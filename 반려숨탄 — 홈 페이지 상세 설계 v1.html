@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>반려숨탄 — 홈 상세</title>
+  <style>
+    :root {
+      --cream-bg:    #FFFDF7;
+      --primary-50:  #ECFDF5;
+      --primary-100: #D1FAE5;
+      --primary-200: #A7F3D0;
+      --primary-400: #34D399;
+      --primary-500: #10B981;
+      --primary-600: #059669;
+      --primary-900: #064E3B;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-900: #111827;
+      --white:    #FFFFFF;
+      --success-400: #4ADE80;
+      --warning-400: #FACC15;
+      --danger-400:  #F87171;
+      --info-400:    #60A5FA;
+      --radius-sm: 6px; --radius-md: 12px;
+      --radius-lg: 16px; --radius-xl: 24px;
+      --radius-full: 9999px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      background:#d0d0d0;
+      display:flex; justify-content:center; align-items:center;
+      min-height:100vh;
+      font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+    }
+
+    /* ── 폰 프레임 ── */
+    .phone{
+      width:390px; height:844px;
+      background:var(--cream-bg);
+      border-radius:48px;
+      box-shadow:0 32px 80px rgba(0,0,0,.35),0 0 0 10px #1a1a1a,0 0 0 12px #333;
+      overflow:hidden;
+      display:flex; flex-direction:column;
+      position:relative;
+    }
+
+    /* ── 상태바 ── */
+    .status-bar{
+      background:var(--primary-50);
+      height:44px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 24px; flex-shrink:0;
+    }
+    .status-bar .time{font-size:15px;font-weight:600;color:var(--primary-900);}
+    .status-bar .icons{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--primary-900);}
+
+    /* ── 헤더 ── */
+    .app-header{
+      background:var(--primary-50);
+      height:56px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 20px;
+      border-bottom:1px solid var(--primary-100);
+      flex-shrink:0;
+      position:relative;
+    }
+    .header-title{font-size:18px;font-weight:700;color:var(--primary-900);}
+    .pet-chip{
+      position:absolute; left:50%; transform:translateX(-50%);
+      background:var(--primary-100);
+      border:1.5px solid var(--primary-400);
+      border-radius:var(--radius-full);
+      padding:4px 14px;
+      font-size:12px; font-weight:600; color:var(--primary-900);
+      display:flex; align-items:center; gap:4px; cursor:pointer;
+      transition:all .15s;
+    }
+    .pet-chip:hover{background:var(--primary-400);color:var(--white);}
+    .hamburger{
+      width:36px;height:36px;border-radius:var(--radius-full);
+      background:transparent;border:none;cursor:pointer;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+    }
+    .hamburger:hover{background:var(--primary-100);}
+    .hamburger span{display:block;width:20px;height:2px;background:var(--primary-900);border-radius:2px;}
+
+    /* ── 스크롤 콘텐츠 ── */
+    .scroll-body{
+      flex:1; overflow-y:auto; padding:16px 16px 100px;
+      background:var(--cream-bg);
+    }
+    .scroll-body::-webkit-scrollbar{display:none;}
+
+    /* ── 인사 섹션 ── */
+    .greeting{margin-bottom:20px;}
+    .greeting .date-row{
+      display:flex; align-items:center; justify-content:space-between;
+      margin-bottom:6px;
+    }
+    .greeting .date-text{font-size:12px;color:var(--gray-500);}
+    .greeting .weather-chip{
+      background:var(--primary-50);
+      border:1px solid var(--primary-100);
+      border-radius:var(--radius-full);
+      padding:2px 10px;
+      font-size:11px; color:var(--primary-600);
+    }
+    .greeting .main-text{font-size:20px;font-weight:700;color:var(--gray-900);line-height:1.4;}
+    .greeting .main-text .name{color:var(--primary-600);}
+    .greeting .sub-text{font-size:13px;color:var(--gray-500);margin-top:4px;}
+
+    /* ── 섹션 헤더 ── */
+    .section-header{
+      display:flex; align-items:center; justify-content:space-between;
+      margin:20px 0 10px;
+    }
+    .section-title{font-size:13px;font-weight:700;color:var(--gray-600);letter-spacing:.3px;}
+    .section-more{font-size:12px;color:var(--primary-600);cursor:pointer;font-weight:500;}
+
+    /* ── 오늘 컨디션 요약 바 (3칸) ── */
+    .today-summary{
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:8px; margin-bottom:4px;
+    }
+    .summary-chip{
+      background:var(--white);
+      border:1px solid var(--gray-200);
+      border-radius:var(--radius-lg);
+      padding:14px 8px;
+      display:flex; flex-direction:column; align-items:center; gap:4px;
+      cursor:pointer; transition:all .15s;
+      position:relative; overflow:hidden;
+    }
+    .summary-chip::before{
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+    }
+    .summary-chip.good::before{background:var(--success-400);}
+    .summary-chip.soso::before{background:var(--warning-400);}
+    .summary-chip.bad::before {background:var(--danger-400);}
+    .summary-chip.neutral::before{background:var(--gray-300);}
+    .summary-chip:hover{background:var(--primary-50);border-color:var(--primary-200);}
+    .chip-icon{font-size:22px;line-height:1;}
+    .chip-value{font-size:15px;font-weight:700;color:var(--gray-900);}
+    .chip-label{font-size:10px;color:var(--gray-400);font-weight:500;}
+
+    /* ── 기록 없음 안내 칩 ── */
+    .no-record-chip{
+      background:var(--gray-100);
+      border-radius:var(--radius-md);
+      padding:6px 10px;
+      font-size:11px; color:var(--gray-400);
+      text-align:center; margin-top:4px;
+    }
+
+    /* ── 오늘의 기록 카드 목록 ── */
+    .record-list{display:flex;flex-direction:column;gap:8px;}
+
+    .record-card{
+      background:var(--white);
+      border:1px solid var(--gray-200);
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      display:flex; align-items:stretch;
+      cursor:pointer; transition:all .15s;
+    }
+    .record-card:hover{border-color:var(--primary-200);box-shadow:0 2px 12px rgba(52,211,153,.12);}
+
+    /* 좌측 카테고리 컬러 바 */
+    .rc-bar{width:4px;flex-shrink:0;}
+    .rc-bar.green {background:var(--success-400);}
+    .rc-bar.blue  {background:var(--info-400);}
+    .rc-bar.orange{background:#FB923C;}
+    .rc-bar.purple{background:#A78BFA;}
+    .rc-bar.pink  {background:#F472B6;}
+    .rc-bar.teal  {background:#2DD4BF;}
+
+    .rc-content{flex:1;padding:12px 12px 12px 14px;display:flex;align-items:center;gap:10px;}
+    .rc-icon-wrap{
+      width:36px;height:36px;border-radius:var(--radius-md);
+      display:flex;align-items:center;justify-content:center;
+      font-size:18px;flex-shrink:0;
+    }
+    .rc-icon-wrap.green {background:#F0FDF4;}
+    .rc-icon-wrap.blue  {background:#EFF6FF;}
+    .rc-icon-wrap.orange{background:#FFF7ED;}
+    .rc-icon-wrap.purple{background:#FAF5FF;}
+    .rc-icon-wrap.pink  {background:#FDF2F8;}
+    .rc-icon-wrap.teal  {background:#F0FDFA;}
+
+    .rc-text{flex:1;}
+    .rc-title{font-size:13px;font-weight:600;color:var(--gray-900);}
+    .rc-desc {font-size:12px;color:var(--gray-600);margin-top:2px;}
+    .rc-meta {font-size:11px;color:var(--gray-400);margin-top:3px;}
+    .rc-arrow{font-size:14px;color:var(--gray-300);flex-shrink:0;}
+
+    /* ── Empty State ── */
+    .empty-state{
+      background:var(--white);
+      border:1.5px dashed var(--gray-200);
+      border-radius:var(--radius-lg);
+      padding:32px 20px;
+      text-align:center;
+    }
+    .empty-state .es-icon{font-size:36px;margin-bottom:10px;}
+    .empty-state .es-title{font-size:14px;font-weight:600;color:var(--gray-600);margin-bottom:6px;}
+    .empty-state .es-desc{font-size:12px;color:var(--gray-400);line-height:1.6;}
+    .empty-btn{
+      display:inline-flex;align-items:center;gap:6px;
+      margin-top:14px;
+      background:var(--primary-400);
+      color:var(--white);
+      font-size:13px;font-weight:500;
+      padding:8px 20px;
+      border-radius:var(--radius-xl);
+      cursor:pointer; border:none;
+      transition:background .15s;
+    }
+    .empty-btn:hover{background:var(--primary-500);}
+
+    /* ── 그래프 카드 ── */
+    .graph-card{
+      background:var(--white);
+      border:1px solid var(--gray-200);
+      border-radius:var(--radius-lg);
+      padding:16px;
+      margin-bottom:4px;
+    }
+    .graph-card-header{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:14px;
+    }
+    .graph-card-title{font-size:14px;font-weight:700;color:var(--gray-900);}
+    .graph-badge{
+      background:var(--primary-50);
+      border:1px solid var(--primary-100);
+      border-radius:var(--radius-full);
+      padding:2px 10px;
+      font-size:11px;color:var(--primary-600);font-weight:600;
+    }
+
+    /* SVG 그래프 */
+    .graph-wrap{position:relative;}
+    .graph-wrap svg{width:100%;height:auto;display:block;}
+    .graph-x-labels{
+      display:flex;justify-content:space-between;
+      padding:0 4px;
+      margin-top:6px;
+    }
+    .graph-x-labels span{font-size:10px;color:var(--gray-400);}
+
+    /* 체중 범례 */
+    .graph-legend{
+      display:flex;align-items:center;gap:16px;
+      margin-top:10px;
+    }
+    .legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--gray-500);}
+    .legend-dot{width:8px;height:8px;border-radius:50%;}
+
+    /* 배변 바 그래프 */
+    .bar-graph{display:flex;align-items:flex-end;gap:6px;height:60px;padding:0 2px;}
+    .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+    .bar-fill{
+      width:100%;border-radius:4px 4px 0 0;
+      background:var(--primary-200);
+      transition:height .3s;
+      min-height:4px;
+      position:relative;
+    }
+    .bar-fill.today-bar{background:var(--primary-400);}
+    .bar-val{font-size:10px;color:var(--gray-500);font-weight:600;}
+    .bar-day{font-size:10px;color:var(--gray-400);}
+
+    /* ── FAB ── */
+    .fab{
+      position:absolute;
+      right:20px; bottom:92px;
+      width:56px;height:56px;
+      background:var(--primary-400);
+      border-radius:var(--radius-full);
+      border:2.5px solid var(--white);
+      display:flex;align-items:center;justify-content:center;
+      font-size:26px;color:var(--white);
+      cursor:pointer;
+      box-shadow:0 6px 20px rgba(52,211,153,.5);
+      transition:all .2s;
+      z-index:50;
+      user-select:none;
+    }
+    .fab:hover{background:var(--primary-500);transform:scale(1.08);}
+    .fab:active{transform:scale(.96);}
+
+    /* ── 하단 탭바 ── */
+    .bottom-tab-bar{
+      height:80px;
+      background:var(--white);
+      border-top:1px solid var(--gray-200);
+      display:flex;align-items:center;justify-content:space-around;
+      padding:0 8px;
+      flex-shrink:0;
+      box-shadow:0 -4px 16px rgba(0,0,0,.06);
+    }
+    .tab-item{
+      flex:1;display:flex;flex-direction:column;align-items:center;
+      justify-content:center;gap:4px;cursor:pointer;padding:8px 0;
+      border-radius:var(--radius-lg);transition:all .15s;position:relative;
+    }
+    .tab-item .ti-icon{font-size:22px;line-height:1;}
+    .tab-item .ti-label{font-size:10px;font-weight:500;color:var(--gray-400);}
+    .tab-item.active .ti-label{color:var(--primary-600);font-weight:700;}
+    .tab-item.active::after{
+      content:'';position:absolute;bottom:4px;
+      width:20px;height:3px;
+      background:var(--primary-400);border-radius:var(--radius-full);
+    }
+    .tab-item.center-tab{position:relative;top:-16px;}
+    .tab-item.center-tab .ct-wrap{
+      width:52px;height:52px;
+      background:var(--primary-400);border-radius:var(--radius-full);
+      display:flex;align-items:center;justify-content:center;
+      font-size:26px;color:var(--white);
+      box-shadow:0 4px 16px rgba(52,211,153,.45);
+      border:3px solid var(--white);
+      transition:all .15s;
+    }
+    .tab-item.center-tab:hover .ct-wrap{background:var(--primary-500);transform:scale(1.08);}
+    .tab-item.center-tab::after{display:none;}
+    .tab-item.center-tab .ti-label{color:var(--gray-500);margin-top:2px;}
+
+    /* ── 퀵 기록 모달 ── */
+    .modal-overlay{
+      position:absolute;inset:0;
+      background:rgba(0,0,0,.4);
+      z-index:200;opacity:0;pointer-events:none;
+      transition:opacity .2s;
+      display:flex;align-items:flex-end;
+    }
+    .modal-overlay.open{opacity:1;pointer-events:all;}
+    .modal-sheet{
+      width:100%;background:var(--white);
+      border-radius:24px 24px 0 0;
+      padding:20px;
+      transform:translateY(100%);
+      transition:transform .28s cubic-bezier(.4,0,.2,1);
+    }
+    .modal-overlay.open .modal-sheet{transform:translateY(0);}
+    .modal-handle{
+      width:40px;height:4px;background:var(--gray-300);
+      border-radius:var(--radius-full);margin:0 auto 16px;
+    }
+    .modal-title{font-size:16px;font-weight:700;color:var(--gray-900);margin-bottom:16px;}
+    .quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    .quick-item{
+      background:var(--primary-50);
+      border:1.2px solid var(--primary-100);
+      border-radius:var(--radius-lg);
+      padding:16px 8px;text-align:center;
+      cursor:pointer;transition:all .15s;
+    }
+    .quick-item:hover{background:var(--primary-100);border-color:var(--primary-400);}
+    .qi-icon{font-size:24px;margin-bottom:6px;}
+    .qi-label{font-size:12px;font-weight:600;color:var(--primary-900);}
+
+    /* 토글 스위치 */
+    .view-toggle{
+      display:flex;
+      background:var(--gray-100);
+      border-radius:var(--radius-full);
+      padding:3px;
+      gap:2px;
+    }
+    .vt-btn{
+      padding:4px 12px;
+      border-radius:var(--radius-full);
+      font-size:11px;font-weight:600;
+      cursor:pointer;border:none;
+      background:transparent;color:var(--gray-500);
+      transition:all .15s;
+    }
+    .vt-btn.active{background:var(--white);color:var(--primary-600);box-shadow:0 1px 4px rgba(0,0,0,.1);}
+  </style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- 상태바 -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <span>●●●</span><span>WiFi</span><span>🔋</span>
+    </div>
+  </div>
+
+  <!-- 헤더 -->
+  <header class="app-header">
+    <span class="header-title">홈</span>
+    <div class="pet-chip">🐶 콩이 <span style="font-size:10px;color:var(--gray-500);">▾</span></div>
+    <button class="hamburger" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- 스크롤 콘텐츠 -->
+  <div class="scroll-body" id="scrollBody">
+
+    <!-- 인사 섹션 -->
+    <div class="greeting">
+      <div class="date-row">
+        <span class="date-text">2026년 5월 2일 토요일</span>
+        <span class="weather-chip">☀️ 맑음 18°C</span>
+      </div>
+      <div class="main-text">안녕하세요! <span class="name">콩이</span>는<br>오늘도 건강한가요? 🐾</div>
+      <div class="sub-text">마지막 기록 · 오늘 오전 8:30</div>
+    </div>
+
+    <!-- 오늘 컨디션 요약 -->
+    <div class="section-header">
+      <span class="section-title">오늘의 상태</span>
+      <span class="section-more" onclick="openModal()">+ 기록하기</span>
+    </div>
+    <div class="today-summary">
+      <div class="summary-chip good">
+        <span class="chip-icon">🟢</span>
+        <span class="chip-value">4점</span>
+        <span class="chip-label">컨디션</span>
+      </div>
+      <div class="summary-chip neutral">
+        <span class="chip-icon">💩</span>
+        <span class="chip-value">2회</span>
+        <span class="chip-label">배변</span>
+      </div>
+      <div class="summary-chip neutral">
+        <span class="chip-icon">⚖️</span>
+        <span class="chip-value">4.2kg</span>
+        <span class="chip-label">체중</span>
+      </div>
+    </div>
+
+    <!-- 오늘의 기록 -->
+    <div class="section-header">
+      <span class="section-title">오늘의 기록</span>
+      <span class="section-more">전체 보기</span>
+    </div>
+
+    <!-- 기록 있을 때 -->
+    <div class="record-list" id="recordList">
+      <div class="record-card">
+        <div class="rc-bar green"></div>
+        <div class="rc-content">
+          <div class="rc-icon-wrap green">🌡️</div>
+          <div class="rc-text">
+            <div class="rc-title">컨디션 4점 — 양호</div>
+            <div class="rc-desc">활발하게 놀았음. 식욕 정상.</div>
+            <div class="rc-meta">오전 9:00</div>
+          </div>
+          <span class="rc-arrow">›</span>
+        </div>
+      </div>
+      <div class="record-card">
+        <div class="rc-bar blue"></div>
+        <div class="rc-content">
+          <div class="rc-icon-wrap blue">💩</div>
+          <div class="rc-text">
+            <div class="rc-title">대변 — 정상</div>
+            <div class="rc-desc">상태 양호, 색상 정상</div>
+            <div class="rc-meta">오전 7:20</div>
+          </div>
+          <span class="rc-arrow">›</span>
+        </div>
+      </div>
+      <div class="record-card">
+        <div class="rc-bar orange"></div>
+        <div class="rc-content">
+          <div class="rc-icon-wrap orange">💊</div>
+          <div class="rc-text">
+            <div class="rc-title">심장사상충 예방약</div>
+            <div class="rc-desc">1정 투여 완료</div>
+            <div class="rc-meta">오전 8:30</div>
+          </div>
+          <span class="rc-arrow">›</span>
+        </div>
+      </div>
+      <div class="record-card">
+        <div class="rc-bar teal"></div>
+        <div class="rc-content">
+          <div class="rc-icon-wrap teal">🍽️</div>
+          <div class="rc-text">
+            <div class="rc-title">아침 식사</div>
+            <div class="rc-desc">사료 80g 급여 / 잔식 없음</div>
+            <div class="rc-meta">오전 7:45</div>
+          </div>
+          <span class="rc-arrow">›</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 체중 추세 그래프 -->
+    <div class="section-header">
+      <span class="section-title">체중 추세</span>
+      <div class="view-toggle">
+        <button class="vt-btn active">7일</button>
+        <button class="vt-btn" onclick="togglePeriod(this)">30일</button>
+      </div>
+    </div>
+    <div class="graph-card">
+      <div class="graph-card-header">
+        <span class="graph-card-title">⚖️ 체중 변화</span>
+        <span class="graph-badge">현재 4.2kg</span>
+      </div>
+      <div class="graph-wrap">
+        <svg viewBox="0 0 330 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 그리드 라인 -->
+          <line x1="0" y1="15" x2="330" y2="15" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="0" y1="45" x2="330" y2="45" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="0" y1="75" x2="330" y2="75" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4,3"/>
+          <!-- y축 레이블 -->
+          <text x="0" y="13" font-size="9" fill="#9CA3AF">4.4</text>
+          <text x="0" y="43" font-size="9" fill="#9CA3AF">4.2</text>
+          <text x="0" y="73" font-size="9" fill="#9CA3AF">4.0</text>
+          <!-- 영역 채우기 -->
+          <path d="M 28 60 L 75 50 L 122 55 L 169 40 L 216 45 L 263 35 L 310 45 L 310 90 L 28 90 Z"
+                fill="url(#weightGrad)" opacity="0.3"/>
+          <!-- 라인 -->
+          <polyline points="28,60 75,50 122,55 169,40 216,45 263,35 310,45"
+                    stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- 데이터 포인트 -->
+          <circle cx="28"  cy="60" r="4" fill="#34D399" stroke="white" stroke-width="2"/>
+          <circle cx="75"  cy="50" r="4" fill="#34D399" stroke="white" stroke-width="2"/>
+          <circle cx="122" cy="55" r="4" fill="#34D399" stroke="white" stroke-width="2"/>
+          <circle cx="169" cy="40" r="4" fill="#34D399" stroke="white" stroke-width="2"/>
+          <circle cx="216" cy="45" r="4" fill="#34D399" stroke="white" stroke-width="2"/>
+          <circle cx="263" cy="35" r="4" fill="#34D399" stroke="white" stroke-width="2"/>
+          <!-- 오늘 강조 -->
+          <circle cx="310" cy="45" r="6" fill="#34D399" stroke="white" stroke-width="2.5"/>
+          <circle cx="310" cy="45" r="10" fill="#34D399" opacity="0.15"/>
+          <!-- 그라디언트 -->
+          <defs>
+            <linearGradient id="weightGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#34D399"/>
+              <stop offset="100%" stop-color="#34D399" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="graph-x-labels">
+        <span>4/26</span><span>4/27</span><span>4/28</span>
+        <span>4/29</span><span>4/30</span><span>5/1</span>
+        <span style="color:var(--primary-600);font-weight:700;">오늘</span>
+      </div>
+      <div class="graph-legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--primary-400);"></div>
+          <span>실측 체중</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:var(--gray-300);"></div>
+          <span>표준 체중 4.0~4.5kg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 배변 주간 통계 -->
+    <div class="section-header">
+      <span class="section-title">배변 주간 통계</span>
+      <span class="section-more">상세 보기</span>
+    </div>
+    <div class="graph-card">
+      <div class="graph-card-header">
+        <span class="graph-card-title">💩 이번 주 배변 횟수</span>
+        <span class="graph-badge">평균 2.4회/일</span>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:8px;height:72px;padding:0 4px;">
+        <div class="bar-col">
+          <span class="bar-val">2</span>
+          <div class="bar-fill" style="height:40px;"></div>
+          <span class="bar-day">월</span>
+        </div>
+        <div class="bar-col">
+          <span class="bar-val">3</span>
+          <div class="bar-fill" style="height:56px;"></div>
+          <span class="bar-day">화</span>
+        </div>
+        <div class="bar-col">
+          <span class="bar-val">2</span>
+          <div class="bar-fill" style="height:40px;"></div>
+          <span class="bar-day">수</span>
+        </div>
+        <div class="bar-col">
+          <span class="bar-val">3</span>
+          <div class="bar-fill" style="height:56px;"></div>
+          <span class="bar-day">목</span>
+        </div>
+        <div class="bar-col">
+          <span class="bar-val">1</span>
+          <div class="bar-fill" style="height:24px;"></div>
+          <span class="bar-day">금</span>
+        </div>
+        <div class="bar-col">
+          <span class="bar-val">2</span>
+          <div class="bar-fill today-bar" style="height:40px;"></div>
+          <span class="bar-day" style="color:var(--primary-600);font-weight:700;">오늘</span>
+        </div>
+        <div class="bar-col">
+          <span class="bar-val" style="color:var(--gray-300);">-</span>
+          <div class="bar-fill" style="height:4px;background:var(--gray-200);"></div>
+          <span class="bar-day">일</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /scroll-body -->
+
+  <!-- FAB -->
+  <div class="fab" onclick="openModal()">＋</div>
+
+  <!-- 하단 탭바 -->
+  <nav class="bottom-tab-bar">
+    <div class="tab-item active">
+      <span class="ti-icon">🏠</span>
+      <span class="ti-label">홈</span>
+    </div>
+    <div class="tab-item">
+      <span class="ti-icon">📅</span>
+      <span class="ti-label">일지</span>
+    </div>
+    <div class="tab-item center-tab">
+      <div class="ct-wrap" onclick="openModal()">➕</div>
+      <span class="ti-label">기록</span>
+    </div>
+    <div class="tab-item">
+      <span class="ti-icon">🔔</span>
+      <span class="ti-label">알림</span>
+    </div>
+    <div class="tab-item">
+      <span class="ti-icon">🐾</span>
+      <span class="ti-label">프로필</span>
+    </div>
+  </nav>
+
+  <!-- 퀵 기록 모달 -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <div class="modal-title">📝 오늘 무엇을 기록할까요?</div>
+      <div class="quick-grid">
+        <div class="quick-item"><div class="qi-icon">🌡️</div><div class="qi-label">컨디션</div></div>
+        <div class="quick-item"><div class="qi-icon">💩</div><div class="qi-label">배변</div></div>
+        <div class="quick-item"><div class="qi-icon">💊</div><div class="qi-label">투약</div></div>
+        <div class="quick-item"><div class="qi-icon">🍽️</div><div class="qi-label">식사</div></div>
+        <div class="quick-item"><div class="qi-icon">⚖️</div><div class="qi-label">체중</div></div>
+        <div class="quick-item"><div class="qi-icon">🏥</div><div class="qi-label">병원</div></div>
+        <div class="quick-item"><div class="qi-icon">💉</div><div class="qi-label">접종</div></div>
+        <div class="quick-item"><div class="qi-icon">🛁</div><div class="qi-label">미용</div></div>
+        <div class="quick-item"><div class="qi-icon">📝</div><div class="qi-label">메모</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 드로어 -->
+  <div class="modal-overlay" id="drawerOverlay" onclick="toggleDrawer()" style="align-items:stretch;justify-content:flex-end;">
+    <div class="modal-sheet" style="width:75%;height:100%;border-radius:24px 0 0 24px;padding:0;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .28s cubic-bezier(.4,0,.2,1);" id="drawerSheet">
+      <div style="background:var(--primary-50);padding:52px 20px 16px;border-bottom:1px solid var(--primary-100);">
+        <div style="font-size:28px;">🐶</div>
+        <div style="font-size:18px;font-weight:700;color:var(--primary-900);margin-top:8px;">콩이의 반려숨탄</div>
+        <div style="font-size:12px;color:var(--gray-500);margin-top:2px;">말티즈 · 만 5세</div>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:16px;">
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 8px;border-radius:12px;cursor:pointer;font-size:14px;color:var(--gray-700);" onmouseover="this.style.background='var(--primary-50)'" onmouseout="this.style.background=''">🏠 홈으로</div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 8px;border-radius:12px;cursor:pointer;font-size:14px;color:var(--gray-700);" onmouseover="this.style.background='var(--primary-50)'" onmouseout="this.style.background=''">📊 통계 & 그래프</div>
+          <div style="height:1px;background:var(--gray-200);margin:8px 0;"></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 8px;border-radius:12px;cursor:pointer;font-size:14px;color:var(--gray-700);" onmouseover="this.style.background='var(--primary-50)'" onmouseout="this.style.background=''">🏥 응급 병원 찾기</div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 8px;border-radius:12px;cursor:pointer;font-size:14px;color:var(--gray-700);" onmouseover="this.style.background='var(--primary-50)'" onmouseout="this.style.background=''">🚨 응급 대응 가이드</div>
+          <div style="height:1px;background:var(--gray-200);margin:8px 0;"></div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 8px;border-radius:12px;cursor:pointer;font-size:14px;color:var(--gray-700);" onmouseover="this.style.background='var(--primary-50)'" onmouseout="this.style.background=''">📤 데이터 내보내기</div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 8px;border-radius:12px;cursor:pointer;font-size:14px;color:var(--gray-700);" onmouseover="this.style.background='var(--primary-50)'" onmouseout="this.style.background=''">⚙️ 설정</div>
+        </div>
+      </div>
+      <div style="padding:16px;border-top:1px solid var(--gray-200);font-size:11px;color:var(--gray-400);text-align:center;">반려숨탄 v1.0.0</div>
+    </div>
+  </div>
+
+</div><!-- /phone -->
+
+<script>
+  // 퀵 기록 모달
+  function openModal(){
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+  function closeModal(e){
+    if(e.target === document.getElementById('modalOverlay'))
+      document.getElementById('modalOverlay').classList.remove('open');
+  }
+
+  // 드로어
+  function toggleDrawer(){
+    const ov = document.getElementById('drawerOverlay');
+    const sh = document.getElementById('drawerSheet');
+    const isOpen = ov.classList.contains('open');
+    ov.classList.toggle('open', !isOpen);
+    sh.style.transform = isOpen ? 'translateX(100%)' : 'translateX(0)';
+  }
+
+  // 기간 토글 (7일/30일)
+  function togglePeriod(btn){
+    document.querySelectorAll('.vt-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // Empty State 토글 (데모용)
+  let hasRecord = true;
+  function toggleEmpty(){
+    const list = document.getElementById('recordList');
+    if(hasRecord){
+      list.innerHTML = `
+        <div class="empty-state">
+          <div class="es-icon">🐾</div>
+          <div class="es-title">아직 오늘의 기록이 없어요</div>
+          <div class="es-desc">콩이의 컨디션, 배변, 식사를<br>기록해 건강을 관리해 보세요!</div>
+          <button class="empty-btn" onclick="openModal()">✏️ 첫 기록 남기기</button>
+        </div>`;
+      hasRecord = false;
+    } else {
+      location.reload();
+    }
+  }
+</script>
+</body>
+</html>

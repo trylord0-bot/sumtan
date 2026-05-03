@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반려숨탄 — 알림 완료 처리 UI</title>
+    <style>
+        :root {
+            --primary-900: #064E3B;
+            --primary-700: #047857;
+            --primary-600: #059669;
+            --primary-500: #10B981;
+            --primary-400: #34D399;
+            --primary-300: #6EE7B7;
+            --primary-200: #A7F3D0;
+            --primary-100: #D1FAE5;
+            --primary-50: #ECFDF5;
+            --gray-900: #111827;
+            --gray-800: #1F2937;
+            --gray-700: #374151;
+            --gray-600: #4B5563;
+            --gray-500: #6B7280;
+            --gray-400: #9CA3AF;
+            --gray-300: #D1D5DB;
+            --gray-200: #E5E7EB;
+            --gray-100: #F3F4F6;
+            --gray-50: #F9FAFB;
+            --white: #FFFFFF;
+            --cream-bg: #FFFDF7;
+            --red-500: #EF4444;
+            --red-400: #F87171;
+            --red-50: #FEF2F2;
+            --amber-400: #FBBF24;
+            --amber-50: #FFFBEB;
+            --amber-100: #FEF3C7;
+            --amber-700: #B45309;
+            --sp1: 4px;
+            --sp2: 8px;
+            --sp3: 12px;
+            --sp4: 16px;
+            --sp5: 20px;
+            --sp6: 24px;
+            --r-sm: 8px;
+            --r-md: 12px;
+            --r-lg: 16px;
+            --r-xl: 20px;
+            --r-2xl: 24px;
+            --r-full: 9999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #C9CDD4;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 24px;
+            font-family: -apple-system, 'Pretendard', sans-serif;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phone-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-600);
+            background: var(--white);
+            padding: 4px 14px;
+            border-radius: var(--r-full);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+            letter-spacing: 0.3px;
+            text-align: center;
+            white-space: nowrap;
+            max-width: 390px;
+        }
+
+        /* ── 폰 프레임 ── */
+        .phone {
+            width: 390px;
+            height: 844px;
+            background: var(--cream-bg);
+            border-radius: 44px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22), 0 0 0 2px #1a1a1a;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ── 상태바 ── */
+        .status-bar {
+            height: 44px;
+            background: var(--primary-50);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .status-time {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-900);
+        }
+
+        .status-icons {
+            font-size: 12px;
+            color: var(--primary-900);
+            display: flex;
+            gap: 6px;
+        }
+
+        /* ── 앱 헤더 ── */
+        .app-header {
+            height: 56px;
+            background: var(--primary-50);
+            border-bottom: 1px solid var(--primary-100);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--sp5);
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-900);
+        }
+
+        .pet-chip {
+            background: var(--primary-100);
+            border: 1.5px solid var(--primary-400);
+            border-radius: var(--r-full);
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-900);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .hamburger {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--r-full);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--primary-900);
+            border-radius: 2px;
+        }
+
+        /* ── 콘텐츠 ── */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--sp4);
+            padding-bottom: 80px;
+            background: var(--cream-bg);
+        }
+
+        .content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ── 알림 리스트 ── */
+        .alarm-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp2);
+        }
+
+        .list-divider {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-400);
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            padding: var(--sp3) var(--sp1) var(--sp2);
+            display: flex;
+            align-items: center;
+            gap: var(--sp2);
+        }
+
+        .list-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        /* 스와이프 래퍼 */
+        .swipe-wrapper {
+            position: relative;
+            border-radius: var(--r-lg);
+            overflow: hidden;
+        }
+
+        .swipe-delete-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 80px;
+            background: var(--red-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 3px;
+            border-radius: 0 var(--r-lg) var(--r-lg) 0;
+        }
+
+        .swipe-delete-bg span:first-child {
+            font-size: 20px;
+        }
+
+        .swipe-delete-bg span:last-child {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        /* 알림 아이템 기본 */
+        .alarm-item {
+            background: var(--white);
+            border-radius: var(--r-lg);
+            padding: var(--sp3) var(--sp4);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: var(--sp3);
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.25s ease;
+        }
+
+        .alarm-item.today {
+            border-left-color: var(--primary-400);
+            background: var(--primary-50);
+        }
+
+        .alarm-item.urgent {
+            border-left-color: var(--primary-400);
+        }
+
+        .alarm-item.past {
+            border-left-color: var(--gray-300);
+        }
+
+        .alarm-item.repeat {
+            border-left-color: var(--primary-200);
+        }
+
+        .alarm-item.swiped {
+            transform: translateX(-80px);
+            border-radius: var(--r-lg) 0 0 var(--r-lg);
+        }
+
+        /* ── 오늘 미완료 아이템 (완료 버튼 포함) ── */
+        .alarm-item.today-pending {
+            border-left-color: var(--amber-400);
+            background: var(--amber-50);
+            flex-direction: column;
+            align-items: stretch;
+            gap: var(--sp2);
+            padding-bottom: var(--sp3);
+        }
+
+        .today-pending-top {
+            display: flex;
+            align-items: center;
+            gap: var(--sp3);
+        }
+
+        .today-pending-actions {
+            display: flex;
+            gap: var(--sp2);
+            padding-left: 52px;
+            /* 아이콘 박스 40px + gap 12px */
+        }
+
+        .btn-done {
+            flex: 1;
+            padding: 7px 0;
+            background: var(--primary-400);
+            color: var(--white);
+            border: none;
+            border-radius: var(--r-md);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            box-shadow: 0 2px 8px rgba(52, 211, 153, 0.3);
+        }
+
+        .btn-later {
+            flex: 1;
+            padding: 7px 0;
+            background: var(--white);
+            color: var(--gray-500);
+            border: 1.5px solid var(--gray-300);
+            border-radius: var(--r-md);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        /* 아이콘 박스 */
+        .item-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--r-md);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .icon-vaccination {
+            background: #EDE9FE;
+        }
+
+        .icon-hospital {
+            background: #FEE2E2;
+        }
+
+        .icon-medication {
+            background: #FEF3C7;
+        }
+
+        .icon-meal {
+            background: #DCFCE7;
+        }
+
+        .icon-daily {
+            background: var(--primary-100);
+        }
+
+        .item-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-800);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .item-sub {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        /* 지남 상태 텍스트 */
+        .item-title.muted {
+            color: var(--gray-400);
+        }
+
+        .item-sub.muted {
+            color: var(--gray-300);
+        }
+
+        .item-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        /* D-배지 */
+        .d-badge {
+            padding: 2px 8px;
+            border-radius: var(--r-full);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .d-badge.normal {
+            background: var(--primary-100);
+            color: var(--primary-700);
+        }
+
+        .d-badge.urgent {
+            background: var(--primary-400);
+            color: var(--white);
+        }
+
+        .d-badge.today {
+            background: var(--primary-400);
+            color: var(--white);
+        }
+
+        .d-badge.past {
+            background: var(--gray-200);
+            color: var(--gray-400);
+        }
+
+        /* 오늘 미완료 배지 */
+        .d-badge.pending {
+            background: var(--amber-400);
+            color: var(--white);
+        }
+
+        /* 토글 */
+        .toggle {
+            position: relative;
+            width: 40px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            border-radius: var(--r-full);
+            background: var(--gray-300);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--white);
+            left: 3px;
+            top: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            transition: 0.2s;
+        }
+
+        .toggle input:checked+.toggle-slider {
+            background: var(--primary-400);
+        }
+
+        .toggle input:checked+.toggle-slider::before {
+            transform: translateX(16px);
+        }
+
+        /* ── 지난 알림 숨기기 버튼 ── */
+        .past-toggle-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp2);
+            padding: var(--sp3) var(--sp4);
+            background: var(--gray-50);
+            border: 1.5px dashed var(--gray-300);
+            border-radius: var(--r-lg);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-500);
+            margin-top: var(--sp1);
+        }
+
+        .past-toggle-btn:hover {
+            background: var(--gray-100);
+        }
+
+        .past-count-badge {
+            background: var(--gray-200);
+            color: var(--gray-600);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: var(--r-full);
+        }
+
+        /* ── 완료된 알림 (숨김 해제 시) ── */
+        .alarm-item.done {
+            border-left-color: var(--primary-200);
+            opacity: 0.55;
+        }
+
+        .done-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+
+        /* ── 탭바 ── */
+        .tab-bar {
+            height: 80px;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 var(--sp2);
+            flex-shrink: 0;
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            flex: 1;
+            padding-bottom: 4px;
+            position: relative;
+        }
+
+        .tab-icon {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .tab-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--gray-400);
+        }
+
+        .tab-item.active .tab-label {
+            color: var(--primary-600);
+            font-weight: 700;
+        }
+
+        .tab-indicator {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            border-radius: var(--r-full);
+            background: var(--primary-400);
+        }
+
+        .tab-fab {
+            position: relative;
+            top: -16px;
+            flex-shrink: 0;
+        }
+
+        .fab-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--r-full);
+            background: var(--primary-400);
+            border: 3px solid var(--white);
+            box-shadow: 0 4px 16px rgba(52, 211, 153, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        /* ── 바텀시트 공통 ── */
+        .bs-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 100;
+            border-radius: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .bs {
+            background: var(--white);
+            border-radius: var(--r-2xl) var(--r-2xl) 0 0;
+            max-height: 92%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bs-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--gray-300);
+            border-radius: var(--r-full);
+            margin: 12px auto 0;
+            flex-shrink: 0;
+        }
+
+        .bs-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--sp4) var(--sp5) var(--sp3);
+            flex-shrink: 0;
+        }
+
+        .bs-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .bs-close {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--r-full);
+            background: var(--gray-100);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: var(--gray-500);
+        }
+
+        .bs-body {
+            overflow-y: auto;
+            padding: 0 var(--sp5) var(--sp5);
+            flex: 1;
+        }
+
+        .bs-body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* 완료 확인 다이얼로그 */
+        .dialog-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            border-radius: 44px;
+        }
+
+        .dialog {
+            background: var(--white);
+            border-radius: var(--r-lg);
+            padding: var(--sp5);
+            width: 300px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .dialog-emoji {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: var(--sp3);
+        }
+
+        .dialog-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: var(--sp2);
+            text-align: center;
+        }
+
+        .dialog-body {
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: var(--sp5);
+            text-align: center;
+        }
+
+        .dialog-actions {
+            display: flex;
+            gap: var(--sp2);
+        }
+
+        .dialog-btn {
+            flex: 1;
+            padding: 11px;
+            border-radius: var(--r-md);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+        }
+
+        .dialog-btn.cancel {
+            background: var(--gray-100);
+            color: var(--gray-600);
+        }
+
+        .dialog-btn.confirm {
+            background: var(--primary-400);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(52, 211, 153, 0.3);
+        }
+
+        /* 푸시 알림 UI */
+        .push-notification {
+            background: var(--white);
+            border-radius: var(--r-lg);
+            padding: var(--sp3) var(--sp4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            margin: var(--sp4);
+        }
+
+        .push-header {
+            display: flex;
+            align-items: center;
+            gap: var(--sp2);
+            margin-bottom: var(--sp2);
+        }
+
+        .push-app-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: var(--primary-400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .push-app-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-500);
+        }
+
+        .push-time {
+            font-size: 11px;
+            color: var(--gray-400);
+            margin-left: auto;
+        }
+
+        .push-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 3px;
+        }
+
+        .push-body {
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.4;
+            margin-bottom: var(--sp3);
+        }
+
+        .push-actions {
+            display: flex;
+            gap: var(--sp2);
+        }
+
+        .push-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: var(--r-md);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+        }
+
+        .push-btn.done {
+            background: var(--primary-100);
+            color: var(--primary-700);
+        }
+
+        .push-btn.later {
+            background: var(--gray-100);
+            color: var(--gray-600);
+        }
+
+        /* 잠금화면 배경 */
+        .lockscreen {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(160deg, #1a3a2a 0%, #0d2018 100%);
+            display: flex;
+            flex-direction: column;
+            border-radius: 44px;
+            overflow: hidden;
+        }
+
+        .lock-status {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .lock-time-big {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .lock-time-big .time {
+            font-size: 64px;
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1;
+        }
+
+        .lock-time-big .date {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 4px;
+        }
+
+        .lock-notifications {
+            padding: var(--sp4);
+            margin-top: var(--sp5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp2);
+        }
+
+        .lock-push {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border-radius: var(--r-lg);
+            padding: var(--sp3) var(--sp4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .lock-push-header {
+            display: flex;
+            align-items: center;
+            gap: var(--sp2);
+            margin-bottom: var(--sp2);
+        }
+
+        .lock-push-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: var(--primary-400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        .lock-push-app {
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .lock-push-time {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-left: auto;
+        }
+
+        .lock-push-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 3px;
+        }
+
+        .lock-push-body {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.4;
+            margin-bottom: var(--sp3);
+        }
+
+        .lock-push-actions {
+            display: flex;
+            gap: var(--sp2);
+        }
+
+        .lock-push-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: var(--r-md);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+        }
+
+        .lock-push-btn.done {
+            background: rgba(52, 211, 153, 0.25);
+            color: var(--primary-300);
+        }
+
+        .lock-push-btn.later {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* 재예약 바텀시트 */
+        .reschedule-info {
+            background: var(--amber-50);
+            border: 1.5px solid var(--amber-100);
+            border-radius: var(--r-md);
+            padding: var(--sp3) var(--sp4);
+            margin-bottom: var(--sp4);
+            display: flex;
+            align-items: flex-start;
+            gap: var(--sp2);
+        }
+
+        .reschedule-info-text {
+            font-size: 13px;
+            color: var(--amber-700);
+            line-height: 1.5;
+        }
+
+        .form-sec {
+            margin-bottom: var(--sp4);
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: var(--sp2);
+            display: block;
+        }
+
+        .date-btn {
+            width: 100%;
+            padding: 12px var(--sp4);
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--r-md);
+            font-size: 14px;
+            color: var(--gray-800);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .date-btn.filled {
+            border-color: var(--primary-300);
+            background: var(--primary-50);
+            color: var(--primary-800);
+        }
+
+        .chip-row {
+            display: flex;
+            gap: var(--sp2);
+            flex-wrap: wrap;
+        }
+
+        .sel-chip {
+            padding: 6px 14px;
+            border-radius: var(--r-full);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1.5px solid var(--gray-300);
+            color: var(--gray-500);
+            background: var(--white);
+        }
+
+        .sel-chip.active {
+            border-color: var(--primary-400);
+            color: var(--primary-700);
+            background: var(--primary-50);
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--gray-100);
+            margin: var(--sp4) 0;
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-400);
+            color: var(--white);
+            border: none;
+            border-radius: var(--r-lg);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(52, 211, 153, 0.35);
+        }
+
+        .delete-btn {
+            width: 100%;
+            padding: 13px;
+            background: var(--white);
+            color: var(--red-500);
+            border: 1.5px solid var(--red-400);
+            border-radius: var(--r-lg);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp2);
+            margin-top: var(--sp3);
+        }
+
+        .swipe-hint {
+            text-align: center;
+            font-size: 11px;
+            color: var(--gray-400);
+            padding: var(--sp2) 0 var(--sp1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════
+  ① 잠금화면 푸시 알림
+  (액션 버튼: ✅ 완료 / 나중에)
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">① 잠금화면 푸시 알림 (액션 버튼)</p>
+        <div class="phone">
+            <div class="lockscreen">
+                <div class="lock-status">
+                    <span style="font-size:14px;font-weight:600;color:rgba(255,255,255,0.8)">9:41</span>
+                    <div style="display:flex;gap:6px;font-size:12px;color:rgba(255,255,255,0.7)">
+                        <span>●●●</span><span>🔋</span></div>
+                </div>
+                <div class="lock-time-big">
+                    <div class="time">9:41</div>
+                    <div class="date">2026년 5월 3일 일요일</div>
+                </div>
+                <div class="lock-notifications">
+                    <!-- 푸시 알림 카드 -->
+                    <div class="lock-push">
+                        <div class="lock-push-header">
+                            <div class="lock-push-icon">🐾</div>
+                            <span class="lock-push-app">반려숨탄</span>
+                            <span class="lock-push-time">방금</span>
+                        </div>
+                        <div class="lock-push-title">💉 광견병 예방접종 D-1</div>
+                        <div class="lock-push-body">콩이의 광견병 예방접종이 내일이에요!<br>예약을 확인해 주세요 🏥</div>
+                        <div class="lock-push-actions">
+                            <button class="lock-push-btn done">✅ 완료했어요</button>
+                            <button class="lock-push-btn later">나중에</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ② 앱 내 알림 목록
+  — 오늘 미완료 아이템 (완료/나중에 버튼)
+  — 지남 아이템
+  — 지난 알림 숨기기 버튼
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">② 알림 목록 — 오늘 미완료 + 지남</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content">
+                <div class="alarm-list">
+                    <div class="list-divider">예정된 알림</div>
+
+                    <!-- 오늘 미완료 — 완료/나중에 버튼 인라인 노출 -->
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item today-pending">
+                            <div class="today-pending-top">
+                                <div class="item-icon icon-medication">💊</div>
+                                <div class="item-body">
+                                    <div class="item-title">심장사상충 예방약</div>
+                                    <div class="item-sub">오늘 · 오전 9:00</div>
+                                </div>
+                                <div class="item-right">
+                                    <span class="d-badge pending">오늘</span>
+                                </div>
+                            </div>
+                            <!-- 완료/나중에 버튼 -->
+                            <div class="today-pending-actions">
+                                <button class="btn-done">✅ 완료했어요</button>
+                                <button class="btn-later">🕐 나중에</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- D-3 일반 -->
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item urgent">
+                            <div class="item-icon icon-vaccination">💉</div>
+                            <div class="item-body">
+                                <div class="item-title">광견병 예방접종</div>
+                                <div class="item-sub">5월 6일 (수) · D-7, D-3, D-1</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge urgent">D-3</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+
+                    <!-- 지남 (미완료) -->
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item past">
+                            <div class="item-icon icon-vaccination" style="opacity:0.5">💉</div>
+                            <div class="item-body">
+                                <div class="item-title muted">종합백신 2차</div>
+                                <div class="item-sub muted">4월 28일 (화) · 탭해서 재예약하세요</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge past">지남</span></div>
+                        </div>
+                    </div>
+
+                    <!-- 지난 알림 숨기기 버튼 -->
+                    <button class="past-toggle-btn">
+                        <span>지난 알림 숨기기</span>
+                        <span class="past-count-badge">2개</span>
+                        <span style="margin-left:auto;font-size:12px">▲</span>
+                    </button>
+
+                    <div class="list-divider">반복 알림</div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item repeat">
+                            <div class="item-icon icon-meal">🍽️</div>
+                            <div class="item-body">
+                                <div class="item-title">콩이 아침 식사</div>
+                                <div class="item-sub">매일 · 오전 8:00</div>
+                            </div>
+                            <div class="item-right"><label class="toggle"><input type="checkbox" checked><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item repeat">
+                            <div class="item-icon icon-daily">📋</div>
+                            <div class="item-body">
+                                <div class="item-title">일일 기록 리마인더</div>
+                                <div class="item-sub">매일 · 오후 9:00</div>
+                            </div>
+                            <div class="item-right"><label class="toggle"><input type="checkbox" checked><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swipe-hint">← 스와이프하면 삭제할 수 있어요</div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ③ "완료했어요" 탭 → 완료 확인 다이얼로그
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">③ 완료 확인 다이얼로그</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;">
+                <div class="alarm-list">
+                    <div class="list-divider">예정된 알림</div>
+                    <div class="alarm-item today-pending">
+                        <div class="today-pending-top">
+                            <div class="item-icon icon-medication">💊</div>
+                            <div class="item-body">
+                                <div class="item-title">심장사상충 예방약</div>
+                                <div class="item-sub">오늘 · 오전 9:00</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge pending">오늘</span></div>
+                        </div>
+                        <div class="today-pending-actions">
+                            <button class="btn-done">✅ 완료했어요</button>
+                            <button class="btn-later">🕐 나중에</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 완료 확인 다이얼로그 -->
+            <div class="dialog-overlay">
+                <div class="dialog">
+                    <div class="dialog-emoji">✅</div>
+                    <div class="dialog-title">투약을 완료했나요?</div>
+                    <div class="dialog-body">
+                        심장사상충 예방약 투약을<br>
+                        오늘 기록에 자동으로 저장할게요.<br>
+                        <span style="font-size:12px;color:var(--gray-400)">기록 → 투약 항목에서 확인할 수 있어요</span>
+                    </div>
+                    <div class="dialog-actions">
+                        <button class="dialog-btn cancel">취소</button>
+                        <button class="dialog-btn confirm">✅ 완료 저장</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ④ 완료 후 리스트
+  — 완료 아이템 숨김 처리
+  — "지난 알림 N개 보기" 버튼
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">④ 완료 후 — 완료 아이템 숨김</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content">
+                <div class="alarm-list">
+                    <div class="list-divider">예정된 알림</div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item urgent">
+                            <div class="item-icon icon-vaccination">💉</div>
+                            <div class="item-body">
+                                <div class="item-title">광견병 예방접종</div>
+                                <div class="item-sub">5월 6일 (수) · D-7, D-3, D-1</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge urgent">D-3</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item">
+                            <div class="item-icon icon-hospital">🏥</div>
+                            <div class="item-body">
+                                <div class="item-title">정기 건강검진</div>
+                                <div class="item-sub">5월 10일 (일) · 오전 11:00</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge normal">D-7</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+
+                    <!-- 지난 알림 보기 버튼 (완료 3개 숨겨짐) -->
+                    <button class="past-toggle-btn">
+                        <span>지난 알림 보기</span>
+                        <span class="past-count-badge">3개</span>
+                        <span style="margin-left:auto;font-size:12px">▼</span>
+                    </button>
+
+                    <div class="list-divider">반복 알림</div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item repeat">
+                            <div class="item-icon icon-meal">🍽️</div>
+                            <div class="item-body">
+                                <div class="item-title">콩이 아침 식사</div>
+                                <div class="item-sub">매일 · 오전 8:00</div>
+                            </div>
+                            <div class="item-right"><label class="toggle"><input type="checkbox" checked><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item repeat">
+                            <div class="item-icon icon-daily">📋</div>
+                            <div class="item-body">
+                                <div class="item-title">일일 기록 리마인더</div>
+                                <div class="item-sub">매일 · 오후 9:00</div>
+                            </div>
+                            <div class="item-right"><label class="toggle"><input type="checkbox" checked><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑤ 지난 알림 보기 펼침
+  — 완료 아이템 흐리게 표시
+  — 지남(미완료) 아이템 재예약 유도
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑤ 지난 알림 펼침 (완료 + 지남 미완료)</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content">
+                <div class="alarm-list">
+                    <div class="list-divider">예정된 알림</div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item urgent">
+                            <div class="item-icon icon-vaccination">💉</div>
+                            <div class="item-body">
+                                <div class="item-title">광견병 예방접종</div>
+                                <div class="item-sub">5월 6일 (수)</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge urgent">D-3</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+
+                    <!-- 지난 알림 숨기기 (펼쳐진 상태) -->
+                    <button class="past-toggle-btn">
+                        <span>지난 알림 숨기기</span>
+                        <span class="past-count-badge">3개</span>
+                        <span style="margin-left:auto;font-size:12px">▲</span>
+                    </button>
+
+                    <!-- 완료된 아이템 (흐리게) -->
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item done">
+                            <div class="item-icon icon-medication" style="opacity:0.6">💊</div>
+                            <div class="item-body">
+                                <div class="item-title" style="color:var(--gray-400);text-decoration:line-through">심장사상충
+                                    예방약</div>
+                                <div class="item-sub" style="color:var(--gray-300)">5월 3일 (일) · 완료됨</div>
+                            </div>
+                            <div class="item-right">
+                                <div class="done-check">✓</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item done">
+                            <div class="item-icon icon-vaccination" style="opacity:0.6">💉</div>
+                            <div class="item-body">
+                                <div class="item-title" style="color:var(--gray-400);text-decoration:line-through">종합백신
+                                    1차</div>
+                                <div class="item-sub" style="color:var(--gray-300)">4월 20일 (월) · 완료됨</div>
+                            </div>
+                            <div class="item-right">
+                                <div class="done-check">✓</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 지남 미완료 (재예약 유도) -->
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item past">
+                            <div class="item-icon icon-vaccination" style="opacity:0.5">💉</div>
+                            <div class="item-body">
+                                <div class="item-title muted">종합백신 2차</div>
+                                <div class="item-sub" style="color:var(--amber-700);font-weight:600">⚠️ 4월 28일 지남 · 탭해서
+                                    재예약</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge past">지남</span></div>
+                        </div>
+                    </div>
+
+                    <div class="list-divider">반복 알림</div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item repeat">
+                            <div class="item-icon icon-meal">🍽️</div>
+                            <div class="item-body">
+                                <div class="item-title">콩이 아침 식사</div>
+                                <div class="item-sub">매일 · 오전 8:00</div>
+                            </div>
+                            <div class="item-right"><label class="toggle"><input type="checkbox" checked><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑥ 지남 미완료 탭 → 재예약 바텀시트
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑥ 지남 미완료 탭 → 재예약 바텀시트</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;"></div>
+            <div class="bs-overlay">
+                <div class="bs" style="max-height:92%;">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header">
+                        <span class="bs-title">💉 예방접종 알림 수정</span>
+                        <button class="bs-close">✕</button>
+                    </div>
+                    <div class="bs-body">
+                        <!-- 지남 안내 배너 -->
+                        <div class="reschedule-info">
+                            <span>⚠️</span>
+                            <span class="reschedule-info-text">
+                                이 알림의 예정일이 지났어요.<br>
+                                새 날짜로 변경하거나 삭제할 수 있어요.
+                            </span>
+                        </div>
+
+                        <div class="form-sec">
+                            <label class="form-label">백신 이름</label>
+                            <input
+                                style="width:100%;padding:12px 16px;border:1.5px solid #A7F3D0;border-radius:12px;font-size:14px;background:#ECFDF5;color:#064E3B;outline:none;"
+                                type="text" value="종합백신 2차">
+                        </div>
+                        <div class="form-sec">
+                            <label class="form-label">예정일 <span style="color:var(--amber-700);font-size:12px">· 새 날짜로
+                                    변경해주세요</span></label>
+                            <button class="date-btn"
+                                style="border-color:var(--amber-400);background:var(--amber-50);color:var(--amber-700);">
+                                <span>날짜를 선택하세요</span><span>📅</span>
+                            </button>
+                        </div>
+                        <div class="form-sec">
+                            <label class="form-label">알림 시점</label>
+                            <div class="chip-row">
+                                <span class="sel-chip active">D-7</span>
+                                <span class="sel-chip active">D-3</span>
+                                <span class="sel-chip active">D-1</span>
+                                <span class="sel-chip">당일</span>
+                            </div>
+                        </div>
+                        <div class="form-sec">
+                            <label class="form-label">알림 시각</label>
+                            <button class="date-btn filled"><span>오전 9:00</span><span>🕘</span></button>
+                        </div>
+                        <div class="divider"></div>
+                        <button class="save-btn">재예약하기</button>
+                        <button class="delete-btn">🗑️ 이 알림 삭제하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반려숨탄 — 알림 화면 UI v3</title>
+    <style>
+        :root {
+            --primary-900: #064E3B;
+            --primary-700: #047857;
+            --primary-600: #059669;
+            --primary-500: #10B981;
+            --primary-400: #34D399;
+            --primary-300: #6EE7B7;
+            --primary-200: #A7F3D0;
+            --primary-100: #D1FAE5;
+            --primary-50: #ECFDF5;
+            --gray-900: #111827;
+            --gray-800: #1F2937;
+            --gray-700: #374151;
+            --gray-600: #4B5563;
+            --gray-500: #6B7280;
+            --gray-400: #9CA3AF;
+            --gray-300: #D1D5DB;
+            --gray-200: #E5E7EB;
+            --gray-100: #F3F4F6;
+            --gray-50: #F9FAFB;
+            --white: #FFFFFF;
+            --cream-bg: #FFFDF7;
+            --red-500: #EF4444;
+            --red-400: #F87171;
+            --red-50: #FEF2F2;
+            --sp1: 4px;
+            --sp2: 8px;
+            --sp3: 12px;
+            --sp4: 16px;
+            --sp5: 20px;
+            --sp6: 24px;
+            --r-sm: 8px;
+            --r-md: 12px;
+            --r-lg: 16px;
+            --r-xl: 20px;
+            --r-2xl: 24px;
+            --r-full: 9999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #C9CDD4;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 24px;
+            font-family: -apple-system, 'Pretendard', sans-serif;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phone-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-600);
+            background: var(--white);
+            padding: 4px 14px;
+            border-radius: var(--r-full);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+            letter-spacing: 0.3px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ── 폰 프레임 ── */
+        .phone {
+            width: 390px;
+            height: 844px;
+            background: var(--cream-bg);
+            border-radius: 44px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22), 0 0 0 2px #1a1a1a;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ── 상태바 ── */
+        .status-bar {
+            height: 44px;
+            background: var(--primary-50);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .status-time {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-900);
+        }
+
+        .status-icons {
+            font-size: 12px;
+            color: var(--primary-900);
+            display: flex;
+            gap: 6px;
+        }
+
+        /* ── 앱 헤더 ── */
+        .app-header {
+            height: 56px;
+            background: var(--primary-50);
+            border-bottom: 1px solid var(--primary-100);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--sp5);
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-900);
+        }
+
+        .pet-chip {
+            background: var(--primary-100);
+            border: 1.5px solid var(--primary-400);
+            border-radius: var(--r-full);
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-900);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--r-full);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--primary-900);
+            border-radius: 2px;
+        }
+
+        /* ── 콘텐츠 ── */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--sp4);
+            padding-bottom: 80px;
+            background: var(--cream-bg);
+        }
+
+        .content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ── 알림 리스트 ── */
+        .alarm-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp2);
+        }
+
+        .list-divider {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-400);
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            padding: var(--sp3) var(--sp1) var(--sp2);
+            display: flex;
+            align-items: center;
+            gap: var(--sp2);
+        }
+
+        .list-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+
+        /* 스와이프 래퍼 */
+        .swipe-wrapper {
+            position: relative;
+            border-radius: var(--r-lg);
+            overflow: hidden;
+        }
+
+        .swipe-delete-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 80px;
+            background: var(--red-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 3px;
+            border-radius: 0 var(--r-lg) var(--r-lg) 0;
+        }
+
+        .swipe-delete-bg span:first-child {
+            font-size: 20px;
+        }
+
+        .swipe-delete-bg span:last-child {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        /* 알림 아이템 */
+        .alarm-item {
+            background: var(--white);
+            border-radius: var(--r-lg);
+            padding: var(--sp3) var(--sp4);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: var(--sp3);
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.25s ease;
+        }
+
+        .alarm-item.today {
+            border-left-color: var(--primary-400);
+            background: var(--primary-50);
+        }
+
+        .alarm-item.urgent {
+            border-left-color: var(--primary-400);
+        }
+
+        .alarm-item.past {
+            border-left-color: var(--gray-300);
+            opacity: 0.6;
+        }
+
+        .alarm-item.repeat {
+            border-left-color: var(--primary-200);
+        }
+
+        .alarm-item.swiped {
+            transform: translateX(-80px);
+            border-radius: var(--r-lg) 0 0 var(--r-lg);
+        }
+
+        .item-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--r-md);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .icon-vaccination {
+            background: #EDE9FE;
+        }
+
+        .icon-hospital {
+            background: #FEE2E2;
+        }
+
+        .icon-medication {
+            background: #FEF3C7;
+        }
+
+        .icon-meal {
+            background: #DCFCE7;
+        }
+
+        .icon-daily {
+            background: var(--primary-100);
+        }
+
+        .item-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-800);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .item-sub {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        .item-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .d-badge {
+            padding: 2px 8px;
+            border-radius: var(--r-full);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .d-badge.normal {
+            background: var(--primary-100);
+            color: var(--primary-700);
+        }
+
+        .d-badge.urgent {
+            background: var(--primary-400);
+            color: var(--white);
+        }
+
+        .d-badge.today {
+            background: var(--primary-400);
+            color: var(--white);
+        }
+
+        .d-badge.past {
+            background: var(--gray-200);
+            color: var(--gray-400);
+        }
+
+        /* 토글 */
+        .toggle {
+            position: relative;
+            width: 40px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            border-radius: var(--r-full);
+            background: var(--gray-300);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--white);
+            left: 3px;
+            top: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            transition: 0.2s;
+        }
+
+        .toggle input:checked+.toggle-slider {
+            background: var(--primary-400);
+        }
+
+        .toggle input:checked+.toggle-slider::before {
+            transform: translateX(16px);
+        }
+
+        .swipe-hint {
+            text-align: center;
+            font-size: 11px;
+            color: var(--gray-400);
+            padding: var(--sp2) 0 var(--sp1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        /* ── 빈 상태 ── */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 56px var(--sp4) var(--sp6);
+            text-align: center;
+            gap: var(--sp3);
+        }
+
+        .empty-emoji {
+            font-size: 52px;
+        }
+
+        .empty-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-700);
+        }
+
+        .empty-desc {
+            font-size: 13px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* ── 탭바 ── */
+        .tab-bar {
+            height: 80px;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 var(--sp2);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            flex: 1;
+            padding-bottom: 4px;
+            position: relative;
+        }
+
+        .tab-icon {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .tab-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--gray-400);
+        }
+
+        .tab-item.active .tab-label {
+            color: var(--primary-600);
+            font-weight: 700;
+        }
+
+        .tab-indicator {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            border-radius: var(--r-full);
+            background: var(--primary-400);
+        }
+
+        .tab-fab {
+            position: relative;
+            top: -16px;
+            flex-shrink: 0;
+        }
+
+        .fab-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--r-full);
+            background: var(--primary-400);
+            border: 3px solid var(--white);
+            box-shadow: 0 4px 16px rgba(52, 211, 153, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        /* ══ 바텀시트 공통 ══ */
+        .bs-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 100;
+            border-radius: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .bs {
+            background: var(--white);
+            border-radius: var(--r-2xl) var(--r-2xl) 0 0;
+            max-height: 92%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bs-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--gray-300);
+            border-radius: var(--r-full);
+            margin: 12px auto 0;
+            flex-shrink: 0;
+        }
+
+        .bs-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--sp4) var(--sp5) var(--sp3);
+            flex-shrink: 0;
+        }
+
+        .bs-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .bs-subtitle {
+            font-size: 13px;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        .bs-close {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--r-full);
+            background: var(--gray-100);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: var(--gray-500);
+        }
+
+        .bs-body {
+            overflow-y: auto;
+            padding: 0 var(--sp5) var(--sp5);
+            flex: 1;
+        }
+
+        .bs-body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ── 타입 선택 그리드 ── */
+        .type-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--sp3);
+            padding: var(--sp2) 0 var(--sp2);
+        }
+
+        /* 타입 아이템 — 클릭하면 바로 다음 스텝으로 */
+        .type-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--sp2);
+            padding: var(--sp4) var(--sp2);
+            background: var(--gray-50);
+            border-radius: var(--r-lg);
+            border: 1.5px solid var(--gray-200);
+            cursor: pointer;
+            transition: all 0.15s;
+            /* 클릭 유도 강조 */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .type-item:hover {
+            background: var(--primary-50);
+            border-color: var(--primary-400);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 211, 153, 0.2);
+        }
+
+        .type-item:active {
+            transform: scale(0.96);
+        }
+
+        .type-item-emoji {
+            font-size: 28px;
+        }
+
+        .type-item-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-700);
+            text-align: center;
+        }
+
+        .type-item:hover .type-item-label {
+            color: var(--primary-700);
+        }
+
+        /* 클릭 힌트 */
+        .type-hint {
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray-400);
+            padding: var(--sp2) 0 var(--sp3);
+        }
+
+        /* ── 폼 공통 ── */
+        .form-sec {
+            margin-bottom: var(--sp4);
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: var(--sp2);
+            display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px var(--sp4);
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--r-md);
+            font-size: 14px;
+            color: var(--gray-800);
+            background: var(--white);
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-400);
+        }
+
+        .form-input.filled {
+            border-color: var(--primary-300);
+            background: var(--primary-50);
+        }
+
+        .date-btn {
+            width: 100%;
+            padding: 12px var(--sp4);
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--r-md);
+            font-size: 14px;
+            color: var(--gray-800);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .date-btn.filled {
+            border-color: var(--primary-300);
+            background: var(--primary-50);
+            color: var(--primary-800);
+        }
+
+        .date-btn .placeholder {
+            color: var(--gray-400);
+        }
+
+        .chip-row {
+            display: flex;
+            gap: var(--sp2);
+            flex-wrap: wrap;
+        }
+
+        .sel-chip {
+            padding: 6px 14px;
+            border-radius: var(--r-full);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1.5px solid var(--gray-300);
+            color: var(--gray-500);
+            background: var(--white);
+            transition: all 0.15s;
+        }
+
+        .sel-chip.active {
+            border-color: var(--primary-400);
+            color: var(--primary-700);
+            background: var(--primary-50);
+        }
+
+        .divider {
+            height: 1px;
+            background: var(--gray-100);
+            margin: var(--sp4) 0;
+        }
+
+        /* 저장 버튼 */
+        .save-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-400);
+            color: var(--white);
+            border: none;
+            border-radius: var(--r-lg);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(52, 211, 153, 0.35);
+            margin-bottom: var(--sp3);
+        }
+
+        /* 삭제 버튼 (수정 폼 전용) */
+        .delete-btn {
+            width: 100%;
+            padding: 13px;
+            background: var(--white);
+            color: var(--red-500);
+            border: 1.5px solid var(--red-400);
+            border-radius: var(--r-lg);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp2);
+        }
+
+        .delete-btn:hover {
+            background: var(--red-50);
+        }
+
+        /* 섹션 구분 타이틀 (폼 내부) */
+        .form-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-400);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: var(--sp3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════
+  ① 알림 목록 (통합, 예정 있음)
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">① 알림 목록 (통합)</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content">
+                <div class="alarm-list">
+                    <div class="list-divider">예정된 알림</div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item today">
+                            <div class="item-icon icon-medication">💊</div>
+                            <div class="item-body">
+                                <div class="item-title">심장사상충 예방약</div>
+                                <div class="item-sub">오늘 · 오전 9:00</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge today">오늘</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item urgent">
+                            <div class="item-icon icon-vaccination">💉</div>
+                            <div class="item-body">
+                                <div class="item-title">광견병 예방접종</div>
+                                <div class="item-sub">5월 6일 (수) · D-7, D-3, D-1</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge urgent">D-3</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item">
+                            <div class="item-icon icon-hospital">🏥</div>
+                            <div class="item-body">
+                                <div class="item-title">정기 건강검진</div>
+                                <div class="item-sub">5월 10일 (일) · 오전 11:00</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge normal">D-7</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item past">
+                            <div class="item-icon icon-vaccination">💉</div>
+                            <div class="item-body">
+                                <div class="item-title">종합백신 2차</div>
+                                <div class="item-sub">4월 28일 (화) · 완료 미기록</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge past">지남</span><label class="toggle"><input
+                                        type="checkbox"><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="list-divider">반복 알림</div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item repeat">
+                            <div class="item-icon icon-meal">🍽️</div>
+                            <div class="item-body">
+                                <div class="item-title">콩이 아침 식사</div>
+                                <div class="item-sub">매일 · 오전 8:00</div>
+                            </div>
+                            <div class="item-right"><label class="toggle"><input type="checkbox" checked><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item repeat">
+                            <div class="item-icon icon-meal">🍽️</div>
+                            <div class="item-body">
+                                <div class="item-title">콩이 저녁 식사</div>
+                                <div class="item-sub">매일 · 오후 6:00</div>
+                            </div>
+                            <div class="item-right"><label class="toggle"><input type="checkbox" checked><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item repeat">
+                            <div class="item-icon icon-daily">📋</div>
+                            <div class="item-body">
+                                <div class="item-title">일일 기록 리마인더</div>
+                                <div class="item-sub">매일 · 오후 9:00</div>
+                            </div>
+                            <div class="item-right"><label class="toggle"><input type="checkbox"><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swipe-hint">← 스와이프하면 삭제할 수 있어요</div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ② 빈 상태
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">② 빈 상태</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content">
+                <div class="empty-state">
+                    <span class="empty-emoji">🐾</span>
+                    <div class="empty-title">등록된 알림이 없네요</div>
+                    <div class="empty-desc">콩이는 오늘도 건강하게 지내봐요!<br>오른쪽 아래 + 버튼으로 알림을 추가해보세요.</div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ③ 스와이프 → 삭제 노출
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">③ 스와이프 → 삭제 노출</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content">
+                <div class="alarm-list">
+                    <div class="list-divider">예정된 알림</div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item today">
+                            <div class="item-icon icon-medication">💊</div>
+                            <div class="item-body">
+                                <div class="item-title">심장사상충 예방약</div>
+                                <div class="item-sub">오늘 · 오전 9:00</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge today">오늘</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <!-- 스와이프된 카드 -->
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item urgent swiped">
+                            <div class="item-icon icon-vaccination">💉</div>
+                            <div class="item-body">
+                                <div class="item-title">광견병 예방접종</div>
+                                <div class="item-sub">5월 6일 (수) · D-7, D-3, D-1</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge urgent">D-3</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item">
+                            <div class="item-icon icon-hospital">🏥</div>
+                            <div class="item-body">
+                                <div class="item-title">정기 건강검진</div>
+                                <div class="item-sub">5월 10일 (일) · 오전 11:00</div>
+                            </div>
+                            <div class="item-right"><span class="d-badge normal">D-7</span><label class="toggle"><input
+                                        type="checkbox" checked><span class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                    <div class="list-divider">반복 알림</div>
+                    <div class="swipe-wrapper">
+                        <div class="swipe-delete-bg"><span>🗑️</span><span>삭제</span></div>
+                        <div class="alarm-item repeat">
+                            <div class="item-icon icon-meal">🍽️</div>
+                            <div class="item-body">
+                                <div class="item-title">콩이 아침 식사</div>
+                                <div class="item-sub">매일 · 오전 8:00</div>
+                            </div>
+                            <div class="item-right"><label class="toggle"><input type="checkbox" checked><span
+                                        class="toggle-slider"></span></label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ④ 알림 추가 — 타입 선택
+  (다음 버튼 없음, 아이템 클릭 → 바로 다음 스텝)
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">④ 추가 — 타입 선택 (클릭 → 다음 스텝)</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;"></div>
+            <div class="bs-overlay">
+                <div class="bs">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header">
+                        <div>
+                            <div class="bs-title">어떤 알림을 추가할까요?</div>
+                            <div class="bs-subtitle">알림 종류를 선택하면 바로 입력할 수 있어요</div>
+                        </div>
+                        <button class="bs-close">✕</button>
+                    </div>
+                    <div class="bs-body">
+                        <div class="type-grid">
+                            <div class="type-item"><span class="type-item-emoji">💉</span><span
+                                    class="type-item-label">예방접종</span></div>
+                            <div class="type-item"><span class="type-item-emoji">🏥</span><span
+                                    class="type-item-label">병원 예약</span></div>
+                            <div class="type-item"><span class="type-item-emoji">💊</span><span
+                                    class="type-item-label">투약</span></div>
+                            <div class="type-item"><span class="type-item-emoji">🍽️</span><span
+                                    class="type-item-label">식사 시간</span></div>
+                            <div class="type-item"><span class="type-item-emoji">📋</span><span
+                                    class="type-item-label">일일 리마인더</span></div>
+                        </div>
+                        <div class="type-hint">👆 원하는 알림 종류를 탭하세요</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑤ 추가 폼 — 예방접종
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑤ 추가 폼 — 💉 예방접종</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;"></div>
+            <div class="bs-overlay">
+                <div class="bs" style="max-height:92%;">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header"><span class="bs-title">💉 예방접종 알림 추가</span><button
+                            class="bs-close">✕</button></div>
+                    <div class="bs-body">
+                        <div class="form-sec"><label class="form-label">백신 이름</label><input class="form-input"
+                                type="text" placeholder="예) 광견병, 종합백신 등"></div>
+                        <div class="form-sec"><label class="form-label">예정일</label><button class="date-btn"><span
+                                    class="placeholder">날짜를 선택하세요</span><span>📅</span></button></div>
+                        <div class="form-sec"><label class="form-label">알림 시점 <span
+                                    style="color:var(--gray-400);font-weight:400">(복수 선택)</span></label>
+                            <div class="chip-row"><span class="sel-chip">D-7</span><span
+                                    class="sel-chip">D-3</span><span class="sel-chip">D-1</span><span
+                                    class="sel-chip">당일</span></div>
+                        </div>
+                        <div class="form-sec"><label class="form-label">알림 시각</label><button class="date-btn"><span
+                                    class="placeholder">시각을 선택하세요</span><span>🕘</span></button></div>
+                        <div class="form-sec"><label class="form-label">메모 <span
+                                    style="color:var(--gray-400);font-weight:400">(선택)</span></label><input
+                                class="form-input" type="text" placeholder="추가 메모를 입력하세요"></div>
+                        <div class="divider"></div>
+                        <button class="save-btn">저장하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑥ 추가 폼 — 병원 예약
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑥ 추가 폼 — 🏥 병원 예약</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;"></div>
+            <div class="bs-overlay">
+                <div class="bs" style="max-height:92%;">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header"><span class="bs-title">🏥 병원 예약 알림 추가</span><button
+                            class="bs-close">✕</button></div>
+                    <div class="bs-body">
+                        <div class="form-sec"><label class="form-label">방문 목적</label><input class="form-input"
+                                type="text" placeholder="예) 정기검진, 피부 진료 등"></div>
+                        <div class="form-sec"><label class="form-label">예약 일시</label><button class="date-btn"><span
+                                    class="placeholder">날짜와 시각을 선택하세요</span><span>📅</span></button></div>
+                        <div class="form-sec"><label class="form-label">알림 시점 <span
+                                    style="color:var(--gray-400);font-weight:400">(복수 선택)</span></label>
+                            <div class="chip-row"><span class="sel-chip">D-1</span><span class="sel-chip">당일</span>
+                            </div>
+                        </div>
+                        <div class="form-sec"><label class="form-label">병원명 <span
+                                    style="color:var(--gray-400);font-weight:400">(선택)</span></label><input
+                                class="form-input" type="text" placeholder="예) 행복동물병원"></div>
+                        <div class="form-sec"><label class="form-label">메모 <span
+                                    style="color:var(--gray-400);font-weight:400">(선택)</span></label><input
+                                class="form-input" type="text" placeholder="추가 메모를 입력하세요"></div>
+                        <div class="divider"></div>
+                        <button class="save-btn">저장하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑦ 추가 폼 — 투약
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑦ 추가 폼 — 💊 투약</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;"></div>
+            <div class="bs-overlay">
+                <div class="bs" style="max-height:92%;">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header"><span class="bs-title">💊 투약 알림 추가</span><button class="bs-close">✕</button>
+                    </div>
+                    <div class="bs-body">
+                        <div class="form-sec"><label class="form-label">약품 이름</label><input class="form-input"
+                                type="text" placeholder="예) 심장사상충, 구충제 등"></div>
+                        <div class="form-sec"><label class="form-label">투약 일시</label><button class="date-btn"><span
+                                    class="placeholder">날짜와 시각을 선택하세요</span><span>📅</span></button></div>
+                        <div class="form-sec"><label class="form-label">반복</label>
+                            <div class="chip-row"><span class="sel-chip active">없음</span><span
+                                    class="sel-chip">매일</span><span class="sel-chip">매주</span><span
+                                    class="sel-chip">매달</span></div>
+                        </div>
+                        <div class="form-sec"><label class="form-label">메모 <span
+                                    style="color:var(--gray-400);font-weight:400">(선택)</span></label><input
+                                class="form-input" type="text" placeholder="예) 식후 30분, 1정"></div>
+                        <div class="divider"></div>
+                        <button class="save-btn">저장하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑧ 추가 폼 — 식사 시간
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑧ 추가 폼 — 🍽️ 식사 시간</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;"></div>
+            <div class="bs-overlay">
+                <div class="bs">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header"><span class="bs-title">🍽️ 식사 시간 알림 추가</span><button
+                            class="bs-close">✕</button></div>
+                    <div class="bs-body">
+                        <div class="form-sec"><label class="form-label">알림 이름</label><input class="form-input"
+                                type="text" placeholder="예) 아침 식사, 저녁 밥 등"></div>
+                        <div class="form-sec"><label class="form-label">식사 시각</label><button class="date-btn"><span
+                                    class="placeholder">시각을 선택하세요</span><span>🕗</span></button></div>
+                        <div class="form-sec"><label class="form-label">반복</label>
+                            <div class="chip-row"><span class="sel-chip active">매일</span><span
+                                    class="sel-chip">평일만</span><span class="sel-chip">주말만</span></div>
+                        </div>
+                        <div class="form-sec"><label class="form-label">메모 <span
+                                    style="color:var(--gray-400);font-weight:400">(선택)</span></label><input
+                                class="form-input" type="text" placeholder="예) 사료 50g + 간식"></div>
+                        <div class="divider"></div>
+                        <button class="save-btn">저장하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑨ 추가 폼 — 일일 리마인더
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑨ 추가 폼 — 📋 일일 리마인더</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;"></div>
+            <div class="bs-overlay">
+                <div class="bs">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header"><span class="bs-title">📋 일일 리마인더 추가</span><button
+                            class="bs-close">✕</button></div>
+                    <div class="bs-body">
+                        <div class="form-sec"><label class="form-label">알림 시각</label><button class="date-btn"><span
+                                    class="placeholder">시각을 선택하세요</span><span>🕘</span></button></div>
+                        <div class="form-sec"><label class="form-label">반복</label>
+                            <div class="chip-row"><span class="sel-chip active">매일</span><span
+                                    class="sel-chip">평일만</span><span class="sel-chip">주말만</span></div>
+                        </div>
+                        <div class="form-sec"><label class="form-label">알림 문구 <span
+                                    style="color:var(--gray-400);font-weight:400">(선택)</span></label><input
+                                class="form-input" type="text" placeholder="예) 콩이 오늘 기록 남기셨나요? 🐾"></div>
+                        <div class="divider"></div>
+                        <button class="save-btn">저장하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑩ 수정 폼 — 예방접종 (탭 → 오픈, 삭제 버튼 포함)
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑩ 수정 폼 — 💉 예방접종</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;"></div>
+            <div class="bs-overlay">
+                <div class="bs" style="max-height:92%;">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header"><span class="bs-title">💉 예방접종 알림 수정</span><button
+                            class="bs-close">✕</button></div>
+                    <div class="bs-body">
+                        <div class="form-sec"><label class="form-label">백신 이름</label><input class="form-input filled"
+                                type="text" value="광견병 예방접종"></div>
+                        <div class="form-sec"><label class="form-label">예정일</label><button
+                                class="date-btn filled"><span>2026년 5월 6일 (수)</span><span>📅</span></button></div>
+                        <div class="form-sec"><label class="form-label">알림 시점 <span
+                                    style="color:var(--gray-400);font-weight:400">(복수 선택)</span></label>
+                            <div class="chip-row"><span class="sel-chip active">D-7</span><span
+                                    class="sel-chip active">D-3</span><span class="sel-chip active">D-1</span><span
+                                    class="sel-chip">당일</span></div>
+                        </div>
+                        <div class="form-sec"><label class="form-label">알림 시각</label><button
+                                class="date-btn filled"><span>오전 9:00</span><span>🕘</span></button></div>
+                        <div class="form-sec"><label class="form-label">메모 <span
+                                    style="color:var(--gray-400);font-weight:400">(선택)</span></label><input
+                                class="form-input" type="text" placeholder="추가 메모를 입력하세요"></div>
+                        <div class="divider"></div>
+                        <button class="save-btn">저장하기</button>
+                        <button class="delete-btn">🗑️ 이 알림 삭제하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑪ 수정 폼 — 병원 예약
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑪ 수정 폼 — 🏥 병원 예약</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header"><span class="header-title">알림</span>
+                <div class="pet-chip">🐶 콩이 ▾</div><button
+                    class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;"></div>
+            <div class="bs-overlay">
+                <div class="bs" style="max-height:92%;">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header"><span class="bs-title">🏥 병원 예약 알림 수정</span><button
+                            class="bs-close">✕</button></div>
+                    <div class="bs-body">
+                        <div class="form-sec"><label class="form-label">방문 목적</label><input class="form-input filled"
+                                type="text" value="정기 건강검진"></div>
+                        <div class="form-sec"><label class="form-label">예약 일시</label><button
+                                class="date-btn filled"><span>2026년 5월 10일 (일) 오전 11:00</span><span>📅</span></button>
+                        </div>
+                        <div class="form-sec"><label class="form-label">알림 시점 <span
+                                    style="color:var(--gray-400);font-weight:400">(복수 선택)</span></label>
+                            <div class="chip-row"><span class="sel-chip active">D-1</span><span
+                                    class="sel-chip active">당일</span></div>
+                        </div>
+                        <div class="form-sec"><label class="form-label">병원명 <span
+                                    style="color:var(--gray-400);font-weight:400">(선택)</span></label><input
+                                class="form-input filled" type="text" value="행복동물병원"></div>
+                        <div class="form-sec"><label class="form-label">메모 <span
+                                    style="color:var(--gray-400);font-weight:400">(선택)</span></label><input
+                                class="form-input" type="text" placeholder="추가 메모를 입력하세요"></div>
+                        <div class="divider"></div>
+                        <button class="save-btn">저장하기</button>
+                        <button class="delete-btn">🗑️ 이 알림 삭제하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item active"><span class="tab-icon">🔔</span><span class="tab-label">알림</span>
+                    <div class="tab-indicator"></div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span></div>
+            </div>

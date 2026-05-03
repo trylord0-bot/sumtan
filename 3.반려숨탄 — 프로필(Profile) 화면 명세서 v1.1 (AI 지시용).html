@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반려숨탄 — 프로필 화면 UI v2</title>
+    <style>
+        :root {
+            --primary-900: #064E3B;
+            --primary-700: #047857;
+            --primary-600: #059669;
+            --primary-500: #10B981;
+            --primary-400: #34D399;
+            --primary-300: #6EE7B7;
+            --primary-200: #A7F3D0;
+            --primary-100: #D1FAE5;
+            --primary-50: #ECFDF5;
+            --gray-900: #111827;
+            --gray-800: #1F2937;
+            --gray-700: #374151;
+            --gray-600: #4B5563;
+            --gray-500: #6B7280;
+            --gray-400: #9CA3AF;
+            --gray-300: #D1D5DB;
+            --gray-200: #E5E7EB;
+            --gray-100: #F3F4F6;
+            --gray-50: #F9FAFB;
+            --white: #FFFFFF;
+            --cream-bg: #FFFDF7;
+            --red-500: #EF4444;
+            --red-400: #F87171;
+            --red-50: #FEF2F2;
+            --amber-400: #FBBF24;
+            --amber-50: #FFFBEB;
+            --amber-100: #FEF3C7;
+            --amber-700: #B45309;
+            --sp1: 4px;
+            --sp2: 8px;
+            --sp3: 12px;
+            --sp4: 16px;
+            --sp5: 20px;
+            --sp6: 24px;
+            --r-sm: 8px;
+            --r-md: 12px;
+            --r-lg: 16px;
+            --r-xl: 20px;
+            --r-2xl: 24px;
+            --r-full: 9999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #C9CDD4;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 40px 24px;
+            font-family: -apple-system, 'Pretendard', sans-serif;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phone-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-600);
+            background: var(--white);
+            padding: 4px 14px;
+            border-radius: var(--r-full);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+            letter-spacing: 0.3px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ── 폰 프레임 ── */
+        .phone {
+            width: 390px;
+            height: 844px;
+            background: var(--cream-bg);
+            border-radius: 44px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22), 0 0 0 2px #1a1a1a;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* ── 상태바 ── */
+        .status-bar {
+            height: 44px;
+            background: var(--primary-50);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+        }
+
+        .status-time {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-900);
+        }
+
+        .status-icons {
+            font-size: 12px;
+            color: var(--primary-900);
+            display: flex;
+            gap: 6px;
+        }
+
+        /* ── 앱 헤더 (기본) ── */
+        .app-header {
+            height: 56px;
+            background: var(--primary-50);
+            border-bottom: 1px solid var(--primary-100);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--sp5);
+            flex-shrink: 0;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-900);
+        }
+
+        .pet-chip {
+            background: var(--primary-100);
+            border: 1.5px solid var(--primary-400);
+            border-radius: var(--r-full);
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-900);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .hamburger {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--r-full);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: var(--primary-900);
+            border-radius: 2px;
+        }
+
+        /* ── 뒤로가기 헤더 (새 펫 추가 전용) ── */
+        .app-header-back {
+            height: 56px;
+            background: var(--primary-50);
+            border-bottom: 1px solid var(--primary-100);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--sp4);
+            flex-shrink: 0;
+            gap: var(--sp2);
+        }
+
+        .back-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--r-full);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--primary-700);
+            flex-shrink: 0;
+        }
+
+        .header-title-center {
+            flex: 1;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-900);
+        }
+
+        /* ── 콘텐츠 ── */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--sp4);
+            padding-bottom: 80px;
+            background: var(--cream-bg);
+        }
+
+        .content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* ── 새 펫 추가 버튼 ── */
+        .add-pet-btn {
+            width: 100%;
+            padding: 12px var(--sp4);
+            background: var(--white);
+            border: 1.5px dashed var(--primary-300);
+            border-radius: var(--r-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp2);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-600);
+            cursor: pointer;
+            margin-bottom: var(--sp4);
+        }
+
+        /* ── 펫 사진 영역 ── */
+        .pet-photo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: var(--sp5);
+        }
+
+        .pet-photo-wrap {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .pet-photo {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-200), var(--primary-400));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            border: 3px solid var(--white);
+            box-shadow: 0 4px 16px rgba(52, 211, 153, 0.3);
+        }
+
+        .photo-edit-badge {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--primary-400);
+            border: 2px solid var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ── 자동저장 토스트 ── */
+        .autosave-toast {
+            position: absolute;
+            top: 108px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gray-800);
+            color: var(--white);
+            padding: 7px 16px;
+            border-radius: var(--r-full);
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 50;
+            white-space: nowrap;
+        }
+
+        /* ── 섹션 카드 ── */
+        .section-card {
+            background: var(--white);
+            border-radius: var(--r-lg);
+            padding: var(--sp4);
+            margin-bottom: var(--sp3);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+        }
+
+        .section-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-400);
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-bottom: var(--sp3);
+        }
+
+        /* ── 필드 행 ── */
+        .field-row {
+            display: flex;
+            align-items: center;
+            padding: var(--sp3) 0;
+            border-bottom: 1px solid var(--gray-100);
+            min-height: 48px;
+        }
+
+        .field-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .field-row:first-child {
+            padding-top: 0;
+        }
+
+        .field-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-500);
+            width: 88px;
+            flex-shrink: 0;
+        }
+
+        .field-value {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-800);
+        }
+
+        .field-value.placeholder {
+            color: var(--gray-400);
+        }
+
+        .field-edit-icon {
+            font-size: 14px;
+            color: var(--gray-300);
+            flex-shrink: 0;
+            margin-left: var(--sp2);
+        }
+
+        /* 인라인 입력 */
+        .field-input {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-800);
+            border: none;
+            background: transparent;
+            outline: none;
+            border-bottom: 1.5px solid var(--primary-400);
+            padding-bottom: 2px;
+        }
+
+        .field-input::placeholder {
+            color: var(--gray-400);
+        }
+
+        /* 편집 중 행 하이라이트 */
+        .field-row.editing {
+            background: var(--primary-50);
+            margin: 0 -16px;
+            padding-left: 16px;
+            padding-right: 16px;
+            border-radius: var(--r-sm);
+            border-bottom: none;
+        }
+
+        .field-row.editing .field-label {
+            color: var(--primary-700);
+        }
+
+        /* 성별 칩 */
+        .gender-chips {
+            display: flex;
+            gap: var(--sp2);
+        }
+
+        .gender-chip {
+            padding: 5px 14px;
+            border-radius: var(--r-full);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1.5px solid var(--gray-300);
+            color: var(--gray-500);
+            background: var(--white);
+        }
+
+        .gender-chip.active {
+            border-color: var(--primary-400);
+            color: var(--primary-700);
+            background: var(--primary-50);
+        }
+
+        /* 중성화 토글 */
+        .toggle {
+            position: relative;
+            width: 40px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            border-radius: var(--r-full);
+            background: var(--gray-300);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--white);
+            left: 3px;
+            top: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            transition: 0.2s;
+        }
+
+        .toggle input:checked+.toggle-slider {
+            background: var(--primary-400);
+        }
+
+        .toggle input:checked+.toggle-slider::before {
+            transform: translateX(16px);
+        }
+
+        /* 펫 삭제 버튼 (프로필 하단) */
+        .delete-pet-btn {
+            width: 100%;
+            padding: 13px;
+            background: var(--white);
+            color: var(--red-500);
+            border: 1.5px solid var(--red-400);
+            border-radius: var(--r-lg);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp2);
+            margin-top: var(--sp1);
+        }
+
+        /* 저장 버튼 (새 펫 추가 전용) */
+        .save-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-400);
+            color: var(--white);
+            border: none;
+            border-radius: var(--r-lg);
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(52, 211, 153, 0.35);
+            margin-top: var(--sp2);
+        }
+
+        /* ── 탭바 ── */
+        .tab-bar {
+            height: 80px;
+            background: var(--white);
+            border-top: 1px solid var(--gray-200);
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 var(--sp2);
+            flex-shrink: 0;
+        }
+
+        .tab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            flex: 1;
+            padding-bottom: 4px;
+            position: relative;
+        }
+
+        .tab-icon {
+            font-size: 22px;
+            line-height: 1;
+        }
+
+        .tab-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--gray-400);
+        }
+
+        .tab-item.active .tab-label {
+            color: var(--primary-600);
+            font-weight: 700;
+        }
+
+        .tab-indicator {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            border-radius: var(--r-full);
+            background: var(--primary-400);
+        }
+
+        .tab-fab {
+            position: relative;
+            top: -16px;
+            flex-shrink: 0;
+        }
+
+        .fab-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--r-full);
+            background: var(--primary-400);
+            border: 3px solid var(--white);
+            box-shadow: 0 4px 16px rgba(52, 211, 153, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        /* ── 바텀시트 (펫 전환) ── */
+        .bs-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 100;
+            border-radius: 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .bs {
+            background: var(--white);
+            border-radius: var(--r-2xl) var(--r-2xl) 0 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bs-handle {
+            width: 40px;
+            height: 4px;
+            background: var(--gray-300);
+            border-radius: var(--r-full);
+            margin: 12px auto 0;
+            flex-shrink: 0;
+        }
+
+        .bs-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--sp4) var(--sp5) var(--sp3);
+            flex-shrink: 0;
+        }
+
+        .bs-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .bs-close {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--r-full);
+            background: var(--gray-100);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            color: var(--gray-500);
+        }
+
+        .bs-body {
+            padding: 0 var(--sp5) var(--sp5);
+        }
+
+        .pet-switch-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--sp2);
+            margin-bottom: var(--sp4);
+        }
+
+        .pet-switch-item {
+            display: flex;
+            align-items: center;
+            gap: var(--sp3);
+            padding: var(--sp3) var(--sp4);
+            background: var(--gray-50);
+            border-radius: var(--r-lg);
+            border: 1.5px solid var(--gray-200);
+            cursor: pointer;
+        }
+
+        .pet-switch-item.active {
+            background: var(--primary-50);
+            border-color: var(--primary-400);
+        }
+
+        .pet-switch-photo {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-200), var(--primary-400));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .pet-switch-info {
+            flex: 1;
+        }
+
+        .pet-switch-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+
+        .pet-switch-sub {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        .pet-switch-check {
+            font-size: 18px;
+            color: var(--primary-500);
+        }
+
+        .bs-add-btn {
+            width: 100%;
+            padding: 13px;
+            background: var(--white);
+            border: 1.5px dashed var(--primary-300);
+            border-radius: var(--r-lg);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-600);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--sp2);
+        }
+
+        /* 다이얼로그 */
+        .dialog-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            border-radius: 44px;
+        }
+
+        .dialog {
+            background: var(--white);
+            border-radius: var(--r-lg);
+            padding: var(--sp5);
+            width: 300px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .dialog-emoji {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: var(--sp3);
+        }
+
+        .dialog-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: var(--sp2);
+            text-align: center;
+        }
+
+        .dialog-body {
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: var(--sp5);
+            text-align: center;
+        }
+
+        .dialog-actions {
+            display: flex;
+            gap: var(--sp2);
+        }
+
+        .dialog-btn {
+            flex: 1;
+            padding: 11px;
+            border-radius: var(--r-md);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+        }
+
+        .dialog-btn.cancel {
+            background: var(--gray-100);
+            color: var(--gray-600);
+        }
+
+        .dialog-btn.danger {
+            background: var(--red-500);
+            color: var(--white);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════
+  ① 프로필 — 읽기 모드 (저장 버튼 없음)
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">① 프로필 — 읽기 모드 (자동 저장)</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header">
+                <span class="header-title">프로필</span>
+                <div class="pet-chip">🐶 콩이 ▾</div>
+                <button class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content">
+
+                <!-- 새 펫 추가 버튼 (최상단) -->
+                <button class="add-pet-btn">➕ 새 펫 추가하기</button>
+
+                <!-- 펫 사진 -->
+                <div class="pet-photo-section">
+                    <div class="pet-photo-wrap">
+                        <div class="pet-photo">🐶</div>
+                        <div class="photo-edit-badge">📷</div>
+                    </div>
+                </div>
+
+                <!-- 기본 정보 -->
+                <div class="section-card">
+                    <div class="section-title">기본 정보</div>
+                    <div class="field-row">
+                        <span class="field-label">이름</span>
+                        <span class="field-value">콩이</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">품종</span>
+                        <span class="field-value">말티즈</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">생년월일</span>
+                        <span class="field-value">2023년 2월 14일</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">나이</span>
+                        <span class="field-value" style="color:var(--gray-400);font-size:13px;">자동 계산 · 3살 2개월</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">성별</span>
+                        <div class="field-value">
+                            <div class="gender-chips">
+                                <span class="gender-chip active">♂ 수컷</span>
+                                <span class="gender-chip">♀ 암컷</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">체중</span>
+                        <span class="field-value">3.2 kg</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">중성화</span>
+                        <div class="field-value" style="display:flex;align-items:center;gap:8px;">
+                            <label class="toggle"><input type="checkbox" checked><span
+                                    class="toggle-slider"></span></label>
+                            <span style="font-size:13px;color:var(--gray-600)">완료</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 식별 정보 -->
+                <div class="section-card">
+                    <div class="section-title">식별 정보</div>
+                    <div class="field-row">
+                        <span class="field-label">마이크로칩</span>
+                        <span class="field-value">410011234567890</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">등록번호</span>
+                        <span class="field-value placeholder">미등록</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                </div>
+
+                <!-- 펫 삭제 버튼만 남김 -->
+                <button class="delete-pet-btn">🗑️ 이 펫 삭제하기</button>
+
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🔔</span><span class="tab-label">알림</span></div>
+                <div class="tab-item active"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span>
+                    <div class="tab-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ② 프로필 — 편집 중 + 자동저장 토스트
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">② 프로필 — 편집 중 + 자동저장 토스트</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header">
+                <span class="header-title">프로필</span>
+                <div class="pet-chip">🐶 콩이 ▾</div>
+                <button class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="position:relative;">
+
+                <!-- 자동저장 토스트 -->
+                <div class="autosave-toast" style="top:8px;">✅ 저장됐어요</div>
+
+                <button class="add-pet-btn">➕ 새 펫 추가하기</button>
+
+                <div class="pet-photo-section">
+                    <div class="pet-photo-wrap">
+                        <div class="pet-photo">🐶</div>
+                        <div class="photo-edit-badge">📷</div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-title">기본 정보</div>
+
+                    <!-- 이름 — 편집 완료 직후 (토스트 표시 중) -->
+                    <div class="field-row">
+                        <span class="field-label">이름</span>
+                        <span class="field-value">콩이</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+
+                    <!-- 체중 — 편집 중 -->
+                    <div class="field-row editing">
+                        <span class="field-label">체중</span>
+                        <input class="field-input" type="text" value="3.2">
+                        <span style="font-size:13px;color:var(--primary-600);margin-left:4px;font-weight:600;">kg</span>
+                    </div>
+
+                    <div class="field-row">
+                        <span class="field-label">품종</span>
+                        <span class="field-value">말티즈</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">생년월일</span>
+                        <span class="field-value">2023년 2월 14일</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">나이</span>
+                        <span class="field-value" style="color:var(--gray-400);font-size:13px;">자동 계산 · 3살 2개월</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">성별</span>
+                        <div class="field-value">
+                            <div class="gender-chips">
+                                <span class="gender-chip active">♂ 수컷</span>
+                                <span class="gender-chip">♀ 암컷</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">중성화</span>
+                        <div class="field-value" style="display:flex;align-items:center;gap:8px;">
+                            <label class="toggle"><input type="checkbox" checked><span
+                                    class="toggle-slider"></span></label>
+                            <span style="font-size:13px;color:var(--gray-600)">완료</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-title">식별 정보</div>
+                    <div class="field-row">
+                        <span class="field-label">마이크로칩</span>
+                        <span class="field-value">410011234567890</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">등록번호</span>
+                        <span class="field-value placeholder">미등록</span>
+                        <span class="field-edit-icon">✏️</span>
+                    </div>
+                </div>
+
+                <button class="delete-pet-btn">🗑️ 이 펫 삭제하기</button>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🔔</span><span class="tab-label">알림</span></div>
+                <div class="tab-item active"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span>
+                    <div class="tab-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ③ 펫 전환 바텀시트
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">③ 펫 전환 바텀시트</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header">
+                <span class="header-title">프로필</span>
+                <div class="pet-chip">🐶 콩이 ▾</div>
+                <button class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;">
+                <button class="add-pet-btn">➕ 새 펫 추가하기</button>
+                <div class="pet-photo-section">
+                    <div class="pet-photo-wrap">
+                        <div class="pet-photo">🐶</div>
+                        <div class="photo-edit-badge">📷</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bs-overlay">
+                <div class="bs">
+                    <div class="bs-handle"></div>
+                    <div class="bs-header">
+                        <span class="bs-title">펫 선택</span>
+                        <button class="bs-close">✕</button>
+                    </div>
+                    <div class="bs-body">
+                        <div class="pet-switch-list">
+                            <div class="pet-switch-item active">
+                                <div class="pet-switch-photo">🐶</div>
+                                <div class="pet-switch-info">
+                                    <div class="pet-switch-name">콩이</div>
+                                    <div class="pet-switch-sub">말티즈 · 수컷 · 3살</div>
+                                </div>
+                                <span class="pet-switch-check">✓</span>
+                            </div>
+                            <div class="pet-switch-item">
+                                <div class="pet-switch-photo"
+                                    style="background:linear-gradient(135deg,#FEF3C7,#FBBF24);">🐱</div>
+                                <div class="pet-switch-info">
+                                    <div class="pet-switch-name">나비</div>
+                                    <div class="pet-switch-sub">코리안숏헤어 · 암컷 · 5살</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="bs-add-btn">➕ 새 펫 추가하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🔔</span><span class="tab-label">알림</span></div>
+                <div class="tab-item active"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span>
+                    <div class="tab-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ④ 새 펫 추가 — 뒤로가기 헤더 + 저장 버튼
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">④ 새 펫 추가 (← 뒤로가기 헤더)</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+
+            <!-- 뒤로가기 헤더 -->
+            <div class="app-header-back">
+                <button class="back-btn">←</button>
+                <span class="header-title-center">새 펫 추가</span>
+            </div>
+
+            <div class="content">
+                <!-- 펫 사진 선택 -->
+                <div class="pet-photo-section" style="margin-top:8px;">
+                    <div class="pet-photo-wrap">
+                        <div class="pet-photo" style="background:var(--gray-100);font-size:36px;color:var(--gray-400);">
+                            📷</div>
+                        <div class="photo-edit-badge" style="background:var(--gray-400);">＋</div>
+                    </div>
+                    <span style="font-size:12px;color:var(--gray-400);margin-top:8px;">사진을 추가해주세요</span>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-title">기본 정보</div>
+                    <div class="field-row">
+                        <span class="field-label">이름 <span style="color:var(--red-400)">*</span></span>
+                        <input class="field-input" type="text" placeholder="펫 이름을 입력하세요">
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">품종</span>
+                        <input class="field-input" type="text" placeholder="예) 말티즈, 골든리트리버">
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">생년월일</span>
+                        <input class="field-input" type="text" placeholder="날짜를 선택하세요">
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">성별</span>
+                        <div class="field-value">
+                            <div class="gender-chips">
+                                <span class="gender-chip">♂ 수컷</span>
+                                <span class="gender-chip">♀ 암컷</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">체중</span>
+                        <input class="field-input" type="text" placeholder="예) 3.2">
+                        <span style="font-size:13px;color:var(--gray-400);margin-left:4px;">kg</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">중성화</span>
+                        <div class="field-value" style="display:flex;align-items:center;gap:8px;">
+                            <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+                            <span style="font-size:13px;color:var(--gray-400)">미완료</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-title">식별 정보 <span style="font-weight:400;color:var(--gray-400)">(선택)</span>
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">마이크로칩</span>
+                        <input class="field-input" type="text" placeholder="15자리 번호 입력">
+                    </div>
+                    <div class="field-row">
+                        <span class="field-label">등록번호</span>
+                        <input class="field-input" type="text" placeholder="동물등록번호 입력">
+                    </div>
+                </div>
+
+                <!-- 저장 버튼 (새 펫 추가 전용) -->
+                <button class="save-btn">저장하기</button>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🔔</span><span class="tab-label">알림</span></div>
+                <div class="tab-item active"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span>
+                    <div class="tab-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════
+  ⑤ 펫 삭제 확인 다이얼로그
+════════════════════════════════ -->
+    <div class="col">
+        <p class="phone-label">⑤ 펫 삭제 확인 다이얼로그</p>
+        <div class="phone">
+            <div class="status-bar"><span class="status-time">9:41</span>
+                <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+            </div>
+            <div class="app-header">
+                <span class="header-title">프로필</span>
+                <div class="pet-chip">🐶 콩이 ▾</div>
+                <button class="hamburger"><span></span><span></span><span></span></button>
+            </div>
+            <div class="content" style="filter:blur(1.5px);pointer-events:none;">
+                <button class="add-pet-btn">➕ 새 펫 추가하기</button>
+                <div class="pet-photo-section">
+                    <div class="pet-photo-wrap">
+                        <div class="pet-photo">🐶</div>
+                        <div class="photo-edit-badge">📷</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dialog-overlay">
+                <div class="dialog">
+                    <div class="dialog-emoji">🗑️</div>
+                    <div class="dialog-title">콩이를 삭제할까요?</div>
+                    <div class="dialog-body">
+                        콩이의 모든 기록과 알림이<br>
+                        함께 삭제되며 복구할 수 없어요.<br>
+                        <span style="font-size:12px;color:var(--gray-400)">정말 삭제하시겠어요?</span>
+                    </div>
+                    <div class="dialog-actions">
+                        <button class="dialog-btn cancel">취소</button>
+                        <button class="dialog-btn danger">삭제하기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <div class="tab-item"><span class="tab-icon">🏠</span><span class="tab-label">홈</span></div>
+                <div class="tab-item"><span class="tab-icon">📅</span><span class="tab-label">일지</span></div>
+                <div class="tab-fab">
+                    <div class="fab-btn">＋</div>
+                </div>
+                <div class="tab-item"><span class="tab-icon">🔔</span><span class="tab-label">알림</span></div>
+                <div class="tab-item active"><span class="tab-icon">🐾</span><span class="tab-label">프로필</span>
+                    <div class="tab-indicator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

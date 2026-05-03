@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>반려숨탄 — 건강관리 가이드 v1.2</title>
+    <style>
+        :root {
+            --cream-bg: #FFFDF7;
+            --primary-50: #ECFDF5;
+            --primary-100: #D1FAE5;
+            --primary-200: #A7F3D0;
+            --primary-400: #34D399;
+            --primary-600: #059669;
+            --primary-700: #047857;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --white: #FFFFFF;
+            --amber-50: #FFFBEB;
+            --amber-100: #FEF3C7;
+            --amber-500: #F59E0B;
+            --amber-600: #D97706;
+            --blue-50: #EFF6FF;
+            --blue-100: #DBEAFE;
+            --blue-600: #2563EB;
+            --blue-700: #1D4ED8;
+            --red-50: #FEF2F2;
+            --red-100: #FEE2E2;
+            --red-500: #EF4444;
+            --red-600: #DC2626;
+            --orange-50: #FFF7ED;
+            --orange-100: #FFEDD5;
+            --orange-500: #F97316;
+            --orange-600: #EA580C;
+            --purple-50: #F5F3FF;
+            --purple-100: #EDE9FE;
+            --purple-600: #7C3AED;
+            --teal-50: #F0FDFA;
+            --teal-100: #CCFBF1;
+            --teal-600: #0D9488;
+            --green-50: #F0FDF4;
+            --green-100: #DCFCE7;
+            --green-600: #16A34A;
+            --yellow-50: #FEFCE8;
+            --yellow-100: #FEF9C3;
+            --yellow-600: #CA8A04;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #D1D5DB;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR', sans-serif;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 32px 20px;
+            min-height: 100vh;
+            flex-wrap: wrap;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-label {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gray-600);
+            margin-bottom: 10px;
+            background: white;
+            border-radius: var(--radius-full);
+            padding: 4px 14px;
+            display: inline-block;
+            align-self: center;
+        }
+
+        .phone {
+            width: 375px;
+            background: var(--cream-bg);
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .status-bar {
+            background: var(--white);
+            height: 44px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .status-bar .time {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gray-700);
+        }
+
+        .status-icons {
+            display: flex;
+            gap: 5px;
+            font-size: 13px;
+        }
+
+        .sub-app-bar {
+            background: var(--white);
+            height: 56px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            border-bottom: 1px solid var(--gray-200);
+            gap: 4px;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--gray-700);
+        }
+
+        .sub-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .tab-header {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-400);
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.dog.active {
+            color: var(--primary-600);
+            border-bottom-color: var(--primary-600);
+        }
+
+        .tab-btn.cat.active {
+            color: var(--blue-600);
+            border-bottom-color: var(--blue-600);
+        }
+
+        .guide-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 16px 40px;
+        }
+
+        /* 히어로 */
+        .hero-banner {
+            border-radius: var(--radius-lg);
+            padding: 18px 16px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .hero-emoji {
+            font-size: 48px;
+            line-height: 1;
+        }
+
+        .hero-title {
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .hero-sub {
+            font-size: 12px;
+            opacity: .78;
+            line-height: 1.55;
+        }
+
+        /* 섹션 */
+        .guide-section {
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            padding: 0 2px;
+        }
+
+        .section-icon-wrap {
+            width: 30px;
+            height: 30px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        /* 카드 */
+        .guide-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .guide-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 14px 10px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .card-emoji {
+            font-size: 18px;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gray-900);
+            flex: 1;
+        }
+
+        .card-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+            white-space: nowrap;
+        }
+
+        .guide-card-body {
+            padding: 10px 14px 12px;
+        }
+
+        .guide-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--gray-50);
+            font-size: 12px;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        .guide-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        /* 경고/팁 박스 */
+        .warn-box,
+        .tip-box {
+            border-radius: var(--radius-md);
+            padding: 11px 13px;
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .box-icon {
+            font-size: 15px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .box-text {
+            font-size: 12px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* 표 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .data-table th {
+            background: var(--gray-50);
+            padding: 7px 8px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--gray-600);
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .data-table td {
+            padding: 7px 8px;
+            border-bottom: 1px solid var(--gray-100);
+            color: var(--gray-700);
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .level-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: var(--radius-full);
+        }
+
+        /* 면책 */
+        .disclaimer {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 11px 13px;
+            font-size: 11px;
+            color: var(--gray-500);
+            line-height: 1.6;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ════════════════════════════════════
+     🐶 강아지 탭
+════════════════════════════════════ -->
+    <div class="col">
+        <div class="phone-label">🐶 강아지 탭</div>
+        <div class="phone" style="height:960px;">
+            <div class="status-bar"><span class="time">01:10</span>
+                <div class="status-icons"><span>📶</span><span>🔋</span></div>
+            </div>
+            <div class="sub-app-bar">
+                <div class="back-btn">‹</div>
+                <div class="sub-title">건강관리 가이드</div>
+            </div>
+            <div class="tab-header">
+                <div class="tab-btn dog active">🐶 강아지</div>
+                <div class="tab-btn cat">🐱 고양이</div>
+            </div>
+            <div class="guide-body">
+
+                <!-- 히어로 -->
+                <div class="hero-banner" style="background:linear-gradient(135deg,#ECFDF5,#D1FAE5);">
+                    <span class="hero-emoji">🐶</span>
+                    <div>
+                        <div class="hero-title" style="color:var(--primary-700);">강아지 건강관리 가이드</div>
+                        <div class="hero-sub" style="color:var(--primary-700);">수의사 권장 기준을 바탕으로<br>작성된 전문 건강 안내서예요.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. 예방접종 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--blue-50);">💉</div>
+                        <div class="section-title">예방접종</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🛡️</span>
+                            <span class="card-title">핵심 필수 접종 (Core Vaccine)</span>
+                            <span class="card-badge" style="background:var(--blue-50);color:var(--blue-600);">필수</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--blue-600);"></div>
+                                <div><strong>DHPPL (종합백신)</strong> — 홍역·간염·파보·파라인플루엔자·렙토스피라. 생후 6~8주 1차, 3~4주 간격 3회, 매년
+                                    추가접종</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--blue-600);"></div>
+                                <div><strong>광견병</strong> — 생후 3개월 이후 1차, 이후 매년 1회 (법정 의무접종)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--blue-600);"></div>
+                                <div><strong>코로나 장염</strong> — 생후 6~8주 시작, 3~4주 간격 2회, 매년 추가접종</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">💊</span>
+                            <span class="card-title">선택 접종 (Non-Core)</span>
+                            <span class="card-badge"
+                                style="background:var(--amber-50);color:var(--amber-600);">권장</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div><strong>켄넬코프</strong> — 다견 환경·미용실·펜션 이용 시 권장. 비강 또는 주사형</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div><strong>인플루엔자</strong> — 야외 활동이 많거나 다른 개와 접촉이 잦은 경우</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 기생충 예방 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--red-50);">🦟</div>
+                        <div class="section-title">기생충 예방</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">❤️</span>
+                            <span class="card-title">심장사상충</span>
+                            <span class="card-badge" style="background:var(--red-50);color:var(--red-600);">매월</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>모기 활동기(3~11월) 전후로 <strong>매월 1회</strong> 예방약 투여 권장</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>감염 시 치료가 어렵고 치명적 — <strong>예방이 최선</strong></div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>투여 전 반드시 감염 여부 검사 후 음성 확인 필요</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>연중 투여 시 더욱 안전 (수의사 권장)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🐛</span>
+                            <span class="card-title">외부기생충 (벼룩·진드기)</span>
+                            <span class="card-badge"
+                                style="background:var(--orange-50);color:var(--orange-500);">매월</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--orange-500);"></div>
+                                <div>스팟온(spot-on) 또는 경구형 예방약 <strong>매월 투여</strong></div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--orange-500);"></div>
+                                <div>산책 후 귀·발가락 사이·겨드랑이 진드기 확인 필수</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--orange-500);"></div>
+                                <div>진드기 제거 시 핀셋으로 수직 방향으로 천천히 제거 (비틀기 금지)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🔬</span>
+                            <span class="card-title">내부기생충</span>
+                            <span class="card-badge"
+                                style="background:var(--purple-50);color:var(--purple-600);">3~6개월</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div>회충·구충·편충: <strong>3~6개월마다</strong> 구충제 투여</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div>강아지 시기(생후 2주~): 2주 간격으로 4회 구충 후 정기 관리</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 정기검진 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--teal-50);">🏥</div>
+                        <div class="section-title">정기 건강검진</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-body" style="padding-top:12px;">
+                            <table class="data-table">
+                                <tr>
+                                    <th>나이</th>
+                                    <th>검진 주기</th>
+                                    <th>주요 항목</th>
+                                </tr>
+                                <tr>
+                                    <td>1~6세</td>
+                                    <td>연 1회</td>
+                                    <td>혈액검사, 심장청진, 체중, 치아</td>
+                                </tr>
+                                <tr>
+                                    <td>7~10세</td>
+                                    <td>연 2회</td>
+                                    <td>혈액·소변·X-ray, 혈압, 관절</td>
+                                </tr>
+                                <tr>
+                                    <td>11세 이상</td>
+                                    <td>3~4개월마다</td>
+                                    <td>종합혈액, 초음파, 신장·간 기능</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 치아 관리 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--amber-50);">🦷</div>
+                        <div class="section-title">치아 & 구강 관리</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-body" style="padding-top:12px;">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div>매일 양치질이 이상적 — 최소 <strong>주 3회 이상</strong> 권장</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div>반드시 <strong>반려동물 전용 치약</strong> 사용 (자일리톨 함유 인체용 치약 금지)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div>치석이 심한 경우 동물병원에서 스케일링 (전신마취 필요)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div>덴탈껌·치아 장난감으로 보조적 관리 가능</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. 절대 금지 음식 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--red-50);">🚫</div>
+                        <div class="section-title">절대 금지 음식</div>
+                    </div>
+                    <div class="warn-box" style="background:var(--red-50);border:1px solid var(--red-100);">
+                        <span class="box-icon">⚠️</span>
+                        <div class="box-text" style="color:var(--red-600);">아래 음식은 강아지에게 독성을 가집니다. 소량도 위험할 수 있으니 절대 급여하지
+                            마세요.</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-body" style="padding-top:12px;">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>포도·건포도</strong> — 신부전 유발, 소량도 치명적</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>초콜릿·카카오</strong> — 테오브로민 중독, 심부전·경련</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>양파·마늘·파</strong> — 적혈구 파괴, 용혈성 빈혈</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>자일리톨</strong> — 인슐린 과분비, 저혈당·간부전</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>마카다미아 너트</strong> — 근육 약화, 고열, 구토</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>날 반죽·알코올</strong> — 에탄올 중독, 저혈당</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>아보카도</strong> — 퍼신(persin) 성분, 구토·설사</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. 응급 증상 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--red-50);">🚨</div>
+                        <div class="section-title">즉시 병원 방문이 필요한 증상</div>
+                    </div>
+                    <div class="warn-box" style="background:var(--red-50);border:1px solid var(--red-100);">
+                        <span class="box-icon">🚑</span>
+                        <div class="box-text" style="color:var(--red-600);">아래 증상이 나타나면 즉시 동물병원을 방문하세요.</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-body" style="padding-top:12px;">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>24시간 이상 식욕 완전 소실</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>구토·설사가 하루 3회 이상 반복</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>복부 팽만·헛구역질 (위확장·염전 의심)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>호흡 곤란·잇몸 창백·청색증</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>경련·발작·의식 소실</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>소변을 12시간 이상 보지 못함</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>눈에 띄는 외상·골절·다량 출혈</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. 운동 & 정신건강 ✅ 신규 추가 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--green-50);">🏃</div>
+                        <div class="section-title">운동 & 정신 건강</div>
+                    </div>
+                    <div class="tip-box" style="background:var(--green-50);border:1px solid var(--green-100);">
+                        <span class="box-icon">💡</span>
+                        <div class="box-text" style="color:var(--green-600);">강아지에게 운동 부족은 단순한 체력 문제가 아니에요. 스트레스·불안·파괴적
+                            행동의 주요 원인이 됩니다.</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🦮</span>
+                            <span class="card-title">산책</span>
+                            <span class="card-badge"
+                                style="background:var(--green-50);color:var(--green-600);">매일</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--green-600);"></div>
+                                <div>소형견: 하루 <strong>20~30분</strong> 이상, 중·대형견: <strong>1시간</strong> 이상 권장</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--green-600);"></div>
+                                <div>산책은 단순 배변이 아닌 <strong>후각 자극·사회화·스트레스 해소</strong>의 시간</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--green-600);"></div>
+                                <div>냄새 맡는 행동(스니핑)을 충분히 허용 — 정신적 피로 해소에 매우 효과적</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--green-600);"></div>
+                                <div>여름철 아스팔트 화상 주의 — 오전 7시 이전 또는 저녁 산책 권장</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">📊</span>
+                            <span class="card-title">품종별 권장 운동량</span>
+                        </div>
+                        <div class="guide-card-body" style="padding-top:10px;">
+                            <table class="data-table">
+                                <tr>
+                                    <th>운동량</th>
+                                    <th>해당 품종 예시</th>
+                                </tr>
+                                <tr>
+                                    <td><span class="level-badge" style="background:#DCFCE7;color:#16A34A;">낮음</span>
+                                    </td>
+                                    <td>불독, 바셋하운드, 시추, 말티즈</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="level-badge" style="background:#FEF9C3;color:#CA8A04;">보통</span>
+                                    </td>
+                                    <td>푸들, 비숑, 코커스패니얼, 비글</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="level-badge" style="background:#FFEDD5;color:#EA580C;">높음</span>
+                                    </td>
+                                    <td>래브라도, 골든, 허스키, 보더콜리</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🎾</span>
+                            <span class="card-title">놀이 & 두뇌 자극</span>
+                            <span class="card-badge"
+                                style="background:var(--amber-50);color:var(--amber-600);">매일</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div><strong>공 던지기·터그 놀이</strong> — 신체 에너지 발산, 보호자와 유대감 강화</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div><strong>노즈워크(냄새 찾기)</strong> — 두뇌 자극, 산책 30분 효과를 15분 만에 가능</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div><strong>퍼즐·콩 장난감</strong> — 혼자 있는 시간 분리불안 완화에 효과적</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div>하루 <strong>10~15분</strong> 집중 놀이만으로도 스트레스 수치 크게 감소</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">😰</span>
+                            <span class="card-title">스트레스 신호 알아채기</span>
+                            <span class="card-badge" style="background:var(--red-50);color:var(--red-600);">주의</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>가구·물건 파괴, 과도한 짖음 — 운동·자극 부족 신호</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>꼬리 물기·과도한 핥기(발, 몸) — 강박 행동, 스트레스 해소 시도</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>보호자 외출 시 과도한 불안·배변 실수 — 분리불안 의심</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>지속될 경우 수의사 또는 반려동물 행동 전문가 상담 권장</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🐾</span>
+                            <span class="card-title">사회화 & 환경 자극</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div>생후 <strong>3~14주</strong>가 사회화 황금기 — 다양한 사람·소리·환경 노출이 중요</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div>다른 강아지와의 교류 — 도그파크·퍼피 클래스 활용</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div>새로운 장소·냄새·소리 경험이 정신적 풍요로움에 기여</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div>긍정 강화 훈련(클리커·간식)은 두뇌 자극과 유대감을 동시에 높임</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disclaimer">⚠️ 본 가이드는 일반적인 건강 정보 제공을 목적으로 하며, 개별 반려동물의 상태에 따라 수의사와 상담하시기 바랍니다.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+     🐱 고양이 탭
+════════════════════════════════════ -->
+    <div class="col">
+        <div class="phone-label">🐱 고양이 탭</div>
+        <div class="phone" style="height:960px;">
+            <div class="status-bar"><span class="time">01:10</span>
+                <div class="status-icons"><span>📶</span><span>🔋</span></div>
+            </div>
+            <div class="sub-app-bar">
+                <div class="back-btn">‹</div>
+                <div class="sub-title">건강관리 가이드</div>
+            </div>
+            <div class="tab-header">
+                <div class="tab-btn dog">🐶 강아지</div>
+                <div class="tab-btn cat active">🐱 고양이</div>
+            </div>
+            <div class="guide-body">
+
+                <!-- 히어로 -->
+                <div class="hero-banner" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);">
+                    <span class="hero-emoji">🐱</span>
+                    <div>
+                        <div class="hero-title" style="color:var(--blue-700);">고양이 건강관리 가이드</div>
+                        <div class="hero-sub" style="color:var(--blue-700);">수의사 권장 기준을 바탕으로<br>작성된 전문 건강 안내서예요.</div>
+                    </div>
+                </div>
+
+                <!-- 1. 예방접종 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--blue-50);">💉</div>
+                        <div class="section-title">예방접종</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🛡️</span>
+                            <span class="card-title">핵심 필수 접종 (Core Vaccine)</span>
+                            <span class="card-badge" style="background:var(--blue-50);color:var(--blue-600);">필수</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--blue-600);"></div>
+                                <div><strong>FVRCP (종합백신)</strong> — 허피스바이러스·칼리시·범백혈구감소증. 생후 6~8주 1차, 3~4주 간격 3회, 이후
+                                    1~3년마다</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--blue-600);"></div>
+                                <div><strong>광견병</strong> — 외출 고양이 필수, 실내 고양이도 권장 (법정 의무)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">💊</span>
+                            <span class="card-title">선택 접종 (Non-Core)</span>
+                            <span class="card-badge"
+                                style="background:var(--amber-50);color:var(--amber-600);">권장</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div><strong>고양이 백혈병(FeLV)</strong> — 외출 고양이·다묘 가정 강력 권장</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div><strong>고양이 클라미디아</strong> — 다묘 환경, 결막염 예방</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--amber-500);"></div>
+                                <div><strong>고양이 면역결핍바이러스(FIV)</strong> — 외출 수컷 고양이 (싸움 상처 통해 전파)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 기생충 예방 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--red-50);">🦟</div>
+                        <div class="section-title">기생충 예방</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🐛</span>
+                            <span class="card-title">외부기생충 (벼룩·진드기)</span>
+                            <span class="card-badge"
+                                style="background:var(--orange-50);color:var(--orange-500);">매월</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--orange-500);"></div>
+                                <div>외출 고양이: 벼룩·진드기 예방약 <strong>매월 1회</strong> 투여</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--orange-500);"></div>
+                                <div>실내 고양이도 사람 옷·신발 통해 벼룩 유입 가능 → <strong>3개월마다</strong> 예방 권장</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--orange-500);"></div>
+                                <div>스팟온 제품 사용 시 목덜미에 정확히 도포</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🔬</span>
+                            <span class="card-title">내부기생충 & 심장사상충</span>
+                            <span class="card-badge"
+                                style="background:var(--purple-50);color:var(--purple-600);">정기</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div>회충·조충: <strong>3~6개월마다</strong> 구충제 투여</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div>생식(날고기·날생선) 급여 시 더 자주 검사 권장</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>심장사상충 — 고양이는 <strong>치료제가 없어 예방이 유일한 방법</strong>. 외출 고양이 매월 투여 강력 권장</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 주요 질환 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--purple-50);">🔬</div>
+                        <div class="section-title">고양이 주요 질환 주의</div>
+                    </div>
+                    <div class="tip-box" style="background:var(--purple-50);border:1px solid var(--purple-100);">
+                        <span class="box-icon">💡</span>
+                        <div class="box-text" style="color:var(--purple-600);">고양이는 아픔을 숨기는 습성이 있어 증상이 나타날 때는 이미 진행된 경우가
+                            많습니다. 정기 검진이 특히 중요해요.</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-body" style="padding-top:12px;">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div><strong>하부요로기계질환(FLUTD)</strong> — 수컷에 흔함. 소변 못 보면 즉시 응급처치 필요</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div><strong>만성신장병(CKD)</strong> — 노령묘 1위 사망 원인. 7세 이상 정기 신장 수치 검사 필수</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div><strong>고양이 당뇨</strong> — 비만·고령 고양이 위험. 다음·다뇨 증상 주의</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div><strong>갑상선기능항진증</strong> — 10세 이상 흔함. 체중 감소·과식·과활동 증상</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div><strong>구내염</strong> — 고양이에 매우 흔함. 입냄새·침흘림·식욕부진 시 검진</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--purple-600);"></div>
+                                <div><strong>고양이 허피스(FHV-1)</strong> — 한번 감염 시 평생 잠복. 스트레스 시 재발, 재채기·눈곱·결막염</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 정기검진 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--teal-50);">🏥</div>
+                        <div class="section-title">정기 건강검진</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-body" style="padding-top:12px;">
+                            <table class="data-table">
+                                <tr>
+                                    <th>나이</th>
+                                    <th>검진 주기</th>
+                                    <th>주요 항목</th>
+                                </tr>
+                                <tr>
+                                    <td>1~6세</td>
+                                    <td>연 1회</td>
+                                    <td>혈액검사, 소변검사, 체중, 치아</td>
+                                </tr>
+                                <tr>
+                                    <td>7~10세</td>
+                                    <td>연 2회</td>
+                                    <td>신장·간 수치, 혈압, 갑상선(T4)</td>
+                                </tr>
+                                <tr>
+                                    <td>11세 이상</td>
+                                    <td>3~4개월마다</td>
+                                    <td>종합혈액, 복부초음파, 신장 집중 모니터링</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. 수분 & 식이 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--blue-50);">💧</div>
+                        <div class="section-title">수분 섭취 & 식이 관리</div>
+                    </div>
+                    <div class="tip-box" style="background:var(--blue-50);border:1px solid var(--blue-100);">
+                        <span class="box-icon">💡</span>
+                        <div class="box-text" style="color:var(--blue-600);">고양이는 원래 물을 잘 마시지 않아 비뇨기 질환에 취약해요. 수분 섭취 유도가
+                            매우 중요합니다.</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-body" style="padding-top:12px;">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--blue-600);"></div>
+                                <div>습식 사료(캔·파우치) 병행으로 수분 보충 권장</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--blue-600);"></div>
+                                <div>흐르는 물 선호 — <strong>분수형 음수대</strong> 설치 효과적</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--blue-600);"></div>
+                                <div>물그릇은 사료그릇과 분리, 넓고 얕은 그릇 선호</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--blue-600);"></div>
+                                <div>목표 수분 섭취량: 체중 1kg당 하루 약 <strong>40~60ml</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. 절대 금지 음식 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--red-50);">🚫</div>
+                        <div class="section-title">절대 금지 음식</div>
+                    </div>
+                    <div class="warn-box" style="background:var(--red-50);border:1px solid var(--red-100);">
+                        <span class="box-icon">⚠️</span>
+                        <div class="box-text" style="color:var(--red-600);">아래 음식은 고양이에게 독성을 가집니다. 소량도 위험할 수 있으니 절대 급여하지
+                            마세요.</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-body" style="padding-top:12px;">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>양파·마늘·파</strong> — 적혈구 파괴, 용혈성 빈혈 (개보다 더 민감)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>포도·건포도</strong> — 신부전 유발</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>초콜릿·카페인</strong> — 심장·신경계 독성</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>날 생선 (지속 급여)</strong> — 티아민(B1) 결핍 유발</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>우유·유제품</strong> — 성묘 유당불내증, 설사 유발</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>자일리톨·알코올</strong> — 간·신경 독성</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>아보카도</strong> — 퍼신(persin) 성분, 구토·설사</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>날 달걀 흰자</strong> — 아비딘이 비오틴 차단, 피부·털 문제</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. 응급 증상 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--red-50);">🚨</div>
+                        <div class="section-title">즉시 병원 방문이 필요한 증상</div>
+                    </div>
+                    <div class="warn-box" style="background:var(--red-50);border:1px solid var(--red-100);">
+                        <span class="box-icon">🚑</span>
+                        <div class="box-text" style="color:var(--red-600);">아래 증상이 나타나면 즉시 동물병원을 방문하세요.</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-body" style="padding-top:12px;">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>소변을 전혀 못 보거나 혈뇨</strong> — 요도폐색 응급 (수컷 고양이 특히 주의)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>24시간 이상 완전 식욕 소실 (지방간 위험)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div><strong>입을 벌리고 호흡</strong> — 고양이는 절대 정상이 아님, 즉시 응급</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>뒷다리 갑작스러운 마비·차가움 (혈전증 의심)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>경련·발작·의식 소실</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>잇몸·혀 창백 또는 황달(노란빛)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>구토·설사가 하루 3회 이상 반복되거나 혈변·혈토</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--red-500);"></div>
+                                <div>눈에 띄는 외상·골절·다량 출혈</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. 환경 & 정신건강 -->
+                <div class="guide-section">
+                    <div class="section-header">
+                        <div class="section-icon-wrap" style="background:var(--teal-50);">🏠</div>
+                        <div class="section-title">환경 & 정신 건강</div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">🏡</span>
+                            <span class="card-title">실내 환경 관리</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div><strong>화장실</strong>: 고양이 수 + 1개 이상 배치, 매일 청소</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div><strong>스크래처</strong>: 최소 2개 이상 (수직형·수평형 병행)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div><strong>높은 공간</strong>: 캣타워·선반 등 수직 공간 제공 (영역 본능 충족)</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div><strong>은신처</strong>: 박스·터널 등 안전하게 숨을 수 있는 공간 제공</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card">
+                        <div class="guide-card-header">
+                            <span class="card-emoji">😌</span>
+                            <span class="card-title">스트레스 관리</span>
+                        </div>
+                        <div class="guide-card-body">
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div>고양이 스트레스는 면역 저하·FLUTD·허피스 재발 등에 직결</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div>급격한 환경 변화(이사·새 가족) 시 페로몬 디퓨저(Feliway) 활용</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div>하루 <strong>10~15분 이상</strong> 장난감을 이용한 놀이 시간 확보</div>
+                            </div>
+                            <div class="guide-item">
+                                <div class="dot" style="background:var(--teal-600);"></div>
+                                <div>다묘 가정: 자원(밥그릇·화장실·잠자리) 개체 수만큼 분리 배치</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disclaimer">⚠️ 본 가이드는 일반적인 건강 정보 제공을 목적으로 하며, 개별 반려동물의 상태에 따라 수의사와 상담하시기 바랍니다.</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

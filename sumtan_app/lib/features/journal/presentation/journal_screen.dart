@@ -4,9 +4,7 @@ import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../features/record/provider/record_provider.dart';
 import '../../../features/record/data/record_model.dart';
-import '../../../features/record/presentation/category_bottom_sheet.dart';
 import '../../../shared/constants/category_constants.dart';
-import '../../../shared/widgets/app_fab.dart';
 import '../../../core/utils/date_utils.dart' as du;
 
 class JournalScreen extends ConsumerWidget {
@@ -14,24 +12,13 @@ class JournalScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: AppColors.creamBg,
-      body: Stack(
+      body: Column(
         children: [
-          const Column(
-            children: [
-              _CalendarSection(),
-              Divider(height: 1, color: AppColors.gray200),
-              Expanded(child: _EventList()),
-            ],
-          ),
-          Positioned(
-            right: AppSpacing.space5,
-            bottom: 92,
-            child: AppFab(
-              onPressed: () => showCategoryBottomSheet(context),
-            ),
-          ),
+          _CalendarSection(),
+          Divider(height: 1, color: AppColors.gray200),
+          Expanded(child: _EventList()),
         ],
       ),
     );

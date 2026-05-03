@@ -57,6 +57,7 @@ class MainScaffold extends ConsumerWidget {
   }
 
   String get _title {
+    if (location == '/settings') return '설정';
     switch (_currentIndex) {
       case 0: return '홈';
       case 1: return '일지';
@@ -76,8 +77,18 @@ class MainScaffold extends ConsumerWidget {
       backgroundColor: AppColors.creamBg,
       appBar: AppHeader(
         title: _title,
-        hamburger: true,
-        petChip: pets.isNotEmpty
+        hamburger: location != '/settings',
+        actions: location == '/settings'
+            ? [
+                IconButton(
+                  icon: const Icon(Icons.close, color: AppColors.primary900, size: 24),
+                  onPressed: () => context.go('/'),
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
+                ),
+              ]
+            : null,
+        petChip: location != '/settings' && pets.isNotEmpty
             ? PetChip(
                 label: '${pet?.speciesEmoji ?? ''} ${pet?.name ?? ''} ▾',
                 onTap: pets.length > 1

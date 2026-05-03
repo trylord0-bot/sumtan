@@ -303,3 +303,122 @@ class FormMemoField extends StatelessWidget {
   }
 }
 
+class FormTagSelector extends StatefulWidget {
+  final String label;
+  final List<String> options;
+  final List<String> selected;
+  final ValueChanged<List<String>> onChanged;
+
+  const FormTagSelector({
+    super.key,
+    required this.label,
+    required this.options,
+    required this.selected,
+    required this.onChanged,
+  });
+
+  @override
+  State<FormTagSelector> createState() => _FormTagSelectorState();
+}
+
+class _FormTagSelectorState extends State<FormTagSelector> {
+  bool _expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(widget.label, style: const TextStyle(
+          fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
+        )),
+        const SizedBox(height: AppSpacing.space2),
+        if (widget.selected.isNotEmpty) ...[
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: widget.selected.map((tag) => Container(
+              padding: const EdgeInsets.only(left: 12, right: 8, top: 5, bottom: 5),
+              decoration: BoxDecoration(
+                color: AppColors.primary100,
+                borderRadius: BorderRadius.circular(AppRadius.radiusFull),
+                border: Border.all(color: AppColors.primary400),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(tag, style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.primary900,
+                  )),
+                  const SizedBox(width: 4),
+                  GestureDetector(
+                    onTap: () {
+                      final updated = List<String>.from(widget.selected)..remove(tag);
+                      widget.onChanged(updated);
+                    },
+                    child: const Icon(
+                      Icons.close,
+                      size: 14,
+                      color: AppColors.primary600,
+                    ),
+                  ),
+                ],
+              ),
+            )).toList(),
+          ),
+          const SizedBox(height: AppSpacing.space2),
+        ],
+        GestureDetector(
+          onTap: () => setState(() => _expanded = !_expanded),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+            decoration: BoxDecoration(
+              color: AppColors.primary50,
+              borderRadius: BorderRadius.circular(AppRadius.radiusFull),
+            ),
+            child: const Text('+ 추가', style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: AppColors.primary600,
+            )),
+          ),
+        ),
+        if (_expanded) ...[
+          const SizedBox(height: AppSpacing.space2),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+            child: Column(
+              children: widget.options.map((opt) {
+                final isSelected = widget.selected.contains(opt);
+                return GestureDetector(
+                  onTap: isSelected ? null : () {
+                    final updated = List<String>.from(widget.selected)..add(opt);
+                    widget.onChanged(updated);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    color: isSelected ? AppColors.gray300 : AppColors.gray100,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    child: Text(
+                      opt,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: isSelected ? AppColors.gray400 : AppColors.gray700,
+                      ),
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+}
+

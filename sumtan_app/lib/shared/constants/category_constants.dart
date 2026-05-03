@@ -8,7 +8,7 @@ enum RecordCategory {
   weight,
   meal,
   hospital,
-  vaccine,
+  vaccination,
   grooming,
   memo,
 }
@@ -22,7 +22,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.weight:     return 'weight';
       case RecordCategory.meal:       return 'meal';
       case RecordCategory.hospital:   return 'hospital';
-      case RecordCategory.vaccine:    return 'vaccine';
+      case RecordCategory.vaccination: return 'vaccination';
       case RecordCategory.grooming:   return 'grooming';
       case RecordCategory.memo:       return 'memo';
     }
@@ -36,7 +36,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.weight:     return '체중';
       case RecordCategory.meal:       return '식사';
       case RecordCategory.hospital:   return '병원';
-      case RecordCategory.vaccine:    return '접종';
+      case RecordCategory.vaccination: return '접종';
       case RecordCategory.grooming:   return '미용';
       case RecordCategory.memo:       return '메모';
     }
@@ -50,7 +50,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.weight:     return '⚖️';
       case RecordCategory.meal:       return '🍽️';
       case RecordCategory.hospital:   return '🏥';
-      case RecordCategory.vaccine:    return '💉';
+      case RecordCategory.vaccination: return '💉';
       case RecordCategory.grooming:   return '🛁';
       case RecordCategory.memo:       return '📝';
     }
@@ -64,7 +64,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.weight:     return AppColors.warning400;
       case RecordCategory.meal:       return const Color(0xFF2DD4BF);
       case RecordCategory.hospital:   return const Color(0xFFFB923C);
-      case RecordCategory.vaccine:    return const Color(0xFFA78BFA);
+      case RecordCategory.vaccination: return const Color(0xFFA78BFA);
       case RecordCategory.grooming:   return const Color(0xFFF472B6);
       case RecordCategory.memo:       return AppColors.gray400;
     }
@@ -78,7 +78,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.weight:     return AppColors.primary100;
       case RecordCategory.meal:       return const Color(0xFFF0FDFA);
       case RecordCategory.hospital:   return const Color(0xFFFFF7ED);
-      case RecordCategory.vaccine:    return const Color(0xFFFAF5FF);
+      case RecordCategory.vaccination: return const Color(0xFFFAF5FF);
       case RecordCategory.grooming:   return const Color(0xFFFDF2F8);
       case RecordCategory.memo:       return AppColors.gray100;
     }

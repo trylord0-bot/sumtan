@@ -6,6 +6,11 @@ import 'forms/poop_form.dart';
 import 'forms/condition_form.dart';
 import 'forms/medication_form.dart';
 import 'forms/weight_form.dart';
+import 'forms/meal_form.dart';
+import 'forms/hospital_form.dart';
+import 'forms/vaccination_form.dart';
+import 'forms/grooming_form.dart';
+import 'forms/memo_form.dart';
 
 Future<void> showCategoryBottomSheet(BuildContext context) async {
   await showModalBottomSheet(
@@ -56,14 +61,44 @@ class _CategorySheet extends StatelessWidget {
           builder: (_) => const WeightForm(),
         );
         return;
-      default:
-        // Placeholder for new categories
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('${category.label} 기록 기능은 준비 중이에요'),
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: AppColors.gray700,
-          ),
+      case RecordCategory.meal:
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (_) => const MealForm(),
+        );
+        return;
+      case RecordCategory.hospital:
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (_) => const HospitalForm(),
+        );
+        return;
+      case RecordCategory.vaccination:
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (_) => const VaccinationForm(),
+        );
+        return;
+      case RecordCategory.grooming:
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (_) => const GroomingForm(),
+        );
+        return;
+      case RecordCategory.memo:
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (_) => const MemoForm(),
         );
         return;
     }

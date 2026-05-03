@@ -49,6 +49,7 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
     ref.invalidate(recentRecordsProvider);
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
+    ref.invalidate(lastRecordProvider);
     if (mounted) Navigator.pop(context, true);
   }
 

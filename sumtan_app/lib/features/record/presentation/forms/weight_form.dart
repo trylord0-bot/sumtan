@@ -46,6 +46,8 @@ class _WeightFormState extends ConsumerState<WeightForm> {
     ref.invalidate(recentRecordsProvider);
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
+    ref.invalidate(weightHistoryProvider);
+    ref.invalidate(lastRecordProvider);
     if (mounted) Navigator.pop(context, true);
   }
 

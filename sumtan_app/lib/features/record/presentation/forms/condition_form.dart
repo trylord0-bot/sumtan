@@ -44,6 +44,7 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
     ref.invalidate(recentRecordsProvider);
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
+    ref.invalidate(lastRecordProvider);
     if (mounted) Navigator.pop(context, true);
   }
 

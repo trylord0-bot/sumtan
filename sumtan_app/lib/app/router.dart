@@ -3,11 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../features/home/presentation/home_screen.dart';
 import '../features/journal/presentation/journal_screen.dart';
-import '../features/pet/presentation/pet_register_screen.dart';
-import '../features/pet/provider/pet_provider.dart';
-import '../features/record/presentation/category_bottom_sheet.dart';
+import '../features/alarm/presentation/alarm_screen.dart';
+import '../features/alarm/provider/alarm_provider.dart';
+import '../features/profile/presentation/profile_screen.dart';
+import '../features/profile/presentation/add_pet_screen.dart';
+import '../features/profile/presentation/widgets/pet_switch_sheet.dart';
 import '../features/settings/presentation/settings_screen.dart';
-import '../shared/widgets/app_header.dart';
+import '../features/health_guide/presentation/health_guide_screen.dart';
+import '../features/pet/provider/pet_provider.dart';
 import 'theme/app_colors.dart';
 
 final appRouter = GoRouter(
@@ -21,18 +24,26 @@ final appRouter = GoRouter(
       routes: [
         GoRoute(path: '/',              builder: (_, __) => const HomeScreen()),
         GoRoute(path: '/journal',       builder: (_, __) => const JournalScreen()),
-        GoRoute(path: '/notifications', builder: (_, __) => const _NotificationsPlaceholder()),
-        GoRoute(path: '/profile',       builder: (_, __) => const _ProfilePlaceholder()),
+        GoRoute(path: '/notifications', builder: (_, __) => const AlarmScreen()),
+        GoRoute(path: '/profile',       builder: (_, __) => const ProfileScreen()),
         GoRoute(path: '/settings',      builder: (_, __) => const SettingsScreen()),
       ],
     ),
     GoRoute(
+      path: '/profile/add',
+      builder: (_, __) => const AddPetScreen(),
+    ),
+    GoRoute(
+      path: '/health-guide',
+      builder: (_, __) => const HealthGuideScreen(),
+    ),
+    GoRoute(
       path: '/pet/register',
-      builder: (_, __) => const PetRegisterScreen(),
+      builder: (_, __) => const AddPetScreen(),
     ),
     GoRoute(
       path: '/pet/edit',
-      builder: (_, state) => PetRegisterScreen(editPet: state.extra as dynamic),
+      builder: (_, state) => const AddPetScreen(),
     ),
   ],
 );
@@ -45,7 +56,6 @@ class MainScaffold extends ConsumerWidget {
 
   const MainScaffold({super.key, required this.location, required this.child});
 
-  // Tab routes mapped by index (index 2 is center FAB — no route)
   static const _tabRoutes = ['/', '/journal', '', '/notifications', '/profile'];
 
   int get _currentIndex {
@@ -57,61 +67,142 @@ class MainScaffold extends ConsumerWidget {
   }
 
   String get _title {
-    if (location == '/settings') return '설정';
-    switch (_currentIndex) {
-      case 0: return '홈';
-      case 1: return '일지';
-      case 3: return '알림';
-      case 4: return '프로필';
+    switch (location) {
+      case '/': return '홈';
+      case '/journal': return '일지';
+      case '/notifications': return '알림';
+      case '/profile': return '프로필';
+      case '/settings': return '설정';
       default: return '반려숨탄';
     }
+  }
+
+  bool get _showNav {
+    return location == '/' ||
+        location == '/journal' ||
+        location == '/notifications' ||
+        location == '/profile';
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pet  = ref.watch(selectedPetProvider);
     final pets = ref.watch(petsProvider).valueOrNull ?? [];
-    final idx  = ref.watch(selectedPetIndexProvider);
+
+    // Reload alarms when pet changes
+    ref.listen(selectedPetProvider, (prev, next) {
+      if (prev?.id != next?.id) {
+        ref.invalidate(alarmListProvider);
+      }
+    });
 
     return Scaffold(
       backgroundColor: AppColors.creamBg,
-      appBar: AppHeader(
+      appBar: _TopBar(
         title: _title,
-        hamburger: location != '/settings',
-        actions: location == '/settings'
-            ? [
-                IconButton(
-                  icon: const Icon(Icons.close, color: AppColors.primary900, size: 24),
-                  onPressed: () => context.go('/'),
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(minWidth: 36, minHeight: 36),
-                ),
-              ]
-            : null,
-        petChip: location != '/settings' && pets.isNotEmpty
-            ? PetChip(
-                label: '${pet?.speciesEmoji ?? ''} ${pet?.name ?? ''} ▾',
-                onTap: pets.length > 1
-                    ? () => ref
-                        .read(selectedPetIndexProvider.notifier)
-                        .state = (idx + 1) % pets.length
-                    : null,
-              )
-            : null,
+        showHamburger: location != '/settings',
+        pet: pet,
+        pets: pets,
+        showClose: location == '/settings',
+        onClose: () => context.go('/'),
+        onPetChip: () => showPetSwitchSheet(context),
       ),
-      endDrawer: _AppDrawer(pet: pet),
+      endDrawer: _AppDrawer(pet: pet, location: location),
       body: child,
-      bottomNavigationBar: _CustomBottomBar(
-        currentIndex: _currentIndex,
-        onTabTap: (i) {
-          if (i == 2) {
-            showCategoryBottomSheet(context);
-            return;
-          }
-          if (_tabRoutes[i].isNotEmpty) {
-            context.go(_tabRoutes[i]);
-          }
-        },
+      bottomNavigationBar: _showNav
+          ? _CustomBottomBar(
+              currentIndex: _currentIndex,
+              onTabTap: (i) {
+                if (i == 2) {
+                  showAlarmAddSheet(context);
+                  return;
+                }
+                if (_tabRoutes[i].isNotEmpty) {
+                  context.go(_tabRoutes[i]);
+                }
+              },
+            )
+          : null,
+    );
+  }
+}
+
+// ─── Top app bar ──────────────────────────────────────────────────────────────
+
+class _TopBar extends ConsumerWidget implements PreferredSizeWidget {
+  final String title;
+  final bool showHamburger;
+  final dynamic pet;
+  final List pets;
+  final bool showClose;
+  final VoidCallback onClose;
+  final VoidCallback onPetChip;
+
+  const _TopBar({
+    required this.title,
+    required this.showHamburger,
+    required this.pet,
+    required this.pets,
+    required this.showClose,
+    required this.onClose,
+    required this.onPetChip,
+  });
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return AppBar(
+      backgroundColor: AppColors.white,
+      elevation: 0,
+      centerTitle: false,
+      automaticallyImplyLeading: false,
+      title: Text(title, style: const TextStyle(
+        fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.gray900,
+      )),
+      actions: [
+        if (pets.isNotEmpty && !showClose)
+          GestureDetector(
+            onTap: onPetChip,
+            child: Container(
+              margin: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: AppColors.primary50,
+                borderRadius: BorderRadius.circular(9999),
+                border: Border.all(color: AppColors.primary200),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '${pet?.speciesEmoji ?? ''} ${pet?.name ?? ''} ▾',
+                    style: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.w600,
+                      color: AppColors.primary700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        if (showClose)
+          IconButton(
+            icon: const Icon(Icons.close, color: AppColors.gray700, size: 22),
+            onPressed: onClose,
+          ),
+        if (showHamburger)
+          Builder(
+            builder: (ctx) => IconButton(
+              icon: const Icon(Icons.menu, color: AppColors.gray700, size: 22),
+              onPressed: () => Scaffold.of(ctx).openEndDrawer(),
+            ),
+          ),
+      ],
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(1),
+        child: Container(height: 1, color: AppColors.gray100),
       ),
     );
   }
@@ -150,10 +241,7 @@ class _CustomBottomBar extends StatelessWidget {
         children: [
           Row(
             children: List.generate(5, (i) {
-              if (i == 2) {
-                // Spacer for the center FAB slot
-                return const Expanded(child: SizedBox());
-              }
+              if (i == 2) return const Expanded(child: SizedBox());
               final isActive = currentIndex == i;
               return Expanded(
                 child: GestureDetector(
@@ -162,35 +250,19 @@ class _CustomBottomBar extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        _icons[i],
-                        size: 22,
-                        color: isActive
-                            ? AppColors.primary500
-                            : AppColors.gray400,
-                      ),
+                      Icon(_icons[i], size: 22,
+                          color: isActive ? AppColors.primary500 : AppColors.gray400),
                       const SizedBox(height: 4),
-                      Text(
-                        _labels[i],
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: isActive
-                              ? FontWeight.w700
-                              : FontWeight.w500,
-                          color: isActive
-                              ? AppColors.primary500
-                              : AppColors.gray400,
-                        ),
-                      ),
+                      Text(_labels[i], style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                        color: isActive ? AppColors.primary500 : AppColors.gray400,
+                      )),
                       const SizedBox(height: 4),
-                      // Active indicator underline
                       Container(
-                        width: 20,
-                        height: 3,
+                        width: 20, height: 3,
                         decoration: BoxDecoration(
-                          color: isActive
-                              ? AppColors.primary400
-                              : Colors.transparent,
+                          color: isActive ? AppColors.primary400 : Colors.transparent,
                           borderRadius: BorderRadius.circular(9999),
                         ),
                       ),
@@ -200,25 +272,21 @@ class _CustomBottomBar extends StatelessWidget {
               );
             }),
           ),
-          // Center FAB — raised above bar
+          // Center FAB
           Positioned(
-            top: -16,
-            left: 0,
-            right: 0,
+            top: -16, left: 0, right: 0,
             child: Center(
               child: GestureDetector(
                 onTap: () => onTabTap(2),
                 child: Container(
-                  width: 52,
-                  height: 52,
+                  width: 52, height: 52,
                   decoration: BoxDecoration(
                     color: AppColors.primary400,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
                         color: AppColors.primary400.withValues(alpha: 0.4),
-                        blurRadius: 12,
-                        offset: const Offset(0, 4),
+                        blurRadius: 12, offset: const Offset(0, 4),
                       ),
                     ],
                   ),
@@ -237,19 +305,14 @@ class _CustomBottomBar extends StatelessWidget {
 
 class _AppDrawer extends ConsumerWidget {
   final dynamic pet;
+  final String location;
 
-  const _AppDrawer({this.pet});
+  const _AppDrawer({this.pet, required this.location});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final petName  = pet?.name ?? '반려동물';
     final petEmoji = pet?.speciesEmoji ?? '🐾';
-    final breed    = pet?.breed as String? ?? '';
-    final ageYears = pet?.ageYears as int?;
-    final breedAge = [
-      if (breed.isNotEmpty) breed,
-      if (ageYears != null) '만 $ageYears세',
-    ].join(' · ');
 
     return Drawer(
       backgroundColor: AppColors.white,
@@ -257,126 +320,76 @@ class _AppDrawer extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Header
             Container(
-              color: AppColors.primary50,
+              color: AppColors.primary600,
               padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
               child: Row(
                 children: [
-                  Text(petEmoji, style: const TextStyle(fontSize: 28)),
+                  Container(
+                    width: 44, height: 44,
+                    decoration: const BoxDecoration(
+                        color: AppColors.white, shape: BoxShape.circle),
+                    alignment: Alignment.center,
+                    child: Text(petEmoji, style: const TextStyle(fontSize: 24)),
+                  ),
                   const SizedBox(width: 12),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        petName,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.primary900,
-                        ),
-                      ),
-                      if (breedAge.isNotEmpty)
-                        Text(
-                          breedAge,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: AppColors.gray500,
-                          ),
-                        ),
+                      const Text('반려숨탄', style: TextStyle(
+                        fontSize: 13, color: Colors.white70,
+                        fontWeight: FontWeight.w500,
+                      )),
+                      Text(petName, style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w800,
+                        color: Colors.white,
+                      )),
                     ],
                   ),
                 ],
               ),
             ),
-            // Menu items
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 children: [
                   _DrawerItem(
-                    icon: '🏠',
-                    label: '홈으로',
-                    onTap: () {
-                      Navigator.pop(context);
-                      GoRouter.of(context).go('/');
-                    },
+                    icon: '🏠', label: '홈',
+                    active: location == '/',
+                    onTap: () { Navigator.pop(context); context.go('/'); },
                   ),
                   _DrawerItem(
-                    icon: '📊',
-                    label: '통계 & 그래프',
+                    icon: '🐾', label: '내 반려동물',
+                    active: location == '/profile',
+                    onTap: () { Navigator.pop(context); context.go('/profile'); },
+                  ),
+                  _DrawerItem(
+                    icon: '🔔', label: '알림 설정',
+                    active: location == '/notifications',
                     onTap: () {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('통계 기능은 준비 중이에요'),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
+                      context.go('/notifications');
                     },
                   ),
                   const Divider(height: 1, color: AppColors.gray200),
                   _DrawerItem(
-                    icon: '🏥',
-                    label: '응급 병원 찾기',
-                    onTap: () {
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('응급 병원 찾기는 준비 중이에요'),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                    },
+                    icon: '💊', label: '건강관리 가이드',
+                    onTap: () { Navigator.pop(context); context.push('/health-guide'); },
                   ),
                   _DrawerItem(
-                    icon: '🚨',
-                    label: '응급 대응 가이드',
-                    onTap: () {
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('응급 대응 가이드는 준비 중이에요'),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                    },
-                  ),
-                  const Divider(height: 1, color: AppColors.gray200),
-                  _DrawerItem(
-                    icon: '📤',
-                    label: '데이터 내보내기',
-                    onTap: () {
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('데이터 내보내기는 준비 중이에요'),
-                          behavior: SnackBarBehavior.floating,
-                        ),
-                      );
-                    },
-                  ),
-                  _DrawerItem(
-                    icon: '⚙️',
-                    label: '설정',
-                    onTap: () {
-                      Navigator.pop(context);
-                      GoRouter.of(context).go('/settings');
-                    },
+                    icon: '⚙️', label: '설정',
+                    active: location == '/settings',
+                    onTap: () { Navigator.pop(context); context.go('/settings'); },
                   ),
                 ],
               ),
             ),
-            // Footer
             const Padding(
               padding: EdgeInsets.only(bottom: 16),
               child: Text(
                 '반려숨탄 v1.0.0',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 11,
-                  color: AppColors.gray400,
-                ),
+                style: TextStyle(fontSize: 11, color: AppColors.gray400),
               ),
             ),
           ],
@@ -389,85 +402,31 @@ class _AppDrawer extends ConsumerWidget {
 class _DrawerItem extends StatelessWidget {
   final String icon;
   final String label;
+  final bool active;
   final VoidCallback onTap;
 
   const _DrawerItem({
-    required this.icon,
-    required this.label,
-    required this.onTap,
+    required this.icon, required this.label,
+    this.active = false, required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Padding(
+      child: Container(
+        color: active ? AppColors.primary50 : null,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         child: Row(
           children: [
             Text(icon, style: const TextStyle(fontSize: 18)),
             const SizedBox(width: 12),
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.gray700,
-              ),
-            ),
+            Text(label, style: TextStyle(
+              fontSize: 14, fontWeight: FontWeight.w500,
+              color: active ? AppColors.primary700 : AppColors.gray700,
+            )),
           ],
         ),
-      ),
-    );
-  }
-}
-
-// ─── Placeholder screens ───────────────────────────────────────────────────────
-
-class _NotificationsPlaceholder extends StatelessWidget {
-  const _NotificationsPlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('🔔', style: TextStyle(fontSize: 48)),
-          SizedBox(height: 16),
-          Text(
-            '알림 기능은 준비 중이에요',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: AppColors.gray500,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ProfilePlaceholder extends StatelessWidget {
-  const _ProfilePlaceholder();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('🐾', style: TextStyle(fontSize: 48)),
-          SizedBox(height: 16),
-          Text(
-            '프로필 기능은 준비 중이에요',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: AppColors.gray500,
-            ),
-          ),
-        ],
       ),
     );
   }

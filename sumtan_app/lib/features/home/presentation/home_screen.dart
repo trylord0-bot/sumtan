@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../features/pet/provider/pet_provider.dart';
@@ -16,19 +17,17 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pet         = ref.watch(selectedPetProvider);
-    final todayAsync  = ref.watch(todayRecordsProvider);
-    final recentAsync = ref.watch(recentRecordsProvider);
-    final lastAsync   = ref.watch(lastRecordProvider);
+    final pet        = ref.watch(selectedPetProvider);
+    final todayAsync = ref.watch(todayRecordsProvider);
+    final lastAsync  = ref.watch(lastRecordProvider);
     final weightAsync = ref.watch(weightHistoryProvider);
-    final poopAsync   = ref.watch(weeklyPoopStatsProvider);
+    final poopAsync  = ref.watch(weeklyPoopStatsProvider);
 
     return Scaffold(
       backgroundColor: AppColors.creamBg,
       body: RefreshIndicator(
         onRefresh: () async {
           ref.invalidate(todayRecordsProvider);
-          ref.invalidate(recentRecordsProvider);
           ref.invalidate(lastRecordProvider);
           ref.invalidate(weightHistoryProvider);
           ref.invalidate(weeklyPoopStatsProvider);
@@ -50,7 +49,12 @@ class HomeScreen extends ConsumerWidget {
                     _SectionHeader(
                       title: '오늘의 상태',
                       linkLabel: '+ 기록하기',
-                      onLink: () => showCategoryBottomSheet(context),
+                      onLink: () async {
+                        await showCategoryBottomSheet(context);
+                        ref.invalidate(weeklyPoopStatsProvider);
+                        ref.invalidate(weightHistoryProvider);
+                        ref.invalidate(lastRecordProvider);
+                      },
                     ),
                     const SizedBox(height: AppSpacing.space3),
 
@@ -64,13 +68,16 @@ class HomeScreen extends ConsumerWidget {
                     _SectionHeader(
                       title: '오늘의 기록',
                       linkLabel: '전체 보기',
-                      onLink: () {},
+                      onLink: () => context.go('/journal'),
                     ),
                     const SizedBox(height: AppSpacing.space3),
-                    recentAsync.when(
-                      data: (records) => records.isEmpty
-                          ? const _EmptyState()
-                          : _RecordList(records: records),
+                    todayAsync.when(
+                      data: (records) {
+                        final display = records.reversed.take(4).toList();
+                        return display.isEmpty
+                            ? const _EmptyState()
+                            : _RecordList(records: display);
+                      },
                       loading: () => const SizedBox(
                         height: 80,
                         child: Center(child: CircularProgressIndicator()),

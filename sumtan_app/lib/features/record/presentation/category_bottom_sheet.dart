@@ -21,19 +21,52 @@ class _CategorySheet extends StatelessWidget {
 
   void _openForm(BuildContext context, RecordCategory category) {
     Navigator.pop(context);
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      builder: (_) {
-        switch (category) {
-          case RecordCategory.poop:      return const PoopForm();
-          case RecordCategory.condition: return const ConditionForm();
-          case RecordCategory.medication:return const MedicationForm();
-          case RecordCategory.weight:    return const WeightForm();
-        }
-      },
-    );
+
+    // Core categories with dedicated forms
+    switch (category) {
+      case RecordCategory.poop:
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (_) => const PoopForm(),
+        );
+        return;
+      case RecordCategory.condition:
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (_) => const ConditionForm(),
+        );
+        return;
+      case RecordCategory.medication:
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (_) => const MedicationForm(),
+        );
+        return;
+      case RecordCategory.weight:
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          builder: (_) => const WeightForm(),
+        );
+        return;
+      default:
+        // Placeholder for new categories
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${category.label} 기록 기능은 준비 중이에요'),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: AppColors.gray700,
+          ),
+        );
+        return;
+    }
   }
 
   @override
@@ -50,10 +83,11 @@ class _CategorySheet extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // 핸들 바
+            // Handle bar
             Container(
               margin: const EdgeInsets.symmetric(vertical: 12),
-              width: 40, height: 4,
+              width: 40,
+              height: 4,
               decoration: BoxDecoration(
                 color: AppColors.gray300,
                 borderRadius: BorderRadius.circular(9999),
@@ -61,10 +95,14 @@ class _CategorySheet extends StatelessWidget {
             ),
             Row(
               children: [
-                const Text('📝 무엇을 기록할까요?', style: TextStyle(
-                  fontSize: 18, fontWeight: FontWeight.w700,
-                  color: AppColors.gray900,
-                )),
+                const Text(
+                  '📝 무엇을 기록할까요?',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.gray900,
+                  ),
+                ),
                 const Spacer(),
                 IconButton(
                   icon: const Icon(Icons.close, color: AppColors.gray500),
@@ -74,12 +112,12 @@ class _CategorySheet extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.space3),
             GridView.count(
-              crossAxisCount: 2,
+              crossAxisCount: 3,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisSpacing: AppSpacing.space3,
               mainAxisSpacing: AppSpacing.space3,
-              childAspectRatio: 2.0,
+              childAspectRatio: 1.1,
               children: RecordCategory.values.map((cat) {
                 return _CategoryButton(
                   category: cat,
@@ -111,15 +149,23 @@ class _CategoryButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.primary100, width: 1.2),
         ),
-        child: Row(
+        padding: const EdgeInsets.symmetric(
+          vertical: AppSpacing.space4,
+          horizontal: AppSpacing.space2,
+        ),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(category.emoji, style: const TextStyle(fontSize: 24)),
-            const SizedBox(width: AppSpacing.space2),
-            Text(category.label, style: const TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w600,
-              color: AppColors.primary900,
-            )),
+            const SizedBox(height: 6),
+            Text(
+              category.label,
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: AppColors.primary900,
+              ),
+            ),
           ],
         ),
       ),

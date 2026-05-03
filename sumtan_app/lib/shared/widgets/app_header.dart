@@ -6,12 +6,14 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget? petChip;
   final List<Widget>? actions;
+  final bool hamburger;
 
   const AppHeader({
     super.key,
     required this.title,
     this.petChip,
     this.actions,
+    this.hamburger = false,
   });
 
   @override
@@ -27,24 +29,47 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.space5),
       child: SafeArea(
         bottom: false,
-        child: Row(
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: AppColors.primary900,
-              ),
+            // Left: title + optional non-hamburger actions
+            Row(
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.primary900,
+                  ),
+                ),
+                const Spacer(),
+                if (!hamburger && actions != null) ...actions!,
+                if (hamburger)
+                  Builder(
+                    builder: (ctx) => IconButton(
+                      icon: const Icon(
+                        Icons.menu_rounded,
+                        color: AppColors.primary900,
+                        size: 24,
+                      ),
+                      onPressed: () => Scaffold.of(ctx).openEndDrawer(),
+                      tooltip: '메뉴',
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(
+                        minWidth: 36,
+                        minHeight: 36,
+                      ),
+                    ),
+                  ),
+              ],
             ),
-            const SizedBox(width: AppSpacing.space3),
-            if (petChip != null) ...[
-              const Spacer(),
-              petChip!,
-              const SizedBox(width: AppSpacing.space2),
-            ] else
-              const Spacer(),
-            if (actions != null) ...actions!,
+            // Center: pet chip (truly centered via Stack)
+            if (petChip != null)
+              IgnorePointer(
+                ignoring: false,
+                child: Center(child: petChip!),
+              ),
           ],
         ),
       ),

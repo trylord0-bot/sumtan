@@ -5,7 +5,8 @@
       "Bash(flutter create *)",
       "Bash(flutter pub *)",
       "PowerShell($cache = \\(dart pub cache list 2>&1 | Select-String \"sqflite_common_ffi_web\"\\); $cache)",
-      "PowerShell(Set-Location \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\"; \\(Get-Content .dart_tool\\\\package_config.json | Select-String -Pattern \"sqflite_common_ffi_web\" -Context 0,3\\)[0])"
+      "PowerShell(Set-Location \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\"; \\(Get-Content .dart_tool\\\\package_config.json | Select-String -Pattern \"sqflite_common_ffi_web\" -Context 0,3\\)[0])",
+      "Bash(flutter analyze *)"
     ]
   }
 }

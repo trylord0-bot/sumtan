@@ -48,6 +48,40 @@ final selectedDateRecordsProvider =
       .getByPetAndDate(pet.id!, date);
 });
 
+// 체중 기간 토글 (7일 or 30일)
+final weightPeriodProvider = StateProvider<int>((ref) => 7);
+
+// 체중 추세 기록
+final weightHistoryProvider =
+    FutureProvider.autoDispose<List<Record>>((ref) async {
+  final pet = ref.watch(selectedPetProvider);
+  final period = ref.watch(weightPeriodProvider);
+  if (pet == null || pet.id == null) return [];
+  return ref
+      .read(recordRepositoryProvider)
+      .getWeightHistoryByPet(pet.id!, days: period);
+});
+
+// 배변 주간 통계
+final weeklyPoopStatsProvider =
+    FutureProvider.autoDispose<Map<DateTime, int>>((ref) async {
+  final pet = ref.watch(selectedPetProvider);
+  if (pet == null || pet.id == null) return {};
+  return ref
+      .read(recordRepositoryProvider)
+      .getWeeklyPoopCountsByPet(pet.id!);
+});
+
+// 가장 최근 기록
+final lastRecordProvider =
+    FutureProvider.autoDispose<Record?>((ref) async {
+  final pet = ref.watch(selectedPetProvider);
+  if (pet == null || pet.id == null) return null;
+  return ref
+      .read(recordRepositoryProvider)
+      .getLastRecordByPet(pet.id!);
+});
+
 class RecordNotifier extends StateNotifier<void> {
   RecordNotifier(this._repo) : super(null);
   final RecordRepository _repo;

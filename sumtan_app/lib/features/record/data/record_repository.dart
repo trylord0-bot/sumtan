@@ -75,4 +75,47 @@ class RecordRepository {
     final db = await _db.database;
     await db.delete('records', where: 'id = ?', whereArgs: [id]);
   }
+
+  /// Weight records for the last [days] days, ordered ASC.
+  Future<List<Record>> getWeightHistoryByPet(int petId, {int days = 7}) async {
+    final db = await _db.database;
+    final cutoff = DateTime.now().subtract(Duration(days: days - 1));
+    final cutoffStr = '${cutoff.year.toString().padLeft(4, '0')}-'
+        '${cutoff.month.toString().padLeft(2, '0')}-'
+        '${cutoff.day.toString().padLeft(2, '0')}';
+    final rows = await db.query(
+      'records',
+      where: "pet_id = ? AND category = 'weight' AND recorded_at >= ?",
+      whereArgs: [petId, cutoffStr],
+      orderBy: 'recorded_at ASC',
+    );
+    return rows.map(Record.fromMap).toList();
+  }
+
+  /// Returns {date: count} for the last 7 days including today (poop only).
+  Future<Map<DateTime, int>> getWeeklyPoopCountsByPet(int petId) async {
+    final now = DateTime.now();
+    final result = <DateTime, int>{};
+    for (int i = 6; i >= 0; i--) {
+      final day = DateTime(now.year, now.month, now.day - i);
+      final records = await getByPetAndDate(petId, day);
+      final count = records.where((r) => r.category == 'poop').length;
+      result[DateTime(day.year, day.month, day.day)] = count;
+    }
+    return result;
+  }
+
+  /// The most recent record for a pet, or null if none.
+  Future<Record?> getLastRecordByPet(int petId) async {
+    final db = await _db.database;
+    final rows = await db.query(
+      'records',
+      where: 'pet_id = ?',
+      whereArgs: [petId],
+      orderBy: 'recorded_at DESC',
+      limit: 1,
+    );
+    if (rows.isEmpty) return null;
+    return Record.fromMap(rows.first);
+  }
 }

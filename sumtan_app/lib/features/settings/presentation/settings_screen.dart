@@ -1,216 +1,233 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../app/theme/app_colors.dart';
-import '../../../app/theme/app_spacing.dart';
-import '../../../features/pet/data/pet_model.dart';
-import '../../../features/pet/provider/pet_provider.dart';
-import '../../../features/pet/presentation/pet_register_screen.dart';
+import '../../../app/widgets/app_toast.dart';
 
-class SettingsScreen extends ConsumerWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final petsAsync = ref.watch(petsProvider);
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
 
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool _notifEnabled = true;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.creamBg,
       body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.space4),
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 40),
         children: [
-          // 반려동물 관리 섹션
-          const _SectionHeader(title: '반려동물 관리'),
-          const SizedBox(height: AppSpacing.space2),
-          petsAsync.when(
-            data: (pets) => Column(
-              children: [
-                ...pets.map((p) => _PetListItem(
-                  pet: p,
-                  onEdit: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => PetRegisterScreen(editPet: p),
-                      ),
-                    );
-                    ref.invalidate(petsProvider);
-                  },
-                  onDelete: () => _confirmDelete(context, ref, p),
-                )),
-                const SizedBox(height: AppSpacing.space2),
-                _AddPetButton(onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const PetRegisterScreen(),
-                    ),
-                  );
-                  ref.invalidate(petsProvider);
-                }),
-              ],
+          // ── 알림 ──────────────────────────────────────────────────────────
+          const _SectionLabel('알림'),
+          _SettingsCard(rows: [
+            _SettingsRow(
+              iconBg: AppColors.primary50,
+              icon: '🔔',
+              title: '푸시 알림 허용',
+              sub: '기기 알림 권한 설정',
+              trailing: Switch(
+                value: _notifEnabled,
+                onChanged: (v) => setState(() => _notifEnabled = v),
+                activeThumbColor: AppColors.primary400,
+                activeTrackColor: AppColors.primary200,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
             ),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (_, __) => const Text('오류가 발생했어요'),
-          ),
+          ]),
 
-          const SizedBox(height: AppSpacing.space6),
+          // ── 데이터 관리 ───────────────────────────────────────────────────
+          const _SectionLabel('데이터 관리'),
+          _SettingsCard(rows: [
+            _SettingsRow(
+              iconBg: const Color(0xFFFFFBEB),
+              icon: '📤',
+              title: '데이터 내보내기',
+              sub: 'ZIP 파일로 저장',
+              trailing: const _Badge(paid: true),
+              onTap: () => _showExportSheet(context),
+            ),
+            _SettingsRow(
+              iconBg: const Color(0xFFEFF6FF),
+              icon: '📥',
+              title: '데이터 가져오기',
+              sub: 'ZIP 파일에서 복원',
+              trailing: const _Badge(paid: false),
+              onTap: () => showTopToast(context, '데이터 가져오기는 준비 중이에요 🛠️'),
+            ),
+          ]),
 
-          const _SectionHeader(title: '앱 정보'),
-          const SizedBox(height: AppSpacing.space2),
-          const _InfoTile(label: '앱 버전', value: '1.0.0'),
-          const _InfoTile(label: '데이터 저장', value: '이 기기에만 저장됩니다'),
-
-          const SizedBox(height: AppSpacing.space6),
-
-          const _SectionHeader(title: '예정 기능'),
-          const SizedBox(height: AppSpacing.space2),
-          const _DisabledTile(label: '데이터 백업 / 복원'),
-          const _DisabledTile(label: '클라우드 동기화'),
-          const _DisabledTile(label: '데이터 내보내기 (JSON/PDF)'),
-          const _DisabledTile(label: '알림 설정'),
-          // TODO: 2차 마일스톤 — 위 기능들 구현 예정
+          // ── 앱 정보 ───────────────────────────────────────────────────────
+          const _SectionLabel('앱 정보'),
+          _SettingsCard(rows: [
+            const _SettingsRow(
+              iconBg: AppColors.gray100,
+              icon: '📱',
+              title: '앱 버전',
+              trailing: Text(
+                '1.0.0',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: AppColors.gray400,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            _SettingsRow(
+              iconBg: const Color(0xFFF5F3FF),
+              icon: '📋',
+              title: '개인정보 처리방침',
+              trailing: const Icon(Icons.chevron_right, size: 16, color: AppColors.gray400),
+              onTap: () => showTopToast(context, '개인정보 처리방침을 준비 중이에요 📋'),
+            ),
+            _SettingsRow(
+              iconBg: const Color(0xFFFFF7ED),
+              icon: '📬',
+              title: '피드백 보내기',
+              trailing: const Icon(Icons.chevron_right, size: 16, color: AppColors.gray400),
+              onTap: () async {
+                final uri = Uri.parse(
+                  'mailto:feedback@sumtan.app?subject=%EB%B0%98%EB%A0%A4%EC%88%A8%ED%83%84%20%ED%94%BC%EB%93%9C%EB%B0%B1',
+                );
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
+                } else {
+                  if (context.mounted) {
+                    showTopToast(context, '이메일 앱을 찾을 수 없어요');
+                  }
+                }
+              },
+            ),
+          ]),
         ],
       ),
     );
   }
 
-  Future<void> _confirmDelete(
-    BuildContext context,
-    WidgetRef ref,
-    Pet pet,
-  ) async {
-    final confirmed = await showDialog<bool>(
+  void _showExportSheet(BuildContext context) {
+    showModalBottomSheet(
       context: context,
-      builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('반려동물 삭제'),
-        content: Text('${pet.name}의 모든 기록이 함께 삭제됩니다.\n정말 삭제할까요?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('취소', style: TextStyle(color: AppColors.gray500)),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text('삭제', style: TextStyle(color: AppColors.danger400)),
-          ),
-        ],
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => const _ExportSheet(),
+    );
+  }
+}
+
+// ── Section label ─────────────────────────────────────────────────────────────
+
+class _SectionLabel extends StatelessWidget {
+  final String text;
+  const _SectionLabel(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 4, top: 20, bottom: 8),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w700,
+          color: AppColors.gray400,
+          letterSpacing: 0.7,
+        ),
       ),
     );
-    if (confirmed == true && pet.id != null) {
-      ref.read(petsProvider.notifier).remove(pet.id!);
-    }
   }
 }
 
-class _SectionHeader extends StatelessWidget {
-  final String title;
-  const _SectionHeader({required this.title});
+// ── Settings card ─────────────────────────────────────────────────────────────
+
+class _SettingsCard extends StatelessWidget {
+  final List<Widget> rows;
+  const _SettingsCard({required this.rows});
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: const TextStyle(
-      fontSize: 13, fontWeight: FontWeight.w700,
-      color: AppColors.gray500, letterSpacing: 0.3,
-    ));
-  }
-}
-
-class _PetListItem extends StatelessWidget {
-  final Pet pet;
-  final VoidCallback onEdit;
-  final VoidCallback onDelete;
-
-  const _PetListItem({
-    required this.pet,
-    required this.onEdit,
-    required this.onDelete,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final age = pet.ageYears;
     return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.space2),
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.space4, vertical: AppSpacing.space3,
-      ),
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.gray200),
       ),
-      child: Row(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
         children: [
-          Container(
-            width: 44, height: 44,
-            decoration: BoxDecoration(
-              color: AppColors.primary50,
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.primary100),
-            ),
-            alignment: Alignment.center,
-            child: Text(pet.speciesEmoji, style: const TextStyle(fontSize: 22)),
-          ),
-          const SizedBox(width: AppSpacing.space3),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(pet.name, style: const TextStyle(
-                  fontSize: 15, fontWeight: FontWeight.w700,
-                  color: AppColors.gray900,
-                )),
-                const SizedBox(height: 2),
-                Text(
-                  [
-                    if (pet.breed != null) pet.breed!,
-                    if (age != null) '$age살',
-                    if (pet.isNeutered) '중성화',
-                  ].join(' · '),
-                  style: const TextStyle(fontSize: 12, color: AppColors.gray500),
-                ),
-              ],
-            ),
-          ),
-          IconButton(
-            icon: const Icon(Icons.edit_outlined, size: 20, color: AppColors.primary600),
-            onPressed: onEdit,
-          ),
-          IconButton(
-            icon: const Icon(Icons.delete_outline, size: 20, color: AppColors.danger400),
-            onPressed: onDelete,
-          ),
+          for (int i = 0; i < rows.length; i++) ...[
+            rows[i],
+            if (i < rows.length - 1)
+              const Divider(height: 1, thickness: 1, color: AppColors.gray100),
+          ],
         ],
       ),
     );
   }
 }
 
-class _AddPetButton extends StatelessWidget {
-  final VoidCallback onTap;
-  const _AddPetButton({required this.onTap});
+// ── Settings row ─────────────────────────────────────────────────────────────
+
+class _SettingsRow extends StatelessWidget {
+  final Color iconBg;
+  final String icon;
+  final String title;
+  final String? sub;
+  final Widget? trailing;
+  final VoidCallback? onTap;
+
+  const _SettingsRow({
+    required this.iconBg,
+    required this.icon,
+    required this.title,
+    this.sub,
+    this.trailing,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: AppSpacing.space3),
-        decoration: BoxDecoration(
-          color: AppColors.primary50,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.primary200, width: 1.5),
-        ),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+        child: Row(
           children: [
-            Icon(Icons.add, color: AppColors.primary600, size: 20),
-            SizedBox(width: AppSpacing.space2),
-            Text('반려동물 추가', style: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w600,
-              color: AppColors.primary600,
-            )),
+            Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: iconBg,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: Text(icon, style: const TextStyle(fontSize: 16)),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.gray900,
+                    ),
+                  ),
+                  if (sub != null) ...[
+                    const SizedBox(height: 1),
+                    Text(
+                      sub!,
+                      style: const TextStyle(fontSize: 11, color: AppColors.gray400),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+            if (trailing != null) trailing!,
           ],
         ),
       ),
@@ -218,65 +235,208 @@ class _AddPetButton extends StatelessWidget {
   }
 }
 
-class _InfoTile extends StatelessWidget {
-  final String label;
-  final String value;
-  const _InfoTile({required this.label, required this.value});
+// ── Paid / free badge ─────────────────────────────────────────────────────────
+
+class _Badge extends StatelessWidget {
+  final bool paid;
+  const _Badge({required this.paid});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.space2),
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.space4, vertical: AppSpacing.space3,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.gray200),
+        gradient: paid
+            ? const LinearGradient(
+                colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
+              )
+            : null,
+        color: paid ? null : AppColors.primary100,
+        borderRadius: BorderRadius.circular(9999),
       ),
-      child: Row(
-        children: [
-          Text(label, style: const TextStyle(fontSize: 14, color: AppColors.gray700)),
-          const Spacer(),
-          Text(value, style: const TextStyle(fontSize: 13, color: AppColors.gray400)),
-        ],
+      child: Text(
+        paid ? '유료' : '무료',
+        style: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
+          color: paid ? AppColors.white : AppColors.primary700,
+        ),
       ),
     );
   }
 }
 
-class _DisabledTile extends StatelessWidget {
-  final String label;
-  const _DisabledTile({required this.label});
+// ── Data export bottom sheet ──────────────────────────────────────────────────
+
+class _ExportSheet extends StatelessWidget {
+  const _ExportSheet();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.space2),
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.space4, vertical: AppSpacing.space3,
+      decoration: const BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      decoration: BoxDecoration(
-        color: AppColors.gray100,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.gray200),
-      ),
-      child: Row(
-        children: [
-          Text(label, style: const TextStyle(fontSize: 14, color: AppColors.gray400)),
-          const Spacer(),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-            decoration: BoxDecoration(
-              color: AppColors.gray200,
-              borderRadius: BorderRadius.circular(9999),
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 36),
+      child: SafeArea(
+        top: false,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Handle
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 18),
+                decoration: BoxDecoration(
+                  color: AppColors.gray300,
+                  borderRadius: BorderRadius.circular(9999),
+                ),
+              ),
             ),
-            child: const Text('준비 중', style: TextStyle(
-              fontSize: 11, color: AppColors.gray500,
-            )),
-          ),
-        ],
+            // IAP 배너
+            Container(
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFFFFBEB), Color(0xFFFEF3C7)],
+                ),
+                border: Border.all(color: const Color(0xFFFBBF24)),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Row(
+                    children: [
+                      Text('💳', style: TextStyle(fontSize: 22)),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          '내보내기 위해서는 결제가 필요해요',
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFFD97706),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.6),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '1회 내보내기',
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFFD97706),
+                              ),
+                            ),
+                            SizedBox(height: 2),
+                            Text(
+                              '결제 후 즉시 파일 저장',
+                              style: TextStyle(fontSize: 11, color: Color(0xFFD97706)),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              '₩3,000',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800,
+                                color: Color(0xFFD97706),
+                              ),
+                            ),
+                            Text(
+                              '/ 회',
+                              style: TextStyle(fontSize: 11, color: Color(0xFFD97706)),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              '📤 데이터 내보내기',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: AppColors.gray900,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              '모든 반려동물 정보와 기록을 ZIP 파일로 저장합니다.\n저장된 파일은 언제든 무료로 가져오기 복원할 수 있어요.',
+              style: TextStyle(
+                fontSize: 13,
+                color: AppColors.gray500,
+                height: 1.65,
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary400,
+                  foregroundColor: AppColors.white,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                onPressed: () {
+                  showTopToast(context, '결제 기능을 준비 중이에요 💳');
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  '💳 결제하고 내보내기 · ₩3,000',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 44,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: AppColors.gray100,
+                  foregroundColor: AppColors.gray600,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  '취소',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

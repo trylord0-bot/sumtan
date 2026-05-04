@@ -10,7 +10,9 @@ import '../features/profile/presentation/profile_screen.dart';
 import '../features/profile/presentation/add_pet_screen.dart';
 import '../features/profile/presentation/widgets/pet_switch_sheet.dart';
 import '../features/settings/presentation/settings_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../features/health_guide/presentation/health_guide_screen.dart';
+import '../features/settings/presentation/help_screen.dart';
 import '../features/pet/provider/pet_provider.dart';
 import 'theme/app_colors.dart';
 import 'widgets/app_toast.dart';
@@ -46,6 +48,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/pet/edit',
       builder: (_, state) => const AddPetScreen(),
+    ),
+    GoRoute(
+      path: '/help',
+      builder: (_, __) => const HelpScreen(),
     ),
   ],
 );
@@ -109,7 +115,7 @@ class MainScaffold extends ConsumerWidget {
         onClose: () => context.go('/'),
         onPetChip: () => showPetSwitchSheet(context),
       ),
-      endDrawer: _AppDrawer(pet: pet, location: location),
+      endDrawer: const _AppDrawer(),
       body: child,
       floatingActionButton: location == '/notifications'
           ? Padding(
@@ -335,95 +341,283 @@ class _CustomBottomBar extends StatelessWidget {
 
 // ─── End drawer ────────────────────────────────────────────────────────────────
 
-class _AppDrawer extends ConsumerWidget {
-  final dynamic pet;
-  final String location;
+class _AppDrawer extends StatelessWidget {
+  const _AppDrawer();
 
-  const _AppDrawer({this.pet, required this.location});
+  static const _tealBg  = Color(0xFFF0FDFA);
+  static const _blueBg  = Color(0xFFEFF6FF);
+  static const _amberBg = Color(0xFFFFFBEB);
+
+  void _openHospitalDialog(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (ctx) => Dialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 56, height: 56,
+                  decoration: BoxDecoration(
+                    color: _tealBg,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text('🏥', style: TextStyle(fontSize: 28)),
+                ),
+                const SizedBox(height: 14),
+                const Text(
+                  '외부 웹페이지로 이동해요',
+                  style: TextStyle(
+                    fontSize: 16, fontWeight: FontWeight.w700,
+                    color: AppColors.gray900,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  '주변 동물병원을 찾으려면\n외부 웹페이지가 필요해요.\n\n지금 바로 이동할까요? 🐾',
+                  style: TextStyle(
+                    fontSize: 13, color: AppColors.gray500, height: 1.65,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 46,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.gray100,
+                            foregroundColor: AppColors.gray600,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                          onPressed: () => Navigator.pop(ctx),
+                          child: const Text('취소',
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        height: 46,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary400,
+                            foregroundColor: AppColors.white,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                          onPressed: () async {
+                            Navigator.pop(ctx);
+                            final uri = Uri.parse(
+                              'https://m.map.naver.com/search2/search.naver?query=%EB%8F%99%EB%AC%BC%EB%B3%91%EC%9B%90',
+                            );
+                            if (await canLaunchUrl(uri)) {
+                              await launchUrl(uri,
+                                  mode: LaunchMode.externalApplication);
+                            }
+                          },
+                          child: const Text('이동할게요',
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    });
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final petName  = pet?.name ?? '반려동물';
-    final petEmoji = pet?.speciesEmoji ?? '🐾';
-
+  Widget build(BuildContext context) {
     return Drawer(
       backgroundColor: AppColors.white,
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              color: AppColors.primary600,
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
-              child: Row(
-                children: [
-                  Container(
-                    width: 44, height: 44,
-                    decoration: const BoxDecoration(
-                        color: AppColors.white, shape: BoxShape.circle),
-                    alignment: Alignment.center,
-                    child: Text(petEmoji, style: const TextStyle(fontSize: 24)),
-                  ),
-                  const SizedBox(width: 12),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('반려숨탄', style: TextStyle(
-                        fontSize: 13, color: Colors.white70,
-                        fontWeight: FontWeight.w500,
-                      )),
-                      Text(petName, style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                      )),
-                    ],
-                  ),
-                ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // ── 헤더 (그라디언트, full-bleed) ──────────────────────────────
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [AppColors.primary600, AppColors.primary700],
               ),
             ),
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                children: [
-                  _DrawerItem(
-                    icon: '🏠', label: '홈',
-                    active: location == '/',
-                    onTap: () { Navigator.pop(context); context.go('/'); },
-                  ),
-                  _DrawerItem(
-                    icon: '🐾', label: '내 반려동물',
-                    active: location == '/profile',
-                    onTap: () { Navigator.pop(context); context.go('/profile'); },
-                  ),
-                  _DrawerItem(
-                    icon: '🔔', label: '알림 설정',
-                    active: location == '/notifications',
-                    onTap: () {
-                      Navigator.pop(context);
-                      context.go('/notifications');
-                    },
-                  ),
-                  const Divider(height: 1, color: AppColors.gray200),
-                  _DrawerItem(
-                    icon: '💊', label: '건강관리 가이드',
-                    onTap: () { Navigator.pop(context); context.push('/health-guide'); },
-                  ),
-                  _DrawerItem(
-                    icon: '⚙️', label: '설정',
-                    active: location == '/settings',
-                    onTap: () { Navigator.pop(context); context.go('/settings'); },
-                  ),
-                ],
-              ),
+            padding: EdgeInsets.fromLTRB(
+              20,
+              MediaQuery.of(context).padding.top + 24,
+              20, 22,
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 16),
-              child: Text(
-                '반려숨탄 v1.0.0',
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('🐾 반려숨탄', style: TextStyle(
+                  fontSize: 20, fontWeight: FontWeight.w800,
+                  color: Colors.white,
+                )),
+                SizedBox(height: 4),
+                Text('반려동물 건강관리 앱', style: TextStyle(
+                  fontSize: 12, color: Colors.white70,
+                )),
+              ],
+            ),
+          ),
+          // ── 본문 ────────────────────────────────────────────────────────
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.only(top: 10),
+              children: [
+                const _DrawerSectionLabel('서비스'),
+                _DrawerTile(
+                  iconBg: _tealBg,
+                  icon: '🏥',
+                  label: '주변 병원 찾기',
+                  sub: '내 위치 기반 동물병원',
+                  onTap: () {
+                    Navigator.pop(context);
+                    _openHospitalDialog(context);
+                  },
+                ),
+                _DrawerTile(
+                  iconBg: _blueBg,
+                  icon: '📖',
+                  label: '건강관리 가이드',
+                  sub: '반려동물 건강 안내서',
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.push('/health-guide');
+                  },
+                ),
+                const _DrawerDivider(),
+                const _DrawerSectionLabel('앱'),
+                _DrawerTile(
+                  iconBg: AppColors.primary50,
+                  icon: '⚙️',
+                  label: '설정',
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.go('/settings');
+                  },
+                ),
+                _DrawerTile(
+                  iconBg: _amberBg,
+                  icon: '❓',
+                  label: '도움말',
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.push('/help');
+                  },
+                ),
+              ],
+            ),
+          ),
+          // ── 푸터 ────────────────────────────────────────────────────────
+          SafeArea(
+            top: false,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              decoration: const BoxDecoration(
+                border: Border(top: BorderSide(color: AppColors.gray100)),
+              ),
+              child: const Text(
+                'v1.0.0 · 반려숨탄',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 11, color: AppColors.gray400),
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ─── Drawer sub-widgets ───────────────────────────────────────────────────────
+
+class _DrawerSectionLabel extends StatelessWidget {
+  final String text;
+  const _DrawerSectionLabel(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 4, 20, 6),
+      child: Text(text, style: const TextStyle(
+        fontSize: 10, fontWeight: FontWeight.w700,
+        color: AppColors.gray400, letterSpacing: 0.8,
+      )),
+    );
+  }
+}
+
+class _DrawerTile extends StatelessWidget {
+  final Color iconBg;
+  final String icon;
+  final String label;
+  final String? sub;
+  final VoidCallback onTap;
+
+  const _DrawerTile({
+    required this.iconBg,
+    required this.icon,
+    required this.label,
+    this.sub,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        child: Row(
+          children: [
+            Container(
+              width: 36, height: 36,
+              decoration: BoxDecoration(
+                color: iconBg,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              alignment: Alignment.center,
+              child: Text(icon, style: const TextStyle(fontSize: 18)),
+            ),
+            const SizedBox(width: 13),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: const TextStyle(
+                    fontSize: 14, fontWeight: FontWeight.w600,
+                    color: AppColors.gray800,
+                  )),
+                  if (sub != null) ...[
+                    const SizedBox(height: 1),
+                    Text(sub!, style: const TextStyle(
+                      fontSize: 11, color: AppColors.gray400,
+                    )),
+                  ],
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_right, size: 16, color: AppColors.gray400),
           ],
         ),
       ),
@@ -431,35 +625,15 @@ class _AppDrawer extends ConsumerWidget {
   }
 }
 
-class _DrawerItem extends StatelessWidget {
-  final String icon;
-  final String label;
-  final bool active;
-  final VoidCallback onTap;
-
-  const _DrawerItem({
-    required this.icon, required this.label,
-    this.active = false, required this.onTap,
-  });
+class _DrawerDivider extends StatelessWidget {
+  const _DrawerDivider();
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        color: active ? AppColors.primary50 : null,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-        child: Row(
-          children: [
-            Text(icon, style: const TextStyle(fontSize: 18)),
-            const SizedBox(width: 12),
-            Text(label, style: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w500,
-              color: active ? AppColors.primary700 : AppColors.gray700,
-            )),
-          ],
-        ),
-      ),
+    return Container(
+      height: 1,
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+      color: AppColors.gray100,
     );
   }
 }

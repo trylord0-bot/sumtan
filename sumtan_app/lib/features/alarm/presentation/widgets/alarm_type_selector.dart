@@ -3,7 +3,11 @@ import '../../../../app/theme/app_colors.dart';
 import 'alarm_form_sheet.dart';
 
 class AlarmTypeSelector extends StatelessWidget {
-  const AlarmTypeSelector({super.key});
+  /// Outer context captured before this sheet was opened.
+  /// Used to show the form sheet after this one closes.
+  final BuildContext outerContext;
+
+  const AlarmTypeSelector({super.key, required this.outerContext});
 
   static const _types = [
     ('vaccination', '💉', '예방접종'),
@@ -52,9 +56,11 @@ class AlarmTypeSelector extends StatelessWidget {
                 emoji: t.$2,
                 label: t.$3,
                 onTap: () {
+                  // 1. Close type selector
                   Navigator.pop(context);
+                  // 2. Show form sheet using outer context (not the dismissing sheet's context)
                   showModalBottomSheet(
-                    context: context,
+                    context: outerContext,
                     isScrollControlled: true,
                     backgroundColor: Colors.transparent,
                     builder: (_) => AlarmFormSheet(type: t.$1),

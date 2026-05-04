@@ -6,6 +6,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import '../../../../app/widgets/app_toast.dart';
 
 class MedicationForm extends ConsumerStatefulWidget {
   const MedicationForm({super.key});
@@ -50,7 +51,10 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
-    if (mounted) Navigator.pop(context, true);
+    if (mounted) {
+      showTopToast(context, '💊 투약이 기록됐어요');
+      Navigator.pop(context, true);
+    }
   }
 
   @override

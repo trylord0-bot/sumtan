@@ -54,7 +54,10 @@ class _MemoFormState extends ConsumerState<MemoForm> {
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
-    if (mounted) Navigator.pop(context, true);
+    if (mounted) {
+      showTopToast(context, '📝 메모가 기록됐어요');
+      Navigator.pop(context, true);
+    }
   }
 
   @override

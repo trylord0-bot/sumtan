@@ -64,7 +64,10 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
-    if (mounted) Navigator.pop(context, true);
+    if (mounted) {
+      showTopToast(context, '💉 예방접종이 기록됐어요');
+      Navigator.pop(context, true);
+    }
   }
 
   @override

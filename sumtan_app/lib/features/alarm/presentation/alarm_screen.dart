@@ -63,7 +63,7 @@ class AlarmScreen extends ConsumerWidget {
             pastOrDone.isNotEmpty;
 
         return ListView(
-          padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 160),
           children: [
             // ── 예정된 알림 섹션 ──────────────────────────────────────────
             if (hasScheduled) ...[
@@ -111,15 +111,27 @@ class _SectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppSpacing.space3),
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 13,
-          fontWeight: FontWeight.w700,
-          color: AppColors.gray500,
-          letterSpacing: 0.4,
-        ),
+      padding: const EdgeInsets.only(top: 4, bottom: 10),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              color: AppColors.gray400,
+              letterSpacing: 0.6,
+            ),
+          ),
+          const SizedBox(width: 8),
+          const Expanded(
+            child: Divider(
+              color: AppColors.gray200,
+              height: 1,
+              thickness: 1,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -144,7 +156,7 @@ class _EmptyAlarmState extends ConsumerWidget {
             Text('등록된 알림이 없네요', style: AppTypography.heading3),
             const SizedBox(height: AppSpacing.space2),
             Text(
-              '$petName는 오늘도 건강하게 지내봐요!\n탭바 + 버튼으로 알림을 추가해보세요.',
+              '$petName는 오늘도 건강하게 지내봐요!\n아래 알림 추가 버튼을 눌러 시작해보세요.',
               style: AppTypography.bodySm.copyWith(color: AppColors.gray500),
               textAlign: TextAlign.center,
             ),

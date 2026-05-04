@@ -5,6 +5,7 @@ import '../features/home/presentation/home_screen.dart';
 import '../features/journal/presentation/journal_screen.dart';
 import '../features/alarm/presentation/alarm_screen.dart';
 import '../features/alarm/provider/alarm_provider.dart';
+import '../features/record/presentation/category_bottom_sheet.dart';
 import '../features/profile/presentation/profile_screen.dart';
 import '../features/profile/presentation/add_pet_screen.dart';
 import '../features/profile/presentation/widgets/pet_switch_sheet.dart';
@@ -12,6 +13,7 @@ import '../features/settings/presentation/settings_screen.dart';
 import '../features/health_guide/presentation/health_guide_screen.dart';
 import '../features/pet/provider/pet_provider.dart';
 import 'theme/app_colors.dart';
+import 'widgets/app_toast.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -109,12 +111,42 @@ class MainScaffold extends ConsumerWidget {
       ),
       endDrawer: _AppDrawer(pet: pet, location: location),
       body: child,
+      floatingActionButton: location == '/notifications'
+          ? Padding(
+              padding: const EdgeInsets.only(bottom: 28),
+              child: FloatingActionButton.extended(
+                backgroundColor: AppColors.primary700,
+                foregroundColor: AppColors.white,
+                onPressed: () {
+                  if (ref.read(selectedPetProvider) == null) {
+                    showTopToast(context, '반려동물을 먼저 등록해 주세요 🐾');
+                    return;
+                  }
+                  showAlarmAddSheet(context);
+                },
+                icon: const Icon(Icons.add_alert_rounded, size: 22),
+                label: const Text(
+                  '알림 추가',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                ),
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: _showNav
           ? _CustomBottomBar(
               currentIndex: _currentIndex,
               onTabTap: (i) {
                 if (i == 2) {
-                  showAlarmAddSheet(context);
+                  if (pet == null) {
+                    showTopToast(context, '반려동물을 먼저 등록해 주세요 🐾');
+                    return;
+                  }
+                  showCategoryBottomSheet(context);
                   return;
                 }
                 if (_tabRoutes[i].isNotEmpty) {

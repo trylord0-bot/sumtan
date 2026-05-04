@@ -7,6 +7,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import '../../../../app/widgets/app_toast.dart';
 
 class HospitalForm extends ConsumerStatefulWidget {
   const HospitalForm({super.key});
@@ -67,7 +68,10 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
-    if (mounted) Navigator.pop(context, true);
+    if (mounted) {
+      showTopToast(context, '🏥 병원 방문이 기록됐어요');
+      Navigator.pop(context, true);
+    }
   }
 
   @override

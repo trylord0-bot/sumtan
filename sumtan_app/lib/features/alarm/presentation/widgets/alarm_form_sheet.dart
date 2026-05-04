@@ -72,6 +72,9 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
           minute: int.parse(parts[1]),
         );
       }
+      if (a.alarmDays != null && a.alarmDays!.isNotEmpty) {
+        _alarmDays = a.alarmDays!.split(',').toSet();
+      }
     }
   }
 
@@ -173,6 +176,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         isDone: false,
         createdAt: widget.editAlarm?.createdAt ?? DateTime.now().toIso8601String(),
         memo: _memoCtrl.text.trim().isNotEmpty ? _memoCtrl.text.trim() : null,
+        alarmDays: _alarmDays.isEmpty ? null : _alarmDays.join(','),
       );
 
       if (widget.isReschedule) {
@@ -183,7 +187,17 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         await notifier.add(alarm);
       }
 
-      if (mounted) Navigator.pop(context);
+      if (mounted) {
+        showTopToast(
+          context,
+          widget.isReschedule
+              ? '🔄 알림이 재예약됐어요'
+              : _isEdit
+                  ? '✅ 알림이 수정됐어요'
+                  : '🔔 알림이 추가됐어요',
+        );
+        Navigator.pop(context);
+      }
     } catch (e) {
       if (mounted) {
         setState(() => _saving = false);

@@ -24,46 +24,47 @@ class PastAlarmsSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Toggle button
+        // Toggle button — full-width, bordered, spec style
         GestureDetector(
           onTap: () => notifier.state = !visible,
           child: Container(
-            margin: const EdgeInsets.only(bottom: 8),
+            width: double.infinity,
+            margin: const EdgeInsets.only(top: 4, bottom: 8),
             padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.space4, vertical: AppSpacing.space2),
+                horizontal: AppSpacing.space4, vertical: AppSpacing.space3),
             decoration: BoxDecoration(
-              color: AppColors.gray100,
-              borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+              color: AppColors.gray50,
+              borderRadius: BorderRadius.circular(AppRadius.radiusLg),
+              border: Border.all(color: AppColors.gray300, width: 1.5),
             ),
             child: Row(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   visible ? '지난 알림 숨기기' : '지난 알림 보기',
                   style: const TextStyle(
                     fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.gray600,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.gray500,
                   ),
                 ),
-                const SizedBox(width: 6),
+                const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                   decoration: BoxDecoration(
-                    color: AppColors.gray300,
+                    color: AppColors.gray200,
                     borderRadius: BorderRadius.circular(AppRadius.radiusFull),
                   ),
                   child: Text('${alarms.length}개',
                       style: const TextStyle(
                           fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.gray700)),
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.gray600)),
                 ),
-                const SizedBox(width: 4),
+                const Spacer(),
                 Icon(
                   visible ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                  size: 18,
-                  color: AppColors.gray500,
+                  size: 16,
+                  color: AppColors.gray400,
                 ),
               ],
             ),
@@ -147,13 +148,24 @@ class _PastAlarmItem extends ConsumerWidget {
                   Container(
                     width: 24, height: 24,
                     decoration: const BoxDecoration(
-                      color: AppColors.success400,
+                      color: AppColors.primary400,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(Icons.check, color: AppColors.white, size: 14),
                   )
                 else
-                  const Icon(Icons.chevron_right, color: AppColors.gray400, size: 20),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    decoration: BoxDecoration(
+                      color: AppColors.gray200,
+                      borderRadius: BorderRadius.circular(AppRadius.radiusFull),
+                    ),
+                    child: const Text('지남',
+                        style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.gray400)),
+                  ),
               ],
             ),
           ),
@@ -164,7 +176,7 @@ class _PastAlarmItem extends ConsumerWidget {
 
   Widget _doneSubtitle() {
     final dateStr = alarm.doneAt != null
-        ? DateFormat('MM/dd').format(DateTime.parse(alarm.doneAt!))
+        ? DateFormat('M월 d일 (E)', 'ko').format(DateTime.parse(alarm.doneAt!))
         : '';
     return Text('$dateStr · 완료됨',
         style: const TextStyle(fontSize: 12, color: AppColors.gray300));
@@ -172,10 +184,11 @@ class _PastAlarmItem extends ConsumerWidget {
 
   Widget _pastSubtitle() {
     final dateStr = alarm.scheduledAt != null
-        ? DateFormat('MM/dd').format(DateTime.parse(alarm.scheduledAt!))
+        ? DateFormat('M월 d일', 'ko').format(DateTime.parse(alarm.scheduledAt!))
         : '';
     return Text('⚠️ $dateStr 지남 · 탭해서 재예약',
-        style: const TextStyle(fontSize: 12, color: _amber700));
+        style: const TextStyle(
+            fontSize: 12, fontWeight: FontWeight.w600, color: _amber700));
   }
 
   void _openReschedule(BuildContext context) {

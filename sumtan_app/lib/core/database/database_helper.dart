@@ -22,7 +22,7 @@ class DatabaseHelper {
     final path = await getDbPath('sumtan.db');
     return openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
@@ -63,6 +63,10 @@ class DatabaseHelper {
     if (oldVersion < 2) {
       await _createAlarmsTable(db);
     }
+    if (oldVersion < 3) {
+      await db.execute(
+          'ALTER TABLE alarms ADD COLUMN alarm_days TEXT');
+    }
   }
 
   Future<void> _createAlarmsTable(Database db) async {
@@ -80,6 +84,7 @@ class DatabaseHelper {
         done_at      TEXT,
         record_id    INTEGER,
         memo         TEXT,
+        alarm_days   TEXT,
         created_at   TEXT NOT NULL,
         FOREIGN KEY (pet_id) REFERENCES pets(id) ON DELETE CASCADE
       )

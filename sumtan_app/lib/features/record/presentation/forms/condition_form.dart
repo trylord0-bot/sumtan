@@ -7,6 +7,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import '../../../../app/widgets/app_toast.dart';
 
 class ConditionForm extends ConsumerStatefulWidget {
   const ConditionForm({super.key});
@@ -45,7 +46,10 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
-    if (mounted) Navigator.pop(context, true);
+    if (mounted) {
+      showTopToast(context, '💗 컨디션이 기록됐어요');
+      Navigator.pop(context, true);
+    }
   }
 
   Color _scoreColor(int s) {

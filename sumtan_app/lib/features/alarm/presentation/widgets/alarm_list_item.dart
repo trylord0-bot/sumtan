@@ -197,19 +197,35 @@ class _Subtitle extends StatelessWidget {
             style: const TextStyle(fontSize: 12, color: _amber700));
 
       case AlarmStatus.repeat:
-        final timeStr = alarm.repeatTime ?? '';
         final ruleLabel = _repeatRuleLabel(alarm.repeatRule);
-        return Text('$ruleLabel · $timeStr',
+        final timeLabel = _formatRepeatTime(alarm.repeatTime);
+        return Text('$ruleLabel · $timeLabel',
             style: const TextStyle(fontSize: 12, color: AppColors.gray500));
 
       default:
         // upcoming
         final dateStr = alarm.scheduledAt != null
-            ? DateFormat('MM월 dd일 (E)', 'ko').format(DateTime.parse(alarm.scheduledAt!))
-            : (alarm.repeatTime ?? '');
-        return Text(dateStr,
+            ? DateFormat('M월 d일 (E)', 'ko').format(DateTime.parse(alarm.scheduledAt!))
+            : _formatRepeatTime(alarm.repeatTime);
+        final daysLabel = (alarm.alarmDays != null && alarm.alarmDays!.isNotEmpty)
+            ? ' · ${alarm.alarmDays}'
+            : '';
+        return Text('$dateStr$daysLabel',
             style: const TextStyle(fontSize: 12, color: AppColors.gray500));
     }
+  }
+
+  String _formatRepeatTime(String? repeatTime) {
+    if (repeatTime == null) return '';
+    final parts = repeatTime.split(':');
+    if (parts.length != 2) return repeatTime;
+    final h = int.tryParse(parts[0]) ?? 0;
+    final m = int.tryParse(parts[1]) ?? 0;
+    final ampm = h < 12 ? '오전' : '오후';
+    final h12 = h % 12 == 0 ? 12 : h % 12;
+    return m == 0
+        ? '$ampm $h12시'
+        : '$ampm $h12:${m.toString().padLeft(2, '0')}';
   }
 
   String _repeatRuleLabel(String rule) {

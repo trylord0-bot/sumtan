@@ -123,19 +123,22 @@ class AlarmListItemPending extends ConsumerWidget {
                   ),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: Container(
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(AppRadius.radiusMd),
-                        border: Border.all(color: AppColors.gray300, width: 1.5),
+                    child: GestureDetector(
+                      onTap: () => showTopToast(context, '나중에 다시 확인해드릴게요 🕐'),
+                      child: Container(
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+                          border: Border.all(color: AppColors.gray300, width: 1.5),
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text('🕐 나중에',
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.gray500)),
                       ),
-                      alignment: Alignment.center,
-                      child: const Text('🕐 나중에',
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.gray500)),
                     ),
                   ),
                 ],

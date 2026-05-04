@@ -6,6 +6,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import '../../../../app/widgets/app_toast.dart';
 
 class PoopForm extends ConsumerStatefulWidget {
   const PoopForm({super.key});
@@ -44,7 +45,10 @@ class _PoopFormState extends ConsumerState<PoopForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(weeklyPoopStatsProvider);
     ref.invalidate(lastRecordProvider);
-    if (mounted) Navigator.pop(context, true);
+    if (mounted) {
+      showTopToast(context, '💩 배변이 기록됐어요');
+      Navigator.pop(context, true);
+    }
   }
 
   @override

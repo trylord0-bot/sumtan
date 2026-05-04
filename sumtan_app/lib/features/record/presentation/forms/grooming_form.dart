@@ -67,7 +67,10 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
-    if (mounted) Navigator.pop(context, true);
+    if (mounted) {
+      showTopToast(context, '✂️ 미용이 기록됐어요');
+      Navigator.pop(context, true);
+    }
   }
 
   @override

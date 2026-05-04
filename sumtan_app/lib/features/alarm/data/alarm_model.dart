@@ -16,6 +16,7 @@ class Alarm {
   final String? doneAt;
   final int? recordId;
   final String? memo;
+  final String? alarmDays; // comma-separated e.g. "D-7,D-3,D-1"
   final String createdAt;
 
   const Alarm({
@@ -31,6 +32,7 @@ class Alarm {
     this.doneAt,
     this.recordId,
     this.memo,
+    this.alarmDays,
     required this.createdAt,
   });
 
@@ -67,6 +69,7 @@ class Alarm {
     String? doneAt,
     int? recordId,
     String? memo,
+    String? alarmDays,
     String? createdAt,
   }) =>
       Alarm(
@@ -82,6 +85,7 @@ class Alarm {
         doneAt: doneAt ?? this.doneAt,
         recordId: recordId ?? this.recordId,
         memo: memo ?? this.memo,
+        alarmDays: alarmDays ?? this.alarmDays,
         createdAt: createdAt ?? this.createdAt,
       );
 
@@ -98,6 +102,7 @@ class Alarm {
         'done_at': doneAt,
         'record_id': recordId,
         'memo': memo,
+        'alarm_days': alarmDays,
         'created_at': createdAt,
       };
 
@@ -114,6 +119,7 @@ class Alarm {
         doneAt: m['done_at'] as String?,
         recordId: m['record_id'] as int?,
         memo: m['memo'] as String?,
+        alarmDays: m['alarm_days'] as String?,
         createdAt: m['created_at'] as String,
       );
 }

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
+import '../../../../app/widgets/app_toast.dart';
 import '../../data/alarm_model.dart';
 import '../../provider/alarm_provider.dart';
 import 'alarm_form_sheet.dart';
@@ -27,9 +28,7 @@ class AlarmListItem extends ConsumerWidget {
       confirmDismiss: (_) async => true,
       onDismissed: (_) {
         notifier.delete(alarm.id!);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('알림이 삭제됐어요 🗑️')),
-        );
+        showTopToast(context, '알림이 삭제됐어요 🗑️');
       },
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,

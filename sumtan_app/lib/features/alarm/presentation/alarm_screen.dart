@@ -79,6 +79,22 @@ class AlarmScreen extends ConsumerWidget {
               _SectionHeader(title: '반복 알림'),
               ...repeat.map((a) => AlarmListItem(alarm: a)),
             ],
+
+            // ── 스와이프 힌트 ─────────────────────────────────────────────
+            const Padding(
+              padding: EdgeInsets.only(top: 8, bottom: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.arrow_back, size: 12, color: AppColors.gray400),
+                  SizedBox(width: 4),
+                  Text(
+                    '스와이프하면 삭제할 수 있어요',
+                    style: TextStyle(fontSize: 11, color: AppColors.gray400),
+                  ),
+                ],
+              ),
+            ),
           ],
         );
       },

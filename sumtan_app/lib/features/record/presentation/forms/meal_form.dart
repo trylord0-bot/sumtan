@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
+import '../../../../app/widgets/app_toast.dart';
 import '../../../../core/utils/date_utils.dart' as du;
 import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
@@ -54,11 +55,7 @@ class _MealFormState extends ConsumerState<MealForm> {
 
   Future<void> _save() async {
     if (_foodNameCtrl.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('사료명을 입력해 주세요'),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: AppColors.gray700,
-      ));
+      showTopToast(context, '사료명을 입력해 주세요');
       return;
     }
     final pet = ref.read(selectedPetProvider);

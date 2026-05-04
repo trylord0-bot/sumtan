@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
+import '../../../../app/widgets/app_toast.dart';
 import '../../data/alarm_model.dart';
 import '../../provider/alarm_provider.dart';
 import 'alarm_complete_dialog.dart';
@@ -25,9 +25,7 @@ class AlarmListItemPending extends ConsumerWidget {
       confirmDismiss: (_) async => true,
       onDismissed: (_) {
         notifier.delete(alarm.id!);
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('알림이 삭제됐어요 🗑️')),
-        );
+        showTopToast(context, '알림이 삭제됐어요 🗑️');
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
@@ -96,6 +94,8 @@ class AlarmListItemPending extends ConsumerWidget {
               const SizedBox(height: 10),
               Row(
                 children: [
+                  // Align with body text (icon 40px + gap 12px)
+                  const SizedBox(width: 52),
                   Expanded(
                     child: GestureDetector(
                       onTap: () => showAlarmCompleteDialog(context, alarm),
@@ -104,12 +104,19 @@ class AlarmListItemPending extends ConsumerWidget {
                         decoration: BoxDecoration(
                           color: AppColors.primary400,
                           borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.primary400.withValues(alpha: 0.3),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
                         ),
                         alignment: Alignment.center,
                         child: const Text('✅ 완료했어요',
                             style: TextStyle(
                                 fontSize: 13,
-                                fontWeight: FontWeight.w600,
+                                fontWeight: FontWeight.w700,
                                 color: AppColors.white)),
                       ),
                     ),
@@ -121,7 +128,7 @@ class AlarmListItemPending extends ConsumerWidget {
                       decoration: BoxDecoration(
                         color: AppColors.white,
                         borderRadius: BorderRadius.circular(AppRadius.radiusMd),
-                        border: Border.all(color: AppColors.gray300),
+                        border: Border.all(color: AppColors.gray300, width: 1.5),
                       ),
                       alignment: Alignment.center,
                       child: const Text('🕐 나중에',
@@ -143,7 +150,10 @@ class AlarmListItemPending extends ConsumerWidget {
   String _dateText() {
     if (alarm.scheduledAt == null) return '';
     final dt = DateTime.parse(alarm.scheduledAt!);
-    return DateFormat('오늘 HH:mm', 'ko').format(dt);
+    final ampm = dt.hour < 12 ? '오전' : '오후';
+    final h = dt.hour % 12 == 0 ? 12 : dt.hour % 12;
+    final m = dt.minute.toString().padLeft(2, '0');
+    return '오늘 · $ampm $h:$m';
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
+import '../../../app/widgets/app_toast.dart';
 import '../../../core/utils/date_utils.dart' as du;
 import '../data/pet_model.dart';
 import '../provider/pet_provider.dart';
@@ -48,9 +49,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
 
   Future<void> _save() async {
     if (_nameCtrl.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('이름을 입력해 주세요')),
-      );
+      showTopToast(context, '이름을 입력해 주세요');
       return;
     }
     final now = du.toIso8601(DateTime.now());

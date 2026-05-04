@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
+import '../../../../app/widgets/app_toast.dart';
 import '../../../../core/utils/date_utils.dart' as du;
 import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
@@ -37,11 +38,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
 
   Future<void> _save() async {
     if (_types.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('미용 종류를 1개 이상 선택해 주세요'),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: AppColors.gray700,
-      ));
+      showTopToast(context, '미용 종류를 1개 이상 선택해 주세요');
       return;
     }
     final pet = ref.read(selectedPetProvider);

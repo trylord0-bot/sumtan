@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
+import '../../../../app/widgets/app_toast.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import '../../data/alarm_model.dart';
 import '../../provider/alarm_provider.dart';
@@ -115,18 +116,14 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
     // Validation
     final err = _validate();
     if (err != null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(err)),
-      );
+      showTopToast(context, err);
       return;
     }
 
     // Pet guard
     final pet = ref.read(selectedPetProvider);
     if (pet == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('먼저 반려동물을 등록해주세요 🐾')),
-      );
+      showTopToast(context, '먼저 반려동물을 등록해주세요 🐾');
       return;
     }
 
@@ -190,9 +187,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
     } catch (e) {
       if (mounted) {
         setState(() => _saving = false);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('저장 중 오류가 발생했어요: $e')),
-        );
+        showTopToast(context, '저장 중 오류가 발생했어요: $e');
       }
     }
   }
@@ -220,9 +215,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
               Navigator.pop(context);  // close sheet
               await ref.read(alarmListProvider.notifier).delete(alarm.id!);
               if (mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('알림이 삭제됐어요 🗑️')),
-                );
+                showTopToast(context, '알림이 삭제됐어요 🗑️');
               }
             },
             style: TextButton.styleFrom(foregroundColor: AppColors.danger600),
@@ -238,9 +231,10 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   @override
   Widget build(BuildContext context) {
     final kb = MediaQuery.viewInsetsOf(context).bottom;
+    final emoji = alarmTypeEmoji(_type);
     final title = _isEdit
-        ? '${alarmTypeLabel(_type)} 알림 수정'
-        : '${alarmTypeLabel(_type)} 알림 추가';
+        ? '$emoji ${alarmTypeLabel(_type)} 알림 수정'
+        : '$emoji ${alarmTypeLabel(_type)} 알림 추가';
 
     return Container(
       decoration: const BoxDecoration(

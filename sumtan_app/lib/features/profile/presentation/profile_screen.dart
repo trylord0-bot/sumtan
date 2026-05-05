@@ -240,16 +240,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           );
         }
 
-        // ── 펫 있음: 선택된 펫 상세 화면 ────────────────────────────────────
+        // ── 반려동물 있음: 선택된 반려동물 상세 화면 ──────────────────────────
         final pet = ref.watch(selectedPetProvider)!;
         _syncControllers(pet);
 
         return ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
           children: [
-            // 새 펫 추가 버튼 (최상단)
+            // 새 반려동물 추가 버튼 (최상단)
             _DashedButton(
-              label: '새 펫 추가하기',
+              label: '새 반려동물 추가하기',
               onTap: () => context.push('/profile/add'),
             ),
             const SizedBox(height: AppSpacing.space4),
@@ -456,7 +456,7 @@ class _DashedButton extends StatelessWidget {
               Icon(Icons.add, color: AppColors.primary600, size: 16),
               SizedBox(width: 4),
               Text(
-                '새 펫 추가하기',
+                '새 반려동물 추가하기',
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,

@@ -100,7 +100,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
         elevation: 0,
         leading: const BackButton(color: AppColors.primary700),
         title: const Text(
-          '새 펫 추가',
+          '새 반려동물 추가',
           style: TextStyle(
             fontSize: 17,
             fontWeight: FontWeight.w700,

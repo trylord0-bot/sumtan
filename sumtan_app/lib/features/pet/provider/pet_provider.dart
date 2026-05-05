@@ -14,7 +14,7 @@ final petsProvider = StateNotifierProvider<PetsNotifier, AsyncValue<List<Pet>>>(
   ),
 );
 
-// ID 기반 펫 선택 (null = 첫 번째 펫 자동 선택)
+// ID 기반 반려동물 선택 (null = 첫 번째 반려동물 자동 선택)
 final selectedPetIdProvider = StateProvider<int?>((ref) => null);
 
 final selectedPetProvider = Provider<Pet?>((ref) {
@@ -43,7 +43,7 @@ class PetsNotifier extends StateNotifier<AsyncValue<List<Pet>>> {
     state = await AsyncValue.guard(() => _repo.getAll());
   }
 
-  /// 새 펫 추가. 반환값(새 id)으로 selectedPetIdProvider를 업데이트할 것.
+  /// 새 반려동물 추가. 반환값(새 id)으로 selectedPetIdProvider를 업데이트할 것.
   Future<int> add(Pet pet) async {
     final newId = await _repo.insert(pet);
     if (pet.weight != null) {

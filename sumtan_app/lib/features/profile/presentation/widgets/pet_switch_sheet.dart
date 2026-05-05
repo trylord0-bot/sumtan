@@ -51,7 +51,7 @@ class _PetSwitchSheet extends ConsumerWidget {
               children: [
                 const Expanded(
                   child: Text(
-                    '펫 선택',
+                    '반려동물 선택',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -67,7 +67,7 @@ class _PetSwitchSheet extends ConsumerWidget {
               ],
             ),
           ),
-          // 펫 목록
+          // 반려동물 목록
           petsAsync.when(
             loading: () => const Padding(
               padding: EdgeInsets.all(20),
@@ -89,7 +89,7 @@ class _PetSwitchSheet extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 8),
-          // 새 펫 추가 버튼
+          // 새 반려동물 추가 버튼
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: _DashedAddButton(
@@ -210,7 +210,7 @@ class _DashedAddButton extends StatelessWidget {
               Icon(Icons.add, color: AppColors.primary600, size: 18),
               SizedBox(width: 6),
               Text(
-                '새 펫 추가하기',
+                '새 반려동물 추가하기',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,

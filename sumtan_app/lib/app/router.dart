@@ -125,7 +125,7 @@ class MainScaffold extends ConsumerWidget {
                 foregroundColor: AppColors.white,
                 onPressed: () {
                   if (ref.read(selectedPetProvider) == null) {
-                    showTopToast(context, '반려동물을 먼저 등록해 주세요 🐾');
+                    showTopToast(context, '아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!');
                     return;
                   }
                   showAlarmAddSheet(context);
@@ -149,7 +149,7 @@ class MainScaffold extends ConsumerWidget {
               onTabTap: (i) {
                 if (i == 2) {
                   if (pet == null) {
-                    showTopToast(context, '반려동물을 먼저 등록해 주세요 🐾');
+                    showTopToast(context, '아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!');
                     return;
                   }
                   showCategoryBottomSheet(context);

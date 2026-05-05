@@ -126,7 +126,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
     // Pet guard
     final pet = ref.read(selectedPetProvider);
     if (pet == null) {
-      showTopToast(context, '먼저 반려동물을 등록해주세요 🐾');
+      showTopToast(context, '아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!');
       return;
     }
 

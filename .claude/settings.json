@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cd \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\"; flutter analyze --no-fatal-infos 2>&1 | Where-Object { $_ -match \"error|warning|Error|Warning\" } | Select-Object -First 30)"
+    ]
+  }
+}

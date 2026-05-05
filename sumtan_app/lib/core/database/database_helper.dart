@@ -22,7 +22,7 @@ class DatabaseHelper {
     final path = await getDbPath('sumtan.db');
     return openDatabase(
       path,
-      version: 3,
+      version: 4,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
@@ -37,7 +37,10 @@ class DatabaseHelper {
         breed TEXT,
         birth_date TEXT,
         gender TEXT,
+        weight REAL,
         is_neutered INTEGER DEFAULT 0,
+        microchip_id TEXT,
+        reg_number TEXT,
         profile_image_path TEXT,
         created_at TEXT NOT NULL
       )
@@ -64,8 +67,12 @@ class DatabaseHelper {
       await _createAlarmsTable(db);
     }
     if (oldVersion < 3) {
-      await db.execute(
-          'ALTER TABLE alarms ADD COLUMN alarm_days TEXT');
+      await db.execute('ALTER TABLE alarms ADD COLUMN alarm_days TEXT');
+    }
+    if (oldVersion < 4) {
+      await db.execute('ALTER TABLE pets ADD COLUMN weight REAL');
+      await db.execute('ALTER TABLE pets ADD COLUMN microchip_id TEXT');
+      await db.execute('ALTER TABLE pets ADD COLUMN reg_number TEXT');
     }
   }
 

@@ -191,40 +191,50 @@ class _TopBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return AppBar(
-      backgroundColor: AppColors.white,
-      elevation: 0,
-      centerTitle: false,
-      automaticallyImplyLeading: false,
-      title: Text(title, style: const TextStyle(
-        fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.gray900,
-      )),
-      actions: [
-        if (pets.isNotEmpty && !showClose)
-          GestureDetector(
+    final showChip = pets.isNotEmpty && !showClose;
+
+    final chip = showChip
+        ? GestureDetector(
             onTap: onPetChip,
             child: Container(
-              margin: const EdgeInsets.only(right: 8),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
                 color: AppColors.primary50,
                 borderRadius: BorderRadius.circular(9999),
                 border: Border.all(color: AppColors.primary200),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '${pet?.speciesEmoji ?? ''} ${pet?.name ?? ''} ▾',
-                    style: const TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.w600,
-                      color: AppColors.primary700,
-                    ),
-                  ),
-                ],
+              child: Text(
+                '${pet?.speciesEmoji ?? ''} ${pet?.name ?? ''} ▾',
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primary700,
+                ),
               ),
             ),
-          ),
+          )
+        : null;
+
+    return AppBar(
+      backgroundColor: AppColors.white,
+      elevation: 0,
+      centerTitle: false,
+      automaticallyImplyLeading: false,
+      titleSpacing: 0,
+      title: Row(
+        children: [
+          const SizedBox(width: 16),
+          Text(title, style: const TextStyle(
+            fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.gray900,
+          )),
+          if (chip != null) ...[
+            const Spacer(),
+            chip,
+          ],
+          const Spacer(),
+        ],
+      ),
+      actions: [
         if (showClose)
           IconButton(
             icon: const Icon(Icons.close, color: AppColors.gray700, size: 22),
@@ -237,6 +247,7 @@ class _TopBar extends ConsumerWidget implements PreferredSizeWidget {
               onPressed: () => Scaffold.of(ctx).openEndDrawer(),
             ),
           ),
+        const SizedBox(width: 4),
       ],
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),

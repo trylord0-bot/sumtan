@@ -1359,17 +1359,18 @@ class _EmptyState extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(
         vertical: AppSpacing.space8, horizontal: AppSpacing.space5,
       ),
+      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.gray200, width: 1.5),
       ),
       child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Text('🐾', style: TextStyle(fontSize: 36)),
           SizedBox(height: AppSpacing.space3),

@@ -29,42 +29,49 @@ class _CategoryEntry {
   final RecordCategory category;
   final String? displayLabel;
   final String? displayEmoji;
+  final Color? displayColor;
+  final Color? displayBgColor;
 
-  const _CategoryEntry(this.category, {this.displayLabel, this.displayEmoji});
+  const _CategoryEntry(this.category, {
+    this.displayLabel,
+    this.displayEmoji,
+    this.displayColor,
+    this.displayBgColor,
+  });
 }
 
 class _CategorySheet extends ConsumerWidget {
   const _CategorySheet();
 
   List<_CategoryEntry> _buildEntries(String? species) {
-    const base = [
-      RecordCategory.poop,
-      RecordCategory.condition,
-      RecordCategory.medication,
-      RecordCategory.weight,
-      RecordCategory.meal,
-      RecordCategory.hospital,
-      RecordCategory.vaccination,
+    // 공통 9개 (미용 항상 포함)
+    final entries = [
+      const _CategoryEntry(RecordCategory.poop),
+      const _CategoryEntry(RecordCategory.condition),
+      const _CategoryEntry(RecordCategory.medication),
+      const _CategoryEntry(RecordCategory.weight),
+      const _CategoryEntry(RecordCategory.meal),
+      const _CategoryEntry(RecordCategory.hospital),
+      const _CategoryEntry(RecordCategory.vaccination),
+      const _CategoryEntry(RecordCategory.grooming),
+      const _CategoryEntry(RecordCategory.memo),
     ];
 
-    final _CategoryEntry speciesEntry;
+    // 종별 항목 추가 (메모 앞에 삽입)
+    final insertIdx = entries.length - 1;
     if (species == 'dog') {
-      speciesEntry = const _CategoryEntry(RecordCategory.walk);
+      entries.insert(insertIdx, const _CategoryEntry(RecordCategory.walk));
     } else if (species == 'cat') {
-      speciesEntry = const _CategoryEntry(
+      entries.insert(insertIdx, const _CategoryEntry(
         RecordCategory.grooming,
         displayLabel: '빗질',
         displayEmoji: '🪮',
-      );
-    } else {
-      speciesEntry = const _CategoryEntry(RecordCategory.grooming);
+        displayColor: Color(0xFFA3E635),
+        displayBgColor: Color(0xFFF7FEE7),
+      ));
     }
 
-    return [
-      ...base.map((c) => _CategoryEntry(c)),
-      speciesEntry,
-      const _CategoryEntry(RecordCategory.memo),
-    ];
+    return entries;
   }
 
   void _openForm(BuildContext context, RecordCategory category) {
@@ -176,8 +183,8 @@ class _CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bg     = entry.category.bgColor;
-    final accent = entry.category.color;
+    final bg     = entry.displayBgColor ?? entry.category.bgColor;
+    final accent = entry.displayColor   ?? entry.category.color;
     final emoji  = entry.displayEmoji ?? entry.category.emoji;
     final label  = entry.displayLabel ?? entry.category.label;
 

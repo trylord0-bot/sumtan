@@ -70,7 +70,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return AppColors.danger400;          // red
       case RecordCategory.vaccination: return AppColors.categoryVaccine;    // purple
       case RecordCategory.grooming:    return AppColors.categoryEmergency;  // orange
-      case RecordCategory.walk:        return AppColors.success400;         // green
+      case RecordCategory.walk:        return const Color(0xFFA3E635);      // lime
       case RecordCategory.memo:        return AppColors.gray400;            // gray
     }
   }
@@ -85,7 +85,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return AppColors.danger50;           // red light
       case RecordCategory.vaccination: return const Color(0xFFFAF5FF);      // purple light
       case RecordCategory.grooming:    return const Color(0xFFFFF7ED);      // orange light
-      case RecordCategory.walk:        return AppColors.success50;          // green light
+      case RecordCategory.walk:        return const Color(0xFFF7FEE7);      // lime light
       case RecordCategory.memo:        return AppColors.gray100;            // gray light
     }
   }

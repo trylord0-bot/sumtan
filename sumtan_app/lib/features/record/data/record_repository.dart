@@ -105,6 +105,19 @@ class RecordRepository {
     return result;
   }
 
+  /// Returns {date: count} for the last 7 days including today (meal only).
+  Future<Map<DateTime, int>> getWeeklyMealCountsByPet(int petId) async {
+    final now = DateTime.now();
+    final result = <DateTime, int>{};
+    for (int i = 6; i >= 0; i--) {
+      final day = DateTime(now.year, now.month, now.day - i);
+      final records = await getByPetAndDate(petId, day);
+      final count = records.where((r) => r.category == 'meal').length;
+      result[DateTime(day.year, day.month, day.day)] = count;
+    }
+    return result;
+  }
+
   /// The most recent record for a pet, or null if none.
   Future<Record?> getLastRecordByPet(int petId) async {
     final db = await _db.database;

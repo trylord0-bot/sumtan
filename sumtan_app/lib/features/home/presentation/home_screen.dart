@@ -1,9 +1,13 @@
+import 'dart:io';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
+import '../../../features/alarm/data/alarm_model.dart';
+import '../../../features/alarm/provider/alarm_provider.dart';
+import '../../../features/pet/data/pet_model.dart';
 import '../../../features/pet/provider/pet_provider.dart';
 import '../../../features/record/provider/record_provider.dart';
 import '../../../features/record/data/record_model.dart';
@@ -22,6 +26,8 @@ class HomeScreen extends ConsumerWidget {
     final lastAsync  = ref.watch(lastRecordProvider);
     final weightAsync = ref.watch(weightHistoryProvider);
     final poopAsync  = ref.watch(weeklyPoopStatsProvider);
+    final mealAsync  = ref.watch(weeklyMealStatsProvider);
+    final alarmAsync = ref.watch(alarmListProvider);
 
     return Scaffold(
       backgroundColor: AppColors.creamBg,
@@ -31,6 +37,7 @@ class HomeScreen extends ConsumerWidget {
           ref.invalidate(lastRecordProvider);
           ref.invalidate(weightHistoryProvider);
           ref.invalidate(weeklyPoopStatsProvider);
+          ref.invalidate(weeklyMealStatsProvider);
         },
         child: CustomScrollView(
           slivers: [
@@ -43,28 +50,57 @@ class HomeScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // ① 인사 카드
                     _GreetingSection(pet: pet, lastAsync: lastAsync),
                     const SizedBox(height: AppSpacing.space5),
 
+                    // ② 오늘의 상태
                     _SectionHeader(
                       title: '오늘의 상태',
                       linkLabel: '+ 기록하기',
                       onLink: () async {
                         await showCategoryBottomSheet(context);
+                        ref.invalidate(todayRecordsProvider);
                         ref.invalidate(weeklyPoopStatsProvider);
+                        ref.invalidate(weeklyMealStatsProvider);
                         ref.invalidate(weightHistoryProvider);
                         ref.invalidate(lastRecordProvider);
                       },
                     ),
                     const SizedBox(height: AppSpacing.space3),
-
                     todayAsync.when(
-                      data: (records) => _TodaySummaryRow(records: records),
+                      data: (records) => _TodaySummaryGrid(
+                        records: records,
+                        pet: pet,
+                        alarms: alarmAsync.valueOrNull ?? [],
+                      ),
                       loading: () => const _SummarySkeleton(),
                       error: (_, __) => const SizedBox.shrink(),
                     ),
                     const SizedBox(height: AppSpacing.space5),
 
+                    // ③ 오늘의 리마인더 (항목 없으면 숨김)
+                    alarmAsync.maybeWhen(
+                      data: (alarms) {
+                        final list = _filteredReminders(alarms);
+                        if (list.isEmpty) return const SizedBox.shrink();
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const _SectionHeader(title: '오늘의 리마인더', linkLabel: ''),
+                            const SizedBox(height: AppSpacing.space3),
+                            ...list.take(3).map((a) => Padding(
+                              padding: const EdgeInsets.only(bottom: AppSpacing.space2),
+                              child: _ReminderCard(alarm: a),
+                            )),
+                            const SizedBox(height: AppSpacing.space5),
+                          ],
+                        );
+                      },
+                      orElse: () => const SizedBox.shrink(),
+                    ),
+
+                    // ④ 오늘의 기록
                     _SectionHeader(
                       title: '오늘의 기록',
                       linkLabel: '전체 보기',
@@ -73,7 +109,7 @@ class HomeScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.space3),
                     todayAsync.when(
                       data: (records) {
-                        final display = records.reversed.take(4).toList();
+                        final display = records.reversed.take(5).toList();
                         return display.isEmpty
                             ? const _EmptyState()
                             : _RecordList(records: display);
@@ -86,10 +122,39 @@ class HomeScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSpacing.space5),
 
-                    _WeightSection(weightAsync: weightAsync, ref: ref),
-                    const SizedBox(height: AppSpacing.space5),
+                    // ⑤ 이번 주 통계
+                    const _SectionHeader(title: '이번 주 통계', linkLabel: ''),
+                    const SizedBox(height: AppSpacing.space3),
 
-                    _PoopSection(poopAsync: poopAsync),
+                    poopAsync.when(
+                      data: (stats) => _WeeklyBarCard(
+                        emoji: '💩',
+                        title: '배변 횟수',
+                        stats: stats,
+                        todayColor: AppColors.primary400,
+                        pastColor: AppColors.primary200,
+                        unit: '회',
+                      ),
+                      loading: () => _statsLoadingBox(),
+                      error: (_, __) => const SizedBox.shrink(),
+                    ),
+                    const SizedBox(height: AppSpacing.space3),
+
+                    mealAsync.when(
+                      data: (stats) => _WeeklyBarCard(
+                        emoji: '🍚',
+                        title: '식사 횟수',
+                        stats: stats,
+                        todayColor: AppColors.warning400,
+                        pastColor: AppColors.warning200,
+                        unit: '끼',
+                      ),
+                      loading: () => _statsLoadingBox(),
+                      error: (_, __) => const SizedBox.shrink(),
+                    ),
+                    const SizedBox(height: AppSpacing.space3),
+
+                    _WeightSection(weightAsync: weightAsync, ref: ref),
                     const SizedBox(height: 120),
                   ],
                 ),
@@ -100,25 +165,56 @@ class HomeScreen extends ConsumerWidget {
       ),
     );
   }
+
+  List<Alarm> _filteredReminders(List<Alarm> alarms) {
+    final relevant = alarms.where((a) {
+      if (a.status == AlarmStatus.todayPending) return true;
+      if (a.status == AlarmStatus.past) return true;
+      if (a.status == AlarmStatus.upcoming) {
+        final d = a.daysUntil;
+        return d != null && d >= 1 && d <= 7;
+      }
+      return false;
+    }).toList();
+    relevant.sort((a, b) {
+      int order(AlarmStatus s) {
+        if (s == AlarmStatus.past) return 0;
+        if (s == AlarmStatus.todayPending) return 1;
+        return 2;
+      }
+      return order(a.status).compareTo(order(b.status));
+    });
+    return relevant;
+  }
+
+  Widget _statsLoadingBox() => Container(
+        height: 140,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.gray200),
+        ),
+        child: const Center(child: CircularProgressIndicator()),
+      );
 }
 
 // ─── Greeting section ──────────────────────────────────────────────────────────
 
 class _GreetingSection extends StatelessWidget {
-  final dynamic pet;
+  final Pet? pet;
   final AsyncValue<Record?> lastAsync;
 
   const _GreetingSection({required this.pet, required this.lastAsync});
 
   @override
   Widget build(BuildContext context) {
-    final name = (pet?.name as String?) ?? '반려동물';
+    final name = pet?.name ?? '반려동물';
     final now  = DateTime.now();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Date row + weather chip
+        // 날짜 + 날씨 칩
         Row(
           children: [
             Text(
@@ -144,74 +240,145 @@ class _GreetingSection extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 10),
 
-        // Main greeting
-        RichText(
-          text: TextSpan(
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: AppColors.gray900,
-              height: 1.4,
-            ),
-            children: [
-              const TextSpan(text: '안녕하세요! '),
-              TextSpan(
-                text: name,
-                style: const TextStyle(color: AppColors.primary600),
+        // 인사 텍스트 + 아바타
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.gray900,
+                        height: 1.4,
+                      ),
+                      children: [
+                        const TextSpan(text: '안녕하세요! '),
+                        TextSpan(
+                          text: name,
+                          style: const TextStyle(color: AppColors.primary600),
+                        ),
+                        const TextSpan(text: '는\n오늘도 건강한가요? 🐾'),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  lastAsync.when(
+                    data: (record) {
+                      if (record == null) {
+                        return const Text(
+                          '아직 기록이 없어요',
+                          style: TextStyle(fontSize: 12, color: AppColors.gray400),
+                        );
+                      }
+                      final dt   = record.recordedAtDate;
+                      final now2 = DateTime.now();
+                      final timeStr = (dt.year == now2.year &&
+                              dt.month == now2.month &&
+                              dt.day == now2.day)
+                          ? '오늘 ${du.formatTime(dt)}'
+                          : du.formatMonthDay(dt);
+                      return Text(
+                        '마지막 기록 · $timeStr',
+                        style: const TextStyle(fontSize: 12, color: AppColors.gray400),
+                      );
+                    },
+                    loading: () => const SizedBox.shrink(),
+                    error: (_, __) => const SizedBox.shrink(),
+                  ),
+                ],
               ),
-              const TextSpan(text: '는\n오늘도 건강한가요? 🐾'),
-            ],
-          ),
-        ),
-        const SizedBox(height: 6),
-
-        // Last record sub text
-        lastAsync.when(
-          data: (record) {
-            if (record == null) {
-              return const Text(
-                '아직 기록이 없어요',
-                style: TextStyle(fontSize: 12, color: AppColors.gray400),
-              );
-            }
-            final dt  = record.recordedAtDate;
-            final now2 = DateTime.now();
-            String timeStr;
-            if (dt.year == now2.year &&
-                dt.month == now2.month &&
-                dt.day == now2.day) {
-              timeStr = '오늘 ${du.formatTime(dt)}';
-            } else {
-              timeStr = du.formatMonthDay(dt);
-            }
-            return Text(
-              '마지막 기록 · $timeStr',
-              style: const TextStyle(fontSize: 12, color: AppColors.gray400),
-            );
-          },
-          loading: () => const SizedBox.shrink(),
-          error: (_, __) => const SizedBox.shrink(),
+            ),
+            const SizedBox(width: 12),
+            _PetAvatar(pet: pet),
+          ],
         ),
       ],
     );
   }
 }
 
-// ─── Today summary row ─────────────────────────────────────────────────────────
-
-class _TodaySummaryRow extends StatelessWidget {
-  final List<Record> records;
-  const _TodaySummaryRow({required this.records});
+class _PetAvatar extends StatelessWidget {
+  final Pet? pet;
+  const _PetAvatar({required this.pet});
 
   @override
   Widget build(BuildContext context) {
+    if (pet == null) return const SizedBox(width: 64, height: 64);
+
+    final hasPhoto = pet!.profileImagePath != null &&
+        pet!.profileImagePath!.isNotEmpty;
+
+    if (hasPhoto) {
+      return Container(
+        width: 64,
+        height: 64,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.white, width: 2),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.12),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+          image: DecorationImage(
+            image: FileImage(File(pet!.profileImagePath!)),
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    }
+
+    final emoji = pet!.species == 'dog'
+        ? '🐶'
+        : pet!.species == 'cat'
+            ? '🐱'
+            : '🐾';
+
+    return Container(
+      width: 64,
+      height: 64,
+      decoration: const BoxDecoration(
+        color: AppColors.primary200,
+        shape: BoxShape.circle,
+      ),
+      alignment: Alignment.center,
+      child: Text(emoji, style: const TextStyle(fontSize: 32)),
+    );
+  }
+}
+
+// ─── Today summary grid (6 badges, 2×3) ───────────────────────────────────────
+
+class _TodaySummaryGrid extends StatelessWidget {
+  final List<Record> records;
+  final Pet? pet;
+  final List<Alarm> alarms;
+
+  const _TodaySummaryGrid({
+    required this.records,
+    required this.pet,
+    required this.alarms,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final poopCount = records.where((r) => r.category == 'poop').length;
+    final mealCount = records.where((r) => r.category == 'meal').length;
+    final medCount  = records.where((r) => r.category == 'medication').length;
+
     final conditionRecord = records.lastWhere(
       (r) => r.category == 'condition',
       orElse: () => const Record(petId: 0, category: '', recordedAt: '', createdAt: ''),
     );
-    final poopCount = records.where((r) => r.category == 'poop').length;
     final weightRecord = records.lastWhere(
       (r) => r.category == 'weight',
       orElse: () => const Record(petId: 0, category: '', recordedAt: '', createdAt: ''),
@@ -224,49 +391,82 @@ class _TodaySummaryRow extends StatelessWidget {
         ? (weightRecord.dataJson?['weight_kg'] as num?)?.toDouble()
         : null;
 
-    final Color condBarColor;
+    // 컨디션
+    final Color condColor;
     final String condIcon;
     final String condValue;
     if (condScore == null) {
-      condBarColor = AppColors.gray300;
-      condIcon = '⚪';
-      condValue = '-';
+      condColor = AppColors.gray300; condIcon = '😐'; condValue = '-';
     } else if (condScore >= 4) {
-      condBarColor = AppColors.success400;
-      condIcon = '🟢';
-      condValue = '$condScore점';
+      condColor = AppColors.success400; condIcon = '😊'; condValue = '양호';
     } else if (condScore >= 3) {
-      condBarColor = AppColors.warning400;
-      condIcon = '🟡';
-      condValue = '$condScore점';
+      condColor = AppColors.warning400; condIcon = '😐'; condValue = '보통';
     } else {
-      condBarColor = AppColors.danger400;
-      condIcon = '🔴';
-      condValue = '$condScore점';
+      condColor = AppColors.danger400; condIcon = '😔'; condValue = '나쁨';
     }
 
-    return Row(
+    // 종별 6번째 뱃지
+    final species = pet?.species ?? 'dog';
+    final Color speciesColor;
+    final String speciesIcon;
+    final String speciesValue;
+    final String speciesLabel;
+    if (species == 'dog') {
+      final walkCount = records.where((r) => r.category == 'walk').length;
+      speciesColor = walkCount > 0 ? AppColors.success400 : AppColors.gray300;
+      speciesIcon  = '🦮';
+      speciesValue = walkCount > 0 ? '$walkCount회' : '-';
+      speciesLabel = '산책';
+    } else {
+      final hasGrooming = records.any((r) => r.category == 'grooming');
+      speciesColor = hasGrooming ? AppColors.info400 : AppColors.gray300;
+      speciesIcon  = species == 'cat' ? '🪮' : '✂️';
+      speciesValue = hasGrooming ? '완료' : '-';
+      speciesLabel = species == 'cat' ? '빗질' : '미용';
+    }
+
+    return Column(
       children: [
-        Expanded(child: _SummaryChip(
-          topColor: condBarColor,
-          icon: condIcon,
-          value: condValue,
-          label: '컨디션',
-        )),
-        const SizedBox(width: AppSpacing.space2),
-        Expanded(child: _SummaryChip(
-          topColor: poopCount > 0 ? AppColors.info400 : AppColors.gray300,
-          icon: '💩',
-          value: '$poopCount회',
-          label: '배변',
-        )),
-        const SizedBox(width: AppSpacing.space2),
-        Expanded(child: _SummaryChip(
-          topColor: weight != null ? AppColors.warning400 : AppColors.gray300,
-          icon: '⚖️',
-          value: weight != null ? '${weight.toStringAsFixed(1)}kg' : '-',
-          label: '체중',
-        )),
+        Row(
+          children: [
+            Expanded(child: _SummaryChip(
+              topColor: poopCount > 0 ? AppColors.info400 : AppColors.gray300,
+              icon: '💩', value: '$poopCount회', label: '배변',
+            )),
+            const SizedBox(width: AppSpacing.space2),
+            Expanded(child: _SummaryChip(
+              topColor: condColor,
+              icon: condIcon, value: condValue, label: '컨디션',
+            )),
+            const SizedBox(width: AppSpacing.space2),
+            Expanded(child: _SummaryChip(
+              topColor: mealCount > 0 ? AppColors.warning400 : AppColors.gray300,
+              icon: '🍚', value: mealCount > 0 ? '$mealCount끼' : '-', label: '식사',
+            )),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.space2),
+        Row(
+          children: [
+            Expanded(child: _SummaryChip(
+              topColor: medCount > 0 ? AppColors.categoryMedicine : AppColors.gray300,
+              icon: '💊', value: medCount > 0 ? '$medCount회' : '-', label: '투약',
+              showBar: true, barFraction: medCount > 0 ? 1.0 : 0.0,
+            )),
+            const SizedBox(width: AppSpacing.space2),
+            Expanded(child: _SummaryChip(
+              topColor: weight != null ? AppColors.warning400 : AppColors.gray300,
+              icon: '⚖️',
+              value: weight != null ? '${weight.toStringAsFixed(1)}kg' : '-',
+              label: '체중',
+            )),
+            const SizedBox(width: AppSpacing.space2),
+            Expanded(child: _SummaryChip(
+              topColor: speciesColor,
+              icon: speciesIcon, value: speciesValue, label: speciesLabel,
+            )),
+          ],
+        ),
       ],
     );
   }
@@ -277,12 +477,16 @@ class _SummaryChip extends StatelessWidget {
   final String icon;
   final String value;
   final String label;
+  final bool showBar;
+  final double barFraction;
 
   const _SummaryChip({
     required this.topColor,
     required this.icon,
     required this.value,
     required this.label,
+    this.showBar = false,
+    this.barFraction = 0.0,
   });
 
   @override
@@ -311,16 +515,30 @@ class _SummaryChip extends StatelessWidget {
                 Text(icon, style: const TextStyle(fontSize: 22)),
                 const SizedBox(height: 4),
                 Text(value, style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
                   color: AppColors.gray900,
                 )),
                 const SizedBox(height: 2),
                 Text(label, style: const TextStyle(
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: FontWeight.w500,
                   color: AppColors.gray400,
                 )),
+                if (showBar) ...[
+                  const SizedBox(height: 6),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: LinearProgressIndicator(
+                      value: barFraction,
+                      minHeight: 3,
+                      backgroundColor: AppColors.gray200,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        barFraction > 0 ? AppColors.categoryMedicine : AppColors.gray200,
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -350,14 +568,131 @@ class _SummarySkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return const Column(
       children: [
-        Expanded(child: _SummaryChipSkeleton()),
-        SizedBox(width: AppSpacing.space2),
-        Expanded(child: _SummaryChipSkeleton()),
-        SizedBox(width: AppSpacing.space2),
-        Expanded(child: _SummaryChipSkeleton()),
+        Row(
+          children: [
+            Expanded(child: _SummaryChipSkeleton()),
+            SizedBox(width: AppSpacing.space2),
+            Expanded(child: _SummaryChipSkeleton()),
+            SizedBox(width: AppSpacing.space2),
+            Expanded(child: _SummaryChipSkeleton()),
+          ],
+        ),
+        SizedBox(height: AppSpacing.space2),
+        Row(
+          children: [
+            Expanded(child: _SummaryChipSkeleton()),
+            SizedBox(width: AppSpacing.space2),
+            Expanded(child: _SummaryChipSkeleton()),
+            SizedBox(width: AppSpacing.space2),
+            Expanded(child: _SummaryChipSkeleton()),
+          ],
+        ),
       ],
+    );
+  }
+}
+
+// ─── Reminder section ──────────────────────────────────────────────────────────
+
+class _ReminderCard extends StatelessWidget {
+  final Alarm alarm;
+  const _ReminderCard({required this.alarm});
+
+  @override
+  Widget build(BuildContext context) {
+    final status = alarm.status;
+
+    final Color badgeBg;
+    final Color badgeText;
+    final String badgeLabel;
+
+    if (status == AlarmStatus.past) {
+      badgeBg   = AppColors.danger50;
+      badgeText = AppColors.danger600;
+      badgeLabel = '지남';
+    } else if (status == AlarmStatus.todayPending) {
+      badgeBg   = AppColors.warning50;
+      badgeText = AppColors.warning600;
+      badgeLabel = '오늘';
+    } else {
+      final d = alarm.daysUntil ?? 0;
+      badgeBg   = AppColors.success50;
+      badgeText = AppColors.success600;
+      badgeLabel = 'D-$d';
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(
+        color: status == AlarmStatus.todayPending
+            ? const Color(0xFFFFFBEB)
+            : AppColors.white,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: status == AlarmStatus.todayPending
+              ? AppColors.warning200
+              : AppColors.gray200,
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 36, height: 36,
+            decoration: BoxDecoration(
+              color: AppColors.gray100,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              alarmTypeEmoji(alarm.type),
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  alarm.label?.isNotEmpty == true
+                      ? alarm.label!
+                      : alarmTypeLabel(alarm.type),
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.gray900,
+                  ),
+                ),
+                if (alarm.scheduledAt != null) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    du.formatMonthDay(DateTime.parse(alarm.scheduledAt!)),
+                    style: const TextStyle(fontSize: 11, color: AppColors.gray400),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            decoration: BoxDecoration(
+              color: badgeBg,
+              borderRadius: BorderRadius.circular(9999),
+            ),
+            child: Text(
+              badgeLabel,
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                color: badgeText,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -385,14 +720,15 @@ class _SectionHeader extends StatelessWidget {
           color: AppColors.gray600,
         )),
         const Spacer(),
-        GestureDetector(
-          onTap: onLink,
-          child: Text(linkLabel, style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-            color: AppColors.primary600,
-          )),
-        ),
+        if (linkLabel.isNotEmpty)
+          GestureDetector(
+            onTap: onLink,
+            child: Text(linkLabel, style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: AppColors.primary600,
+            )),
+          ),
       ],
     );
   }
@@ -422,7 +758,6 @@ class _RecordList extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Left color bar
                   Container(
                     width: 4,
                     decoration: BoxDecoration(
@@ -434,12 +769,10 @@ class _RecordList extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: AppSpacing.space3),
-                  // Icon
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Container(
-                      width: 36,
-                      height: 36,
+                      width: 36, height: 36,
                       decoration: BoxDecoration(
                         color: cat.bgColor,
                         borderRadius: BorderRadius.circular(12),
@@ -449,7 +782,6 @@ class _RecordList extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: AppSpacing.space3),
-                  // Text column
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -458,34 +790,27 @@ class _RecordList extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(title, style: const TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 13, fontWeight: FontWeight.w600,
                             color: AppColors.gray900,
                           )),
                           if (subtitle.isNotEmpty) ...[
                             const SizedBox(height: 2),
                             Text(subtitle, style: const TextStyle(
-                              fontSize: 12,
-                              color: AppColors.gray600,
+                              fontSize: 12, color: AppColors.gray600,
                             ), maxLines: 1, overflow: TextOverflow.ellipsis),
                           ],
                           const SizedBox(height: 2),
                           Text(time, style: const TextStyle(
-                            fontSize: 11,
-                            color: AppColors.gray400,
+                            fontSize: 11, color: AppColors.gray400,
                           )),
                         ],
                       ),
                     ),
                   ),
-                  // Right arrow
                   const Padding(
                     padding: EdgeInsets.only(right: AppSpacing.space3),
                     child: Center(
-                      child: Text('›', style: TextStyle(
-                        fontSize: 20,
-                        color: AppColors.gray300,
-                      )),
+                      child: Text('›', style: TextStyle(fontSize: 20, color: AppColors.gray300)),
                     ),
                   ),
                 ],
@@ -511,12 +836,9 @@ class _RecordList extends StatelessWidget {
       case 'medication':
         final med = d?['medicine'] as String? ?? '';
         return med.isNotEmpty ? med : '투약';
-      case 'weight':
-        return '체중 기록';
-      case 'meal':
-        return '식사 기록';
-      default:
-        return RecordCategoryX.fromString(r.category).label;
+      case 'weight':   return '체중 기록';
+      case 'meal':     return '식사 기록';
+      default:         return RecordCategoryX.fromString(r.category).label;
     }
   }
 
@@ -526,7 +848,7 @@ class _RecordList extends StatelessWidget {
     switch (r.category) {
       case 'poop':
         final status = d['status'] as String? ?? '';
-        final color  = d['color'] as String? ?? '';
+        final color  = d['color']  as String? ?? '';
         return [status, color].where((s) => s.isNotEmpty).join(', ');
       case 'condition':
         final tags = (d['symptoms'] as List?)?.join(', ') ?? '';
@@ -537,11 +859,132 @@ class _RecordList extends StatelessWidget {
       case 'weight':
         final kg = d['weight_kg'];
         return kg != null ? '${kg}kg 기록' : '';
-      case 'meal':
-        return r.memo ?? '';
       default:
         return r.memo ?? '';
     }
+  }
+}
+
+// ─── Weekly bar card (공통: 배변 / 식사) ──────────────────────────────────────
+
+class _WeeklyBarCard extends StatelessWidget {
+  final String emoji;
+  final String title;
+  final Map<DateTime, int> stats;
+  final Color todayColor;
+  final Color pastColor;
+  final String unit;
+
+  const _WeeklyBarCard({
+    required this.emoji,
+    required this.title,
+    required this.stats,
+    required this.todayColor,
+    required this.pastColor,
+    required this.unit,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final now  = DateTime.now();
+    final days = List.generate(7, (i) =>
+        DateTime(now.year, now.month, now.day - (6 - i)));
+    final counts  = days.map((d) => stats[d] ?? 0).toList();
+    final total   = counts.fold<int>(0, (a, b) => a + b);
+    final avg     = total / 7;
+    final maxCount = counts.isEmpty ? 1 : counts.reduce(math.max);
+    final barMax   = maxCount < 1 ? 1 : maxCount;
+
+    const dayLabels = ['월', '화', '수', '목', '금', '토', '일'];
+
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.space4),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.gray200),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text('$emoji 이번 주 $title', style: const TextStyle(
+                fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
+              )),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: AppColors.primary50,
+                  borderRadius: BorderRadius.circular(9999),
+                  border: Border.all(color: AppColors.primary200),
+                ),
+                child: Text(
+                  '평균 ${avg.toStringAsFixed(1)}$unit/일',
+                  style: const TextStyle(
+                    fontSize: 12, fontWeight: FontWeight.w600,
+                    color: AppColors.primary700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.space4),
+          SizedBox(
+            height: 80,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: List.generate(7, (i) {
+                final d        = days[i];
+                final count    = counts[i];
+                final isToday  = d.year == now.year && d.month == now.month && d.day == now.day;
+                final isFuture = d.isAfter(now);
+                final barFrac  = isFuture ? 0.0 : count / barMax;
+                final barH     = math.max(barFrac * 56.0, count > 0 ? 8.0 : 4.0);
+                final barColor = isToday ? todayColor : (count > 0 ? pastColor : AppColors.gray200);
+                final wLabel   = dayLabels[(d.weekday - 1) % 7];
+
+                return Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        isFuture ? '-' : (count > 0 ? '$count' : ''),
+                        style: TextStyle(
+                          fontSize: 11, fontWeight: FontWeight.w600,
+                          color: isToday ? todayColor : AppColors.gray500,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Container(
+                          height: barH,
+                          decoration: BoxDecoration(
+                            color: barColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        wLabel,
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: isToday ? todayColor : AppColors.gray400,
+                          fontWeight: isToday ? FontWeight.w700 : FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -562,16 +1005,13 @@ class _WeightSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Text('체중 추세', style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w700,
-              color: AppColors.gray600,
+            const Text('⚖️ 체중 추이', style: TextStyle(
+              fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.gray600,
             )),
             const Spacer(),
             _PeriodToggle(
               selected: period,
-              onSelect: (v) =>
-                  ref.read(weightPeriodProvider.notifier).state = v,
+              onSelect: (v) => ref.read(weightPeriodProvider.notifier).state = v,
             ),
           ],
         ),
@@ -610,7 +1050,7 @@ class _PeriodToggle extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _ToggleBtn(label: '7일', value: 7, selected: selected, onSelect: onSelect),
+          _ToggleBtn(label: '7일',  value: 7,  selected: selected, onSelect: onSelect),
           _ToggleBtn(label: '30일', value: 30, selected: selected, onSelect: onSelect),
         ],
       ),
@@ -645,8 +1085,7 @@ class _ToggleBtn extends StatelessWidget {
         child: Text(
           label,
           style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
+            fontSize: 12, fontWeight: FontWeight.w600,
             color: isActive ? AppColors.white : AppColors.gray500,
           ),
         ),
@@ -678,7 +1117,6 @@ class _WeightGraphCard extends StatelessWidget {
       );
     }
 
-    // Find current weight (latest record)
     double? currentWeight;
     for (final r in records.reversed) {
       final kg = r.dataJson?['weight_kg'];
@@ -698,13 +1136,10 @@ class _WeightGraphCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Card header
           Row(
             children: [
               const Text('⚖️ 체중 변화', style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.gray700,
+                fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
               )),
               const Spacer(),
               if (currentWeight != null)
@@ -718,8 +1153,7 @@ class _WeightGraphCard extends StatelessWidget {
                   child: Text(
                     '${currentWeight.toStringAsFixed(1)}kg',
                     style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 12, fontWeight: FontWeight.w600,
                       color: AppColors.primary700,
                     ),
                   ),
@@ -727,7 +1161,6 @@ class _WeightGraphCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.space3),
-          // Chart
           SizedBox(
             height: 90,
             child: CustomPaint(
@@ -736,7 +1169,6 @@ class _WeightGraphCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.space2),
-          // Legend
           const Row(
             children: [
               _LegendDot(color: AppColors.primary400, label: '실측 체중'),
@@ -761,10 +1193,8 @@ class _LegendDot extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          width: 8, height: 8,
-          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-        ),
+        Container(width: 8, height: 8,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
         const SizedBox(width: 4),
         Text(label, style: const TextStyle(fontSize: 11, color: AppColors.gray500)),
       ],
@@ -782,7 +1212,6 @@ class _WeightLinePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (records.isEmpty) return;
 
-    // Extract (date, weight) pairs
     final dataPoints = <MapEntry<DateTime, double>>[];
     for (final r in records) {
       final kg = r.dataJson?['weight_kg'];
@@ -792,29 +1221,25 @@ class _WeightLinePainter extends CustomPainter {
     }
     if (dataPoints.isEmpty) return;
 
-    final weights = dataPoints.map((e) => e.value).toList();
-    final minW = weights.reduce(math.min);
-    final maxW = weights.reduce(math.max);
-    final range = maxW - minW;
+    final weights   = dataPoints.map((e) => e.value).toList();
+    final minW      = weights.reduce(math.min);
+    final maxW      = weights.reduce(math.max);
+    final range     = maxW - minW;
     final paddedMin = minW - (range == 0 ? 0.5 : range * 0.15);
     final paddedMax = maxW + (range == 0 ? 0.5 : range * 0.15);
     final totalRange = paddedMax - paddedMin;
-
-    final chartH = size.height - 20.0; // leave 20px for x labels
+    final chartH = size.height - 20.0;
     final chartW = size.width;
 
-    // Map data points to canvas coordinates
     final pts = <Offset>[];
     for (int i = 0; i < dataPoints.length; i++) {
       final x = dataPoints.length == 1
           ? chartW / 2
           : chartW * i / (dataPoints.length - 1);
-      final y = chartH -
-          chartH * (dataPoints[i].value - paddedMin) / totalRange;
+      final y = chartH - chartH * (dataPoints[i].value - paddedMin) / totalRange;
       pts.add(Offset(x, y));
     }
 
-    // Gradient fill
     final fillPaint = Paint()
       ..shader = LinearGradient(
         begin: Alignment.topCenter,
@@ -825,14 +1250,11 @@ class _WeightLinePainter extends CustomPainter {
         ],
       ).createShader(Rect.fromLTWH(0, 0, chartW, chartH));
     final fillPath = Path()..moveTo(pts.first.dx, chartH);
-    for (final p in pts) {
-      fillPath.lineTo(p.dx, p.dy);
-    }
+    for (final p in pts) { fillPath.lineTo(p.dx, p.dy); }
     fillPath.lineTo(pts.last.dx, chartH);
     fillPath.close();
     canvas.drawPath(fillPath, fillPaint);
 
-    // Line
     final linePaint = Paint()
       ..color = AppColors.primary400
       ..strokeWidth = 2.0
@@ -840,234 +1262,42 @@ class _WeightLinePainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round;
     final linePath = Path()..moveTo(pts.first.dx, pts.first.dy);
-    for (int i = 1; i < pts.length; i++) {
-      linePath.lineTo(pts[i].dx, pts[i].dy);
-    }
+    for (int i = 1; i < pts.length; i++) { linePath.lineTo(pts[i].dx, pts[i].dy); }
     canvas.drawPath(linePath, linePaint);
 
-    // Data points
     final now = DateTime.now();
     for (int i = 0; i < pts.length; i++) {
-      final dt   = dataPoints[i].key;
-      final isToday = dt.year == now.year &&
-          dt.month == now.month &&
-          dt.day == now.day;
-      final radius = isToday ? 6.0 : 4.0;
-
+      final dt      = dataPoints[i].key;
+      final isToday = dt.year == now.year && dt.month == now.month && dt.day == now.day;
+      final radius  = isToday ? 6.0 : 4.0;
       if (isToday) {
-        // Halo
-        final haloPaint = Paint()
+        canvas.drawCircle(pts[i], 10.0, Paint()
           ..color = AppColors.primary400.withValues(alpha: 0.2)
-          ..style = PaintingStyle.fill;
-        canvas.drawCircle(pts[i], 10.0, haloPaint);
+          ..style = PaintingStyle.fill);
       }
-
-      final dotPaint = Paint()
-        ..color = AppColors.primary400
-        ..style = PaintingStyle.fill;
-      canvas.drawCircle(pts[i], radius, dotPaint);
-
-      final innerPaint = Paint()
-        ..color = AppColors.white
-        ..style = PaintingStyle.fill;
-      canvas.drawCircle(pts[i], radius - 1.5, innerPaint);
+      canvas.drawCircle(pts[i], radius, Paint()
+        ..color = AppColors.primary400 ..style = PaintingStyle.fill);
+      canvas.drawCircle(pts[i], radius - 1.5, Paint()
+        ..color = AppColors.white ..style = PaintingStyle.fill);
     }
 
-    // X labels
     const labelStyle = TextStyle(fontSize: 10, color: AppColors.gray400);
     for (int i = 0; i < dataPoints.length; i++) {
-      final dt = dataPoints[i].key;
-      final isToday = dt.year == now.year &&
-          dt.month == now.month &&
-          dt.day == now.day;
+      final dt      = dataPoints[i].key;
+      final isToday = dt.year == now.year && dt.month == now.month && dt.day == now.day;
+      if (i != 0 && i != dataPoints.length - 1 && !isToday) continue;
       final label = isToday ? '오늘' : '${dt.month}/${dt.day}';
-      // Only show label for first, last, and today
-      final shouldShow = i == 0 || i == dataPoints.length - 1 || isToday;
-      if (!shouldShow) continue;
-
       final tp = TextPainter(
         text: TextSpan(text: label, style: labelStyle),
         textDirection: TextDirection.ltr,
       )..layout();
-      tp.paint(
-        canvas,
-        Offset(pts[i].dx - tp.width / 2, chartH + 4),
-      );
+      tp.paint(canvas, Offset(pts[i].dx - tp.width / 2, chartH + 4));
     }
   }
 
   @override
   bool shouldRepaint(_WeightLinePainter old) =>
       old.records != records || old.period != period;
-}
-
-// ─── Poop section ──────────────────────────────────────────────────────────────
-
-class _PoopSection extends StatelessWidget {
-  final AsyncValue<Map<DateTime, int>> poopAsync;
-
-  const _PoopSection({required this.poopAsync});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _SectionHeader(
-          title: '배변 주간 통계',
-          linkLabel: '상세 보기',
-          onLink: () {},
-        ),
-        const SizedBox(height: AppSpacing.space3),
-        poopAsync.when(
-          data: (stats) => _PoopGraphCard(stats: stats),
-          loading: () => Container(
-            height: 140,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.gray200),
-            ),
-            child: const Center(child: CircularProgressIndicator()),
-          ),
-          error: (_, __) => const SizedBox.shrink(),
-        ),
-      ],
-    );
-  }
-}
-
-class _PoopGraphCard extends StatelessWidget {
-  final Map<DateTime, int> stats;
-
-  const _PoopGraphCard({required this.stats});
-
-  @override
-  Widget build(BuildContext context) {
-    final now = DateTime.now();
-    // Build last 7 days list (oldest first)
-    final days = List.generate(7, (i) {
-      final d = DateTime(now.year, now.month, now.day - (6 - i));
-      return d;
-    });
-
-    final counts = days.map((d) => stats[d] ?? 0).toList();
-    final total  = counts.fold<int>(0, (a, b) => a + b);
-    final avg    = total / 7;
-
-    final maxCount = counts.isEmpty ? 1 : counts.reduce(math.max);
-    final barMax   = maxCount < 1 ? 1 : maxCount;
-
-    const dayLabels = ['월', '화', '수', '목', '금', '토', '일'];
-
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.space4),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.gray200),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Card header
-          Row(
-            children: [
-              const Text('💩 이번 주 배변 횟수', style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.gray700,
-              )),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: AppColors.primary50,
-                  borderRadius: BorderRadius.circular(9999),
-                  border: Border.all(color: AppColors.primary200),
-                ),
-                child: Text(
-                  '평균 ${avg.toStringAsFixed(1)}회/일',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primary700,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.space4),
-          // Bar chart
-          SizedBox(
-            height: 80,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: List.generate(7, (i) {
-                final d        = days[i];
-                final count    = counts[i];
-                final isToday  = d.year == now.year &&
-                    d.month == now.month &&
-                    d.day == now.day;
-                final isFuture = d.isAfter(now);
-                final barFrac  = isFuture ? 0.0 : (count / barMax);
-                final barH     = math.max(barFrac * 56.0, count > 0 ? 8.0 : 4.0);
-                final barColor = isToday
-                    ? AppColors.primary400
-                    : (count > 0 ? AppColors.primary200 : AppColors.gray200);
-                final weekdayLabel = dayLabels[(d.weekday - 1) % 7];
-
-                return Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      // Count label above bar
-                      Text(
-                        isFuture ? '-' : (count > 0 ? '$count' : ''),
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: isToday
-                              ? AppColors.primary500
-                              : AppColors.gray500,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      // Bar
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: Container(
-                          height: barH,
-                          decoration: BoxDecoration(
-                            color: barColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      // Day label
-                      Text(
-                        weekdayLabel,
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: isToday
-                              ? AppColors.primary500
-                              : AppColors.gray400,
-                          fontWeight: isToday
-                              ? FontWeight.w700
-                              : FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 // ─── Empty state ───────────────────────────────────────────────────────────────
@@ -1091,9 +1321,7 @@ class _EmptyState extends StatelessWidget {
           Text('🐾', style: TextStyle(fontSize: 36)),
           SizedBox(height: AppSpacing.space3),
           Text('아직 오늘의 기록이 없어요', style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: AppColors.gray600,
+            fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.gray600,
           )),
           SizedBox(height: AppSpacing.space2),
           Text(

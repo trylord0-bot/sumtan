@@ -72,6 +72,16 @@ final weeklyPoopStatsProvider =
       .getWeeklyPoopCountsByPet(pet.id!);
 });
 
+// 식사 주간 통계
+final weeklyMealStatsProvider =
+    FutureProvider.autoDispose<Map<DateTime, int>>((ref) async {
+  final pet = ref.watch(selectedPetProvider);
+  if (pet == null || pet.id == null) return {};
+  return ref
+      .read(recordRepositoryProvider)
+      .getWeeklyMealCountsByPet(pet.id!);
+});
+
 // 가장 최근 기록
 final lastRecordProvider =
     FutureProvider.autoDispose<Record?>((ref) async {

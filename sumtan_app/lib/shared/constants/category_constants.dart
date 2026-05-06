@@ -10,49 +10,53 @@ enum RecordCategory {
   hospital,
   vaccination,
   grooming,
+  walk,
   memo,
 }
 
 extension RecordCategoryX on RecordCategory {
   String get name {
     switch (this) {
-      case RecordCategory.poop:       return 'poop';
-      case RecordCategory.condition:  return 'condition';
-      case RecordCategory.medication: return 'medication';
-      case RecordCategory.weight:     return 'weight';
-      case RecordCategory.meal:       return 'meal';
-      case RecordCategory.hospital:   return 'hospital';
+      case RecordCategory.poop:        return 'poop';
+      case RecordCategory.condition:   return 'condition';
+      case RecordCategory.medication:  return 'medication';
+      case RecordCategory.weight:      return 'weight';
+      case RecordCategory.meal:        return 'meal';
+      case RecordCategory.hospital:    return 'hospital';
       case RecordCategory.vaccination: return 'vaccination';
-      case RecordCategory.grooming:   return 'grooming';
-      case RecordCategory.memo:       return 'memo';
+      case RecordCategory.grooming:    return 'grooming';
+      case RecordCategory.walk:        return 'walk';
+      case RecordCategory.memo:        return 'memo';
     }
   }
 
   String get label {
     switch (this) {
-      case RecordCategory.poop:       return '배변';
-      case RecordCategory.condition:  return '컨디션';
-      case RecordCategory.medication: return '투약';
-      case RecordCategory.weight:     return '체중';
-      case RecordCategory.meal:       return '식사';
-      case RecordCategory.hospital:   return '병원';
+      case RecordCategory.poop:        return '배변';
+      case RecordCategory.condition:   return '컨디션';
+      case RecordCategory.medication:  return '투약';
+      case RecordCategory.weight:      return '체중';
+      case RecordCategory.meal:        return '식사';
+      case RecordCategory.hospital:    return '병원';
       case RecordCategory.vaccination: return '접종';
-      case RecordCategory.grooming:   return '미용';
-      case RecordCategory.memo:       return '메모';
+      case RecordCategory.grooming:    return '미용';
+      case RecordCategory.walk:        return '산책';
+      case RecordCategory.memo:        return '메모';
     }
   }
 
   String get emoji {
     switch (this) {
-      case RecordCategory.poop:       return '💩';
-      case RecordCategory.condition:  return '🌡️';
-      case RecordCategory.medication: return '💊';
-      case RecordCategory.weight:     return '⚖️';
-      case RecordCategory.meal:       return '🍽️';
-      case RecordCategory.hospital:   return '🏥';
+      case RecordCategory.poop:        return '💩';
+      case RecordCategory.condition:   return '🌡️';
+      case RecordCategory.medication:  return '💊';
+      case RecordCategory.weight:      return '⚖️';
+      case RecordCategory.meal:        return '🍽️';
+      case RecordCategory.hospital:    return '🏥';
       case RecordCategory.vaccination: return '💉';
-      case RecordCategory.grooming:   return '🛁';
-      case RecordCategory.memo:       return '📝';
+      case RecordCategory.grooming:    return '🛁';
+      case RecordCategory.walk:        return '🦮';
+      case RecordCategory.memo:        return '📝';
     }
   }
 
@@ -66,6 +70,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return AppColors.danger400;          // red
       case RecordCategory.vaccination: return AppColors.categoryVaccine;    // purple
       case RecordCategory.grooming:    return AppColors.categoryEmergency;  // orange
+      case RecordCategory.walk:        return AppColors.success400;         // green
       case RecordCategory.memo:        return AppColors.gray400;            // gray
     }
   }
@@ -80,6 +85,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return AppColors.danger50;           // red light
       case RecordCategory.vaccination: return const Color(0xFFFAF5FF);      // purple light
       case RecordCategory.grooming:    return const Color(0xFFFFF7ED);      // orange light
+      case RecordCategory.walk:        return AppColors.success50;          // green light
       case RecordCategory.memo:        return AppColors.gray100;            // gray light
     }
   }
@@ -87,7 +93,7 @@ extension RecordCategoryX on RecordCategory {
   static RecordCategory fromString(String s) {
     return RecordCategory.values.firstWhere(
       (e) => e.name == s,
-      orElse: () => RecordCategory.condition,
+      orElse: () => RecordCategory.memo,
     );
   }
 }

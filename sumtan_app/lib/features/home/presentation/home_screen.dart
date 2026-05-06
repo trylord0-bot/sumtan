@@ -246,6 +246,8 @@ class _GreetingSection extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _PetAvatar(pet: pet),
+            const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -295,8 +297,6 @@ class _GreetingSection extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 12),
-            _PetAvatar(pet: pet),
           ],
         ),
       ],
@@ -451,7 +451,6 @@ class _TodaySummaryGrid extends StatelessWidget {
             Expanded(child: _SummaryChip(
               topColor: medCount > 0 ? AppColors.categoryMedicine : AppColors.gray300,
               icon: '💊', value: medCount > 0 ? '$medCount회' : '-', label: '투약',
-              showBar: true, barFraction: medCount > 0 ? 1.0 : 0.0,
             )),
             const SizedBox(width: AppSpacing.space2),
             Expanded(child: _SummaryChip(
@@ -477,16 +476,12 @@ class _SummaryChip extends StatelessWidget {
   final String icon;
   final String value;
   final String label;
-  final bool showBar;
-  final double barFraction;
 
   const _SummaryChip({
     required this.topColor,
     required this.icon,
     required this.value,
     required this.label,
-    this.showBar = false,
-    this.barFraction = 0.0,
   });
 
   @override
@@ -525,20 +520,6 @@ class _SummaryChip extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: AppColors.gray400,
                 )),
-                if (showBar) ...[
-                  const SizedBox(height: 6),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: LinearProgressIndicator(
-                      value: barFraction,
-                      minHeight: 3,
-                      backgroundColor: AppColors.gray200,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        barFraction > 0 ? AppColors.categoryMedicine : AppColors.gray200,
-                      ),
-                    ),
-                  ),
-                ],
               ],
             ),
           ),

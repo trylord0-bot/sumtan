@@ -176,13 +176,15 @@ class _CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bg = category.bgColor;
+    final accent = category.color;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.primary50,
+          color: bg,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.primary100, width: 1.2),
+          border: Border.all(color: accent.withValues(alpha: 0.35), width: 1.2),
         ),
         padding: const EdgeInsets.symmetric(
           vertical: AppSpacing.space4,
@@ -191,14 +193,23 @@ class _CategoryButton extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(category.emoji, style: const TextStyle(fontSize: 24)),
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: accent.withValues(alpha: 0.15),
+                shape: BoxShape.circle,
+              ),
+              alignment: Alignment.center,
+              child: Text(category.emoji, style: const TextStyle(fontSize: 22)),
+            ),
             const SizedBox(height: 6),
             Text(
               category.label,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
-                color: AppColors.primary900,
+                color: accent,
               ),
             ),
           ],

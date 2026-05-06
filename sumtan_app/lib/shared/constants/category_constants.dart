@@ -58,29 +58,29 @@ extension RecordCategoryX on RecordCategory {
 
   Color get color {
     switch (this) {
-      case RecordCategory.condition:  return AppColors.success400;
-      case RecordCategory.poop:       return AppColors.info400;
-      case RecordCategory.medication: return const Color(0xFFFB923C);
-      case RecordCategory.weight:     return AppColors.warning400;
-      case RecordCategory.meal:       return const Color(0xFF2DD4BF);
-      case RecordCategory.hospital:   return const Color(0xFFFB923C);
-      case RecordCategory.vaccination: return const Color(0xFFA78BFA);
-      case RecordCategory.grooming:   return const Color(0xFFF472B6);
-      case RecordCategory.memo:       return AppColors.gray400;
+      case RecordCategory.poop:        return AppColors.categoryPoop;       // mint green
+      case RecordCategory.condition:   return AppColors.categoryCondition;  // blue
+      case RecordCategory.medication:  return AppColors.categoryMedicine;   // pink
+      case RecordCategory.weight:      return AppColors.categoryWeight;     // yellow
+      case RecordCategory.meal:        return const Color(0xFF2DD4BF);      // teal
+      case RecordCategory.hospital:    return AppColors.danger400;          // red
+      case RecordCategory.vaccination: return AppColors.categoryVaccine;    // purple
+      case RecordCategory.grooming:    return AppColors.categoryEmergency;  // orange
+      case RecordCategory.memo:        return AppColors.gray400;            // gray
     }
   }
 
   Color get bgColor {
     switch (this) {
-      case RecordCategory.condition:  return const Color(0xFFF0FDF4);
-      case RecordCategory.poop:       return const Color(0xFFEFF6FF);
-      case RecordCategory.medication: return const Color(0xFFFFF7ED);
-      case RecordCategory.weight:     return AppColors.primary100;
-      case RecordCategory.meal:       return const Color(0xFFF0FDFA);
-      case RecordCategory.hospital:   return const Color(0xFFFFF7ED);
-      case RecordCategory.vaccination: return const Color(0xFFFAF5FF);
-      case RecordCategory.grooming:   return const Color(0xFFFDF2F8);
-      case RecordCategory.memo:       return AppColors.gray100;
+      case RecordCategory.poop:        return AppColors.primary50;          // mint light
+      case RecordCategory.condition:   return AppColors.info50;             // blue light
+      case RecordCategory.medication:  return const Color(0xFFFDF2F8);      // pink light
+      case RecordCategory.weight:      return AppColors.warning50;          // yellow light
+      case RecordCategory.meal:        return const Color(0xFFF0FDFA);      // teal light
+      case RecordCategory.hospital:    return AppColors.danger50;           // red light
+      case RecordCategory.vaccination: return const Color(0xFFFAF5FF);      // purple light
+      case RecordCategory.grooming:    return const Color(0xFFFFF7ED);      // orange light
+      case RecordCategory.memo:        return AppColors.gray100;            // gray light
     }
   }
 

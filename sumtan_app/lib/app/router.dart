@@ -221,6 +221,12 @@ class _TopBar extends ConsumerWidget implements PreferredSizeWidget {
       centerTitle: false,
       automaticallyImplyLeading: false,
       titleSpacing: 0,
+      leading: showClose
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back, color: AppColors.gray700, size: 22),
+              onPressed: onClose,
+            )
+          : null,
       title: Row(
         children: [
           const SizedBox(width: 16),
@@ -235,11 +241,6 @@ class _TopBar extends ConsumerWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        if (showClose)
-          IconButton(
-            icon: const Icon(Icons.close, color: AppColors.gray700, size: 22),
-            onPressed: onClose,
-          ),
         if (showHamburger)
           Builder(
             builder: (ctx) => IconButton(

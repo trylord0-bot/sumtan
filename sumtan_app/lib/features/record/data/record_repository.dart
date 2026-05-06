@@ -118,6 +118,26 @@ class RecordRepository {
     return result;
   }
 
+  /// Returns {date: score} for the last 7 days (water amount score sum).
+  /// Scores: very_little=1, little=2, normal=3, much=4, very_much=5
+  Future<Map<DateTime, int>> getWeeklyWaterStatsByPet(int petId) async {
+    const scores = {
+      'very_little': 1, 'little': 2, 'normal': 3, 'much': 4, 'very_much': 5,
+    };
+    final now = DateTime.now();
+    final result = <DateTime, int>{};
+    for (int i = 6; i >= 0; i--) {
+      final day = DateTime(now.year, now.month, now.day - i);
+      final records = await getByPetAndDate(petId, day);
+      final score = records
+          .where((r) => r.category == 'water')
+          .map((r) => scores[r.dataJson?['water_amount'] as String?] ?? 0)
+          .fold(0, (a, b) => a + b);
+      result[DateTime(day.year, day.month, day.day)] = score;
+    }
+    return result;
+  }
+
   /// The most recent record for a pet, or null if none.
   Future<Record?> getLastRecordByPet(int petId) async {
     final db = await _db.database;

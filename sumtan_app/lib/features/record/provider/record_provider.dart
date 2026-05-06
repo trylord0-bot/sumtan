@@ -72,6 +72,16 @@ final weeklyPoopStatsProvider =
       .getWeeklyPoopCountsByPet(pet.id!);
 });
 
+// 음수 주간 통계 (단계 점수 합산)
+final weeklyWaterStatsProvider =
+    FutureProvider.autoDispose<Map<DateTime, int>>((ref) async {
+  final pet = ref.watch(selectedPetProvider);
+  if (pet == null || pet.id == null) return {};
+  return ref
+      .read(recordRepositoryProvider)
+      .getWeeklyWaterStatsByPet(pet.id!);
+});
+
 // 식사 주간 통계
 final weeklyMealStatsProvider =
     FutureProvider.autoDispose<Map<DateTime, int>>((ref) async {

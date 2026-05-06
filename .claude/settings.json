@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "PowerShell(cd \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\"; flutter analyze --no-fatal-infos 2>&1 | Where-Object { $_ -match \"error|warning|Error|Warning\" } | Select-Object -First 30)"
+      "PowerShell(cd \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\"; flutter analyze --no-fatal-infos 2>&1 | Where-Object { $_ -match \"error|warning|Error|Warning\" } | Select-Object -First 30)",
+      "PowerShell($f = \"c:\\\\WORK\\\\etc\\\\sumtan\\\\4.숨탄 앱 식사·음수 분리 AI 지시 MD.md\"; [System.IO.File]::ReadAllText\\($f, [System.Text.Encoding]::UTF8\\))",
+      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"c:\\\\WORK\\\\etc\\\\sumtan\\\\4.숨탄 앱 식사·음수 분리 AI 지시 MD.md\"\\); \"Size: $\\($bytes.Length\\) bytes\"; [System.Text.Encoding]::UTF8.GetString\\($bytes\\) | Select-Object -First 1)",
+      "PowerShell($bytes = [System.IO.File]::ReadAllBytes\\(\"c:\\\\WORK\\\\etc\\\\sumtan\\\\4.숨탄 앱 식사·음수 분리 AI 지시 MD.md\"\\); \"Size: $\\($bytes.Length\\) bytes\"; if \\($bytes.Length -gt 0\\) { [System.Text.Encoding]::UTF8.GetString\\($bytes\\) })"
     ]
   }
 }

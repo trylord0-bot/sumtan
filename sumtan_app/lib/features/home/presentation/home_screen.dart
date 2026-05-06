@@ -27,6 +27,7 @@ class HomeScreen extends ConsumerWidget {
     final weightAsync = ref.watch(weightHistoryProvider);
     final poopAsync  = ref.watch(weeklyPoopStatsProvider);
     final mealAsync  = ref.watch(weeklyMealStatsProvider);
+    final waterAsync = ref.watch(weeklyWaterStatsProvider);
     final alarmAsync = ref.watch(alarmListProvider);
 
     return Scaffold(
@@ -38,6 +39,7 @@ class HomeScreen extends ConsumerWidget {
           ref.invalidate(weightHistoryProvider);
           ref.invalidate(weeklyPoopStatsProvider);
           ref.invalidate(weeklyMealStatsProvider);
+          ref.invalidate(weeklyWaterStatsProvider);
         },
         child: CustomScrollView(
           slivers: [
@@ -63,6 +65,7 @@ class HomeScreen extends ConsumerWidget {
                         ref.invalidate(todayRecordsProvider);
                         ref.invalidate(weeklyPoopStatsProvider);
                         ref.invalidate(weeklyMealStatsProvider);
+                        ref.invalidate(weeklyWaterStatsProvider);
                         ref.invalidate(weightHistoryProvider);
                         ref.invalidate(lastRecordProvider);
                       },
@@ -148,6 +151,20 @@ class HomeScreen extends ConsumerWidget {
                         todayColor: AppColors.warning400,
                         pastColor: AppColors.warning200,
                         unit: '끼',
+                      ),
+                      loading: () => _statsLoadingBox(),
+                      error: (_, __) => const SizedBox.shrink(),
+                    ),
+                    const SizedBox(height: AppSpacing.space3),
+
+                    waterAsync.when(
+                      data: (stats) => _WeeklyBarCard(
+                        emoji: '💧',
+                        title: '음수 단계',
+                        stats: stats,
+                        todayColor: AppColors.cyan400,
+                        pastColor: AppColors.cyan200,
+                        unit: '점',
                       ),
                       loading: () => _statsLoadingBox(),
                       error: (_, __) => const SizedBox.shrink(),
@@ -371,9 +388,10 @@ class _TodaySummaryGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final poopCount = records.where((r) => r.category == 'poop').length;
-    final mealCount = records.where((r) => r.category == 'meal').length;
-    final medCount  = records.where((r) => r.category == 'medication').length;
+    final poopCount  = records.where((r) => r.category == 'poop').length;
+    final mealCount  = records.where((r) => r.category == 'meal').length;
+    final medCount   = records.where((r) => r.category == 'medication').length;
+    final waterCount = records.where((r) => r.category == 'water').length;
 
     final conditionRecord = records.lastWhere(
       (r) => r.category == 'condition',
@@ -427,6 +445,7 @@ class _TodaySummaryGrid extends StatelessWidget {
 
     return Column(
       children: [
+        // Row 1: 배변, 컨디션, 식사
         Row(
           children: [
             Expanded(child: _SummaryChip(
@@ -446,8 +465,14 @@ class _TodaySummaryGrid extends StatelessWidget {
           ],
         ),
         const SizedBox(height: AppSpacing.space2),
+        // Row 2: 음수, 투약, 체중
         Row(
           children: [
+            Expanded(child: _SummaryChip(
+              topColor: waterCount > 0 ? AppColors.categoryWater : AppColors.gray300,
+              icon: '💧', value: waterCount > 0 ? '$waterCount회' : '-', label: '음수',
+            )),
+            const SizedBox(width: AppSpacing.space2),
             Expanded(child: _SummaryChip(
               topColor: medCount > 0 ? AppColors.categoryMedicine : AppColors.gray300,
               icon: '💊', value: medCount > 0 ? '$medCount회' : '-', label: '투약',
@@ -459,11 +484,20 @@ class _TodaySummaryGrid extends StatelessWidget {
               value: weight != null ? '${weight.toStringAsFixed(1)}kg' : '-',
               label: '체중',
             )),
-            const SizedBox(width: AppSpacing.space2),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.space2),
+        // Row 3: 종별 (1/3 width)
+        Row(
+          children: [
             Expanded(child: _SummaryChip(
               topColor: speciesColor,
               icon: speciesIcon, value: speciesValue, label: speciesLabel,
             )),
+            const SizedBox(width: AppSpacing.space2),
+            const Expanded(child: SizedBox.shrink()),
+            const SizedBox(width: AppSpacing.space2),
+            const Expanded(child: SizedBox.shrink()),
           ],
         ),
       ],
@@ -568,6 +602,16 @@ class _SummarySkeleton extends StatelessWidget {
             Expanded(child: _SummaryChipSkeleton()),
             SizedBox(width: AppSpacing.space2),
             Expanded(child: _SummaryChipSkeleton()),
+          ],
+        ),
+        SizedBox(height: AppSpacing.space2),
+        Row(
+          children: [
+            Expanded(child: _SummaryChipSkeleton()),
+            SizedBox(width: AppSpacing.space2),
+            Expanded(child: SizedBox.shrink()),
+            SizedBox(width: AppSpacing.space2),
+            Expanded(child: SizedBox.shrink()),
           ],
         ),
       ],
@@ -817,8 +861,11 @@ class _RecordList extends StatelessWidget {
       case 'medication':
         final med = d?['medicine'] as String? ?? '';
         return med.isNotEmpty ? med : '투약';
-      case 'weight':   return '체중 기록';
-      case 'meal':     return '식사 기록';
+      case 'weight': return '체중 기록';
+      case 'meal':
+        final mealType = d?['meal_type'] as String?;
+        return mealType != null ? '식사 기록 — $mealType' : '식사 기록';
+      case 'water': return '음수 기록';
       default:         return RecordCategoryX.fromString(r.category).label;
     }
   }
@@ -840,6 +887,29 @@ class _RecordList extends StatelessWidget {
       case 'weight':
         final kg = d['weight_kg'];
         return kg != null ? '${kg}kg 기록' : '';
+      case 'meal':
+        const mealAmountLabels = {
+          'very_little': '매우 적음', 'little': '적음', 'normal': '보통',
+          'much': '많음', 'very_much': '매우 많음',
+        };
+        final mealAmt = d['meal_amount'] as String?;
+        final foodName = d['food_name'] as String?;
+        final amountG = d['amount_g'];
+        final parts = [
+          if (mealAmt != null) mealAmountLabels[mealAmt] ?? mealAmt,
+          if (foodName != null && foodName.isNotEmpty) foodName,
+          if (amountG != null) '${amountG}g',
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'water':
+        const waterLabels = {
+          'very_little': '매우 적음', 'little': '적음', 'normal': '보통',
+          'much': '많음', 'very_much': '매우 많음',
+        };
+        final amount = d['water_amount'] as String?;
+        final ml = d['milliliter'];
+        final amountStr = waterLabels[amount] ?? amount ?? '';
+        return ml != null ? '$amountStr · ${ml}mL' : amountStr;
       default:
         return r.memo ?? '';
     }
@@ -1298,12 +1368,18 @@ class _EmptyState extends StatelessWidget {
         border: Border.all(color: AppColors.gray200, width: 1.5),
       ),
       child: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text('🐾', style: TextStyle(fontSize: 36)),
           SizedBox(height: AppSpacing.space3),
-          Text('아직 오늘의 기록이 없어요', style: TextStyle(
-            fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.gray600,
-          )),
+          Text(
+            '아직 오늘의 기록이 없어요',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.gray600,
+            ),
+          ),
           SizedBox(height: AppSpacing.space2),
           Text(
             '반려동물의 컨디션, 배변, 체중을\n기록해 건강을 관리해 보세요!',

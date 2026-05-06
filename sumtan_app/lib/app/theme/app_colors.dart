@@ -57,6 +57,11 @@ abstract class AppColors {
   static const Color info200 = Color(0xFFBFDBFE);
   static const Color info50  = Color(0xFFEFF6FF);
 
+  // Cyan (음수 전용)
+  static const Color cyan400 = Color(0xFF22D3EE);
+  static const Color cyan200 = Color(0xFFA5F3FC);
+  static const Color cyan50  = Color(0xFFECFEFF);
+
   // Category — 기록 유형별
   static const Color categoryPoop      = Color(0xFF34D399); // primary400
   static const Color categoryCondition = Color(0xFF60A5FA); // info400
@@ -64,6 +69,7 @@ abstract class AppColors {
   static const Color categoryWeight    = Color(0xFFFBBF24); // warning400
   static const Color categoryVaccine   = Color(0xFFA78BFA); // purple
   static const Color categoryEmergency = Color(0xFFFB923C); // orange
+  static const Color categoryWater     = Color(0xFF22D3EE); // cyan400
 
   // Dark Mode
   static const Color dmBg           = Color(0xFF0D1117);

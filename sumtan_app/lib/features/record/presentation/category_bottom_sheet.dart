@@ -13,6 +13,7 @@ import 'forms/hospital_form.dart';
 import 'forms/vaccination_form.dart';
 import 'forms/grooming_form.dart';
 import 'forms/walk_form.dart';
+import 'forms/water_form.dart';
 import 'forms/memo_form.dart';
 
 Future<void> showCategoryBottomSheet(BuildContext context) async {
@@ -44,13 +45,14 @@ class _CategorySheet extends ConsumerWidget {
   const _CategorySheet();
 
   List<_CategoryEntry> _buildEntries(String? species) {
-    // 공통 9개 (미용 항상 포함)
+    // 공통 10개 (음수·미용 항상 포함)
     final entries = [
       const _CategoryEntry(RecordCategory.poop),
       const _CategoryEntry(RecordCategory.condition),
       const _CategoryEntry(RecordCategory.medication),
       const _CategoryEntry(RecordCategory.weight),
       const _CategoryEntry(RecordCategory.meal),
+      const _CategoryEntry(RecordCategory.water),
       const _CategoryEntry(RecordCategory.hospital),
       const _CategoryEntry(RecordCategory.vaccination),
       const _CategoryEntry(RecordCategory.grooming),
@@ -89,6 +91,8 @@ class _CategorySheet extends ConsumerWidget {
         form = const WeightForm();
       case RecordCategory.meal:
         form = const MealForm();
+      case RecordCategory.water:
+        form = const WaterForm();
       case RecordCategory.hospital:
         form = const HospitalForm();
       case RecordCategory.vaccination:

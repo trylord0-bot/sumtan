@@ -327,7 +327,18 @@ class _PetAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (pet == null) return const SizedBox(width: 64, height: 64);
+    if (pet == null) {
+      return Container(
+        width: 64,
+        height: 64,
+        decoration: const BoxDecoration(
+          color: AppColors.primary200,
+          shape: BoxShape.circle,
+        ),
+        alignment: Alignment.center,
+        child: const Text('🐾', style: TextStyle(fontSize: 32)),
+      );
+    }
 
     final hasPhoto = pet!.profileImagePath != null &&
         pet!.profileImagePath!.isNotEmpty;

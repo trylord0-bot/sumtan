@@ -62,6 +62,21 @@ class PastAlarmsSection extends ConsumerWidget {
                           color: AppColors.gray600)),
                 ),
                 const Spacer(),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    foregroundColor: AppColors.gray400,
+                    minimumSize: const Size(0, 28),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    textStyle: const TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  onPressed: () => _confirmDeleteAll(context, ref),
+                  child: const Text('전체 삭제'),
+                ),
+                const SizedBox(width: 4),
                 Icon(
                   visible ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
                   size: 16,
@@ -75,6 +90,34 @@ class PastAlarmsSection extends ConsumerWidget {
         if (visible) ...alarms.map((a) => _PastAlarmItem(alarm: a)),
       ],
     );
+  }
+
+  Future<void> _confirmDeleteAll(BuildContext context, WidgetRef ref) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('지난 알림 삭제'),
+        content: Text('지난 알림 ${alarms.length}개를 모두 삭제할까요?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('취소'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: TextButton.styleFrom(foregroundColor: AppColors.danger600),
+            child: const Text('삭제'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+
+    await ref.read(alarmListProvider.notifier).deleteAll(alarms);
+    if (context.mounted) {
+      showTopToast(context, '지난 알림이 모두 삭제됐어요');
+    }
   }
 }
 

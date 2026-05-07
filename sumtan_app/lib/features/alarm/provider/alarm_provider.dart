@@ -95,6 +95,15 @@ class AlarmNotifier extends StateNotifier<AsyncValue<List<Alarm>>> {
     await _load();
   }
 
+  Future<void> deleteAll(Iterable<Alarm> alarms) async {
+    final ids = alarms.map((alarm) => alarm.id).whereType<int>().toList();
+    for (final id in ids) {
+      await _repo.delete(id);
+      await _ns.cancel(id);
+    }
+    await _load();
+  }
+
   Future<void> toggle(int id, bool enabled) async {
     final alarms = state.valueOrNull ?? [];
     final alarm = alarms.firstWhere((a) => a.id == id);

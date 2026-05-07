@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:sqflite_common/sqflite.dart';
 
 import 'db_factory_stub.dart'
@@ -7,6 +9,7 @@ import 'db_factory_stub.dart'
 class DatabaseHelper {
   static DatabaseHelper? _instance;
   static Database? _db;
+  static Completer<Database>? _dbCompleter;
 
   DatabaseHelper._();
 
@@ -16,8 +19,19 @@ class DatabaseHelper {
   }
 
   Future<Database> get database async {
-    _db ??= await _init();
-    return _db!;
+    if (_db != null) return _db!;
+    if (_dbCompleter != null) return _dbCompleter!.future;
+
+    _dbCompleter = Completer<Database>();
+    try {
+      _db = await _init();
+      _dbCompleter!.complete(_db);
+      return _db!;
+    } catch (error, stackTrace) {
+      _dbCompleter!.completeError(error, stackTrace);
+      _dbCompleter = null;
+      rethrow;
+    }
   }
 
   Future<Database> _init() async {
@@ -27,6 +41,9 @@ class DatabaseHelper {
       path,
       options: OpenDatabaseOptions(
         version: 4,
+        onConfigure: (db) async {
+          await db.execute('PRAGMA foreign_keys = ON');
+        },
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
       ),
@@ -67,17 +84,30 @@ class DatabaseHelper {
     await _createAlarmsTable(db);
   }
 
+  /// records.data_json 구조 (category별)
+  /// - 'weight': {"value": 3.5, "unit": "kg"}
+  /// - 'vaccine': {"vaccine_name": "종합백신", "next_date": "2026-06-01"}
+  /// - 'hospital': {"clinic": "행복동물병원", "diagnosis": "피부염"}
+
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
       await _createAlarmsTable(db);
     }
     if (oldVersion < 3) {
-      await db.execute('ALTER TABLE alarms ADD COLUMN alarm_days TEXT');
+      try {
+        await db.execute('ALTER TABLE alarms ADD COLUMN alarm_days TEXT');
+      } catch (_) {}
     }
     if (oldVersion < 4) {
-      await db.execute('ALTER TABLE pets ADD COLUMN weight REAL');
-      await db.execute('ALTER TABLE pets ADD COLUMN microchip_id TEXT');
-      await db.execute('ALTER TABLE pets ADD COLUMN reg_number TEXT');
+      try {
+        await db.execute('ALTER TABLE pets ADD COLUMN weight REAL');
+      } catch (_) {}
+      try {
+        await db.execute('ALTER TABLE pets ADD COLUMN microchip_id TEXT');
+      } catch (_) {}
+      try {
+        await db.execute('ALTER TABLE pets ADD COLUMN reg_number TEXT');
+      } catch (_) {}
     }
   }
 

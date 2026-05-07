@@ -9,6 +9,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 
 class WalkForm extends ConsumerStatefulWidget {
   const WalkForm({super.key});
@@ -22,12 +23,14 @@ class _WalkFormState extends ConsumerState<WalkForm> {
   final _durationCtrl = TextEditingController();
   final _distanceCtrl = TextEditingController();
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
 
   @override
   void dispose() {
     _durationCtrl.dispose();
     _distanceCtrl.dispose();
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
@@ -45,6 +48,8 @@ class _WalkFormState extends ConsumerState<WalkForm> {
     if (_distanceCtrl.text.isNotEmpty) {
       data['distance_km'] = double.tryParse(_distanceCtrl.text);
     }
+    final media = await _mediaController.saveToLocalFiles();
+    if (media.isNotEmpty) data['media'] = media;
 
     final record = Record(
       petId: pet!.id!,
@@ -120,6 +125,8 @@ class _WalkFormState extends ConsumerState<WalkForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

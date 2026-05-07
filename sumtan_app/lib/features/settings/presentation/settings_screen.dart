@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/widgets/app_toast.dart';
+import '../data/export_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -268,8 +269,15 @@ class _Badge extends StatelessWidget {
 
 // ── Data export bottom sheet ──────────────────────────────────────────────────
 
-class _ExportSheet extends StatelessWidget {
+class _ExportSheet extends StatefulWidget {
   const _ExportSheet();
+
+  @override
+  State<_ExportSheet> createState() => _ExportSheetState();
+}
+
+class _ExportSheetState extends State<_ExportSheet> {
+  bool _exporting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -407,12 +415,23 @@ class _ExportSheet extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                onPressed: () {
-                  showTopToast(context, '결제 기능을 준비 중이에요 💳');
-                  Navigator.pop(context);
+                onPressed: _exporting ? null : () async {
+                  setState(() => _exporting = true);
+                  try {
+                    final file = await ExportService().exportZip();
+                    if (!context.mounted) return;
+                    showTopToast(context, 'ZIP 파일을 저장했어요: ${file.path}');
+                    Navigator.pop(context);
+                  } catch (_) {
+                    if (context.mounted) {
+                      showTopToast(context, '내보내기에 실패했어요');
+                    }
+                  } finally {
+                    if (mounted) setState(() => _exporting = false);
+                  }
                 },
-                child: const Text(
-                  '💳 결제하고 내보내기 · ₩3,000',
+                child: Text(
+                  _exporting ? '내보내는 중...' : '💳 결제하고 내보내기 · ₩3,000',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                 ),
               ),

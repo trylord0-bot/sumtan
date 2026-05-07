@@ -6,6 +6,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 import '../../../../app/widgets/app_toast.dart';
 
 class PoopForm extends ConsumerStatefulWidget {
@@ -20,21 +21,28 @@ class _PoopFormState extends ConsumerState<PoopForm> {
   String _status = '정상';
   DateTime _datetime = DateTime.now();
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
 
   @override
   void dispose() {
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
   Future<void> _save() async {
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
+    final media = await _mediaController.saveToLocalFiles();
     final record = Record(
       petId: pet!.id!,
       category: 'poop',
       recordedAt: du.toIso8601(_datetime),
-      dataJson: {'type': _type, 'status': _status},
+      dataJson: {
+        'type': _type,
+        'status': _status,
+        if (media.isNotEmpty) 'media': media,
+      },
       memo: _memoCtrl.text.isEmpty ? null : _memoCtrl.text,
       createdAt: du.toIso8601(DateTime.now()),
     );
@@ -77,6 +85,8 @@ class _PoopFormState extends ConsumerState<PoopForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

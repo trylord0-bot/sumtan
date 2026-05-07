@@ -6,6 +6,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 import '../../../../app/widgets/app_toast.dart';
 
 class MedicationForm extends ConsumerStatefulWidget {
@@ -21,18 +22,21 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
   final _doseCtrl = TextEditingController();
   String _method = '경구';
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
 
   @override
   void dispose() {
     _nameCtrl.dispose();
     _doseCtrl.dispose();
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
   Future<void> _save() async {
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
+    final media = await _mediaController.saveToLocalFiles();
     final record = Record(
       petId: pet!.id!,
       category: 'medication',
@@ -41,6 +45,7 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
         'medicine': _nameCtrl.text,
         'dose': _doseCtrl.text,
         'method': _method,
+        if (media.isNotEmpty) 'media': media,
       },
       memo: _memoCtrl.text.isEmpty ? null : _memoCtrl.text,
       createdAt: du.toIso8601(DateTime.now()),
@@ -80,6 +85,8 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

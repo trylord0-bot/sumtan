@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import '../../../core/database/database_helper.dart';
 import 'record_model.dart';
 
@@ -73,7 +76,41 @@ class RecordRepository {
 
   Future<void> delete(int id) async {
     final db = await _db.database;
+    final rows = await db.query(
+      'records',
+      columns: ['data_json'],
+      where: 'id = ?',
+      whereArgs: [id],
+      limit: 1,
+    );
+    if (rows.isNotEmpty) {
+      await _deleteMediaFiles(rows.first['data_json'] as String?);
+    }
     await db.delete('records', where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<void> _deleteMediaFiles(String? dataJson) async {
+    if (dataJson == null) return;
+    Object? decoded;
+    try {
+      decoded = jsonDecode(dataJson);
+    } catch (_) {
+      return;
+    }
+    if (decoded is! Map<String, dynamic>) return;
+    final media = decoded['media'];
+    if (media is! List) return;
+    for (final item in media) {
+      if (item is! Map) continue;
+      final path = item['path'] as String?;
+      if (path == null || path.isEmpty) continue;
+      try {
+        final file = File(path);
+        if (await file.exists()) await file.delete();
+      } catch (_) {
+        // DB deletion should not be blocked by a missing or inaccessible file.
+      }
+    }
   }
 
   /// Weight records for the last [days] days, ordered ASC.

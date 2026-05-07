@@ -8,6 +8,7 @@ import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
 import '../../../../app/widgets/app_toast.dart';
+import 'media_attachment_field.dart';
 
 class ConditionForm extends ConsumerStatefulWidget {
   const ConditionForm({super.key});
@@ -20,23 +21,30 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
   int _score = 3;
   DateTime _datetime = DateTime.now();
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
   final _symptomTags = const ['구토', '기침', '무기력', '식욕부진', '설사', '콧물', '재채기', '떨림'];
   final _selectedTags = <String>{};
 
   @override
   void dispose() {
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
   Future<void> _save() async {
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
+    final media = await _mediaController.saveToLocalFiles();
     final record = Record(
       petId: pet!.id!,
       category: 'condition',
       recordedAt: du.toIso8601(_datetime),
-      dataJson: {'score': _score, 'symptoms': _selectedTags.toList()},
+      dataJson: {
+        'score': _score,
+        'symptoms': _selectedTags.toList(),
+        if (media.isNotEmpty) 'media': media,
+      },
       memo: _memoCtrl.text.isEmpty ? null : _memoCtrl.text,
       createdAt: du.toIso8601(DateTime.now()),
     );
@@ -131,6 +139,8 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

@@ -7,6 +7,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 
 class MemoForm extends ConsumerStatefulWidget {
   const MemoForm({super.key});
@@ -20,11 +21,13 @@ class _MemoFormState extends ConsumerState<MemoForm> {
   final _titleCtrl = TextEditingController();
   final _contentCtrl = TextEditingController();
   String _pinned = '일반';
+  final _mediaController = RecordMediaController();
 
   @override
   void dispose() {
     _titleCtrl.dispose();
     _contentCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
@@ -35,6 +38,7 @@ class _MemoFormState extends ConsumerState<MemoForm> {
     }
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
+    final media = await _mediaController.saveToLocalFiles();
 
     final record = Record(
       petId: pet!.id!,
@@ -44,6 +48,7 @@ class _MemoFormState extends ConsumerState<MemoForm> {
         'title': _titleCtrl.text,
         'content': _contentCtrl.text.isEmpty ? null : _contentCtrl.text,
         'pinned': _pinned,
+        if (media.isNotEmpty) 'media': media,
       },
       memo: null,
       createdAt: du.toIso8601(DateTime.now()),
@@ -85,6 +90,8 @@ class _MemoFormState extends ConsumerState<MemoForm> {
           selected: _pinned,
           onChanged: (v) => setState(() => _pinned = v),
         ),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

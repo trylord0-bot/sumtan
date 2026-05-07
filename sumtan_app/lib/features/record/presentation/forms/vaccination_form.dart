@@ -8,6 +8,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 
 class VaccinationForm extends ConsumerStatefulWidget {
   const VaccinationForm({super.key});
@@ -23,6 +24,7 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
   DateTime? _nextDate;
   String _sideEffect = '없음';
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
 
   static const _vaccineOptions = [
     '종합백신(DHPPL)', '코로나', '켄넬코프', '광견병', '인플루엔자', '심장사상충', '기타',
@@ -32,6 +34,7 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
   void dispose() {
     _hospitalNameCtrl.dispose();
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
@@ -49,6 +52,8 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
       'side_effect': _sideEffect,
     };
     if (_nextDate != null) data['next_date'] = du.toIso8601(_nextDate!);
+    final media = await _mediaController.saveToLocalFiles();
+    if (media.isNotEmpty) data['media'] = media;
 
     final record = Record(
       petId: pet!.id!,
@@ -148,6 +153,8 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

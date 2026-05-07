@@ -8,6 +8,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 
 class GroomingForm extends ConsumerStatefulWidget {
   const GroomingForm({super.key});
@@ -23,6 +24,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
   final _costCtrl = TextEditingController();
   DateTime? _nextDate;
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
 
   static const _typeOptions = [
     '목욕', '전체미용', '부분미용', '발톱', '귀청소', '치석제거', '항문낭',
@@ -33,6 +35,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
     _shopNameCtrl.dispose();
     _costCtrl.dispose();
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
@@ -52,6 +55,8 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
     };
     if (cost != null) data['cost'] = cost;
     if (_nextDate != null) data['next_date'] = du.toIso8601(_nextDate!);
+    final media = await _mediaController.saveToLocalFiles();
+    if (media.isNotEmpty) data['media'] = media;
 
     final record = Record(
       petId: pet!.id!,
@@ -163,6 +168,8 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

@@ -7,6 +7,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 import '../../../../app/widgets/app_toast.dart';
 
 class WeightForm extends ConsumerStatefulWidget {
@@ -21,11 +22,13 @@ class _WeightFormState extends ConsumerState<WeightForm> {
   final _weightCtrl = TextEditingController();
   String _method = '동물병원';
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
 
   @override
   void dispose() {
     _weightCtrl.dispose();
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
@@ -34,11 +37,16 @@ class _WeightFormState extends ConsumerState<WeightForm> {
     if (pet?.id == null) return;
     final weight = double.tryParse(_weightCtrl.text);
     if (weight == null) return;
+    final media = await _mediaController.saveToLocalFiles();
     final record = Record(
       petId: pet!.id!,
       category: 'weight',
       recordedAt: du.toIso8601(_datetime),
-      dataJson: {'weight_kg': weight, 'method': _method},
+      dataJson: {
+        'weight_kg': weight,
+        'method': _method,
+        if (media.isNotEmpty) 'media': media,
+      },
       memo: _memoCtrl.text.isEmpty ? null : _memoCtrl.text,
       createdAt: du.toIso8601(DateTime.now()),
     );
@@ -84,6 +92,8 @@ class _WeightFormState extends ConsumerState<WeightForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

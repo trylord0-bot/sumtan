@@ -10,6 +10,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 
 class MealForm extends ConsumerStatefulWidget {
   const MealForm({super.key});
@@ -26,6 +27,7 @@ class _MealFormState extends ConsumerState<MealForm> {
   final _amountCtrl = TextEditingController();
   String _intake = '다 먹음';
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
 
   static const _mealAmounts = [
     ('very_little', '매우 적음', '🍚'),
@@ -61,6 +63,7 @@ class _MealFormState extends ConsumerState<MealForm> {
     _foodNameCtrl.dispose();
     _amountCtrl.dispose();
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
@@ -75,6 +78,7 @@ class _MealFormState extends ConsumerState<MealForm> {
     if (_amountCtrl.text.isNotEmpty) {
       await prefs.setString('meal_last_amount_g', _amountCtrl.text);
     }
+    final media = await _mediaController.saveToLocalFiles();
 
     final record = Record(
       petId: pet!.id!,
@@ -86,6 +90,7 @@ class _MealFormState extends ConsumerState<MealForm> {
         if (_foodNameCtrl.text.isNotEmpty) 'food_name': _foodNameCtrl.text,
         if (_amountCtrl.text.isNotEmpty)   'amount_g':  _amountCtrl.text,
         'intake': _intake,
+        if (media.isNotEmpty) 'media': media,
       },
       memo: _memoCtrl.text.isEmpty ? null : _memoCtrl.text,
       createdAt: du.toIso8601(DateTime.now()),
@@ -212,6 +217,8 @@ class _MealFormState extends ConsumerState<MealForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

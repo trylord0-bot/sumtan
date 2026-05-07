@@ -7,6 +7,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 import '../../../../app/widgets/app_toast.dart';
 
 class HospitalForm extends ConsumerStatefulWidget {
@@ -25,6 +26,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
   final _costCtrl = TextEditingController();
   DateTime? _nextVisit;
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
 
   static const _symptomOptions = [
     '구토', '기침', '무기력', '식욕부진', '설사', '콧물', '재채기', '떨림', '혈뇨', '혈변',
@@ -36,6 +38,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
     _diagnosisCtrl.dispose();
     _costCtrl.dispose();
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
@@ -53,6 +56,8 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
     };
     if (cost != null) data['cost'] = cost;
     if (_nextVisit != null) data['next_visit'] = du.toIso8601(_nextVisit!);
+    final media = await _mediaController.saveToLocalFiles();
+    if (media.isNotEmpty) data['media'] = media;
 
     final record = Record(
       petId: pet!.id!,
@@ -177,6 +182,8 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

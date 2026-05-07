@@ -9,6 +9,7 @@ import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import 'form_widgets.dart';
+import 'media_attachment_field.dart';
 
 class WaterForm extends ConsumerStatefulWidget {
   const WaterForm({super.key});
@@ -22,6 +23,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
   String _waterAmount = 'normal';
   final _mlCtrl = TextEditingController();
   final _memoCtrl = TextEditingController();
+  final _mediaController = RecordMediaController();
 
   static const _amounts = [
     ('very_little', '매우 적음', '💧'),
@@ -35,6 +37,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
   void dispose() {
     _mlCtrl.dispose();
     _memoCtrl.dispose();
+    _mediaController.dispose();
     super.dispose();
   }
 
@@ -43,6 +46,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
     if (pet?.id == null) return;
 
     final ml = _mlCtrl.text.isNotEmpty ? int.tryParse(_mlCtrl.text) : null;
+    final media = await _mediaController.saveToLocalFiles();
 
     final record = Record(
       petId: pet!.id!,
@@ -51,6 +55,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
       dataJson: {
         'water_amount': _waterAmount,
         if (ml != null) 'milliliter': ml,
+        if (media.isNotEmpty) 'media': media,
       },
       memo: _memoCtrl.text.isEmpty ? null : _memoCtrl.text,
       createdAt: du.toIso8601(DateTime.now()),
@@ -155,6 +160,8 @@ class _WaterFormState extends ConsumerState<WaterForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),
+        const SizedBox(height: AppSpacing.space4),
+        RecordMediaAttachmentField(controller: _mediaController),
       ],
     );
   }

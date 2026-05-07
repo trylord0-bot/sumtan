@@ -1,5 +1,8 @@
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'db_factory_stub.dart' if (dart.library.html) 'db_factory_web.dart';
+import 'package:sqflite_common/sqflite.dart';
+
+import 'db_factory_stub.dart'
+    if (dart.library.io) 'db_factory_io.dart'
+    if (dart.library.html) 'db_factory_web.dart';
 
 class DatabaseHelper {
   static DatabaseHelper? _instance;
@@ -20,11 +23,13 @@ class DatabaseHelper {
   Future<Database> _init() async {
     initDatabaseFactory();
     final path = await getDbPath('sumtan.db');
-    return openDatabase(
+    return databaseFactory.openDatabase(
       path,
-      version: 4,
-      onCreate: _onCreate,
-      onUpgrade: _onUpgrade,
+      options: OpenDatabaseOptions(
+        version: 4,
+        onCreate: _onCreate,
+        onUpgrade: _onUpgrade,
+      ),
     );
   }
 

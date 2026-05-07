@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'app/app.dart';
 import 'core/database/database_helper.dart';
+import 'features/alarm/data/alarm_repository.dart';
+import 'features/alarm/service/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +16,16 @@ void main() async {
     debugPrint('DB 초기화 실패: $error\n$stackTrace');
     runApp(const DbErrorApp());
     return;
+  }
+
+  try {
+    final notificationService = NotificationService.instance;
+    await notificationService.init();
+    await notificationService.requestPermission();
+    final alarms = await AlarmRepository().getAllEnabled();
+    await notificationService.rescheduleAll(alarms);
+  } catch (error, stackTrace) {
+    debugPrint('알림 초기화 실패: $error\n$stackTrace');
   }
 
   runApp(const ProviderScope(child: SumtanApp()));

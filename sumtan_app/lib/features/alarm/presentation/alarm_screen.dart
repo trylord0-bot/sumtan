@@ -47,14 +47,49 @@ class AlarmScreen extends ConsumerWidget {
         // Split into sections
         final todayPending =
             alarms.where((a) => a.status == AlarmStatus.todayPending).toList();
+        todayPending.sort((a, b) {
+          final at = a.scheduledAt != null
+              ? DateTime.parse(a.scheduledAt!)
+              : DateTime(9999);
+          final bt = b.scheduledAt != null
+              ? DateTime.parse(b.scheduledAt!)
+              : DateTime(9999);
+          return at.compareTo(bt);
+        });
+
         final upcoming =
             alarms.where((a) => a.status == AlarmStatus.upcoming).toList();
+        upcoming.sort((a, b) {
+          final at = a.scheduledAt != null
+              ? DateTime.parse(a.scheduledAt!)
+              : DateTime(9999);
+          final bt = b.scheduledAt != null
+              ? DateTime.parse(b.scheduledAt!)
+              : DateTime(9999);
+          return at.compareTo(bt);
+        });
+
         final pastOrDone = alarms
             .where((a) =>
                 a.status == AlarmStatus.past || a.status == AlarmStatus.done)
             .toList();
+        pastOrDone.sort((a, b) {
+          final at = a.scheduledAt != null
+              ? DateTime.parse(a.scheduledAt!)
+              : DateTime(0);
+          final bt = b.scheduledAt != null
+              ? DateTime.parse(b.scheduledAt!)
+              : DateTime(0);
+          return bt.compareTo(at);
+        });
+
         final repeat =
             alarms.where((a) => a.status == AlarmStatus.repeat).toList();
+        repeat.sort((a, b) {
+          final at = a.repeatTime ?? '99:99';
+          final bt = b.repeatTime ?? '99:99';
+          return at.compareTo(bt);
+        });
 
         final hasScheduled = todayPending.isNotEmpty ||
             upcoming.isNotEmpty ||

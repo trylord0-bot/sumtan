@@ -93,9 +93,11 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
       case 'vaccination':
         if (_labelCtrl.text.trim().isEmpty) return '백신 이름을 입력해주세요';
         if (_scheduledDate == null) return '예정일을 선택해주세요';
+        if (_scheduledTime == null) return '예정 시각을 선택해주세요';
       case 'hospital':
         if (_labelCtrl.text.trim().isEmpty) return '방문 목적을 입력해주세요';
         if (_scheduledDate == null) return '예약 날짜를 선택해주세요';
+        if (_scheduledTime == null) return '예약 시각을 선택해주세요';
       case 'medication':
         if (_labelCtrl.text.trim().isEmpty) return '약품 이름을 입력해주세요';
         if (_repeatRule == 'none' && _scheduledDate == null) {
@@ -144,12 +146,16 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
       String repeatRule = _repeatRule;
 
       if (_scheduledDate != null) {
+        final needsRequiredTime =
+            _type == 'vaccination' || _type == 'hospital';
         final dt = DateTime(
           _scheduledDate!.year,
           _scheduledDate!.month,
           _scheduledDate!.day,
-          _scheduledTime?.hour ?? 9,
-          _scheduledTime?.minute ?? 0,
+          needsRequiredTime ? _scheduledTime!.hour : _scheduledTime?.hour ?? 9,
+          needsRequiredTime
+              ? _scheduledTime!.minute
+              : _scheduledTime?.minute ?? 0,
         );
         scheduledAt = dt.toIso8601String();
       }
@@ -413,7 +419,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
           onChanged: (v) => setState(() => _alarmDays = v),
         ),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('알림 시각'),
+        const _FieldLabel('알림 시각 *'),
         _TimeButton(time: _scheduledTime, onPick: _pickTime),
         const SizedBox(height: AppSpacing.space4),
         _FieldLabel('메모', required: false),

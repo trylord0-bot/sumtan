@@ -394,12 +394,38 @@ class _EventCard extends StatelessWidget {
 
   String _buildSubtitle(Record r) {
     final d = r.dataJson;
-    if (d == null) return r.memo ?? '';
+    if (d == null || d.isEmpty) return r.memo ?? '';
     switch (r.category) {
-      case 'poop':       return '${d['type']} · ${d['status']}';
-      case 'condition':  return '컨디션 ${d['score']}점';
-      case 'medication': return '${d['medicine']} ${d['dose']}';
-      case 'weight':     return '${d['weight_kg']}kg';
+      case 'poop':
+        final type = d['type'] as String? ?? '';
+        final status = d['status'] as String? ?? '';
+        return [type, status].where((s) => s.isNotEmpty).join(' · ');
+      case 'condition':
+        final score = d['score'];
+        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
+        final parts = [
+          if (score != null) '컨디션 $score점',
+          if (symptoms.isNotEmpty) symptoms,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'medication':
+        final medicine = d['medicine'] as String? ?? '';
+        final dose = d['dose'] as String? ?? '';
+        final method = d['method'] as String? ?? '';
+        final parts = [
+          if (medicine.isNotEmpty) medicine,
+          if (dose.isNotEmpty) dose,
+          if (method.isNotEmpty) method,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'weight':
+        final kg = d['weight_kg'];
+        final method = d['method'] as String? ?? '';
+        final parts = [
+          if (kg != null) '${kg}kg',
+          if (method.isNotEmpty) method,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'meal':
         const mealAmountLabels = {
           'very_little': '매우 적음',
@@ -429,6 +455,18 @@ class _EventCard extends StatelessWidget {
         final ml = d['milliliter'];
         final amountStr = waterLabels[amount] ?? amount ?? '';
         return ml != null ? '$amountStr · ${ml}mL' : amountStr;
+      case 'hospital':
+        final visitType = d['visit_type'] as String? ?? '';
+        final hospital = d['hospital_name'] as String?;
+        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
+        final diagnosis = d['diagnosis'] as String?;
+        final parts = [
+          if (visitType.isNotEmpty) visitType,
+          if (hospital != null && hospital.isNotEmpty) hospital,
+          if (symptoms.isNotEmpty) symptoms,
+          if (diagnosis != null && diagnosis.isNotEmpty) diagnosis,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'vaccination':
         final vaccines = (d['vaccines'] as List?)?.join(', ') ?? '';
         final hospital = d['hospital_name'] as String?;
@@ -453,6 +491,24 @@ class _EventCard extends StatelessWidget {
           if (duration != null) '$duration분',
         ];
         return items.isNotEmpty ? items.join(' · ') : (r.memo ?? '');
+      case 'walk':
+        final duration = d['duration_min'];
+        final distance = d['distance_km'];
+        final parts = [
+          if (duration != null) '$duration분',
+          if (distance != null) '${distance}km',
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'memo':
+        final title = d['title'] as String? ?? '';
+        final pinned = d['pinned'] as String? ?? '';
+        final content = d['content'] as String?;
+        final parts = [
+          if (title.isNotEmpty) title,
+          if (pinned.isNotEmpty) pinned,
+          if (content != null && content.isNotEmpty) content,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : '';
       default:           return r.memo ?? '';
     }
   }

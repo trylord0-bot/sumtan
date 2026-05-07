@@ -888,14 +888,25 @@ class _RecordList extends StatelessWidget {
       case 'medication':
         final med = d?['medicine'] as String? ?? '';
         return med.isNotEmpty ? med : '투약';
-      case 'weight': return '체중 기록';
+      case 'weight':
+        final kg = d?['weight_kg'];
+        return kg != null ? '체중 기록 — ${kg}kg' : '체중 기록';
       case 'meal':
         final mealType = d?['meal_type'] as String?;
         return mealType != null ? '식사 기록 — $mealType' : '식사 기록';
       case 'water': return '음수 기록';
+      case 'hospital':
+        final visitType = d?['visit_type'] as String?;
+        return visitType != null ? '병원 기록 — $visitType' : '병원 기록';
       case 'vaccination': return '접종 기록';
       case 'grooming': return '미용 기록';
       case 'brushing': return '빗질 기록';
+      case 'walk':
+        final duration = d?['duration_min'];
+        return duration != null ? '산책 기록 — $duration분' : '산책 기록';
+      case 'memo':
+        final title = d?['title'] as String?;
+        return title != null && title.isNotEmpty ? title : '메모';
       default:         return RecordCategoryX.fromString(r.category).label;
     }
   }
@@ -913,10 +924,15 @@ class _RecordList extends StatelessWidget {
         return tags.isNotEmpty ? tags : (r.memo ?? '');
       case 'medication':
         final dose = d['dose'] as String? ?? '';
-        return dose.isNotEmpty ? '$dose 투여 완료' : (r.memo ?? '');
+        final method = d['method'] as String? ?? '';
+        final parts = [
+          if (dose.isNotEmpty) dose,
+          if (method.isNotEmpty) method,
+        ];
+        return parts.isNotEmpty ? '${parts.join(' · ')} 투여 완료' : (r.memo ?? '');
       case 'weight':
-        final kg = d['weight_kg'];
-        return kg != null ? '${kg}kg 기록' : '';
+        final method = d['method'] as String? ?? '';
+        return method.isNotEmpty ? method : (r.memo ?? '');
       case 'meal':
         const mealAmountLabels = {
           'very_little': '매우 적음', 'little': '적음', 'normal': '보통',
@@ -948,6 +964,16 @@ class _RecordList extends StatelessWidget {
           if (hospital != null && hospital.isNotEmpty) hospital,
         ];
         return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'hospital':
+        final hospital = d['hospital_name'] as String?;
+        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
+        final diagnosis = d['diagnosis'] as String?;
+        final parts = [
+          if (hospital != null && hospital.isNotEmpty) hospital,
+          if (symptoms.isNotEmpty) symptoms,
+          if (diagnosis != null && diagnosis.isNotEmpty) diagnosis,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'grooming':
         final types = (d['types'] as List?)?.join(', ') ?? '';
         final shop = d['shop_name'] as String?;
@@ -964,6 +990,17 @@ class _RecordList extends StatelessWidget {
           if (duration != null) '$duration분',
         ];
         return items.isNotEmpty ? items.join(' · ') : (r.memo ?? '');
+      case 'walk':
+        final distance = d['distance_km'];
+        return distance != null ? '${distance}km' : (r.memo ?? '');
+      case 'memo':
+        final content = d['content'] as String?;
+        final pinned = d['pinned'] as String?;
+        final parts = [
+          if (pinned != null && pinned.isNotEmpty) pinned,
+          if (content != null && content.isNotEmpty) content,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : '';
       default:
         return r.memo ?? '';
     }

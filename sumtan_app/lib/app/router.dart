@@ -223,23 +223,36 @@ class _TopBar extends ConsumerWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       leading: showClose
           ? IconButton(
-              icon: const Icon(Icons.arrow_back, color: AppColors.gray700, size: 22),
+              icon: const Icon(
+                Icons.arrow_back,
+                color: AppColors.gray700,
+                size: 22,
+              ),
               onPressed: onClose,
             )
           : null,
-      title: Row(
-        children: [
-          const SizedBox(width: 16),
-          Text(title, style: const TextStyle(
-            fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.gray900,
-          )),
-          if (chip != null) ...[
-            const Spacer(),
-            chip,
-          ],
-          const Spacer(),
-        ],
+      title: Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w800,
+            color: AppColors.gray900,
+          ),
+        ),
       ),
+      flexibleSpace: chip == null
+          ? null
+          : SafeArea(
+              bottom: false,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Center(child: chip),
+                ],
+              ),
+            ),
       actions: [
         if (showHamburger)
           Builder(

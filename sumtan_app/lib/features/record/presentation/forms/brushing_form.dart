@@ -77,7 +77,7 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
     ref.invalidate(lastRecordProvider);
 
     if (mounted) {
-      showTopToast(context, '🪮 빗질이 기록됐어요');
+      showTopToast(context, '🪥 빗질이 기록됐어요');
       Navigator.pop(context, true);
     }
   }
@@ -85,7 +85,7 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
   @override
   Widget build(BuildContext context) {
     return FormShell(
-      title: '🪮 빗질 기록',
+      title: '🪥 빗질 기록',
       onSave: _save,
       children: [
         FormDateTimePicker(

@@ -62,7 +62,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return '🏥';
       case RecordCategory.vaccination: return '💉';
       case RecordCategory.grooming:    return '🛁';
-      case RecordCategory.brushing:    return '🪮';
+      case RecordCategory.brushing:    return '🪥';
       case RecordCategory.walk:        return '🦮';
       case RecordCategory.memo:        return '📝';
     }
@@ -74,14 +74,14 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.condition:   return AppColors.categoryCondition;  // blue
       case RecordCategory.medication:  return AppColors.categoryMedicine;   // pink
       case RecordCategory.weight:      return AppColors.categoryWeight;     // yellow
-      case RecordCategory.meal:        return const Color(0xFF2DD4BF);      // teal
+      case RecordCategory.meal:        return const Color(0xFF14B8A6);      // teal
       case RecordCategory.water:       return AppColors.categoryWater;      // cyan
       case RecordCategory.hospital:    return AppColors.danger400;          // red
       case RecordCategory.vaccination: return AppColors.categoryVaccine;    // purple
       case RecordCategory.grooming:    return AppColors.categoryEmergency;  // orange
-      case RecordCategory.brushing:    return const Color(0xFFA3E635);      // lime
-      case RecordCategory.walk:        return const Color(0xFFA3E635);      // lime
-      case RecordCategory.memo:        return AppColors.gray400;            // gray
+      case RecordCategory.brushing:    return const Color(0xFF84CC16);      // lime
+      case RecordCategory.walk:        return const Color(0xFF818CF8);      // indigo
+      case RecordCategory.memo:        return const Color(0xFF94A3B8);      // slate
     }
   }
 
@@ -97,8 +97,8 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.vaccination: return const Color(0xFFFAF5FF);      // purple light
       case RecordCategory.grooming:    return const Color(0xFFFFF7ED);      // orange light
       case RecordCategory.brushing:    return const Color(0xFFF7FEE7);      // lime light
-      case RecordCategory.walk:        return const Color(0xFFF7FEE7);      // lime light
-      case RecordCategory.memo:        return AppColors.gray100;            // gray light
+      case RecordCategory.walk:        return const Color(0xFFEEF2FF);      // indigo light
+      case RecordCategory.memo:        return const Color(0xFFF8FAFC);      // slate light
     }
   }
 

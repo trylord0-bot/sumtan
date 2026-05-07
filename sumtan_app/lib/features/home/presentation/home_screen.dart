@@ -506,7 +506,7 @@ class _TodaySummaryGrid extends StatelessWidget {
               topColor: brushingCount > 0
                   ? AppColors.success400
                   : AppColors.gray300,
-              icon: '🪮',
+              icon: '🪥',
               value: brushingCount > 0 ? '$brushingCount회' : '-',
               label: '빗질',
             )),

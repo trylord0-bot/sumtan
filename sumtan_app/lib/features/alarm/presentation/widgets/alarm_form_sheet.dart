@@ -10,7 +10,7 @@ import '../../data/alarm_model.dart';
 import '../../provider/alarm_provider.dart';
 
 // Amber color constants
-const _amber50  = Color(0xFFFFFBEB);
+const _amber50 = Color(0xFFFFFBEB);
 const _amber100 = Color(0xFFFEF3C7);
 const _amber400 = Color(0xFFFBBF24);
 const _amber700 = Color(0xFFB45309);
@@ -33,9 +33,9 @@ class AlarmFormSheet extends ConsumerStatefulWidget {
 
 class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   late String _type;
-  final _labelCtrl   = TextEditingController();
-  final _memoCtrl    = TextEditingController();
-  final _extraCtrl   = TextEditingController(); // hospital name
+  final _labelCtrl = TextEditingController();
+  final _memoCtrl = TextEditingController();
+  final _extraCtrl = TextEditingController(); // hospital name
 
   DateTime? _scheduledDate;
   TimeOfDay? _scheduledTime;
@@ -56,7 +56,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
     final a = widget.editAlarm;
     if (a != null) {
       _labelCtrl.text = a.label ?? '';
-      _memoCtrl.text  = a.memo ?? '';
+      _memoCtrl.text = a.memo ?? '';
       _repeatRule = a.repeatRule;
 
       // In reschedule mode date is intentionally cleared
@@ -98,8 +98,12 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         if (_scheduledDate == null) return '예약 날짜를 선택해주세요';
       case 'medication':
         if (_labelCtrl.text.trim().isEmpty) return '약품 이름을 입력해주세요';
-        if (_repeatRule == 'none' && _scheduledDate == null) return '투약 날짜를 선택해주세요';
-        if (_repeatRule != 'none' && _repeatTime == null) return '투약 시각을 선택해주세요';
+        if (_repeatRule == 'none' && _scheduledDate == null) {
+          return '투약 날짜를 선택해주세요';
+        }
+        if (_repeatRule != 'none' && _repeatTime == null) {
+          return '투약 시각을 선택해주세요';
+        }
       case 'meal':
         if (_labelCtrl.text.trim().isEmpty) return '알림 이름을 입력해주세요';
         if (_repeatTime == null) return '식사 시각을 선택해주세요';
@@ -141,8 +145,11 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
 
       if (_scheduledDate != null) {
         final dt = DateTime(
-          _scheduledDate!.year, _scheduledDate!.month, _scheduledDate!.day,
-          _scheduledTime?.hour ?? 9, _scheduledTime?.minute ?? 0,
+          _scheduledDate!.year,
+          _scheduledDate!.month,
+          _scheduledDate!.day,
+          _scheduledTime?.hour ?? 9,
+          _scheduledTime?.minute ?? 0,
         );
         scheduledAt = dt.toIso8601String();
       }
@@ -153,10 +160,11 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
       }
 
       // Repeating types: no scheduledAt
-      if (_type == 'meal' || _type == 'daily' ||
+      if (_type == 'meal' ||
+          _type == 'daily' ||
           (_type == 'medication' && _repeatRule != 'none')) {
         scheduledAt = null;
-        repeatRule  = _repeatRule;
+        repeatRule = _repeatRule;
       }
       // Vaccination: notify time goes into repeatTime
       if (_type == 'vaccination' && _scheduledTime != null) {
@@ -168,13 +176,15 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         id: widget.editAlarm?.id,
         petId: pet.id!,
         type: _type,
-        label: _labelCtrl.text.trim().isNotEmpty ? _labelCtrl.text.trim() : null,
+        label:
+            _labelCtrl.text.trim().isNotEmpty ? _labelCtrl.text.trim() : null,
         scheduledAt: scheduledAt,
         repeatRule: repeatRule,
         repeatTime: repeatTime,
         isEnabled: widget.editAlarm?.isEnabled ?? true,
         isDone: false,
-        createdAt: widget.editAlarm?.createdAt ?? DateTime.now().toIso8601String(),
+        createdAt:
+            widget.editAlarm?.createdAt ?? DateTime.now().toIso8601String(),
         memo: _memoCtrl.text.trim().isNotEmpty ? _memoCtrl.text.trim() : null,
         alarmDays: _alarmDays.isEmpty ? null : _alarmDays.join(','),
       );
@@ -225,8 +235,8 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
           ),
           TextButton(
             onPressed: () async {
-              Navigator.pop(ctx);      // close dialog
-              Navigator.pop(context);  // close sheet
+              Navigator.pop(ctx); // close dialog
+              Navigator.pop(context); // close sheet
               await ref.read(alarmListProvider.notifier).delete(alarm.id!);
               if (mounted) {
                 showTopToast(context, '알림이 삭제됐어요 🗑️');
@@ -250,45 +260,52 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         ? '$emoji ${alarmTypeLabel(_type)} 알림 수정'
         : '$emoji ${alarmTypeLabel(_type)} 알림 추가';
 
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Drag handle
-          Container(
-            margin: const EdgeInsets.only(top: 12),
-            width: 40, height: 4,
-            decoration: BoxDecoration(
-              color: AppColors.gray300,
-              borderRadius: BorderRadius.circular(2),
+    return DraggableScrollableSheet(
+      initialChildSize: 0.85,
+      minChildSize: 0.35,
+      maxChildSize: 0.95,
+      expand: false,
+      builder: (_, scrollController) => Container(
+        decoration: const BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          children: [
+            // Drag handle
+            Container(
+              margin: const EdgeInsets.only(top: 12),
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: AppColors.gray300,
+                borderRadius: BorderRadius.circular(2),
+              ),
             ),
-          ),
-          Flexible(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(20, 16, 20, 20 + kb),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 16, 12, 8),
+              child: Row(
                 children: [
-                  // Title
-                  Text(title, style: AppTypography.heading3),
-                  const SizedBox(height: AppSpacing.space4),
-
-                  // Reschedule warning banner
+                  Expanded(child: Text(title, style: AppTypography.heading3)),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: AppColors.gray500),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(height: 1, color: AppColors.gray200),
+            Expanded(
+              child: ListView(
+                controller: scrollController,
+                padding: EdgeInsets.fromLTRB(20, 16, 20, 20 + kb),
+                children: [
                   if (widget.isReschedule) ...[
                     _RescheduleBanner(),
                     const SizedBox(height: AppSpacing.space4),
                   ],
-
-                  // Fields
                   _buildFields(),
-
                   const SizedBox(height: AppSpacing.space6),
-
-                  // Save button
                   SizedBox(
                     width: double.infinity,
                     height: 50,
@@ -299,23 +316,25 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
                             : AppColors.primary400,
                         foregroundColor: AppColors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppRadius.radiusLg),
+                          borderRadius:
+                              BorderRadius.circular(AppRadius.radiusLg),
                         ),
                       ),
                       onPressed: _saving ? null : _save,
                       child: _saving
                           ? const SizedBox(
-                              width: 22, height: 22,
+                              width: 22,
+                              height: 22,
                               child: CircularProgressIndicator(
                                 strokeWidth: 2.5,
                                 color: AppColors.white,
                               ),
                             )
                           : Text(
-                        widget.isReschedule ? '재예약하기' : '저장하기',
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w700),
-                      ),
+                              widget.isReschedule ? '재예약하기' : '저장하기',
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w700),
+                            ),
                     ),
                   ),
 
@@ -330,7 +349,8 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
                           foregroundColor: AppColors.danger600,
                           side: const BorderSide(color: AppColors.danger400),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppRadius.radiusLg),
+                            borderRadius:
+                                BorderRadius.circular(AppRadius.radiusLg),
                           ),
                         ),
                         onPressed: _onDelete,
@@ -342,20 +362,26 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildFields() {
     switch (_type) {
-      case 'vaccination':  return _buildVaccinationFields();
-      case 'hospital':     return _buildHospitalFields();
-      case 'medication':   return _buildMedicationFields();
-      case 'meal':         return _buildMealFields();
-      case 'daily':        return _buildDailyFields();
-      default:             return const SizedBox.shrink();
+      case 'vaccination':
+        return _buildVaccinationFields();
+      case 'hospital':
+        return _buildHospitalFields();
+      case 'medication':
+        return _buildMedicationFields();
+      case 'meal':
+        return _buildMealFields();
+      case 'daily':
+        return _buildDailyFields();
+      default:
+        return const SizedBox.shrink();
     }
   }
 
@@ -377,7 +403,12 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         const SizedBox(height: AppSpacing.space4),
         _FieldLabel('알림 시점'),
         _MultiChips(
-          options: const [('D-7','D-7'),('D-3','D-3'),('D-1','D-1'),('D-0','당일')],
+          options: const [
+            ('D-7', 'D-7'),
+            ('D-3', 'D-3'),
+            ('D-1', 'D-1'),
+            ('D-0', '당일')
+          ],
           selected: _alarmDays,
           onChanged: (v) => setState(() => _alarmDays = v),
         ),
@@ -419,7 +450,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         const SizedBox(height: AppSpacing.space4),
         _FieldLabel('알림 시점'),
         _MultiChips(
-          options: const [('D-1','D-1'),('D-0','당일')],
+          options: const [('D-1', 'D-1'), ('D-0', '당일')],
           selected: _alarmDays,
           onChanged: (v) => setState(() => _alarmDays = v),
         ),
@@ -445,8 +476,10 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         _FieldLabel('반복 *'),
         _SingleChips(
           options: const [
-            ('none', '없음'), ('daily', '매일'),
-            ('weekly', '매주'), ('monthly', '매달'),
+            ('none', '없음'),
+            ('daily', '매일'),
+            ('weekly', '매주'),
+            ('monthly', '매달'),
           ],
           selected: _repeatRule,
           onChanged: (v) => setState(() => _repeatRule = v),
@@ -495,7 +528,9 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         _FieldLabel('반복 *'),
         _SingleChips(
           options: const [
-            ('daily', '매일'), ('weekday', '평일만'), ('weekend', '주말만'),
+            ('daily', '매일'),
+            ('weekday', '평일만'),
+            ('weekend', '주말만'),
           ],
           selected: _repeatRule,
           onChanged: (v) => setState(() => _repeatRule = v),
@@ -519,7 +554,9 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         _FieldLabel('반복 *'),
         _SingleChips(
           options: const [
-            ('daily', '매일'), ('weekday', '평일만'), ('weekend', '주말만'),
+            ('daily', '매일'),
+            ('weekday', '평일만'),
+            ('weekend', '주말만'),
           ],
           selected: _repeatRule,
           onChanged: (v) => setState(() => _repeatRule = v),
@@ -605,7 +642,9 @@ class _FieldLabel extends StatelessWidget {
       child: Text(
         required ? text : text,
         style: const TextStyle(
-          fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+          color: AppColors.gray700,
         ),
       ),
     );
@@ -631,7 +670,8 @@ class _TextInput extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 14),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.radiusMd),
           borderSide: const BorderSide(color: AppColors.gray200, width: 1.5),
@@ -665,9 +705,15 @@ class _DateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasDate = date != null;
-    final Color bg   = isReschedule ? _amber50  : (hasDate ? AppColors.primary50  : AppColors.white);
-    final Color bd   = isReschedule ? _amber400 : (hasDate ? AppColors.primary300 : AppColors.gray200);
-    final Color fg   = isReschedule ? _amber700 : (hasDate ? AppColors.primary800 : AppColors.gray400);
+    final Color bg = isReschedule
+        ? _amber50
+        : (hasDate ? AppColors.primary50 : AppColors.white);
+    final Color bd = isReschedule
+        ? _amber400
+        : (hasDate ? AppColors.primary300 : AppColors.gray200);
+    final Color fg = isReschedule
+        ? _amber700
+        : (hasDate ? AppColors.primary800 : AppColors.gray400);
     final String txt = hasDate
         ? DateFormat('MM월 dd일 (E)', 'ko').format(date!)
         : (isReschedule ? '날짜 재선택' : '날짜 선택');
@@ -703,9 +749,7 @@ class _TimeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasTime = time != null;
-    final txt = hasTime
-        ? time!.format(context)
-        : '시각 선택';
+    final txt = hasTime ? time!.format(context) : '시각 선택';
 
     return GestureDetector(
       onTap: onPick,
@@ -722,7 +766,8 @@ class _TimeButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(Icons.access_time_rounded, size: 16,
+            Icon(Icons.access_time_rounded,
+                size: 16,
                 color: hasTime ? AppColors.primary800 : AppColors.gray400),
             const SizedBox(width: 8),
             Text(txt,
@@ -750,7 +795,8 @@ class _MultiChips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 8, runSpacing: 8,
+      spacing: 8,
+      runSpacing: 8,
       children: options.map((opt) {
         final isSelected = selected.contains(opt.$1);
         return GestureDetector(
@@ -784,11 +830,14 @@ class _SingleChips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: 8, runSpacing: 8,
-      children: options.map((opt) => GestureDetector(
-        onTap: () => onChanged(opt.$1),
-        child: _Chip(label: opt.$2, isSelected: selected == opt.$1),
-      )).toList(),
+      spacing: 8,
+      runSpacing: 8,
+      children: options
+          .map((opt) => GestureDetector(
+                onTap: () => onChanged(opt.$1),
+                child: _Chip(label: opt.$2, isSelected: selected == opt.$1),
+              ))
+          .toList(),
     );
   }
 }
@@ -812,7 +861,8 @@ class _Chip extends StatelessWidget {
       child: Text(
         label,
         style: TextStyle(
-          fontSize: 13, fontWeight: FontWeight.w500,
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
           color: isSelected ? AppColors.primary700 : AppColors.gray500,
         ),
       ),

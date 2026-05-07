@@ -46,7 +46,8 @@ class AlarmListItem extends ConsumerWidget {
                   const SizedBox(width: 12),
                   Expanded(child: _InfoColumn(alarm: alarm, status: status)),
                   const SizedBox(width: 8),
-                  _RightWidget(alarm: alarm, status: status, notifier: notifier),
+                  _RightWidget(
+                      alarm: alarm, status: status, notifier: notifier),
                 ],
               ),
             ),
@@ -61,6 +62,7 @@ class AlarmListItem extends ConsumerWidget {
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
+        useRootNavigator: true,
         backgroundColor: Colors.transparent,
         builder: (_) => AlarmFormSheet(editAlarm: alarm, isReschedule: true),
       );
@@ -68,6 +70,7 @@ class AlarmListItem extends ConsumerWidget {
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
+        useRootNavigator: true,
         backgroundColor: Colors.transparent,
         builder: (_) => AlarmFormSheet(editAlarm: alarm),
       );
@@ -122,18 +125,24 @@ class _TypeIconBox extends StatelessWidget {
 
   Color get _bg {
     switch (type) {
-      case 'vaccination': return const Color(0xFFEDE9FE);
-      case 'hospital':    return const Color(0xFFFEE2E2);
-      case 'medication':  return const Color(0xFFFEF3C7);
-      case 'meal':        return const Color(0xFFDCFCE7);
-      default:            return AppColors.primary100;
+      case 'vaccination':
+        return const Color(0xFFEDE9FE);
+      case 'hospital':
+        return const Color(0xFFFEE2E2);
+      case 'medication':
+        return const Color(0xFFFEF3C7);
+      case 'meal':
+        return const Color(0xFFDCFCE7);
+      default:
+        return AppColors.primary100;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40, height: 40,
+      width: 40,
+      height: 40,
       decoration: BoxDecoration(
         color: _bg,
         borderRadius: BorderRadius.circular(AppRadius.radiusMd),
@@ -155,7 +164,8 @@ class _InfoColumn extends StatelessWidget {
       fontSize: 14,
       fontWeight: FontWeight.w600,
       color: status == AlarmStatus.done ? AppColors.gray400 : AppColors.gray900,
-      decoration: status == AlarmStatus.done ? TextDecoration.lineThrough : null,
+      decoration:
+          status == AlarmStatus.done ? TextDecoration.lineThrough : null,
     );
 
     return Column(
@@ -205,11 +215,13 @@ class _Subtitle extends StatelessWidget {
       default:
         // upcoming
         final dateStr = alarm.scheduledAt != null
-            ? DateFormat('M월 d일 (E)', 'ko').format(DateTime.parse(alarm.scheduledAt!))
+            ? DateFormat('M월 d일 (E)', 'ko')
+                .format(DateTime.parse(alarm.scheduledAt!))
             : _formatRepeatTime(alarm.repeatTime);
-        final daysLabel = (alarm.alarmDays != null && alarm.alarmDays!.isNotEmpty)
-            ? ' · ${alarm.alarmDays}'
-            : '';
+        final daysLabel =
+            (alarm.alarmDays != null && alarm.alarmDays!.isNotEmpty)
+                ? ' · ${alarm.alarmDays}'
+                : '';
         return Text('$dateStr$daysLabel',
             style: const TextStyle(fontSize: 12, color: AppColors.gray500));
     }
@@ -230,12 +242,18 @@ class _Subtitle extends StatelessWidget {
 
   String _repeatRuleLabel(String rule) {
     switch (rule) {
-      case 'daily':   return '매일';
-      case 'weekday': return '평일';
-      case 'weekend': return '주말';
-      case 'weekly':  return '매주';
-      case 'monthly': return '매달';
-      default:        return '';
+      case 'daily':
+        return '매일';
+      case 'weekday':
+        return '평일';
+      case 'weekend':
+        return '주말';
+      case 'weekly':
+        return '매주';
+      case 'monthly':
+        return '매달';
+      default:
+        return '';
     }
   }
 }
@@ -244,13 +262,15 @@ class _RightWidget extends ConsumerWidget {
   final Alarm alarm;
   final AlarmStatus status;
   final AlarmNotifier notifier;
-  const _RightWidget({required this.alarm, required this.status, required this.notifier});
+  const _RightWidget(
+      {required this.alarm, required this.status, required this.notifier});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (status == AlarmStatus.done) {
       return Container(
-        width: 24, height: 24,
+        width: 24,
+        height: 24,
         decoration: const BoxDecoration(
           color: AppColors.success400,
           shape: BoxShape.circle,
@@ -260,7 +280,8 @@ class _RightWidget extends ConsumerWidget {
     }
 
     if (status == AlarmStatus.past) {
-      return const Icon(Icons.chevron_right, color: AppColors.gray400, size: 20);
+      return const Icon(Icons.chevron_right,
+          color: AppColors.gray400, size: 20);
     }
 
     // D-badge + toggle for upcoming & repeat
@@ -302,13 +323,21 @@ class _DBadge extends StatelessWidget {
     String text;
 
     if (days == 0) {
-      bg = _amber400; fg = AppColors.white; text = 'D-Day';
+      bg = _amber400;
+      fg = AppColors.white;
+      text = 'D-Day';
     } else if (days < 0) {
-      bg = AppColors.gray200; fg = AppColors.gray400; text = 'D+${-days}';
+      bg = AppColors.gray200;
+      fg = AppColors.gray400;
+      text = 'D+${-days}';
     } else if (days <= 3) {
-      bg = AppColors.primary400; fg = AppColors.white; text = 'D-$days';
+      bg = AppColors.primary400;
+      fg = AppColors.white;
+      text = 'D-$days';
     } else {
-      bg = AppColors.primary100; fg = AppColors.primary700; text = 'D-$days';
+      bg = AppColors.primary100;
+      fg = AppColors.primary700;
+      text = 'D-$days';
     }
 
     return Container(
@@ -318,7 +347,8 @@ class _DBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.radiusFull),
       ),
       child: Text(text,
-          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: fg)),
+          style:
+              TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: fg)),
     );
   }
 }

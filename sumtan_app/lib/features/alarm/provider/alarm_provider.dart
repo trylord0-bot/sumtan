@@ -9,7 +9,8 @@ import '../../record/data/record_repository.dart';
 import '../../record/provider/record_provider.dart';
 
 final alarmRepositoryProvider = Provider((ref) => AlarmRepository());
-final notificationServiceProvider = Provider((_) => NotificationService.instance);
+final notificationServiceProvider =
+    Provider((_) => NotificationService.instance);
 
 final alarmListProvider =
     StateNotifierProvider<AlarmNotifier, AsyncValue<List<Alarm>>>(
@@ -55,6 +56,36 @@ class AlarmNotifier extends StateNotifier<AsyncValue<List<Alarm>>> {
     await _repo.update(alarm);
     await _ns.cancel(alarm.id!);
     if (alarm.isEnabled) await _ns.schedule(alarm);
+    await _load();
+  }
+
+  Future<void> snooze(Alarm alarm, int minutes) async {
+    final now = DateTime.now();
+    final scheduledAt = alarm.scheduledAt;
+    final scheduled =
+        scheduledAt == null ? null : DateTime.tryParse(scheduledAt);
+    final baseTime =
+        scheduled == null || scheduled.isBefore(now) ? now : scheduled;
+    final updated = alarm.copyWith(
+      scheduledAt: baseTime.add(Duration(minutes: minutes)).toIso8601String(),
+      isDone: false,
+    );
+
+    await _repo.update(updated);
+    await _ns.cancel(alarm.id!);
+    if (updated.isEnabled) await _ns.schedule(updated);
+    await _load();
+  }
+
+  Future<void> snoozeUntil(Alarm alarm, DateTime scheduledAt) async {
+    final updated = alarm.copyWith(
+      scheduledAt: scheduledAt.toIso8601String(),
+      isDone: false,
+    );
+
+    await _repo.update(updated);
+    await _ns.cancel(alarm.id!);
+    if (updated.isEnabled) await _ns.schedule(updated);
     await _load();
   }
 

@@ -16,6 +16,7 @@ void showAlarmAddSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
+    useRootNavigator: true,
     backgroundColor: Colors.transparent,
     // outerContext = context here (main scaffold) so the form sheet
     // can be pushed on the main navigator after the type selector closes.
@@ -44,19 +45,16 @@ class AlarmScreen extends ConsumerWidget {
         }
 
         // Split into sections
-        final todayPending = alarms
-            .where((a) => a.status == AlarmStatus.todayPending)
-            .toList();
-        final upcoming = alarms
-            .where((a) => a.status == AlarmStatus.upcoming)
-            .toList();
+        final todayPending =
+            alarms.where((a) => a.status == AlarmStatus.todayPending).toList();
+        final upcoming =
+            alarms.where((a) => a.status == AlarmStatus.upcoming).toList();
         final pastOrDone = alarms
             .where((a) =>
                 a.status == AlarmStatus.past || a.status == AlarmStatus.done)
             .toList();
-        final repeat = alarms
-            .where((a) => a.status == AlarmStatus.repeat)
-            .toList();
+        final repeat =
+            alarms.where((a) => a.status == AlarmStatus.repeat).toList();
 
         final hasScheduled = todayPending.isNotEmpty ||
             upcoming.isNotEmpty ||

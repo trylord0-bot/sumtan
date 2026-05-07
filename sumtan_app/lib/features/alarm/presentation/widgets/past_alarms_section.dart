@@ -49,7 +49,8 @@ class PastAlarmsSection extends ConsumerWidget {
                 ),
                 const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                   decoration: BoxDecoration(
                     color: AppColors.gray200,
                     borderRadius: BorderRadius.circular(AppRadius.radiusFull),
@@ -71,8 +72,7 @@ class PastAlarmsSection extends ConsumerWidget {
           ),
         ),
 
-        if (visible)
-          ...alarms.map((a) => _PastAlarmItem(alarm: a)),
+        if (visible) ...alarms.map((a) => _PastAlarmItem(alarm: a)),
       ],
     );
   }
@@ -134,7 +134,8 @@ class _PastAlarmItem extends ConsumerWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
                           color: isDone ? AppColors.gray400 : AppColors.gray900,
-                          decoration: isDone ? TextDecoration.lineThrough : null,
+                          decoration:
+                              isDone ? TextDecoration.lineThrough : null,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -146,16 +147,19 @@ class _PastAlarmItem extends ConsumerWidget {
                 ),
                 if (isDone)
                   Container(
-                    width: 24, height: 24,
+                    width: 24,
+                    height: 24,
                     decoration: const BoxDecoration(
                       color: AppColors.primary400,
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(Icons.check, color: AppColors.white, size: 14),
+                    child: const Icon(Icons.check,
+                        color: AppColors.white, size: 14),
                   )
                 else
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
                       color: AppColors.gray200,
                       borderRadius: BorderRadius.circular(AppRadius.radiusFull),
@@ -195,6 +199,7 @@ class _PastAlarmItem extends ConsumerWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      useRootNavigator: true,
       backgroundColor: Colors.transparent,
       builder: (_) => AlarmFormSheet(editAlarm: alarm, isReschedule: true),
     );
@@ -207,18 +212,24 @@ class _TypeIconBox extends StatelessWidget {
 
   Color get _bg {
     switch (type) {
-      case 'vaccination': return const Color(0xFFEDE9FE);
-      case 'hospital':    return const Color(0xFFFEE2E2);
-      case 'medication':  return const Color(0xFFFEF3C7);
-      case 'meal':        return const Color(0xFFDCFCE7);
-      default:            return AppColors.primary100;
+      case 'vaccination':
+        return const Color(0xFFEDE9FE);
+      case 'hospital':
+        return const Color(0xFFFEE2E2);
+      case 'medication':
+        return const Color(0xFFFEF3C7);
+      case 'meal':
+        return const Color(0xFFDCFCE7);
+      default:
+        return AppColors.primary100;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40, height: 40,
+      width: 40,
+      height: 40,
       decoration: BoxDecoration(
         color: _bg,
         borderRadius: BorderRadius.circular(AppRadius.radiusMd),

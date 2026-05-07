@@ -11,10 +11,10 @@ class AlarmTypeSelector extends StatelessWidget {
 
   static const _types = [
     ('vaccination', '💉', '예방접종'),
-    ('hospital',    '🏥', '병원 예약'),
-    ('medication',  '💊', '투약'),
-    ('meal',        '🍽️', '식사 시간'),
-    ('daily',       '📋', '일일 리마인더'),
+    ('hospital', '🏥', '병원 예약'),
+    ('medication', '💊', '투약'),
+    ('meal', '🍽️', '식사 시간'),
+    ('daily', '📋', '일일 리마인더'),
   ];
 
   @override
@@ -29,18 +29,31 @@ class AlarmTypeSelector extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(top: 12),
-            width: 40, height: 4,
+            width: 40,
+            height: 4,
             decoration: BoxDecoration(
               color: AppColors.gray300,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 16, 20, 12),
-            child: Text('알림 종류 선택', style: TextStyle(
-              fontSize: 16, fontWeight: FontWeight.w700,
-              color: AppColors.gray900,
-            )),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 12, 12, 8),
+            child: Row(
+              children: [
+                const Expanded(
+                  child: Text('알림 종류 선택',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.gray900,
+                      )),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close, color: AppColors.gray500),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -51,29 +64,31 @@ class AlarmTypeSelector extends StatelessWidget {
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
               childAspectRatio: 1.1,
-              children: _types.map((t) => _TypeCard(
-                type: t.$1,
-                emoji: t.$2,
-                label: t.$3,
-                onTap: () {
-                  // 1. Close type selector
-                  Navigator.pop(context);
-                  // 2. Show form sheet using outer context (not the dismissing sheet's context)
-                  showModalBottomSheet(
-                    context: outerContext,
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    builder: (_) => AlarmFormSheet(type: t.$1),
-                  );
-                },
-              )).toList(),
+              children: _types
+                  .map((t) => _TypeCard(
+                        type: t.$1,
+                        emoji: t.$2,
+                        label: t.$3,
+                        onTap: () {
+                          // 1. Close type selector
+                          Navigator.pop(context);
+                          // 2. Show form sheet using outer context (not the dismissing sheet's context)
+                          showModalBottomSheet(
+                            context: outerContext,
+                            isScrollControlled: true,
+                            useRootNavigator: true,
+                            backgroundColor: Colors.transparent,
+                            builder: (_) => AlarmFormSheet(type: t.$1),
+                          );
+                        },
+                      ))
+                  .toList(),
             ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
             child: Text('👆 원하는 알림 종류를 탭하세요',
-                style: TextStyle(
-                    fontSize: 12, color: AppColors.gray400)),
+                style: TextStyle(fontSize: 12, color: AppColors.gray400)),
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
         ],
@@ -110,10 +125,13 @@ class _TypeCard extends StatelessWidget {
           children: [
             Text(emoji, style: const TextStyle(fontSize: 28)),
             const SizedBox(height: 4),
-            Text(label, style: const TextStyle(
-              fontSize: 12, fontWeight: FontWeight.w600,
-              color: AppColors.primary700,
-            ), textAlign: TextAlign.center),
+            Text(label,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primary700,
+                ),
+                textAlign: TextAlign.center),
           ],
         ),
       ),

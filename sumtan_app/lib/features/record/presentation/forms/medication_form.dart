@@ -34,6 +34,17 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
   }
 
   Future<void> _save() async {
+    final medicine = _nameCtrl.text.trim();
+    final dose = _doseCtrl.text.trim();
+    if (medicine.isEmpty) {
+      showTopToast(context, '💡 약품명을 입력해 주세요');
+      return;
+    }
+    if (dose.isEmpty) {
+      showTopToast(context, '💡 용량을 입력해 주세요');
+      return;
+    }
+
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
     final media = await _mediaController.saveToLocalFiles();
@@ -42,8 +53,8 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
       category: 'medication',
       recordedAt: du.toIso8601(_datetime),
       dataJson: {
-        'medicine': _nameCtrl.text,
-        'dose': _doseCtrl.text,
+        'medicine': medicine,
+        'dose': dose,
         'method': _method,
         if (media.isNotEmpty) 'media': media,
       },

@@ -88,9 +88,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('음수량', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('음수량'),
             const SizedBox(height: AppSpacing.space3),
             Row(
               children: _amounts.map((entry) {
@@ -135,23 +133,21 @@ class _WaterFormState extends ConsumerState<WaterForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
 
-        // mL 직접 입력 (선택)
+        // mL 직접 입력
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('mL 직접 입력 (선택)', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('mL 직접 입력', required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _mlCtrl,
               keyboardType: TextInputType.number,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
-                _RangeLimitFormatter(max: 9999),
+                const _RangeLimitFormatter(max: 9999),
               ],
               decoration: const InputDecoration(
-                hintText: '직접 입력 (선택)',
+                hintText: '예: 200',
                 suffixText: 'mL',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),

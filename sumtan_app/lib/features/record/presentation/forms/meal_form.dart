@@ -121,9 +121,7 @@ class _MealFormState extends ConsumerState<MealForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('식사량', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('식사량', required: false),
             const SizedBox(height: AppSpacing.space3),
             Row(
               children: _mealAmounts.map((entry) {
@@ -168,13 +166,11 @@ class _MealFormState extends ConsumerState<MealForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
 
-        // 급여량 (선택)
+        // 급여량
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('급여량 (선택)', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('급여량', required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _amountCtrl,

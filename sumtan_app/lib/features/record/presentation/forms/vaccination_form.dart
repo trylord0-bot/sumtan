@@ -42,7 +42,7 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
 
   Future<void> _save() async {
     if (_vaccines.isEmpty) {
-      showTopToast(context, '백신 종류를 1개 이상 선택해 주세요');
+      showTopToast(context, '💡 백신 종류를 하나 이상 선택해 주세요');
       return;
     }
     final pet = ref.read(selectedPetProvider);
@@ -101,12 +101,14 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
           label: '병원명',
+          required: false,
           controller: _hospitalNameCtrl,
           hint: '예: 행복동물병원',
         ),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
           label: '부작용',
+          required: false,
           options: const ['없음', '경미', '심각'],
           selected: _sideEffect,
           onChanged: (v) => setState(() => _sideEffect = v),

@@ -12,6 +12,7 @@ import 'package:video_player/video_player.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
+import 'form_widgets.dart';
 
 enum RecordMediaType {
   photo,
@@ -253,13 +254,9 @@ class _RecordMediaAttachmentFieldState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        FormFieldLabel(
           items.isEmpty ? '사진 · 동영상' : '사진 · 동영상 · ${items.length}개',
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w600,
-            color: AppColors.gray700,
-          ),
+          required: false,
         ),
         const SizedBox(height: AppSpacing.space2),
         Wrap(

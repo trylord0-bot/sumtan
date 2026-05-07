@@ -44,7 +44,7 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
 
   Future<void> _save() async {
     if (_parts.isEmpty) {
-      showTopToast(context, '빗질 부위를 1개 이상 선택해 주세요');
+      showTopToast(context, '💡 빗질 부위를 하나 이상 선택해 주세요');
       return;
     }
 
@@ -101,7 +101,8 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-          label: '소요 시간 (선택)',
+          label: '소요 시간',
+          required: false,
           controller: _durationCtrl,
           hint: '예: 10',
           keyboardType: TextInputType.number,

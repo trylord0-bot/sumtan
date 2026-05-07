@@ -33,10 +33,21 @@ class _WeightFormState extends ConsumerState<WeightForm> {
   }
 
   Future<void> _save() async {
+    final weightText = _weightCtrl.text.trim();
+    if (weightText.isEmpty) {
+      showTopToast(context, '💡 체중을 입력해 주세요');
+      return;
+    }
+
+    final weight = double.tryParse(weightText);
+    if (weight == null) {
+      showTopToast(context, '💡 체중은 숫자로 입력해 주세요');
+      return;
+    }
+
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
-    final weight = double.tryParse(_weightCtrl.text);
-    if (weight == null) return;
+
     final media = await _mediaController.saveToLocalFiles();
     final record = Record(
       petId: pet!.id!,

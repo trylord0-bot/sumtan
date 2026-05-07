@@ -91,26 +91,26 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   String? _validate() {
     switch (_type) {
       case 'vaccination':
-        if (_labelCtrl.text.trim().isEmpty) return '백신 이름을 입력해주세요';
-        if (_scheduledDate == null) return '예정일을 선택해주세요';
-        if (_scheduledTime == null) return '예정 시각을 선택해주세요';
+        if (_labelCtrl.text.trim().isEmpty) return '💡 백신 이름을 입력해 주세요';
+        if (_scheduledDate == null) return '💡 예정일을 선택해 주세요';
+        if (_scheduledTime == null) return '💡 예정 시각을 선택해 주세요';
       case 'hospital':
-        if (_labelCtrl.text.trim().isEmpty) return '방문 목적을 입력해주세요';
-        if (_scheduledDate == null) return '예약 날짜를 선택해주세요';
-        if (_scheduledTime == null) return '예약 시각을 선택해주세요';
+        if (_labelCtrl.text.trim().isEmpty) return '💡 방문 목적을 입력해 주세요';
+        if (_scheduledDate == null) return '💡 예약 날짜를 선택해 주세요';
+        if (_scheduledTime == null) return '💡 예약 시각을 선택해 주세요';
       case 'medication':
-        if (_labelCtrl.text.trim().isEmpty) return '약품 이름을 입력해주세요';
+        if (_labelCtrl.text.trim().isEmpty) return '💡 약품 이름을 입력해 주세요';
         if (_repeatRule == 'none' && _scheduledDate == null) {
-          return '투약 날짜를 선택해주세요';
+          return '💡 투약 날짜를 선택해 주세요';
         }
         if (_repeatRule != 'none' && _repeatTime == null) {
-          return '투약 시각을 선택해주세요';
+          return '💡 투약 시각을 선택해 주세요';
         }
       case 'meal':
-        if (_labelCtrl.text.trim().isEmpty) return '알림 이름을 입력해주세요';
-        if (_repeatTime == null) return '식사 시각을 선택해주세요';
+        if (_labelCtrl.text.trim().isEmpty) return '💡 알림 이름을 입력해 주세요';
+        if (_repeatTime == null) return '💡 식사 시각을 선택해 주세요';
       case 'daily':
-        if (_repeatTime == null) return '알림 시각을 선택해주세요';
+        if (_repeatTime == null) return '💡 알림 시각을 선택해 주세요';
     }
     return null;
   }

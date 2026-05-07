@@ -181,8 +181,32 @@ class _PickerChip extends StatelessWidget {
   }
 }
 
+class FormFieldLabel extends StatelessWidget {
+  final String label;
+  final bool required;
+
+  const FormFieldLabel(
+    this.label, {
+    super.key,
+    this.required = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      required ? '$label *' : label,
+      style: const TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+        color: AppColors.gray700,
+      ),
+    );
+  }
+}
+
 class FormSegmentRow extends StatelessWidget {
   final String label;
+  final bool required;
   final List<String> options;
   final String selected;
   final ValueChanged<String> onChanged;
@@ -190,6 +214,7 @@ class FormSegmentRow extends StatelessWidget {
   const FormSegmentRow({
     super.key,
     required this.label,
+    this.required = true,
     required this.options,
     required this.selected,
     required this.onChanged,
@@ -200,9 +225,7 @@ class FormSegmentRow extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(
-          fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-        )),
+        FormFieldLabel(label, required: required),
         const SizedBox(height: AppSpacing.space2),
         Container(
           padding: const EdgeInsets.all(3),
@@ -243,6 +266,7 @@ class FormSegmentRow extends StatelessWidget {
 
 class FormInputField extends StatelessWidget {
   final String label;
+  final bool required;
   final TextEditingController controller;
   final String hint;
   final TextInputType? keyboardType;
@@ -251,6 +275,7 @@ class FormInputField extends StatelessWidget {
   const FormInputField({
     super.key,
     required this.label,
+    this.required = true,
     required this.controller,
     required this.hint,
     this.keyboardType,
@@ -262,9 +287,7 @@ class FormInputField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(
-          fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-        )),
+        FormFieldLabel(label, required: required),
         const SizedBox(height: AppSpacing.space2),
         TextFormField(
           controller: controller,
@@ -288,9 +311,7 @@ class FormMemoField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('메모 (선택)', style: TextStyle(
-          fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-        )),
+        const FormFieldLabel('메모', required: false),
         const SizedBox(height: AppSpacing.space2),
         TextFormField(
           controller: controller,
@@ -305,6 +326,7 @@ class FormMemoField extends StatelessWidget {
 
 class FormTagSelector extends StatefulWidget {
   final String label;
+  final bool required;
   final List<String> options;
   final List<String> selected;
   final ValueChanged<List<String>> onChanged;
@@ -312,6 +334,7 @@ class FormTagSelector extends StatefulWidget {
   const FormTagSelector({
     super.key,
     required this.label,
+    this.required = true,
     required this.options,
     required this.selected,
     required this.onChanged,
@@ -329,9 +352,7 @@ class _FormTagSelectorState extends State<FormTagSelector> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.label, style: const TextStyle(
-          fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-        )),
+        FormFieldLabel(widget.label, required: widget.required),
         const SizedBox(height: AppSpacing.space2),
         if (widget.selected.isNotEmpty) ...[
           Wrap(
@@ -421,4 +442,3 @@ class _FormTagSelectorState extends State<FormTagSelector> {
     );
   }
 }
-

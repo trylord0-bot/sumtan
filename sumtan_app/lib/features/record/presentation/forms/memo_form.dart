@@ -32,8 +32,9 @@ class _MemoFormState extends ConsumerState<MemoForm> {
   }
 
   Future<void> _save() async {
-    if (_titleCtrl.text.isEmpty) {
-      showTopToast(context, '제목을 입력해 주세요');
+    final title = _titleCtrl.text.trim();
+    if (title.isEmpty) {
+      showTopToast(context, '💡 제목을 입력해 주세요');
       return;
     }
     final pet = ref.read(selectedPetProvider);
@@ -45,7 +46,7 @@ class _MemoFormState extends ConsumerState<MemoForm> {
       category: 'memo',
       recordedAt: du.toIso8601(_datetime),
       dataJson: {
-        'title': _titleCtrl.text,
+        'title': title,
         'content': _contentCtrl.text.isEmpty ? null : _contentCtrl.text,
         'pinned': _pinned,
         if (media.isNotEmpty) 'media': media,

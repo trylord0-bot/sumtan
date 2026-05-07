@@ -92,6 +92,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
           label: '병원명',
+          required: false,
           controller: _hospitalNameCtrl,
           hint: '예: 행복동물병원',
         ),
@@ -105,6 +106,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         const SizedBox(height: AppSpacing.space4),
         FormTagSelector(
           label: '증상 태그',
+          required: false,
           options: _symptomOptions,
           selected: _symptoms,
           onChanged: (v) => setState(() => _symptoms = v),
@@ -112,6 +114,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
           label: '진단명',
+          required: false,
           controller: _diagnosisCtrl,
           hint: '예: 장염, 피부염',
         ),
@@ -119,9 +122,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('비용', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('비용', required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _costCtrl,
@@ -138,9 +139,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('다음 예약일', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('다음 예약일', required: false),
             const SizedBox(height: AppSpacing.space2),
             if (_nextVisit == null)
               GestureDetector(

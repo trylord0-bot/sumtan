@@ -35,15 +35,22 @@ class _WalkFormState extends ConsumerState<WalkForm> {
   }
 
   Future<void> _save() async {
-    if (_durationCtrl.text.isEmpty) {
-      showTopToast(context, '산책 시간을 입력해 주세요');
+    final durationText = _durationCtrl.text.trim();
+    if (durationText.isEmpty) {
+      showTopToast(context, '💡 산책 시간을 입력해 주세요');
       return;
     }
+    final duration = int.tryParse(durationText);
+    if (duration == null) {
+      showTopToast(context, '💡 산책 시간은 숫자로 입력해 주세요');
+      return;
+    }
+
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
 
     final data = <String, dynamic>{
-      'duration_min': int.tryParse(_durationCtrl.text) ?? 0,
+      'duration_min': duration,
     };
     if (_distanceCtrl.text.isNotEmpty) {
       data['distance_km'] = double.tryParse(_distanceCtrl.text);
@@ -85,9 +92,7 @@ class _WalkFormState extends ConsumerState<WalkForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('산책 시간', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('산책 시간'),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _durationCtrl,
@@ -105,9 +110,7 @@ class _WalkFormState extends ConsumerState<WalkForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('거리 (선택)', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('거리', required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _distanceCtrl,

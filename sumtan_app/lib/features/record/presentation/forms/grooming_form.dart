@@ -41,7 +41,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
 
   Future<void> _save() async {
     if (_types.isEmpty) {
-      showTopToast(context, '미용 종류를 1개 이상 선택해 주세요');
+      showTopToast(context, '💡 미용 종류를 하나 이상 선택해 주세요');
       return;
     }
     final pet = ref.read(selectedPetProvider);
@@ -98,6 +98,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
           label: '샵 이름',
+          required: false,
           controller: _shopNameCtrl,
           hint: '예: 뽀송뽀송 펫샵',
         ),
@@ -105,9 +106,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('비용', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('비용', required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _costCtrl,
@@ -124,9 +123,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('다음 예약일', style: TextStyle(
-              fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-            )),
+            const FormFieldLabel('다음 예약일', required: false),
             const SizedBox(height: AppSpacing.space2),
             if (_nextDate == null)
               GestureDetector(

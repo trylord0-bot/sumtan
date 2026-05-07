@@ -77,9 +77,7 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
           onChanged: (dt) => setState(() => _datetime = dt),
         ),
         const SizedBox(height: AppSpacing.space4),
-        const Text('컨디션 점수 (1~5점)', style: TextStyle(
-          fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-        )),
+        const FormFieldLabel('컨디션 점수 (1~5점)'),
         const SizedBox(height: AppSpacing.space2),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -106,9 +104,7 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
           }),
         ),
         const SizedBox(height: AppSpacing.space4),
-        const Text('증상 태그', style: TextStyle(
-          fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-        )),
+        const FormFieldLabel('증상 태그', required: false),
         const SizedBox(height: AppSpacing.space2),
         Wrap(
           spacing: 8, runSpacing: 8,

@@ -23,9 +23,7 @@ class _MealFormState extends ConsumerState<MealForm> {
   DateTime _datetime = DateTime.now();
   String _mealType = '아침';
   String _mealAmount = 'normal';
-  final _foodNameCtrl = TextEditingController();
   final _amountCtrl = TextEditingController();
-  String _intake = '다 먹음';
   final _memoCtrl = TextEditingController();
   final _mediaController = RecordMediaController();
 
@@ -48,11 +46,9 @@ class _MealFormState extends ConsumerState<MealForm> {
 
   Future<void> _loadLastValues() async {
     final prefs = await SharedPreferences.getInstance();
-    final lastName   = prefs.getString('meal_last_food_name') ?? '';
     final lastAmount = prefs.getString('meal_last_amount_g') ?? '';
     if (mounted) {
       setState(() {
-        _foodNameCtrl.text = lastName;
         _amountCtrl.text   = lastAmount;
       });
     }
@@ -60,7 +56,6 @@ class _MealFormState extends ConsumerState<MealForm> {
 
   @override
   void dispose() {
-    _foodNameCtrl.dispose();
     _amountCtrl.dispose();
     _memoCtrl.dispose();
     _mediaController.dispose();
@@ -72,9 +67,6 @@ class _MealFormState extends ConsumerState<MealForm> {
     if (pet?.id == null) return;
 
     final prefs = await SharedPreferences.getInstance();
-    if (_foodNameCtrl.text.isNotEmpty) {
-      await prefs.setString('meal_last_food_name', _foodNameCtrl.text);
-    }
     if (_amountCtrl.text.isNotEmpty) {
       await prefs.setString('meal_last_amount_g', _amountCtrl.text);
     }
@@ -87,9 +79,7 @@ class _MealFormState extends ConsumerState<MealForm> {
       dataJson: {
         'meal_type':   _mealType,
         'meal_amount': _mealAmount,
-        if (_foodNameCtrl.text.isNotEmpty) 'food_name': _foodNameCtrl.text,
         if (_amountCtrl.text.isNotEmpty)   'amount_g':  _amountCtrl.text,
-        'intake': _intake,
         if (media.isNotEmpty) 'media': media,
       },
       memo: _memoCtrl.text.isEmpty ? null : _memoCtrl.text,
@@ -120,7 +110,7 @@ class _MealFormState extends ConsumerState<MealForm> {
         const SizedBox(height: AppSpacing.space4),
 
         FormSegmentRow(
-          label: '식사 타입',
+          label: '식사 종류',
           options: const ['아침', '점심', '저녁', '간식'],
           selected: _mealType,
           onChanged: (v) => setState(() => _mealType = v),
@@ -178,13 +168,6 @@ class _MealFormState extends ConsumerState<MealForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
 
-        FormInputField(
-          label: '사료명 (선택)',
-          controller: _foodNameCtrl,
-          hint: '예: 로얄캐닌 어덜트',
-        ),
-        const SizedBox(height: AppSpacing.space3),
-
         // 급여량 (선택)
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,14 +189,6 @@ class _MealFormState extends ConsumerState<MealForm> {
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),
             ),
           ],
-        ),
-        const SizedBox(height: AppSpacing.space4),
-
-        FormSegmentRow(
-          label: '섭취 상태',
-          options: const ['다 먹음', '절반', '거의 안 먹음'],
-          selected: _intake,
-          onChanged: (v) => setState(() => _intake = v),
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _memoCtrl),

@@ -11,6 +11,7 @@ enum RecordCategory {
   hospital,
   vaccination,
   grooming,
+  brushing,
   walk,
   memo,
 }
@@ -27,6 +28,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return 'hospital';
       case RecordCategory.vaccination: return 'vaccination';
       case RecordCategory.grooming:    return 'grooming';
+      case RecordCategory.brushing:    return 'brushing';
       case RecordCategory.walk:        return 'walk';
       case RecordCategory.memo:        return 'memo';
     }
@@ -43,6 +45,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return '병원';
       case RecordCategory.vaccination: return '접종';
       case RecordCategory.grooming:    return '미용';
+      case RecordCategory.brushing:    return '빗질';
       case RecordCategory.walk:        return '산책';
       case RecordCategory.memo:        return '메모';
     }
@@ -59,6 +62,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return '🏥';
       case RecordCategory.vaccination: return '💉';
       case RecordCategory.grooming:    return '🛁';
+      case RecordCategory.brushing:    return '🪮';
       case RecordCategory.walk:        return '🦮';
       case RecordCategory.memo:        return '📝';
     }
@@ -75,6 +79,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return AppColors.danger400;          // red
       case RecordCategory.vaccination: return AppColors.categoryVaccine;    // purple
       case RecordCategory.grooming:    return AppColors.categoryEmergency;  // orange
+      case RecordCategory.brushing:    return const Color(0xFFA3E635);      // lime
       case RecordCategory.walk:        return const Color(0xFFA3E635);      // lime
       case RecordCategory.memo:        return AppColors.gray400;            // gray
     }
@@ -91,6 +96,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.hospital:    return AppColors.danger50;           // red light
       case RecordCategory.vaccination: return const Color(0xFFFAF5FF);      // purple light
       case RecordCategory.grooming:    return const Color(0xFFFFF7ED);      // orange light
+      case RecordCategory.brushing:    return const Color(0xFFF7FEE7);      // lime light
       case RecordCategory.walk:        return const Color(0xFFF7FEE7);      // lime light
       case RecordCategory.memo:        return AppColors.gray100;            // gray light
     }

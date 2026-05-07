@@ -400,6 +400,59 @@ class _EventCard extends StatelessWidget {
       case 'condition':  return '컨디션 ${d['score']}점';
       case 'medication': return '${d['medicine']} ${d['dose']}';
       case 'weight':     return '${d['weight_kg']}kg';
+      case 'meal':
+        const mealAmountLabels = {
+          'very_little': '매우 적음',
+          'little': '적음',
+          'normal': '보통',
+          'much': '많음',
+          'very_much': '매우 많음',
+        };
+        final mealType = d['meal_type'] as String?;
+        final mealAmount = d['meal_amount'] as String?;
+        final amountG = d['amount_g'];
+        final parts = [
+          if (mealType != null && mealType.isNotEmpty) mealType,
+          if (mealAmount != null) mealAmountLabels[mealAmount] ?? mealAmount,
+          if (amountG != null) '${amountG}g',
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'water':
+        const waterLabels = {
+          'very_little': '매우 적음',
+          'little': '적음',
+          'normal': '보통',
+          'much': '많음',
+          'very_much': '매우 많음',
+        };
+        final amount = d['water_amount'] as String?;
+        final ml = d['milliliter'];
+        final amountStr = waterLabels[amount] ?? amount ?? '';
+        return ml != null ? '$amountStr · ${ml}mL' : amountStr;
+      case 'vaccination':
+        final vaccines = (d['vaccines'] as List?)?.join(', ') ?? '';
+        final hospital = d['hospital_name'] as String?;
+        final parts = [
+          if (vaccines.isNotEmpty) vaccines,
+          if (hospital != null && hospital.isNotEmpty) hospital,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'grooming':
+        final types = (d['types'] as List?)?.join(', ') ?? '';
+        final shop = d['shop_name'] as String?;
+        final parts = [
+          if (types.isNotEmpty) types,
+          if (shop != null && shop.isNotEmpty) shop,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'brushing':
+        final parts = (d['parts'] as List?)?.join(', ') ?? '';
+        final duration = d['duration_min'];
+        final items = [
+          if (parts.isNotEmpty) parts,
+          if (duration != null) '$duration분',
+        ];
+        return items.isNotEmpty ? items.join(' · ') : (r.memo ?? '');
       default:           return r.memo ?? '';
     }
   }

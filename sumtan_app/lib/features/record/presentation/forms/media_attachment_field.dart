@@ -12,7 +12,6 @@ import 'package:video_player/video_player.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
-import '../../../../app/widgets/app_toast.dart';
 
 enum RecordMediaType {
   photo,

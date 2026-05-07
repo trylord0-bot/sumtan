@@ -12,6 +12,7 @@ import 'forms/meal_form.dart';
 import 'forms/hospital_form.dart';
 import 'forms/vaccination_form.dart';
 import 'forms/grooming_form.dart';
+import 'forms/brushing_form.dart';
 import 'forms/walk_form.dart';
 import 'forms/water_form.dart';
 import 'forms/memo_form.dart';
@@ -25,27 +26,17 @@ Future<void> showCategoryBottomSheet(BuildContext context) async {
   );
 }
 
-// Each grid item: category + optional display overrides for species-specific labeling
 class _CategoryEntry {
   final RecordCategory category;
-  final String? displayLabel;
-  final String? displayEmoji;
-  final Color? displayColor;
-  final Color? displayBgColor;
 
-  const _CategoryEntry(this.category, {
-    this.displayLabel,
-    this.displayEmoji,
-    this.displayColor,
-    this.displayBgColor,
-  });
+  const _CategoryEntry(this.category);
 }
 
 class _CategorySheet extends ConsumerWidget {
   const _CategorySheet();
 
   List<_CategoryEntry> _buildEntries(String? species) {
-    // 공통 10개 (음수·미용 항상 포함)
+    // 공통 항목 (음수·미용·빗질 항상 포함)
     final entries = [
       const _CategoryEntry(RecordCategory.poop),
       const _CategoryEntry(RecordCategory.condition),
@@ -56,6 +47,7 @@ class _CategorySheet extends ConsumerWidget {
       const _CategoryEntry(RecordCategory.hospital),
       const _CategoryEntry(RecordCategory.vaccination),
       const _CategoryEntry(RecordCategory.grooming),
+      const _CategoryEntry(RecordCategory.brushing),
       const _CategoryEntry(RecordCategory.memo),
     ];
 
@@ -63,14 +55,6 @@ class _CategorySheet extends ConsumerWidget {
     final insertIdx = entries.length - 1;
     if (species == 'dog') {
       entries.insert(insertIdx, const _CategoryEntry(RecordCategory.walk));
-    } else if (species == 'cat') {
-      entries.insert(insertIdx, const _CategoryEntry(
-        RecordCategory.grooming,
-        displayLabel: '빗질',
-        displayEmoji: '🪮',
-        displayColor: Color(0xFFA3E635),
-        displayBgColor: Color(0xFFF7FEE7),
-      ));
     }
 
     return entries;
@@ -99,6 +83,8 @@ class _CategorySheet extends ConsumerWidget {
         form = const VaccinationForm();
       case RecordCategory.grooming:
         form = const GroomingForm();
+      case RecordCategory.brushing:
+        form = const BrushingForm();
       case RecordCategory.walk:
         form = const WalkForm();
       case RecordCategory.memo:
@@ -187,10 +173,10 @@ class _CategoryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bg     = entry.displayBgColor ?? entry.category.bgColor;
-    final accent = entry.displayColor   ?? entry.category.color;
-    final emoji  = entry.displayEmoji ?? entry.category.emoji;
-    final label  = entry.displayLabel ?? entry.category.label;
+    final bg = entry.category.bgColor;
+    final accent = entry.category.color;
+    final emoji = entry.category.emoji;
+    final label = entry.category.label;
 
     return GestureDetector(
       onTap: onTap,

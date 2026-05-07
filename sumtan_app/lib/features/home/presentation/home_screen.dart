@@ -403,6 +403,8 @@ class _TodaySummaryGrid extends StatelessWidget {
     final mealCount  = records.where((r) => r.category == 'meal').length;
     final medCount   = records.where((r) => r.category == 'medication').length;
     final waterCount = records.where((r) => r.category == 'water').length;
+    final brushingCount = records.where((r) => r.category == 'brushing').length;
+    final groomingCount = records.where((r) => r.category == 'grooming').length;
 
     final conditionRecord = records.lastWhere(
       (r) => r.category == 'condition',
@@ -434,7 +436,7 @@ class _TodaySummaryGrid extends StatelessWidget {
       condColor = AppColors.danger400; condIcon = '😔'; condValue = '나쁨';
     }
 
-    // 종별 6번째 뱃지
+    // 종별 추가 뱃지
     final species = pet?.species ?? 'dog';
     final Color speciesColor;
     final String speciesIcon;
@@ -447,11 +449,10 @@ class _TodaySummaryGrid extends StatelessWidget {
       speciesValue = walkCount > 0 ? '$walkCount회' : '-';
       speciesLabel = '산책';
     } else {
-      final hasGrooming = records.any((r) => r.category == 'grooming');
-      speciesColor = hasGrooming ? AppColors.info400 : AppColors.gray300;
-      speciesIcon  = species == 'cat' ? '🪮' : '✂️';
-      speciesValue = hasGrooming ? '완료' : '-';
-      speciesLabel = species == 'cat' ? '빗질' : '미용';
+      speciesColor = groomingCount > 0 ? AppColors.info400 : AppColors.gray300;
+      speciesIcon  = '✂️';
+      speciesValue = groomingCount > 0 ? '$groomingCount회' : '-';
+      speciesLabel = '미용';
     }
 
     return Column(
@@ -498,15 +499,22 @@ class _TodaySummaryGrid extends StatelessWidget {
           ],
         ),
         const SizedBox(height: AppSpacing.space2),
-        // Row 3: 종별 (1/3 width)
+        // Row 3: 빗질 + 종별 항목
         Row(
           children: [
+            Expanded(child: _SummaryChip(
+              topColor: brushingCount > 0
+                  ? AppColors.success400
+                  : AppColors.gray300,
+              icon: '🪮',
+              value: brushingCount > 0 ? '$brushingCount회' : '-',
+              label: '빗질',
+            )),
+            const SizedBox(width: AppSpacing.space2),
             Expanded(child: _SummaryChip(
               topColor: speciesColor,
               icon: speciesIcon, value: speciesValue, label: speciesLabel,
             )),
-            const SizedBox(width: AppSpacing.space2),
-            const Expanded(child: SizedBox.shrink()),
             const SizedBox(width: AppSpacing.space2),
             const Expanded(child: SizedBox.shrink()),
           ],
@@ -877,6 +885,9 @@ class _RecordList extends StatelessWidget {
         final mealType = d?['meal_type'] as String?;
         return mealType != null ? '식사 기록 — $mealType' : '식사 기록';
       case 'water': return '음수 기록';
+      case 'vaccination': return '접종 기록';
+      case 'grooming': return '미용 기록';
+      case 'brushing': return '빗질 기록';
       default:         return RecordCategoryX.fromString(r.category).label;
     }
   }
@@ -921,6 +932,30 @@ class _RecordList extends StatelessWidget {
         final ml = d['milliliter'];
         final amountStr = waterLabels[amount] ?? amount ?? '';
         return ml != null ? '$amountStr · ${ml}mL' : amountStr;
+      case 'vaccination':
+        final vaccines = (d['vaccines'] as List?)?.join(', ') ?? '';
+        final hospital = d['hospital_name'] as String?;
+        final parts = [
+          if (vaccines.isNotEmpty) vaccines,
+          if (hospital != null && hospital.isNotEmpty) hospital,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'grooming':
+        final types = (d['types'] as List?)?.join(', ') ?? '';
+        final shop = d['shop_name'] as String?;
+        final parts = [
+          if (types.isNotEmpty) types,
+          if (shop != null && shop.isNotEmpty) shop,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'brushing':
+        final parts = (d['parts'] as List?)?.join(', ') ?? '';
+        final duration = d['duration_min'];
+        final items = [
+          if (parts.isNotEmpty) parts,
+          if (duration != null) '$duration분',
+        ];
+        return items.isNotEmpty ? items.join(' · ') : (r.memo ?? '');
       default:
         return r.memo ?? '';
     }

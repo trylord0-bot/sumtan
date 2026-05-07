@@ -399,124 +399,132 @@ class _TodaySummaryGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final poopCount  = records.where((r) => r.category == 'poop').length;
-    final mealCount  = records.where((r) => r.category == 'meal').length;
-    final medCount   = records.where((r) => r.category == 'medication').length;
+    final poopCount = records.where((r) => r.category == 'poop').length;
+    final mealCount = records.where((r) => r.category == 'meal').length;
+    final medCount = records.where((r) => r.category == 'medication').length;
     final waterCount = records.where((r) => r.category == 'water').length;
     final brushingCount = records.where((r) => r.category == 'brushing').length;
-    final groomingCount = records.where((r) => r.category == 'grooming').length;
+    final walkCount = records.where((r) => r.category == 'walk').length;
 
     final conditionRecord = records.lastWhere(
       (r) => r.category == 'condition',
-      orElse: () => const Record(petId: 0, category: '', recordedAt: '', createdAt: ''),
-    );
-    final weightRecord = records.lastWhere(
-      (r) => r.category == 'weight',
-      orElse: () => const Record(petId: 0, category: '', recordedAt: '', createdAt: ''),
+      orElse: () =>
+          const Record(petId: 0, category: '', recordedAt: '', createdAt: ''),
     );
 
     final int? condScore = conditionRecord.category.isNotEmpty
         ? (conditionRecord.dataJson?['score'] as num?)?.toInt()
         : null;
-    final double? weight = weightRecord.category.isNotEmpty
-        ? (weightRecord.dataJson?['weight_kg'] as num?)?.toDouble()
-        : null;
 
     // 컨디션
-    final Color condColor;
     final String condIcon;
     final String condValue;
     if (condScore == null) {
-      condColor = AppColors.gray300; condIcon = '😐'; condValue = '-';
+      condIcon = '😐';
+      condValue = '-';
     } else if (condScore >= 4) {
-      condColor = AppColors.success400; condIcon = '😊'; condValue = '양호';
+      condIcon = '😊';
+      condValue = '양호';
     } else if (condScore >= 3) {
-      condColor = AppColors.warning400; condIcon = '😐'; condValue = '보통';
+      condIcon = '😐';
+      condValue = '보통';
     } else {
-      condColor = AppColors.danger400; condIcon = '😔'; condValue = '나쁨';
+      condIcon = '😔';
+      condValue = '나쁨';
     }
 
     // 종별 추가 뱃지
     final species = pet?.species ?? 'dog';
-    final Color speciesColor;
+    final RecordCategory speciesCategory;
     final String speciesIcon;
     final String speciesValue;
     final String speciesLabel;
     if (species == 'dog') {
-      final walkCount = records.where((r) => r.category == 'walk').length;
-      speciesColor = walkCount > 0 ? AppColors.success400 : AppColors.gray300;
-      speciesIcon  = '🦮';
+      speciesCategory = RecordCategory.walk;
+      speciesIcon = '🦮';
       speciesValue = walkCount > 0 ? '$walkCount회' : '-';
       speciesLabel = '산책';
     } else {
-      speciesColor = groomingCount > 0 ? AppColors.info400 : AppColors.gray300;
-      speciesIcon  = '✂️';
-      speciesValue = groomingCount > 0 ? '$groomingCount회' : '-';
-      speciesLabel = '미용';
+      speciesCategory = RecordCategory.brushing;
+      speciesIcon = '🪥';
+      speciesValue = brushingCount > 0 ? '$brushingCount회' : '-';
+      speciesLabel = '빗질';
     }
+
+    Color statusColor(RecordCategory category, bool hasRecord) =>
+        hasRecord ? category.color : AppColors.gray300;
 
     return Column(
       children: [
-        // Row 1: 배변, 컨디션, 식사
+        // Row 1: 컨디션, 식사, 음수
         Row(
           children: [
-            Expanded(child: _SummaryChip(
-              topColor: poopCount > 0 ? AppColors.info400 : AppColors.gray300,
-              icon: '💩', value: '$poopCount회', label: '배변',
-            )),
+            Expanded(
+              child: _SummaryChip(
+                topColor: statusColor(
+                  RecordCategory.condition,
+                  condScore != null,
+                ),
+                icon: condIcon,
+                value: condValue,
+                label: '컨디션',
+              ),
+            ),
             const SizedBox(width: AppSpacing.space2),
-            Expanded(child: _SummaryChip(
-              topColor: condColor,
-              icon: condIcon, value: condValue, label: '컨디션',
-            )),
+            Expanded(
+              child: _SummaryChip(
+                topColor: statusColor(RecordCategory.meal, mealCount > 0),
+                icon: '🍚',
+                value: mealCount > 0 ? '$mealCount끼' : '-',
+                label: '식사',
+              ),
+            ),
             const SizedBox(width: AppSpacing.space2),
-            Expanded(child: _SummaryChip(
-              topColor: mealCount > 0 ? AppColors.warning400 : AppColors.gray300,
-              icon: '🍚', value: mealCount > 0 ? '$mealCount끼' : '-', label: '식사',
-            )),
+            Expanded(
+              child: _SummaryChip(
+                topColor: statusColor(RecordCategory.water, waterCount > 0),
+                icon: '💧',
+                value: waterCount > 0 ? '$waterCount회' : '-',
+                label: '음수',
+              ),
+            ),
           ],
         ),
         const SizedBox(height: AppSpacing.space2),
-        // Row 2: 음수, 투약, 체중
+        // Row 2: 배변, 투약, 산책(강아지) 또는 빗질(고양이)
         Row(
           children: [
-            Expanded(child: _SummaryChip(
-              topColor: waterCount > 0 ? AppColors.categoryWater : AppColors.gray300,
-              icon: '💧', value: waterCount > 0 ? '$waterCount회' : '-', label: '음수',
-            )),
+            Expanded(
+              child: _SummaryChip(
+                topColor: statusColor(RecordCategory.poop, poopCount > 0),
+                icon: '💩',
+                value: '$poopCount회',
+                label: '배변',
+              ),
+            ),
             const SizedBox(width: AppSpacing.space2),
-            Expanded(child: _SummaryChip(
-              topColor: medCount > 0 ? AppColors.categoryMedicine : AppColors.gray300,
-              icon: '💊', value: medCount > 0 ? '$medCount회' : '-', label: '투약',
-            )),
+            Expanded(
+              child: _SummaryChip(
+                topColor: statusColor(RecordCategory.medication, medCount > 0),
+                icon: '💊',
+                value: medCount > 0 ? '$medCount회' : '-',
+                label: '투약',
+              ),
+            ),
             const SizedBox(width: AppSpacing.space2),
-            Expanded(child: _SummaryChip(
-              topColor: weight != null ? AppColors.warning400 : AppColors.gray300,
-              icon: '⚖️',
-              value: weight != null ? '${weight.toStringAsFixed(1)}kg' : '-',
-              label: '체중',
-            )),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.space2),
-        // Row 3: 빗질 + 종별 항목
-        Row(
-          children: [
-            Expanded(child: _SummaryChip(
-              topColor: brushingCount > 0
-                  ? AppColors.success400
-                  : AppColors.gray300,
-              icon: '🪥',
-              value: brushingCount > 0 ? '$brushingCount회' : '-',
-              label: '빗질',
-            )),
-            const SizedBox(width: AppSpacing.space2),
-            Expanded(child: _SummaryChip(
-              topColor: speciesColor,
-              icon: speciesIcon, value: speciesValue, label: speciesLabel,
-            )),
-            const SizedBox(width: AppSpacing.space2),
-            const Expanded(child: SizedBox.shrink()),
+            Expanded(
+              child: _SummaryChip(
+                topColor: statusColor(
+                  speciesCategory,
+                  speciesCategory == RecordCategory.walk
+                      ? walkCount > 0
+                      : brushingCount > 0,
+                ),
+                icon: speciesIcon,
+                value: speciesValue,
+                label: speciesLabel,
+              ),
+            ),
           ],
         ),
       ],

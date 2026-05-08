@@ -2,16 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
+import '../../../app/widgets/app_toast.dart';
 import '../../../features/record/provider/record_provider.dart';
 import '../../../features/record/data/record_model.dart';
+import '../../../features/record/presentation/record_edit_sheet.dart';
 import '../../../shared/constants/category_constants.dart';
 import '../../../core/utils/date_utils.dart' as du;
 
-class JournalScreen extends ConsumerWidget {
-  const JournalScreen({super.key});
+class JournalScreen extends ConsumerStatefulWidget {
+  final Record? initialEditRecord;
+
+  const JournalScreen({super.key, this.initialEditRecord});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<JournalScreen> createState() => _JournalScreenState();
+}
+
+class _JournalScreenState extends ConsumerState<JournalScreen> {
+  int? _openedInitialRecordId;
+
+  @override
+  void didUpdateWidget(covariant JournalScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialEditRecord?.id != widget.initialEditRecord?.id) {
+      _openedInitialRecordId = null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final initialRecord = widget.initialEditRecord;
+    final initialRecordId = initialRecord?.id;
+    if (initialRecord != null && _openedInitialRecordId != initialRecordId) {
+      _openedInitialRecordId = initialRecordId;
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (!mounted) return;
+        ref.read(selectedDateProvider.notifier).state =
+            initialRecord.recordedAtDate;
+        await showRecordEditSheet(context, record: initialRecord);
+      });
+    }
+
     return const Scaffold(
       backgroundColor: AppColors.creamBg,
       body: Column(
@@ -331,75 +362,132 @@ class _EventList extends ConsumerWidget {
   }
 }
 
-class _EventCard extends StatelessWidget {
+class _EventCard extends ConsumerWidget {
   final Record record;
 
   const _EventCard({required this.record});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final cat = RecordCategoryX.fromString(record.category);
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 12, horizontal: 14,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 4,
-            offset: const Offset(0, 1),
+    return Dismissible(
+      key: Key('record_${record.id ?? record.recordedAt}_${record.category}'),
+      direction: DismissDirection.endToStart,
+      background: const _DeleteBackground(),
+      confirmDismiss: (_) async => true,
+      onDismissed: (_) async {
+        final id = record.id;
+        if (id == null) return;
+        await ref.read(recordNotifierProvider.notifier).remove(id);
+        _invalidateRecords(ref);
+        if (context.mounted) {
+          showTopToast(context, '기록이 삭제됐어요 🗑️');
+        }
+      },
+      child: GestureDetector(
+        onTap: () => showRecordEditSheet(context, record: record),
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: 12, horizontal: 14,
           ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 38, height: 38,
-            decoration: BoxDecoration(
-              color: cat.bgColor,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            alignment: Alignment.center,
-            child: Text(cat.emoji, style: const TextStyle(fontSize: 20)),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.04),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-          const SizedBox(width: AppSpacing.space3),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(cat.label, style: const TextStyle(
-                  fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.gray900,
-                )),
-                const SizedBox(height: 2),
-                Text(
-                  _buildSubtitle(record),
-                  style: const TextStyle(fontSize: 12, color: AppColors.gray500),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+          child: Row(
+            children: [
+              Container(
+                width: 40, height: 40,
+                decoration: BoxDecoration(
+                  color: cat.bgColor,
+                  borderRadius: BorderRadius.circular(AppRadius.radiusMd),
                 ),
-              ],
-            ),
+                alignment: Alignment.center,
+                child: Text(cat.emoji, style: const TextStyle(fontSize: 20)),
+              ),
+              const SizedBox(width: AppSpacing.space3),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(cat.label, style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.gray900,
+                    )),
+                    const SizedBox(height: 2),
+                    Text(
+                      _buildSubtitle(record),
+                      style: const TextStyle(fontSize: 12, color: AppColors.gray500),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: AppSpacing.space2),
+              Text(
+                du.formatTime(record.recordedAtDate),
+                style: const TextStyle(fontSize: 11, color: AppColors.gray400),
+              ),
+            ],
           ),
-          Text(
-            du.formatTime(record.recordedAtDate),
-            style: const TextStyle(fontSize: 11, color: AppColors.gray400),
-          ),
-        ],
+        ),
       ),
     );
   }
 
+  void _invalidateRecords(WidgetRef ref) {
+    ref.invalidate(todayRecordsProvider);
+    ref.invalidate(recentRecordsProvider);
+    ref.invalidate(selectedDateRecordsProvider);
+    ref.invalidate(monthRecordsProvider);
+    ref.invalidate(lastRecordProvider);
+    ref.invalidate(weightHistoryProvider);
+    ref.invalidate(weeklyPoopStatsProvider);
+    ref.invalidate(weeklyMealStatsProvider);
+    ref.invalidate(weeklyWaterStatsProvider);
+  }
+
   String _buildSubtitle(Record r) {
     final d = r.dataJson;
-    if (d == null) return r.memo ?? '';
+    if (d == null || d.isEmpty) return r.memo ?? '';
     switch (r.category) {
-      case 'poop':       return '${d['type']} · ${d['status']}';
-      case 'condition':  return '컨디션 ${d['score']}점';
-      case 'medication': return '${d['medicine']} ${d['dose']}';
-      case 'weight':     return '${d['weight_kg']}kg';
+      case 'poop':
+        final type = d['type'] as String? ?? '';
+        final status = d['status'] as String? ?? '';
+        return [type, status].where((s) => s.isNotEmpty).join(' · ');
+      case 'condition':
+        final score = (d['score'] as num?)?.toInt();
+        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
+        final parts = [
+          if (score != null) ConditionScoreLabel.fromScore(score).recordText,
+          if (symptoms.isNotEmpty) symptoms,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'medication':
+        final medicine = d['medicine'] as String? ?? '';
+        final dose = d['dose'] as String? ?? '';
+        final method = d['method'] as String? ?? '';
+        final parts = [
+          if (medicine.isNotEmpty) medicine,
+          if (dose.isNotEmpty) dose,
+          if (method.isNotEmpty) method,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'weight':
+        final kg = d['weight_kg'];
+        final method = d['method'] as String? ?? '';
+        final parts = [
+          if (kg != null) '${kg}kg',
+          if (method.isNotEmpty) method,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'meal':
         const mealAmountLabels = {
           'very_little': '매우 적음',
@@ -429,6 +517,18 @@ class _EventCard extends StatelessWidget {
         final ml = d['milliliter'];
         final amountStr = waterLabels[amount] ?? amount ?? '';
         return ml != null ? '$amountStr · ${ml}mL' : amountStr;
+      case 'hospital':
+        final visitType = d['visit_type'] as String? ?? '';
+        final hospital = d['hospital_name'] as String?;
+        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
+        final diagnosis = d['diagnosis'] as String?;
+        final parts = [
+          if (visitType.isNotEmpty) visitType,
+          if (hospital != null && hospital.isNotEmpty) hospital,
+          if (symptoms.isNotEmpty) symptoms,
+          if (diagnosis != null && diagnosis.isNotEmpty) diagnosis,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'vaccination':
         final vaccines = (d['vaccines'] as List?)?.join(', ') ?? '';
         final hospital = d['hospital_name'] as String?;
@@ -453,7 +553,42 @@ class _EventCard extends StatelessWidget {
           if (duration != null) '$duration분',
         ];
         return items.isNotEmpty ? items.join(' · ') : (r.memo ?? '');
+      case 'walk':
+        final duration = d['duration_min'];
+        final distance = d['distance_km'];
+        final parts = [
+          if (duration != null) '$duration분',
+          if (distance != null) '${distance}km',
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'memo':
+        final title = d['title'] as String? ?? '';
+        final pinned = d['pinned'] as String? ?? '';
+        final content = d['content'] as String?;
+        final parts = [
+          if (title.isNotEmpty) title,
+          if (pinned.isNotEmpty) pinned,
+          if (content != null && content.isNotEmpty) content,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : '';
       default:           return r.memo ?? '';
     }
+  }
+}
+
+class _DeleteBackground extends StatelessWidget {
+  const _DeleteBackground();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.danger600,
+        borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+      ),
+      alignment: Alignment.centerRight,
+      padding: const EdgeInsets.only(right: 20),
+      child: const Text('🗑️', style: TextStyle(fontSize: 22)),
+    );
   }
 }

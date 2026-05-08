@@ -231,31 +231,9 @@ class _GreetingSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 날짜 + 날씨 칩
-        Row(
-          children: [
-            Text(
-              du.formatDate(now),
-              style: const TextStyle(fontSize: 12, color: AppColors.gray500),
-            ),
-            const Spacer(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: AppColors.primary50,
-                borderRadius: BorderRadius.circular(9999),
-                border: Border.all(color: AppColors.primary100, width: 1),
-              ),
-              child: const Text(
-                '☀️ 맑음 18°C',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.primary600,
-                ),
-              ),
-            ),
-          ],
+        Text(
+          du.formatDate(now),
+          style: const TextStyle(fontSize: 12, color: AppColors.gray500),
         ),
         const SizedBox(height: 10),
 
@@ -283,7 +261,7 @@ class _GreetingSection extends StatelessWidget {
                           text: name,
                           style: const TextStyle(color: AppColors.primary600),
                         ),
-                        const TextSpan(text: '는\n오늘도 건강한가요? 🐾'),
+                        const TextSpan(text: '\n오늘도 건강한가요? 🐾'),
                       ],
                     ),
                   ),
@@ -416,22 +394,9 @@ class _TodaySummaryGrid extends StatelessWidget {
         ? (conditionRecord.dataJson?['score'] as num?)?.toInt()
         : null;
 
-    // 컨디션
-    final String condIcon;
-    final String condValue;
-    if (condScore == null) {
-      condIcon = '😐';
-      condValue = '-';
-    } else if (condScore >= 4) {
-      condIcon = '😊';
-      condValue = '양호';
-    } else if (condScore >= 3) {
-      condIcon = '😐';
-      condValue = '보통';
-    } else {
-      condIcon = '😔';
-      condValue = '나쁨';
-    }
+    final condLabel = condScore != null
+        ? ConditionScoreLabel.fromScore(condScore)
+        : null;
 
     // 종별 추가 뱃지
     final species = pet?.species ?? 'dog';
@@ -465,8 +430,8 @@ class _TodaySummaryGrid extends StatelessWidget {
                   RecordCategory.condition,
                   condScore != null,
                 ),
-                icon: condIcon,
-                value: condValue,
+                icon: condLabel?.emoji ?? ConditionScoreLabel.fallback.emoji,
+                value: condLabel?.word ?? '-',
                 label: '컨디션',
               ),
             ),
@@ -805,7 +770,7 @@ class _RecordList extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: AppSpacing.space2),
           child: AppCard(
             padding: EdgeInsets.zero,
-            onTap: () {},
+            onTap: () => context.go('/journal', extra: r),
             child: IntrinsicHeight(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -880,22 +845,32 @@ class _RecordList extends StatelessWidget {
       case 'condition':
         final score = (d?['score'] as num?)?.toInt();
         if (score == null) return '컨디션';
-        final level = score >= 4 ? '좋음' : score >= 3 ? '보통' : '나쁨';
-        return '컨디션 $score점 — $level';
+        return ConditionScoreLabel.fromScore(score).recordText;
       case 'poop':
         final type = d?['type'] as String? ?? '';
         return type.isNotEmpty ? '대변 — $type' : '대변';
       case 'medication':
         final med = d?['medicine'] as String? ?? '';
         return med.isNotEmpty ? med : '투약';
-      case 'weight': return '체중 기록';
+      case 'weight':
+        final kg = d?['weight_kg'];
+        return kg != null ? '체중 기록 — ${kg}kg' : '체중 기록';
       case 'meal':
         final mealType = d?['meal_type'] as String?;
         return mealType != null ? '식사 기록 — $mealType' : '식사 기록';
       case 'water': return '음수 기록';
+      case 'hospital':
+        final visitType = d?['visit_type'] as String?;
+        return visitType != null ? '병원 기록 — $visitType' : '병원 기록';
       case 'vaccination': return '접종 기록';
       case 'grooming': return '미용 기록';
       case 'brushing': return '빗질 기록';
+      case 'walk':
+        final duration = d?['duration_min'];
+        return duration != null ? '산책 기록 — $duration분' : '산책 기록';
+      case 'memo':
+        final title = d?['title'] as String?;
+        return title != null && title.isNotEmpty ? title : '메모';
       default:         return RecordCategoryX.fromString(r.category).label;
     }
   }
@@ -913,10 +888,15 @@ class _RecordList extends StatelessWidget {
         return tags.isNotEmpty ? tags : (r.memo ?? '');
       case 'medication':
         final dose = d['dose'] as String? ?? '';
-        return dose.isNotEmpty ? '$dose 투여 완료' : (r.memo ?? '');
+        final method = d['method'] as String? ?? '';
+        final parts = [
+          if (dose.isNotEmpty) dose,
+          if (method.isNotEmpty) method,
+        ];
+        return parts.isNotEmpty ? '${parts.join(' · ')} 투여 완료' : (r.memo ?? '');
       case 'weight':
-        final kg = d['weight_kg'];
-        return kg != null ? '${kg}kg 기록' : '';
+        final method = d['method'] as String? ?? '';
+        return method.isNotEmpty ? method : (r.memo ?? '');
       case 'meal':
         const mealAmountLabels = {
           'very_little': '매우 적음', 'little': '적음', 'normal': '보통',
@@ -948,6 +928,16 @@ class _RecordList extends StatelessWidget {
           if (hospital != null && hospital.isNotEmpty) hospital,
         ];
         return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'hospital':
+        final hospital = d['hospital_name'] as String?;
+        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
+        final diagnosis = d['diagnosis'] as String?;
+        final parts = [
+          if (hospital != null && hospital.isNotEmpty) hospital,
+          if (symptoms.isNotEmpty) symptoms,
+          if (diagnosis != null && diagnosis.isNotEmpty) diagnosis,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'grooming':
         final types = (d['types'] as List?)?.join(', ') ?? '';
         final shop = d['shop_name'] as String?;
@@ -964,6 +954,17 @@ class _RecordList extends StatelessWidget {
           if (duration != null) '$duration분',
         ];
         return items.isNotEmpty ? items.join(' · ') : (r.memo ?? '');
+      case 'walk':
+        final distance = d['distance_km'];
+        return distance != null ? '${distance}km' : (r.memo ?? '');
+      case 'memo':
+        final content = d['content'] as String?;
+        final pinned = d['pinned'] as String?;
+        final parts = [
+          if (pinned != null && pinned.isNotEmpty) pinned,
+          if (content != null && content.isNotEmpty) content,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : '';
       default:
         return r.memo ?? '';
     }

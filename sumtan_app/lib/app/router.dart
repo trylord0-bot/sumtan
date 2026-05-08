@@ -6,6 +6,7 @@ import '../features/journal/presentation/journal_screen.dart';
 import '../features/alarm/presentation/alarm_screen.dart';
 import '../features/alarm/provider/alarm_provider.dart';
 import '../features/record/presentation/category_bottom_sheet.dart';
+import '../features/record/data/record_model.dart';
 import '../features/profile/presentation/profile_screen.dart';
 import '../features/profile/presentation/add_pet_screen.dart';
 import '../features/profile/presentation/widgets/pet_switch_sheet.dart';
@@ -13,6 +14,7 @@ import '../features/settings/presentation/settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../features/health_guide/presentation/health_guide_screen.dart';
 import '../features/settings/presentation/help_screen.dart';
+import '../features/settings/presentation/privacy_policy_screen.dart';
 import '../features/pet/provider/pet_provider.dart';
 import 'theme/app_colors.dart';
 import 'widgets/app_toast.dart';
@@ -27,7 +29,12 @@ final appRouter = GoRouter(
       ),
       routes: [
         GoRoute(path: '/',              builder: (_, __) => const HomeScreen()),
-        GoRoute(path: '/journal',       builder: (_, __) => const JournalScreen()),
+        GoRoute(
+          path: '/journal',
+          builder: (_, state) => JournalScreen(
+            initialEditRecord: state.extra is Record ? state.extra as Record : null,
+          ),
+        ),
         GoRoute(path: '/notifications', builder: (_, __) => const AlarmScreen()),
         GoRoute(path: '/profile',       builder: (_, __) => const ProfileScreen()),
         GoRoute(path: '/settings',      builder: (_, __) => const SettingsScreen()),
@@ -52,6 +59,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/help',
       builder: (_, __) => const HelpScreen(),
+    ),
+    GoRoute(
+      path: '/privacy-policy',
+      builder: (_, __) => const PrivacyPolicyScreen(),
     ),
   ],
 );
@@ -94,7 +105,7 @@ class MainScaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pet  = ref.watch(selectedPetProvider);
+    final pet = ref.watch(selectedPetProvider);
     final pets = ref.watch(petsProvider).valueOrNull ?? [];
 
     // Reload alarms when pet changes
@@ -113,7 +124,7 @@ class MainScaffold extends ConsumerWidget {
         pets: pets,
         showClose: location == '/settings',
         onClose: () => context.go('/'),
-        onPetChip: () => showPetSwitchSheet(context),
+        onPetChip: () => showPetSwitchSheet(context, ref),
       ),
       endDrawer: const _AppDrawer(),
       body: child,

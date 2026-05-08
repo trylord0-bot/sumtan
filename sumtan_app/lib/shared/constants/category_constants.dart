@@ -16,6 +16,43 @@ enum RecordCategory {
   memo,
 }
 
+class ConditionScoreLabel {
+  final int score;
+  final String word;
+  final String emoji;
+
+  const ConditionScoreLabel({
+    required this.score,
+    required this.word,
+    required this.emoji,
+  });
+
+  String get recordText => '컨디션 $score점 - $word';
+
+  static const fallback = ConditionScoreLabel(
+    score: 3,
+    word: '보통',
+    emoji: '😐',
+  );
+
+  static ConditionScoreLabel fromScore(int score) {
+    switch (score) {
+      case 1:
+        return const ConditionScoreLabel(score: 1, word: '최악', emoji: '😫');
+      case 2:
+        return const ConditionScoreLabel(score: 2, word: '저조', emoji: '😞');
+      case 3:
+        return const ConditionScoreLabel(score: 3, word: '보통', emoji: '😐');
+      case 4:
+        return const ConditionScoreLabel(score: 4, word: '양호', emoji: '😊');
+      case 5:
+        return const ConditionScoreLabel(score: 5, word: '최상', emoji: '🌟');
+      default:
+        return fallback;
+    }
+  }
+}
+
 extension RecordCategoryX on RecordCategory {
   String get name {
     switch (this) {

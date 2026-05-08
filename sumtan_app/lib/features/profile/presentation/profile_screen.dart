@@ -3,13 +3,13 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/utils/date_utils.dart' as du;
 import '../../pet/data/pet_model.dart';
 import '../../pet/provider/pet_provider.dart';
+import 'widgets/pet_add_payment.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
@@ -19,11 +19,11 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
-  final _nameCtrl      = TextEditingController();
-  final _breedCtrl     = TextEditingController();
-  final _weightCtrl    = TextEditingController();
+  final _nameCtrl = TextEditingController();
+  final _breedCtrl = TextEditingController();
+  final _weightCtrl = TextEditingController();
   final _microchipCtrl = TextEditingController();
-  final _regNumCtrl    = TextEditingController();
+  final _regNumCtrl = TextEditingController();
 
   int? _syncedPetId;
 
@@ -31,11 +31,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   void _syncControllers(Pet pet) {
     if (pet.id == _syncedPetId) return;
     _syncedPetId = pet.id;
-    _nameCtrl.text      = pet.name;
-    _breedCtrl.text     = pet.breed ?? '';
-    _weightCtrl.text    = pet.weight != null ? '${pet.weight}' : '';
+    _nameCtrl.text = pet.name;
+    _breedCtrl.text = pet.breed ?? '';
+    _weightCtrl.text = pet.weight != null ? '${pet.weight}' : '';
     _microchipCtrl.text = pet.microchipId ?? '';
-    _regNumCtrl.text    = pet.regNumber ?? '';
+    _regNumCtrl.text = pet.regNumber ?? '';
   }
 
   @override
@@ -65,16 +65,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   Future<void> _saveName(Pet p) async {
     final name = _nameCtrl.text.trim();
     if (name.isEmpty || name == p.name) return;
-    await ref.read(petsProvider.notifier).update(
-        _with(p, name: name), previousWeight: p.weight);
+    await ref
+        .read(petsProvider.notifier)
+        .update(_with(p, name: name), previousWeight: p.weight);
     _showSaved();
   }
 
   Future<void> _saveBreed(Pet p) async {
-    final breed = _breedCtrl.text.trim().isEmpty ? null : _breedCtrl.text.trim();
+    final breed =
+        _breedCtrl.text.trim().isEmpty ? null : _breedCtrl.text.trim();
     if (breed == p.breed) return;
     await ref.read(petsProvider.notifier).update(
-        _with(p, breed: breed, clearBreed: breed == null), previousWeight: p.weight);
+        _with(p, breed: breed, clearBreed: breed == null),
+        previousWeight: p.weight);
     _showSaved();
   }
 
@@ -82,46 +85,54 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final prev = p.weight;
     final next = double.tryParse(_weightCtrl.text.trim());
     if (next == prev) return;
-    await ref.read(petsProvider.notifier).update(
-        _withWeight(p, next), previousWeight: prev);
+    await ref
+        .read(petsProvider.notifier)
+        .update(_withWeight(p, next), previousWeight: prev);
     _showSaved();
   }
 
   Future<void> _saveMicrochip(Pet p) async {
-    final val = _microchipCtrl.text.trim().isEmpty ? null : _microchipCtrl.text.trim();
+    final val =
+        _microchipCtrl.text.trim().isEmpty ? null : _microchipCtrl.text.trim();
     if (val == p.microchipId) return;
-    await ref.read(petsProvider.notifier).update(
-        _withIds(p, microchipId: val), previousWeight: p.weight);
+    await ref
+        .read(petsProvider.notifier)
+        .update(_withIds(p, microchipId: val), previousWeight: p.weight);
     _showSaved();
   }
 
   Future<void> _saveRegNum(Pet p) async {
-    final val = _regNumCtrl.text.trim().isEmpty ? null : _regNumCtrl.text.trim();
+    final val =
+        _regNumCtrl.text.trim().isEmpty ? null : _regNumCtrl.text.trim();
     if (val == p.regNumber) return;
-    await ref.read(petsProvider.notifier).update(
-        _withIds(p, regNumber: val), previousWeight: p.weight);
+    await ref
+        .read(petsProvider.notifier)
+        .update(_withIds(p, regNumber: val), previousWeight: p.weight);
     _showSaved();
   }
 
   Future<void> _saveBirthDate(Pet p, DateTime? date) async {
     final str = date?.toIso8601String().substring(0, 10);
     if (str == p.birthDate) return;
-    await ref.read(petsProvider.notifier).update(
-        _withDate(p, str), previousWeight: p.weight);
+    await ref
+        .read(petsProvider.notifier)
+        .update(_withDate(p, str), previousWeight: p.weight);
     _showSaved();
   }
 
   Future<void> _saveGender(Pet p, String gender) async {
     if (gender == p.gender) return;
-    await ref.read(petsProvider.notifier).update(
-        _full(p, gender: gender), previousWeight: p.weight);
+    await ref
+        .read(petsProvider.notifier)
+        .update(_full(p, gender: gender), previousWeight: p.weight);
     _showSaved();
   }
 
   Future<void> _saveNeutered(Pet p, bool val) async {
     if (val == p.isNeutered) return;
-    await ref.read(petsProvider.notifier).update(
-        _full(p, isNeutered: val), previousWeight: p.weight);
+    await ref
+        .read(petsProvider.notifier)
+        .update(_full(p, isNeutered: val), previousWeight: p.weight);
     _showSaved();
   }
 
@@ -130,7 +141,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       final file = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (file == null) return;
       await ref.read(petsProvider.notifier).update(
-          _full(p, profileImagePath: file.path), previousWeight: p.weight);
+          _full(p, profileImagePath: file.path),
+          previousWeight: p.weight);
     } catch (_) {}
   }
 
@@ -173,52 +185,82 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   Pet _with(Pet p, {String? name, String? breed, bool clearBreed = false}) =>
       Pet(
-        id: p.id, name: name ?? p.name, species: p.species,
+        id: p.id,
+        name: name ?? p.name,
+        species: p.species,
         breed: clearBreed ? null : (breed ?? p.breed),
-        birthDate: p.birthDate, gender: p.gender, weight: p.weight,
-        isNeutered: p.isNeutered, microchipId: p.microchipId,
-        regNumber: p.regNumber, profileImagePath: p.profileImagePath,
+        birthDate: p.birthDate,
+        gender: p.gender,
+        weight: p.weight,
+        isNeutered: p.isNeutered,
+        microchipId: p.microchipId,
+        regNumber: p.regNumber,
+        profileImagePath: p.profileImagePath,
         createdAt: p.createdAt,
       );
 
-  Pet _withWeight(Pet p, double? w) =>
-      Pet(
-        id: p.id, name: p.name, species: p.species, breed: p.breed,
-        birthDate: p.birthDate, gender: p.gender, weight: w,
-        isNeutered: p.isNeutered, microchipId: p.microchipId,
-        regNumber: p.regNumber, profileImagePath: p.profileImagePath,
+  Pet _withWeight(Pet p, double? w) => Pet(
+        id: p.id,
+        name: p.name,
+        species: p.species,
+        breed: p.breed,
+        birthDate: p.birthDate,
+        gender: p.gender,
+        weight: w,
+        isNeutered: p.isNeutered,
+        microchipId: p.microchipId,
+        regNumber: p.regNumber,
+        profileImagePath: p.profileImagePath,
         createdAt: p.createdAt,
       );
 
-  Pet _withDate(Pet p, String? date) =>
-      Pet(
-        id: p.id, name: p.name, species: p.species, breed: p.breed,
-        birthDate: date, gender: p.gender, weight: p.weight,
-        isNeutered: p.isNeutered, microchipId: p.microchipId,
-        regNumber: p.regNumber, profileImagePath: p.profileImagePath,
+  Pet _withDate(Pet p, String? date) => Pet(
+        id: p.id,
+        name: p.name,
+        species: p.species,
+        breed: p.breed,
+        birthDate: date,
+        gender: p.gender,
+        weight: p.weight,
+        isNeutered: p.isNeutered,
+        microchipId: p.microchipId,
+        regNumber: p.regNumber,
+        profileImagePath: p.profileImagePath,
         createdAt: p.createdAt,
       );
 
-  Pet _withIds(Pet p, {String? microchipId, String? regNumber}) =>
-      Pet(
-        id: p.id, name: p.name, species: p.species, breed: p.breed,
-        birthDate: p.birthDate, gender: p.gender, weight: p.weight,
+  Pet _withIds(Pet p, {String? microchipId, String? regNumber}) => Pet(
+        id: p.id,
+        name: p.name,
+        species: p.species,
+        breed: p.breed,
+        birthDate: p.birthDate,
+        gender: p.gender,
+        weight: p.weight,
         isNeutered: p.isNeutered,
         microchipId: microchipId ?? p.microchipId,
         regNumber: regNumber ?? p.regNumber,
-        profileImagePath: p.profileImagePath, createdAt: p.createdAt,
+        profileImagePath: p.profileImagePath,
+        createdAt: p.createdAt,
       );
 
-  Pet _full(Pet p, {
-    String? gender, bool? isNeutered, String? profileImagePath,
+  Pet _full(
+    Pet p, {
+    String? gender,
+    bool? isNeutered,
+    String? profileImagePath,
   }) =>
       Pet(
-        id: p.id, name: p.name, species: p.species, breed: p.breed,
+        id: p.id,
+        name: p.name,
+        species: p.species,
+        breed: p.breed,
         birthDate: p.birthDate,
         gender: gender ?? p.gender,
         weight: p.weight,
         isNeutered: isNeutered ?? p.isNeutered,
-        microchipId: p.microchipId, regNumber: p.regNumber,
+        microchipId: p.microchipId,
+        regNumber: p.regNumber,
         profileImagePath: profileImagePath ?? p.profileImagePath,
         createdAt: p.createdAt,
       );
@@ -236,7 +278,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         // ── 빈 상태: 기존 화면 유지 ─────────────────────────────────────────
         if (pets.isEmpty) {
           return _EmptyProfileState(
-            onAdd: () => context.push('/profile/add'),
+            onAdd: () => openPaidAddPetScreen(context, ref),
           );
         }
 
@@ -250,7 +292,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             // 새 반려동물 추가 버튼 (최상단)
             _DashedButton(
               label: '새 반려동물 추가하기',
-              onTap: () => context.push('/profile/add'),
+              onTap: () => openPaidAddPetScreen(context, ref),
             ),
             const SizedBox(height: AppSpacing.space4),
 
@@ -307,9 +349,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   controller: _weightCtrl,
                   hint: '미입력',
                   suffix: 'kg',
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: [
-                    FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                    FilteringTextInputFormatter.allow(
+                        RegExp(r'^\d+\.?\d{0,2}')),
                   ],
                   onSave: () => _saveWeight(pet),
                   isLast: false,
@@ -365,7 +409,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 child: Text(
                   '${pet.name} 삭제하기',
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -506,8 +551,7 @@ class _PhotoSection extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: pet.profileImagePath == null
-                  ? Text(pet.speciesEmoji,
-                      style: const TextStyle(fontSize: 40))
+                  ? Text(pet.speciesEmoji, style: const TextStyle(fontSize: 40))
                   : null,
             ),
             Positioned(
@@ -693,8 +737,7 @@ class _FieldRowState extends State<_FieldRow> {
             ],
           ),
         ),
-        if (!widget.isLast)
-          Container(height: 1, color: AppColors.gray100),
+        if (!widget.isLast) Container(height: 1, color: AppColors.gray100),
       ],
     );
   }
@@ -779,9 +822,8 @@ class _DateRow extends StatelessWidget {
                     value ?? '미입력',
                     style: TextStyle(
                       fontSize: 14,
-                      color: value != null
-                          ? AppColors.gray900
-                          : AppColors.gray400,
+                      color:
+                          value != null ? AppColors.gray900 : AppColors.gray400,
                     ),
                   ),
                 ),
@@ -870,8 +912,8 @@ class _GenderChip extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected ? AppColors.primary400 : AppColors.gray100,
           borderRadius: BorderRadius.circular(AppRadius.radiusFull),
-          border:
-              Border.all(color: selected ? AppColors.primary400 : AppColors.gray200),
+          border: Border.all(
+              color: selected ? AppColors.primary400 : AppColors.gray200),
         ),
         child: Text(
           label,
@@ -967,8 +1009,7 @@ class _DashedPainter extends CustomPainter {
       double distance = 0;
       while (distance < metric.length) {
         dashPath.addPath(
-          metric.extractPath(
-              distance, math.min(distance + dw, metric.length)),
+          metric.extractPath(distance, math.min(distance + dw, metric.length)),
           Offset.zero,
         );
         distance += dw + ds;

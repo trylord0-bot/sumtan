@@ -7,12 +7,16 @@ import '../../../../core/utils/date_utils.dart' as du;
 class FormShell extends StatelessWidget {
   final String title;
   final VoidCallback onSave;
+  final VoidCallback? onDelete;
+  final String deleteLabel;
   final List<Widget> children;
 
   const FormShell({
     super.key,
     required this.title,
     required this.onSave,
+    this.onDelete,
+    this.deleteLabel = '삭제하기',
     required this.children,
   });
 
@@ -73,22 +77,50 @@ class FormShell extends StatelessWidget {
                 AppSpacing.space5, AppSpacing.space5,
               ),
               child: SafeArea(
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 52,
-                  child: ElevatedButton(
-                    onPressed: onSave,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary400,
-                      foregroundColor: AppColors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppRadius.radiusXl),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      height: 52,
+                      child: ElevatedButton(
+                        onPressed: onSave,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary400,
+                          foregroundColor: AppColors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(AppRadius.radiusXl),
+                          ),
+                        ),
+                        child: const Text('저장하기', style: TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w700,
+                        )),
                       ),
                     ),
-                    child: const Text('저장하기', style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w700,
-                    )),
-                  ),
+                    if (onDelete != null) ...[
+                      const SizedBox(height: AppSpacing.space3),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 46,
+                        child: OutlinedButton.icon(
+                          onPressed: onDelete,
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.danger600,
+                            side: const BorderSide(
+                              color: AppColors.danger400,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(AppRadius.radiusLg),
+                            ),
+                          ),
+                          icon: const Icon(Icons.delete_outline, size: 18),
+                          label: Text(deleteLabel),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
               ),
             ),

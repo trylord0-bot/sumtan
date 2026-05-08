@@ -231,31 +231,9 @@ class _GreetingSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 날짜 + 날씨 칩
-        Row(
-          children: [
-            Text(
-              du.formatDate(now),
-              style: const TextStyle(fontSize: 12, color: AppColors.gray500),
-            ),
-            const Spacer(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: AppColors.primary50,
-                borderRadius: BorderRadius.circular(9999),
-                border: Border.all(color: AppColors.primary100, width: 1),
-              ),
-              child: const Text(
-                '☀️ 맑음 18°C',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.primary600,
-                ),
-              ),
-            ),
-          ],
+        Text(
+          du.formatDate(now),
+          style: const TextStyle(fontSize: 12, color: AppColors.gray500),
         ),
         const SizedBox(height: 10),
 
@@ -283,7 +261,7 @@ class _GreetingSection extends StatelessWidget {
                           text: name,
                           style: const TextStyle(color: AppColors.primary600),
                         ),
-                        const TextSpan(text: '는\n오늘도 건강한가요? 🐾'),
+                        const TextSpan(text: '\n오늘도 건강한가요? 🐾'),
                       ],
                     ),
                   ),

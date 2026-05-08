@@ -47,7 +47,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               icon: '📤',
               title: '데이터 내보내기',
               sub: 'ZIP 파일로 저장',
-              trailing: const _Badge(paid: true),
               onTap: () => _showExportSheet(context),
             ),
             _SettingsRow(
@@ -55,7 +54,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               icon: '📥',
               title: '데이터 가져오기',
               sub: 'ZIP 파일에서 복원',
-              trailing: const _Badge(paid: false),
               onTap: () => showTopToast(context, '데이터 가져오기는 준비 중이에요 🛠️'),
             ),
           ]),
@@ -230,37 +228,6 @@ class _SettingsRow extends StatelessWidget {
             ),
             if (trailing != null) trailing!,
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// ── Paid / free badge ─────────────────────────────────────────────────────────
-
-class _Badge extends StatelessWidget {
-  final bool paid;
-  const _Badge({required this.paid});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-      decoration: BoxDecoration(
-        gradient: paid
-            ? const LinearGradient(
-                colors: [Color(0xFFF59E0B), Color(0xFFD97706)],
-              )
-            : null,
-        color: paid ? null : AppColors.primary100,
-        borderRadius: BorderRadius.circular(9999),
-      ),
-      child: Text(
-        paid ? '유료' : '무료',
-        style: TextStyle(
-          fontSize: 10,
-          fontWeight: FontWeight.w700,
-          color: paid ? AppColors.white : AppColors.primary700,
         ),
       ),
     );

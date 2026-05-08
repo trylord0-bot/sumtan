@@ -394,22 +394,9 @@ class _TodaySummaryGrid extends StatelessWidget {
         ? (conditionRecord.dataJson?['score'] as num?)?.toInt()
         : null;
 
-    // 컨디션
-    final String condIcon;
-    final String condValue;
-    if (condScore == null) {
-      condIcon = '😐';
-      condValue = '-';
-    } else if (condScore >= 4) {
-      condIcon = '😊';
-      condValue = '양호';
-    } else if (condScore >= 3) {
-      condIcon = '😐';
-      condValue = '보통';
-    } else {
-      condIcon = '😔';
-      condValue = '나쁨';
-    }
+    final condLabel = condScore != null
+        ? ConditionScoreLabel.fromScore(condScore)
+        : null;
 
     // 종별 추가 뱃지
     final species = pet?.species ?? 'dog';
@@ -443,8 +430,8 @@ class _TodaySummaryGrid extends StatelessWidget {
                   RecordCategory.condition,
                   condScore != null,
                 ),
-                icon: condIcon,
-                value: condValue,
+                icon: condLabel?.emoji ?? ConditionScoreLabel.fallback.emoji,
+                value: condLabel?.word ?? '-',
                 label: '컨디션',
               ),
             ),
@@ -858,8 +845,7 @@ class _RecordList extends StatelessWidget {
       case 'condition':
         final score = (d?['score'] as num?)?.toInt();
         if (score == null) return '컨디션';
-        final level = score >= 4 ? '좋음' : score >= 3 ? '보통' : '나쁨';
-        return '컨디션 $score점 — $level';
+        return ConditionScoreLabel.fromScore(score).recordText;
       case 'poop':
         final type = d?['type'] as String? ?? '';
         return type.isNotEmpty ? '대변 — $type' : '대변';

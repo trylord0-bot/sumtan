@@ -463,10 +463,10 @@ class _EventCard extends ConsumerWidget {
         final status = d['status'] as String? ?? '';
         return [type, status].where((s) => s.isNotEmpty).join(' · ');
       case 'condition':
-        final score = d['score'];
+        final score = (d['score'] as num?)?.toInt();
         final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
         final parts = [
-          if (score != null) '컨디션 $score점',
+          if (score != null) ConditionScoreLabel.fromScore(score).recordText,
           if (symptoms.isNotEmpty) symptoms,
         ];
         return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');

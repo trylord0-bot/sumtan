@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/widgets/app_toast.dart';
-import '../data/export_service.dart';
+import '../../../features/alarm/provider/alarm_provider.dart';
+import '../../../features/pet/provider/pet_provider.dart';
+import '../../../features/record/provider/record_provider.dart';
+import '../provider/export_provider.dart';
+import '../provider/import_provider.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool _notifEnabled = true;
 
   @override
@@ -54,7 +61,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               icon: '📥',
               title: '데이터 가져오기',
               sub: 'ZIP 파일에서 복원',
-              onTap: () => showTopToast(context, '데이터 가져오기는 준비 중이에요 🛠️'),
+              onTap: _startImport,
             ),
           ]),
 
@@ -112,6 +119,75 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: Colors.transparent,
       builder: (_) => const _ExportSheet(),
     );
+  }
+
+  Future<void> _startImport() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('데이터 가져오기'),
+        content: const Text(
+          '기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체됩니다.\n\n계속하시겠습니까?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('취소'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text(
+              '가져오기',
+              style: TextStyle(color: AppColors.danger600),
+            ),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    final picked = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: const ['zip'],
+    );
+    final path = picked?.files.single.path;
+    if (path == null) return;
+
+    if (!mounted) return;
+    _showProgressDialog(
+      context: context,
+      title: '데이터 가져오기',
+      mode: _ProgressMode.import,
+    );
+
+    await ref.read(importProvider.notifier).startImport(path);
+    if (!mounted) return;
+    Navigator.of(context, rootNavigator: true).pop();
+
+    final state = ref.read(importProvider);
+    if (state.status == ImportStatus.success) {
+      _invalidateAllData();
+      showTopToast(context, '백업 데이터를 복원했어요');
+      context.go('/');
+    } else {
+      showTopToast(context, _friendlyError(state.errorMessage, '가져오기에 실패했어요'));
+    }
+    ref.read(importProvider.notifier).reset();
+  }
+
+  void _invalidateAllData() {
+    ref.invalidate(petsProvider);
+    ref.invalidate(selectedPetIdProvider);
+    ref.invalidate(todayRecordsProvider);
+    ref.invalidate(recentRecordsProvider);
+    ref.invalidate(selectedDateRecordsProvider);
+    ref.invalidate(monthRecordsProvider);
+    ref.invalidate(lastRecordProvider);
+    ref.invalidate(weightHistoryProvider);
+    ref.invalidate(weeklyPoopStatsProvider);
+    ref.invalidate(weeklyMealStatsProvider);
+    ref.invalidate(weeklyWaterStatsProvider);
+    ref.invalidate(alarmListProvider);
   }
 }
 
@@ -236,14 +312,14 @@ class _SettingsRow extends StatelessWidget {
 
 // ── Data export bottom sheet ──────────────────────────────────────────────────
 
-class _ExportSheet extends StatefulWidget {
+class _ExportSheet extends ConsumerStatefulWidget {
   const _ExportSheet();
 
   @override
-  State<_ExportSheet> createState() => _ExportSheetState();
+  ConsumerState<_ExportSheet> createState() => _ExportSheetState();
 }
 
-class _ExportSheetState extends State<_ExportSheet> {
+class _ExportSheetState extends ConsumerState<_ExportSheet> {
   bool _exporting = false;
 
   @override
@@ -272,87 +348,6 @@ class _ExportSheetState extends State<_ExportSheet> {
                 ),
               ),
             ),
-            // IAP 배너
-            Container(
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [Color(0xFFFFFBEB), Color(0xFFFEF3C7)],
-                ),
-                border: Border.all(color: const Color(0xFFFBBF24)),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(
-                    children: [
-                      Text('💳', style: TextStyle(fontSize: 22)),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          '내보내기 위해서는 결제가 필요해요',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFFD97706),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.6),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '1회 내보내기',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Color(0xFFD97706),
-                              ),
-                            ),
-                            SizedBox(height: 2),
-                            Text(
-                              '결제 후 즉시 파일 저장',
-                              style: TextStyle(fontSize: 11, color: Color(0xFFD97706)),
-                            ),
-                          ],
-                        ),
-                        Spacer(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              '₩3,000',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w800,
-                                color: Color(0xFFD97706),
-                              ),
-                            ),
-                            Text(
-                              '/ 회',
-                              style: TextStyle(fontSize: 11, color: Color(0xFFD97706)),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
             const Text(
               '📤 데이터 내보내기',
               style: TextStyle(
@@ -382,24 +377,10 @@ class _ExportSheetState extends State<_ExportSheet> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),
-                onPressed: _exporting ? null : () async {
-                  setState(() => _exporting = true);
-                  try {
-                    final file = await ExportService().exportZip();
-                    if (!context.mounted) return;
-                    showTopToast(context, 'ZIP 파일을 저장했어요: ${file.path}');
-                    Navigator.pop(context);
-                  } catch (_) {
-                    if (context.mounted) {
-                      showTopToast(context, '내보내기에 실패했어요');
-                    }
-                  } finally {
-                    if (mounted) setState(() => _exporting = false);
-                  }
-                },
+                onPressed: _exporting ? null : _startExport,
                 child: Text(
-                  _exporting ? '내보내는 중...' : '💳 결제하고 내보내기 · ₩3,000',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                  _exporting ? '내보내는 중...' : 'ZIP 파일로 내보내기',
+                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
                 ),
               ),
             ),
@@ -426,4 +407,111 @@ class _ExportSheetState extends State<_ExportSheet> {
       ),
     );
   }
+
+  Future<void> _startExport() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('데이터 내보내기'),
+        content: const Text('모든 반려동물 정보와 기록, 첨부 미디어를 ZIP 파일로 내보냅니다.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('취소'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('내보내기'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    setState(() => _exporting = true);
+    if (!mounted) return;
+    _showProgressDialog(
+      context: context,
+      title: '데이터 내보내기',
+      mode: _ProgressMode.export,
+    );
+
+    await ref.read(exportProvider.notifier).startExport();
+    if (!mounted) return;
+    Navigator.of(context, rootNavigator: true).pop();
+
+    final state = ref.read(exportProvider);
+    if (state.status == ExportStatus.success) {
+      showTopToast(context, '백업 파일을 공유할 수 있어요');
+      Navigator.pop(context);
+    } else {
+      showTopToast(context, _friendlyError(state.errorMessage, '내보내기에 실패했어요'));
+    }
+    ref.read(exportProvider.notifier).reset();
+    if (mounted) setState(() => _exporting = false);
+  }
+}
+
+enum _ProgressMode { export, import }
+
+void _showProgressDialog({
+  required BuildContext context,
+  required String title,
+  required _ProgressMode mode,
+}) {
+  showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) => _BackupProgressDialog(title: title, mode: mode),
+  );
+}
+
+class _BackupProgressDialog extends ConsumerWidget {
+  final String title;
+  final _ProgressMode mode;
+
+  const _BackupProgressDialog({
+    required this.title,
+    required this.mode,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final progress = mode == _ProgressMode.export
+        ? ref.watch(exportProvider).progress
+        : ref.watch(importProvider).progress;
+    final message = mode == _ProgressMode.export
+        ? ref.watch(exportProvider).message
+        : ref.watch(importProvider).message;
+
+    return AlertDialog(
+      title: Text(title),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          LinearProgressIndicator(value: progress <= 0 ? null : progress),
+          const SizedBox(height: 14),
+          Text(
+            message.isEmpty ? '준비 중...' : message,
+            style: const TextStyle(fontSize: 13, color: AppColors.gray600),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            '${(progress * 100).round()}%',
+            textAlign: TextAlign.right,
+            style: const TextStyle(fontSize: 12, color: AppColors.gray400),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+String _friendlyError(String? message, String fallback) {
+  if (message == null || message.isEmpty) return fallback;
+  return message
+      .replaceFirst('Exception: ', '')
+      .replaceFirst('내보내기 실패: Exception: ', '')
+      .replaceFirst('가져오기 실패: Exception: ', '');
 }

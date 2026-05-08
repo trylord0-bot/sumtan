@@ -14,6 +14,7 @@ import '../features/settings/presentation/settings_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../features/health_guide/presentation/health_guide_screen.dart';
 import '../features/settings/presentation/help_screen.dart';
+import '../features/settings/presentation/privacy_policy_screen.dart';
 import '../features/pet/provider/pet_provider.dart';
 import 'theme/app_colors.dart';
 import 'widgets/app_toast.dart';
@@ -58,6 +59,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/help',
       builder: (_, __) => const HelpScreen(),
+    ),
+    GoRoute(
+      path: '/privacy-policy',
+      builder: (_, __) => const PrivacyPolicyScreen(),
     ),
   ],
 );

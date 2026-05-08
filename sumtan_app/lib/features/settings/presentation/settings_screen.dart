@@ -88,7 +88,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               title: '개인정보 처리방침',
               trailing: const Icon(Icons.chevron_right,
                   size: 16, color: AppColors.gray400),
-              onTap: () => showTopToast(context, '개인정보 처리방침을 준비 중이에요 📋'),
+              onTap: () => context.push('/privacy-policy'),
             ),
             _SettingsRow(
               iconBg: const Color(0xFFFFF7ED),

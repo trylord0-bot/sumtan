@@ -805,7 +805,7 @@ class _RecordList extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: AppSpacing.space2),
           child: AppCard(
             padding: EdgeInsets.zero,
-            onTap: () {},
+            onTap: () => context.go('/journal', extra: r),
             child: IntrinsicHeight(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,

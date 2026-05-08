@@ -2,16 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
+import '../../../app/widgets/app_toast.dart';
 import '../../../features/record/provider/record_provider.dart';
 import '../../../features/record/data/record_model.dart';
+import '../../../features/record/presentation/record_edit_sheet.dart';
 import '../../../shared/constants/category_constants.dart';
 import '../../../core/utils/date_utils.dart' as du;
 
-class JournalScreen extends ConsumerWidget {
-  const JournalScreen({super.key});
+class JournalScreen extends ConsumerStatefulWidget {
+  final Record? initialEditRecord;
+
+  const JournalScreen({super.key, this.initialEditRecord});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<JournalScreen> createState() => _JournalScreenState();
+}
+
+class _JournalScreenState extends ConsumerState<JournalScreen> {
+  int? _openedInitialRecordId;
+
+  @override
+  void didUpdateWidget(covariant JournalScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialEditRecord?.id != widget.initialEditRecord?.id) {
+      _openedInitialRecordId = null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final initialRecord = widget.initialEditRecord;
+    final initialRecordId = initialRecord?.id;
+    if (initialRecord != null && _openedInitialRecordId != initialRecordId) {
+      _openedInitialRecordId = initialRecordId;
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        if (!mounted) return;
+        ref.read(selectedDateProvider.notifier).state =
+            initialRecord.recordedAtDate;
+        await showRecordEditSheet(context, record: initialRecord);
+      });
+    }
+
     return const Scaffold(
       backgroundColor: AppColors.creamBg,
       body: Column(
@@ -331,65 +362,96 @@ class _EventList extends ConsumerWidget {
   }
 }
 
-class _EventCard extends StatelessWidget {
+class _EventCard extends ConsumerWidget {
   final Record record;
 
   const _EventCard({required this.record});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final cat = RecordCategoryX.fromString(record.category);
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: 12, horizontal: 14,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
-            blurRadius: 4,
-            offset: const Offset(0, 1),
+    return Dismissible(
+      key: Key('record_${record.id ?? record.recordedAt}_${record.category}'),
+      direction: DismissDirection.endToStart,
+      background: const _DeleteBackground(),
+      confirmDismiss: (_) async => true,
+      onDismissed: (_) async {
+        final id = record.id;
+        if (id == null) return;
+        await ref.read(recordNotifierProvider.notifier).remove(id);
+        _invalidateRecords(ref);
+        if (context.mounted) {
+          showTopToast(context, '기록이 삭제됐어요 🗑️');
+        }
+      },
+      child: GestureDetector(
+        onTap: () => showRecordEditSheet(context, record: record),
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: 12, horizontal: 14,
           ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 38, height: 38,
-            decoration: BoxDecoration(
-              color: cat.bgColor,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            alignment: Alignment.center,
-            child: Text(cat.emoji, style: const TextStyle(fontSize: 20)),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.04),
+                blurRadius: 6,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
-          const SizedBox(width: AppSpacing.space3),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(cat.label, style: const TextStyle(
-                  fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.gray900,
-                )),
-                const SizedBox(height: 2),
-                Text(
-                  _buildSubtitle(record),
-                  style: const TextStyle(fontSize: 12, color: AppColors.gray500),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+          child: Row(
+            children: [
+              Container(
+                width: 40, height: 40,
+                decoration: BoxDecoration(
+                  color: cat.bgColor,
+                  borderRadius: BorderRadius.circular(AppRadius.radiusMd),
                 ),
-              ],
-            ),
+                alignment: Alignment.center,
+                child: Text(cat.emoji, style: const TextStyle(fontSize: 20)),
+              ),
+              const SizedBox(width: AppSpacing.space3),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(cat.label, style: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.gray900,
+                    )),
+                    const SizedBox(height: 2),
+                    Text(
+                      _buildSubtitle(record),
+                      style: const TextStyle(fontSize: 12, color: AppColors.gray500),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: AppSpacing.space2),
+              Text(
+                du.formatTime(record.recordedAtDate),
+                style: const TextStyle(fontSize: 11, color: AppColors.gray400),
+              ),
+            ],
           ),
-          Text(
-            du.formatTime(record.recordedAtDate),
-            style: const TextStyle(fontSize: 11, color: AppColors.gray400),
-          ),
-        ],
+        ),
       ),
     );
+  }
+
+  void _invalidateRecords(WidgetRef ref) {
+    ref.invalidate(todayRecordsProvider);
+    ref.invalidate(recentRecordsProvider);
+    ref.invalidate(selectedDateRecordsProvider);
+    ref.invalidate(monthRecordsProvider);
+    ref.invalidate(lastRecordProvider);
+    ref.invalidate(weightHistoryProvider);
+    ref.invalidate(weeklyPoopStatsProvider);
+    ref.invalidate(weeklyMealStatsProvider);
+    ref.invalidate(weeklyWaterStatsProvider);
   }
 
   String _buildSubtitle(Record r) {
@@ -511,5 +573,22 @@ class _EventCard extends StatelessWidget {
         return parts.isNotEmpty ? parts.join(' · ') : '';
       default:           return r.memo ?? '';
     }
+  }
+}
+
+class _DeleteBackground extends StatelessWidget {
+  const _DeleteBackground();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.danger600,
+        borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+      ),
+      alignment: Alignment.centerRight,
+      padding: const EdgeInsets.only(right: 20),
+      child: const Text('🗑️', style: TextStyle(fontSize: 22)),
+    );
   }
 }

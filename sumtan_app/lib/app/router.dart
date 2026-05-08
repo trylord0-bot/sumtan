@@ -6,6 +6,7 @@ import '../features/journal/presentation/journal_screen.dart';
 import '../features/alarm/presentation/alarm_screen.dart';
 import '../features/alarm/provider/alarm_provider.dart';
 import '../features/record/presentation/category_bottom_sheet.dart';
+import '../features/record/data/record_model.dart';
 import '../features/profile/presentation/profile_screen.dart';
 import '../features/profile/presentation/add_pet_screen.dart';
 import '../features/profile/presentation/widgets/pet_switch_sheet.dart';
@@ -27,7 +28,12 @@ final appRouter = GoRouter(
       ),
       routes: [
         GoRoute(path: '/',              builder: (_, __) => const HomeScreen()),
-        GoRoute(path: '/journal',       builder: (_, __) => const JournalScreen()),
+        GoRoute(
+          path: '/journal',
+          builder: (_, state) => JournalScreen(
+            initialEditRecord: state.extra is Record ? state.extra as Record : null,
+          ),
+        ),
         GoRoute(path: '/notifications', builder: (_, __) => const AlarmScreen()),
         GoRoute(path: '/profile',       builder: (_, __) => const ProfileScreen()),
         GoRoute(path: '/settings',      builder: (_, __) => const SettingsScreen()),

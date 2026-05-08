@@ -10,6 +10,7 @@ import '../../../features/pet/provider/pet_provider.dart';
 import '../../../features/record/provider/record_provider.dart';
 import '../provider/export_provider.dart';
 import '../provider/import_provider.dart';
+import '../provider/purchase_provider.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
@@ -324,6 +325,16 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final purchaseState = ref.watch(purchaseProvider);
+
+    ref.listen<PurchaseState>(purchaseProvider, (_, next) {
+      if (!mounted) return;
+      if (next.status == IapStatus.error) {
+        showTopToast(context, next.errorMessage ?? '결제에 실패했어요');
+        ref.read(purchaseProvider.notifier).reset();
+      }
+    });
+
     return Container(
       decoration: const BoxDecoration(
         color: AppColors.white,
@@ -348,65 +359,249 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
                 ),
               ),
             ),
-            const Text(
-              '📤 데이터 내보내기',
-              style: TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
-                color: AppColors.gray900,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '모든 반려동물 정보와 기록을 ZIP 파일로 저장합니다.\n저장된 파일은 언제든 무료로 가져오기 복원할 수 있어요.',
-              style: TextStyle(
-                fontSize: 13,
-                color: AppColors.gray500,
-                height: 1.65,
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 50,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary400,
-                  foregroundColor: AppColors.white,
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                onPressed: _exporting ? null : _startExport,
-                child: Text(
-                  _exporting ? '내보내는 중...' : 'ZIP 파일로 내보내기',
-                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            SizedBox(
-              height: 44,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: AppColors.gray100,
-                  foregroundColor: AppColors.gray600,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  '취소',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
+            if (purchaseState.isUnlocked)
+              ..._buildUnlockedContent()
+            else
+              ..._buildLockedContent(purchaseState),
           ],
         ),
       ),
     );
   }
+
+  // ── 잠금 해제 전 UI ─────────────────────────────────────────────────────────
+
+  List<Widget> _buildLockedContent(PurchaseState ps) {
+    final isBusy = ps.status == IapStatus.loading;
+    final notAvailable = ps.status == IapStatus.notAvailable;
+    final priceLabel = ps.product?.price ?? '3,000원';
+
+    return [
+      const Text(
+        '📤 데이터 내보내기',
+        style: TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.w700,
+          color: AppColors.gray900,
+        ),
+      ),
+      const SizedBox(height: 14),
+
+      // 혜택 카드
+      Container(
+        decoration: BoxDecoration(
+          color: AppColors.primary50,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.primary200),
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    '내 소중한 기록을 안전하게 💚',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.primary800,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            for (final item in const [
+              '모든 반려동물 프로필 & 사진',
+              '건강 기록 · 일지 · 체중 전체',
+              '첨부 이미지 & 영상 포함',
+            ])
+              Padding(
+                padding: const EdgeInsets.only(top: 7),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.check_circle,
+                      size: 15,
+                      color: AppColors.primary500,
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      item,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: AppColors.gray700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+
+      const SizedBox(height: 20),
+
+      if (notAvailable)
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: AppColors.gray100,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: const Text(
+            '현재 스토어에 연결할 수 없어요 🙏\n잠시 후 다시 시도해 주세요.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 13,
+              color: AppColors.gray500,
+              height: 1.55,
+            ),
+          ),
+        )
+      else
+        SizedBox(
+          height: 50,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primary400,
+              foregroundColor: AppColors.white,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+            ),
+            onPressed: isBusy
+                ? null
+                : () => ref.read(purchaseProvider.notifier).buyExportUnlock(),
+            child: isBusy
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: AppColors.white,
+                    ),
+                  )
+                : Text(
+                    '$priceLabel 결제하고 내보내기 📤',
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+          ),
+        ),
+
+      const SizedBox(height: 8),
+
+      SizedBox(
+        height: 44,
+        child: TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: AppColors.gray100,
+            foregroundColor: AppColors.gray600,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          onPressed: () => Navigator.pop(context),
+          child: const Text(
+            '취소',
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
+    ];
+  }
+
+  // ── 잠금 해제 후 UI ─────────────────────────────────────────────────────────
+
+  List<Widget> _buildUnlockedContent() {
+    return [
+      Row(
+        children: [
+          const Text(
+            '📤 데이터 내보내기',
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              color: AppColors.gray900,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            decoration: BoxDecoration(
+              color: AppColors.primary100,
+              borderRadius: BorderRadius.circular(99),
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.lock_open, size: 11, color: AppColors.primary700),
+                SizedBox(width: 3),
+                Text(
+                  '잠금 해제됨',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primary700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      const SizedBox(height: 8),
+      const Text(
+        '모든 반려동물 정보와 기록을 ZIP 파일로 저장합니다.\n저장된 파일은 언제든 무료로 가져오기 복원할 수 있어요.',
+        style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.65),
+      ),
+      const SizedBox(height: 20),
+      SizedBox(
+        height: 50,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primary400,
+            foregroundColor: AppColors.white,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          onPressed: _exporting ? null : _startExport,
+          child: Text(
+            _exporting ? '내보내는 중...' : 'ZIP 파일로 내보내기',
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+          ),
+        ),
+      ),
+      const SizedBox(height: 8),
+      SizedBox(
+        height: 44,
+        child: TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: AppColors.gray100,
+            foregroundColor: AppColors.gray600,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+          onPressed: () => Navigator.pop(context),
+          child: const Text(
+            '취소',
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          ),
+        ),
+      ),
+    ];
+  }
+
+  // ── 내보내기 실행 ───────────────────────────────────────────────────────────
 
   Future<void> _startExport() async {
     final confirmed = await showDialog<bool>(
@@ -442,6 +637,8 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
 
     final state = ref.read(exportProvider);
     if (state.status == ExportStatus.success) {
+      // 인메모리 결제 플래그 초기화 — 다음 내보내기 시 재결제 필요
+      ref.read(purchaseProvider.notifier).resetUnlock();
       showTopToast(context, '백업 파일을 공유할 수 있어요');
       Navigator.pop(context);
     } else {

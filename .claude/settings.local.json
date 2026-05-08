@@ -9,7 +9,9 @@
       "Bash(flutter analyze *)",
       "Bash(Get-ChildItem -Path \"C:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\" -Recurse -Directory)",
       "Bash(Select-Object -ExpandProperty FullName)",
-      "PowerShell(head *)"
+      "PowerShell(head *)",
+      "Bash(Get-ChildItem -Path \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\\\\lib\" -Recurse -Directory)",
+      "Bash(Sort-Object)"
     ]
   }
 }

@@ -1,23 +1,32 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../pet/data/pet_model.dart';
 import '../../../pet/provider/pet_provider.dart';
+import 'pet_add_payment.dart';
 
-void showPetSwitchSheet(BuildContext context) {
+void showPetSwitchSheet(BuildContext context, WidgetRef parentRef) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
-    builder: (_) => const _PetSwitchSheet(),
+    builder: (_) => _PetSwitchSheet(
+      parentContext: context,
+      parentRef: parentRef,
+    ),
   );
 }
 
 class _PetSwitchSheet extends ConsumerWidget {
-  const _PetSwitchSheet();
+  final BuildContext parentContext;
+  final WidgetRef parentRef;
+
+  const _PetSwitchSheet({
+    required this.parentContext,
+    required this.parentRef,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -93,9 +102,9 @@ class _PetSwitchSheet extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: _DashedAddButton(
-              onTap: () {
+              onTap: () async {
                 Navigator.pop(context);
-                context.push('/profile/add');
+                await openPaidAddPetScreen(parentContext, parentRef);
               },
             ),
           ),
@@ -121,10 +130,7 @@ class _PetTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final parts = <String>[
       if (pet.breed != null) pet.breed!,
-      if (pet.gender == 'male')
-        '수컷'
-      else if (pet.gender == 'female')
-        '암컷',
+      if (pet.gender == 'male') '수컷' else if (pet.gender == 'female') '암컷',
       if (pet.ageLabel != '미입력') pet.ageLabel,
     ];
 
@@ -151,8 +157,8 @@ class _PetTile extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               alignment: Alignment.center,
-              child: Text(pet.speciesEmoji,
-                  style: const TextStyle(fontSize: 22)),
+              child:
+                  Text(pet.speciesEmoji, style: const TextStyle(fontSize: 22)),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -164,9 +170,8 @@ class _PetTile extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: isSelected
-                          ? AppColors.primary700
-                          : AppColors.gray900,
+                      color:
+                          isSelected ? AppColors.primary700 : AppColors.gray900,
                     ),
                   ),
                   if (parts.isNotEmpty) ...[
@@ -248,8 +253,7 @@ class _DashedPainter extends CustomPainter {
     for (final metric in path.computeMetrics()) {
       double d = 0;
       while (d < metric.length) {
-        dashPath.addPath(
-            metric.extractPath(d, math.min(d + dw, metric.length)),
+        dashPath.addPath(metric.extractPath(d, math.min(d + dw, metric.length)),
             Offset.zero);
         d += dw + ds;
       }

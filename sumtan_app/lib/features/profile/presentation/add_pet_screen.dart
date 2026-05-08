@@ -9,6 +9,8 @@ import '../../../app/theme/app_spacing.dart';
 import '../../../core/utils/date_utils.dart' as du;
 import '../../pet/data/pet_model.dart';
 import '../../pet/provider/pet_provider.dart';
+import '../../settings/provider/purchase_provider.dart';
+import 'widgets/pet_add_payment.dart';
 
 class AddPetScreen extends ConsumerStatefulWidget {
   const AddPetScreen({super.key});
@@ -18,19 +20,19 @@ class AddPetScreen extends ConsumerStatefulWidget {
 }
 
 class _AddPetScreenState extends ConsumerState<AddPetScreen> {
-  final _nameCtrl      = TextEditingController();
-  final _breedCtrl     = TextEditingController();
-  final _weightCtrl    = TextEditingController();
+  final _nameCtrl = TextEditingController();
+  final _breedCtrl = TextEditingController();
+  final _weightCtrl = TextEditingController();
   final _microchipCtrl = TextEditingController();
-  final _regNumCtrl    = TextEditingController();
-  final _nameFocus     = FocusNode();
+  final _regNumCtrl = TextEditingController();
+  final _nameFocus = FocusNode();
 
-  String    _species   = 'dog';
-  String    _gender    = 'male';
-  bool      _neutered  = false;
+  String _species = 'dog';
+  String _gender = 'male';
+  bool _neutered = false;
   DateTime? _birthDate;
-  String?   _photoPath;
-  bool      _nameError = false;
+  String? _photoPath;
+  bool _nameError = false;
 
   @override
   void dispose() {
@@ -45,8 +47,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
 
   Future<void> _pickPhoto() async {
     try {
-      final file =
-          await ImagePicker().pickImage(source: ImageSource.gallery);
+      final file = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (file != null) setState(() => _photoPath = file.path);
     } catch (_) {}
   }
@@ -60,6 +61,9 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
     }
     setState(() => _nameError = false);
 
+    final allowed = await ensureAdditionalPetPayment(context, ref);
+    if (!allowed) return;
+
     final pet = Pet(
       name: name,
       species: _species,
@@ -69,14 +73,18 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
       weight: double.tryParse(_weightCtrl.text.trim()),
       isNeutered: _neutered,
       microchipId: _microchipCtrl.text.trim().isEmpty
-          ? null : _microchipCtrl.text.trim(),
-      regNumber: _regNumCtrl.text.trim().isEmpty
-          ? null : _regNumCtrl.text.trim(),
+          ? null
+          : _microchipCtrl.text.trim(),
+      regNumber:
+          _regNumCtrl.text.trim().isEmpty ? null : _regNumCtrl.text.trim(),
       profileImagePath: _photoPath,
       createdAt: du.toIso8601(DateTime.now()),
     );
 
     final newId = await ref.read(petsProvider.notifier).add(pet);
+    if (ref.read(purchaseProvider).hasAdditionalPetCredit) {
+      ref.read(purchaseProvider.notifier).consumeAdditionalPetCredit();
+    }
     ref.read(selectedPetIdProvider.notifier).state = newId;
 
     if (mounted) {
@@ -136,8 +144,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                     errorText: _nameError ? '이름을 입력해 주세요' : null,
                     border: InputBorder.none,
                     isDense: true,
-                    contentPadding:
-                        const EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                   onChanged: (_) {
                     if (_nameError) setState(() => _nameError = false);
@@ -164,8 +171,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                     hintStyle: TextStyle(color: AppColors.gray400),
                     border: InputBorder.none,
                     isDense: true,
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: EdgeInsets.symmetric(vertical: 10),
                   ),
                 ),
               ),
@@ -183,8 +189,8 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                   if (picked != null) setState(() => _birthDate = picked);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 14),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   child: Row(
                     children: [
                       const SizedBox(
@@ -252,14 +258,13 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                           hintStyle: TextStyle(color: AppColors.gray400),
                           border: InputBorder.none,
                           isDense: true,
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 10),
+                          contentPadding: EdgeInsets.symmetric(vertical: 10),
                         ),
                       ),
                     ),
                     const Text('kg',
-                        style: TextStyle(
-                            fontSize: 13, color: AppColors.gray400)),
+                        style:
+                            TextStyle(fontSize: 13, color: AppColors.gray400)),
                   ],
                 ),
               ),
@@ -369,9 +374,12 @@ class _PhotoSection extends StatelessWidget {
 
   String get _emoji {
     switch (species) {
-      case 'dog': return '🐶';
-      case 'cat': return '🐱';
-      default:    return '🐾';
+      case 'dog':
+        return '🐶';
+      case 'cat':
+        return '🐱';
+      default:
+        return '🐾';
     }
   }
 
@@ -475,8 +483,8 @@ class _LabelField extends StatelessWidget {
   final bool required;
   final Widget child;
 
-  const _LabelField({
-      required this.label, this.required = false, required this.child});
+  const _LabelField(
+      {required this.label, this.required = false, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -496,8 +504,8 @@ class _LabelField extends StatelessWidget {
                         fontWeight: FontWeight.w500)),
                 if (required)
                   const Text(' *',
-                      style: TextStyle(
-                          fontSize: 13, color: AppColors.danger600)),
+                      style:
+                          TextStyle(fontSize: 13, color: AppColors.danger600)),
               ],
             ),
           ),

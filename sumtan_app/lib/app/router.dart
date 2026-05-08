@@ -100,7 +100,7 @@ class MainScaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pet  = ref.watch(selectedPetProvider);
+    final pet = ref.watch(selectedPetProvider);
     final pets = ref.watch(petsProvider).valueOrNull ?? [];
 
     // Reload alarms when pet changes
@@ -119,7 +119,7 @@ class MainScaffold extends ConsumerWidget {
         pets: pets,
         showClose: location == '/settings',
         onClose: () => context.go('/'),
-        onPetChip: () => showPetSwitchSheet(context),
+        onPetChip: () => showPetSwitchSheet(context, ref),
       ),
       endDrawer: const _AppDrawer(),
       body: child,

@@ -3,6 +3,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 class PurchaseService {
   // Google Play / App Store 에 등록할 상품 ID (소비성 상품)
   static const String exportProductId = 'export_data_per_use';
+  static const String additionalPetProductId = 'additional_pet_per_use';
 
   final _iap = InAppPurchase.instance;
 
@@ -10,6 +11,11 @@ class PurchaseService {
 
   Future<ProductDetails?> loadExportProduct() async {
     final response = await _iap.queryProductDetails({exportProductId});
+    return response.productDetails.firstOrNull;
+  }
+
+  Future<ProductDetails?> loadAdditionalPetProduct() async {
+    final response = await _iap.queryProductDetails({additionalPetProductId});
     return response.productDetails.firstOrNull;
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,6 +18,8 @@ Future<bool> ensureAdditionalPetPayment(
   BuildContext context,
   WidgetRef ref,
 ) async {
+  if (kDebugMode) return true;
+
   final petCount = ref.read(petsProvider).valueOrNull?.length ?? 0;
   if (petCount == 0) return true;
 

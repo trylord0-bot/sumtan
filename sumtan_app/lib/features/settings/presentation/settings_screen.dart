@@ -86,21 +86,33 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               iconBg: const Color(0xFFF5F3FF),
               icon: '📋',
               title: '개인정보 처리방침',
-              trailing: const Icon(Icons.chevron_right, size: 16, color: AppColors.gray400),
+              trailing: const Icon(Icons.chevron_right,
+                  size: 16, color: AppColors.gray400),
               onTap: () => showTopToast(context, '개인정보 처리방침을 준비 중이에요 📋'),
             ),
             _SettingsRow(
               iconBg: const Color(0xFFFFF7ED),
               icon: '📬',
               title: '피드백 보내기',
-              trailing: const Icon(Icons.chevron_right, size: 16, color: AppColors.gray400),
+              trailing: const Icon(Icons.chevron_right,
+                  size: 16, color: AppColors.gray400),
               onTap: () async {
-                final uri = Uri.parse(
-                  'mailto:feedback@sumtan.app?subject=%EB%B0%98%EB%A0%A4%EC%88%A8%ED%83%84%20%ED%94%BC%EB%93%9C%EB%B0%B1',
+                final Uri emailUri = Uri(
+                  scheme: 'mailto',
+                  path: 'feedback@sumtan.app',
+                  queryParameters: {
+                    'subject': '반려숨탄 피드백',
+                  },
                 );
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri);
-                } else {
+                try {
+                  final launched = await launchUrl(
+                    emailUri,
+                    mode: LaunchMode.externalApplication,
+                  );
+                  if (!launched && context.mounted) {
+                    showTopToast(context, '이메일 앱을 찾을 수 없어요');
+                  }
+                } catch (e) {
                   if (context.mounted) {
                     showTopToast(context, '이메일 앱을 찾을 수 없어요');
                   }
@@ -297,7 +309,8 @@ class _SettingsRow extends StatelessWidget {
                     const SizedBox(height: 1),
                     Text(
                       sub!,
-                      style: const TextStyle(fontSize: 11, color: AppColors.gray400),
+                      style: const TextStyle(
+                          fontSize: 11, color: AppColors.gray400),
                     ),
                   ],
                 ],

@@ -4,6 +4,7 @@ import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_toast.dart';
 import '../../../core/utils/date_utils.dart' as du;
+import '../../../core/widgets/localized_pickers.dart';
 import '../data/pet_model.dart';
 import '../provider/pet_provider.dart';
 
@@ -17,11 +18,11 @@ class PetRegisterScreen extends ConsumerStatefulWidget {
 }
 
 class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
-  final _nameCtrl  = TextEditingController();
+  final _nameCtrl = TextEditingController();
   final _breedCtrl = TextEditingController();
-  String _species  = 'dog';
-  String _gender   = 'male';
-  bool _neutered   = false;
+  String _species = 'dog';
+  String _gender = 'male';
+  bool _neutered = false;
   DateTime? _birthDate;
 
   bool get _isEdit => widget.editPet != null;
@@ -31,12 +32,12 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
     super.initState();
     final p = widget.editPet;
     if (p != null) {
-      _nameCtrl.text  = p.name;
+      _nameCtrl.text = p.name;
       _breedCtrl.text = p.breed ?? '';
-      _species        = p.species ?? 'dog';
-      _gender         = p.gender ?? 'male';
-      _neutered       = p.isNeutered;
-      _birthDate      = p.birthDate != null ? DateTime.tryParse(p.birthDate!) : null;
+      _species = p.species ?? 'dog';
+      _gender = p.gender ?? 'male';
+      _neutered = p.isNeutered;
+      _birthDate = p.birthDate != null ? DateTime.tryParse(p.birthDate!) : null;
     }
   }
 
@@ -87,7 +88,8 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
         title: Text(
           _isEdit ? '반려동물 편집' : '반려동물 등록',
           style: const TextStyle(
-            color: AppColors.primary900, fontWeight: FontWeight.w700,
+            color: AppColors.primary900,
+            fontWeight: FontWeight.w700,
           ),
         ),
         leading: IconButton(
@@ -167,17 +169,17 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
           const SizedBox(height: AppSpacing.space2),
           GestureDetector(
             onTap: () async {
-              final picked = await showDatePicker(
+              final picked = await showLocalizedDatePicker(
                 context: context,
-                initialDate: _birthDate ?? DateTime.now().subtract(const Duration(days: 365)),
-                firstDate: DateTime(2000),
-                lastDate: DateTime.now(),
+                initialDate: _birthDate ??
+                    DateTime.now().subtract(const Duration(days: 365)),
               );
               if (picked != null) setState(() => _birthDate = picked);
             },
             child: Container(
               padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.space4, vertical: AppSpacing.space3,
+                horizontal: AppSpacing.space4,
+                vertical: AppSpacing.space3,
               ),
               decoration: BoxDecoration(
                 color: AppColors.white,
@@ -221,7 +223,8 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
               ),
               child: Text(
                 _isEdit ? '수정 완료' : '등록하기',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
             ),
           ),
@@ -237,9 +240,12 @@ class _FieldLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: const TextStyle(
-      fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.gray700,
-    ));
+    return Text(text,
+        style: const TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+          color: AppColors.gray700,
+        ));
   }
 }
 
@@ -279,11 +285,12 @@ class _SegmentControl extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 alignment: Alignment.center,
-                child: Text(labels[i], style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  color: sel ? AppColors.white : AppColors.gray500,
-                )),
+                child: Text(labels[i],
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: sel ? AppColors.white : AppColors.gray500,
+                    )),
               ),
             ),
           );

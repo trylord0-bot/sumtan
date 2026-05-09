@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'router.dart';
@@ -13,6 +14,11 @@ class SumtanApp extends ConsumerWidget {
     return MaterialApp.router(
       title: '반려숨탄',
       theme: AppTheme.light,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: const [
+        Locale('ko', 'KR'),
+        Locale('en', 'US'),
+      ],
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
       builder: (context, child) {

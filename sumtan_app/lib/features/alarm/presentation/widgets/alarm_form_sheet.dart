@@ -5,6 +5,7 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
 import '../../../../app/widgets/app_toast.dart';
+import '../../../../core/widgets/localized_pickers.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
 import '../../data/alarm_model.dart';
 import '../../provider/alarm_provider.dart';
@@ -585,17 +586,15 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   // ── Pickers ─────────────────────────────────────────────────────────────────
 
   Future<void> _pickDate() async {
-    final date = await showDatePicker(
+    final date = await showLocalizedDatePicker(
       context: context,
       initialDate: _scheduledDate ?? DateTime.now(),
-      firstDate: DateTime.now().subtract(const Duration(days: 365)),
-      lastDate: DateTime.now().add(const Duration(days: 365 * 3)),
     );
     if (date != null) setState(() => _scheduledDate = date);
   }
 
   Future<void> _pickTime() async {
-    final time = await showTimePicker(
+    final time = await showWheelTimePicker(
       context: context,
       initialTime: _scheduledTime ?? const TimeOfDay(hour: 9, minute: 0),
     );
@@ -603,7 +602,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   }
 
   Future<void> _pickRepeatTime() async {
-    final time = await showTimePicker(
+    final time = await showWheelTimePicker(
       context: context,
       initialTime: _repeatTime ?? const TimeOfDay(hour: 8, minute: 0),
     );

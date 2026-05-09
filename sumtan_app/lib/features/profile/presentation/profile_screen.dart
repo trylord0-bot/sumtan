@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/utils/date_utils.dart' as du;
+import '../../../core/widgets/localized_pickers.dart';
 import '../../pet/data/pet_model.dart';
 import '../../pet/provider/pet_provider.dart';
 import 'widgets/pet_add_payment.dart';
@@ -322,13 +323,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       ? du.formatDate(DateTime.parse(pet.birthDate!))
                       : null,
                   onTap: () async {
-                    final picked = await showDatePicker(
+                    final picked = await showLocalizedDatePicker(
                       context: context,
                       initialDate: pet.birthDate != null
                           ? DateTime.parse(pet.birthDate!)
                           : DateTime.now().subtract(const Duration(days: 365)),
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime.now(),
                     );
                     if (picked != null) await _saveBirthDate(pet, picked);
                   },

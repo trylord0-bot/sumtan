@@ -5,6 +5,7 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
 import '../../../../app/widgets/app_toast.dart';
+import '../../../../core/widgets/localized_pickers.dart';
 import '../../data/alarm_model.dart';
 import '../../provider/alarm_provider.dart';
 import 'alarm_complete_dialog.dart';
@@ -375,12 +376,9 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
   }
 
   Future<void> _pickDate() async {
-    final now = DateTime.now();
-    final picked = await showDatePicker(
+    final picked = await showLocalizedDatePicker(
       context: context,
       initialDate: _customDate,
-      firstDate: DateTime(now.year, now.month, now.day),
-      lastDate: DateTime(now.year + 3, now.month, now.day),
     );
     if (picked != null && mounted) {
       setState(() {
@@ -390,7 +388,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
   }
 
   Future<void> _pickTime() async {
-    final picked = await showTimePicker(
+    final picked = await showWheelTimePicker(
       context: context,
       initialTime: _customTime,
     );

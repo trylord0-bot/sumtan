@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/utils/date_utils.dart' as du;
+import '../../../core/widgets/localized_pickers.dart';
 import '../../pet/data/pet_model.dart';
 import '../../pet/provider/pet_provider.dart';
 import '../../settings/provider/purchase_provider.dart';
@@ -179,12 +180,10 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
               // 생년월일
               InkWell(
                 onTap: () async {
-                  final picked = await showDatePicker(
+                  final picked = await showLocalizedDatePicker(
                     context: context,
                     initialDate: _birthDate ??
                         DateTime.now().subtract(const Duration(days: 365)),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime.now(),
                   );
                   if (picked != null) setState(() => _birthDate = picked);
                 },

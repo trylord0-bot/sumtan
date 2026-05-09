@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
+import '../../../../core/widgets/localized_pickers.dart';
 
 class FormShell extends StatelessWidget {
   final String title;
@@ -163,11 +164,9 @@ class FormDateTimePicker extends StatelessWidget {
           icon: Icons.calendar_today_outlined,
           label: du.formatMonthDay(value),
           onTap: () async {
-            final picked = await showDatePicker(
+            final picked = await showLocalizedDatePicker(
               context: context,
               initialDate: value,
-              firstDate: DateTime(2020),
-              lastDate: DateTime.now().add(const Duration(days: 1)),
             );
             if (picked != null) {
               onChanged(DateTime(picked.year, picked.month, picked.day,
@@ -181,7 +180,7 @@ class FormDateTimePicker extends StatelessWidget {
           icon: Icons.access_time_outlined,
           label: du.formatTime(value),
           onTap: () async {
-            final picked = await showTimePicker(
+            final picked = await showWheelTimePicker(
               context: context,
               initialTime: TimeOfDay.fromDateTime(value),
             );

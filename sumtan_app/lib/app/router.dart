@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show SystemNavigator;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../features/home/presentation/home_screen.dart';
@@ -71,24 +73,96 @@ final appRouter = GoRouter(
 
 // ─── Main scaffold ─────────────────────────────────────────────────────────────
 
-class MainScaffold extends ConsumerWidget {
+class MainScaffold extends ConsumerStatefulWidget {
   final String location;
   final Widget child;
 
   const MainScaffold({super.key, required this.location, required this.child});
 
+  @override
+  ConsumerState<MainScaffold> createState() => _MainScaffoldState();
+}
+
+class _MainScaffoldState extends ConsumerState<MainScaffold>
+    with WidgetsBindingObserver {
   static const _tabRoutes = ['/', '/journal', '', '/notifications', '/profile'];
+
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  DateTime? _lastBackPress;
+  String? _previousLocation;
+
+  @override
+  void didUpdateWidget(MainScaffold oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.location != widget.location &&
+        widget.location == '/settings') {
+      _previousLocation = oldWidget.location;
+    }
+  }
+
+  bool get _isAndroid {
+    if (kIsWeb) return false;
+    return defaultTargetPlatform == TargetPlatform.android;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (_isAndroid) WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    if (_isAndroid) WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  void _goBackFromSettings() {
+    context.go(_previousLocation ?? '/');
+  }
+
+  @override
+  Future<bool> didPopRoute() async {
+    // 드로어가 열려 있으면 먼저 닫기
+    final scaffoldState = _scaffoldKey.currentState;
+    if (scaffoldState?.isEndDrawerOpen == true) {
+      scaffoldState!.closeEndDrawer();
+      return true;
+    }
+
+    // 설정 화면은 직전 화면으로 이동 (go()로 진입해 스택에 없음)
+    if (widget.location == '/settings' && mounted) {
+      _goBackFromSettings();
+      return true;
+    }
+
+    // 더 돌아갈 라우트가 있으면 go_router에 위임
+    if (Navigator.of(context).canPop()) return false;
+
+    // 최상위 화면: 두 번 뒤로가기 종료 로직
+    final now = DateTime.now();
+    if (_lastBackPress != null &&
+        now.difference(_lastBackPress!) < const Duration(seconds: 2)) {
+      await SystemNavigator.pop();
+      return true;
+    }
+    _lastBackPress = now;
+    if (mounted) {
+      showTopToast(context, '한 번 더 누르면 앱을 종료합니다 👋');
+    }
+    return true;
+  }
 
   int get _currentIndex {
     for (int i = 0; i < _tabRoutes.length; i++) {
       if (i == 2) continue;
-      if (location == _tabRoutes[i]) return i;
+      if (widget.location == _tabRoutes[i]) return i;
     }
     return 0;
   }
 
   String get _title {
-    switch (location) {
+    switch (widget.location) {
       case '/':
         return '홈';
       case '/journal':
@@ -105,18 +179,17 @@ class MainScaffold extends ConsumerWidget {
   }
 
   bool get _showNav {
-    return location == '/' ||
-        location == '/journal' ||
-        location == '/notifications' ||
-        location == '/profile';
+    return widget.location == '/' ||
+        widget.location == '/journal' ||
+        widget.location == '/notifications' ||
+        widget.location == '/profile';
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final pet = ref.watch(selectedPetProvider);
     final pets = ref.watch(petsProvider).valueOrNull ?? [];
 
-    // Reload alarms when pet changes
     ref.listen(selectedPetProvider, (prev, next) {
       if (prev?.id != next?.id) {
         ref.invalidate(alarmListProvider);
@@ -124,19 +197,20 @@ class MainScaffold extends ConsumerWidget {
     });
 
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: AppColors.creamBg,
       appBar: _TopBar(
         title: _title,
-        showHamburger: location != '/settings',
+        showHamburger: widget.location != '/settings',
         pet: pet,
         pets: pets,
-        showClose: location == '/settings',
-        onClose: () => context.go('/'),
+        showClose: widget.location == '/settings',
+        onClose: _goBackFromSettings,
         onPetChip: () => showPetSwitchSheet(context, ref),
       ),
       endDrawer: const _AppDrawer(),
-      body: child,
-      floatingActionButton: location == '/notifications'
+      body: widget.child,
+      floatingActionButton: widget.location == '/notifications'
           ? Padding(
               padding: const EdgeInsets.only(bottom: 28),
               child: FloatingActionButton.extended(

@@ -9,7 +9,8 @@
       "Read(//Users/lukas/**)",
       "Bash(/Users/lukas/flutter-sdk/bin/flutter pub *)",
       "Bash(git -C /Users/lukas/WORK/git/sumtan/sumtan_app status --short -- \"ios/Runner/Assets.xcassets/AppIcon.appiconset/\")",
-      "Bash(git -C /Users/lukas/WORK/git/sumtan/sumtan_app diff --name-only HEAD -- \"ios/Runner/Assets.xcassets/AppIcon.appiconset/\")"
+      "Bash(git -C /Users/lukas/WORK/git/sumtan/sumtan_app diff --name-only HEAD -- \"ios/Runner/Assets.xcassets/AppIcon.appiconset/\")",
+      "Bash(/Users/lukas/flutter-sdk/bin/flutter analyze *)"
     ]
   }
 }

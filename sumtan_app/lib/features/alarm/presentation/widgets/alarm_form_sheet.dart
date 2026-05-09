@@ -146,8 +146,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
       String repeatRule = _repeatRule;
 
       if (_scheduledDate != null) {
-        final needsRequiredTime =
-            _type == 'vaccination' || _type == 'hospital';
+        final needsRequiredTime = _type == 'vaccination' || _type == 'hospital';
         final dt = DateTime(
           _scheduledDate!.year,
           _scheduledDate!.month,
@@ -266,109 +265,114 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         ? '$emoji ${alarmTypeLabel(_type)} 알림 수정'
         : '$emoji ${alarmTypeLabel(_type)} 알림 추가';
 
-    return DraggableScrollableSheet(
-      initialChildSize: 0.85,
-      minChildSize: 0.35,
-      maxChildSize: 0.95,
-      expand: false,
-      builder: (_, scrollController) => Container(
-        decoration: const BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: Column(
-          children: [
-            // Drag handle
-            Container(
-              margin: const EdgeInsets.only(top: 12),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: AppColors.gray300,
-                borderRadius: BorderRadius.circular(2),
+    return AnimatedPadding(
+      duration: const Duration(milliseconds: 220),
+      curve: Curves.easeOutCubic,
+      padding: EdgeInsets.only(bottom: kb),
+      child: DraggableScrollableSheet(
+        initialChildSize: 0.85,
+        minChildSize: 0.35,
+        maxChildSize: 0.95,
+        expand: false,
+        builder: (_, scrollController) => Container(
+          decoration: const BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          child: Column(
+            children: [
+              // Drag handle
+              Container(
+                margin: const EdgeInsets.only(top: 12),
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: AppColors.gray300,
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 16, 12, 8),
-              child: Row(
-                children: [
-                  Expanded(child: Text(title, style: AppTypography.heading3)),
-                  IconButton(
-                    icon: const Icon(Icons.close, color: AppColors.gray500),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
-              ),
-            ),
-            const Divider(height: 1, color: AppColors.gray200),
-            Expanded(
-              child: ListView(
-                controller: scrollController,
-                padding: EdgeInsets.fromLTRB(20, 16, 20, 20 + kb),
-                children: [
-                  if (widget.isReschedule) ...[
-                    _RescheduleBanner(),
-                    const SizedBox(height: AppSpacing.space4),
-                  ],
-                  _buildFields(),
-                  const SizedBox(height: AppSpacing.space6),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _saving
-                            ? AppColors.primary200
-                            : AppColors.primary400,
-                        foregroundColor: AppColors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(AppRadius.radiusLg),
-                        ),
-                      ),
-                      onPressed: _saving ? null : _save,
-                      child: _saving
-                          ? const SizedBox(
-                              width: 22,
-                              height: 22,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2.5,
-                                color: AppColors.white,
-                              ),
-                            )
-                          : Text(
-                              widget.isReschedule ? '재예약하기' : '저장하기',
-                              style: const TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.w700),
-                            ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 16, 12, 8),
+                child: Row(
+                  children: [
+                    Expanded(child: Text(title, style: AppTypography.heading3)),
+                    IconButton(
+                      icon: const Icon(Icons.close, color: AppColors.gray500),
+                      onPressed: () => Navigator.pop(context),
                     ),
-                  ),
-
-                  // Delete button (edit/reschedule mode only)
-                  if (_isEdit) ...[
-                    const SizedBox(height: AppSpacing.space3),
+                  ],
+                ),
+              ),
+              const Divider(height: 1, color: AppColors.gray200),
+              Expanded(
+                child: ListView(
+                  controller: scrollController,
+                  padding: EdgeInsets.fromLTRB(20, 16, 20, 20 + kb),
+                  children: [
+                    if (widget.isReschedule) ...[
+                      _RescheduleBanner(),
+                      const SizedBox(height: AppSpacing.space4),
+                    ],
+                    _buildFields(),
+                    const SizedBox(height: AppSpacing.space6),
                     SizedBox(
                       width: double.infinity,
-                      height: 46,
-                      child: OutlinedButton.icon(
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.danger600,
-                          side: const BorderSide(color: AppColors.danger400),
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: _saving
+                              ? AppColors.primary200
+                              : AppColors.primary400,
+                          foregroundColor: AppColors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(AppRadius.radiusLg),
                           ),
                         ),
-                        onPressed: _onDelete,
-                        icon: const Icon(Icons.delete_outline, size: 18),
-                        label: const Text('이 알림 삭제하기'),
+                        onPressed: _saving ? null : _save,
+                        child: _saving
+                            ? const SizedBox(
+                                width: 22,
+                                height: 22,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2.5,
+                                  color: AppColors.white,
+                                ),
+                              )
+                            : Text(
+                                widget.isReschedule ? '재예약하기' : '저장하기',
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w700),
+                              ),
                       ),
                     ),
+
+                    // Delete button (edit/reschedule mode only)
+                    if (_isEdit) ...[
+                      const SizedBox(height: AppSpacing.space3),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 46,
+                        child: OutlinedButton.icon(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.danger600,
+                            side: const BorderSide(color: AppColors.danger400),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(AppRadius.radiusLg),
+                            ),
+                          ),
+                          onPressed: _onDelete,
+                          icon: const Icon(Icons.delete_outline, size: 18),
+                          label: const Text('이 알림 삭제하기'),
+                        ),
+                      ),
+                    ],
                   ],
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -657,7 +661,7 @@ class _FieldLabel extends StatelessWidget {
   }
 }
 
-class _TextInput extends StatelessWidget {
+class _TextInput extends StatefulWidget {
   final TextEditingController controller;
   final String hint;
   final int maxLines;
@@ -669,12 +673,57 @@ class _TextInput extends StatelessWidget {
   });
 
   @override
+  State<_TextInput> createState() => _TextInputState();
+}
+
+class _TextInputState extends State<_TextInput> {
+  late final FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode()..addListener(_scrollIntoView);
+  }
+
+  @override
+  void dispose() {
+    _focusNode
+      ..removeListener(_scrollIntoView)
+      ..dispose();
+    super.dispose();
+  }
+
+  void _scrollIntoView() {
+    if (!_focusNode.hasFocus) return;
+
+    Future<void>.delayed(const Duration(milliseconds: 280), () {
+      if (!mounted || !_focusNode.hasFocus) return;
+
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 220),
+        curve: Curves.easeOutCubic,
+        alignmentPolicy: ScrollPositionAlignmentPolicy.keepVisibleAtEnd,
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final keyboardInset = MediaQuery.viewInsetsOf(context).bottom;
+
     return TextField(
-      controller: controller,
-      maxLines: maxLines,
+      controller: widget.controller,
+      focusNode: _focusNode,
+      maxLines: widget.maxLines,
+      scrollPadding: EdgeInsets.only(
+        left: 20,
+        right: 20,
+        top: 20,
+        bottom: keyboardInset + 120,
+      ),
       decoration: InputDecoration(
-        hintText: hint,
+        hintText: widget.hint,
         hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 14),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 12, vertical: 10),

@@ -19,7 +19,7 @@ class AppPageAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.navBg,
       foregroundColor: AppColors.gray900,
       elevation: 0,
       surfaceTintColor: Colors.transparent,

@@ -16,10 +16,16 @@ class AppTheme {
           error: AppColors.danger400,
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.navBg,
           foregroundColor: AppColors.gray900,
           elevation: 0,
           surfaceTintColor: Colors.transparent,
+          titleTextStyle: TextStyle(
+            fontSize: 17,
+            fontWeight: FontWeight.w800,
+            color: AppColors.gray900,
+            fontFamily: 'Pretendard',
+          ),
         ),
         cardTheme: const CardThemeData(
           color: AppColors.white,

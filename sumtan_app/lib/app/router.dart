@@ -28,16 +28,18 @@ final appRouter = GoRouter(
         child: child,
       ),
       routes: [
-        GoRoute(path: '/',              builder: (_, __) => const HomeScreen()),
+        GoRoute(path: '/', builder: (_, __) => const HomeScreen()),
         GoRoute(
           path: '/journal',
           builder: (_, state) => JournalScreen(
-            initialEditRecord: state.extra is Record ? state.extra as Record : null,
+            initialEditRecord:
+                state.extra is Record ? state.extra as Record : null,
           ),
         ),
-        GoRoute(path: '/notifications', builder: (_, __) => const AlarmScreen()),
-        GoRoute(path: '/profile',       builder: (_, __) => const ProfileScreen()),
-        GoRoute(path: '/settings',      builder: (_, __) => const SettingsScreen()),
+        GoRoute(
+            path: '/notifications', builder: (_, __) => const AlarmScreen()),
+        GoRoute(path: '/profile', builder: (_, __) => const ProfileScreen()),
+        GoRoute(path: '/settings', builder: (_, __) => const SettingsScreen()),
       ],
     ),
     GoRoute(
@@ -87,12 +89,18 @@ class MainScaffold extends ConsumerWidget {
 
   String get _title {
     switch (location) {
-      case '/': return '홈';
-      case '/journal': return '일지';
-      case '/notifications': return '알림';
-      case '/profile': return '프로필';
-      case '/settings': return '설정';
-      default: return '반려숨탄';
+      case '/':
+        return '홈';
+      case '/journal':
+        return '일지';
+      case '/notifications':
+        return '알림';
+      case '/profile':
+        return '프로필';
+      case '/settings':
+        return '설정';
+      default:
+        return '반려숨탄';
     }
   }
 
@@ -227,7 +235,7 @@ class _TopBar extends ConsumerWidget implements PreferredSizeWidget {
         : null;
 
     return AppBar(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.navBg,
       elevation: 0,
       centerTitle: false,
       automaticallyImplyLeading: false,
@@ -324,19 +332,29 @@ class _CustomBottomBar extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(_icons[i], size: 22,
-                          color: isActive ? AppColors.primary500 : AppColors.gray400),
+                      Icon(_icons[i],
+                          size: 22,
+                          color: isActive
+                              ? AppColors.primary500
+                              : AppColors.gray400),
                       const SizedBox(height: 4),
-                      Text(_labels[i], style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
-                        color: isActive ? AppColors.primary500 : AppColors.gray400,
-                      )),
+                      Text(_labels[i],
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight:
+                                isActive ? FontWeight.w700 : FontWeight.w500,
+                            color: isActive
+                                ? AppColors.primary500
+                                : AppColors.gray400,
+                          )),
                       const SizedBox(height: 4),
                       Container(
-                        width: 20, height: 3,
+                        width: 20,
+                        height: 3,
                         decoration: BoxDecoration(
-                          color: isActive ? AppColors.primary400 : Colors.transparent,
+                          color: isActive
+                              ? AppColors.primary400
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(9999),
                         ),
                       ),
@@ -348,23 +366,28 @@ class _CustomBottomBar extends StatelessWidget {
           ),
           // Center FAB
           Positioned(
-            top: -16, left: 0, right: 0,
+            top: -16,
+            left: 0,
+            right: 0,
             child: Center(
               child: GestureDetector(
                 onTap: () => onTabTap(2),
                 child: Container(
-                  width: 52, height: 52,
+                  width: 52,
+                  height: 52,
                   decoration: BoxDecoration(
                     color: AppColors.primary400,
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
                         color: AppColors.primary400.withValues(alpha: 0.4),
-                        blurRadius: 12, offset: const Offset(0, 4),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
                       ),
                     ],
                   ),
-                  child: const Icon(Icons.add, color: AppColors.white, size: 28),
+                  child:
+                      const Icon(Icons.add, color: AppColors.white, size: 28),
                 ),
               ),
             ),
@@ -380,8 +403,8 @@ class _CustomBottomBar extends StatelessWidget {
 class _AppDrawer extends StatelessWidget {
   const _AppDrawer();
 
-  static const _tealBg  = Color(0xFFF0FDFA);
-  static const _blueBg  = Color(0xFFEFF6FF);
+  static const _tealBg = Color(0xFFF0FDFA);
+  static const _blueBg = Color(0xFFEFF6FF);
   static const _amberBg = Color(0xFFFFFBEB);
 
   void _openHospitalDialog(BuildContext context) {
@@ -389,14 +412,16 @@ class _AppDrawer extends StatelessWidget {
       showDialog(
         context: context,
         builder: (ctx) => Dialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  width: 56, height: 56,
+                  width: 56,
+                  height: 56,
                   decoration: BoxDecoration(
                     color: _tealBg,
                     borderRadius: BorderRadius.circular(16),
@@ -408,7 +433,8 @@ class _AppDrawer extends StatelessWidget {
                 const Text(
                   '외부 웹페이지로 이동해요',
                   style: TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
                     color: AppColors.gray900,
                   ),
                 ),
@@ -416,7 +442,9 @@ class _AppDrawer extends StatelessWidget {
                 const Text(
                   '주변 동물병원을 찾으려면\n외부 웹페이지가 필요해요.\n\n지금 바로 이동할까요? 🐾',
                   style: TextStyle(
-                    fontSize: 13, color: AppColors.gray500, height: 1.65,
+                    fontSize: 13,
+                    color: AppColors.gray500,
+                    height: 1.65,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -437,7 +465,8 @@ class _AppDrawer extends StatelessWidget {
                           ),
                           onPressed: () => Navigator.pop(ctx),
                           child: const Text('취소',
-                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w600)),
                         ),
                       ),
                     ),
@@ -466,7 +495,8 @@ class _AppDrawer extends StatelessWidget {
                             }
                           },
                           child: const Text('이동할게요',
-                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w700)),
                         ),
                       ),
                     ),
@@ -499,19 +529,24 @@ class _AppDrawer extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(
               20,
               MediaQuery.of(context).padding.top + 24,
-              20, 22,
+              20,
+              22,
             ),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('🐾 반려숨탄', style: TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.w800,
-                  color: Colors.white,
-                )),
+                Text('🐾 반려숨탄',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                    )),
                 SizedBox(height: 4),
-                Text('반려동물 건강관리 앱', style: TextStyle(
-                  fontSize: 12, color: Colors.white70,
-                )),
+                Text('반려동물 건강관리 앱',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.white70,
+                    )),
               ],
             ),
           ),
@@ -595,10 +630,13 @@ class _DrawerSectionLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 4, 20, 6),
-      child: Text(text, style: const TextStyle(
-        fontSize: 10, fontWeight: FontWeight.w700,
-        color: AppColors.gray400, letterSpacing: 0.8,
-      )),
+      child: Text(text,
+          style: const TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w700,
+            color: AppColors.gray400,
+            letterSpacing: 0.8,
+          )),
     );
   }
 }
@@ -627,7 +665,8 @@ class _DrawerTile extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 36, height: 36,
+              width: 36,
+              height: 36,
               decoration: BoxDecoration(
                 color: iconBg,
                 borderRadius: BorderRadius.circular(12),
@@ -640,15 +679,19 @@ class _DrawerTile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(label, style: const TextStyle(
-                    fontSize: 14, fontWeight: FontWeight.w600,
-                    color: AppColors.gray800,
-                  )),
+                  Text(label,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.gray800,
+                      )),
                   if (sub != null) ...[
                     const SizedBox(height: 1),
-                    Text(sub!, style: const TextStyle(
-                      fontSize: 11, color: AppColors.gray400,
-                    )),
+                    Text(sub!,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: AppColors.gray400,
+                        )),
                   ],
                 ],
               ),

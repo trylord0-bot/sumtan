@@ -27,7 +27,7 @@ abstract class AppColors {
   static const Color gray50 = Color(0xFFF9FAFB);
 
   static const Color creamBg = Color(0xFFFFFDF7); // ⭐ 앱 전체 배경
-  static const Color navBg = Color(0xFFFFFCF2);
+  static const Color navBg = Color(0xFFF6FFFB);
   static const Color white = Color(0xFFFFFFFF);
 
   // Semantic — Success

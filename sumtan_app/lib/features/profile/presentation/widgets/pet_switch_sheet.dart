@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -149,17 +150,7 @@ class _PetTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                color: isSelected ? AppColors.primary100 : AppColors.gray200,
-                shape: BoxShape.circle,
-              ),
-              alignment: Alignment.center,
-              child:
-                  Text(pet.speciesEmoji, style: const TextStyle(fontSize: 22)),
-            ),
+            _PetTileAvatar(pet: pet, isSelected: isSelected),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -191,6 +182,51 @@ class _PetTile extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _PetTileAvatar extends StatelessWidget {
+  final Pet pet;
+  final bool isSelected;
+
+  const _PetTileAvatar({
+    required this.pet,
+    required this.isSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final photoPath = pet.profileImagePath;
+    final hasPhoto = photoPath != null && photoPath.isNotEmpty;
+
+    if (hasPhoto) {
+      return Container(
+        width: 44,
+        height: 44,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: isSelected ? AppColors.primary300 : AppColors.white,
+            width: 1.5,
+          ),
+          image: DecorationImage(
+            image: FileImage(File(photoPath)),
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    }
+
+    return Container(
+      width: 44,
+      height: 44,
+      decoration: BoxDecoration(
+        color: isSelected ? AppColors.primary100 : AppColors.gray200,
+        shape: BoxShape.circle,
+      ),
+      alignment: Alignment.center,
+      child: Text(pet.speciesEmoji, style: const TextStyle(fontSize: 22)),
     );
   }
 }

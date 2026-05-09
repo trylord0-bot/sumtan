@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'router.dart';
 import 'theme/app_theme.dart';
+import 'widgets/startup_splash.dart';
 
 class SumtanApp extends ConsumerWidget {
   const SumtanApp({super.key});
@@ -22,8 +23,10 @@ class SumtanApp extends ConsumerWidget {
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
-        return _KeyboardDismissOnTap(
-          child: child ?? const SizedBox.shrink(),
+        return StartupSplash(
+          child: _KeyboardDismissOnTap(
+            child: child ?? const SizedBox.shrink(),
+          ),
         );
       },
     );

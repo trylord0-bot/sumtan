@@ -11,7 +11,10 @@
       "Bash(Select-Object -ExpandProperty FullName)",
       "PowerShell(head *)",
       "Bash(Get-ChildItem -Path \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\\\\lib\" -Recurse -Directory)",
-      "Bash(Sort-Object)"
+      "Bash(Sort-Object)",
+      "Bash(dart run *)",
+      "Read(//usr/local/bin/**)",
+      "Read(//Users/lukas/flutter/bin/**)"
     ]
   }
 }

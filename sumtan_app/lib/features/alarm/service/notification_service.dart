@@ -4,6 +4,7 @@ import 'package:timezone/data/latest_all.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
 import '../data/alarm_model.dart';
+import 'notification_attachment_file.dart';
 
 class NotificationService {
   NotificationService._();
@@ -30,8 +31,7 @@ class NotificationService {
       return;
     }
 
-    const androidSettings =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings = AndroidInitializationSettings('launcher_icon');
     const iosSettings = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
@@ -192,20 +192,22 @@ class NotificationService {
   }) async {
     if (kIsWeb || _isUnsupportedDesktop) return;
 
+    final iosDetails = await _iosNotificationDetails();
+
     await _plugin.zonedSchedule(
       id,
       _notificationTitle(alarm),
       _notificationBody(alarm),
       scheduledDate,
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
+      NotificationDetails(
+        android: const AndroidNotificationDetails(
           _channelId,
           _channelName,
           channelDescription: _channelDescription,
           importance: Importance.max,
           priority: Priority.high,
         ),
-        iOS: DarwinNotificationDetails(),
+        iOS: iosDetails,
       ),
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
@@ -222,6 +224,26 @@ class NotificationService {
   IOSFlutterLocalNotificationsPlugin? get _iosPlugin =>
       _plugin.resolvePlatformSpecificImplementation<
           IOSFlutterLocalNotificationsPlugin>();
+
+  Future<DarwinNotificationDetails> _iosNotificationDetails() async {
+    if (defaultTargetPlatform != TargetPlatform.iOS) {
+      return const DarwinNotificationDetails();
+    }
+
+    final attachmentPath = await notificationIconAttachmentPath();
+    if (attachmentPath == null) {
+      return const DarwinNotificationDetails();
+    }
+
+    return DarwinNotificationDetails(
+      attachments: [
+        DarwinNotificationAttachment(
+          attachmentPath,
+          identifier: 'sumtan_notification_icon',
+        ),
+      ],
+    );
+  }
 
   bool get _isUnsupportedDesktop =>
       defaultTargetPlatform == TargetPlatform.windows ||

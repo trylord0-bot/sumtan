@@ -1,4 +1,4 @@
-package com.sumtan.sumtan_app
+package kr.co.lunlu.sumtan
 
 import io.flutter.embedding.android.FlutterActivity
 

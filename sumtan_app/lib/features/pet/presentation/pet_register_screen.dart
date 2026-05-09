@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
+import '../../../app/widgets/app_page_app_bar.dart';
 import '../../../app/widgets/app_toast.dart';
 import '../../../core/utils/date_utils.dart' as du;
 import '../../../core/widgets/localized_pickers.dart';
@@ -83,21 +84,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.creamBg,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary50,
-        title: Text(
-          _isEdit ? '반려동물 편집' : '반려동물 등록',
-          style: const TextStyle(
-            color: AppColors.primary900,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.primary900),
-          onPressed: () => Navigator.pop(context),
-        ),
-        elevation: 0,
-      ),
+      appBar: AppPageAppBar(title: _isEdit ? '반려동물 편집' : '반려동물 등록'),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.space4),
         children: [

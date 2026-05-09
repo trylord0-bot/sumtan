@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
+import '../../../app/widgets/app_page_app_bar.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
@@ -10,24 +11,7 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.creamBg,
-      appBar: AppBar(
-        backgroundColor: AppColors.creamBg,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-          color: AppColors.gray700,
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: const Text(
-          '도움말',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            color: AppColors.gray900,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: const AppPageAppBar(title: '도움말'),
       body: ListView(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.space4,

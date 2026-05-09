@@ -2,29 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
+import '../../../app/widgets/app_page_app_bar.dart';
 
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: AppColors.creamBg,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary50,
-        foregroundColor: AppColors.primary900,
-        elevation: 0,
-        surfaceTintColor: Colors.transparent,
-        title: const Text(
-          '개인정보 처리방침',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-            color: AppColors.primary900,
-          ),
-        ),
-      ),
-      body: const SingleChildScrollView(
+      appBar: AppPageAppBar(title: '개인정보 처리방침'),
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(AppSpacing.space4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -152,8 +140,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                 children: [
                   _BodyText('반려숨탄은 데이터 내보내기(백업) 및 가져오기(복원) 기능을 제공합니다.'),
                   SizedBox(height: AppSpacing.space2),
-                  _BulletItem(
-                      '내보내기: 앱 내 모든 데이터를 파일(.zip)로 저장하거나 공유할 수 있습니다.'),
+                  _BulletItem('내보내기: 앱 내 모든 데이터를 파일(.zip)로 저장하거나 공유할 수 있습니다.'),
                   _BulletItem('가져오기: 이전에 내보낸 백업 파일을 불러와 데이터를 복원할 수 있습니다.'),
                   _BulletItem(
                     '백업 파일은 사용자가 직접 관리하며, 파일을 타인과 공유하지 않도록 주의하시기 바랍니다.',

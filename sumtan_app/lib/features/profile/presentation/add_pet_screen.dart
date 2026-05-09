@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
+import '../../../app/widgets/app_page_app_bar.dart';
 import '../../../core/utils/date_utils.dart' as du;
 import '../../../core/widgets/localized_pickers.dart';
 import '../../pet/data/pet_model.dart';
@@ -104,23 +105,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.creamBg,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary50,
-        elevation: 0,
-        leading: const BackButton(color: AppColors.primary700),
-        title: const Text(
-          '새 반려동물 추가',
-          style: TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w700,
-            color: AppColors.primary900,
-          ),
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(height: 1, color: AppColors.gray100),
-        ),
-      ),
+      appBar: const AppPageAppBar(title: '새 반려동물 추가'),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 20, 16, 40),
         children: [

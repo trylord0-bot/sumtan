@@ -16,8 +16,8 @@ class AppTheme {
           error: AppColors.danger400,
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: AppColors.primary50,
-          foregroundColor: AppColors.primary900,
+          backgroundColor: AppColors.white,
+          foregroundColor: AppColors.gray900,
           elevation: 0,
           surfaceTintColor: Colors.transparent,
         ),
@@ -34,7 +34,8 @@ class AppTheme {
             backgroundColor: AppColors.primary400,
             foregroundColor: AppColors.white,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(AppRadius.radiusXl)),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(AppRadius.radiusXl)),
             ),
             padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.space6,
@@ -47,7 +48,8 @@ class AppTheme {
             foregroundColor: AppColors.primary600,
             side: const BorderSide(color: AppColors.primary400, width: 1.5),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(AppRadius.radiusXl)),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(AppRadius.radiusXl)),
             ),
             padding: const EdgeInsets.symmetric(
               horizontal: AppSpacing.space6,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
-import '../../../../core/utils/date_utils.dart' as du;
 import '../../../../core/widgets/localized_pickers.dart';
 
 class FormShell extends StatelessWidget {
@@ -162,7 +161,7 @@ class FormDateTimePicker extends StatelessWidget {
         Expanded(
             child: _PickerChip(
           icon: Icons.calendar_today_outlined,
-          label: du.formatMonthDay(value),
+          label: formatLocalizedDate(context, value),
           onTap: () async {
             final picked = await showLocalizedDatePicker(
               context: context,
@@ -178,7 +177,10 @@ class FormDateTimePicker extends StatelessWidget {
         Expanded(
             child: _PickerChip(
           icon: Icons.access_time_outlined,
-          label: du.formatTime(value),
+          label: formatLocalizedTimeOfDay(
+            context,
+            TimeOfDay.fromDateTime(value),
+          ),
           onTap: () async {
             final picked = await showWheelTimePicker(
               context: context,
@@ -222,12 +224,18 @@ class _PickerChip extends StatelessWidget {
           children: [
             Icon(icon, size: 16, color: AppColors.primary600),
             const SizedBox(width: 6),
-            Text(label,
+            Flexible(
+              child: Text(
+                label,
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
                   color: AppColors.primary900,
-                )),
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
       ),

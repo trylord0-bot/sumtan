@@ -20,6 +20,21 @@ Future<DateTime?> showLocalizedDatePicker({
   );
 }
 
+String formatLocalizedDate(BuildContext context, DateTime date) {
+  return MaterialLocalizations.of(context).formatShortDate(date);
+}
+
+String formatLocalizedTimeOfDay(BuildContext context, TimeOfDay time) {
+  return time.format(context);
+}
+
+String formatLocalizedDateTime(BuildContext context, DateTime dateTime) {
+  return '${formatLocalizedDate(context, dateTime)} ${formatLocalizedTimeOfDay(
+    context,
+    TimeOfDay.fromDateTime(dateTime),
+  )}';
+}
+
 class _FlexibleGregorianCalendarDelegate extends GregorianCalendarDelegate {
   const _FlexibleGregorianCalendarDelegate();
 

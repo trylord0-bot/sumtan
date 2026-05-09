@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
@@ -334,7 +333,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
                   Expanded(
                     child: _SnoozePickerButton(
                       icon: Icons.calendar_today_rounded,
-                      label: DateFormat('M월 d일 (E)', 'ko').format(_customDate),
+                      label: formatLocalizedDate(context, _customDate),
                       onTap: _pickDate,
                     ),
                   ),
@@ -342,7 +341,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
                   Expanded(
                     child: _SnoozePickerButton(
                       icon: Icons.access_time_rounded,
-                      label: _customTime.format(context),
+                      label: formatLocalizedTimeOfDay(context, _customTime),
                       onTap: _pickTime,
                     ),
                   ),
@@ -429,16 +428,9 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
     if (widget.outerContext.mounted) {
       showTopToast(
         widget.outerContext,
-        '🕐 ${_formatCustomToast(selected)}에 다시 알려드릴게요',
+        '🕐 ${formatLocalizedDateTime(widget.outerContext, selected)}에 다시 알려드릴게요',
       );
     }
-  }
-
-  String _formatCustomToast(DateTime dateTime) {
-    final ampm = dateTime.hour < 12 ? '오전' : '오후';
-    final h = dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12;
-    final m = dateTime.minute.toString().padLeft(2, '0');
-    return '${DateFormat('M월 d일', 'ko').format(dateTime)} $ampm $h:$m';
   }
 }
 

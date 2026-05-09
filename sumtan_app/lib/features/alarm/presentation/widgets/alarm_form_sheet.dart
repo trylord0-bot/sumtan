@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
@@ -769,7 +768,7 @@ class _DateButton extends StatelessWidget {
         ? _amber700
         : (hasDate ? AppColors.primary800 : AppColors.gray400);
     final String txt = hasDate
-        ? DateFormat('MM월 dd일 (E)', 'ko').format(date!)
+        ? formatLocalizedDate(context, date!)
         : (isReschedule ? '날짜 재선택' : '날짜 선택');
 
     return GestureDetector(
@@ -786,7 +785,14 @@ class _DateButton extends StatelessWidget {
           children: [
             Icon(Icons.calendar_today_rounded, size: 16, color: fg),
             const SizedBox(width: 8),
-            Text(txt, style: TextStyle(fontSize: 14, color: fg)),
+            Expanded(
+              child: Text(
+                txt,
+                style: TextStyle(fontSize: 14, color: fg),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
       ),
@@ -803,7 +809,7 @@ class _TimeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasTime = time != null;
-    final txt = hasTime ? time!.format(context) : '시각 선택';
+    final txt = hasTime ? formatLocalizedTimeOfDay(context, time!) : '시각 선택';
 
     return GestureDetector(
       onTap: onPick,
@@ -824,10 +830,16 @@ class _TimeButton extends StatelessWidget {
                 size: 16,
                 color: hasTime ? AppColors.primary800 : AppColors.gray400),
             const SizedBox(width: 8),
-            Text(txt,
+            Expanded(
+              child: Text(
+                txt,
                 style: TextStyle(
                     fontSize: 14,
-                    color: hasTime ? AppColors.primary800 : AppColors.gray400)),
+                    color: hasTime ? AppColors.primary800 : AppColors.gray400),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
       ),

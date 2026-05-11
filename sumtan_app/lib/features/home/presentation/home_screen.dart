@@ -880,7 +880,7 @@ class _RecordList extends StatelessWidget {
         return ConditionScoreLabel.fromScore(score).recordText;
       case 'poop':
         final type = d?['type'] as String? ?? '';
-        return type.isNotEmpty ? '대변 — $type' : '대변';
+        return type.isNotEmpty ? '배변 — $type' : '대변';
       case 'medication':
         final med = d?['medicine'] as String? ?? '';
         return med.isNotEmpty ? med : '투약';

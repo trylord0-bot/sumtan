@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
 import '../../../../core/utils/date_utils.dart' as du;
@@ -51,7 +52,7 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
 
   Future<void> _save() async {
     if (_vaccines.isEmpty) {
-      showTopToast(context, '💡 백신 종류를 하나 이상 선택해 주세요');
+      showTopToast(context, context.lt('💡 백신 종류를 하나 이상 선택해 주세요'));
       return;
     }
     final pet = ref.read(selectedPetProvider);
@@ -81,7 +82,7 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '💉 예방접종이 기록됐어요');
+      showTopToast(context, context.lt('💉 예방접종이 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

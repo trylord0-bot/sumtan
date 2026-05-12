@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
 import '../../../../core/utils/date_utils.dart' as du;
@@ -44,7 +45,7 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
 
   Future<void> _save() async {
     if (_parts.isEmpty) {
-      showTopToast(context, '💡 빗질 부위를 하나 이상 선택해 주세요');
+      showTopToast(context, context.lt('💡 빗질 부위를 하나 이상 선택해 주세요'));
       return;
     }
 
@@ -76,7 +77,7 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
     ref.invalidate(lastRecordProvider);
 
     if (mounted) {
-      showTopToast(context, '🪥 빗질이 기록됐어요');
+      showTopToast(context, context.lt('🪥 빗질이 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

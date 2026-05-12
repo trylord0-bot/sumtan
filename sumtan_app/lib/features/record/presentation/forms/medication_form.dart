@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
 import '../../data/record_model.dart';
@@ -37,11 +38,11 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
     final medicine = _nameCtrl.text.trim();
     final dose = _doseCtrl.text.trim();
     if (medicine.isEmpty) {
-      showTopToast(context, '💡 약품명을 입력해 주세요');
+      showTopToast(context, context.lt('💡 약품명을 입력해 주세요'));
       return;
     }
     if (dose.isEmpty) {
-      showTopToast(context, '💡 용량을 입력해 주세요');
+      showTopToast(context, context.lt('💡 용량을 입력해 주세요'));
       return;
     }
 
@@ -68,7 +69,7 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '💊 투약이 기록됐어요');
+      showTopToast(context, context.lt('💊 투약이 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

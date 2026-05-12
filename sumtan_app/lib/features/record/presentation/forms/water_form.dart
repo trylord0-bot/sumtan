@@ -68,7 +68,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '💧 음수가 기록됐어요');
+      showTopToast(context, context.lt('💧 음수가 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

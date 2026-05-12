@@ -126,7 +126,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               onTap: () async {
                 final Uri emailUri = Uri(
                   scheme: 'mailto',
-                  path: 'feedback@sumtan.app',
+                  path: 'lunlu.co.kr@gmail.com',
                   queryParameters: {
                     'subject': l10n.t('settings.feedbackSubject'),
                   },

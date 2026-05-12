@@ -273,8 +273,8 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          '언제 다시 알려드릴까요?',
+                        Text(
+                          context.lt('언제 다시 알려드릴까요?'),
                           style: AppTypography.heading3,
                         ),
                         const SizedBox(height: 2),
@@ -317,9 +317,9 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
               const SizedBox(height: AppSpacing.space5),
               const Divider(height: 1, color: AppColors.gray200),
               const SizedBox(height: AppSpacing.space4),
-              const Text(
-                '직접 지정',
-                style: TextStyle(
+              Text(
+                context.lt('직접 지정'),
+                style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
                   color: AppColors.gray700,
@@ -359,9 +359,10 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
                       borderRadius: BorderRadius.circular(AppRadius.radiusMd),
                     ),
                   ),
-                  child: const Text(
-                    '이 시간에 다시 알림',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                  child: Text(
+                    context.lt('이 시간에 다시 알림'),
+                    style: const TextStyle(
+                        fontSize: 15, fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
@@ -400,7 +401,13 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
         .read(alarmListProvider.notifier)
         .snooze(widget.alarm, option.minutes);
     if (widget.outerContext.mounted) {
-      showTopToast(widget.outerContext, '🕐 ${option.label}에 다시 알려드릴게요');
+      showTopToast(
+        widget.outerContext,
+        widget.outerContext.lt(
+          '🕐 {time}에 다시 알려드릴게요',
+          args: {'time': widget.outerContext.lt(option.label)},
+        ),
+      );
     }
   }
 
@@ -414,7 +421,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
     );
 
     if (!selected.isAfter(DateTime.now())) {
-      showTopToast(context, '지금 이후의 시간을 선택해주세요');
+      showTopToast(context, context.lt('지금 이후의 시간을 선택해주세요'));
       return;
     }
 
@@ -426,7 +433,12 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
     if (widget.outerContext.mounted) {
       showTopToast(
         widget.outerContext,
-        '🕐 ${formatLocalizedDateTime(widget.outerContext, selected)}에 다시 알려드릴게요',
+        widget.outerContext.lt(
+          '🕐 {time}에 다시 알려드릴게요',
+          args: {
+            'time': formatLocalizedDateTime(widget.outerContext, selected),
+          },
+        ),
       );
     }
   }
@@ -466,7 +478,7 @@ class _SnoozeOptionButton extends StatelessWidget {
             border: Border.all(color: AppColors.primary200, width: 1.2),
           ),
           child: Text(
-            option.label,
+            context.lt(option.label),
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,

@@ -93,7 +93,7 @@ class _MealFormState extends ConsumerState<MealForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '🍽️ 식사가 기록됐어요');
+      showTopToast(context, context.lt('🍽️ 식사가 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

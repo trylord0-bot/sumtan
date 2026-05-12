@@ -38,12 +38,12 @@ class _WalkFormState extends ConsumerState<WalkForm> {
   Future<void> _save() async {
     final durationText = _durationCtrl.text.trim();
     if (durationText.isEmpty) {
-      showTopToast(context, '💡 산책 시간을 입력해 주세요');
+      showTopToast(context, context.lt('💡 산책 시간을 입력해 주세요'));
       return;
     }
     final duration = int.tryParse(durationText);
     if (duration == null) {
-      showTopToast(context, '💡 산책 시간은 숫자로 입력해 주세요');
+      showTopToast(context, context.lt('💡 산책 시간은 숫자로 입력해 주세요'));
       return;
     }
 
@@ -74,7 +74,7 @@ class _WalkFormState extends ConsumerState<WalkForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '🦮 산책이 기록됐어요');
+      showTopToast(context, context.lt('🦮 산책이 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

@@ -86,7 +86,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '🏥 병원 방문이 기록됐어요');
+      showTopToast(context, context.lt('🏥 병원 방문이 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

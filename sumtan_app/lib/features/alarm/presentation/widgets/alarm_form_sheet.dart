@@ -126,14 +126,14 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
     // Validation
     final err = _validate();
     if (err != null) {
-      showTopToast(context, err);
+      showTopToast(context, context.lt(err));
       return;
     }
 
     // Pet guard
     final pet = ref.read(selectedPetProvider);
     if (pet == null) {
-      showTopToast(context, '아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!');
+      showTopToast(context, context.lt('아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!'));
       return;
     }
 
@@ -207,17 +207,20 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         showTopToast(
           context,
           widget.isReschedule
-              ? '🔄 알림이 재예약됐어요'
+              ? context.lt('🔄 알림이 재예약됐어요')
               : _isEdit
-                  ? '✅ 알림이 수정됐어요'
-                  : '🔔 알림이 추가됐어요',
+                  ? context.lt('✅ 알림이 수정됐어요')
+                  : context.lt('🔔 알림이 추가됐어요'),
         );
         Navigator.pop(context);
       }
     } catch (e) {
       if (mounted) {
         setState(() => _saving = false);
-        showTopToast(context, '저장 중 오류가 발생했어요: $e');
+        showTopToast(
+          context,
+          context.lt('저장 중 오류가 발생했어요: {error}', args: {'error': '$e'}),
+        );
       }
     }
   }

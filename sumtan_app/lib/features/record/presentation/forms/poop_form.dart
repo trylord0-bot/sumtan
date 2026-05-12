@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
 import '../../data/record_model.dart';
@@ -54,7 +55,7 @@ class _PoopFormState extends ConsumerState<PoopForm> {
     ref.invalidate(weeklyPoopStatsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '💩 배변이 기록됐어요');
+      showTopToast(context, context.lt('💩 배변이 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

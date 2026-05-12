@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
 import '../../../../core/utils/date_utils.dart' as du;
@@ -34,7 +35,7 @@ class _MemoFormState extends ConsumerState<MemoForm> {
   Future<void> _save() async {
     final title = _titleCtrl.text.trim();
     if (title.isEmpty) {
-      showTopToast(context, '💡 제목을 입력해 주세요');
+      showTopToast(context, context.lt('💡 제목을 입력해 주세요'));
       return;
     }
     final pet = ref.read(selectedPetProvider);
@@ -61,7 +62,7 @@ class _MemoFormState extends ConsumerState<MemoForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '📝 메모가 기록됐어요');
+      showTopToast(context, context.lt('📝 메모가 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

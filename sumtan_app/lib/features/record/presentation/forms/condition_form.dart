@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
@@ -64,7 +65,7 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '💗 컨디션이 기록됐어요');
+      showTopToast(context, context.lt('💗 컨디션이 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

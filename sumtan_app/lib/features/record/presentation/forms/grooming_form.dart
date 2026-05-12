@@ -48,7 +48,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
 
   Future<void> _save() async {
     if (_types.isEmpty) {
-      showTopToast(context, '💡 미용 종류를 하나 이상 선택해 주세요');
+      showTopToast(context, context.lt('💡 미용 종류를 하나 이상 선택해 주세요'));
       return;
     }
     final pet = ref.read(selectedPetProvider);
@@ -81,7 +81,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '✂️ 미용이 기록됐어요');
+      showTopToast(context, context.lt('✂️ 미용이 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

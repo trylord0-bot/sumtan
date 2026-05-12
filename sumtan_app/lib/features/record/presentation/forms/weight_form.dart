@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
 import '../../data/record_model.dart';
@@ -35,13 +36,13 @@ class _WeightFormState extends ConsumerState<WeightForm> {
   Future<void> _save() async {
     final weightText = _weightCtrl.text.trim();
     if (weightText.isEmpty) {
-      showTopToast(context, '💡 체중을 입력해 주세요');
+      showTopToast(context, context.lt('💡 체중을 입력해 주세요'));
       return;
     }
 
     final weight = double.tryParse(weightText);
     if (weight == null) {
-      showTopToast(context, '💡 체중은 숫자로 입력해 주세요');
+      showTopToast(context, context.lt('💡 체중은 숫자로 입력해 주세요'));
       return;
     }
 
@@ -69,7 +70,7 @@ class _WeightFormState extends ConsumerState<WeightForm> {
     ref.invalidate(weightHistoryProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, '⚖️ 체중이 기록됐어요');
+      showTopToast(context, context.lt('⚖️ 체중이 기록됐어요'));
       Navigator.pop(context, true);
     }
   }

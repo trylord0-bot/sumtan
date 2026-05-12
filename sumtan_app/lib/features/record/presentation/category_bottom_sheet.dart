@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../features/pet/provider/pet_provider.dart';
@@ -110,7 +111,10 @@ class _CategorySheet extends ConsumerWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       padding: const EdgeInsets.fromLTRB(
-        AppSpacing.space5, 0, AppSpacing.space5, AppSpacing.space5,
+        AppSpacing.space5,
+        0,
+        AppSpacing.space5,
+        AppSpacing.space5,
       ),
       child: SafeArea(
         child: Column(
@@ -127,9 +131,9 @@ class _CategorySheet extends ConsumerWidget {
             ),
             Row(
               children: [
-                const Text(
-                  '📝 무엇을 기록할까요?',
-                  style: TextStyle(
+                Text(
+                  context.lt('📝 무엇을 기록할까요?'),
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
                     color: AppColors.gray900,
@@ -205,7 +209,7 @@ class _CategoryButton extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              label,
+              context.lt(label),
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,

@@ -10,6 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import 'form_widgets.dart';
@@ -48,9 +49,8 @@ class RecordMediaItem {
       };
 
   factory RecordMediaItem.fromJson(Map<String, dynamic> json) {
-    final type = json['type'] == 'video'
-        ? RecordMediaType.video
-        : RecordMediaType.photo;
+    final type =
+        json['type'] == 'video' ? RecordMediaType.video : RecordMediaType.photo;
     final path = json['path'] as String? ?? '';
     return RecordMediaItem(
       type: type,
@@ -213,15 +213,15 @@ class _RecordMediaAttachmentFieldState
     final openSettings = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('설정에서 권한을 허용해 주세요'),
+        title: Text(context.lt('설정에서 권한을 허용해 주세요')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('취소'),
+            child: Text(context.lt('취소')),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('설정 열기'),
+            child: Text(context.lt('설정 열기')),
           ),
         ],
       ),
@@ -255,7 +255,10 @@ class _RecordMediaAttachmentFieldState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         FormFieldLabel(
-          items.isEmpty ? '사진 · 동영상' : '사진 · 동영상 · ${items.length}개',
+          items.isEmpty
+              ? context.lt('사진 · 동영상')
+              : context.lt('사진 · 동영상 · {count}개',
+                  args: {'count': '${items.length}'}),
           required: false,
         ),
         const SizedBox(height: AppSpacing.space2),
@@ -414,11 +417,12 @@ class _AddMediaButton extends StatelessWidget {
             children: [
               const Icon(Icons.add, size: 24, color: AppColors.gray400),
               if (showLabel)
-                const Padding(
-                  padding: EdgeInsets.only(top: 2),
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
                   child: Text(
-                    '미디어 추가',
-                    style: TextStyle(fontSize: 9, color: AppColors.gray400),
+                    context.lt('미디어 추가'),
+                    style:
+                        const TextStyle(fontSize: 9, color: AppColors.gray400),
                   ),
                 ),
             ],
@@ -485,11 +489,11 @@ class _MediaPickerSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(999),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 10),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
               child: Text(
-                '미디어 추가 방법 선택',
-                style: TextStyle(fontSize: 13, color: AppColors.gray400),
+                context.lt('미디어 추가 방법 선택'),
+                style: const TextStyle(fontSize: 13, color: AppColors.gray400),
               ),
             ),
             _PickerRow(
@@ -499,7 +503,8 @@ class _MediaPickerSheet extends StatelessWidget {
               subtitle: '사진 또는 동영상 촬영',
               onTap: onCamera,
             ),
-            const Divider(height: 1, color: AppColors.gray100, indent: 20, endIndent: 20),
+            const Divider(
+                height: 1, color: AppColors.gray100, indent: 20, endIndent: 20),
             _PickerRow(
               icon: Icons.photo_library,
               iconBg: AppColors.info200,
@@ -521,7 +526,7 @@ class _MediaPickerSheet extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text('취소'),
+                  child: Text(context.lt('취소')),
                 ),
               ),
             ),
@@ -603,16 +608,18 @@ class _PickerRow extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.gray900,
-                  )),
+                  Text(context.lt(title),
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.gray900,
+                      )),
                   const SizedBox(height: 2),
-                  Text(subtitle, style: const TextStyle(
-                    fontSize: 12,
-                    color: AppColors.gray400,
-                  )),
+                  Text(context.lt(subtitle),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: AppColors.gray400,
+                      )),
                 ],
               ),
             ),
@@ -758,7 +765,9 @@ class _VideoPreviewPageState extends State<_VideoPreviewPage> {
                                 muted: _muted,
                                 format: _format,
                                 onPlayToggle: () {
-                                  playing ? _controller.pause() : _controller.play();
+                                  playing
+                                      ? _controller.pause()
+                                      : _controller.play();
                                   _showControls();
                                 },
                                 onMuteToggle: () {
@@ -772,7 +781,8 @@ class _VideoPreviewPageState extends State<_VideoPreviewPage> {
                         ],
                       ),
                     )
-                  : const CircularProgressIndicator(color: AppColors.primary500),
+                  : const CircularProgressIndicator(
+                      color: AppColors.primary500),
             ),
             AnimatedOpacity(
               opacity: controlsVisible ? 1 : 0,
@@ -886,8 +896,9 @@ class _VideoControls extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                icon: Icon(muted ? Icons.volume_off : Icons.volume_up, size: 16),
-                label: Text(muted ? '음소거' : '소리 켜짐'),
+                icon:
+                    Icon(muted ? Icons.volume_off : Icons.volume_up, size: 16),
+                label: Text(muted ? context.lt('음소거') : context.lt('소리 켜짐')),
               ),
             ],
           ),
@@ -957,7 +968,8 @@ class _PreviewDeleteButton extends StatelessWidget {
               ),
             ),
             icon: const Icon(Icons.delete_outline, size: 18),
-            label: Text(label, style: const TextStyle(fontWeight: FontWeight.w600)),
+            label: Text(context.lt(label),
+                style: const TextStyle(fontWeight: FontWeight.w600)),
           ),
         ),
       ),
@@ -969,7 +981,7 @@ Future<bool> _confirmDelete(BuildContext context, String title) async {
   return await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(title, textAlign: TextAlign.center),
+          title: Text(context.lt(title), textAlign: TextAlign.center),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
             TextButton(
@@ -978,7 +990,7 @@ Future<bool> _confirmDelete(BuildContext context, String title) async {
                 backgroundColor: AppColors.gray100,
                 foregroundColor: AppColors.gray700,
               ),
-              child: const Text('취소'),
+              child: Text(context.lt('취소')),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
@@ -986,7 +998,7 @@ Future<bool> _confirmDelete(BuildContext context, String title) async {
                 backgroundColor: const Color(0xFFEF4444),
                 foregroundColor: AppColors.white,
               ),
-              child: const Text('삭제'),
+              child: Text(context.lt('삭제')),
             ),
           ],
         ),

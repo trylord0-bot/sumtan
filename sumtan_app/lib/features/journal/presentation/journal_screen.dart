@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_toast.dart';
@@ -126,7 +127,8 @@ class _MonthHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.space4, vertical: AppSpacing.space3,
+        horizontal: AppSpacing.space4,
+        vertical: AppSpacing.space3,
       ),
       child: Row(
         children: [
@@ -135,7 +137,8 @@ class _MonthHeader extends StatelessWidget {
           Text(
             du.formatMonthYear(date),
             style: const TextStyle(
-              fontSize: 16, fontWeight: FontWeight.w700,
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
               color: AppColors.primary900,
             ),
           ),
@@ -158,7 +161,8 @@ class _NavBtn extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 30, height: 30,
+        width: 30,
+        height: 30,
         decoration: const BoxDecoration(
           color: AppColors.primary50,
           shape: BoxShape.circle,
@@ -187,9 +191,12 @@ class _WeekdayRow extends StatelessWidget {
                   : AppColors.gray400;
           return Expanded(
             child: Center(
-              child: Text(e.value, style: TextStyle(
-                fontSize: 10, fontWeight: FontWeight.w600, color: color,
-              )),
+              child: Text(context.lt(e.value),
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    color: color,
+                  )),
             ),
           );
         }).toList(),
@@ -235,7 +242,9 @@ class _DaysGrid extends StatelessWidget {
               final cellDate = DateTime(year, month, day);
               final dateKey =
                   '${year.toString().padLeft(4, '0')}-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
-              final isToday = today.year == year && today.month == month && today.day == day;
+              final isToday = today.year == year &&
+                  today.month == month &&
+                  today.day == day;
               final isSelected = selectedDate.year == year &&
                   selectedDate.month == month &&
                   selectedDate.day == day;
@@ -251,11 +260,14 @@ class _DaysGrid extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: 28, height: 28,
+                          width: 28,
+                          height: 28,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: isSelected
-                                ? (isToday ? AppColors.primary400 : AppColors.primary900)
+                                ? (isToday
+                                    ? AppColors.primary400
+                                    : AppColors.primary900)
                                 : Colors.transparent,
                           ),
                           alignment: Alignment.center,
@@ -285,9 +297,11 @@ class _DaysGrid extends StatelessWidget {
                               children: dots.take(4).map((cat) {
                                 final c = RecordCategoryX.fromString(cat).color;
                                 return Container(
-                                  width: 4, height: 4,
+                                  width: 4,
+                                  height: 4,
                                   decoration: BoxDecoration(
-                                    color: c, shape: BoxShape.circle,
+                                    color: c,
+                                    shape: BoxShape.circle,
                                   ),
                                 );
                               }).toList(),
@@ -325,8 +339,10 @@ class _EventList extends ConsumerWidget {
                 const Text('🐾', style: TextStyle(fontSize: 36)),
                 const SizedBox(height: AppSpacing.space3),
                 Text(
-                  '${du.formatMonthDay(selectedDate)}의 기록이 없어요',
-                  style: const TextStyle(fontSize: 15, color: AppColors.gray500),
+                  context.lt('{date}의 기록이 없어요',
+                      args: {'date': du.formatMonthDay(selectedDate)}),
+                  style:
+                      const TextStyle(fontSize: 15, color: AppColors.gray500),
                 ),
               ],
             ),
@@ -334,19 +350,26 @@ class _EventList extends ConsumerWidget {
         }
         return ListView.separated(
           padding: const EdgeInsets.fromLTRB(
-            AppSpacing.space4, AppSpacing.space3,
-            AppSpacing.space4, 120,
+            AppSpacing.space4,
+            AppSpacing.space3,
+            AppSpacing.space4,
+            120,
           ),
           itemCount: records.length + 1,
-          separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.space2),
+          separatorBuilder: (_, __) =>
+              const SizedBox(height: AppSpacing.space2),
           itemBuilder: (context, idx) {
             if (idx == 0) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: AppSpacing.space2),
                 child: Text(
-                  '${du.formatMonthDay(selectedDate)} 기록 (${records.length}건)',
+                  context.lt('{date} 기록 ({count}건)', args: {
+                    'date': du.formatMonthDay(selectedDate),
+                    'count': '${records.length}',
+                  }),
                   style: const TextStyle(
-                    fontSize: 13, fontWeight: FontWeight.w700,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
                     color: AppColors.gray500,
                   ),
                 ),
@@ -357,7 +380,7 @@ class _EventList extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => const Center(child: Text('오류가 발생했어요')),
+      error: (_, __) => Center(child: Text(context.lt('오류가 발생했어요'))),
     );
   }
 }
@@ -381,14 +404,15 @@ class _EventCard extends ConsumerWidget {
         await ref.read(recordNotifierProvider.notifier).remove(id);
         _invalidateRecords(ref);
         if (context.mounted) {
-          showTopToast(context, '기록이 삭제됐어요 🗑️');
+          showTopToast(context, context.lt('기록이 삭제됐어요 🗑️'));
         }
       },
       child: GestureDetector(
         onTap: () => showRecordEditSheet(context, record: record),
         child: Container(
           padding: const EdgeInsets.symmetric(
-            vertical: 12, horizontal: 14,
+            vertical: 12,
+            horizontal: 14,
           ),
           decoration: BoxDecoration(
             color: AppColors.white,
@@ -404,7 +428,8 @@ class _EventCard extends ConsumerWidget {
           child: Row(
             children: [
               Container(
-                width: 40, height: 40,
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                   color: cat.bgColor,
                   borderRadius: BorderRadius.circular(AppRadius.radiusMd),
@@ -417,13 +442,17 @@ class _EventCard extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(cat.label, style: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.gray900,
-                    )),
+                    Text(context.lt(cat.label),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.gray900,
+                        )),
                     const SizedBox(height: 2),
                     Text(
-                      _buildSubtitle(record),
-                      style: const TextStyle(fontSize: 12, color: AppColors.gray500),
+                      context.lt(_buildSubtitle(record)),
+                      style: const TextStyle(
+                          fontSize: 12, color: AppColors.gray500),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -571,7 +600,8 @@ class _EventCard extends ConsumerWidget {
           if (content != null && content.isNotEmpty) content,
         ];
         return parts.isNotEmpty ? parts.join(' · ') : '';
-      default:           return r.memo ?? '';
+      default:
+        return r.memo ?? '';
     }
   }
 }

@@ -115,8 +115,7 @@ class Pet {
     final birth = DateTime.tryParse(birthDate!);
     if (birth == null) return '미입력';
     final now = DateTime.now();
-    final months =
-        (now.year - birth.year) * 12 + (now.month - birth.month);
+    final months = (now.year - birth.year) * 12 + (now.month - birth.month);
     if (months < 0) return '미입력';
     if (months < 12) return '$months개월';
     final y = months ~/ 12;

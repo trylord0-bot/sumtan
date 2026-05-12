@@ -51,7 +51,8 @@ class Alarm {
   int? get daysUntil {
     if (scheduledAt == null) return null;
     final scheduled = DateTime.parse(scheduledAt!);
-    final today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    final today =
+        DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
     final s = DateTime(scheduled.year, scheduled.month, scheduled.day);
     return s.difference(today).inDays;
   }
@@ -127,22 +128,34 @@ class Alarm {
 // Type helpers
 String alarmTypeEmoji(String type) {
   switch (type) {
-    case 'vaccination': return '💉';
-    case 'hospital':    return '🏥';
-    case 'medication':  return '💊';
-    case 'meal':        return '🍽️';
-    case 'daily':       return '📋';
-    default:            return '🔔';
+    case 'vaccination':
+      return '💉';
+    case 'hospital':
+      return '🏥';
+    case 'medication':
+      return '💊';
+    case 'meal':
+      return '🍽️';
+    case 'daily':
+      return '📋';
+    default:
+      return '🔔';
   }
 }
 
 String alarmTypeLabel(String type) {
   switch (type) {
-    case 'vaccination': return '예방접종';
-    case 'hospital':    return '병원 예약';
-    case 'medication':  return '투약';
-    case 'meal':        return '식사 시간';
-    case 'daily':       return '일일 리마인더';
-    default:            return '알림';
+    case 'vaccination':
+      return '예방접종';
+    case 'hospital':
+      return '병원 예약';
+    case 'medication':
+      return '투약';
+    case 'meal':
+      return '식사 시간';
+    case 'daily':
+      return '일일 리마인더';
+    default:
+      return '알림';
   }
 }

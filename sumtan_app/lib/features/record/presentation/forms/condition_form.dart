@@ -22,7 +22,16 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
   DateTime _datetime = DateTime.now();
   final _memoCtrl = TextEditingController();
   final _mediaController = RecordMediaController();
-  final _symptomTags = const ['구토', '기침', '무기력', '식욕부진', '설사', '콧물', '재채기', '떨림'];
+  final _symptomTags = const [
+    '구토',
+    '기침',
+    '무기력',
+    '식욕부진',
+    '설사',
+    '콧물',
+    '재채기',
+    '떨림'
+  ];
   final _selectedTags = <String>{};
 
   @override
@@ -89,16 +98,19 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
               onTap: () => setState(() => _score = val),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 150),
-                width: 48, height: 48,
+                width: 48,
+                height: 48,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: selected ? color : color.withValues(alpha: 0.2),
                 ),
                 alignment: Alignment.center,
-                child: Text('$val', style: TextStyle(
-                  fontSize: 18, fontWeight: FontWeight.w700,
-                  color: selected ? AppColors.white : color,
-                )),
+                child: Text('$val',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: selected ? AppColors.white : color,
+                    )),
               ),
             );
           }),
@@ -107,7 +119,8 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
         const FormFieldLabel('증상 태그', required: false),
         const SizedBox(height: AppSpacing.space2),
         Wrap(
-          spacing: 8, runSpacing: 8,
+          spacing: 8,
+          runSpacing: 8,
           children: _symptomTags.map((tag) {
             final sel = _selectedTags.contains(tag);
             return GestureDetector(
@@ -116,7 +129,8 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
               }),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 150),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: sel ? AppColors.primary100 : AppColors.gray100,
                   borderRadius: BorderRadius.circular(AppRadius.radiusFull),
@@ -124,11 +138,12 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
                     color: sel ? AppColors.primary400 : AppColors.gray200,
                   ),
                 ),
-                child: Text(tag, style: TextStyle(
-                  fontSize: 13,
-                  color: sel ? AppColors.primary900 : AppColors.gray600,
-                  fontWeight: sel ? FontWeight.w600 : FontWeight.w400,
-                )),
+                child: Text(tag,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: sel ? AppColors.primary900 : AppColors.gray600,
+                      fontWeight: sel ? FontWeight.w600 : FontWeight.w400,
+                    )),
               ),
             );
           }).toList(),

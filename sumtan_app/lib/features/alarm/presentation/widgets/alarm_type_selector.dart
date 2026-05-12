@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import 'alarm_form_sheet.dart';
 
@@ -40,9 +41,9 @@ class AlarmTypeSelector extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 12, 12, 8),
             child: Row(
               children: [
-                const Expanded(
-                  child: Text('알림 종류 선택',
-                      style: TextStyle(
+                Expanded(
+                  child: Text(context.lt('알림 종류 선택'),
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: AppColors.gray900,
@@ -87,8 +88,8 @@ class AlarmTypeSelector extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
-            child: Text('👆 원하는 알림 종류를 탭하세요',
-                style: TextStyle(fontSize: 12, color: AppColors.gray400)),
+            child: Text(context.lt('👆 원하는 알림 종류를 탭하세요'),
+                style: const TextStyle(fontSize: 12, color: AppColors.gray400)),
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
         ],
@@ -125,7 +126,7 @@ class _TypeCard extends StatelessWidget {
           children: [
             Text(emoji, style: const TextStyle(fontSize: 28)),
             const SizedBox(height: 4),
-            Text(label,
+            Text(context.lt(label),
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,

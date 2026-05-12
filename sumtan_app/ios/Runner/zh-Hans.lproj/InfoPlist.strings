@@ -1,0 +1,5 @@
+CFBundleDisplayName = "宠物 Sumtan";
+CFBundleName = "宠物 Sumtan";
+NSCameraUsageDescription = "需要访问相机以拍摄日记附件中的照片和视频。";
+NSMicrophoneUsageDescription = "需要访问麦克风以录制日记附件中的视频。";
+NSPhotoLibraryUsageDescription = "需要访问照片图库以添加日记附件以及导入/导出数据。";

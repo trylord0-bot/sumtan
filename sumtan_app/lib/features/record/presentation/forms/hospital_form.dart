@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
@@ -29,7 +30,16 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
   final _mediaController = RecordMediaController();
 
   static const _symptomOptions = [
-    '구토', '기침', '무기력', '식욕부진', '설사', '콧물', '재채기', '떨림', '혈뇨', '혈변',
+    '구토',
+    '기침',
+    '무기력',
+    '식욕부진',
+    '설사',
+    '콧물',
+    '재채기',
+    '떨림',
+    '혈뇨',
+    '혈변',
   ];
 
   @override
@@ -46,10 +56,12 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
 
-    final cost = _costCtrl.text.isNotEmpty ? double.tryParse(_costCtrl.text) : null;
+    final cost =
+        _costCtrl.text.isNotEmpty ? double.tryParse(_costCtrl.text) : null;
 
     final data = <String, dynamic>{
-      'hospital_name': _hospitalNameCtrl.text.isEmpty ? null : _hospitalNameCtrl.text,
+      'hospital_name':
+          _hospitalNameCtrl.text.isEmpty ? null : _hospitalNameCtrl.text,
       'visit_type': _visitType,
       'symptoms': _symptoms,
       'diagnosis': _diagnosisCtrl.text.isEmpty ? null : _diagnosisCtrl.text,
@@ -127,8 +139,8 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
             TextFormField(
               controller: _costCtrl,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                hintText: '예: 35000',
+              decoration: InputDecoration(
+                hintText: context.lt('예: 35000'),
                 prefixText: '₩',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),
@@ -145,16 +157,18 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
               GestureDetector(
                 onTap: () => setState(() => _nextVisit = DateTime.now()),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                   decoration: BoxDecoration(
                     color: AppColors.primary50,
                     borderRadius: BorderRadius.circular(AppRadius.radiusFull),
                   ),
-                  child: const Text('+ 다음 예약일 추가', style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primary600,
-                  )),
+                  child: Text(context.lt('+ 다음 예약일 추가'),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primary600,
+                      )),
                 ),
               )
             else
@@ -169,11 +183,12 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
                   const SizedBox(width: AppSpacing.space2),
                   GestureDetector(
                     onTap: () => setState(() => _nextVisit = null),
-                    child: const Text('삭제', style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.danger400,
-                    )),
+                    child: Text(context.lt('삭제'),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.danger400,
+                        )),
                   ),
                 ],
               ),

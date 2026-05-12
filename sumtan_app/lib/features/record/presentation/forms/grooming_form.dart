@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -27,7 +28,13 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
   final _mediaController = RecordMediaController();
 
   static const _typeOptions = [
-    '목욕', '전체미용', '부분미용', '발톱', '귀청소', '치석제거', '항문낭',
+    '목욕',
+    '전체미용',
+    '부분미용',
+    '발톱',
+    '귀청소',
+    '치석제거',
+    '항문낭',
   ];
 
   @override
@@ -47,7 +54,8 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
 
-    final cost = _costCtrl.text.isNotEmpty ? double.tryParse(_costCtrl.text) : null;
+    final cost =
+        _costCtrl.text.isNotEmpty ? double.tryParse(_costCtrl.text) : null;
 
     final data = <String, dynamic>{
       'types': _types,
@@ -111,8 +119,8 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
             TextFormField(
               controller: _costCtrl,
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                hintText: '예: 50000',
+              decoration: InputDecoration(
+                hintText: context.lt('예: 50000'),
                 prefixText: '₩',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),
@@ -129,16 +137,18 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
               GestureDetector(
                 onTap: () => setState(() => _nextDate = DateTime.now()),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                   decoration: BoxDecoration(
                     color: AppColors.primary50,
                     borderRadius: BorderRadius.circular(AppRadius.radiusFull),
                   ),
-                  child: const Text('+ 다음 예약일 추가', style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primary600,
-                  )),
+                  child: Text(context.lt('+ 다음 예약일 추가'),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.primary600,
+                      )),
                 ),
               )
             else
@@ -153,11 +163,12 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
                   const SizedBox(width: AppSpacing.space2),
                   GestureDetector(
                     onTap: () => setState(() => _nextDate = null),
-                    child: const Text('삭제', style: TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.danger400,
-                    )),
+                    child: Text(context.lt('삭제'),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.danger400,
+                        )),
                   ),
                 ],
               ),

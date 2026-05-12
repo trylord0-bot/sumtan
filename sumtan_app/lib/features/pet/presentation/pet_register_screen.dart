@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -51,7 +52,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
 
   Future<void> _save() async {
     if (_nameCtrl.text.trim().isEmpty) {
-      showTopToast(context, '이름을 입력해 주세요');
+      showTopToast(context, context.lt('이름을 입력해 주세요'));
       return;
     }
     final now = du.toIso8601(DateTime.now());
@@ -93,7 +94,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
           const SizedBox(height: AppSpacing.space2),
           TextFormField(
             controller: _nameCtrl,
-            decoration: const InputDecoration(hintText: '예: 콩이'),
+            decoration: InputDecoration(hintText: context.lt('예: 콩이')),
           ),
           const SizedBox(height: AppSpacing.space4),
 
@@ -113,7 +114,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
           const SizedBox(height: AppSpacing.space2),
           TextFormField(
             controller: _breedCtrl,
-            decoration: const InputDecoration(hintText: '예: 말티즈, 페르시안'),
+            decoration: InputDecoration(hintText: context.lt('예: 말티즈, 페르시안')),
           ),
           const SizedBox(height: AppSpacing.space4),
 
@@ -140,7 +141,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
               ),
               const SizedBox(width: AppSpacing.space2),
               Text(
-                _neutered ? '중성화 완료' : '중성화 안 함',
+                _neutered ? context.lt('중성화 완료') : context.lt('중성화 안 함'),
                 style: TextStyle(
                   fontSize: 14,
                   color: _neutered ? AppColors.primary900 : AppColors.gray500,
@@ -181,7 +182,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
                   Text(
                     _birthDate != null
                         ? du.formatDate(_birthDate!)
-                        : '날짜를 선택하세요',
+                        : context.lt('날짜를 선택하세요'),
                     style: TextStyle(
                       fontSize: 16,
                       color: _birthDate != null
@@ -209,7 +210,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
                 ),
               ),
               child: Text(
-                _isEdit ? '수정 완료' : '등록하기',
+                _isEdit ? context.lt('수정 완료') : context.lt('등록하기'),
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
@@ -227,7 +228,7 @@ class _FieldLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
+    return Text(context.lt(text),
         style: const TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w600,
@@ -272,7 +273,7 @@ class _SegmentControl extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 alignment: Alignment.center,
-                child: Text(labels[i],
+                child: Text(context.lt(labels[i]),
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,

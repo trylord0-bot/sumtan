@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/theme/app_typography.dart';
@@ -35,7 +36,7 @@ class AlarmScreen extends ConsumerWidget {
     return alarmsAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => Center(
-        child: Text('오류가 발생했어요\n$e',
+        child: Text(context.lt('오류가 발생했어요\n{error}', args: {'error': '$e'}),
             textAlign: TextAlign.center,
             style: const TextStyle(color: AppColors.gray500)),
       ),
@@ -100,7 +101,7 @@ class AlarmScreen extends ConsumerWidget {
           children: [
             // ── 예정된 알림 섹션 ──────────────────────────────────────────
             if (hasScheduled) ...[
-              _SectionHeader(title: '예정된 알림'),
+              _SectionHeader(title: context.lt('예정된 알림')),
               ...todayPending.map((a) => AlarmListItemPending(alarm: a)),
               ...upcoming.map((a) => AlarmListItem(alarm: a)),
               PastAlarmsSection(alarms: pastOrDone),
@@ -109,21 +110,23 @@ class AlarmScreen extends ConsumerWidget {
 
             // ── 반복 알림 섹션 ────────────────────────────────────────────
             if (repeat.isNotEmpty) ...[
-              _SectionHeader(title: '반복 알림'),
+              _SectionHeader(title: context.lt('반복 알림')),
               ...repeat.map((a) => AlarmListItem(alarm: a)),
             ],
 
             // ── 스와이프 힌트 ─────────────────────────────────────────────
-            const Padding(
-              padding: EdgeInsets.only(top: 8, bottom: 4),
+            Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.arrow_back, size: 12, color: AppColors.gray400),
-                  SizedBox(width: 4),
+                  const Icon(Icons.arrow_back,
+                      size: 12, color: AppColors.gray400),
+                  const SizedBox(width: 4),
                   Text(
-                    '스와이프하면 삭제할 수 있어요',
-                    style: TextStyle(fontSize: 11, color: AppColors.gray400),
+                    context.lt('스와이프하면 삭제할 수 있어요'),
+                    style:
+                        const TextStyle(fontSize: 11, color: AppColors.gray400),
                   ),
                 ],
               ),
@@ -186,10 +189,11 @@ class _EmptyAlarmState extends ConsumerWidget {
           children: [
             const Text('🐾', style: TextStyle(fontSize: 52)),
             const SizedBox(height: AppSpacing.space3),
-            Text('등록된 알림이 없네요', style: AppTypography.heading3),
+            Text(context.lt('등록된 알림이 없네요'), style: AppTypography.heading3),
             const SizedBox(height: AppSpacing.space2),
             Text(
-              '$petName는 오늘도 건강하게 지내봐요!\n아래 알림 추가 버튼을 눌러 시작해보세요.',
+              context.lt('{petName}는 오늘도 건강하게 지내봐요!\n아래 알림 추가 버튼을 눌러 시작해보세요.',
+                  args: {'petName': petName}),
               style: AppTypography.bodySm.copyWith(color: AppColors.gray500),
               textAlign: TextAlign.center,
             ),

@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/widgets/app_toast.dart';
 import '../../../features/alarm/provider/alarm_provider.dart';
@@ -24,19 +25,32 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final selectedLocale = ref.watch(localeControllerProvider).valueOrNull;
+    final selectedLanguageLabel = selectedLocale == null
+        ? l10n.t('settings.languageSystem')
+        : AppLocalizations.supportedLocaleItems
+            .firstWhere(
+              (item) =>
+                  AppLocalizations.localeTag(item.locale) ==
+                  AppLocalizations.localeTag(selectedLocale),
+              orElse: () => AppLocalizations.supportedLocaleItems.first,
+            )
+            .nativeName;
+
     return Scaffold(
       backgroundColor: AppColors.creamBg,
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 40),
         children: [
           // ── 알림 ──────────────────────────────────────────────────────────
-          const _SectionLabel('알림'),
+          _SectionLabel(l10n.t('settings.notifications')),
           _SettingsCard(rows: [
             _SettingsRow(
               iconBg: AppColors.primary50,
               icon: '🔔',
-              title: '푸시 알림 허용',
-              sub: '기기 알림 권한 설정',
+              title: l10n.t('settings.pushNotifications'),
+              sub: l10n.t('settings.pushNotificationsSub'),
               trailing: Switch(
                 value: _notifEnabled,
                 onChanged: (v) => setState(() => _notifEnabled = v),
@@ -47,33 +61,46 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ]),
 
+          _SectionLabel(l10n.t('settings.languageSection')),
+          _SettingsCard(rows: [
+            _SettingsRow(
+              iconBg: const Color(0xFFEFF6FF),
+              icon: '🌐',
+              title: l10n.t('settings.language'),
+              sub: selectedLanguageLabel,
+              trailing: const Icon(Icons.chevron_right,
+                  size: 16, color: AppColors.gray400),
+              onTap: _showLanguageSheet,
+            ),
+          ]),
+
           // ── 데이터 관리 ───────────────────────────────────────────────────
-          const _SectionLabel('데이터 관리'),
+          _SectionLabel(l10n.t('settings.data')),
           _SettingsCard(rows: [
             _SettingsRow(
               iconBg: const Color(0xFFFFFBEB),
               icon: '📤',
-              title: '데이터 내보내기',
-              sub: 'ZIP 파일로 저장',
+              title: l10n.t('settings.export'),
+              sub: l10n.t('settings.exportSub'),
               onTap: () => _showExportSheet(context),
             ),
             _SettingsRow(
               iconBg: const Color(0xFFEFF6FF),
               icon: '📥',
-              title: '데이터 가져오기',
-              sub: 'ZIP 파일에서 복원',
+              title: l10n.t('settings.import'),
+              sub: l10n.t('settings.importSub'),
               onTap: _startImport,
             ),
           ]),
 
           // ── 앱 정보 ───────────────────────────────────────────────────────
-          const _SectionLabel('앱 정보'),
+          _SectionLabel(l10n.t('settings.appInfo')),
           _SettingsCard(rows: [
-            const _SettingsRow(
+            _SettingsRow(
               iconBg: AppColors.gray100,
               icon: '📱',
-              title: '앱 버전',
-              trailing: Text(
+              title: l10n.t('settings.version'),
+              trailing: const Text(
                 '1.0.0',
                 style: TextStyle(
                   fontSize: 13,
@@ -85,7 +112,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _SettingsRow(
               iconBg: const Color(0xFFF5F3FF),
               icon: '📋',
-              title: '개인정보 처리방침',
+              title: l10n.t('settings.privacy'),
               trailing: const Icon(Icons.chevron_right,
                   size: 16, color: AppColors.gray400),
               onTap: () => context.push('/privacy-policy'),
@@ -93,7 +120,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _SettingsRow(
               iconBg: const Color(0xFFFFF7ED),
               icon: '📬',
-              title: '피드백 보내기',
+              title: l10n.t('settings.feedback'),
               trailing: const Icon(Icons.chevron_right,
                   size: 16, color: AppColors.gray400),
               onTap: () async {
@@ -101,7 +128,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   scheme: 'mailto',
                   path: 'feedback@sumtan.app',
                   queryParameters: {
-                    'subject': '반려숨탄 피드백',
+                    'subject': l10n.t('settings.feedbackSubject'),
                   },
                 );
                 try {
@@ -110,11 +137,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     mode: LaunchMode.externalApplication,
                   );
                   if (!launched && context.mounted) {
-                    showTopToast(context, '이메일 앱을 찾을 수 없어요');
+                    showTopToast(
+                        context, context.l10n.t('settings.emailAppMissing'));
                   }
                 } catch (e) {
                   if (context.mounted) {
-                    showTopToast(context, '이메일 앱을 찾을 수 없어요');
+                    showTopToast(
+                        context, context.l10n.t('settings.emailAppMissing'));
                   }
                 }
               },
@@ -134,24 +163,100 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
+  void _showLanguageSheet() {
+    final l10n = context.l10n;
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) {
+        final selectedLocale = ref.read(localeControllerProvider).valueOrNull;
+        final selectedTag = selectedLocale == null
+            ? 'system'
+            : AppLocalizations.localeTag(selectedLocale);
+
+        return Container(
+          decoration: const BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          padding: const EdgeInsets.fromLTRB(20, 14, 20, 28),
+          child: SafeArea(
+            top: false,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.gray300,
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                ),
+                Flexible(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          title: Text(l10n.t('settings.languageSystem')),
+                          trailing: selectedTag == 'system'
+                              ? const Icon(Icons.check,
+                                  color: AppColors.primary600)
+                              : null,
+                          onTap: () => _selectLocale(null),
+                        ),
+                        for (final item
+                            in AppLocalizations.supportedLocaleItems)
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: Text(item.nativeName),
+                            subtitle: Text(item.englishName),
+                            trailing: selectedTag ==
+                                    AppLocalizations.localeTag(item.locale)
+                                ? const Icon(Icons.check,
+                                    color: AppColors.primary600)
+                                : null,
+                            onTap: () => _selectLocale(item.locale),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> _selectLocale(Locale? locale) async {
+    await ref.read(localeControllerProvider.notifier).setLocale(locale);
+    if (!mounted) return;
+    Navigator.pop(context);
+    showTopToast(context, context.l10n.t('settings.languageChanged'));
+  }
+
   Future<void> _startImport() async {
+    final l10n = context.l10n;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('데이터 가져오기'),
-        content: const Text(
-          '기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체됩니다.\n\n계속하시겠습니까?',
-        ),
+        title: Text(l10n.t('settings.import')),
+        content: Text(l10n.t('settings.importConfirmBody')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('취소'),
+            child: Text(l10n.t('common.cancel')),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text(
-              '가져오기',
-              style: TextStyle(color: AppColors.danger600),
+            child: Text(
+              l10n.t('settings.importAction'),
+              style: const TextStyle(color: AppColors.danger600),
             ),
           ),
         ],
@@ -169,7 +274,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     if (!mounted) return;
     _showProgressDialog(
       context: context,
-      title: '데이터 가져오기',
+      title: l10n.t('settings.importing'),
       mode: _ProgressMode.import,
     );
 
@@ -180,10 +285,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final state = ref.read(importProvider);
     if (state.status == ImportStatus.success) {
       _invalidateAllData();
-      showTopToast(context, '백업 데이터를 복원했어요');
+      showTopToast(context, l10n.t('settings.importSuccess'));
       context.go('/');
     } else {
-      showTopToast(context, _friendlyError(state.errorMessage, '가져오기에 실패했어요'));
+      showTopToast(context,
+          _friendlyError(state.errorMessage, l10n.t('settings.importFailed')));
     }
     ref.read(importProvider.notifier).reset();
   }
@@ -339,11 +445,13 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
   @override
   Widget build(BuildContext context) {
     final purchaseState = ref.watch(purchaseProvider);
+    final l10n = context.l10n;
 
     ref.listen<PurchaseState>(purchaseProvider, (_, next) {
       if (!mounted) return;
       if (next.status == IapStatus.error) {
-        showTopToast(context, next.errorMessage ?? '결제에 실패했어요');
+        showTopToast(context,
+            next.errorMessage ?? context.l10n.t('settings.purchaseFailed'));
         ref.read(purchaseProvider.notifier).reset();
       }
     });
@@ -375,7 +483,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
             if (purchaseState.isUnlocked)
               ..._buildUnlockedContent()
             else
-              ..._buildLockedContent(purchaseState),
+              ..._buildLockedContent(purchaseState, l10n),
           ],
         ),
       ),
@@ -384,15 +492,15 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
 
   // ── 잠금 해제 전 UI ─────────────────────────────────────────────────────────
 
-  List<Widget> _buildLockedContent(PurchaseState ps) {
+  List<Widget> _buildLockedContent(PurchaseState ps, AppLocalizations l10n) {
     final isBusy = ps.status == IapStatus.loading;
     final notAvailable = ps.status == IapStatus.notAvailable;
     final priceLabel = ps.product?.price ?? '3,000원';
 
     return [
-      const Text(
-        '📤 데이터 내보내기',
-        style: TextStyle(
+      Text(
+        '📤 ${l10n.t('settings.exportTitle')}',
+        style: const TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.w700,
           color: AppColors.gray900,
@@ -411,12 +519,12 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+            Row(
               children: [
                 Expanded(
                   child: Text(
-                    '내 소중한 기록을 안전하게 💚',
-                    style: TextStyle(
+                    l10n.t('settings.exportBenefitTitle'),
+                    style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
                       color: AppColors.primary800,
@@ -426,10 +534,10 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
               ],
             ),
             const SizedBox(height: 12),
-            for (final item in const [
-              '모든 반려동물 프로필 & 사진',
-              '건강 기록 · 일지 · 체중 전체',
-              '첨부 이미지 & 영상 포함',
+            for (final item in [
+              l10n.t('settings.exportBenefitPets'),
+              l10n.t('settings.exportBenefitRecords'),
+              l10n.t('settings.exportBenefitMedia'),
             ])
               Padding(
                 padding: const EdgeInsets.only(top: 7),
@@ -464,10 +572,10 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
             color: AppColors.gray100,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Text(
-            '현재 스토어에 연결할 수 없어요 🙏\n잠시 후 다시 시도해 주세요.',
+          child: Text(
+            l10n.t('settings.storeUnavailable'),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               color: AppColors.gray500,
               height: 1.55,
@@ -499,7 +607,8 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
                     ),
                   )
                 : Text(
-                    '$priceLabel 결제하고 내보내기 📤',
+                    l10n.t('settings.payAndExport',
+                        args: {'price': priceLabel}),
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
@@ -521,9 +630,9 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
             ),
           ),
           onPressed: () => Navigator.pop(context),
-          child: const Text(
-            '취소',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          child: Text(
+            l10n.t('common.cancel'),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
       ),
@@ -533,12 +642,13 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
   // ── 잠금 해제 후 UI ─────────────────────────────────────────────────────────
 
   List<Widget> _buildUnlockedContent() {
+    final l10n = context.l10n;
     return [
       Row(
         children: [
-          const Text(
-            '📤 데이터 내보내기',
-            style: TextStyle(
+          Text(
+            '📤 ${l10n.t('settings.exportTitle')}',
+            style: const TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w700,
               color: AppColors.gray900,
@@ -551,14 +661,15 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
               color: AppColors.primary100,
               borderRadius: BorderRadius.circular(99),
             ),
-            child: const Row(
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.lock_open, size: 11, color: AppColors.primary700),
-                SizedBox(width: 3),
+                const Icon(Icons.lock_open,
+                    size: 11, color: AppColors.primary700),
+                const SizedBox(width: 3),
                 Text(
-                  '잠금 해제됨',
-                  style: TextStyle(
+                  l10n.t('settings.unlocked'),
+                  style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
                     color: AppColors.primary700,
@@ -570,9 +681,10 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
         ],
       ),
       const SizedBox(height: 8),
-      const Text(
-        '모든 반려동물 정보와 기록을 ZIP 파일로 저장합니다.\n저장된 파일은 언제든 무료로 가져오기 복원할 수 있어요.',
-        style: TextStyle(fontSize: 13, color: AppColors.gray500, height: 1.65),
+      Text(
+        l10n.t('settings.exportUnlockedBody'),
+        style: const TextStyle(
+            fontSize: 13, color: AppColors.gray500, height: 1.65),
       ),
       const SizedBox(height: 20),
       SizedBox(
@@ -588,7 +700,9 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
           ),
           onPressed: _exporting ? null : _startExport,
           child: Text(
-            _exporting ? '내보내는 중...' : 'ZIP 파일로 내보내기',
+            _exporting
+                ? l10n.t('settings.exporting')
+                : l10n.t('settings.exportZip'),
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
           ),
         ),
@@ -605,9 +719,9 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
             ),
           ),
           onPressed: () => Navigator.pop(context),
-          child: const Text(
-            '취소',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          child: Text(
+            l10n.t('common.cancel'),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
       ),
@@ -617,19 +731,20 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
   // ── 내보내기 실행 ───────────────────────────────────────────────────────────
 
   Future<void> _startExport() async {
+    final l10n = context.l10n;
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('데이터 내보내기'),
-        content: const Text('모든 반려동물 정보와 기록, 첨부 미디어를 ZIP 파일로 내보냅니다.'),
+        title: Text(l10n.t('settings.exportTitle')),
+        content: Text(l10n.t('settings.exportConfirmBody')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('취소'),
+            child: Text(l10n.t('common.cancel')),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('내보내기'),
+            child: Text(l10n.t('settings.exportAction')),
           ),
         ],
       ),
@@ -640,7 +755,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
     if (!mounted) return;
     _showProgressDialog(
       context: context,
-      title: '데이터 내보내기',
+      title: l10n.t('settings.exportTitle'),
       mode: _ProgressMode.export,
     );
 
@@ -652,10 +767,11 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
     if (state.status == ExportStatus.success) {
       // 인메모리 결제 플래그 초기화 — 다음 내보내기 시 재결제 필요
       ref.read(purchaseProvider.notifier).resetUnlock();
-      showTopToast(context, '백업 파일을 공유할 수 있어요');
+      showTopToast(context, l10n.t('settings.exportSuccess'));
       Navigator.pop(context);
     } else {
-      showTopToast(context, _friendlyError(state.errorMessage, '내보내기에 실패했어요'));
+      showTopToast(context,
+          _friendlyError(state.errorMessage, l10n.t('settings.exportFailed')));
     }
     ref.read(exportProvider.notifier).reset();
     if (mounted) setState(() => _exporting = false);
@@ -687,6 +803,7 @@ class _BackupProgressDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final progress = mode == _ProgressMode.export
         ? ref.watch(exportProvider).progress
         : ref.watch(importProvider).progress;
@@ -703,12 +820,13 @@ class _BackupProgressDialog extends ConsumerWidget {
           LinearProgressIndicator(value: progress <= 0 ? null : progress),
           const SizedBox(height: 14),
           Text(
-            message.isEmpty ? '준비 중...' : message,
+            message.isEmpty ? l10n.t('common.loading') : l10n.text(message),
             style: const TextStyle(fontSize: 13, color: AppColors.gray600),
           ),
           const SizedBox(height: 4),
           Text(
-            '${(progress * 100).round()}%',
+            l10n.t('common.percent',
+                args: {'percent': '${(progress * 100).round()}'}),
             textAlign: TextAlign.right,
             style: const TextStyle(fontSize: 12, color: AppColors.gray400),
           ),

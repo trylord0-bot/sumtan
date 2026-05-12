@@ -1,2 +1,5 @@
 CFBundleDisplayName = "반려숨탄";
 CFBundleName = "반려숨탄";
+NSCameraUsageDescription = "일지에 첨부할 사진과 동영상을 촬영하기 위해 카메라 접근이 필요합니다.";
+NSMicrophoneUsageDescription = "일지에 첨부할 동영상을 촬영하기 위해 마이크 접근이 필요합니다.";
+NSPhotoLibraryUsageDescription = "일지 첨부와 데이터 내보내기/가져오기를 위해 사진 보관함 접근이 필요합니다.";

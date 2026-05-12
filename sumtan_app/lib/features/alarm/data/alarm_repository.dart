@@ -30,8 +30,10 @@ class AlarmRepository {
   Future<void> update(Alarm alarm) async {
     final db = await _db.database;
     await db.update(
-      'alarms', alarm.toMap(),
-      where: 'id = ?', whereArgs: [alarm.id],
+      'alarms',
+      alarm.toMap(),
+      where: 'id = ?',
+      whereArgs: [alarm.id],
     );
   }
 

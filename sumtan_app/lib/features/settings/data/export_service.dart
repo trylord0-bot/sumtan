@@ -18,7 +18,7 @@ class ExportService {
   Future<File> exportZip({
     void Function(double progress, String message)? onProgress,
   }) async {
-      File? zipFile;
+    File? zipFile;
     try {
       void progress(double value, String message) {
         onProgress?.call(value.clamp(0.0, 1.0).toDouble(), message);
@@ -173,7 +173,8 @@ class ExportService {
     final file = File(sourcePath);
     if (!await file.exists()) return null;
 
-    final ext = p.extension(sourcePath).isEmpty ? '.dat' : p.extension(sourcePath);
+    final ext =
+        p.extension(sourcePath).isEmpty ? '.dat' : p.extension(sourcePath);
     var fileName = '${_safeName(prefix)}$ext';
     var archivePath = '$preferredFolder/$fileName';
     var index = 1;

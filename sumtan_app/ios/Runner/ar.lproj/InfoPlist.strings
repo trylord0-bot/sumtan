@@ -1,0 +1,5 @@
+CFBundleDisplayName = "بت سمتان";
+CFBundleName = "بت سمتان";
+NSCameraUsageDescription = "يلزم الوصول إلى الكاميرا لالتقاط الصور والفيديوهات كمرفقات للسجل.";
+NSMicrophoneUsageDescription = "يلزم الوصول إلى الميكروفون لتسجيل الفيديوهات كمرفقات للسجل.";
+NSPhotoLibraryUsageDescription = "يلزم الوصول إلى مكتبة الصور لمرفقات السجل واستيراد/تصدير البيانات.";

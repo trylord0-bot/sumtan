@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -202,16 +203,16 @@ class _IntroCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.radiusLg),
         border: Border.all(color: AppColors.primary200),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text('🔒', style: TextStyle(fontSize: 20)),
-              SizedBox(width: AppSpacing.space2),
+              const Text('🔒', style: TextStyle(fontSize: 20)),
+              const SizedBox(width: AppSpacing.space2),
               Text(
-                '개인정보 처리방침',
-                style: TextStyle(
+                context.lt('개인정보 처리방침'),
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                   color: AppColors.primary900,
@@ -219,10 +220,11 @@ class _IntroCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: AppSpacing.space2),
+          const SizedBox(height: AppSpacing.space2),
           Text(
-            '반려숨탄은 회원가입 없이 사용하는 앱으로, 모든 데이터는 사용자의 기기 내에만 저장됩니다. 외부 서버로 개인정보를 전송하지 않으며, 사용자의 소중한 반려동물 정보를 안전하게 보호합니다.',
-            style: TextStyle(
+            context.lt(
+                '반려숨탄은 회원가입 없이 사용하는 앱으로, 모든 데이터는 사용자의 기기 내에만 저장됩니다. 외부 서버로 개인정보를 전송하지 않으며, 사용자의 소중한 반려동물 정보를 안전하게 보호합니다.'),
+            style: const TextStyle(
               fontSize: 13,
               color: AppColors.primary800,
               height: 1.6,
@@ -272,7 +274,7 @@ class _Section extends StatelessWidget {
             const SizedBox(width: AppSpacing.space2),
             Expanded(
               child: Text(
-                title,
+                context.lt(title),
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -307,7 +309,7 @@ class _BodyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      context.lt(text),
       style: const TextStyle(
         fontSize: 14,
         color: AppColors.gray700,
@@ -327,7 +329,7 @@ class _SubTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.space2),
       child: Text(
-        text,
+        context.lt(text),
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
@@ -360,7 +362,7 @@ class _BulletItem extends StatelessWidget {
           const SizedBox(width: AppSpacing.space2),
           Expanded(
             child: Text(
-              text,
+              context.lt(text),
               style: const TextStyle(
                 fontSize: 14,
                 color: AppColors.gray700,
@@ -399,7 +401,7 @@ class _PermissionItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  context.lt(name),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -408,7 +410,7 @@ class _PermissionItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  desc,
+                  context.lt(desc),
                   style: const TextStyle(
                     fontSize: 13,
                     color: AppColors.gray600,
@@ -437,16 +439,16 @@ class _ContactCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.radiusMd),
         border: Border.all(color: AppColors.primary200),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text('📬', style: TextStyle(fontSize: 18)),
-              SizedBox(width: AppSpacing.space2),
+              const Text('📬', style: TextStyle(fontSize: 18)),
+              const SizedBox(width: AppSpacing.space2),
               Text(
-                '개발자에게 문의하기',
-                style: TextStyle(
+                context.lt('개발자에게 문의하기'),
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primary900,
@@ -454,10 +456,10 @@ class _ContactCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: AppSpacing.space2),
+          const SizedBox(height: AppSpacing.space2),
           Text(
-            '설정 화면의 [피드백 보내기] 버튼을 통해 문의하시면\n빠르게 답변드리겠습니다.',
-            style: TextStyle(
+            context.lt('설정 화면의 [피드백 보내기] 버튼을 통해 문의하시면\n빠르게 답변드리겠습니다.'),
+            style: const TextStyle(
               fontSize: 13,
               color: AppColors.primary800,
               height: 1.6,
@@ -481,9 +483,9 @@ class _EffectiveDateCard extends StatelessWidget {
         color: AppColors.gray100,
         borderRadius: BorderRadius.circular(AppRadius.radiusMd),
       ),
-      child: const Text(
-        '본 개인정보 처리방침은 2026년 1월 1일부터 시행됩니다.\n최종 수정일: 2026년 5월 8일',
-        style: TextStyle(
+      child: Text(
+        context.lt('본 개인정보 처리방침은 2026년 1월 1일부터 시행됩니다.\n최종 수정일: 2026년 5월 8일'),
+        style: const TextStyle(
           fontSize: 13,
           color: AppColors.gray500,
           height: 1.6,

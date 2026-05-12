@@ -1,0 +1,5 @@
+CFBundleDisplayName = "ペットスムタン";
+CFBundleName = "ペットスムタン";
+NSCameraUsageDescription = "日誌に添付する写真や動画を撮影するためにカメラへのアクセスが必要です。";
+NSMicrophoneUsageDescription = "日誌に添付する動画を撮影するためにマイクへのアクセスが必要です。";
+NSPhotoLibraryUsageDescription = "日誌への添付とデータのインポート/エクスポートのために写真ライブラリへのアクセスが必要です。";

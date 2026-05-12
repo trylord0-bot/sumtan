@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -40,7 +41,7 @@ class PastAlarmsSection extends ConsumerWidget {
             child: Row(
               children: [
                 Text(
-                  visible ? '지난 알림 숨기기' : '지난 알림 보기',
+                  visible ? context.lt('지난 알림 숨기기') : context.lt('지난 알림 보기'),
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -55,7 +56,9 @@ class PastAlarmsSection extends ConsumerWidget {
                     color: AppColors.gray200,
                     borderRadius: BorderRadius.circular(AppRadius.radiusFull),
                   ),
-                  child: Text('${alarms.length}개',
+                  child: Text(
+                      context
+                          .lt('{count}개', args: {'count': '${alarms.length}'}),
                       style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
@@ -74,7 +77,7 @@ class PastAlarmsSection extends ConsumerWidget {
                     ),
                   ),
                   onPressed: () => _confirmDeleteAll(context, ref),
-                  child: const Text('전체 삭제'),
+                  child: Text(context.lt('전체 삭제')),
                 ),
                 const SizedBox(width: 4),
                 Icon(
@@ -96,17 +99,18 @@ class PastAlarmsSection extends ConsumerWidget {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('지난 알림 삭제'),
-        content: Text('지난 알림 ${alarms.length}개를 모두 삭제할까요?'),
+        title: Text(context.lt('지난 알림 삭제')),
+        content: Text(context.lt('지난 알림 {count}개를 모두 삭제할까요?',
+            args: {'count': '${alarms.length}'})),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: const Text('취소'),
+            child: Text(context.lt('취소')),
           ),
           TextButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(foregroundColor: AppColors.danger600),
-            child: const Text('삭제'),
+            child: Text(context.lt('삭제')),
           ),
         ],
       ),
@@ -116,7 +120,7 @@ class PastAlarmsSection extends ConsumerWidget {
 
     await ref.read(alarmListProvider.notifier).deleteAll(alarms);
     if (context.mounted) {
-      showTopToast(context, '지난 알림이 모두 삭제됐어요');
+      showTopToast(context, context.lt('지난 알림이 모두 삭제됐어요'));
     }
   }
 }
@@ -137,7 +141,7 @@ class _PastAlarmItem extends ConsumerWidget {
       confirmDismiss: (_) async => true,
       onDismissed: (_) {
         notifier.delete(alarm.id!);
-        showTopToast(context, '알림이 삭제됐어요 🗑️');
+        showTopToast(context, context.lt('알림이 삭제됐어요 🗑️'));
       },
       child: GestureDetector(
         onTap: isDone ? null : () => _openReschedule(context),
@@ -172,7 +176,7 @@ class _PastAlarmItem extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        alarm.label ?? alarmTypeLabel(alarm.type),
+                        alarm.label ?? context.lt(alarmTypeLabel(alarm.type)),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -184,7 +188,7 @@ class _PastAlarmItem extends ConsumerWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 2),
-                      isDone ? _doneSubtitle() : _pastSubtitle(),
+                      isDone ? _doneSubtitle(context) : _pastSubtitle(context),
                     ],
                   ),
                 ),
@@ -207,8 +211,8 @@ class _PastAlarmItem extends ConsumerWidget {
                       color: AppColors.gray200,
                       borderRadius: BorderRadius.circular(AppRadius.radiusFull),
                     ),
-                    child: const Text('지남',
-                        style: TextStyle(
+                    child: Text(context.lt('지남'),
+                        style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
                             color: AppColors.gray400)),
@@ -221,19 +225,21 @@ class _PastAlarmItem extends ConsumerWidget {
     );
   }
 
-  Widget _doneSubtitle() {
+  Widget _doneSubtitle(BuildContext context) {
     final dateStr = alarm.doneAt != null
-        ? DateFormat('M월 d일 (E)', 'ko').format(DateTime.parse(alarm.doneAt!))
+        ? DateFormat.MEd(Localizations.localeOf(context).toLanguageTag())
+            .format(DateTime.parse(alarm.doneAt!))
         : '';
-    return Text('$dateStr · 완료됨',
+    return Text(context.lt('{date} · 완료됨', args: {'date': dateStr}),
         style: const TextStyle(fontSize: 12, color: AppColors.gray300));
   }
 
-  Widget _pastSubtitle() {
+  Widget _pastSubtitle(BuildContext context) {
     final dateStr = alarm.scheduledAt != null
-        ? DateFormat('M월 d일', 'ko').format(DateTime.parse(alarm.scheduledAt!))
+        ? DateFormat.MMMd(Localizations.localeOf(context).toLanguageTag())
+            .format(DateTime.parse(alarm.scheduledAt!))
         : '';
-    return Text('⚠️ $dateStr 지남 · 탭해서 재예약',
+    return Text(context.lt('⚠️ {date} 지남 · 탭해서 재예약', args: {'date': dateStr}),
         style: const TextStyle(
             fontSize: 12, fontWeight: FontWeight.w600, color: _amber700));
   }

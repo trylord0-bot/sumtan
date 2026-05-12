@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -98,8 +99,8 @@ class _WalkFormState extends ConsumerState<WalkForm> {
               controller: _durationCtrl,
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              decoration: const InputDecoration(
-                hintText: '예: 30',
+              decoration: InputDecoration(
+                hintText: context.lt('예: 30'),
                 suffixText: '분',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),
@@ -114,12 +115,13 @@ class _WalkFormState extends ConsumerState<WalkForm> {
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _distanceCtrl,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}')),
               ],
-              decoration: const InputDecoration(
-                hintText: '예: 2.5',
+              decoration: InputDecoration(
+                hintText: context.lt('예: 2.5'),
                 suffixText: 'km',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),

@@ -8,7 +8,7 @@ import 'features/alarm/service/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeDateFormatting('ko');
+  await initializeDateFormatting();
 
   try {
     await DatabaseHelper.instance.database;
@@ -43,7 +43,7 @@ class DbErrorApp extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(24),
             child: Text(
-              '앱 데이터를 준비하는 중 문제가 발생했습니다.\n잠시 후 다시 실행해 주세요.',
+              'There was a problem preparing app data.\nPlease try again later.',
               textAlign: TextAlign.center,
             ),
           ),

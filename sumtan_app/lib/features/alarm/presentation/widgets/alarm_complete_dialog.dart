@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
@@ -21,7 +22,7 @@ class _AlarmCompleteDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(alarmListProvider.notifier);
-    final typeLabel = alarmTypeLabel(alarm.type);
+    final typeLabel = context.lt(alarmTypeLabel(alarm.type));
     final displayName = alarm.label ?? typeLabel;
 
     return AlertDialog(
@@ -34,18 +35,23 @@ class _AlarmCompleteDialog extends ConsumerWidget {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(alarmTypeEmoji(alarm.type), style: const TextStyle(fontSize: 36)),
+          Text(alarmTypeEmoji(alarm.type),
+              style: const TextStyle(fontSize: 36)),
           const SizedBox(height: AppSpacing.space3),
-          Text('$typeLabel을 완료했나요?', style: AppTypography.heading3),
+          Text(context.lt('{type}을 완료했나요?', args: {'type': typeLabel}),
+              style: AppTypography.heading3),
           const SizedBox(height: AppSpacing.space2),
           Text(
-            '$displayName 을(를)\n오늘 기록에 자동으로 저장할게요.',
-            style: const TextStyle(fontSize: 13, color: AppColors.gray600, height: 1.6),
+            context.lt('{name} 을(를)\n오늘 기록에 자동으로 저장할게요.',
+                args: {'name': displayName}),
+            style: const TextStyle(
+                fontSize: 13, color: AppColors.gray600, height: 1.6),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 4),
           Text(
-            '기록 → $typeLabel 항목에서 확인할 수 있어요',
+            context.lt('기록 → {typeLabel} 항목에서 확인할 수 있어요',
+                args: {'typeLabel': typeLabel}),
             style: const TextStyle(fontSize: 12, color: AppColors.gray400),
             textAlign: TextAlign.center,
           ),
@@ -65,8 +71,9 @@ class _AlarmCompleteDialog extends ConsumerWidget {
                   ),
                 ),
                 onPressed: () => Navigator.pop(context),
-                child: const Text('취소',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                child: Text(context.lt('취소'),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w700)),
               ),
             ),
             const SizedBox(width: 8),
@@ -85,11 +92,15 @@ class _AlarmCompleteDialog extends ConsumerWidget {
                   await notifier.markDone(alarm.id!);
                   if (context.mounted) {
                     Navigator.pop(context);
-                    showTopToast(context, '$displayName 완료가 기록됐어요 ✅');
+                    showTopToast(
+                        context,
+                        context.lt('{name} 완료가 기록됐어요 ✅',
+                            args: {'name': displayName}));
                   }
                 },
-                child: const Text('✅ 완료 저장',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
+                child: Text(context.lt('✅ 완료 저장'),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w700)),
               ),
             ),
           ],

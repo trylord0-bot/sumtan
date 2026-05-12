@@ -95,7 +95,8 @@ class ImportService {
 
       await db.transaction((txn) async {
         for (final pet in importedPets) {
-          await txn.insert('pets', pet, conflictAlgorithm: ConflictAlgorithm.replace);
+          await txn.insert('pets', pet,
+              conflictAlgorithm: ConflictAlgorithm.replace);
         }
         for (final record in importedRecords) {
           await txn.insert(

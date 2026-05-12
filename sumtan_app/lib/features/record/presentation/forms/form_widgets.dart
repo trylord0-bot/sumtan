@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/widgets/localized_pickers.dart';
@@ -60,7 +61,7 @@ class FormShell extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Text(title,
+                    Text(context.lt(title),
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -106,8 +107,8 @@ class FormShell extends StatelessWidget {
                                   BorderRadius.circular(AppRadius.radiusXl),
                             ),
                           ),
-                          child: const Text('저장하기',
-                              style: TextStyle(
+                          child: Text(context.lt('저장하기'),
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700,
                               )),
@@ -131,7 +132,7 @@ class FormShell extends StatelessWidget {
                               ),
                             ),
                             icon: const Icon(Icons.delete_outline, size: 18),
-                            label: Text(deleteLabel),
+                            label: Text(context.lt(deleteLabel)),
                           ),
                         ),
                       ],
@@ -256,7 +257,7 @@ class FormFieldLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      required ? '$label *' : label,
+      required ? '${context.lt(label)} *' : context.lt(label),
       style: const TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w600,
@@ -311,7 +312,7 @@ class FormSegmentRow extends StatelessWidget {
                           BorderRadius.circular(AppRadius.radiusSm - 2),
                     ),
                     alignment: Alignment.center,
-                    child: Text(opt,
+                    child: Text(context.lt(opt),
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -402,7 +403,7 @@ class _FormInputFieldState extends State<FormInputField> {
             top: 20,
             bottom: keyboardInset + 120,
           ),
-          decoration: InputDecoration(hintText: widget.hint),
+          decoration: InputDecoration(hintText: context.lt(widget.hint)),
           style: const TextStyle(fontSize: 16, color: AppColors.gray900),
         ),
       ],
@@ -458,7 +459,7 @@ class _FormMemoFieldState extends State<FormMemoField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const FormFieldLabel('메모', required: false),
+        FormFieldLabel(context.lt('메모'), required: false),
         const SizedBox(height: AppSpacing.space2),
         TextFormField(
           controller: widget.controller,
@@ -470,7 +471,7 @@ class _FormMemoFieldState extends State<FormMemoField> {
             top: 20,
             bottom: keyboardInset + 140,
           ),
-          decoration: const InputDecoration(hintText: '자유롭게 메모를 남겨보세요'),
+          decoration: InputDecoration(hintText: context.lt('자유롭게 메모를 남겨보세요')),
           style: const TextStyle(fontSize: 16, color: AppColors.gray900),
         ),
       ],
@@ -525,7 +526,7 @@ class _FormTagSelectorState extends State<FormTagSelector> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(tag,
+                          Text(context.lt(tag),
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -559,8 +560,8 @@ class _FormTagSelectorState extends State<FormTagSelector> {
               color: AppColors.primary50,
               borderRadius: BorderRadius.circular(AppRadius.radiusFull),
             ),
-            child: const Text('+ 추가',
-                style: TextStyle(
+            child: Text(context.lt('+ 추가'),
+                style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primary600,
@@ -590,7 +591,7 @@ class _FormTagSelectorState extends State<FormTagSelector> {
                       vertical: 12,
                     ),
                     child: Text(
-                      opt,
+                      context.lt(opt),
                       style: TextStyle(
                         fontSize: 14,
                         color:

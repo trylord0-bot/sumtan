@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_toast.dart';
@@ -81,7 +82,8 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     if (raw is! List) return const [];
     return raw
         .whereType<Map>()
-        .map((item) => RecordMediaItem.fromJson(Map<String, dynamic>.from(item)))
+        .map(
+            (item) => RecordMediaItem.fromJson(Map<String, dynamic>.from(item)))
         .where((item) => item.path.isNotEmpty)
         .toList();
   }
@@ -140,7 +142,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     switch (category) {
       case 'medication':
         if (text('medicine').isEmpty || text('dose').isEmpty) {
-          showTopToast(context, '💡 약품명과 용량을 입력해 주세요');
+          showTopToast(context, context.lt('💡 약품명과 용량을 입력해 주세요'));
           return;
         }
         data['medicine'] = text('medicine');
@@ -148,14 +150,14 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'weight':
         final weight = double.tryParse(text('weight_kg'));
         if (weight == null) {
-          showTopToast(context, '💡 체중을 숫자로 입력해 주세요');
+          showTopToast(context, context.lt('💡 체중을 숫자로 입력해 주세요'));
           return;
         }
         data['weight_kg'] = weight;
       case 'walk':
         final duration = int.tryParse(text('duration_min'));
         if (duration == null) {
-          showTopToast(context, '💡 산책 시간을 숫자로 입력해 주세요');
+          showTopToast(context, context.lt('💡 산책 시간을 숫자로 입력해 주세요'));
           return;
         }
         data['duration_min'] = duration;
@@ -167,7 +169,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         }
       case 'brushing':
         if (_stringList('parts').isEmpty) {
-          showTopToast(context, '💡 빗질 부위를 하나 이상 선택해 주세요');
+          showTopToast(context, context.lt('💡 빗질 부위를 하나 이상 선택해 주세요'));
           return;
         }
         final duration = int.tryParse(text('duration_min'));
@@ -178,17 +180,17 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         }
       case 'vaccination':
         if (_stringList('vaccines').isEmpty) {
-          showTopToast(context, '💡 백신 종류를 하나 이상 선택해 주세요');
+          showTopToast(context, context.lt('💡 백신 종류를 하나 이상 선택해 주세요'));
           return;
         }
       case 'grooming':
         if (_stringList('types').isEmpty) {
-          showTopToast(context, '💡 미용 종류를 하나 이상 선택해 주세요');
+          showTopToast(context, context.lt('💡 미용 종류를 하나 이상 선택해 주세요'));
           return;
         }
       case 'memo':
         if (text('title').isEmpty) {
-          showTopToast(context, '💡 제목을 입력해 주세요');
+          showTopToast(context, context.lt('💡 제목을 입력해 주세요'));
           return;
         }
         data['title'] = text('title');
@@ -210,7 +212,8 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'hospital':
         data['hospital_name'] =
             text('hospital_name').isEmpty ? null : text('hospital_name');
-        data['diagnosis'] = text('diagnosis').isEmpty ? null : text('diagnosis');
+        data['diagnosis'] =
+            text('diagnosis').isEmpty ? null : text('diagnosis');
         final cost = double.tryParse(text('cost'));
         if (cost == null) {
           data.remove('cost');
@@ -241,7 +244,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     _invalidateRecords();
 
     if (mounted) {
-      showTopToast(context, '기록이 수정됐어요');
+      showTopToast(context, context.lt('기록이 수정됐어요'));
       Navigator.pop(context, true);
     }
   }
@@ -254,12 +257,13 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('기록을 삭제할까요?'),
-        content: Text('${cat.label} 기록이 삭제되고\n되돌릴 수 없어요.'),
+        title: Text(context.lt('기록을 삭제할까요?')),
+        content: Text(context.lt('{category} 기록이 삭제되고\n되돌릴 수 없어요.',
+            args: {'category': context.lt(cat.label)})),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('취소'),
+            child: Text(context.lt('취소')),
           ),
           TextButton(
             onPressed: () async {
@@ -267,11 +271,11 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
               await ref.read(recordNotifierProvider.notifier).remove(id);
               _invalidateRecords();
               if (!mounted) return;
-              showTopToast(context, '기록이 삭제됐어요 🗑️');
+              showTopToast(context, context.lt('기록이 삭제됐어요 🗑️'));
               Navigator.pop(context, true);
             },
             style: TextButton.styleFrom(foregroundColor: AppColors.danger600),
-            child: const Text('삭제'),
+            child: Text(context.lt('삭제')),
           ),
         ],
       ),
@@ -295,7 +299,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     final cat = RecordCategoryX.fromString(widget.record.category);
 
     return FormShell(
-      title: '${cat.emoji} ${cat.label} 수정',
+      title: '${cat.emoji} ${context.lt(cat.label)} ${context.lt('수정')}',
       onSave: _save,
       onDelete: _onDelete,
       deleteLabel: '이 기록 삭제하기',
@@ -353,9 +357,11 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         ];
       case 'medication':
         return [
-          FormInputField(label: '약품명', controller: _ctrl('medicine'), hint: '예: 항생제'),
+          FormInputField(
+              label: '약품명', controller: _ctrl('medicine'), hint: '예: 항생제'),
           const SizedBox(height: AppSpacing.space4),
-          FormInputField(label: '용량', controller: _ctrl('dose'), hint: '예: 0.5ml'),
+          FormInputField(
+              label: '용량', controller: _ctrl('dose'), hint: '예: 0.5ml'),
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
             label: '투약 방법',
@@ -371,7 +377,9 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
             controller: _ctrl('weight_kg'),
             hint: '예: 4.2',
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))],
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+            ],
           ),
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
@@ -404,7 +412,9 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
             controller: _ctrl('amount_g'),
             hint: '예: 80',
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))],
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))
+            ],
           ),
         ];
       case 'water':
@@ -444,7 +454,18 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           FormTagSelector(
             label: '증상 태그',
             required: false,
-            options: const ['구토', '기침', '무기력', '식욕부진', '설사', '콧물', '재채기', '떨림', '혈뇨', '혈변'],
+            options: const [
+              '구토',
+              '기침',
+              '무기력',
+              '식욕부진',
+              '설사',
+              '콧물',
+              '재채기',
+              '떨림',
+              '혈뇨',
+              '혈변'
+            ],
             selected: _stringList('symptoms'),
             onChanged: (v) => _setStringList('symptoms', v),
           ),
@@ -460,7 +481,17 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         return [
           FormTagSelector(
             label: '백신 종류',
-            options: const ['종합백신 (DHPPL)', '코로나장염', '켄넬코프', '광견병', '인플루엔자', '종합백신 (FVRCP)', '백혈병 (FeLV)', '클라미디아', '기타'],
+            options: const [
+              '종합백신 (DHPPL)',
+              '코로나장염',
+              '켄넬코프',
+              '광견병',
+              '인플루엔자',
+              '종합백신 (FVRCP)',
+              '백혈병 (FeLV)',
+              '클라미디아',
+              '기타'
+            ],
             selected: _stringList('vaccines'),
             onChanged: (v) => _setStringList('vaccines', v),
           ),
@@ -530,12 +561,15 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
             controller: _ctrl('distance_km'),
             hint: '예: 2.5',
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))],
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))
+            ],
           ),
         ];
       case 'memo':
         return [
-          FormInputField(label: '제목', controller: _ctrl('title'), hint: '메모 제목'),
+          FormInputField(
+              label: '제목', controller: _ctrl('title'), hint: '메모 제목'),
           const SizedBox(height: AppSpacing.space4),
           FormMemoField(controller: _ctrl('content')),
           const SizedBox(height: AppSpacing.space4),

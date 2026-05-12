@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -27,10 +28,10 @@ class _WaterFormState extends ConsumerState<WaterForm> {
 
   static const _amounts = [
     ('very_little', '매우 적음', '💧'),
-    ('little',      '적음',     '💧💧'),
-    ('normal',      '보통',     '💧💧💧'),
-    ('much',        '많음',     '💧💧💧💧'),
-    ('very_much',   '매우 많음', '💧💧💧💧💧'),
+    ('little', '적음', '💧💧'),
+    ('normal', '보통', '💧💧💧'),
+    ('much', '많음', '💧💧💧💧'),
+    ('very_much', '매우 많음', '💧💧💧💧💧'),
   ];
 
   @override
@@ -104,7 +105,9 @@ class _WaterFormState extends ConsumerState<WaterForm> {
                         color: isSelected ? AppColors.cyan50 : AppColors.gray50,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: isSelected ? AppColors.categoryWater : AppColors.gray200,
+                          color: isSelected
+                              ? AppColors.categoryWater
+                              : AppColors.gray200,
                           width: isSelected ? 1.5 : 1,
                         ),
                       ),
@@ -114,11 +117,13 @@ class _WaterFormState extends ConsumerState<WaterForm> {
                           Text(dots, style: const TextStyle(fontSize: 10)),
                           const SizedBox(height: 4),
                           Text(
-                            label,
+                            context.lt(label),
                             style: TextStyle(
                               fontSize: 9,
                               fontWeight: FontWeight.w600,
-                              color: isSelected ? AppColors.categoryWater : AppColors.gray500,
+                              color: isSelected
+                                  ? AppColors.categoryWater
+                                  : AppColors.gray500,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -146,8 +151,8 @@ class _WaterFormState extends ConsumerState<WaterForm> {
                 FilteringTextInputFormatter.digitsOnly,
                 const _RangeLimitFormatter(max: 9999),
               ],
-              decoration: const InputDecoration(
-                hintText: '예: 200',
+              decoration: InputDecoration(
+                hintText: context.lt('예: 200'),
                 suffixText: 'mL',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),

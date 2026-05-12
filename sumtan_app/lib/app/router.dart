@@ -18,6 +18,7 @@ import '../features/health_guide/presentation/health_guide_screen.dart';
 import '../features/settings/presentation/help_screen.dart';
 import '../features/settings/presentation/privacy_policy_screen.dart';
 import '../features/pet/provider/pet_provider.dart';
+import 'localization/app_localizations.dart';
 import 'theme/app_colors.dart';
 import 'widgets/app_toast.dart';
 
@@ -148,7 +149,7 @@ class _MainScaffoldState extends ConsumerState<MainScaffold>
     }
     _lastBackPress = now;
     if (mounted) {
-      showTopToast(context, '한 번 더 누르면 앱을 종료합니다 👋');
+      showTopToast(context, context.l10n.t('toast.backToExit'));
     }
     return true;
   }
@@ -161,20 +162,21 @@ class _MainScaffoldState extends ConsumerState<MainScaffold>
     return 0;
   }
 
-  String get _title {
+  String _title(BuildContext context) {
+    final l10n = context.l10n;
     switch (widget.location) {
       case '/':
-        return '홈';
+        return l10n.t('nav.home');
       case '/journal':
-        return '일지';
+        return l10n.t('nav.journal');
       case '/notifications':
-        return '알림';
+        return l10n.t('nav.notifications');
       case '/profile':
-        return '프로필';
+        return l10n.t('nav.profile');
       case '/settings':
-        return '설정';
+        return l10n.t('nav.settings');
       default:
-        return '반려숨탄';
+        return l10n.t('app.name');
     }
   }
 
@@ -200,7 +202,7 @@ class _MainScaffoldState extends ConsumerState<MainScaffold>
       key: _scaffoldKey,
       backgroundColor: AppColors.creamBg,
       appBar: _TopBar(
-        title: _title,
+        title: _title(context),
         showHamburger: widget.location != '/settings',
         pet: pet,
         pets: pets,
@@ -218,15 +220,16 @@ class _MainScaffoldState extends ConsumerState<MainScaffold>
                 foregroundColor: AppColors.white,
                 onPressed: () {
                   if (ref.read(selectedPetProvider) == null) {
-                    showTopToast(context, '아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!');
+                    showTopToast(context, context.l10n.t('toast.needPet'));
                     return;
                   }
                   showAlarmAddSheet(context);
                 },
                 icon: const Icon(Icons.add_alert_rounded, size: 22),
-                label: const Text(
-                  '알림 추가',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                label: Text(
+                  context.l10n.t('nav.addAlarm'),
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.w700),
                 ),
                 elevation: 4,
                 shape: RoundedRectangleBorder(
@@ -242,7 +245,7 @@ class _MainScaffoldState extends ConsumerState<MainScaffold>
               onTabTap: (i) {
                 if (i == 2) {
                   if (pet == null) {
-                    showTopToast(context, '아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!');
+                    showTopToast(context, context.l10n.t('toast.needPet'));
                     return;
                   }
                   showCategoryBottomSheet(context);
@@ -375,7 +378,6 @@ class _CustomBottomBar extends StatelessWidget {
     required this.onTabTap,
   });
 
-  static const _labels = ['홈', '일지', '', '알림', '프로필'];
   static const _icons = [
     Icons.home_rounded,
     Icons.calendar_month_rounded,
@@ -386,6 +388,14 @@ class _CustomBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labels = [
+      context.l10n.t('nav.home'),
+      context.l10n.t('nav.journal'),
+      '',
+      context.l10n.t('nav.notifications'),
+      context.l10n.t('nav.profile'),
+    ];
+
     return Container(
       height: 80,
       decoration: const BoxDecoration(
@@ -412,7 +422,7 @@ class _CustomBottomBar extends StatelessWidget {
                               ? AppColors.primary500
                               : AppColors.gray400),
                       const SizedBox(height: 4),
-                      Text(_labels[i],
+                      Text(labels[i],
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight:
@@ -482,6 +492,7 @@ class _AppDrawer extends StatelessWidget {
   static const _amberBg = Color(0xFFFFFBEB);
 
   void _openHospitalDialog(BuildContext context) {
+    final l10n = context.l10n;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog(
         context: context,
@@ -504,18 +515,18 @@ class _AppDrawer extends StatelessWidget {
                   child: const Text('🏥', style: TextStyle(fontSize: 28)),
                 ),
                 const SizedBox(height: 14),
-                const Text(
-                  '외부 웹페이지로 이동해요',
-                  style: TextStyle(
+                Text(
+                  l10n.t('dialog.externalTitle'),
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                     color: AppColors.gray900,
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  '주변 동물병원을 찾으려면\n외부 웹페이지가 필요해요.\n\n지금 바로 이동할까요? 🐾',
-                  style: TextStyle(
+                Text(
+                  l10n.t('dialog.externalHospitalBody'),
+                  style: const TextStyle(
                     fontSize: 13,
                     color: AppColors.gray500,
                     height: 1.65,
@@ -538,8 +549,8 @@ class _AppDrawer extends StatelessWidget {
                             ),
                           ),
                           onPressed: () => Navigator.pop(ctx),
-                          child: const Text('취소',
-                              style: TextStyle(
+                          child: Text(l10n.t('common.cancel'),
+                              style: const TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w600)),
                         ),
                       ),
@@ -568,8 +579,8 @@ class _AppDrawer extends StatelessWidget {
                                   mode: LaunchMode.externalApplication);
                             }
                           },
-                          child: const Text('이동할게요',
-                              style: TextStyle(
+                          child: Text(l10n.t('common.go'),
+                              style: const TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w700)),
                         ),
                       ),
@@ -586,6 +597,8 @@ class _AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Drawer(
       backgroundColor: AppColors.white,
       child: Column(
@@ -606,18 +619,18 @@ class _AppDrawer extends StatelessWidget {
               20,
               22,
             ),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('🐾 반려숨탄',
-                    style: TextStyle(
+                Text('🐾 ${l10n.t('app.name')}',
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
                       color: Colors.white,
                     )),
-                SizedBox(height: 4),
-                Text('반려동물 건강관리 앱',
-                    style: TextStyle(
+                const SizedBox(height: 4),
+                Text(l10n.t('app.tagline'),
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.white70,
                     )),
@@ -629,12 +642,12 @@ class _AppDrawer extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.only(top: 10),
               children: [
-                const _DrawerSectionLabel('서비스'),
+                _DrawerSectionLabel(l10n.t('drawer.service')),
                 _DrawerTile(
                   iconBg: _tealBg,
                   icon: '🏥',
-                  label: '주변 병원 찾기',
-                  sub: '내 위치 기반 동물병원',
+                  label: l10n.t('drawer.nearbyHospitals'),
+                  sub: l10n.t('drawer.nearbyHospitalsSub'),
                   onTap: () {
                     Navigator.pop(context);
                     _openHospitalDialog(context);
@@ -643,19 +656,19 @@ class _AppDrawer extends StatelessWidget {
                 _DrawerTile(
                   iconBg: _blueBg,
                   icon: '📖',
-                  label: '건강관리 가이드',
-                  sub: '반려동물 건강 안내서',
+                  label: l10n.t('drawer.healthGuide'),
+                  sub: l10n.t('drawer.healthGuideSub'),
                   onTap: () {
                     Navigator.pop(context);
                     context.push('/health-guide');
                   },
                 ),
                 const _DrawerDivider(),
-                const _DrawerSectionLabel('앱'),
+                _DrawerSectionLabel(l10n.t('drawer.app')),
                 _DrawerTile(
                   iconBg: AppColors.primary50,
                   icon: '⚙️',
-                  label: '설정',
+                  label: l10n.t('nav.settings'),
                   onTap: () {
                     Navigator.pop(context);
                     context.go('/settings');
@@ -664,7 +677,7 @@ class _AppDrawer extends StatelessWidget {
                 _DrawerTile(
                   iconBg: _amberBg,
                   icon: '❓',
-                  label: '도움말',
+                  label: l10n.t('drawer.help'),
                   onTap: () {
                     Navigator.pop(context);
                     context.push('/help');

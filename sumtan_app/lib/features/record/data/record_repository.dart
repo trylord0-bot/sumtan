@@ -69,8 +69,10 @@ class RecordRepository {
   Future<void> update(Record record) async {
     final db = await _db.database;
     await db.update(
-      'records', record.toMap(),
-      where: 'id = ?', whereArgs: [record.id],
+      'records',
+      record.toMap(),
+      where: 'id = ?',
+      whereArgs: [record.id],
     );
   }
 
@@ -159,7 +161,11 @@ class RecordRepository {
   /// Scores: very_little=1, little=2, normal=3, much=4, very_much=5
   Future<Map<DateTime, int>> getWeeklyWaterStatsByPet(int petId) async {
     const scores = {
-      'very_little': 1, 'little': 2, 'normal': 3, 'much': 4, 'very_much': 5,
+      'very_little': 1,
+      'little': 2,
+      'normal': 3,
+      'much': 4,
+      'very_much': 5,
     };
     final now = DateTime.now();
     final result = <DateTime, int>{};

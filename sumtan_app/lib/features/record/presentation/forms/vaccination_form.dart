@@ -25,11 +25,20 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
   final _mediaController = RecordMediaController();
 
   static const _dogVaccineOptions = [
-    '종합백신 (DHPPL)', '코로나장염', '켄넬코프', '광견병', '인플루엔자', '기타',
+    '종합백신 (DHPPL)',
+    '코로나장염',
+    '켄넬코프',
+    '광견병',
+    '인플루엔자',
+    '기타',
   ];
 
   static const _catVaccineOptions = [
-    '종합백신 (FVRCP)', '광견병', '백혈병 (FeLV)', '클라미디아', '기타',
+    '종합백신 (FVRCP)',
+    '광견병',
+    '백혈병 (FeLV)',
+    '클라미디아',
+    '기타',
   ];
 
   @override
@@ -50,7 +59,8 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
 
     final data = <String, dynamic>{
       'vaccines': _vaccines,
-      'hospital_name': _hospitalNameCtrl.text.isEmpty ? null : _hospitalNameCtrl.text,
+      'hospital_name':
+          _hospitalNameCtrl.text.isEmpty ? null : _hospitalNameCtrl.text,
       'side_effect': _sideEffect,
     };
     final media = await _mediaController.saveToLocalFiles();
@@ -79,9 +89,8 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
   @override
   Widget build(BuildContext context) {
     final species = ref.watch(selectedPetProvider)?.species;
-    final vaccineOptions = species == 'cat'
-        ? _catVaccineOptions
-        : _dogVaccineOptions;
+    final vaccineOptions =
+        species == 'cat' ? _catVaccineOptions : _dogVaccineOptions;
 
     return FormShell(
       title: '💉 접종 기록',

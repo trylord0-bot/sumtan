@@ -51,9 +51,8 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
 
-    final duration = _durationCtrl.text.isEmpty
-        ? null
-        : int.tryParse(_durationCtrl.text);
+    final duration =
+        _durationCtrl.text.isEmpty ? null : int.tryParse(_durationCtrl.text);
     final media = await _mediaController.saveToLocalFiles();
 
     final record = Record(

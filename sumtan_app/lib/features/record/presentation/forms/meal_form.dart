@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -29,14 +30,14 @@ class _MealFormState extends ConsumerState<MealForm> {
 
   static const _mealAmounts = [
     ('very_little', '매우 적음', '🍚'),
-    ('little',      '적음',     '🍚🍚'),
-    ('normal',      '보통',     '🍚🍚🍚'),
-    ('much',        '많음',     '🍚🍚🍚🍚'),
-    ('very_much',   '매우 많음', '🍚🍚🍚🍚🍚'),
+    ('little', '적음', '🍚🍚'),
+    ('normal', '보통', '🍚🍚🍚'),
+    ('much', '많음', '🍚🍚🍚🍚'),
+    ('very_much', '매우 많음', '🍚🍚🍚🍚🍚'),
   ];
 
   static const _mealAccent = Color(0xFF2DD4BF);
-  static const _mealBg     = Color(0xFFF0FDFA);
+  static const _mealBg = Color(0xFFF0FDFA);
 
   @override
   void initState() {
@@ -49,7 +50,7 @@ class _MealFormState extends ConsumerState<MealForm> {
     final lastAmount = prefs.getString('meal_last_amount_g') ?? '';
     if (mounted) {
       setState(() {
-        _amountCtrl.text   = lastAmount;
+        _amountCtrl.text = lastAmount;
       });
     }
   }
@@ -77,9 +78,9 @@ class _MealFormState extends ConsumerState<MealForm> {
       category: 'meal',
       recordedAt: du.toIso8601(_datetime),
       dataJson: {
-        'meal_type':   _mealType,
+        'meal_type': _mealType,
         'meal_amount': _mealAmount,
-        if (_amountCtrl.text.isNotEmpty)   'amount_g':  _amountCtrl.text,
+        if (_amountCtrl.text.isNotEmpty) 'amount_g': _amountCtrl.text,
         if (media.isNotEmpty) 'media': media,
       },
       memo: _memoCtrl.text.isEmpty ? null : _memoCtrl.text,
@@ -147,11 +148,12 @@ class _MealFormState extends ConsumerState<MealForm> {
                           Text(bowls, style: const TextStyle(fontSize: 10)),
                           const SizedBox(height: 4),
                           Text(
-                            label,
+                            context.lt(label),
                             style: TextStyle(
                               fontSize: 9,
                               fontWeight: FontWeight.w600,
-                              color: isSelected ? _mealAccent : AppColors.gray500,
+                              color:
+                                  isSelected ? _mealAccent : AppColors.gray500,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -174,12 +176,13 @@ class _MealFormState extends ConsumerState<MealForm> {
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _amountCtrl,
-              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}')),
               ],
-              decoration: const InputDecoration(
-                hintText: '예: 80',
+              decoration: InputDecoration(
+                hintText: context.lt('예: 80'),
                 suffixText: 'g',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),

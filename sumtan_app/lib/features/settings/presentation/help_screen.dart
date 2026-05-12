@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -215,7 +216,7 @@ class _SectionHeader extends StatelessWidget {
           Text(emoji, style: const TextStyle(fontSize: 18)),
           const SizedBox(width: AppSpacing.space2),
           Text(
-            title,
+            context.lt(title),
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
@@ -244,7 +245,7 @@ class _HelpCard extends StatelessWidget {
         border: Border.all(color: AppColors.primary200),
       ),
       child: Text(
-        content,
+        context.lt(content),
         style: const TextStyle(
           fontSize: 14,
           color: AppColors.gray700,
@@ -275,7 +276,7 @@ class _HelpItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title,
+            context.lt(title),
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -284,7 +285,7 @@ class _HelpItem extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            desc,
+            context.lt(desc),
             style: const TextStyle(
               fontSize: 13,
               color: AppColors.gray600,
@@ -331,7 +332,7 @@ class _CategoryItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  context.lt(name),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -340,7 +341,7 @@ class _CategoryItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  desc,
+                  context.lt(desc),
                   style: const TextStyle(
                     fontSize: 13,
                     color: AppColors.gray600,
@@ -401,7 +402,7 @@ class _FaqItemState extends State<_FaqItem> {
                   const SizedBox(width: AppSpacing.space2),
                   Expanded(
                     child: Text(
-                      widget.q,
+                      context.lt(widget.q),
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -451,7 +452,7 @@ class _FaqItemState extends State<_FaqItem> {
                   const SizedBox(width: AppSpacing.space2),
                   Expanded(
                     child: Text(
-                      widget.a,
+                      context.lt(widget.a),
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.gray600,
@@ -480,21 +481,21 @@ class _ContactCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.radiusLg),
         border: Border.all(color: AppColors.primary200),
       ),
-      child: const Column(
+      child: Column(
         children: [
           Text(
-            '더 궁금한 점이 있으신가요?',
-            style: TextStyle(
+            context.lt('더 궁금한 점이 있으신가요?'),
+            style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
               color: AppColors.gray900,
             ),
           ),
-          SizedBox(height: AppSpacing.space2),
+          const SizedBox(height: AppSpacing.space2),
           Text(
-            '설정 > 피드백 보내기를 통해 문의해 주세요.\n빠르게 답변 드릴게요 🐾',
+            context.lt('설정 > 피드백 보내기를 통해 문의해 주세요.\n빠르게 답변 드릴게요 🐾'),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 13,
               color: AppColors.gray600,
               height: 1.5,

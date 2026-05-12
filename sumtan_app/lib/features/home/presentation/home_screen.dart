@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_toast.dart';
@@ -65,8 +66,8 @@ class HomeScreen extends ConsumerWidget {
                       linkLabel: '+ 기록하기',
                       onLink: () async {
                         if (pet == null) {
-                          showTopToast(
-                              context, '아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!');
+                          showTopToast(context,
+                              context.lt('아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!'));
                           return;
                         }
                         await showCategoryBottomSheet(context);
@@ -98,8 +99,7 @@ class HomeScreen extends ConsumerWidget {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const _SectionHeader(
-                                title: '오늘의 리마인더', linkLabel: ''),
+                            _SectionHeader(title: '오늘의 리마인더', linkLabel: ''),
                             const SizedBox(height: AppSpacing.space3),
                             ...list.take(3).map((a) => Padding(
                                   padding: const EdgeInsets.only(
@@ -136,7 +136,7 @@ class HomeScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.space5),
 
                     // ⑤ 이번 주 통계
-                    const _SectionHeader(title: '이번 주 통계', linkLabel: ''),
+                    _SectionHeader(title: '이번 주 통계', linkLabel: ''),
                     const SizedBox(height: AppSpacing.space3),
 
                     poopAsync.when(
@@ -236,7 +236,7 @@ class _GreetingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final name = pet?.name ?? '반려동물';
+    final name = pet?.name ?? context.lt('반려동물');
     final now = DateTime.now();
 
     return Column(
@@ -267,12 +267,12 @@ class _GreetingSection extends StatelessWidget {
                         height: 1.4,
                       ),
                       children: [
-                        const TextSpan(text: '안녕하세요! '),
+                        TextSpan(text: context.lt('안녕하세요! ')),
                         TextSpan(
                           text: name,
                           style: const TextStyle(color: AppColors.primary600),
                         ),
-                        const TextSpan(text: '\n오늘도 건강한가요? 🐾'),
+                        TextSpan(text: context.lt('\n오늘도 건강한가요? 🐾')),
                       ],
                     ),
                   ),
@@ -280,10 +280,10 @@ class _GreetingSection extends StatelessWidget {
                   lastAsync.when(
                     data: (record) {
                       if (record == null) {
-                        return const Text(
-                          '아직 기록이 없어요',
-                          style:
-                              TextStyle(fontSize: 12, color: AppColors.gray400),
+                        return Text(
+                          context.lt('아직 기록이 없어요'),
+                          style: const TextStyle(
+                              fontSize: 12, color: AppColors.gray400),
                         );
                       }
                       final dt = record.recordedAtDate;
@@ -291,10 +291,10 @@ class _GreetingSection extends StatelessWidget {
                       final timeStr = (dt.year == now2.year &&
                               dt.month == now2.month &&
                               dt.day == now2.day)
-                          ? '오늘 ${du.formatTime(dt)}'
+                          ? '${context.lt('오늘')} ${du.formatTime(dt)}'
                           : du.formatMonthDay(dt);
                       return Text(
-                        '마지막 기록 · $timeStr',
+                        context.lt('마지막 기록 · {time}', args: {'time': timeStr}),
                         style: const TextStyle(
                             fontSize: 12, color: AppColors.gray400),
                       );
@@ -556,7 +556,7 @@ class _SummaryChip extends StatelessWidget {
                       color: AppColors.gray900,
                     )),
                 const SizedBox(height: 2),
-                Text(label,
+                Text(context.lt(label),
                     style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
@@ -693,7 +693,7 @@ class _ReminderCard extends StatelessWidget {
                 Text(
                   alarm.label?.isNotEmpty == true
                       ? alarm.label!
-                      : alarmTypeLabel(alarm.type),
+                      : context.lt(alarmTypeLabel(alarm.type)),
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -718,7 +718,7 @@ class _ReminderCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(9999),
             ),
             child: Text(
-              badgeLabel,
+              context.lt(badgeLabel),
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
@@ -749,7 +749,7 @@ class _SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(title,
+        Text(context.lt(title),
             style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w700,
@@ -759,7 +759,7 @@ class _SectionHeader extends StatelessWidget {
         if (linkLabel.isNotEmpty)
           GestureDetector(
             onTap: onLink,
-            child: Text(linkLabel,
+            child: Text(context.lt(linkLabel),
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
@@ -828,7 +828,7 @@ class _RecordList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(title,
+                          Text(context.lt(title),
                               style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
@@ -836,7 +836,7 @@ class _RecordList extends StatelessWidget {
                               )),
                           if (subtitle.isNotEmpty) ...[
                             const SizedBox(height: 2),
-                            Text(subtitle,
+                            Text(context.lt(subtitle),
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: AppColors.gray600,
@@ -1058,7 +1058,7 @@ class _WeeklyBarCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text('$emoji 이번 주 $title',
+              Text('$emoji ${context.lt('이번 주')} ${context.lt(title)}',
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -1073,7 +1073,10 @@ class _WeeklyBarCard extends StatelessWidget {
                   border: Border.all(color: AppColors.primary200),
                 ),
                 child: Text(
-                  '평균 ${avg.toStringAsFixed(1)}$unit/일',
+                  context.lt('평균 {value}{unit}/일', args: {
+                    'value': avg.toStringAsFixed(1),
+                    'unit': context.lt(unit),
+                  }),
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -1164,8 +1167,8 @@ class _WeightSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Text('⚖️ 체중 추이',
-                style: TextStyle(
+            Text(context.lt('⚖️ 체중 추이'),
+                style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
                   color: AppColors.gray600,
@@ -1248,7 +1251,7 @@ class _ToggleBtn extends StatelessWidget {
           borderRadius: BorderRadius.circular(6),
         ),
         child: Text(
-          label,
+          context.lt(label),
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
@@ -1276,9 +1279,9 @@ class _WeightGraphCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppColors.gray200),
         ),
-        child: const Center(
-          child: Text('체중 데이터가 없어요',
-              style: TextStyle(fontSize: 14, color: AppColors.gray400)),
+        child: Center(
+          child: Text(context.lt('체중 데이터가 없어요'),
+              style: const TextStyle(fontSize: 14, color: AppColors.gray400)),
         ),
       );
     }
@@ -1304,8 +1307,8 @@ class _WeightGraphCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text('⚖️ 체중 변화',
-                  style: TextStyle(
+              Text(context.lt('⚖️ 체중 변화'),
+                  style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                     color: AppColors.gray700,
@@ -1369,7 +1372,7 @@ class _LegendDot extends StatelessWidget {
             height: 8,
             decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
         const SizedBox(width: 4),
-        Text(label,
+        Text(context.lt(label),
             style: const TextStyle(fontSize: 11, color: AppColors.gray500)),
       ],
     );
@@ -1511,25 +1514,25 @@ class _EmptyState extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.gray200, width: 1.5),
       ),
-      child: const Column(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('🐾', style: TextStyle(fontSize: 36)),
-          SizedBox(height: AppSpacing.space3),
+          const Text('🐾', style: TextStyle(fontSize: 36)),
+          const SizedBox(height: AppSpacing.space3),
           Text(
-            '아직 오늘의 기록이 없어요',
+            context.lt('아직 오늘의 기록이 없어요'),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: AppColors.gray600,
             ),
           ),
-          SizedBox(height: AppSpacing.space2),
+          const SizedBox(height: AppSpacing.space2),
           Text(
-            '반려동물의 컨디션, 배변, 체중을\n기록해 건강을 관리해 보세요!',
+            context.lt('반려동물의 컨디션, 배변, 체중을\n기록해 건강을 관리해 보세요!'),
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, color: AppColors.gray400),
+            style: const TextStyle(fontSize: 14, color: AppColors.gray400),
           ),
         ],
       ),

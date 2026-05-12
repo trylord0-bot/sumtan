@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
@@ -228,15 +229,16 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('알림을 삭제할까요?'),
+        title: Text(context.lt('알림을 삭제할까요?')),
         content: Text(
-          '${alarm.label ?? alarmTypeLabel(alarm.type)}이 삭제되고\n'
-          '예정된 푸시 알림도 함께 취소돼요.',
+          context.lt('{name}이 삭제되고\n예정된 푸시 알림도 함께 취소돼요.', args: {
+            'name': alarm.label ?? context.lt(alarmTypeLabel(alarm.type))
+          }),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('취소'),
+            child: Text(context.lt('취소')),
           ),
           TextButton(
             onPressed: () async {
@@ -244,11 +246,11 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
               Navigator.pop(context); // close sheet
               await ref.read(alarmListProvider.notifier).delete(alarm.id!);
               if (mounted) {
-                showTopToast(context, '알림이 삭제됐어요 🗑️');
+                showTopToast(context, context.lt('알림이 삭제됐어요 🗑️'));
               }
             },
             style: TextButton.styleFrom(foregroundColor: AppColors.danger600),
-            child: const Text('삭제'),
+            child: Text(context.lt('삭제')),
           ),
         ],
       ),
@@ -262,8 +264,8 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
     final kb = MediaQuery.viewInsetsOf(context).bottom;
     final emoji = alarmTypeEmoji(_type);
     final title = _isEdit
-        ? '$emoji ${alarmTypeLabel(_type)} 알림 수정'
-        : '$emoji ${alarmTypeLabel(_type)} 알림 추가';
+        ? '$emoji ${context.lt(alarmTypeLabel(_type))} ${context.lt('알림 수정')}'
+        : '$emoji ${context.lt(alarmTypeLabel(_type))} ${context.lt('알림 추가')}';
 
     return AnimatedPadding(
       duration: const Duration(milliseconds: 220),
@@ -340,7 +342,9 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
                                 ),
                               )
                             : Text(
-                                widget.isReschedule ? '재예약하기' : '저장하기',
+                                widget.isReschedule
+                                    ? context.lt('재예약하기')
+                                    : context.lt('저장하기'),
                                 style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w700),
                               ),
@@ -364,7 +368,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
                           ),
                           onPressed: _onDelete,
                           icon: const Icon(Icons.delete_outline, size: 18),
-                          label: const Text('이 알림 삭제하기'),
+                          label: Text(context.lt('이 알림 삭제하기')),
                         ),
                       ),
                     ],
@@ -621,15 +625,15 @@ class _RescheduleBanner extends StatelessWidget {
         border: Border.all(color: _amber100),
         borderRadius: BorderRadius.circular(AppRadius.radiusMd),
       ),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('⚠️', style: TextStyle(fontSize: 16)),
-          SizedBox(width: AppSpacing.space2),
+          const Text('⚠️', style: TextStyle(fontSize: 16)),
+          const SizedBox(width: AppSpacing.space2),
           Expanded(
             child: Text(
-              '이 알림의 예정일이 지났어요.\n새 날짜로 변경하거나 삭제할 수 있어요.',
-              style: TextStyle(fontSize: 14, color: _amber700),
+              context.lt('이 알림의 예정일이 지났어요.\n새 날짜로 변경하거나 삭제할 수 있어요.'),
+              style: const TextStyle(fontSize: 14, color: _amber700),
             ),
           ),
         ],
@@ -648,7 +652,7 @@ class _FieldLabel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Text(
-        required ? text : text,
+        context.lt(required ? text : text),
         style: const TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w600,
@@ -721,7 +725,7 @@ class _TextInputState extends State<_TextInput> {
         bottom: keyboardInset + 120,
       ),
       decoration: InputDecoration(
-        hintText: widget.hint,
+        hintText: context.lt(widget.hint),
         hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 14),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -769,7 +773,7 @@ class _DateButton extends StatelessWidget {
         : (hasDate ? AppColors.primary800 : AppColors.gray400);
     final String txt = hasDate
         ? formatLocalizedDate(context, date!)
-        : (isReschedule ? '날짜 재선택' : '날짜 선택');
+        : (isReschedule ? context.lt('날짜 재선택') : context.lt('날짜 선택'));
 
     return GestureDetector(
       onTap: onPick,
@@ -809,7 +813,9 @@ class _TimeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasTime = time != null;
-    final txt = hasTime ? formatLocalizedTimeOfDay(context, time!) : '시각 선택';
+    final txt = hasTime
+        ? formatLocalizedTimeOfDay(context, time!)
+        : context.lt('시각 선택');
 
     return GestureDetector(
       onTap: onPick,
@@ -925,7 +931,7 @@ class _Chip extends StatelessWidget {
         ),
       ),
       child: Text(
-        label,
+        context.lt(label),
         style: TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w500,

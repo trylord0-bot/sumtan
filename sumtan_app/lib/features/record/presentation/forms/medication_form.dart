@@ -84,9 +84,11 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
           onChanged: (dt) => setState(() => _datetime = dt),
         ),
         const SizedBox(height: AppSpacing.space4),
-        FormInputField(label: '약품명', controller: _nameCtrl, hint: '예: 항생제, 소화제'),
+        FormInputField(
+            label: '약품명', controller: _nameCtrl, hint: '예: 항생제, 소화제'),
         const SizedBox(height: AppSpacing.space3),
-        FormInputField(label: '용량', controller: _doseCtrl, hint: '예: 0.5ml, 1정'),
+        FormInputField(
+            label: '용량', controller: _doseCtrl, hint: '예: 0.5ml, 1정'),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
           label: '투약 방법',

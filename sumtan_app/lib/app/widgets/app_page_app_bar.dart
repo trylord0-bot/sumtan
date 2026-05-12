@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../localization/app_localizations.dart';
 import '../theme/app_colors.dart';
 
 class AppPageAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -29,7 +30,7 @@ class AppPageAppBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: () => Navigator.of(context).pop(),
       ),
       title: Text(
-        title,
+        context.lt(title),
         style: const TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.w800,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../app/localization/app_localizations.dart';
 import '../../app/theme/app_colors.dart';
 import '../../app/theme/app_spacing.dart';
 import '../constants/category_constants.dart';
@@ -7,7 +8,8 @@ class CategoryBadge extends StatelessWidget {
   final RecordCategory category;
   final bool compact;
 
-  const CategoryBadge({super.key, required this.category, this.compact = false});
+  const CategoryBadge(
+      {super.key, required this.category, this.compact = false});
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +28,13 @@ class CategoryBadge extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 6, height: 6,
+            width: 6,
+            height: 6,
             decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           ),
           const SizedBox(width: 4),
           Text(
-            category.label,
+            context.lt(category.label),
             style: TextStyle(
               fontSize: compact ? 11 : 13,
               fontWeight: FontWeight.w500,
@@ -53,7 +56,8 @@ class CategoryIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size, height: size,
+      width: size,
+      height: size,
       decoration: BoxDecoration(
         color: category.bgColor,
         borderRadius: BorderRadius.circular(AppRadius.radiusMd),
@@ -111,7 +115,8 @@ class RecordListItem extends StatelessWidget {
             const SizedBox(width: AppSpacing.space3),
             // 아이콘
             Container(
-              width: 36, height: 36,
+              width: 36,
+              height: 36,
               decoration: BoxDecoration(
                 color: iconBg,
                 borderRadius: BorderRadius.circular(AppRadius.radiusMd),
@@ -125,14 +130,17 @@ class RecordListItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: const TextStyle(
-                    fontSize: 13, fontWeight: FontWeight.w600,
-                    color: AppColors.gray900,
-                  )),
+                  Text(context.lt(title),
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.gray900,
+                      )),
                   const SizedBox(height: 2),
                   Text(
-                    subtitle,
-                    style: const TextStyle(fontSize: 13, color: AppColors.gray600),
+                    context.lt(subtitle),
+                    style:
+                        const TextStyle(fontSize: 13, color: AppColors.gray600),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -145,11 +153,14 @@ class RecordListItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(time, style: const TextStyle(
-                    fontSize: 12, color: AppColors.gray400,
-                  )),
+                  Text(time,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: AppColors.gray400,
+                      )),
                   const SizedBox(height: 2),
-                  const Icon(Icons.chevron_right, color: AppColors.gray300, size: 16),
+                  const Icon(Icons.chevron_right,
+                      color: AppColors.gray300, size: 16),
                 ],
               ),
             ),

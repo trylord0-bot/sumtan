@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
@@ -28,7 +29,7 @@ class AlarmListItemPending extends ConsumerWidget {
       confirmDismiss: (_) async => true,
       onDismissed: (_) {
         notifier.delete(alarm.id!);
-        showTopToast(context, '알림이 삭제됐어요 🗑️');
+        showTopToast(context, context.lt('알림이 삭제됐어요 🗑️'));
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
@@ -74,7 +75,7 @@ class AlarmListItemPending extends ConsumerWidget {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            _dateText(),
+                            _dateText(context),
                             style: const TextStyle(
                               fontSize: 12,
                               color: AppColors.gray500,
@@ -129,8 +130,8 @@ class AlarmListItemPending extends ConsumerWidget {
                           ],
                         ),
                         alignment: Alignment.center,
-                        child: const Text('✅ 완료했어요',
-                            style: TextStyle(
+                        child: Text(context.lt('✅ 완료했어요'),
+                            style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.white)),
@@ -151,8 +152,8 @@ class AlarmListItemPending extends ConsumerWidget {
                               Border.all(color: AppColors.gray300, width: 1.5),
                         ),
                         alignment: Alignment.center,
-                        child: const Text('🕐 나중에',
-                            style: TextStyle(
+                        child: Text(context.lt('🕐 나중에'),
+                            style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                                 color: AppColors.gray500)),
@@ -188,13 +189,10 @@ class AlarmListItemPending extends ConsumerWidget {
     );
   }
 
-  String _dateText() {
+  String _dateText(BuildContext context) {
     if (alarm.scheduledAt == null) return '';
     final dt = DateTime.parse(alarm.scheduledAt!);
-    final ampm = dt.hour < 12 ? '오전' : '오후';
-    final h = dt.hour % 12 == 0 ? 12 : dt.hour % 12;
-    final m = dt.minute.toString().padLeft(2, '0');
-    return '오늘 · $ampm $h:$m';
+    return '${context.lt('오늘')} · ${TimeOfDay.fromDateTime(dt).format(context)}';
   }
 }
 

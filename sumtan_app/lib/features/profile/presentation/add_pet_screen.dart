@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../../app/localization/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -91,7 +92,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
 
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('$name이(가) 추가됐어요 🐾'),
+        content: Text(context.lt('{name}이(가) 추가됐어요 🐾', args: {'name': name})),
         behavior: SnackBarBehavior.floating,
         shape: const StadiumBorder(),
         backgroundColor: AppColors.gray800,
@@ -125,9 +126,9 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                   controller: _nameCtrl,
                   focusNode: _nameFocus,
                   decoration: InputDecoration(
-                    hintText: '예: 콩이',
+                    hintText: context.lt('예: 콩이'),
                     hintStyle: const TextStyle(color: AppColors.gray400),
-                    errorText: _nameError ? '이름을 입력해 주세요' : null,
+                    errorText: _nameError ? context.lt('이름을 입력해 주세요') : null,
                     border: InputBorder.none,
                     isDense: true,
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
@@ -152,9 +153,9 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                 label: '품종',
                 child: TextField(
                   controller: _breedCtrl,
-                  decoration: const InputDecoration(
-                    hintText: '예: 말티즈',
-                    hintStyle: TextStyle(color: AppColors.gray400),
+                  decoration: InputDecoration(
+                    hintText: context.lt('예: 말티즈'),
+                    hintStyle: const TextStyle(color: AppColors.gray400),
                     border: InputBorder.none,
                     isDense: true,
                     contentPadding: EdgeInsets.symmetric(vertical: 10),
@@ -177,10 +178,10 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   child: Row(
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 88,
-                        child: Text('생년월일',
-                            style: TextStyle(
+                        child: Text(context.lt('생년월일'),
+                            style: const TextStyle(
                                 fontSize: 13,
                                 color: AppColors.gray500,
                                 fontWeight: FontWeight.w500)),
@@ -189,7 +190,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                         child: Text(
                           _birthDate != null
                               ? du.formatDate(_birthDate!)
-                              : '미입력',
+                              : context.lt('미입력'),
                           style: TextStyle(
                             fontSize: 14,
                             color: _birthDate != null
@@ -237,9 +238,9 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                           FilteringTextInputFormatter.allow(
                               RegExp(r'^\d+\.?\d{0,2}')),
                         ],
-                        decoration: const InputDecoration(
-                          hintText: '미입력',
-                          hintStyle: TextStyle(color: AppColors.gray400),
+                        decoration: InputDecoration(
+                          hintText: context.lt('미입력'),
+                          hintStyle: const TextStyle(color: AppColors.gray400),
                           border: InputBorder.none,
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(vertical: 10),
@@ -259,7 +260,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                   children: [
                     Expanded(
                       child: Text(
-                        _neutered ? '완료' : '미완료',
+                        _neutered ? context.lt('완료') : context.lt('미완료'),
                         style: TextStyle(
                           fontSize: 14,
                           color: _neutered
@@ -293,9 +294,9 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                     FilteringTextInputFormatter.digitsOnly,
                     LengthLimitingTextInputFormatter(15),
                   ],
-                  decoration: const InputDecoration(
-                    hintText: '미등록',
-                    hintStyle: TextStyle(color: AppColors.gray400),
+                  decoration: InputDecoration(
+                    hintText: context.lt('미등록'),
+                    hintStyle: const TextStyle(color: AppColors.gray400),
                     border: InputBorder.none,
                     isDense: true,
                     contentPadding: EdgeInsets.symmetric(vertical: 10),
@@ -307,9 +308,9 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                 label: '등록번호',
                 child: TextField(
                   controller: _regNumCtrl,
-                  decoration: const InputDecoration(
-                    hintText: '미등록',
-                    hintStyle: TextStyle(color: AppColors.gray400),
+                  decoration: InputDecoration(
+                    hintText: context.lt('미등록'),
+                    hintStyle: const TextStyle(color: AppColors.gray400),
                     border: InputBorder.none,
                     isDense: true,
                     contentPadding: EdgeInsets.symmetric(vertical: 10),
@@ -334,9 +335,10 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                   borderRadius: BorderRadius.circular(AppRadius.radiusXl),
                 ),
               ),
-              child: const Text(
-                '저장하기',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              child: Text(
+                context.lt('저장하기'),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
             ),
           ),
@@ -445,7 +447,7 @@ class _FormCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
             child: Text(
-              title,
+              context.lt(title),
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -481,7 +483,7 @@ class _LabelField extends StatelessWidget {
             width: 88,
             child: Row(
               children: [
-                Text(label,
+                Text(context.lt(label),
                     style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.gray500,
@@ -537,7 +539,7 @@ class _SegmentRow extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  labels[i],
+                  context.lt(labels[i]),
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -575,7 +577,7 @@ class _GenderChip extends StatelessWidget {
               color: selected ? AppColors.primary400 : AppColors.gray200),
         ),
         child: Text(
-          label,
+          context.lt(label),
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,

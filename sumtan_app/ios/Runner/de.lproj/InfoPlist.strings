@@ -1,0 +1,5 @@
+CFBundleDisplayName = "Pet Sumtan";
+CFBundleName = "Pet Sumtan";
+NSCameraUsageDescription = "Kamerazugriff wird benötigt, um Fotos und Videos für Tagebuchanhänge aufzunehmen.";
+NSMicrophoneUsageDescription = "Mikrofonzugriff wird benötigt, um Videos für Tagebuchanhänge aufzunehmen.";
+NSPhotoLibraryUsageDescription = "Zugriff auf die Fotomediathek wird für Tagebuchanhänge sowie Datenimport und -export benötigt.";

@@ -1,0 +1,5 @@
+CFBundleDisplayName = "Pet Sumtan";
+CFBundleName = "Pet Sumtan";
+NSCameraUsageDescription = "O acesso à câmera é necessário para tirar fotos e vídeos para anexos do diário.";
+NSMicrophoneUsageDescription = "O acesso ao microfone é necessário para gravar vídeos para anexos do diário.";
+NSPhotoLibraryUsageDescription = "O acesso à biblioteca de fotos é necessário para anexos do diário e importação/exportação de dados.";

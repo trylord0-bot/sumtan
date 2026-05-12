@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
+import 'localization/app_localizations.dart';
 import 'router.dart';
 import 'theme/app_theme.dart';
 import 'widgets/startup_splash.dart';
@@ -12,17 +14,23 @@ class SumtanApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeControllerProvider).valueOrNull;
+    //final locale = Locale('ja');
+
     return MaterialApp.router(
-      title: '반려숨탄',
+      title: 'Pet Sumtan',
       theme: AppTheme.light,
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      supportedLocales: const [
-        Locale('ko', 'KR'),
-        Locale('en', 'US'),
+      locale: locale,
+      localeResolutionCallback: AppLocalizations.resolve,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
       ],
+      supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
+        Intl.defaultLocale = Localizations.localeOf(context).toLanguageTag();
         return StartupSplash(
           child: _KeyboardDismissOnTap(
             child: child ?? const SizedBox.shrink(),

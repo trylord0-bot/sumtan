@@ -1,2 +1,5 @@
 CFBundleDisplayName = "Pet Sumtan";
 CFBundleName = "Pet Sumtan";
+NSCameraUsageDescription = "Camera access is needed to take photos and videos for journal attachments.";
+NSMicrophoneUsageDescription = "Microphone access is needed to record videos for journal attachments.";
+NSPhotoLibraryUsageDescription = "Photo library access is needed for journal attachments and data import/export.";

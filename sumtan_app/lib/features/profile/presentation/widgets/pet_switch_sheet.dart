@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../app/localization/app_localizations.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../pet/data/pet_model.dart';
@@ -59,10 +60,10 @@ class _PetSwitchSheet extends ConsumerWidget {
             padding: const EdgeInsets.fromLTRB(20, 14, 8, 10),
             child: Row(
               children: [
-                const Expanded(
+                Expanded(
                   child: Text(
-                    '반려동물 선택',
-                    style: TextStyle(
+                    context.lt('반려동물 선택'),
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: AppColors.gray900,
@@ -131,8 +132,11 @@ class _PetTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final parts = <String>[
       if (pet.breed != null) pet.breed!,
-      if (pet.gender == 'male') '수컷' else if (pet.gender == 'female') '암컷',
-      if (pet.ageLabel != '미입력') pet.ageLabel,
+      if (pet.gender == 'male')
+        context.lt('수컷')
+      else if (pet.gender == 'female')
+        context.lt('암컷'),
+      if (pet.ageLabel != '미입력') context.lt(pet.ageLabel),
     ];
 
     return InkWell(
@@ -245,14 +249,14 @@ class _DashedAddButton extends StatelessWidget {
           width: double.infinity,
           height: 48,
           alignment: Alignment.center,
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.add, color: AppColors.primary600, size: 18),
-              SizedBox(width: 6),
+              const Icon(Icons.add, color: AppColors.primary600, size: 18),
+              const SizedBox(width: 6),
               Text(
-                '새 반려동물 추가하기',
-                style: TextStyle(
+                context.lt('새 반려동물 추가하기'),
+                style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primary600,

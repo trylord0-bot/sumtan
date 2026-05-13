@@ -1731,4 +1731,979 @@ class AppLocalizationsDe extends AppLocalizations {
   String deleteRecordBody(String category) {
     return '$category-Eintrag wird gelöscht\nund kann nicht rückgängig gemacht werden.';
   }
+
+  @override
+  String dayCountShort(int days) {
+    return '$days T.';
+  }
+
+  @override
+  String get helpIntroContent =>
+      'Pet Sumtan ist eine App, mit der du die Gesundheit und den Alltag deines Haustiers an einem Ort erfassen und verwalten kannst.\nDu kannst verschiedene Gesundheitsdaten wie Mahlzeiten, Wasseraufnahme, Kot/Urin, Gewicht, Medikamente und Tierarztbesuche einfach festhalten und Alarme nutzen, damit du wichtige Termine nicht vergisst.';
+
+  @override
+  String get helpHomeTodayRecordSummaryDesc =>
+      'Sieh dir alle heute hinzugefügten Einträge auf einen Blick an. Tippe auf einen Eintrag, um Details anzusehen oder ihn zu bearbeiten.';
+
+  @override
+  String get helpHomeWeeklyStatsDesc =>
+      'Sieh dir die Toilettengänge, Mahlzeiten und Wasseraufnahme dieser Woche in Diagrammen an. So kannst du den Alltag deines Haustiers besser verstehen.';
+
+  @override
+  String get helpHomeWeightChangeChartDesc =>
+      'Zeigt die letzten Gewichtseinträge als Diagramm an, damit du Gewichtsveränderungen leicht verfolgen kannst.';
+
+  @override
+  String get helpHomeFindNearbyHospitalsDesc =>
+      'Tippe auf die Schaltfläche, um Tierkliniken in der Nähe in Naver Maps zu suchen.';
+
+  @override
+  String get helpHomeAddNewRecordDesc =>
+      'Tippe unten auf dem Bildschirm auf die Schaltfläche +, wähle eine Eintragskategorie aus und füge einen neuen Eintrag hinzu.';
+
+  @override
+  String get helpRecordCategoriesIntro =>
+      'Du kannst den Alltag deines Haustiers in 12 Kategorien erfassen.';
+
+  @override
+  String get helpCategoryPottyName => 'Kot/Urin';
+
+  @override
+  String get helpCategoryPottyDesc =>
+      'Erfasse Kot-/Urin-Aktivitäten und deren Zustand. Du kannst auch Fotos anhängen.';
+
+  @override
+  String get helpCategoryConditionName => 'Zustand';
+
+  @override
+  String get helpCategoryConditionDesc =>
+      'Erfasse den allgemeinen Gesundheitszustand deines Haustiers.';
+
+  @override
+  String get helpCategoryMedicationName => 'Medikament';
+
+  @override
+  String get helpCategoryMedicationDesc =>
+      'Erfasse den Medikamentennamen, die Dosis und den Einnahmezeitpunkt.';
+
+  @override
+  String get helpCategoryWeightName => 'Gewicht';
+
+  @override
+  String get helpCategoryWeightDesc =>
+      'Erfasse das Gewicht in kg. Du kannst den Gewichtsverlauf auf dem Startbildschirm überprüfen.';
+
+  @override
+  String get helpCategoryMealName => 'Mahlzeit';
+
+  @override
+  String get helpCategoryMealDesc =>
+      'Erfasse Futtermenge und Futterart. Du kannst auch Fotos und Videos anhängen.';
+
+  @override
+  String get helpCategoryWaterName => 'Wasser';
+
+  @override
+  String get helpCategoryWaterDesc =>
+      'Erfasse die Wasseraufnahme in ml. Du kannst auch Fotos und Videos anhängen.';
+
+  @override
+  String get helpCategoryHospitalName => 'Klinik';
+
+  @override
+  String get helpCategoryHospitalDesc =>
+      'Erfasse den Kliniknamen und Details des Besuchs. Du kannst auch Fotos und Videos anhängen.';
+
+  @override
+  String get helpCategoryVaccinationName => 'Impfung';
+
+  @override
+  String get helpCategoryVaccinationDesc =>
+      'Erfasse die Impfstoffart und das Impfdatum.';
+
+  @override
+  String get helpCategoryGroomingName => 'Pflege';
+
+  @override
+  String get helpCategoryGroomingDesc =>
+      'Erfasse Pflegedetails und hänge Fotos oder Videos an.';
+
+  @override
+  String get helpCategoryDentalName => 'Zahnpflege';
+
+  @override
+  String get helpCategoryDentalDesc =>
+      'Erfasse, ob die Zahnpflege durchgeführt wurde, und füge eine Notiz hinzu.';
+
+  @override
+  String get helpCategoryWalkName => 'Spaziergang';
+
+  @override
+  String get helpCategoryWalkDesc =>
+      'Erfasse die Entfernung und Dauer des Spaziergangs.';
+
+  @override
+  String get helpCategoryMemoName => 'Notiz';
+
+  @override
+  String get helpCategoryMemoDesc => 'Hinterlasse frei eine Notiz.';
+
+  @override
+  String get helpJournalViewRecordListDesc =>
+      'Sieh dir alle Einträge nach Datum an. Kategorie-Badges helfen dir, die Art jedes Eintrags schnell zu erkennen.';
+
+  @override
+  String get helpJournalEditDeleteRecordDesc =>
+      'Tippe auf einen Eintrag, um das Bearbeitungsfenster zu öffnen. Du kannst den Inhalt ändern oder den Eintrag löschen.';
+
+  @override
+  String get helpJournalAttachMediaDesc =>
+      'In einigen Kategorien wie Mahlzeit, Wasser, Klinik, Pflege und Kot/Urin kannst du Fotos oder Videos anhängen.';
+
+  @override
+  String get helpAlarmAddDesc =>
+      'Du kannst verschiedene Arten von Alarmen hinzufügen, z. B. für Impfungen, Medikamente, Tierarztbesuche und Pflege. Wähle zuerst den Alarmtyp aus und lege anschließend Datum und Uhrzeit fest.';
+
+  @override
+  String get helpAlarmRepeatDesc =>
+      'Lege Wiederholungsregeln fest, z. B. täglich, wöchentlich oder monatlich. Das ist nützlich für regelmäßige Medikamente oder die Herzwurm-Prophylaxe.';
+
+  @override
+  String get helpAlarmAdvanceDesc =>
+      'Für wichtige Termine wie Impfungen kannst du Vorab-Erinnerungen 7 Tage, 3 Tage und 1 Tag vorher erhalten.';
+
+  @override
+  String get helpAlarmCompleteDesc =>
+      'Tippe auf einen Alarm, um ihn als abgeschlossen zu markieren. Abgeschlossene Alarme findest du in der Liste der vergangenen Alarme.';
+
+  @override
+  String get helpAlarmDeleteDesc =>
+      'Wische einen Alarm nach links, um ihn zu löschen.';
+
+  @override
+  String get helpPetRegisterDesc =>
+      'Registriere dein Haustier, indem du Name, Art, Rasse, Geschlecht, Geburtsdatum und Kastrationsstatus eingibst.';
+
+  @override
+  String get helpPetEditProfileDesc =>
+      'Auf dem Profilbildschirm kannst du Name, Rasse, Gewicht, Mikrochipnummer, Registrierungsnummer und Profilfoto bearbeiten.';
+
+  @override
+  String get helpPetManageMultipleDesc =>
+      'Du kannst mehrere Haustiere registrieren. Tippe oben auf den Haustier-Chip, um das Haustier zu wechseln, das du verwalten möchtest.';
+
+  @override
+  String get helpDogHealthGuideDesc =>
+      'Bietet tierärztlich basierte Gesundheitsinformationen, darunter Pflicht- und optionale Impfpläne, Herzwurm- und Parasitenprophylaxe, Zahnpflege und Ernährung.';
+
+  @override
+  String get helpCatHealthGuideDesc =>
+      'Sieh dir katzenspezifische Impfpläne, Parasitenprophylaxe, Zahnpflege und Ernährungsinformationen an.';
+
+  @override
+  String get helpSettingsNotificationDesc =>
+      'Schalte alle App-Benachrichtigungen ein oder aus.';
+
+  @override
+  String get helpSettingsExportDesc =>
+      'Exportiere alle gespeicherten Daten als ZIP-Datei. Nutze sie als Sicherung, wenn du das Gerät wechselst.';
+
+  @override
+  String get helpSettingsImportDesc =>
+      'Importiere eine zuvor exportierte ZIP-Sicherungsdatei, um deine Daten wiederherzustellen.';
+
+  @override
+  String get helpSettingsFeedbackDesc =>
+      'Sende uns Probleme, Unannehmlichkeiten oder Verbesserungsvorschläge per E-Mail. Das hilft uns sehr, die App zu verbessern.';
+
+  @override
+  String get helpFaqDeletePetQ =>
+      'Wenn ich ein Haustier lösche, werden dann auch alle Einträge gelöscht?';
+
+  @override
+  String get helpFaqDeletePetA =>
+      'Ja. Wenn du ein Haustier löschst, werden auch alle zugehörigen Einträge und Alarme gelöscht. Bitte sichere deine Daten vor dem Löschen über Daten exportieren.';
+
+  @override
+  String get helpFaqMultipleMediaQ =>
+      'Kann ich mehrere Fotos an einen Eintrag anhängen?';
+
+  @override
+  String get helpFaqMultipleMediaA =>
+      'Ja. Du kannst mehrere Fotos und Videos anhängen. Du kannst sie aus der Galerie auswählen oder direkt mit der Kamera aufnehmen.';
+
+  @override
+  String get helpFaqNoNotificationQ => 'Ich erhalte keine Benachrichtigungen.';
+
+  @override
+  String get helpFaqNoNotificationA =>
+      'Prüfe, ob Benachrichtigungen für Pet Sumtan in den Benachrichtigungseinstellungen deines Geräts erlaubt sind. Prüfe außerdem, ob App-Benachrichtigungen unter Einstellungen > Benachrichtigungseinstellungen aktiviert sind.';
+
+  @override
+  String get helpFaqMoveDataQ =>
+      'Kann ich meine Daten auf ein neues Gerät übertragen?';
+
+  @override
+  String get helpFaqMoveDataA =>
+      'Ja. Speichere auf dem alten Gerät eine Sicherungsdatei über Einstellungen > Daten exportieren. Stelle sie anschließend auf dem neuen Gerät über Einstellungen > Daten importieren wieder her.';
+
+  @override
+  String get helpFaqMultiplePetsQ => 'Kann ich mehrere Haustiere registrieren?';
+
+  @override
+  String get helpFaqMultiplePetsA =>
+      'Standardmäßig kannst du 1 Haustier kostenlos registrieren. Das Hinzufügen weiterer Haustiere ist als Premium-Funktion verfügbar.';
+
+  @override
+  String get privacyIntroBody =>
+      'Pet Sumtan ist eine App, die ohne Registrierung genutzt werden kann. Alle Daten werden ausschließlich auf dem Gerät des Nutzers gespeichert. Wir übertragen keine personenbezogenen Daten an externe Server und schützen die wertvollen Informationen deines Haustiers sicher.';
+
+  @override
+  String get privacySection1Title => 'Erhobene personenbezogene Daten';
+
+  @override
+  String get privacySection1Body =>
+      'Pet Sumtan kann ohne Registrierung genutzt werden und erhebt keine separaten Informationen, mit denen Nutzer persönlich identifiziert werden können. Zur Bereitstellung der App-Funktionen können jedoch die folgenden Informationen auf dem Gerät gespeichert werden.';
+
+  @override
+  String get privacyLocalStorageInfo =>
+      'Lokal auf dem Gerät gespeicherte Informationen';
+
+  @override
+  String get privacyPetInfo =>
+      'Haustierinformationen: Name, Art, Rasse, Geburtsdatum, Geschlecht, Gewicht, Kastrationsstatus, Mikrochipnummer und Registrierungsnummer des Tieres';
+
+  @override
+  String get privacyHealthRecords =>
+      'Gesundheitseinträge: Kot/Urin, Mahlzeiten, Wasseraufnahme, Gewicht, Medikamente, Impfungen, Klinikbesuche, Pflege, Zahnpflege, Spaziergänge, Zustand, Notizen sowie andere vom Nutzer direkt eingegebene Einträge';
+
+  @override
+  String get privacyAttachedMedia =>
+      'Angehängte Medien: Fotos und Videos, die vom Nutzer direkt aufgenommen oder ausgewählt wurden';
+
+  @override
+  String get privacyNotificationSettings =>
+      'Alarmeinstellungen: Alarmtyp, geplantes Datum und Uhrzeit sowie Wiederholungsregeln';
+
+  @override
+  String get privacyInAppPurchaseTitle => 'In-App-Käufe';
+
+  @override
+  String get privacyPaymentProcessing =>
+      'Zahlungen werden über den Apple App Store oder Google Play Store abgewickelt. Die App erhebt oder speichert Zahlungsinformationen nicht direkt.';
+
+  @override
+  String get privacyReceiptVerification =>
+      'Es werden nur die minimal erforderlichen Informationen zur Überprüfung von Kaufbelegen gemäß den Richtlinien der jeweiligen Plattform verarbeitet.';
+
+  @override
+  String get privacySection2Title =>
+      'Zweck der Erhebung und Nutzung personenbezogener Daten';
+
+  @override
+  String get privacyPurposeRecords =>
+      'Speichern und Anzeigen von Gesundheitseinträgen des Haustiers';
+
+  @override
+  String get privacyPurposeStats =>
+      'Bereitstellung von Statistiken auf dem Startbildschirm, z. B. wöchentliche Kot-/Urin-, Mahlzeiten- und Wasseraufnahmeübersichten sowie Diagramme zur Gewichtsveränderung';
+
+  @override
+  String get privacyPurposeReminders =>
+      'Senden gesundheitsbezogener Alarme, z. B. für Impfungen, Medikamente und Klinikbesuche';
+
+  @override
+  String get privacyPurposeBackupRestore =>
+      'Bereitstellung von Funktionen zur Datensicherung und Wiederherstellung';
+
+  @override
+  String get privacyPurposePaidEligibility =>
+      'Überprüfung der Berechtigung zur Nutzung kostenpflichtiger Funktionen';
+
+  @override
+  String get privacySection3Title =>
+      'Aufbewahrung und Löschung personenbezogener Daten';
+
+  @override
+  String get privacyRetentionBody =>
+      'Alle Daten von Pet Sumtan werden ausschließlich in der lokalen Datenbank (SQLite) auf dem Gerät des Nutzers gespeichert und nicht an externe Server übertragen.';
+
+  @override
+  String get privacyDataDeletionMethod => 'Möglichkeiten zum Löschen von Daten';
+
+  @override
+  String get privacyDeleteInApp =>
+      'Du kannst Haustierinformationen und Einträge direkt in der App unter Einstellungen > Datenverwaltung löschen.';
+
+  @override
+  String get privacyDeleteUninstall =>
+      'Wenn du die App löschst, werden auch alle auf dem Gerät gespeicherten Daten gelöscht.';
+
+  @override
+  String get privacyDeleteBackupWarning =>
+      'Bitte beachte, dass Daten nicht wiederhergestellt werden können, wenn du vor dem Löschen der App keine Sicherung (Export) erstellt hast.';
+
+  @override
+  String get privacySection4Title =>
+      'Weitergabe personenbezogener Daten an Dritte';
+
+  @override
+  String get privacyThirdPartyBody =>
+      'Pet Sumtan gibt personenbezogene Daten der Nutzer nicht an Dritte weiter. Ausgenommen sind jedoch die folgenden Fälle.';
+
+  @override
+  String get privacyThirdPartyUserExport =>
+      'Wenn der Nutzer selbst die Datenexportfunktion verwendet, z. B. zum Teilen einer Sicherungsdatei';
+
+  @override
+  String get privacyThirdPartyLegalRequest =>
+      'Wenn dies gesetzlich vorgeschrieben ist oder eine rechtmäßige Anfrage von Ermittlungsbehörden vorliegt';
+
+  @override
+  String get privacySection5Title => 'Zugriffsberechtigungen';
+
+  @override
+  String get privacyPermissionsBody =>
+      'Zur Bereitstellung der App-Funktionen können die folgenden Berechtigungen angefordert werden. Auch wenn du eine Berechtigung nicht erteilst, kannst du die übrigen Funktionen weiterhin normal nutzen, mit Ausnahme der Funktion, die diese Berechtigung benötigt.';
+
+  @override
+  String get privacyPermissionCameraName => 'Kamera';
+
+  @override
+  String get privacyPermissionCameraDesc =>
+      'Wird verwendet, um Fotos oder Videos direkt aufzunehmen und an Gesundheitseinträge anzuhängen.';
+
+  @override
+  String get privacyPermissionMediaName => 'Zugriff auf Fotos und Medien';
+
+  @override
+  String get privacyPermissionMediaDesc =>
+      'Wird verwendet, um Fotos und Videos aus der Galerie auszuwählen und an Einträge anzuhängen.';
+
+  @override
+  String get privacyPermissionNotificationName => 'Mitteilungen';
+
+  @override
+  String get privacyPermissionNotificationDesc =>
+      'Werden verwendet, um gesundheitsbezogene Alarme zu senden, z. B. für Impfungen, Medikamente und Klinikbesuche.';
+
+  @override
+  String get privacyPermissionFileName => 'Dateizugriff (Android)';
+
+  @override
+  String get privacyPermissionFileDesc =>
+      'Wird verwendet, um Datensicherungsdateien zu speichern oder zu laden.';
+
+  @override
+  String get privacySection6Title => 'Datensicherung und Wiederherstellung';
+
+  @override
+  String get privacyBackupExport =>
+      'Exportieren: Alle App-Daten können als Datei (.zip) gespeichert oder geteilt werden.';
+
+  @override
+  String get privacyBackupImport =>
+      'Importieren: Eine zuvor exportierte Sicherungsdatei kann geladen werden, um Daten wiederherzustellen.';
+
+  @override
+  String get privacyBackupWarning =>
+      'Sicherungsdateien werden direkt vom Nutzer verwaltet. Bitte achte darauf, die Dateien nicht mit anderen Personen zu teilen.';
+
+  @override
+  String get privacySection7Title =>
+      'Schutz personenbezogener Daten von Kindern';
+
+  @override
+  String get privacyChildrenBody =>
+      'Pet Sumtan erhebt keine separaten personenbezogenen Daten von Kindern unter 14 Jahren. Alle App-Daten werden ausschließlich auf dem Gerät gespeichert und nicht an externe Server übertragen, sodass auch Kinder die App sicher nutzen können.';
+
+  @override
+  String get privacySection8Title => 'Änderungen dieser Datenschutzerklärung';
+
+  @override
+  String get privacyPolicyChangeNotice =>
+      'Falls Änderungen vorgenommen werden, informieren wir dich über App-Update-Hinweise oder Mitteilungen innerhalb der App.';
+
+  @override
+  String get privacyPolicyChangeEffective =>
+      'Die geänderte Richtlinie tritt 7 Tage nach der Mitteilung in Kraft.';
+
+  @override
+  String get privacySection9Title => 'Kontakt';
+
+  @override
+  String get hgDogHeroTitle => 'Gesundheitsratgeber für Hunde';
+
+  @override
+  String get hgCatHeroTitle => 'Gesundheitsratgeber für Katzen';
+
+  @override
+  String get hgHeroSubtitle =>
+      'Ein professioneller Gesundheitsratgeber\nbasierend auf tierärztlichen Empfehlungen.';
+
+  @override
+  String get hgVaccination => 'Impfung';
+
+  @override
+  String get hgCoreVaccines => 'Core-Impfungen (Pflichtimpfungen)';
+
+  @override
+  String get hgNonCoreVaccines => 'Non-Core-Impfungen';
+
+  @override
+  String get hgRequired => 'Pflicht';
+
+  @override
+  String get hgRecommended => 'Empfohlen';
+
+  @override
+  String get hgParasitePrevention => 'Parasitenvorbeugung';
+
+  @override
+  String get hgHeartworm => 'Herzwurm';
+
+  @override
+  String get hgMonthly => 'Monatlich';
+
+  @override
+  String get hgExternalParasites => 'Äußere Parasiten (Flöhe und Zecken)';
+
+  @override
+  String get hgInternalParasites => 'Innere Parasiten';
+
+  @override
+  String get hgThreeToSixMonths => 'Alle 3–6 Monate';
+
+  @override
+  String get hgRegular => 'Regelmäßig';
+
+  @override
+  String get hgRegularCheckup => 'Regelmäßige Gesundheitskontrolle';
+
+  @override
+  String get hgDentalCare => 'Zahn- und Mundpflege';
+
+  @override
+  String get hgForbiddenFoods => 'Streng verbotene Lebensmittel';
+
+  @override
+  String get hgEmergencySymptoms =>
+      'Symptome, die sofortige tierärztliche Hilfe erfordern';
+
+  @override
+  String get hgExerciseMentalHealth => 'Bewegung und mentale Gesundheit';
+
+  @override
+  String get hgWalk => 'Spaziergang';
+
+  @override
+  String get hgDaily => 'Täglich';
+
+  @override
+  String get hgBreedExerciseAmount => 'Empfohlene Bewegung nach Rasse';
+
+  @override
+  String get hgPlayBrainStimulation => 'Spiel und geistige Stimulation';
+
+  @override
+  String get hgStressSignals => 'Stresssignale erkennen';
+
+  @override
+  String get hgCaution => 'Achtung';
+
+  @override
+  String get hgSocialization => 'Sozialisierung und Umweltreize';
+
+  @override
+  String get hgDogCoreDhppl =>
+      '**DHPPL (Kombinationsimpfung)** — Staupe, Hepatitis, Parvovirose, Parainfluenza und Leptospirose.\n1. Dosis im Alter von 6–8 Wochen, 3 Dosen im Abstand von 3–4 Wochen, danach jährliche Auffrischung';
+
+  @override
+  String get hgDogCoreRabies =>
+      '**Tollwut** — 1. Dosis nach dem 3. Lebensmonat, danach einmal jährlich (gesetzlich vorgeschriebene Impfung)';
+
+  @override
+  String get hgDogCoreCorona =>
+      '**Coronavirus-Enteritis** — Beginn im Alter von 6–8 Wochen, 2 Dosen im Abstand von 3–4 Wochen, danach jährliche Auffrischung';
+
+  @override
+  String get hgDogNonCoreKennel =>
+      '**Zwingerhusten** — empfohlen in Mehrhundehaushalten, bei Nutzung von Hundesalons oder Hundepensionen. Als Nasen- oder Injektionsimpfung verfügbar';
+
+  @override
+  String get hgDogNonCoreFlu =>
+      '**Hundeinfluenza** — empfohlen für Hunde mit viel Aktivität im Freien oder häufigem Kontakt zu anderen Hunden';
+
+  @override
+  String get hgDogHeartworm1 =>
+      'Während und rund um die Mückensaison (März bis November) wird eine vorbeugende Gabe **einmal monatlich** empfohlen';
+
+  @override
+  String get hgDogHeartworm2 =>
+      'Eine Infektion ist schwer zu behandeln und kann tödlich sein — **Vorbeugung ist der beste Schutz**';
+
+  @override
+  String get hgDogHeartworm3 =>
+      'Vor Beginn der Medikation muss durch einen Test bestätigt werden, dass keine Infektion vorliegt';
+
+  @override
+  String get hgDogHeartworm4 =>
+      'Ganzjährige Vorbeugung ist sicherer und wird häufig tierärztlich empfohlen';
+
+  @override
+  String get hgDogExternalParasites1 =>
+      'Spot-on- oder orale Präparate **monatlich** anwenden';
+
+  @override
+  String get hgDogExternalParasites2 =>
+      'Nach Spaziergängen Ohren, Zehenzwischenräume und Achseln immer auf Zecken kontrollieren';
+
+  @override
+  String get hgDogExternalParasites3 =>
+      'Beim Entfernen einer Zecke eine Pinzette verwenden und sie langsam gerade nach oben herausziehen, ohne zu drehen';
+
+  @override
+  String get hgDogInternalParasites1 =>
+      'Spulwürmer, Hakenwürmer und Peitschenwürmer: Entwurmung **alle 3–6 Monate**';
+
+  @override
+  String get hgDogInternalParasites2 =>
+      'Bei Welpen ab 2 Wochen: 4 Entwurmungen im Abstand von 2 Wochen, danach regelmäßige Kontrolle';
+
+  @override
+  String get hgDental1 =>
+      'Tägliches Zähneputzen ist ideal — mindestens **3-mal pro Woche** wird empfohlen';
+
+  @override
+  String get hgDental2 =>
+      'Immer **spezielle Haustier-Zahnpasta** verwenden. Keine menschliche Zahnpasta mit Xylit verwenden';
+
+  @override
+  String get hgDental3 =>
+      'Starker Zahnstein erfordert eine professionelle Zahnreinigung in der Tierklinik unter Vollnarkose';
+
+  @override
+  String get hgDental4 =>
+      'Zahnpflege-Snacks und Zahnspielzeug können die Mundpflege ergänzen';
+
+  @override
+  String get hgDogForbiddenFoodAlert =>
+      'Die folgenden Lebensmittel sind für Hunde giftig. Schon kleine Mengen können gefährlich sein, daher niemals füttern.';
+
+  @override
+  String get hgDogForbiddenGrape =>
+      '**Trauben und Rosinen** — können Nierenversagen verursachen; selbst kleine Mengen können tödlich sein';
+
+  @override
+  String get hgDogForbiddenChocolate =>
+      '**Schokolade und Kakao** — Theobrominvergiftung, Herzversagen und Krampfanfälle';
+
+  @override
+  String get hgDogForbiddenOnion =>
+      '**Zwiebeln, Knoblauch und Lauch** — zerstören rote Blutkörperchen und verursachen hämolytische Anämie';
+
+  @override
+  String get hgDogForbiddenXylitol =>
+      '**Xylit** — verursacht übermäßige Insulinfreisetzung, Unterzuckerung und Leberversagen';
+
+  @override
+  String get hgDogForbiddenMacadamia =>
+      '**Macadamianüsse** — Muskelschwäche, hohes Fieber und Erbrechen';
+
+  @override
+  String get hgDogForbiddenDoughAlcohol =>
+      '**Roher Teig und Alkohol** — Ethanolvergiftung und Unterzuckerung';
+
+  @override
+  String get hgDogForbiddenAvocado =>
+      '**Avocado** — enthält Persin und kann Erbrechen sowie Durchfall verursachen';
+
+  @override
+  String get hgEmergencyAlert =>
+      'Wenn eines der folgenden Symptome auftritt, suchen Sie sofort eine Tierklinik auf.';
+
+  @override
+  String get hgDogEmergency1 =>
+      'Vollständiger Appetitverlust für mehr als 24 Stunden';
+
+  @override
+  String get hgDogEmergency2 =>
+      'Erbrechen oder Durchfall 3-mal oder häufiger an einem Tag';
+
+  @override
+  String get hgDogEmergency3 =>
+      'Aufgeblähter Bauch und erfolgloses Würgen, mögliche Magendrehung';
+
+  @override
+  String get hgDogEmergency4 => 'Atemnot, blasse Schleimhäute oder Zyanose';
+
+  @override
+  String get hgDogEmergency5 =>
+      'Krampfanfälle, Konvulsionen oder Bewusstlosigkeit';
+
+  @override
+  String get hgDogEmergency6 => 'Kein Urinabsatz für mehr als 12 Stunden';
+
+  @override
+  String get hgDogEmergency7 =>
+      'Sichtbare Verletzung, Knochenbruch oder starke Blutung';
+
+  @override
+  String get hgDogExerciseAlert =>
+      'Bei Hunden ist Bewegungsmangel nicht nur ein Fitnessproblem. Er kann eine Hauptursache für Stress, Angst und zerstörerisches Verhalten sein.';
+
+  @override
+  String get hgDogWalk1 =>
+      'Kleine Rassen: mindestens **20–30 Minuten** täglich; mittlere und große Rassen: **1 Stunde oder mehr** empfohlen';
+
+  @override
+  String get hgDogWalk2 =>
+      'Spaziergänge dienen nicht nur dem Lösen — sie bieten **Geruchsstimulation, Sozialisierung und Stressabbau**';
+
+  @override
+  String get hgDogWalk3 =>
+      'Ausreichend Zeit zum Schnüffeln lassen — das ist sehr wirksam gegen mentale Ermüdung';
+
+  @override
+  String get hgDogWalk4 =>
+      'Im Sommer auf Verbrennungen durch Asphalt achten — Spaziergänge vor 7 Uhr morgens oder abends werden empfohlen';
+
+  @override
+  String get hgDogPlay1 =>
+      '**Apportieren und Zerrspiele** — helfen, körperliche Energie abzubauen und die Bindung zum Halter zu stärken';
+
+  @override
+  String get hgDogPlay2 =>
+      '**Nasenarbeit** — stimuliert das Gehirn und kann in nur 15 Minuten eine ähnliche Wirkung wie 30 Minuten Spaziergang haben';
+
+  @override
+  String get hgDogPlay3 =>
+      '**Intelligenzspielzeuge und Kong-Spielzeuge** — helfen, Trennungsangst während Alleinzeiten zu reduzieren';
+
+  @override
+  String get hgDogPlay4 =>
+      'Schon **10–15 Minuten** konzentriertes Spielen täglich können Stress deutlich reduzieren';
+
+  @override
+  String get hgDogStress1 =>
+      'Zerstören von Möbeln oder Gegenständen und übermäßiges Bellen können auf Bewegungs- oder Reizmangel hinweisen';
+
+  @override
+  String get hgDogStress2 =>
+      'Schwanzbeißen oder übermäßiges Lecken von Pfoten/Körper kann zwanghaftes Verhalten oder Stressabbauversuche anzeigen';
+
+  @override
+  String get hgDogStress3 =>
+      'Starke Angst beim Weggehen des Halters und Unsauberkeit können auf Trennungsangst hindeuten';
+
+  @override
+  String get hgDogStress4 =>
+      'Wenn die Symptome anhalten, wenden Sie sich an einen Tierarzt oder Spezialisten für Tierverhalten';
+
+  @override
+  String get hgDogSocial1 =>
+      '**3–14 Wochen** sind die goldene Phase der Sozialisierung — Kontakt mit verschiedenen Menschen, Geräuschen und Umgebungen ist wichtig';
+
+  @override
+  String get hgDogSocial2 =>
+      'Kontakt mit anderen Hunden — Hundeparks und Welpenkurse können helfen';
+
+  @override
+  String get hgDogSocial3 =>
+      'Neue Orte, Gerüche und Geräusche zu erleben, trägt zur mentalen Bereicherung bei';
+
+  @override
+  String get hgDogSocial4 =>
+      'Training mit positiver Verstärkung, z. B. Clicker und Leckerlis, stimuliert das Gehirn und stärkt gleichzeitig die Bindung';
+
+  @override
+  String get hgCatCoreFvrcp =>
+      '**FVRCP (Kombinationsimpfung)** — felines Herpesvirus, Calicivirus und Panleukopenie.\n1. Dosis im Alter von 6–8 Wochen, 3 Dosen im Abstand von 3–4 Wochen, danach alle 1–3 Jahre';
+
+  @override
+  String get hgCatCoreRabies =>
+      '**Tollwut** — erforderlich für Freigänger-Katzen und auch für Wohnungskatzen empfohlen (gesetzlich vorgeschrieben)';
+
+  @override
+  String get hgCatNonCoreFelv =>
+      '**Feline Leukämie (FeLV)** — dringend empfohlen für Freigänger-Katzen und Mehrkatzenhaushalte';
+
+  @override
+  String get hgCatNonCoreChlamydia =>
+      '**Feline Chlamydien** — hilft, Bindehautentzündungen in Mehrkatzenumgebungen vorzubeugen';
+
+  @override
+  String get hgCatNonCoreFiv =>
+      '**Felines Immundefizienzvirus (FIV)** — besonders relevant für männliche Freigänger; Übertragung durch Kampfverletzungen';
+
+  @override
+  String get hgCatExternalParasites1 =>
+      'Freigänger-Katzen: Floh- und Zeckenvorbeugung **einmal monatlich** anwenden';
+
+  @override
+  String get hgCatExternalParasites2 =>
+      'Auch Wohnungskatzen können Flöhen ausgesetzt sein, die über Kleidung oder Schuhe eingeschleppt werden → Vorbeugung **alle 3 Monate** empfohlen';
+
+  @override
+  String get hgCatExternalParasites3 =>
+      'Spot-on-Produkte genau im Nackenbereich auftragen';
+
+  @override
+  String get hgCatInternalHeartworm => 'Innere Parasiten und Herzwurm';
+
+  @override
+  String get hgCatInternalParasites1 =>
+      'Spulwürmer und Bandwürmer: Entwurmung **alle 3–6 Monate**';
+
+  @override
+  String get hgCatInternalParasites2 =>
+      'Bei Fütterung von rohem Fleisch oder rohem Fisch werden häufigere Untersuchungen empfohlen';
+
+  @override
+  String get hgCatHeartworm1 =>
+      'Herzwurm — bei Katzen gibt es **keine heilende Behandlung, daher ist Vorbeugung die einzige Möglichkeit**. Monatliche Vorbeugung wird für Freigänger-Katzen dringend empfohlen';
+
+  @override
+  String get hgCatMajorDiseases =>
+      'Wichtige Katzenerkrankungen, auf die Sie achten sollten';
+
+  @override
+  String get hgCatDiseaseAlert =>
+      'Katzen neigen dazu, Schmerzen und Krankheiten zu verbergen. Symptome treten oft erst auf, wenn die Erkrankung bereits fortgeschritten ist. Regelmäßige Kontrollen sind besonders wichtig.';
+
+  @override
+  String get hgCatDiseaseFlutd =>
+      '**Feline Erkrankung der unteren Harnwege (FLUTD)** — häufig bei Katern. Wenn die Katze nicht urinieren kann, ist das ein sofortiger Notfall';
+
+  @override
+  String get hgCatDiseaseCkd =>
+      '**Chronische Nierenerkrankung (CKD)** — eine der häufigsten Todesursachen bei älteren Katzen. Regelmäßige Nierenkontrollen sind ab 7 Jahren unerlässlich';
+
+  @override
+  String get hgCatDiseaseDiabetes =>
+      '**Katzendiabetes** — höheres Risiko bei übergewichtigen und älteren Katzen. Achten Sie auf vermehrten Durst und Urinabsatz';
+
+  @override
+  String get hgCatDiseaseHyperthyroidism =>
+      '**Hyperthyreose** — häufig bei Katzen über 10 Jahren. Achten Sie auf Gewichtsverlust, gesteigerten Appetit und Hyperaktivität';
+
+  @override
+  String get hgCatDiseaseStomatitis =>
+      '**Stomatitis** — sehr häufig bei Katzen. Mundgeruch, Sabbern oder Appetitverlust sollten untersucht werden';
+
+  @override
+  String get hgCatDiseaseFhv =>
+      '**Felines Herpesvirus (FHV-1)** — nach der Infektion bleibt es lebenslang latent. Stress kann Rückfälle mit Niesen, Augenausfluss und Bindehautentzündung auslösen';
+
+  @override
+  String get hgHydrationDiet => 'Flüssigkeitsaufnahme und Ernährung';
+
+  @override
+  String get hgCatHydrationAlert =>
+      'Katzen trinken von Natur aus wenig Wasser und sind anfällig für Harnwegserkrankungen. Die Förderung der Wasseraufnahme ist sehr wichtig.';
+
+  @override
+  String get hgCatHydration1 =>
+      'Nassfutter wie Dosen oder Beutel wird empfohlen, um die Flüssigkeitsaufnahme zu erhöhen';
+
+  @override
+  String get hgCatHydration2 =>
+      'Viele Katzen bevorzugen fließendes Wasser — ein **Trinkbrunnen** kann wirksam sein';
+
+  @override
+  String get hgCatHydration3 =>
+      'Stellen Sie den Wassernapf vom Futternapf getrennt auf; breite, flache Näpfe werden oft bevorzugt';
+
+  @override
+  String get hgCatHydration4 =>
+      'Zielmenge für die Wasseraufnahme: etwa **40–60 ml** pro kg Körpergewicht pro Tag';
+
+  @override
+  String get hgCatForbiddenFoodAlert =>
+      'Die folgenden Lebensmittel sind für Katzen giftig. Schon kleine Mengen können gefährlich sein, daher niemals füttern.';
+
+  @override
+  String get hgCatForbiddenOnion =>
+      '**Zwiebeln, Knoblauch und Lauch** — zerstören rote Blutkörperchen und verursachen hämolytische Anämie; Katzen sind empfindlicher als Hunde';
+
+  @override
+  String get hgCatForbiddenGrape =>
+      '**Trauben und Rosinen** — können Nierenversagen verursachen';
+
+  @override
+  String get hgCatForbiddenChocolate =>
+      '**Schokolade und Koffein** — giftig für Herz und Nervensystem';
+
+  @override
+  String get hgCatForbiddenRawFish =>
+      '**Roher Fisch bei dauerhafter Fütterung** — kann Thiamin-, Vitamin-B1-, Mangel verursachen';
+
+  @override
+  String get hgCatForbiddenMilk =>
+      '**Milch und Milchprodukte** — viele erwachsene Katzen sind laktoseintolerant und können Durchfall bekommen';
+
+  @override
+  String get hgCatForbiddenXylitolAlcohol =>
+      '**Xylit und Alkohol** — giftig für Leber und Nervensystem';
+
+  @override
+  String get hgCatForbiddenAvocado =>
+      '**Avocado** — enthält Persin und kann Erbrechen sowie Durchfall verursachen';
+
+  @override
+  String get hgCatForbiddenRawEggWhite =>
+      '**Rohes Eiweiß** — Avidin blockiert die Biotinaufnahme und kann Haut- und Fellprobleme verursachen';
+
+  @override
+  String get hgCatEmergency1 =>
+      '**Kann nicht urinieren oder Blut im Urin** — Harnröhrenverschluss ist ein Notfall, besonders bei Katern';
+
+  @override
+  String get hgCatEmergency2 =>
+      'Vollständiger Appetitverlust für mehr als 24 Stunden, mit Risiko einer Fettleber';
+
+  @override
+  String get hgCatEmergency3 =>
+      '**Atmung mit offenem Maul** — bei Katzen niemals normal und erfordert sofortige Notfallversorgung';
+
+  @override
+  String get hgCatEmergency4 =>
+      'Plötzliche Lähmung oder Kälte der Hinterbeine, möglicher Thromboembolismus';
+
+  @override
+  String get hgCatEmergency5 =>
+      'Krampfanfälle, Konvulsionen oder Bewusstlosigkeit';
+
+  @override
+  String get hgCatEmergency6 =>
+      'Blasse Schleimhäute oder Zunge, oder gelbliche Verfärbung/Gelbsucht';
+
+  @override
+  String get hgCatEmergency7 =>
+      'Erbrechen oder Durchfall 3-mal oder häufiger an einem Tag, oder Blut im Kot/Erbrochenen';
+
+  @override
+  String get hgCatEmergency8 =>
+      'Sichtbare Verletzung, Knochenbruch oder starke Blutung';
+
+  @override
+  String get hgEnvironmentMentalHealth => 'Umgebung und mentale Gesundheit';
+
+  @override
+  String get hgIndoorEnvironment => 'Management der Innenumgebung';
+
+  @override
+  String get hgStressManagement => 'Stressmanagement';
+
+  @override
+  String get hgCatEnvironment1 =>
+      '**Katzentoiletten**: Anzahl der Katzen + mindestens 1, täglich reinigen';
+
+  @override
+  String get hgCatEnvironment2 =>
+      '**Kratzmöglichkeiten**: mindestens 2, mit vertikalen und horizontalen Varianten';
+
+  @override
+  String get hgCatEnvironment3 =>
+      '**Erhöhte Plätze**: Kratzbäume, Regale oder vertikale Räume bereitstellen, um territoriale Instinkte zu erfüllen';
+
+  @override
+  String get hgCatEnvironment4 =>
+      '**Verstecke**: Kartons, Tunnel oder sichere Orte bereitstellen, an denen sich die Katze verstecken kann';
+
+  @override
+  String get hgCatStress1 =>
+      'Stress bei Katzen steht direkt mit geschwächter Immunität, FLUTD und Rückfällen des felinen Herpesvirus in Verbindung';
+
+  @override
+  String get hgCatStress2 =>
+      'Bei größeren Umweltveränderungen wie Umzug oder einem neuen Familienmitglied kann ein Pheromon-Diffusor wie Feliway helfen';
+
+  @override
+  String get hgCatStress3 =>
+      'Täglich mindestens **10–15 Minuten** interaktives Spiel mit Spielzeug ermöglichen';
+
+  @override
+  String get hgCatStress4 =>
+      'In Mehrkatzenhaushalten Ressourcen wie Futternäpfe, Katzentoiletten und Schlafplätze entsprechend der Katzenanzahl getrennt anbieten';
+
+  @override
+  String get hgAge => 'Alter';
+
+  @override
+  String get hgCheckupCycle => 'Kontrollintervall';
+
+  @override
+  String get hgMainItems => 'Hauptpunkte';
+
+  @override
+  String get hgAge1to6 => '1–6 Jahre';
+
+  @override
+  String get hgAge7to10 => '7–10 Jahre';
+
+  @override
+  String get hgAge11Plus => '11 Jahre und älter';
+
+  @override
+  String get hgYearlyOnce => 'Einmal jährlich';
+
+  @override
+  String get hgYearlyTwice => 'Zweimal jährlich';
+
+  @override
+  String get hgEvery3to4Months => 'Alle 3–4 Monate';
+
+  @override
+  String get hgDogCheckupItems1 =>
+      'Bluttest, Herzabhören, Gewicht, Zahnkontrolle';
+
+  @override
+  String get hgDogCheckupItems2 => 'Blut, Urin, Röntgen, Blutdruck, Gelenke';
+
+  @override
+  String get hgDogCheckupItems3 =>
+      'Umfassende Blutuntersuchung, Ultraschall, Nieren- und Leberfunktion';
+
+  @override
+  String get hgCatCheckupItems1 => 'Bluttest, Urintest, Gewicht, Zahnkontrolle';
+
+  @override
+  String get hgCatCheckupItems2 =>
+      'Nieren- und Leberwerte, Blutdruck, Schilddrüse T4';
+
+  @override
+  String get hgCatCheckupItems3 =>
+      'Umfassende Blutuntersuchung, Bauchultraschall, intensive Nierenüberwachung';
+
+  @override
+  String get hgExerciseAmount => 'Bewegungsniveau';
+
+  @override
+  String get hgBreedExamples => 'Rassebeispiele';
+
+  @override
+  String get hgLow => 'Niedrig';
+
+  @override
+  String get hgNormal => 'Moderat';
+
+  @override
+  String get hgHigh => 'Hoch';
+
+  @override
+  String get hgBreedLowExamples =>
+      'Bulldogge, Basset Hound, Shih Tzu, Malteser';
+
+  @override
+  String get hgBreedNormalExamples =>
+      'Pudel, Bichon Frisé, Cocker Spaniel, Beagle';
+
+  @override
+  String get hgBreedHighExamples =>
+      'Labrador, Golden Retriever, Husky, Border Collie';
+
+  @override
+  String get hgDisclaimer =>
+      'Dieser Ratgeber bietet allgemeine Informationen zur Gesundheitsvorsorge. Die erforderliche Pflege kann je nach Zustand Ihres Haustiers variieren. Wenn ungewöhnliche Symptome auftreten oder eine Behandlung erforderlich ist, konsultieren Sie immer einen Tierarzt.';
 }

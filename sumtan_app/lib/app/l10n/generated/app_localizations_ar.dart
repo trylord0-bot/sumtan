@@ -1718,4 +1718,957 @@ class AppLocalizationsAr extends AppLocalizations {
   String deleteRecordBody(String category) {
     return 'سيتم حذف سجل $category\nولا يمكن التراجع عن ذلك.';
   }
+
+  @override
+  String dayCountShort(int days) {
+    return '$days يوم';
+  }
+
+  @override
+  String get helpIntroContent =>
+      'بت سمتان هو تطبيق يمكنك من خلاله تسجيل وإدارة صحة حيوانك الأليف وحياته اليومية في مكان واحد.\nيمكنك بسهولة حفظ سجلات صحية متنوعة مثل الوجبات، شرب الماء، الإخراج، الوزن، الدواء وزيارات الطبيب البيطري، كما يمكنك استخدام التنبيهات حتى لا تفوّت المواعيد المهمة.';
+
+  @override
+  String get helpHomeTodayRecordSummaryDesc =>
+      'اعرض جميع السجلات المضافة اليوم بنظرة واحدة. اضغط على أي سجل لعرض التفاصيل أو تعديله.';
+
+  @override
+  String get helpHomeWeeklyStatsDesc =>
+      'تحقق من عدد مرات الإخراج، وكمية الطعام، وكمية الماء لهذا الأسبوع عبر الرسوم البيانية. يساعدك ذلك على فهم نمط حياة حيوانك الأليف.';
+
+  @override
+  String get helpHomeWeightChangeChartDesc =>
+      'يعرض سجلات الوزن الأخيرة في رسم بياني حتى تتمكن من متابعة تغيرات الوزن بسهولة.';
+
+  @override
+  String get helpHomeFindNearbyHospitalsDesc =>
+      'اضغط على الزر للبحث عن المستشفيات البيطرية القريبة في خرائط Naver.';
+
+  @override
+  String get helpHomeAddNewRecordDesc =>
+      'اضغط على زر + أسفل الشاشة لاختيار فئة السجل وإضافة سجل جديد.';
+
+  @override
+  String get helpRecordCategoriesIntro =>
+      'يمكنك تسجيل الحياة اليومية لحيوانك الأليف ضمن 12 فئة.';
+
+  @override
+  String get helpCategoryPottyName => 'الإخراج';
+
+  @override
+  String get helpCategoryPottyDesc =>
+      'سجّل نشاط الإخراج وحالته. يمكنك أيضًا إرفاق صور.';
+
+  @override
+  String get helpCategoryConditionName => 'الحالة';
+
+  @override
+  String get helpCategoryConditionDesc => 'سجّل الحالة العامة لحيوانك الأليف.';
+
+  @override
+  String get helpCategoryMedicationName => 'الدواء';
+
+  @override
+  String get helpCategoryMedicationDesc =>
+      'سجّل اسم الدواء، الجرعة ووقت إعطاء الدواء.';
+
+  @override
+  String get helpCategoryWeightName => 'الوزن';
+
+  @override
+  String get helpCategoryWeightDesc =>
+      'سجّل الوزن بالكيلوغرام. يمكنك متابعة تغير الوزن من شاشة الرئيسية.';
+
+  @override
+  String get helpCategoryMealName => 'الوجبة';
+
+  @override
+  String get helpCategoryMealDesc =>
+      'سجّل كمية الطعام ونوعه. يمكنك أيضًا إرفاق صور ومقاطع فيديو.';
+
+  @override
+  String get helpCategoryWaterName => 'الماء';
+
+  @override
+  String get helpCategoryWaterDesc =>
+      'سجّل كمية الماء بالملليلتر. يمكنك أيضًا إرفاق صور ومقاطع فيديو.';
+
+  @override
+  String get helpCategoryHospitalName => 'المستشفى';
+
+  @override
+  String get helpCategoryHospitalDesc =>
+      'سجّل اسم المستشفى وتفاصيل الزيارة. يمكنك أيضًا إرفاق صور ومقاطع فيديو.';
+
+  @override
+  String get helpCategoryVaccinationName => 'التطعيم';
+
+  @override
+  String get helpCategoryVaccinationDesc => 'سجّل نوع اللقاح وتاريخ التطعيم.';
+
+  @override
+  String get helpCategoryGroomingName => 'العناية';
+
+  @override
+  String get helpCategoryGroomingDesc =>
+      'سجّل تفاصيل العناية وأرفق صورًا أو مقاطع فيديو.';
+
+  @override
+  String get helpCategoryDentalName => 'تنظيف الأسنان';
+
+  @override
+  String get helpCategoryDentalDesc =>
+      'سجّل ما إذا تم تنظيف الأسنان وأضف ملاحظة.';
+
+  @override
+  String get helpCategoryWalkName => 'النزهة';
+
+  @override
+  String get helpCategoryWalkDesc => 'سجّل مسافة النزهة ومدتها.';
+
+  @override
+  String get helpCategoryMemoName => 'ملاحظة';
+
+  @override
+  String get helpCategoryMemoDesc => 'اترك أي ملاحظة بحرية.';
+
+  @override
+  String get helpJournalViewRecordListDesc =>
+      'اعرض جميع السجلات حسب التاريخ. تساعدك شارات الفئات على تمييز نوع كل سجل بسرعة.';
+
+  @override
+  String get helpJournalEditDeleteRecordDesc =>
+      'اضغط على سجل لفتح صفحة التعديل. يمكنك تحديث المحتوى أو حذفه.';
+
+  @override
+  String get helpJournalAttachMediaDesc =>
+      'في بعض الفئات مثل الوجبة، الماء، المستشفى، العناية والإخراج، يمكنك إرفاق صور أو مقاطع فيديو.';
+
+  @override
+  String get helpAlarmAddDesc =>
+      'يمكنك إضافة أنواع مختلفة من التنبيهات مثل التطعيم، الدواء، زيارة الطبيب البيطري والعناية. اختر أولًا نوع التنبيه، ثم حدد التاريخ والوقت.';
+
+  @override
+  String get helpAlarmRepeatDesc =>
+      'يمكنك ضبط قواعد التكرار مثل يوميًا، أسبوعيًا أو شهريًا. هذا مفيد للأدوية المنتظمة أو الوقاية من الدودة القلبية.';
+
+  @override
+  String get helpAlarmAdvanceDesc =>
+      'للمواعيد المهمة مثل التطعيم، يمكنك تلقي تنبيهات مسبقة قبل 7 أيام، و3 أيام، ويوم واحد.';
+
+  @override
+  String get helpAlarmCompleteDesc =>
+      'اضغط على تنبيه لتمييزه كمكتمل. يمكنك مراجعة التنبيهات المكتملة في قائمة التنبيهات السابقة.';
+
+  @override
+  String get helpAlarmDeleteDesc => 'اسحب التنبيه إلى اليسار لحذفه.';
+
+  @override
+  String get helpPetRegisterDesc =>
+      'أضف حيوانك الأليف بإدخال الاسم، النوع، السلالة، الجنس، تاريخ الميلاد وحالة التعقيم.';
+
+  @override
+  String get helpPetEditProfileDesc =>
+      'في شاشة الملف الشخصي، يمكنك تعديل الاسم، السلالة، الوزن، رقم الشريحة الإلكترونية، رقم التسجيل وصورة الملف الشخصي.';
+
+  @override
+  String get helpPetManageMultipleDesc =>
+      'يمكنك إضافة عدة حيوانات أليفة. اضغط على شريحة الحيوان الأليف في الأعلى للتبديل إلى الحيوان الذي تريد إدارته.';
+
+  @override
+  String get helpDogHealthGuideDesc =>
+      'يوفر معلومات صحية مبنية على إرشادات بيطرية، بما في ذلك جداول التطعيمات الأساسية والاختيارية، الوقاية من الدودة القلبية والطفيليات الخارجية، العناية بالأسنان والتغذية.';
+
+  @override
+  String get helpCatHealthGuideDesc =>
+      'تحقق من جداول التطعيم الخاصة بالقطط، والوقاية من الطفيليات، والعناية بالأسنان، ومعلومات التغذية.';
+
+  @override
+  String get helpSettingsNotificationDesc =>
+      'قم بتشغيل أو إيقاف جميع إشعارات التطبيق.';
+
+  @override
+  String get helpSettingsExportDesc =>
+      'صدّر جميع البيانات المسجلة كملف ZIP. استخدمه كنسخة احتياطية عند تغيير الجهاز.';
+
+  @override
+  String get helpSettingsImportDesc =>
+      'استورد ملف نسخة احتياطية ZIP تم تصديره مسبقًا لاستعادة بياناتك.';
+
+  @override
+  String get helpSettingsFeedbackDesc =>
+      'أرسل لنا أي مشكلة أو اقتراح للتحسين عبر البريد الإلكتروني. يساعدنا ذلك كثيرًا في تحسين التطبيق.';
+
+  @override
+  String get helpFaqDeletePetQ =>
+      'إذا حذفت حيوانًا أليفًا، هل سيتم حذف جميع سجلاته أيضًا؟';
+
+  @override
+  String get helpFaqDeletePetA =>
+      'نعم. عند حذف حيوان أليف، سيتم أيضًا حذف جميع السجلات والتنبيهات المرتبطة به. يرجى عمل نسخة احتياطية باستخدام تصدير البيانات قبل الحذف.';
+
+  @override
+  String get helpFaqMultipleMediaQ => 'هل يمكنني إرفاق عدة صور بسجل واحد؟';
+
+  @override
+  String get helpFaqMultipleMediaA =>
+      'نعم. يمكنك إرفاق عدة صور ومقاطع فيديو. يمكنك اختيارها من المعرض أو التقاطها مباشرة بالكاميرا.';
+
+  @override
+  String get helpFaqNoNotificationQ => 'لا أتلقى التنبيهات.';
+
+  @override
+  String get helpFaqNoNotificationA =>
+      'تحقق مما إذا كانت تنبيهات بت سمتان مسموحًا بها في إعدادات التنبيهات على جهازك. تحقق أيضًا من أن تنبيهات التطبيق مفعلة من الإعدادات > إعدادات التنبيهات.';
+
+  @override
+  String get helpFaqMoveDataQ => 'هل يمكنني نقل بياناتي إلى جهاز جديد؟';
+
+  @override
+  String get helpFaqMoveDataA =>
+      'نعم. على جهازك القديم، احفظ ملف نسخة احتياطية من الإعدادات > تصدير البيانات. ثم استعده على الجهاز الجديد من الإعدادات > استيراد البيانات.';
+
+  @override
+  String get helpFaqMultiplePetsQ => 'هل يمكنني إضافة عدة حيوانات أليفة؟';
+
+  @override
+  String get helpFaqMultiplePetsA =>
+      'افتراضيًا، يمكنك إضافة حيوان أليف واحد مجانًا. إضافة المزيد من الحيوانات الأليفة متاحة كميزة مدفوعة.';
+
+  @override
+  String get privacyIntroBody =>
+      'Pet Sumtan هو تطبيق يمكن استخدامه دون تسجيل عضوية، ويتم تخزين جميع البيانات على جهاز المستخدم فقط. لا ننقل المعلومات الشخصية إلى خوادم خارجية، ونحمي معلومات حيواناتك الأليفة الثمينة بأمان.';
+
+  @override
+  String get privacySection1Title => 'عناصر المعلومات الشخصية التي يتم جمعها';
+
+  @override
+  String get privacySection1Body =>
+      'يمكن استخدام Pet Sumtan دون تسجيل عضوية، ولا يجمع معلومات منفصلة يمكن أن تحدد هوية المستخدم الشخصية. ومع ذلك، قد يتم تخزين المعلومات التالية على الجهاز لتوفير وظائف التطبيق.';
+
+  @override
+  String get privacyLocalStorageInfo => 'المعلومات المخزنة محليًا على الجهاز';
+
+  @override
+  String get privacyPetInfo =>
+      'معلومات الحيوان الأليف: الاسم، النوع، السلالة، تاريخ الميلاد، الجنس، الوزن، حالة التعقيم، رقم الشريحة الإلكترونية، ورقم تسجيل الحيوان';
+
+  @override
+  String get privacyHealthRecords =>
+      'السجلات الصحية: الإخراج، الوجبات، شرب الماء، الوزن، الدواء، التطعيم، المستشفى، العناية، تنظيف الأسنان، النزهة، الحالة، الملاحظات، وغيرها من السجلات التي يدخلها المستخدم مباشرة';
+
+  @override
+  String get privacyAttachedMedia =>
+      'الوسائط المرفقة: الصور ومقاطع الفيديو التي يلتقطها المستخدم أو يختارها مباشرة';
+
+  @override
+  String get privacyNotificationSettings =>
+      'إعدادات التنبيهات: نوع التنبيه، التاريخ والوقت المجدولان، وقواعد التكرار';
+
+  @override
+  String get privacyInAppPurchaseTitle => 'المشتريات داخل التطبيق';
+
+  @override
+  String get privacyPaymentProcessing =>
+      'تتم معالجة المدفوعات عبر Apple App Store أو Google Play Store، ولا يجمع التطبيق معلومات الدفع أو يخزنها مباشرة.';
+
+  @override
+  String get privacyReceiptVerification =>
+      'تتم معالجة الحد الأدنى فقط من المعلومات اللازمة للتحقق من إيصالات الشراء وفقًا لسياسات كل منصة.';
+
+  @override
+  String get privacySection2Title =>
+      'الغرض من جمع المعلومات الشخصية واستخدامها';
+
+  @override
+  String get privacyPurposeRecords => 'حفظ سجلات صحة الحيوانات الأليفة وعرضها';
+
+  @override
+  String get privacyPurposeStats =>
+      'توفير إحصاءات الشاشة الرئيسية، مثل حالة الإخراج والوجبات وشرب الماء الأسبوعية، بالإضافة إلى مخططات تغيّر الوزن';
+
+  @override
+  String get privacyPurposeReminders =>
+      'إرسال تنبيهات متعلقة بالصحة، مثل التطعيم والدواء وزيارات المستشفى';
+
+  @override
+  String get privacyPurposeBackupRestore =>
+      'توفير ميزات النسخ الاحتياطي واستعادة البيانات';
+
+  @override
+  String get privacyPurposePaidEligibility =>
+      'التحقق من أهلية استخدام الميزات المدفوعة';
+
+  @override
+  String get privacySection3Title => 'الاحتفاظ بالمعلومات الشخصية وحذفها';
+
+  @override
+  String get privacyRetentionBody =>
+      'يتم تخزين جميع بيانات Pet Sumtan فقط في قاعدة البيانات المحلية (SQLite) على جهاز المستخدم، ولا يتم إرسالها إلى خوادم خارجية.';
+
+  @override
+  String get privacyDataDeletionMethod => 'طريقة حذف البيانات';
+
+  @override
+  String get privacyDeleteInApp =>
+      'يمكنك حذف معلومات الحيوانات الأليفة والسجلات مباشرة من الإعدادات > إدارة البيانات داخل التطبيق.';
+
+  @override
+  String get privacyDeleteUninstall =>
+      'عند حذف التطبيق، سيتم أيضًا حذف جميع البيانات المخزنة على الجهاز.';
+
+  @override
+  String get privacyDeleteBackupWarning =>
+      'يرجى ملاحظة أنه إذا لم تقم بعمل نسخة احتياطية (تصدير) قبل حذف التطبيق، فلن تتمكن من استعادة البيانات.';
+
+  @override
+  String get privacySection4Title => 'تقديم المعلومات الشخصية إلى أطراف ثالثة';
+
+  @override
+  String get privacyThirdPartyBody =>
+      'لا يقدم Pet Sumtan المعلومات الشخصية للمستخدمين إلى جهات خارجية. ومع ذلك، تُستثنى الحالات التالية.';
+
+  @override
+  String get privacyThirdPartyUserExport =>
+      'عندما يستخدم المستخدم بنفسه ميزة تصدير البيانات، مثل مشاركة ملف النسخة الاحتياطية';
+
+  @override
+  String get privacyThirdPartyLegalRequest =>
+      'عندما يكون ذلك مطلوبًا بموجب القانون أو بناءً على طلب قانوني من سلطات التحقيق';
+
+  @override
+  String get privacySection5Title => 'إرشادات أذونات الوصول';
+
+  @override
+  String get privacyPermissionsBody =>
+      'قد يطلب التطبيق الأذونات التالية لتوفير وظائفه. حتى إذا لم تمنح إذنًا معينًا، يمكنك استخدام بقية الوظائف بشكل طبيعي باستثناء الوظيفة التي تتطلب ذلك الإذن.';
+
+  @override
+  String get privacyPermissionCameraName => 'الكاميرا';
+
+  @override
+  String get privacyPermissionCameraDesc =>
+      'تُستخدم لالتقاط الصور أو تسجيل مقاطع الفيديو مباشرة وإرفاقها بالسجلات الصحية.';
+
+  @override
+  String get privacyPermissionMediaName => 'الوصول إلى الصور والوسائط';
+
+  @override
+  String get privacyPermissionMediaDesc =>
+      'يُستخدم لاختيار الصور ومقاطع الفيديو من المعرض وإرفاقها بالسجلات.';
+
+  @override
+  String get privacyPermissionNotificationName => 'الإشعارات';
+
+  @override
+  String get privacyPermissionNotificationDesc =>
+      'تُستخدم لإرسال تنبيهات متعلقة بالصحة، مثل التطعيم والدواء وزيارات المستشفى.';
+
+  @override
+  String get privacyPermissionFileName => 'الوصول إلى الملفات (Android)';
+
+  @override
+  String get privacyPermissionFileDesc =>
+      'يُستخدم لحفظ ملفات النسخ الاحتياطي للبيانات أو تحميلها.';
+
+  @override
+  String get privacySection6Title => 'النسخ الاحتياطي للبيانات واستعادتها';
+
+  @override
+  String get privacyBackupExport =>
+      'التصدير: يمكنك حفظ جميع بيانات التطبيق أو مشاركتها كملف (.zip).';
+
+  @override
+  String get privacyBackupImport =>
+      'الاستيراد: يمكنك تحميل ملف نسخة احتياطية تم تصديره سابقًا واستعادة البيانات.';
+
+  @override
+  String get privacyBackupWarning =>
+      'يدير المستخدم ملفات النسخ الاحتياطي مباشرة. يرجى الحرص على عدم مشاركة الملفات مع الآخرين.';
+
+  @override
+  String get privacySection7Title => 'حماية المعلومات الشخصية للأطفال';
+
+  @override
+  String get privacyChildrenBody =>
+      'لا يجمع Pet Sumtan معلومات شخصية منفصلة من الأطفال دون سن 14 عامًا. يتم تخزين جميع بيانات التطبيق على الجهاز فقط ولا يتم إرسالها إلى خوادم خارجية، لذلك يمكن للأطفال أيضًا استخدام التطبيق بأمان.';
+
+  @override
+  String get privacySection8Title => 'تغييرات سياسة الخصوصية';
+
+  @override
+  String get privacyPolicyChangeNotice =>
+      'في حال حدوث تغييرات، سنبلغك من خلال ملاحظات تحديث التطبيق أو الإشعارات داخل التطبيق.';
+
+  @override
+  String get privacyPolicyChangeEffective =>
+      'تدخل السياسة المعدلة حيز التنفيذ بعد مرور 7 أيام من الإشعار.';
+
+  @override
+  String get privacySection9Title => 'الاستفسارات';
+
+  @override
+  String get hgDogHeroTitle => 'دليل العناية بصحة الكلاب';
+
+  @override
+  String get hgCatHeroTitle => 'دليل العناية بصحة القطط';
+
+  @override
+  String get hgHeroSubtitle => 'دليل صحي احترافي\nمبني على توصيات بيطرية.';
+
+  @override
+  String get hgVaccination => 'التطعيم';
+
+  @override
+  String get hgCoreVaccines => 'اللقاحات الأساسية (Core Vaccine)';
+
+  @override
+  String get hgNonCoreVaccines => 'اللقاحات غير الأساسية (Non-Core)';
+
+  @override
+  String get hgRequired => 'إلزامي';
+
+  @override
+  String get hgRecommended => 'موصى به';
+
+  @override
+  String get hgParasitePrevention => 'الوقاية من الطفيليات';
+
+  @override
+  String get hgHeartworm => 'الدودة القلبية';
+
+  @override
+  String get hgMonthly => 'شهريًا';
+
+  @override
+  String get hgExternalParasites => 'الطفيليات الخارجية (البراغيث والقراد)';
+
+  @override
+  String get hgInternalParasites => 'الطفيليات الداخلية';
+
+  @override
+  String get hgThreeToSixMonths => 'كل 3 إلى 6 أشهر';
+
+  @override
+  String get hgRegular => 'دوري';
+
+  @override
+  String get hgRegularCheckup => 'فحص صحي دوري';
+
+  @override
+  String get hgDentalCare => 'العناية بالأسنان والفم';
+
+  @override
+  String get hgForbiddenFoods => 'أطعمة ممنوعة تمامًا';
+
+  @override
+  String get hgEmergencySymptoms => 'أعراض تتطلب زيارة فورية للطبيب البيطري';
+
+  @override
+  String get hgExerciseMentalHealth => 'التمارين والصحة النفسية';
+
+  @override
+  String get hgWalk => 'النزهة';
+
+  @override
+  String get hgDaily => 'يوميًا';
+
+  @override
+  String get hgBreedExerciseAmount => 'كمية التمارين الموصى بها حسب السلالة';
+
+  @override
+  String get hgPlayBrainStimulation => 'اللعب وتحفيز الدماغ';
+
+  @override
+  String get hgStressSignals => 'التعرّف على علامات التوتر';
+
+  @override
+  String get hgCaution => 'تنبيه';
+
+  @override
+  String get hgSocialization => 'التنشئة الاجتماعية والتحفيز البيئي';
+
+  @override
+  String get hgDogCoreDhppl =>
+      '**DHPPL (لقاح مركّب)** — ديستمبر، التهاب الكبد، بارفو، نظير الإنفلونزا، والليبتوسبيرا.\nالجرعة الأولى في عمر 6 إلى 8 أسابيع، 3 جرعات بفاصل 3 إلى 4 أسابيع، ثم جرعة معززة سنوية';
+
+  @override
+  String get hgDogCoreRabies =>
+      '**داء الكلب** — الجرعة الأولى بعد عمر 3 أشهر، ثم مرة واحدة سنويًا (تطعيم إلزامي قانونيًا)';
+
+  @override
+  String get hgDogCoreCorona =>
+      '**التهاب الأمعاء التاجي** — يبدأ في عمر 6 إلى 8 أسابيع، جرعتان بفاصل 3 إلى 4 أسابيع، ثم جرعة معززة سنوية';
+
+  @override
+  String get hgDogNonCoreKennel =>
+      '**سعال الكنيل** — موصى به للكلاب في بيئات متعددة الحيوانات أو عند استخدام صالونات العناية أو الفنادق. يتوفر بشكل أنفي أو حقن';
+
+  @override
+  String get hgDogNonCoreFlu =>
+      '**إنفلونزا الكلاب** — موصى بها للكلاب كثيرة النشاط في الخارج أو التي تخالط كلابًا أخرى كثيرًا';
+
+  @override
+  String get hgDogHeartworm1 =>
+      'خلال موسم نشاط البعوض وما حوله (مارس إلى نوفمبر)، يُوصى بإعطاء دواء الوقاية **مرة واحدة شهريًا**';
+
+  @override
+  String get hgDogHeartworm2 =>
+      'العدوى صعبة العلاج وقد تكون قاتلة — **الوقاية هي أفضل حماية**';
+
+  @override
+  String get hgDogHeartworm3 =>
+      'قبل بدء الدواء، يجب إجراء اختبار للتأكد من عدم وجود عدوى';
+
+  @override
+  String get hgDogHeartworm4 =>
+      'الوقاية طوال العام أكثر أمانًا وغالبًا ما يوصي بها الأطباء البيطريون';
+
+  @override
+  String get hgDogExternalParasites1 =>
+      'إعطاء أدوية الوقاية الموضعية أو الفموية **شهريًا**';
+
+  @override
+  String get hgDogExternalParasites2 =>
+      'بعد النزهة، افحص الأذنين وبين الأصابع وتحت الإبطين للتأكد من عدم وجود قراد';
+
+  @override
+  String get hgDogExternalParasites3 =>
+      'عند إزالة القراد، استخدم ملقطًا واسحب ببطء إلى الأعلى بشكل مستقيم دون لف';
+
+  @override
+  String get hgDogInternalParasites1 =>
+      'الديدان الأسطوانية والديدان الخطافية والديدان السوطية: إعطاء دواء الديدان **كل 3 إلى 6 أشهر**';
+
+  @override
+  String get hgDogInternalParasites2 =>
+      'للجراء من عمر أسبوعين: إزالة الديدان 4 مرات بفاصل أسبوعين، ثم الاستمرار بالمتابعة الدورية';
+
+  @override
+  String get hgDental1 =>
+      'تنظيف الأسنان يوميًا هو الأفضل — ويُنصح به على الأقل **3 مرات أسبوعيًا**';
+
+  @override
+  String get hgDental2 =>
+      'استخدم دائمًا **معجون أسنان مخصصًا للحيوانات الأليفة**. لا تستخدم معجون أسنان بشريًا يحتوي على الزيليتول';
+
+  @override
+  String get hgDental3 =>
+      'تراكم الجير الشديد يتطلب تنظيفًا احترافيًا في عيادة بيطرية تحت التخدير العام';
+
+  @override
+  String get hgDental4 =>
+      'يمكن أن تساعد مكافآت الأسنان وألعاب الأسنان كوسائل عناية إضافية';
+
+  @override
+  String get hgDogForbiddenFoodAlert =>
+      'الأطعمة التالية سامة للكلاب. حتى الكميات الصغيرة قد تكون خطيرة، لذلك لا تقدّمها أبدًا.';
+
+  @override
+  String get hgDogForbiddenGrape =>
+      '**العنب والزبيب** — قد يسببان فشلًا كلويًا، وحتى الكميات الصغيرة قد تكون قاتلة';
+
+  @override
+  String get hgDogForbiddenChocolate =>
+      '**الشوكولاتة والكاكاو** — تسمم بالثيوبرومين، فشل قلبي، وتشنجات';
+
+  @override
+  String get hgDogForbiddenOnion =>
+      '**البصل والثوم والكراث** — تدمّر خلايا الدم الحمراء وتسبب فقر الدم الانحلالي';
+
+  @override
+  String get hgDogForbiddenXylitol =>
+      '**الزيليتول** — يسبب إفرازًا مفرطًا للأنسولين، نقص سكر الدم، وفشلًا كبديًا';
+
+  @override
+  String get hgDogForbiddenMacadamia =>
+      '**مكسرات المكاديميا** — ضعف عضلي، حمى عالية، وقيء';
+
+  @override
+  String get hgDogForbiddenDoughAlcohol =>
+      '**العجين النيء والكحول** — تسمم بالإيثانول ونقص سكر الدم';
+
+  @override
+  String get hgDogForbiddenAvocado =>
+      '**الأفوكادو** — يحتوي على مادة البرسين وقد يسبب القيء والإسهال';
+
+  @override
+  String get hgEmergencyAlert =>
+      'إذا ظهرت أي من الأعراض التالية، توجّه فورًا إلى عيادة بيطرية.';
+
+  @override
+  String get hgDogEmergency1 => 'فقدان كامل للشهية لأكثر من 24 ساعة';
+
+  @override
+  String get hgDogEmergency2 =>
+      'تكرار القيء أو الإسهال 3 مرات أو أكثر في اليوم';
+
+  @override
+  String get hgDogEmergency3 =>
+      'انتفاخ البطن ومحاولات قيء غير منتجة، احتمال تمدد أو التواء المعدة';
+
+  @override
+  String get hgDogEmergency4 => 'صعوبة في التنفس، شحوب اللثة، أو الزرقة';
+
+  @override
+  String get hgDogEmergency5 => 'نوبات، تشنجات، أو فقدان الوعي';
+
+  @override
+  String get hgDogEmergency6 => 'عدم التبول لأكثر من 12 ساعة';
+
+  @override
+  String get hgDogEmergency7 => 'إصابة واضحة، كسر، أو نزيف شديد';
+
+  @override
+  String get hgDogExerciseAlert =>
+      'بالنسبة للكلاب، قلة التمارين ليست مجرد مشكلة لياقة. فقد تكون سببًا رئيسيًا للتوتر والقلق والسلوكيات التخريبية.';
+
+  @override
+  String get hgDogWalk1 =>
+      'السلالات الصغيرة: على الأقل **20 إلى 30 دقيقة** يوميًا؛ السلالات المتوسطة والكبيرة: يُوصى بـ **ساعة واحدة أو أكثر**';
+
+  @override
+  String get hgDogWalk2 =>
+      'النزهة ليست فقط لقضاء الحاجة — فهي توفر **تحفيزًا شميًا، وتنشئة اجتماعية، وتخفيفًا للتوتر**';
+
+  @override
+  String get hgDogWalk3 =>
+      'اسمح بوقت كافٍ للشم — فهو فعّال جدًا في تخفيف الإرهاق الذهني';
+
+  @override
+  String get hgDogWalk4 =>
+      'في الصيف، انتبه لحروق الأسفلت — يُنصح بالمشي قبل الساعة 7 صباحًا أو في المساء';
+
+  @override
+  String get hgDogPlay1 =>
+      '**لعبة إحضار الكرة وشد الحبل** — تساعد على تفريغ الطاقة الجسدية وتقوية الرابط مع المالك';
+
+  @override
+  String get hgDogPlay2 =>
+      '**ألعاب الشم** — تحفّز الدماغ وقد تعطي تأثيرًا مشابهًا لنزهة مدتها 30 دقيقة خلال 15 دقيقة فقط';
+
+  @override
+  String get hgDogPlay3 =>
+      '**ألعاب الألغاز وألعاب كونغ** — تساعد على تقليل قلق الانفصال أثناء البقاء وحيدًا';
+
+  @override
+  String get hgDogPlay4 =>
+      'مجرد **10 إلى 15 دقيقة** من اللعب المركز يوميًا يمكن أن يقلل التوتر بشكل ملحوظ';
+
+  @override
+  String get hgDogStress1 =>
+      'تدمير الأثاث أو الأشياء والنباح المفرط قد يشيران إلى نقص التمارين أو التحفيز';
+
+  @override
+  String get hgDogStress2 =>
+      'عض الذيل أو اللعق المفرط للقدمين أو الجسم قد يدل على سلوك قهري أو محاولة لتخفيف التوتر';
+
+  @override
+  String get hgDogStress3 =>
+      'القلق الشديد عند خروج المالك وحدوث أخطاء في قضاء الحاجة قد يشيران إلى قلق الانفصال';
+
+  @override
+  String get hgDogStress4 =>
+      'إذا استمرت الأعراض، استشر طبيبًا بيطريًا أو اختصاصي سلوك حيواني';
+
+  @override
+  String get hgDogSocial1 =>
+      'العمر بين **3 و14 أسبوعًا** هو الفترة الذهبية للتنشئة الاجتماعية — التعرض لمختلف الأشخاص والأصوات والبيئات مهم';
+
+  @override
+  String get hgDogSocial2 =>
+      'التفاعل مع الكلاب الأخرى — يمكن أن تساعد حدائق الكلاب ودروس الجراء';
+
+  @override
+  String get hgDogSocial3 =>
+      'تجربة أماكن وروائح وأصوات جديدة تساهم في الإثراء الذهني';
+
+  @override
+  String get hgDogSocial4 =>
+      'التدريب بالتعزيز الإيجابي، مثل النقرات والمكافآت، يحفّز الدماغ ويقوّي الرابط في الوقت نفسه';
+
+  @override
+  String get hgCatCoreFvrcp =>
+      '**FVRCP (لقاح مركّب)** — فيروس الهربس القطي، الكاليسي، ونقص الكريات البيضاء الشامل.\nالجرعة الأولى في عمر 6 إلى 8 أسابيع، 3 جرعات بفاصل 3 إلى 4 أسابيع، ثم كل 1 إلى 3 سنوات';
+
+  @override
+  String get hgCatCoreRabies =>
+      '**داء الكلب** — إلزامي للقطط التي تخرج إلى الخارج، وموصى به أيضًا للقطط المنزلية (إلزامي قانونيًا)';
+
+  @override
+  String get hgCatNonCoreFelv =>
+      '**سرطان الدم القطي (FeLV)** — موصى به بشدة للقطط التي تخرج وللمنازل متعددة القطط';
+
+  @override
+  String get hgCatNonCoreChlamydia =>
+      '**كلاميديا القطط** — تساعد في الوقاية من التهاب الملتحمة في البيئات متعددة القطط';
+
+  @override
+  String get hgCatNonCoreFiv =>
+      '**فيروس نقص المناعة القطي (FIV)** — مهم خصوصًا للقطط الذكور التي تخرج، وينتقل عبر جروح العراك';
+
+  @override
+  String get hgCatExternalParasites1 =>
+      'القطط التي تخرج: إعطاء وقاية من البراغيث والقراد **مرة واحدة شهريًا**';
+
+  @override
+  String get hgCatExternalParasites2 =>
+      'حتى القطط المنزلية قد تتعرض للبراغيث التي تدخل عبر الملابس أو الأحذية → يُوصى بالوقاية **كل 3 أشهر**';
+
+  @override
+  String get hgCatExternalParasites3 =>
+      'عند استخدام المنتجات الموضعية، ضعها بدقة على مؤخرة الرقبة';
+
+  @override
+  String get hgCatInternalHeartworm => 'الطفيليات الداخلية والدودة القلبية';
+
+  @override
+  String get hgCatInternalParasites1 =>
+      'الديدان الأسطوانية والشريطية: إعطاء دواء الديدان **كل 3 إلى 6 أشهر**';
+
+  @override
+  String get hgCatInternalParasites2 =>
+      'إذا كانت تتناول لحمًا أو سمكًا نيئًا، يُوصى بإجراء فحوصات أكثر تكرارًا';
+
+  @override
+  String get hgCatHeartworm1 =>
+      'الدودة القلبية — لا يوجد للقطط **علاج شافٍ، لذلك الوقاية هي الخيار الوحيد**. يُوصى بشدة بالوقاية الشهرية للقطط التي تخرج';
+
+  @override
+  String get hgCatMajorDiseases => 'أهم أمراض القطط التي يجب الانتباه لها';
+
+  @override
+  String get hgCatDiseaseAlert =>
+      'تميل القطط إلى إخفاء الألم والمرض، لذلك غالبًا لا تظهر الأعراض إلا بعد تقدم الحالة. الفحوصات الدورية مهمة بشكل خاص.';
+
+  @override
+  String get hgCatDiseaseFlutd =>
+      '**مرض الجهاز البولي السفلي لدى القطط (FLUTD)** — شائع لدى الذكور. عدم القدرة على التبول حالة طارئة فورية';
+
+  @override
+  String get hgCatDiseaseCkd =>
+      '**مرض الكلى المزمن (CKD)** — من أبرز أسباب الوفاة لدى القطط المسنة. فحص الكلى الدوري ضروري ابتداءً من عمر 7 سنوات';
+
+  @override
+  String get hgCatDiseaseDiabetes =>
+      '**سكري القطط** — الخطر أعلى لدى القطط البدينة والمسنة. راقب زيادة العطش والتبول';
+
+  @override
+  String get hgCatDiseaseHyperthyroidism =>
+      '**فرط نشاط الغدة الدرقية** — شائع لدى القطط فوق 10 سنوات. راقب فقدان الوزن وزيادة الشهية وفرط النشاط';
+
+  @override
+  String get hgCatDiseaseStomatitis =>
+      '**التهاب الفم** — شائع جدًا لدى القطط. يجب فحص رائحة الفم الكريهة أو سيلان اللعاب أو فقدان الشهية';
+
+  @override
+  String get hgCatDiseaseFhv =>
+      '**فيروس الهربس القطي (FHV-1)** — بعد الإصابة يبقى كامنًا مدى الحياة. يمكن أن يسبب التوتر عودة الأعراض مثل العطاس وإفرازات العين والتهاب الملتحمة';
+
+  @override
+  String get hgHydrationDiet => 'الترطيب وإدارة النظام الغذائي';
+
+  @override
+  String get hgCatHydrationAlert =>
+      'القطط بطبيعتها تشرب كمية قليلة من الماء، وهي عرضة لأمراض المسالك البولية. تشجيع شرب الماء مهم جدًا.';
+
+  @override
+  String get hgCatHydration1 =>
+      'يُوصى بالطعام الرطب، مثل العلب أو الأكياس، للمساعدة في زيادة الترطيب';
+
+  @override
+  String get hgCatHydration2 =>
+      'تفضّل العديد من القطط الماء الجاري — يمكن أن تكون **نافورة الماء** فعالة';
+
+  @override
+  String get hgCatHydration3 =>
+      'ضع وعاء الماء بعيدًا عن وعاء الطعام؛ غالبًا ما تفضّل القطط الأوعية الواسعة والضحلة';
+
+  @override
+  String get hgCatHydration4 =>
+      'كمية الماء المستهدفة: حوالي **40 إلى 60 مل** لكل كغ من وزن الجسم يوميًا';
+
+  @override
+  String get hgCatForbiddenFoodAlert =>
+      'الأطعمة التالية سامة للقطط. حتى الكميات الصغيرة قد تكون خطيرة، لذلك لا تقدّمها أبدًا.';
+
+  @override
+  String get hgCatForbiddenOnion =>
+      '**البصل والثوم والكراث** — تدمّر خلايا الدم الحمراء وتسبب فقر الدم الانحلالي؛ القطط أكثر حساسية من الكلاب';
+
+  @override
+  String get hgCatForbiddenGrape =>
+      '**العنب والزبيب** — قد يسببان فشلًا كلويًا';
+
+  @override
+  String get hgCatForbiddenChocolate =>
+      '**الشوكولاتة والكافيين** — سامة للقلب والجهاز العصبي';
+
+  @override
+  String get hgCatForbiddenRawFish =>
+      '**السمك النيء عند تقديمه باستمرار** — قد يسبب نقص الثيامين، فيتامين B1';
+
+  @override
+  String get hgCatForbiddenMilk =>
+      '**الحليب ومنتجات الألبان** — كثير من القطط البالغة لديها عدم تحمل اللاكتوز وقد تصاب بالإسهال';
+
+  @override
+  String get hgCatForbiddenXylitolAlcohol =>
+      '**الزيليتول والكحول** — سامان للكبد والجهاز العصبي';
+
+  @override
+  String get hgCatForbiddenAvocado =>
+      '**الأفوكادو** — يحتوي على البرسين وقد يسبب القيء والإسهال';
+
+  @override
+  String get hgCatForbiddenRawEggWhite =>
+      '**بياض البيض النيء** — الأفيدين يمنع امتصاص البيوتين وقد يسبب مشاكل في الجلد والفراء';
+
+  @override
+  String get hgCatEmergency1 =>
+      '**عدم القدرة على التبول أو وجود دم في البول** — انسداد الإحليل حالة طارئة، خصوصًا لدى الذكور';
+
+  @override
+  String get hgCatEmergency2 =>
+      'فقدان كامل للشهية لأكثر من 24 ساعة، مع خطر الإصابة بالكبد الدهني';
+
+  @override
+  String get hgCatEmergency3 =>
+      '**التنفس والفم مفتوح** — ليس طبيعيًا أبدًا لدى القطط ويتطلب رعاية طارئة فورية';
+
+  @override
+  String get hgCatEmergency4 =>
+      'شلل مفاجئ في الساقين الخلفيتين أو برودتهما، احتمال وجود جلطة';
+
+  @override
+  String get hgCatEmergency5 => 'نوبات، تشنجات، أو فقدان الوعي';
+
+  @override
+  String get hgCatEmergency6 => 'شحوب اللثة أو اللسان، أو اصفرار/يرقان';
+
+  @override
+  String get hgCatEmergency7 =>
+      'تكرار القيء أو الإسهال 3 مرات أو أكثر في اليوم، أو وجود دم في البراز/القيء';
+
+  @override
+  String get hgCatEmergency8 => 'إصابة واضحة، كسر، أو نزيف شديد';
+
+  @override
+  String get hgEnvironmentMentalHealth => 'البيئة والصحة النفسية';
+
+  @override
+  String get hgIndoorEnvironment => 'إدارة البيئة الداخلية';
+
+  @override
+  String get hgStressManagement => 'إدارة التوتر';
+
+  @override
+  String get hgCatEnvironment1 =>
+      '**صناديق الرمل**: عدد القطط + 1 أو أكثر، مع التنظيف اليومي';
+
+  @override
+  String get hgCatEnvironment2 =>
+      '**ألواح الخدش**: على الأقل 2، مع الجمع بين الأنواع الرأسية والأفقية';
+
+  @override
+  String get hgCatEnvironment3 =>
+      '**المساحات المرتفعة**: وفر أبراج قطط أو رفوفًا أو مساحات عمودية لإشباع غريزة تحديد المنطقة';
+
+  @override
+  String get hgCatEnvironment4 =>
+      '**أماكن الاختباء**: وفر صناديق أو أنفاقًا أو أماكن آمنة يمكن للقط الاختباء فيها';
+
+  @override
+  String get hgCatStress1 =>
+      'يرتبط التوتر لدى القطط مباشرة بانخفاض المناعة وFLUTD وعودة فيروس الهربس القطي';
+
+  @override
+  String get hgCatStress2 =>
+      'أثناء التغييرات البيئية الكبيرة مثل الانتقال أو قدوم فرد جديد للعائلة، قد يساعد ناشر الفيرومونات مثل Feliway';
+
+  @override
+  String get hgCatStress3 =>
+      'وفّر ما لا يقل عن **10 إلى 15 دقيقة** من اللعب التفاعلي بالألعاب يوميًا';
+
+  @override
+  String get hgCatStress4 =>
+      'في المنازل متعددة القطط، افصل الموارد مثل أوعية الطعام وصناديق الرمل وأماكن النوم حسب عدد القطط';
+
+  @override
+  String get hgAge => 'العمر';
+
+  @override
+  String get hgCheckupCycle => 'دورة الفحص';
+
+  @override
+  String get hgMainItems => 'العناصر الرئيسية';
+
+  @override
+  String get hgAge1to6 => 'من 1 إلى 6 سنوات';
+
+  @override
+  String get hgAge7to10 => 'من 7 إلى 10 سنوات';
+
+  @override
+  String get hgAge11Plus => '11 سنة فأكثر';
+
+  @override
+  String get hgYearlyOnce => 'مرة واحدة سنويًا';
+
+  @override
+  String get hgYearlyTwice => 'مرتان سنويًا';
+
+  @override
+  String get hgEvery3to4Months => 'كل 3 إلى 4 أشهر';
+
+  @override
+  String get hgDogCheckupItems1 => 'فحص دم، سماع القلب، الوزن، فحص الأسنان';
+
+  @override
+  String get hgDogCheckupItems2 =>
+      'الدم، البول، الأشعة السينية، ضغط الدم، المفاصل';
+
+  @override
+  String get hgDogCheckupItems3 =>
+      'فحوصات دم شاملة، تصوير بالموجات فوق الصوتية، وظائف الكلى والكبد';
+
+  @override
+  String get hgCatCheckupItems1 => 'فحص دم، فحص بول، الوزن، فحص الأسنان';
+
+  @override
+  String get hgCatCheckupItems2 =>
+      'قيم الكلى والكبد، ضغط الدم، الغدة الدرقية T4';
+
+  @override
+  String get hgCatCheckupItems3 =>
+      'فحوصات دم شاملة، تصوير بطني بالموجات فوق الصوتية، مراقبة مكثفة للكلى';
+
+  @override
+  String get hgExerciseAmount => 'مستوى التمرين';
+
+  @override
+  String get hgBreedExamples => 'أمثلة على السلالات';
+
+  @override
+  String get hgLow => 'منخفض';
+
+  @override
+  String get hgNormal => 'متوسط';
+
+  @override
+  String get hgHigh => 'مرتفع';
+
+  @override
+  String get hgBreedLowExamples => 'بولدوغ، باسيت هاوند، شيه تزو، مالتيز';
+
+  @override
+  String get hgBreedNormalExamples => 'بودل، بيشون فريز، كوكر سبانيل، بيغل';
+
+  @override
+  String get hgBreedHighExamples =>
+      'لابرادور، غولدن ريتريفر، هاسكي، بوردر كولي';
+
+  @override
+  String get hgDisclaimer =>
+      'يقدّم هذا الدليل معلومات عامة للعناية الصحية، وقد تختلف الرعاية المطلوبة حسب حالة حيوانك الأليف. إذا ظهرت أعراض غير طبيعية أو كانت هناك حاجة للعلاج، فاستشر طبيبًا بيطريًا دائمًا.';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../app/l10n/l10n_extension.dart';
+import '../../../app/l10n/static_text.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -216,7 +217,7 @@ class _SectionHeader extends StatelessWidget {
           Text(emoji, style: const TextStyle(fontSize: 18)),
           const SizedBox(width: AppSpacing.space2),
           Text(
-            title,
+            localizedStaticText(context, title),
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
@@ -245,7 +246,7 @@ class _HelpCard extends StatelessWidget {
         border: Border.all(color: AppColors.primary200),
       ),
       child: Text(
-        content,
+        localizedStaticText(context, content),
         style: const TextStyle(
           fontSize: 14,
           color: AppColors.gray700,
@@ -276,7 +277,7 @@ class _HelpItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title,
+            localizedStaticText(context, title),
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -285,7 +286,7 @@ class _HelpItem extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            desc,
+            localizedStaticText(context, desc),
             style: const TextStyle(
               fontSize: 13,
               color: AppColors.gray600,
@@ -332,7 +333,7 @@ class _CategoryItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  localizedStaticText(context, name),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -341,7 +342,7 @@ class _CategoryItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  desc,
+                  localizedStaticText(context, desc),
                   style: const TextStyle(
                     fontSize: 13,
                     color: AppColors.gray600,
@@ -402,7 +403,7 @@ class _FaqItemState extends State<_FaqItem> {
                   const SizedBox(width: AppSpacing.space2),
                   Expanded(
                     child: Text(
-                      widget.q,
+                      localizedStaticText(context, widget.q),
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -452,7 +453,7 @@ class _FaqItemState extends State<_FaqItem> {
                   const SizedBox(width: AppSpacing.space2),
                   Expanded(
                     child: Text(
-                      widget.a,
+                      localizedStaticText(context, widget.a),
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.gray600,

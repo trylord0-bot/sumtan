@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../app/l10n/l10n_extension.dart';
+import '../../../app/l10n/static_text.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_toast.dart';
@@ -98,7 +99,9 @@ class HomeScreen extends ConsumerWidget {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _SectionHeader(title: context.l10n.todayReminders, linkLabel: ''),
+                            _SectionHeader(
+                                title: context.l10n.todayReminders,
+                                linkLabel: ''),
                             const SizedBox(height: AppSpacing.space3),
                             ...list.take(3).map((a) => Padding(
                                   padding: const EdgeInsets.only(
@@ -135,7 +138,8 @@ class HomeScreen extends ConsumerWidget {
                     const SizedBox(height: AppSpacing.space5),
 
                     // ⑤ 이번 주 통계
-                    _SectionHeader(title: context.l10n.weekStats, linkLabel: ''),
+                    _SectionHeader(
+                        title: context.l10n.weekStats, linkLabel: ''),
                     const SizedBox(height: AppSpacing.space3),
 
                     poopAsync.when(
@@ -418,12 +422,14 @@ class _TodaySummaryGrid extends StatelessWidget {
     if (species == 'dog') {
       speciesCategory = RecordCategory.walk;
       speciesIcon = '🦮';
-      speciesValue = walkCount > 0 ? '$walkCount${context.l10n.timesUnit}' : '-';
+      speciesValue =
+          walkCount > 0 ? '$walkCount${context.l10n.timesUnit}' : '-';
       speciesLabel = RecordCategory.walk.localizedLabel(context);
     } else {
       speciesCategory = RecordCategory.brushing;
       speciesIcon = '🪥';
-      speciesValue = brushingCount > 0 ? '$brushingCount${context.l10n.timesUnit}' : '-';
+      speciesValue =
+          brushingCount > 0 ? '$brushingCount${context.l10n.timesUnit}' : '-';
       speciesLabel = RecordCategory.brushing.localizedLabel(context);
     }
 
@@ -451,7 +457,8 @@ class _TodaySummaryGrid extends StatelessWidget {
               child: _SummaryChip(
                 topColor: statusColor(RecordCategory.meal, mealCount > 0),
                 icon: '🍚',
-                value: mealCount > 0 ? '$mealCount${context.l10n.mealsUnit}' : '-',
+                value:
+                    mealCount > 0 ? '$mealCount${context.l10n.mealsUnit}' : '-',
                 label: RecordCategory.meal.localizedLabel(context),
               ),
             ),
@@ -460,7 +467,9 @@ class _TodaySummaryGrid extends StatelessWidget {
               child: _SummaryChip(
                 topColor: statusColor(RecordCategory.water, waterCount > 0),
                 icon: '💧',
-                value: waterCount > 0 ? '$waterCount${context.l10n.timesUnit}' : '-',
+                value: waterCount > 0
+                    ? '$waterCount${context.l10n.timesUnit}'
+                    : '-',
                 label: RecordCategory.water.localizedLabel(context),
               ),
             ),
@@ -483,7 +492,8 @@ class _TodaySummaryGrid extends StatelessWidget {
               child: _SummaryChip(
                 topColor: statusColor(RecordCategory.medication, medCount > 0),
                 icon: '💊',
-                value: medCount > 0 ? '$medCount${context.l10n.timesUnit}' : '-',
+                value:
+                    medCount > 0 ? '$medCount${context.l10n.timesUnit}' : '-',
                 label: RecordCategory.medication.localizedLabel(context),
               ),
             ),
@@ -1043,7 +1053,15 @@ class _WeeklyBarCard extends StatelessWidget {
     final maxCount = counts.isEmpty ? 1 : counts.reduce(math.max);
     final barMax = maxCount < 1 ? 1 : maxCount;
 
-    const dayLabels = ['월', '화', '수', '목', '금', '토', '일'];
+    final dayLabels = [
+      context.l10n.dayMon,
+      context.l10n.dayTue,
+      context.l10n.dayWed,
+      context.l10n.dayThu,
+      context.l10n.dayFri,
+      context.l10n.daySat,
+      context.l10n.daySun,
+    ];
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.space4),
@@ -1213,9 +1231,17 @@ class _PeriodToggle extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           _ToggleBtn(
-              label: '7일', value: 7, selected: selected, onSelect: onSelect),
+            label: localizedDayCountShort(context, 7),
+            value: 7,
+            selected: selected,
+            onSelect: onSelect,
+          ),
           _ToggleBtn(
-              label: '30일', value: 30, selected: selected, onSelect: onSelect),
+            label: localizedDayCountShort(context, 30),
+            value: 30,
+            selected: selected,
+            onSelect: onSelect,
+          ),
         ],
       ),
     );
@@ -1334,16 +1360,23 @@ class _WeightGraphCard extends StatelessWidget {
           SizedBox(
             height: 90,
             child: CustomPaint(
-              painter: _WeightLinePainter(records: records, period: period),
+              painter: _WeightLinePainter(
+                records: records,
+                period: period,
+                todayLabel: context.l10n.today,
+              ),
               size: Size.infinite,
             ),
           ),
           const SizedBox(height: AppSpacing.space2),
           Row(
             children: [
-              _LegendDot(color: AppColors.primary400, label: context.l10n.measuredWeight),
+              _LegendDot(
+                  color: AppColors.primary400,
+                  label: context.l10n.measuredWeight),
               const SizedBox(width: 12),
-              _LegendDot(color: AppColors.gray300, label: context.l10n.standardRange),
+              _LegendDot(
+                  color: AppColors.gray300, label: context.l10n.standardRange),
             ],
           ),
         ],
@@ -1378,8 +1411,13 @@ class _LegendDot extends StatelessWidget {
 class _WeightLinePainter extends CustomPainter {
   final List<Record> records;
   final int period;
+  final String todayLabel;
 
-  _WeightLinePainter({required this.records, required this.period});
+  _WeightLinePainter({
+    required this.records,
+    required this.period,
+    required this.todayLabel,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -1477,7 +1515,7 @@ class _WeightLinePainter extends CustomPainter {
       final isToday =
           dt.year == now.year && dt.month == now.month && dt.day == now.day;
       if (i != 0 && i != dataPoints.length - 1 && !isToday) continue;
-      final label = isToday ? '오늘' : '${dt.month}/${dt.day}';
+      final label = isToday ? todayLabel : '${dt.month}/${dt.day}';
       final tp = TextPainter(
         text: TextSpan(text: label, style: labelStyle),
         textDirection: TextDirection.ltr,
@@ -1488,7 +1526,9 @@ class _WeightLinePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_WeightLinePainter old) =>
-      old.records != records || old.period != period;
+      old.records != records ||
+      old.period != period ||
+      old.todayLabel != todayLabel;
 }
 
 // ─── Empty state ───────────────────────────────────────────────────────────────

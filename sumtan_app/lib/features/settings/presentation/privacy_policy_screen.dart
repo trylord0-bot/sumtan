@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../app/l10n/l10n_extension.dart';
+import '../../../app/l10n/static_text.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -222,7 +223,10 @@ class _IntroCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.space2),
           Text(
-            '반려숨탄은 회원가입 없이 사용하는 앱으로, 모든 데이터는 사용자의 기기 내에만 저장됩니다. 외부 서버로 개인정보를 전송하지 않으며, 사용자의 소중한 반려동물 정보를 안전하게 보호합니다.',
+            localizedStaticText(
+              context,
+              '반려숨탄은 회원가입 없이 사용하는 앱으로, 모든 데이터는 사용자의 기기 내에만 저장됩니다. 외부 서버로 개인정보를 전송하지 않으며, 사용자의 소중한 반려동물 정보를 안전하게 보호합니다.',
+            ),
             style: const TextStyle(
               fontSize: 13,
               color: AppColors.primary800,
@@ -273,7 +277,7 @@ class _Section extends StatelessWidget {
             const SizedBox(width: AppSpacing.space2),
             Expanded(
               child: Text(
-                title,
+                localizedStaticText(context, title),
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -308,7 +312,7 @@ class _BodyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
+      localizedStaticText(context, text),
       style: const TextStyle(
         fontSize: 14,
         color: AppColors.gray700,
@@ -328,7 +332,7 @@ class _SubTitle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.space2),
       child: Text(
-        text,
+        localizedStaticText(context, text),
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
@@ -361,7 +365,7 @@ class _BulletItem extends StatelessWidget {
           const SizedBox(width: AppSpacing.space2),
           Expanded(
             child: Text(
-              text,
+              localizedStaticText(context, text),
               style: const TextStyle(
                 fontSize: 14,
                 color: AppColors.gray700,
@@ -400,7 +404,7 @@ class _PermissionItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  localizedStaticText(context, name),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -409,7 +413,7 @@ class _PermissionItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  desc,
+                  localizedStaticText(context, desc),
                   style: const TextStyle(
                     fontSize: 13,
                     color: AppColors.gray600,

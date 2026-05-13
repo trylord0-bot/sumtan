@@ -46,9 +46,6 @@ final selectedDateRecordsProvider =
   return ref.read(recordRepositoryProvider).getByPetAndDate(pet.id!, date);
 });
 
-// 체중 기간 토글 (7일 or 30일)
-final weightPeriodProvider = StateProvider<int>((ref) => 7);
-
 // 통계 기간 토글 (7일 or 30일)
 final statsPeriodProvider = StateProvider<int>((ref) => 7);
 
@@ -56,7 +53,7 @@ final statsPeriodProvider = StateProvider<int>((ref) => 7);
 final weightHistoryProvider =
     FutureProvider.autoDispose<List<Record>>((ref) async {
   final pet = ref.watch(selectedPetProvider);
-  final period = ref.watch(weightPeriodProvider);
+  final period = ref.watch(statsPeriodProvider);
   if (pet == null || pet.id == null) return [];
   return ref
       .read(recordRepositoryProvider)

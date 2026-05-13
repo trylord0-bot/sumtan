@@ -186,7 +186,14 @@ class HomeScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSpacing.space3),
 
-                    _WeightSection(weightAsync: weightAsync, ref: ref),
+                    weightAsync.when(
+                      data: (records) => _WeightGraphCard(
+                        records: records,
+                        period: ref.watch(statsPeriodProvider),
+                      ),
+                      loading: () => _statsLoadingBox(),
+                      error: (_, __) => const SizedBox.shrink(),
+                    ),
                     const SizedBox(height: 120),
                   ],
                 ),
@@ -1075,8 +1082,8 @@ class _WeeklyBarCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
-    final days = List.generate(
-        period, (i) => DateTime(now.year, now.month, now.day - (period - 1 - i)));
+    final days = List.generate(period,
+        (i) => DateTime(now.year, now.month, now.day - (period - 1 - i)));
     final counts = days.map((d) => stats[d] ?? 0).toList();
     final total = counts.fold<int>(0, (a, b) => a + b);
     // 실제 입력된 날(count > 0)만 분모로 사용. 0도 포함(0-count 입력일 포함).
@@ -1219,56 +1226,6 @@ class _WeeklyBarCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-// ─── Weight section ────────────────────────────────────────────────────────────
-
-class _WeightSection extends StatelessWidget {
-  final AsyncValue<List<Record>> weightAsync;
-  final WidgetRef ref;
-
-  const _WeightSection({required this.weightAsync, required this.ref});
-
-  @override
-  Widget build(BuildContext context) {
-    final period = ref.watch(weightPeriodProvider);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(context.l10n.weightTrend,
-                style: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.gray600,
-                )),
-            const Spacer(),
-            _PeriodToggle(
-              selected: period,
-              onSelect: (v) =>
-                  ref.read(weightPeriodProvider.notifier).state = v,
-            ),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.space3),
-        weightAsync.when(
-          data: (records) => _WeightGraphCard(records: records, period: period),
-          loading: () => Container(
-            height: 160,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.gray200),
-            ),
-            child: const Center(child: CircularProgressIndicator()),
-          ),
-          error: (_, __) => const SizedBox.shrink(),
-        ),
-      ],
     );
   }
 }

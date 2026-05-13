@@ -202,6 +202,10 @@
 
   "settingsPurchaseFailed": "Payment failed",
   "@settingsPurchaseFailed": { "description": "Settings: Purchase failed" },
+  "settingsPurchaseProductLoadFailed": "Couldn’t load product info. Please try again shortly.",
+  "@settingsPurchaseProductLoadFailed": { "description": "Settings: Purchase product info failed to load" },
+  "settingsPurchaseStartFailed": "Couldn’t start payment. Please try again shortly.",
+  "@settingsPurchaseStartFailed": { "description": "Settings: Purchase flow failed to start" },
 
   "errorDbInit": "There was a problem preparing app data.\nPlease try again later.",
   "@errorDbInit": { "description": "Error: DB init failed" },

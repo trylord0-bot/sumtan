@@ -208,6 +208,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsPurchaseFailed => '支払いに失敗しました';
 
   @override
+  String get settingsPurchaseProductLoadFailed =>
+      '商品情報を読み込めませんでした。しばらくしてから再試行してください。';
+
+  @override
+  String get settingsPurchaseStartFailed => '支払いを開始できませんでした。しばらくしてから再試行してください。';
+
+  @override
   String get errorDbInit => 'アプリデータの準備中に問題が発生しました。\nしばらくしてからもう一度起動してください。';
 
   @override

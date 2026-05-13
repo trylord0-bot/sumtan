@@ -65,6 +65,8 @@
   "settingsExportSuccess": "备份文件已可分享",
   "settingsExportFailed": "导出失败",
   "settingsPurchaseFailed": "支付失败",
+  "settingsPurchaseProductLoadFailed": "无法加载商品信息。请稍后再试。",
+  "settingsPurchaseStartFailed": "无法开始支付。请稍后再试。",
   "errorDbInit": "准备应用数据时出现问题。\n请稍后再启动。",
   "help": "帮助",
   "healthGuide": "健康管理指南",

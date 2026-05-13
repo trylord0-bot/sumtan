@@ -212,6 +212,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsPurchaseFailed => 'فشل الدفع';
 
   @override
+  String get settingsPurchaseProductLoadFailed =>
+      'تعذّر تحميل معلومات المنتج. يُرجى المحاولة بعد قليل.';
+
+  @override
+  String get settingsPurchaseStartFailed =>
+      'تعذّر بدء الدفع. يُرجى المحاولة بعد قليل.';
+
+  @override
   String get errorDbInit =>
       'حدثت مشكلة أثناء تحضير بيانات التطبيق.\nyُرجى إعادة التشغيل بعد قليل.';
 

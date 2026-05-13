@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
+import '../../../app/l10n/generated/app_localizations.dart';
+import '../../../app/l10n/locale_controller.dart';
 import '../data/purchase_service.dart';
 
 enum IapStatus { idle, loading, success, error, notAvailable }
@@ -50,11 +53,12 @@ class PurchaseState {
 }
 
 class PurchaseNotifier extends StateNotifier<PurchaseState> {
-  PurchaseNotifier(this._service) : super(const PurchaseState()) {
+  PurchaseNotifier(this._service, this._l10n) : super(const PurchaseState()) {
     _init();
   }
 
   final PurchaseService _service;
+  final AppLocalizations Function() _l10n;
   StreamSubscription<List<PurchaseDetails>>? _sub;
   Completer<bool>? _additionalPetCompleter;
 
@@ -106,7 +110,8 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
         if (!mounted) return;
         state = state.copyWith(
           status: IapStatus.error,
-          errorMessage: purchase.error?.message ?? '결제에 실패했어요',
+          errorMessage:
+              purchase.error?.message ?? _l10n().settingsPurchaseFailed,
         );
         if (purchase.productID == PurchaseService.additionalPetProductId) {
           _completeAdditionalPetPurchase(false);
@@ -137,7 +142,7 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
     if (product == null) {
       state = state.copyWith(
         status: IapStatus.error,
-        errorMessage: '상품 정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.',
+        errorMessage: _l10n().settingsPurchaseProductLoadFailed,
       );
       return;
     }
@@ -148,7 +153,7 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
       if (!mounted) return;
       state = state.copyWith(
         status: IapStatus.error,
-        errorMessage: '결제를 시작하지 못했어요. 잠시 후 다시 시도해 주세요.',
+        errorMessage: _l10n().settingsPurchaseStartFailed,
       );
     }
   }
@@ -168,7 +173,7 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
     if (product == null) {
       state = state.copyWith(
         status: IapStatus.error,
-        errorMessage: '상품 정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.',
+        errorMessage: _l10n().settingsPurchaseProductLoadFailed,
       );
       return false;
     }
@@ -184,7 +189,7 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
       _completeAdditionalPetPurchase(false);
       state = state.copyWith(
         status: IapStatus.error,
-        errorMessage: '결제를 시작하지 못했어요. 잠시 후 다시 시도해 주세요.',
+        errorMessage: _l10n().settingsPurchaseStartFailed,
       );
       return false;
     }
@@ -212,5 +217,35 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
 }
 
 final purchaseProvider = StateNotifierProvider<PurchaseNotifier, PurchaseState>(
-  (ref) => PurchaseNotifier(PurchaseService()),
+  (ref) => PurchaseNotifier(
+    PurchaseService(),
+    () => _purchaseLocalizations(ref),
+  ),
 );
+
+AppLocalizations _purchaseLocalizations(Ref ref) {
+  final configuredLocale = ref.read(localeControllerProvider).valueOrNull;
+  final locale = _supportedLocale(
+    configuredLocale ?? PlatformDispatcher.instance.locale,
+  );
+  return lookupAppLocalizations(locale);
+}
+
+Locale _supportedLocale(Locale locale) {
+  final supportedLocales = AppLocalizations.supportedLocales;
+
+  for (final supported in supportedLocales) {
+    if (supported.languageCode == locale.languageCode &&
+        supported.countryCode == locale.countryCode) {
+      return supported;
+    }
+  }
+
+  for (final supported in supportedLocales) {
+    if (supported.languageCode == locale.languageCode) {
+      return supported;
+    }
+  }
+
+  return const Locale('en');
+}

@@ -65,6 +65,8 @@
   "settingsExportSuccess": "ملف النسخ الاحتياطي جاهز للمشاركة",
   "settingsExportFailed": "فشل التصدير",
   "settingsPurchaseFailed": "فشل الدفع",
+  "settingsPurchaseProductLoadFailed": "تعذّر تحميل معلومات المنتج. يُرجى المحاولة بعد قليل.",
+  "settingsPurchaseStartFailed": "تعذّر بدء الدفع. يُرجى المحاولة بعد قليل.",
   "errorDbInit": "حدثت مشكلة أثناء تحضير بيانات التطبيق.\nyُرجى إعادة التشغيل بعد قليل.",
   "help": "المساعدة",
   "healthGuide": "دليل الرعاية الصحية",

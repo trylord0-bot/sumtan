@@ -65,6 +65,8 @@
   "settingsExportSuccess": "Archivo de copia de seguridad listo para compartir",
   "settingsExportFailed": "Error al exportar",
   "settingsPurchaseFailed": "Error en el pago",
+  "settingsPurchaseProductLoadFailed": "No se pudo cargar la información del producto. Inténtalo de nuevo en breve.",
+  "settingsPurchaseStartFailed": "No se pudo iniciar el pago. Inténtalo de nuevo en breve.",
   "errorDbInit": "Hubo un problema al preparar los datos de la app.\nVuelve a intentarlo más tarde.",
   "help": "Ayuda",
   "healthGuide": "Guía de salud",

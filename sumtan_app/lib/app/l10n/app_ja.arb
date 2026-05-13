@@ -65,6 +65,8 @@
   "settingsExportSuccess": "バックアップファイルを共有できます",
   "settingsExportFailed": "書き出しに失敗しました",
   "settingsPurchaseFailed": "支払いに失敗しました",
+  "settingsPurchaseProductLoadFailed": "商品情報を読み込めませんでした。しばらくしてから再試行してください。",
+  "settingsPurchaseStartFailed": "支払いを開始できませんでした。しばらくしてから再試行してください。",
   "errorDbInit": "アプリデータの準備中に問題が発生しました。\nしばらくしてからもう一度起動してください。",
   "help": "ヘルプ",
   "healthGuide": "健康管理ガイド",

@@ -215,6 +215,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsPurchaseFailed => 'Falha no pagamento';
 
   @override
+  String get settingsPurchaseProductLoadFailed =>
+      'Não foi possível carregar as informações do produto. Tente novamente em breve.';
+
+  @override
+  String get settingsPurchaseStartFailed =>
+      'Não foi possível iniciar o pagamento. Tente novamente em breve.';
+
+  @override
   String get errorDbInit =>
       'Ocorreu um problema ao preparar os dados do app.\nTente novamente mais tarde.';
 

@@ -209,6 +209,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsPurchaseFailed => '결제에 실패했어요';
 
   @override
+  String get settingsPurchaseProductLoadFailed =>
+      '상품 정보를 불러오지 못했어요. 잠시 후 다시 시도해 주세요.';
+
+  @override
+  String get settingsPurchaseStartFailed => '결제를 시작하지 못했어요. 잠시 후 다시 시도해 주세요.';
+
+  @override
   String get errorDbInit => '앱 데이터를 준비하는 중 문제가 발생했습니다.\n잠시 후 다시 실행해 주세요.';
 
   @override

@@ -65,6 +65,8 @@
   "settingsExportSuccess": "Fichier de sauvegarde prêt à partager",
   "settingsExportFailed": "Échec de l'exportation",
   "settingsPurchaseFailed": "Échec du paiement",
+  "settingsPurchaseProductLoadFailed": "Impossible de charger les informations du produit. Veuillez réessayer dans un instant.",
+  "settingsPurchaseStartFailed": "Impossible de démarrer le paiement. Veuillez réessayer dans un instant.",
   "errorDbInit": "Un problème est survenu lors de la préparation des données.\nVeuillez réessayer plus tard.",
   "help": "Aide",
   "healthGuide": "Guide santé",

@@ -498,6 +498,18 @@ abstract class AppLocalizations {
   /// **'Payment failed'**
   String get settingsPurchaseFailed;
 
+  /// Settings: Purchase product info failed to load
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t load product info. Please try again shortly.'**
+  String get settingsPurchaseProductLoadFailed;
+
+  /// Settings: Purchase flow failed to start
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn’t start payment. Please try again shortly.'**
+  String get settingsPurchaseStartFailed;
+
   /// Error: DB init failed
   ///
   /// In en, this message translates to:

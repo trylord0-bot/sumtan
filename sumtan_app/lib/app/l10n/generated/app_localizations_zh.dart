@@ -206,6 +206,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsPurchaseFailed => '支付失败';
 
   @override
+  String get settingsPurchaseProductLoadFailed => '无法加载商品信息。请稍后再试。';
+
+  @override
+  String get settingsPurchaseStartFailed => '无法开始支付。请稍后再试。';
+
+  @override
   String get errorDbInit => '准备应用数据时出现问题。\n请稍后再启动。';
 
   @override
@@ -2710,6 +2716,12 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get settingsPurchaseFailed => '支付失败';
 
   @override
+  String get settingsPurchaseProductLoadFailed => '无法加载商品信息。请稍后再试。';
+
+  @override
+  String get settingsPurchaseStartFailed => '无法开始支付。请稍后再试。';
+
+  @override
   String get errorDbInit => '准备应用数据时出现问题。\n请稍后再启动。';
 
   @override
@@ -5209,6 +5221,12 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get settingsPurchaseFailed => '付款失敗';
+
+  @override
+  String get settingsPurchaseProductLoadFailed => '無法載入商品資訊。請稍後再試。';
+
+  @override
+  String get settingsPurchaseStartFailed => '無法開始付款。請稍後再試。';
 
   @override
   String get errorDbInit => '準備 App 資料時發生問題。\n請稍後再啟動。';

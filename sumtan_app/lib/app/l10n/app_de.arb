@@ -65,6 +65,8 @@
   "settingsExportSuccess": "Sicherungsdatei kann geteilt werden",
   "settingsExportFailed": "Export fehlgeschlagen",
   "settingsPurchaseFailed": "Zahlung fehlgeschlagen",
+  "settingsPurchaseProductLoadFailed": "Produktinformationen konnten nicht geladen werden. Bitte in Kürze erneut versuchen.",
+  "settingsPurchaseStartFailed": "Zahlung konnte nicht gestartet werden. Bitte in Kürze erneut versuchen.",
   "errorDbInit": "Beim Vorbereiten der App-Daten ist ein Problem aufgetreten.\nBitte später erneut starten.",
   "help": "Hilfe",
   "healthGuide": "Gesundheitsratgeber",

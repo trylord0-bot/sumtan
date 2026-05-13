@@ -65,6 +65,8 @@
   "settingsExportSuccess": "Arquivo de backup pronto para compartilhar",
   "settingsExportFailed": "Falha na exportação",
   "settingsPurchaseFailed": "Falha no pagamento",
+  "settingsPurchaseProductLoadFailed": "Não foi possível carregar as informações do produto. Tente novamente em breve.",
+  "settingsPurchaseStartFailed": "Não foi possível iniciar o pagamento. Tente novamente em breve.",
   "errorDbInit": "Ocorreu um problema ao preparar os dados do app.\nTente novamente mais tarde.",
   "help": "Ajuda",
   "healthGuide": "Guia de saúde",

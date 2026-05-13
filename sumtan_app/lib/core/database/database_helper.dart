@@ -40,7 +40,7 @@ class DatabaseHelper {
     return databaseFactory.openDatabase(
       path,
       options: OpenDatabaseOptions(
-        version: 4,
+        version: 5,
         onConfigure: (db) async {
           await db.execute('PRAGMA foreign_keys = ON');
         },
@@ -82,6 +82,7 @@ class DatabaseHelper {
     ''');
 
     await _createAlarmsTable(db);
+    await _createPurchaseTransactionsTable(db);
   }
 
   /// records.data_json 구조 (category별)
@@ -109,6 +110,21 @@ class DatabaseHelper {
         await db.execute('ALTER TABLE pets ADD COLUMN reg_number TEXT');
       } catch (_) {}
     }
+    if (oldVersion < 5) {
+      await _createPurchaseTransactionsTable(db);
+    }
+  }
+
+  Future<void> _createPurchaseTransactionsTable(Database db) async {
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS purchase_transactions (
+        id           TEXT PRIMARY KEY,
+        product_id   TEXT NOT NULL,
+        purchased_at TEXT NOT NULL,
+        status       TEXT NOT NULL DEFAULT 'pending',
+        signature    TEXT NOT NULL
+      )
+    ''');
   }
 
   Future<void> _createAlarmsTable(Database db) async {

@@ -86,7 +86,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
 
     final newId = await ref.read(petsProvider.notifier).add(pet);
     if (ref.read(purchaseProvider).hasAdditionalPetCredit) {
-      ref.read(purchaseProvider.notifier).consumeAdditionalPetCredit();
+      await ref.read(purchaseProvider.notifier).consumeAdditionalPetCredit();
     }
     ref.read(selectedPetIdProvider.notifier).state = newId;
 

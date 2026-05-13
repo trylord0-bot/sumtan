@@ -655,29 +655,29 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
             ),
           ),
           const SizedBox(width: 8),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-            decoration: BoxDecoration(
-              color: AppColors.primary100,
-              borderRadius: BorderRadius.circular(99),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.lock_open,
-                    size: 11, color: AppColors.primary700),
-                const SizedBox(width: 3),
-                Text(
-                  l10n.settingsUnlocked,
-                  style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primary700,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Container(
+          //   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+          //   decoration: BoxDecoration(
+          //     color: AppColors.primary100,
+          //     borderRadius: BorderRadius.circular(99),
+          //   ),
+          //   child: Row(
+          //     mainAxisSize: MainAxisSize.min,
+          //     children: [
+          //       const Icon(Icons.lock_open,
+          //           size: 11, color: AppColors.primary700),
+          //       const SizedBox(width: 3),
+          //       Text(
+          //         l10n.settingsUnlocked,
+          //         style: const TextStyle(
+          //           fontSize: 11,
+          //           fontWeight: FontWeight.w600,
+          //           color: AppColors.primary700,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
       const SizedBox(height: 8),
@@ -766,7 +766,8 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
     final state = ref.read(exportProvider);
     if (state.status == ExportStatus.success) {
       // 인메모리 결제 플래그 초기화 — 다음 내보내기 시 재결제 필요
-      ref.read(purchaseProvider.notifier).resetUnlock();
+      await ref.read(purchaseProvider.notifier).resetUnlock();
+      if (!mounted) return;
       showTopToast(context, l10n.settingsExportSuccess);
       Navigator.pop(context);
     } else {

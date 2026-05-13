@@ -142,7 +142,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsImportConfirmBody =>
-      '기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체됩니다.\n\n계속하시겠습니까?';
+      '기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체됩니다.\n\n계속하시겠어요?';
 
   @override
   String get settingsImportAction => '가져오기';

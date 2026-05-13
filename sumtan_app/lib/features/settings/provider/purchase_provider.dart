@@ -2,12 +2,16 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:freerasp/freerasp.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 import '../../../app/l10n/generated/app_localizations.dart';
 import '../../../app/l10n/locale_controller.dart';
+import '../../../core/database/database_helper.dart';
+import '../data/purchase_secure_storage.dart';
 import '../data/purchase_service.dart';
+import '../data/purchase_transaction_dao.dart';
 
 enum IapStatus { idle, loading, success, error, notAvailable }
 
@@ -53,19 +57,51 @@ class PurchaseState {
 }
 
 class PurchaseNotifier extends StateNotifier<PurchaseState> {
-  PurchaseNotifier(this._service, this._l10n) : super(const PurchaseState()) {
+  PurchaseNotifier(this._service, this._secureStorage, this._l10n)
+      : super(const PurchaseState()) {
     _init();
   }
 
   final PurchaseService _service;
+  final PurchaseSecureStorage _secureStorage;
   final AppLocalizations Function() _l10n;
   StreamSubscription<List<PurchaseDetails>>? _sub;
   Completer<bool>? _additionalPetCompleter;
+  PurchaseTransactionDao? _dao;
+
+  // 미사용 트랜잭션 ID (markConsumed 시 사용)
+  String? _exportTxId;
+  String? _additionalPetTxId;
 
   Future<void> _init() async {
     if (kDebugMode) {
       state = state.copyWith(isUnlocked: true, status: IapStatus.idle);
       return;
+    }
+
+    // freeRASP 보안 탐지 설정 (루팅/탈옥 포함)
+    try {
+      final config = TalsecConfig(
+        androidConfig: AndroidConfig(
+          packageName: 'kr.co.lunlu.sumtan',
+          // TODO: 릴리즈 키스토어 SHA-256 해시로 교체
+          // 추출 명령: keytool -printcert -jarfile app-release.apk
+          signingCertHashes: ['replace_with_release_cert_hash'],
+        ),
+        iosConfig: IOSConfig(
+          bundleIds: ['kr.co.lunlu.sumtan'],
+          teamId: '7WPX8J5QH9',
+        ),
+        watcherMail: 'lunlu.co.kr@gmail.com',
+        isProd: true,
+      );
+      final callback = ThreatCallback(
+        onPrivilegedAccess: _onRasp,
+      );
+      Talsec.instance.attachListener(callback);
+      await Talsec.instance.start(config);
+    } catch (_) {
+      // 탐지 초기화 실패 시 무시하고 진행
     }
 
     final available = await _service.isAvailable();
@@ -74,6 +110,24 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
       state = state.copyWith(status: IapStatus.notAvailable);
       return;
     }
+
+    // DAO 초기화 및 미사용 트랜잭션 복원
+    try {
+      final db = await DatabaseHelper.instance.database;
+      if (!mounted) return;
+      _dao = PurchaseTransactionDao(db, _secureStorage);
+      final pending = await _dao!.loadPending();
+      if (!mounted) return;
+      for (final tx in pending) {
+        if (tx.productId == PurchaseService.exportProductId) {
+          _exportTxId = tx.id;
+          state = state.copyWith(isUnlocked: true);
+        } else if (tx.productId == PurchaseService.additionalPetProductId) {
+          _additionalPetTxId = tx.id;
+          state = state.copyWith(hasAdditionalPetCredit: true);
+        }
+      }
+    } catch (_) {}
 
     _sub = _service.purchaseStream.listen(_handlePurchaseUpdate);
 
@@ -96,10 +150,23 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
 
       if (purchase.status == PurchaseStatus.purchased) {
         if (!mounted) return;
+
+        final txId = purchase.purchaseID ??
+            '${purchase.productID}_${DateTime.now().millisecondsSinceEpoch}';
+        final tx = PurchaseTransaction(
+          id: txId,
+          productId: purchase.productID,
+          purchasedAt: DateTime.now().toIso8601String(),
+        );
+        try {
+          await _dao?.insert(tx);
+        } catch (_) {}
+
         if (purchase.productID == PurchaseService.exportProductId) {
-          // 인메모리 플래그만 세팅 — DB/SharedPreferences 저장 없음
+          _exportTxId = txId;
           state = state.copyWith(isUnlocked: true, status: IapStatus.success);
         } else {
+          _additionalPetTxId = txId;
           state = state.copyWith(
             hasAdditionalPetCredit: true,
             status: IapStatus.success,
@@ -128,6 +195,11 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
         await _service.completePurchase(purchase);
       }
     }
+  }
+
+  void _onRasp() {
+    if (!mounted) return;
+    state = state.copyWith(status: IapStatus.notAvailable);
   }
 
   void _completeAdditionalPetPurchase(bool success) {
@@ -195,12 +267,24 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
     }
   }
 
-  /// 내보내기 완료 후 호출 — 플래그를 메모리에서 초기화
-  void resetUnlock() {
+  /// 내보내기 완료 후 호출 — 트랜잭션을 consumed 처리하고 플래그 초기화
+  Future<void> resetUnlock() async {
+    if (_exportTxId != null) {
+      try {
+        await _dao?.markConsumed(_exportTxId!);
+      } catch (_) {}
+      _exportTxId = null;
+    }
     state = state.copyWith(isUnlocked: false, status: IapStatus.idle);
   }
 
-  void consumeAdditionalPetCredit() {
+  Future<void> consumeAdditionalPetCredit() async {
+    if (_additionalPetTxId != null) {
+      try {
+        await _dao?.markConsumed(_additionalPetTxId!);
+      } catch (_) {}
+      _additionalPetTxId = null;
+    }
     state =
         state.copyWith(hasAdditionalPetCredit: false, status: IapStatus.idle);
   }
@@ -219,6 +303,7 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
 final purchaseProvider = StateNotifierProvider<PurchaseNotifier, PurchaseState>(
   (ref) => PurchaseNotifier(
     PurchaseService(),
+    PurchaseSecureStorage(),
     () => _purchaseLocalizations(ref),
   ),
 );

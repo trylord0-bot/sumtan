@@ -44,7 +44,7 @@
   "settingsFeedback": "피드백 보내기",
   "settingsFeedbackSubject": "반려숨탄 피드백",
   "settingsEmailAppMissing": "이메일 앱을 찾을 수 없어요",
-  "settingsImportConfirmBody": "기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체됩니다.\n\n계속하시겠습니까?",
+  "settingsImportConfirmBody": "기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체됩니다.\n\n계속하시겠어요?",
   "settingsImportAction": "가져오기",
   "settingsImporting": "데이터 가져오기",
   "settingsImportSuccess": "백업 데이터를 복원했어요",

@@ -16,7 +16,11 @@
       "Read(//usr/local/bin/**)",
       "Read(//Users/lukas/flutter/bin/**)",
       "Bash(Select-String -Pattern \"\\(home|stat|chart\\)\")",
-      "Bash(Get-ChildItem -Path \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\\\\lib\\\\features\\\\home\" -Recurse -Filter \"*.dart\")"
+      "Bash(Get-ChildItem -Path \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\\\\lib\\\\features\\\\home\" -Recurse -Filter \"*.dart\")",
+      "Bash(xargs grep -l \"in_app_purchase\\\\|InAppPurchase\")",
+      "WebFetch(domain:pub.dev)",
+      "WebSearch",
+      "WebFetch(domain:docs.talsec.app)"
     ]
   }
 }

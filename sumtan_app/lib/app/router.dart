@@ -491,7 +491,10 @@ class _AppDrawer extends StatelessWidget {
   static const _blueBg = Color(0xFFEFF6FF);
   static const _amberBg = Color(0xFFFFFBEB);
 
-  void _openHospitalDialog(BuildContext context) {
+  void _openHospitalDialog(
+    BuildContext context, {
+    required String languageCode,
+  }) {
     final l10n = context.l10n;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog(
@@ -570,10 +573,17 @@ class _AppDrawer extends StatelessWidget {
                             ),
                           ),
                           onPressed: () async {
+                            final uri = languageCode == 'ko'
+                                ? Uri.parse(
+                                    //'https://m.map.naver.com/search2/search.naver?query=%EB%8F%99%EB%AC%BC%EB%B3%91%EC%9B%90',
+                                    'https://map.kakao.com/link/search/%EB%8F%99%EB%AC%BC%EB%B3%91%EC%9B%90',
+                                  )
+                                : Uri.https(
+                                    'www.google.com',
+                                    '/maps/search/',
+                                    {'api': '1', 'query': 'veterinary clinic'},
+                                  );
                             Navigator.pop(ctx);
-                            final uri = Uri.parse(
-                              'https://m.map.naver.com/search2/search.naver?query=%EB%8F%99%EB%AC%BC%EB%B3%91%EC%9B%90',
-                            );
                             if (await canLaunchUrl(uri)) {
                               await launchUrl(uri,
                                   mode: LaunchMode.externalApplication);
@@ -649,8 +659,15 @@ class _AppDrawer extends StatelessWidget {
                   label: l10n.drawerNearbyHospitals,
                   sub: l10n.drawerNearbyHospitalsSub,
                   onTap: () {
+                    final languageCode =
+                        Localizations.localeOf(context).languageCode;
+                    final navigator =
+                        Navigator.of(context, rootNavigator: true);
                     Navigator.pop(context);
-                    _openHospitalDialog(context);
+                    _openHospitalDialog(
+                      navigator.context,
+                      languageCode: languageCode,
+                    );
                   },
                 ),
                 _DrawerTile(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -29,7 +29,7 @@ class AlarmListItem extends ConsumerWidget {
       confirmDismiss: (_) async => true,
       onDismissed: (_) {
         notifier.delete(alarm.id!);
-        showTopToast(context, context.lt('알림이 삭제됐어요 🗑️'));
+        showTopToast(context, context.l10n.alarmDeleted);
       },
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -173,7 +173,7 @@ class _InfoColumn extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          alarm.label ?? context.lt(alarmTypeLabel(alarm.type)),
+          alarm.label ?? localizedAlarmTypeLabel(context, alarm.type),
           style: titleStyle,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
@@ -197,7 +197,7 @@ class _Subtitle extends StatelessWidget {
         final doneDate = alarm.doneAt != null
             ? DateFormat('MM/dd').format(DateTime.parse(alarm.doneAt!))
             : '';
-        return Text(context.lt('{date} · 완료됨', args: {'date': doneDate}),
+        return Text(context.l10n.dateCompleted(doneDate),
             style: const TextStyle(fontSize: 12, color: AppColors.gray400));
 
       case AlarmStatus.past:
@@ -205,13 +205,13 @@ class _Subtitle extends StatelessWidget {
             ? DateFormat('MM/dd').format(DateTime.parse(alarm.scheduledAt!))
             : '';
         return Text(
-            context.lt('⚠️ {date} 지남 · 탭해서 재예약', args: {'date': dateStr}),
+            context.l10n.datePassedTapToReschedule(dateStr),
             style: const TextStyle(fontSize: 12, color: _amber700));
 
       case AlarmStatus.repeat:
-        final ruleLabel = _repeatRuleLabel(alarm.repeatRule);
+        final ruleLabel = _localizedRepeatRuleLabel(context, alarm.repeatRule);
         final timeLabel = _formatRepeatTime(context, alarm.repeatTime);
-        return Text('${context.lt(ruleLabel)} · $timeLabel',
+        return Text('$ruleLabel · $timeLabel',
             style: const TextStyle(fontSize: 12, color: AppColors.gray500));
 
       default:
@@ -238,18 +238,19 @@ class _Subtitle extends StatelessWidget {
     return TimeOfDay(hour: h, minute: m).format(context);
   }
 
-  String _repeatRuleLabel(String rule) {
+  String _localizedRepeatRuleLabel(BuildContext context, String rule) {
+    final l10n = context.l10n;
     switch (rule) {
       case 'daily':
-        return '매일';
+        return l10n.daily;
       case 'weekday':
-        return '평일';
+        return l10n.weekdays;
       case 'weekend':
-        return '주말';
+        return l10n.weekends;
       case 'weekly':
-        return '매주';
+        return l10n.weekly;
       case 'monthly':
-        return '매달';
+        return l10n.monthly;
       default:
         return '';
     }

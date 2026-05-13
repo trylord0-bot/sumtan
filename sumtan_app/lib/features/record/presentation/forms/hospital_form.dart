@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
@@ -86,15 +86,33 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('🏥 병원 방문이 기록됐어요'));
+      showTopToast(context, context.l10n.vetVisitRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
+  List<String> _symptomLabels(BuildContext context) {
+    final l10n = context.l10n;
+    return _symptomOptions.map((v) => switch (v) {
+      '구토' => l10n.vomiting,
+      '기침' => l10n.cough,
+      '무기력' => l10n.lethargy,
+      '식욕부진' => l10n.lossOfAppetite,
+      '설사' => l10n.diarrhea,
+      '콧물' => l10n.runnyNose,
+      '재채기' => l10n.sneezing,
+      '떨림' => l10n.trembling,
+      '혈뇨' => l10n.bloodInUrine,
+      '혈변' => l10n.bloodInStool,
+      _ => v,
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '🏥 병원 기록',
+      title: l10n.hospitalFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -103,44 +121,46 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-          label: '병원명',
+          label: l10n.hospitalName,
           required: false,
           controller: _hospitalNameCtrl,
-          hint: '예: 행복동물병원',
+          hint: l10n.hospitalNameExample,
         ),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
-          label: '진료 유형',
+          label: l10n.visitType,
           options: const ['일반', '정기검진', '응급'],
+          optionLabels: [l10n.general, l10n.regularCheckup, l10n.emergency],
           selected: _visitType,
           onChanged: (v) => setState(() => _visitType = v),
         ),
         const SizedBox(height: AppSpacing.space4),
         FormTagSelector(
-          label: '증상 태그',
+          label: l10n.symptomTags,
           required: false,
           options: _symptomOptions,
+          optionLabels: _symptomLabels(context),
           selected: _symptoms,
           onChanged: (v) => setState(() => _symptoms = v),
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-          label: '진단명',
+          label: l10n.diagnosisName,
           required: false,
           controller: _diagnosisCtrl,
-          hint: '예: 장염, 피부염',
+          hint: l10n.diagnosisExample,
         ),
         const SizedBox(height: AppSpacing.space4),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('비용', required: false),
+            FormFieldLabel(l10n.cost, required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _costCtrl,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: context.lt('예: 35000'),
+                hintText: l10n.example35000,
                 prefixText: '₩',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),
@@ -151,7 +171,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('다음 예약일', required: false),
+            FormFieldLabel(l10n.nextAppointment, required: false),
             const SizedBox(height: AppSpacing.space2),
             if (_nextVisit == null)
               GestureDetector(
@@ -163,7 +183,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
                     color: AppColors.primary50,
                     borderRadius: BorderRadius.circular(AppRadius.radiusFull),
                   ),
-                  child: Text(context.lt('+ 다음 예약일 추가'),
+                  child: Text(l10n.addNextAppointment,
                       style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -183,7 +203,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
                   const SizedBox(width: AppSpacing.space2),
                   GestureDetector(
                     onTap: () => setState(() => _nextVisit = null),
-                    child: Text(context.lt('삭제'),
+                    child: Text(l10n.delete,
                         style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,

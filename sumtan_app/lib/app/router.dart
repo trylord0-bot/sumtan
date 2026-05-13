@@ -18,7 +18,7 @@ import '../features/health_guide/presentation/health_guide_screen.dart';
 import '../features/settings/presentation/help_screen.dart';
 import '../features/settings/presentation/privacy_policy_screen.dart';
 import '../features/pet/provider/pet_provider.dart';
-import 'localization/app_localizations.dart';
+import 'l10n/l10n_extension.dart';
 import 'theme/app_colors.dart';
 import 'widgets/app_toast.dart';
 
@@ -149,7 +149,7 @@ class _MainScaffoldState extends ConsumerState<MainScaffold>
     }
     _lastBackPress = now;
     if (mounted) {
-      showTopToast(context, context.l10n.t('toast.backToExit'));
+      showTopToast(context, context.l10n.toastBackToExit);
     }
     return true;
   }
@@ -166,17 +166,17 @@ class _MainScaffoldState extends ConsumerState<MainScaffold>
     final l10n = context.l10n;
     switch (widget.location) {
       case '/':
-        return l10n.t('nav.home');
+        return l10n.navHome;
       case '/journal':
-        return l10n.t('nav.journal');
+        return l10n.navJournal;
       case '/notifications':
-        return l10n.t('nav.notifications');
+        return l10n.navNotifications;
       case '/profile':
-        return l10n.t('nav.profile');
+        return l10n.navProfile;
       case '/settings':
-        return l10n.t('nav.settings');
+        return l10n.navSettings;
       default:
-        return l10n.t('app.name');
+        return l10n.appName;
     }
   }
 
@@ -220,14 +220,14 @@ class _MainScaffoldState extends ConsumerState<MainScaffold>
                 foregroundColor: AppColors.white,
                 onPressed: () {
                   if (ref.read(selectedPetProvider) == null) {
-                    showTopToast(context, context.l10n.t('toast.needPet'));
+                    showTopToast(context, context.l10n.toastNeedPet);
                     return;
                   }
                   showAlarmAddSheet(context);
                 },
                 icon: const Icon(Icons.add_alert_rounded, size: 22),
                 label: Text(
-                  context.l10n.t('nav.addAlarm'),
+                  context.l10n.navAddAlarm,
                   style: const TextStyle(
                       fontSize: 15, fontWeight: FontWeight.w700),
                 ),
@@ -245,7 +245,7 @@ class _MainScaffoldState extends ConsumerState<MainScaffold>
               onTabTap: (i) {
                 if (i == 2) {
                   if (pet == null) {
-                    showTopToast(context, context.l10n.t('toast.needPet'));
+                    showTopToast(context, context.l10n.toastNeedPet);
                     return;
                   }
                   showCategoryBottomSheet(context);
@@ -389,11 +389,11 @@ class _CustomBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labels = [
-      context.l10n.t('nav.home'),
-      context.l10n.t('nav.journal'),
+      context.l10n.navHome,
+      context.l10n.navJournal,
       '',
-      context.l10n.t('nav.notifications'),
-      context.l10n.t('nav.profile'),
+      context.l10n.navNotifications,
+      context.l10n.navProfile,
     ];
 
     return Container(
@@ -516,7 +516,7 @@ class _AppDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 14),
                 Text(
-                  l10n.t('dialog.externalTitle'),
+                  l10n.dialogExternalTitle,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
@@ -525,7 +525,7 @@ class _AppDrawer extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  l10n.t('dialog.externalHospitalBody'),
+                  l10n.dialogExternalHospitalBody,
                   style: const TextStyle(
                     fontSize: 13,
                     color: AppColors.gray500,
@@ -549,7 +549,7 @@ class _AppDrawer extends StatelessWidget {
                             ),
                           ),
                           onPressed: () => Navigator.pop(ctx),
-                          child: Text(l10n.t('common.cancel'),
+                          child: Text(l10n.commonCancel,
                               style: const TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w600)),
                         ),
@@ -579,7 +579,7 @@ class _AppDrawer extends StatelessWidget {
                                   mode: LaunchMode.externalApplication);
                             }
                           },
-                          child: Text(l10n.t('common.go'),
+                          child: Text(l10n.commonGo,
                               style: const TextStyle(
                                   fontSize: 14, fontWeight: FontWeight.w700)),
                         ),
@@ -622,14 +622,14 @@ class _AppDrawer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('🐾 ${l10n.t('app.name')}',
+                Text('🐾 ${l10n.appName}',
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
                       color: Colors.white,
                     )),
                 const SizedBox(height: 4),
-                Text(l10n.t('app.tagline'),
+                Text(l10n.appTagline,
                     style: const TextStyle(
                       fontSize: 12,
                       color: Colors.white70,
@@ -642,12 +642,12 @@ class _AppDrawer extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.only(top: 10),
               children: [
-                _DrawerSectionLabel(l10n.t('drawer.service')),
+                _DrawerSectionLabel(l10n.drawerService),
                 _DrawerTile(
                   iconBg: _tealBg,
                   icon: '🏥',
-                  label: l10n.t('drawer.nearbyHospitals'),
-                  sub: l10n.t('drawer.nearbyHospitalsSub'),
+                  label: l10n.drawerNearbyHospitals,
+                  sub: l10n.drawerNearbyHospitalsSub,
                   onTap: () {
                     Navigator.pop(context);
                     _openHospitalDialog(context);
@@ -656,19 +656,19 @@ class _AppDrawer extends StatelessWidget {
                 _DrawerTile(
                   iconBg: _blueBg,
                   icon: '📖',
-                  label: l10n.t('drawer.healthGuide'),
-                  sub: l10n.t('drawer.healthGuideSub'),
+                  label: l10n.drawerHealthGuide,
+                  sub: l10n.drawerHealthGuideSub,
                   onTap: () {
                     Navigator.pop(context);
                     context.push('/health-guide');
                   },
                 ),
                 const _DrawerDivider(),
-                _DrawerSectionLabel(l10n.t('drawer.app')),
+                _DrawerSectionLabel(l10n.drawerApp),
                 _DrawerTile(
                   iconBg: AppColors.primary50,
                   icon: '⚙️',
-                  label: l10n.t('nav.settings'),
+                  label: l10n.navSettings,
                   onTap: () {
                     Navigator.pop(context);
                     context.go('/settings');
@@ -677,7 +677,7 @@ class _AppDrawer extends StatelessWidget {
                 _DrawerTile(
                   iconBg: _amberBg,
                   icon: '❓',
-                  label: l10n.t('drawer.help'),
+                  label: l10n.drawerHelp,
                   onTap: () {
                     Navigator.pop(context);
                     context.push('/help');

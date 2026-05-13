@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
@@ -65,9 +65,24 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('💗 컨디션이 기록됐어요'));
+      showTopToast(context, context.l10n.conditionRecordSaved);
       Navigator.pop(context, true);
     }
+  }
+
+  String _localizeSymptom(BuildContext context, String val) {
+    final l10n = context.l10n;
+    return switch (val) {
+      '구토' => l10n.vomiting,
+      '기침' => l10n.cough,
+      '무기력' => l10n.lethargy,
+      '식욕부진' => l10n.lossOfAppetite,
+      '설사' => l10n.diarrhea,
+      '콧물' => l10n.runnyNose,
+      '재채기' => l10n.sneezing,
+      '떨림' => l10n.trembling,
+      _ => val,
+    };
   }
 
   Color _scoreColor(int s) {
@@ -78,8 +93,9 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '🌡️ 컨디션 기록',
+      title: l10n.conditionFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -87,7 +103,7 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
           onChanged: (dt) => setState(() => _datetime = dt),
         ),
         const SizedBox(height: AppSpacing.space4),
-        const FormFieldLabel('컨디션 점수 (1~5점)'),
+        FormFieldLabel(l10n.conditionScore),
         const SizedBox(height: AppSpacing.space2),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -117,7 +133,7 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
           }),
         ),
         const SizedBox(height: AppSpacing.space4),
-        const FormFieldLabel('증상 태그', required: false),
+        FormFieldLabel(l10n.symptomTags, required: false),
         const SizedBox(height: AppSpacing.space2),
         Wrap(
           spacing: 8,
@@ -139,7 +155,7 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
                     color: sel ? AppColors.primary400 : AppColors.gray200,
                   ),
                 ),
-                child: Text(tag,
+                child: Text(_localizeSymptom(context, tag),
                     style: TextStyle(
                       fontSize: 13,
                       color: sel ? AppColors.primary900 : AppColors.gray600,

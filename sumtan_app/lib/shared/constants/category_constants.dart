@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 
 enum RecordCategory {
@@ -109,6 +110,36 @@ extension RecordCategoryX on RecordCategory {
         return '산책';
       case RecordCategory.memo:
         return '메모';
+    }
+  }
+
+  String localizedLabel(BuildContext context) {
+    final l10n = context.l10n;
+    switch (this) {
+      case RecordCategory.poop:
+        return l10n.catPotty;
+      case RecordCategory.condition:
+        return l10n.catCondition;
+      case RecordCategory.medication:
+        return l10n.medication;
+      case RecordCategory.weight:
+        return l10n.weight;
+      case RecordCategory.meal:
+        return l10n.catMeal;
+      case RecordCategory.water:
+        return l10n.catWater;
+      case RecordCategory.hospital:
+        return l10n.catHospital;
+      case RecordCategory.vaccination:
+        return l10n.vaccination;
+      case RecordCategory.grooming:
+        return l10n.catGrooming;
+      case RecordCategory.brushing:
+        return l10n.catBrushing;
+      case RecordCategory.walk:
+        return l10n.catWalk;
+      case RecordCategory.memo:
+        return l10n.memo;
     }
   }
 

@@ -15,7 +15,11 @@
       "Bash(python3)",
       "Bash(python3 -)",
       "Bash(dart analyze *)",
-      "Bash(~/.fvm/versions/stable/bin/flutter analyze *)"
+      "Bash(~/.fvm/versions/stable/bin/flutter analyze *)",
+      "Bash(flutter gen-l10n *)",
+      "Bash(/Users/lukas/flutter-sdk/bin/flutter gen-l10n *)",
+      "Bash(/Users/lukas/fvm/versions/stable/bin/flutter analyze *)",
+      "Bash(python3 -c ' *)"
     ]
   }
 }

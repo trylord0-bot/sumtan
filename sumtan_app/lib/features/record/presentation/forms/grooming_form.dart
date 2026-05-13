@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -48,7 +48,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
 
   Future<void> _save() async {
     if (_types.isEmpty) {
-      showTopToast(context, context.lt('💡 미용 종류를 하나 이상 선택해 주세요'));
+      showTopToast(context, context.l10n.hintSelectGroomingType);
       return;
     }
     final pet = ref.read(selectedPetProvider);
@@ -81,15 +81,16 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('✂️ 미용이 기록됐어요'));
+      showTopToast(context, context.l10n.groomingRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '✂️ 미용 기록',
+      title: l10n.groomingFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -98,29 +99,38 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormTagSelector(
-          label: '미용 종류',
+          label: l10n.groomingType,
           options: _typeOptions,
+          optionLabels: [
+            l10n.bath,
+            l10n.fullGrooming,
+            l10n.partialGrooming,
+            l10n.nailTrim,
+            l10n.earCleaning,
+            l10n.tartarRemoval,
+            l10n.analGlands,
+          ],
           selected: _types,
           onChanged: (v) => setState(() => _types = v),
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-          label: '샵 이름',
+          label: l10n.shopName,
           required: false,
           controller: _shopNameCtrl,
-          hint: '예: 뽀송뽀송 펫샵',
+          hint: l10n.shopNameExample,
         ),
         const SizedBox(height: AppSpacing.space4),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('비용', required: false),
+            FormFieldLabel(l10n.cost, required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _costCtrl,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: context.lt('예: 50000'),
+                hintText: l10n.example50000,
                 prefixText: '₩',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),
@@ -131,7 +141,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('다음 예약일', required: false),
+            FormFieldLabel(l10n.nextAppointment, required: false),
             const SizedBox(height: AppSpacing.space2),
             if (_nextDate == null)
               GestureDetector(
@@ -143,7 +153,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
                     color: AppColors.primary50,
                     borderRadius: BorderRadius.circular(AppRadius.radiusFull),
                   ),
-                  child: Text(context.lt('+ 다음 예약일 추가'),
+                  child: Text(l10n.addNextAppointment,
                       style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
@@ -163,7 +173,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
                   const SizedBox(width: AppSpacing.space2),
                   GestureDetector(
                     onTap: () => setState(() => _nextDate = null),
-                    child: Text(context.lt('삭제'),
+                    child: Text(l10n.delete,
                         style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,

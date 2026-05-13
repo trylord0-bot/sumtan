@@ -3,7 +3,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../app/localization/app_localizations.dart';
+import '../../../app/l10n/l10n_extension.dart';
+import '../../../app/l10n/locale_controller.dart';
+import '../../../app/l10n/generated/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/widgets/app_toast.dart';
 import '../../../features/alarm/provider/alarm_provider.dart';
@@ -28,13 +30,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final l10n = context.l10n;
     final selectedLocale = ref.watch(localeControllerProvider).valueOrNull;
     final selectedLanguageLabel = selectedLocale == null
-        ? l10n.t('settings.languageSystem')
-        : AppLocalizations.supportedLocaleItems
+        ? l10n.settingsLanguageSystem
+        : supportedLocaleItems
             .firstWhere(
               (item) =>
-                  AppLocalizations.localeTag(item.locale) ==
-                  AppLocalizations.localeTag(selectedLocale),
-              orElse: () => AppLocalizations.supportedLocaleItems.first,
+                  localeTag(item.locale) ==
+                  localeTag(selectedLocale),
+              orElse: () => supportedLocaleItems.first,
             )
             .nativeName;
 
@@ -44,13 +46,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 40),
         children: [
           // ── 알림 ──────────────────────────────────────────────────────────
-          _SectionLabel(l10n.t('settings.notifications')),
+          _SectionLabel(l10n.settingsNotifications),
           _SettingsCard(rows: [
             _SettingsRow(
               iconBg: AppColors.primary50,
               icon: '🔔',
-              title: l10n.t('settings.pushNotifications'),
-              sub: l10n.t('settings.pushNotificationsSub'),
+              title: l10n.settingsPushNotifications,
+              sub: l10n.settingsPushNotificationsSub,
               trailing: Switch(
                 value: _notifEnabled,
                 onChanged: (v) => setState(() => _notifEnabled = v),
@@ -61,12 +63,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ]),
 
-          _SectionLabel(l10n.t('settings.languageSection')),
+          _SectionLabel(l10n.settingsLanguageSection),
           _SettingsCard(rows: [
             _SettingsRow(
               iconBg: const Color(0xFFEFF6FF),
               icon: '🌐',
-              title: l10n.t('settings.language'),
+              title: l10n.settingsLanguage,
               sub: selectedLanguageLabel,
               trailing: const Icon(Icons.chevron_right,
                   size: 16, color: AppColors.gray400),
@@ -75,31 +77,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ]),
 
           // ── 데이터 관리 ───────────────────────────────────────────────────
-          _SectionLabel(l10n.t('settings.data')),
+          _SectionLabel(l10n.settingsData),
           _SettingsCard(rows: [
             _SettingsRow(
               iconBg: const Color(0xFFFFFBEB),
               icon: '📤',
-              title: l10n.t('settings.export'),
-              sub: l10n.t('settings.exportSub'),
+              title: l10n.settingsExport,
+              sub: l10n.settingsExportSub,
               onTap: () => _showExportSheet(context),
             ),
             _SettingsRow(
               iconBg: const Color(0xFFEFF6FF),
               icon: '📥',
-              title: l10n.t('settings.import'),
-              sub: l10n.t('settings.importSub'),
+              title: l10n.settingsImport,
+              sub: l10n.settingsImportSub,
               onTap: _startImport,
             ),
           ]),
 
           // ── 앱 정보 ───────────────────────────────────────────────────────
-          _SectionLabel(l10n.t('settings.appInfo')),
+          _SectionLabel(l10n.settingsAppInfo),
           _SettingsCard(rows: [
             _SettingsRow(
               iconBg: AppColors.gray100,
               icon: '📱',
-              title: l10n.t('settings.version'),
+              title: l10n.settingsVersion,
               trailing: const Text(
                 '1.0.0',
                 style: TextStyle(
@@ -112,7 +114,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _SettingsRow(
               iconBg: const Color(0xFFF5F3FF),
               icon: '📋',
-              title: l10n.t('settings.privacy'),
+              title: l10n.settingsPrivacy,
               trailing: const Icon(Icons.chevron_right,
                   size: 16, color: AppColors.gray400),
               onTap: () => context.push('/privacy-policy'),
@@ -120,7 +122,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             _SettingsRow(
               iconBg: const Color(0xFFFFF7ED),
               icon: '📬',
-              title: l10n.t('settings.feedback'),
+              title: l10n.settingsFeedback,
               trailing: const Icon(Icons.chevron_right,
                   size: 16, color: AppColors.gray400),
               onTap: () async {
@@ -128,7 +130,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   scheme: 'mailto',
                   path: 'lunlu.co.kr@gmail.com',
                   queryParameters: {
-                    'subject': l10n.t('settings.feedbackSubject'),
+                    'subject': l10n.settingsFeedbackSubject,
                   },
                 );
                 try {
@@ -138,12 +140,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   );
                   if (!launched && context.mounted) {
                     showTopToast(
-                        context, context.l10n.t('settings.emailAppMissing'));
+                        context, context.l10n.settingsEmailAppMissing);
                   }
                 } catch (e) {
                   if (context.mounted) {
                     showTopToast(
-                        context, context.l10n.t('settings.emailAppMissing'));
+                        context, context.l10n.settingsEmailAppMissing);
                   }
                 }
               },
@@ -172,7 +174,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         final selectedLocale = ref.read(localeControllerProvider).valueOrNull;
         final selectedTag = selectedLocale == null
             ? 'system'
-            : AppLocalizations.localeTag(selectedLocale);
+            : localeTag(selectedLocale);
 
         return Container(
           decoration: const BoxDecoration(
@@ -201,21 +203,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       children: [
                         ListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: Text(l10n.t('settings.languageSystem')),
+                          title: Text(l10n.settingsLanguageSystem),
                           trailing: selectedTag == 'system'
                               ? const Icon(Icons.check,
                                   color: AppColors.primary600)
                               : null,
                           onTap: () => _selectLocale(null),
                         ),
-                        for (final item
-                            in AppLocalizations.supportedLocaleItems)
+                        for (final item in supportedLocaleItems)
                           ListTile(
                             contentPadding: EdgeInsets.zero,
                             title: Text(item.nativeName),
                             subtitle: Text(item.englishName),
                             trailing: selectedTag ==
-                                    AppLocalizations.localeTag(item.locale)
+                                    localeTag(item.locale)
                                 ? const Icon(Icons.check,
                                     color: AppColors.primary600)
                                 : null,
@@ -237,7 +238,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     await ref.read(localeControllerProvider.notifier).setLocale(locale);
     if (!mounted) return;
     Navigator.pop(context);
-    showTopToast(context, context.l10n.t('settings.languageChanged'));
+    showTopToast(context, context.l10n.settingsLanguageChanged);
   }
 
   Future<void> _startImport() async {
@@ -245,17 +246,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.t('settings.import')),
-        content: Text(l10n.t('settings.importConfirmBody')),
+        title: Text(l10n.settingsImport),
+        content: Text(l10n.settingsImportConfirmBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text(l10n.t('common.cancel')),
+            child: Text(l10n.commonCancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
             child: Text(
-              l10n.t('settings.importAction'),
+              l10n.settingsImportAction,
               style: const TextStyle(color: AppColors.danger600),
             ),
           ),
@@ -274,7 +275,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     if (!mounted) return;
     _showProgressDialog(
       context: context,
-      title: l10n.t('settings.importing'),
+      title: l10n.settingsImporting,
       mode: _ProgressMode.import,
     );
 
@@ -285,11 +286,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final state = ref.read(importProvider);
     if (state.status == ImportStatus.success) {
       _invalidateAllData();
-      showTopToast(context, l10n.t('settings.importSuccess'));
+      showTopToast(context, l10n.settingsImportSuccess);
       context.go('/');
     } else {
       showTopToast(context,
-          _friendlyError(state.errorMessage, l10n.t('settings.importFailed')));
+          _friendlyError(state.errorMessage, l10n.settingsImportFailed));
     }
     ref.read(importProvider.notifier).reset();
   }
@@ -451,7 +452,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
       if (!mounted) return;
       if (next.status == IapStatus.error) {
         showTopToast(context,
-            next.errorMessage ?? context.l10n.t('settings.purchaseFailed'));
+            next.errorMessage ?? context.l10n.settingsPurchaseFailed);
         ref.read(purchaseProvider.notifier).reset();
       }
     });
@@ -499,7 +500,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
 
     return [
       Text(
-        '📤 ${l10n.t('settings.exportTitle')}',
+        '📤 ${l10n.settingsExportTitle}',
         style: const TextStyle(
           fontSize: 17,
           fontWeight: FontWeight.w700,
@@ -523,7 +524,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
               children: [
                 Expanded(
                   child: Text(
-                    l10n.t('settings.exportBenefitTitle'),
+                    l10n.settingsExportBenefitTitle,
                     style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
@@ -535,9 +536,9 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
             ),
             const SizedBox(height: 12),
             for (final item in [
-              l10n.t('settings.exportBenefitPets'),
-              l10n.t('settings.exportBenefitRecords'),
-              l10n.t('settings.exportBenefitMedia'),
+              l10n.settingsExportBenefitPets,
+              l10n.settingsExportBenefitRecords,
+              l10n.settingsExportBenefitMedia,
             ])
               Padding(
                 padding: const EdgeInsets.only(top: 7),
@@ -573,7 +574,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-            l10n.t('settings.storeUnavailable'),
+            l10n.settingsStoreUnavailable,
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 13,
@@ -607,8 +608,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
                     ),
                   )
                 : Text(
-                    l10n.t('settings.payAndExport',
-                        args: {'price': priceLabel}),
+                    l10n.settingsPayAndExport(priceLabel),
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
@@ -631,7 +631,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
           ),
           onPressed: () => Navigator.pop(context),
           child: Text(
-            l10n.t('common.cancel'),
+            l10n.commonCancel,
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
@@ -647,7 +647,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
       Row(
         children: [
           Text(
-            '📤 ${l10n.t('settings.exportTitle')}',
+            '📤 ${l10n.settingsExportTitle}',
             style: const TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w700,
@@ -668,7 +668,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
                     size: 11, color: AppColors.primary700),
                 const SizedBox(width: 3),
                 Text(
-                  l10n.t('settings.unlocked'),
+                  l10n.settingsUnlocked,
                   style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w600,
@@ -682,7 +682,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
       ),
       const SizedBox(height: 8),
       Text(
-        l10n.t('settings.exportUnlockedBody'),
+        l10n.settingsExportUnlockedBody,
         style: const TextStyle(
             fontSize: 13, color: AppColors.gray500, height: 1.65),
       ),
@@ -701,8 +701,8 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
           onPressed: _exporting ? null : _startExport,
           child: Text(
             _exporting
-                ? l10n.t('settings.exporting')
-                : l10n.t('settings.exportZip'),
+                ? l10n.settingsExporting
+                : l10n.settingsExportZip,
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
           ),
         ),
@@ -720,7 +720,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
           ),
           onPressed: () => Navigator.pop(context),
           child: Text(
-            l10n.t('common.cancel'),
+            l10n.commonCancel,
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
         ),
@@ -735,16 +735,16 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.t('settings.exportTitle')),
-        content: Text(l10n.t('settings.exportConfirmBody')),
+        title: Text(l10n.settingsExportTitle),
+        content: Text(l10n.settingsExportConfirmBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text(l10n.t('common.cancel')),
+            child: Text(l10n.commonCancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text(l10n.t('settings.exportAction')),
+            child: Text(l10n.settingsExportAction),
           ),
         ],
       ),
@@ -755,7 +755,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
     if (!mounted) return;
     _showProgressDialog(
       context: context,
-      title: l10n.t('settings.exportTitle'),
+      title: l10n.settingsExportTitle,
       mode: _ProgressMode.export,
     );
 
@@ -767,11 +767,11 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
     if (state.status == ExportStatus.success) {
       // 인메모리 결제 플래그 초기화 — 다음 내보내기 시 재결제 필요
       ref.read(purchaseProvider.notifier).resetUnlock();
-      showTopToast(context, l10n.t('settings.exportSuccess'));
+      showTopToast(context, l10n.settingsExportSuccess);
       Navigator.pop(context);
     } else {
       showTopToast(context,
-          _friendlyError(state.errorMessage, l10n.t('settings.exportFailed')));
+          _friendlyError(state.errorMessage, l10n.settingsExportFailed));
     }
     ref.read(exportProvider.notifier).reset();
     if (mounted) setState(() => _exporting = false);
@@ -820,13 +820,12 @@ class _BackupProgressDialog extends ConsumerWidget {
           LinearProgressIndicator(value: progress <= 0 ? null : progress),
           const SizedBox(height: 14),
           Text(
-            message.isEmpty ? l10n.t('common.loading') : l10n.text(message),
+            message.isEmpty ? l10n.commonLoading : message,
             style: const TextStyle(fontSize: 13, color: AppColors.gray600),
           ),
           const SizedBox(height: 4),
           Text(
-            l10n.t('common.percent',
-                args: {'percent': '${(progress * 100).round()}'}),
+            l10n.commonPercent('${(progress * 100).round()}'),
             textAlign: TextAlign.right,
             style: const TextStyle(fontSize: 12, color: AppColors.gray400),
           ),

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../app/localization/app_localizations.dart';
+import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -92,7 +92,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
 
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(context.lt('{name}이(가) 추가됐어요 🐾', args: {'name': name})),
+        content: Text(context.l10n.petAdded(name)),
         behavior: SnackBarBehavior.floating,
         shape: const StadiumBorder(),
         backgroundColor: AppColors.gray800,
@@ -106,7 +106,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.creamBg,
-      appBar: const AppPageAppBar(title: '새 반려동물 추가'),
+      appBar: AppPageAppBar(title: context.l10n.addNewPet),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 20, 16, 40),
         children: [
@@ -117,18 +117,18 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
 
           // 기본 정보
           _FormCard(
-            title: '기본 정보',
+            title: context.l10n.basicInfo,
             children: [
               _LabelField(
-                label: '이름',
+                label: context.l10n.name,
                 required: true,
                 child: TextField(
                   controller: _nameCtrl,
                   focusNode: _nameFocus,
                   decoration: InputDecoration(
-                    hintText: context.lt('예: 콩이'),
+                    hintText: context.l10n.examplePetName,
                     hintStyle: const TextStyle(color: AppColors.gray400),
-                    errorText: _nameError ? context.lt('이름을 입력해 주세요') : null,
+                    errorText: _nameError ? context.l10n.enterNameHint : null,
                     border: InputBorder.none,
                     isDense: true,
                     contentPadding: const EdgeInsets.symmetric(vertical: 10),
@@ -140,21 +140,21 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
               ),
               const _Divider(),
               _LabelField(
-                label: '종류',
+                label: context.l10n.petKind,
                 child: _SegmentRow(
                   options: const ['dog', 'cat', 'other'],
-                  labels: const ['강아지 🐶', '고양이 🐱', '기타 🐾'],
+                  labels: [context.l10n.dogEmoji, context.l10n.catEmoji, context.l10n.otherEmoji],
                   selected: _species,
                   onChanged: (v) => setState(() => _species = v),
                 ),
               ),
               const _Divider(),
               _LabelField(
-                label: '품종',
+                label: context.l10n.breed,
                 child: TextField(
                   controller: _breedCtrl,
                   decoration: InputDecoration(
-                    hintText: context.lt('예: 말티즈'),
+                    hintText: context.l10n.exampleBreed,
                     hintStyle: const TextStyle(color: AppColors.gray400),
                     border: InputBorder.none,
                     isDense: true,
@@ -180,7 +180,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                     children: [
                       SizedBox(
                         width: 88,
-                        child: Text(context.lt('생년월일'),
+                        child: Text(context.l10n.birthDate,
                             style: const TextStyle(
                                 fontSize: 13,
                                 color: AppColors.gray500,
@@ -190,7 +190,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                         child: Text(
                           _birthDate != null
                               ? du.formatDate(_birthDate!)
-                              : context.lt('미입력'),
+                              : context.l10n.notEntered,
                           style: TextStyle(
                             fontSize: 14,
                             color: _birthDate != null
@@ -207,17 +207,17 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
               ),
               const _Divider(),
               _LabelField(
-                label: '성별',
+                label: context.l10n.gender,
                 child: Row(
                   children: [
                     _GenderChip(
-                      label: '수컷 ♂',
+                      label: context.l10n.maleSym,
                       selected: _gender == 'male',
                       onTap: () => setState(() => _gender = 'male'),
                     ),
                     const SizedBox(width: 8),
                     _GenderChip(
-                      label: '암컷 ♀',
+                      label: context.l10n.femaleSym,
                       selected: _gender == 'female',
                       onTap: () => setState(() => _gender = 'female'),
                     ),
@@ -226,7 +226,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
               ),
               const _Divider(),
               _LabelField(
-                label: '체중',
+                label: context.l10n.weight,
                 child: Row(
                   children: [
                     Expanded(
@@ -239,7 +239,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                               RegExp(r'^\d+\.?\d{0,2}')),
                         ],
                         decoration: InputDecoration(
-                          hintText: context.lt('미입력'),
+                          hintText: context.l10n.notEntered,
                           hintStyle: const TextStyle(color: AppColors.gray400),
                           border: InputBorder.none,
                           isDense: true,
@@ -255,12 +255,12 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
               ),
               const _Divider(),
               _LabelField(
-                label: '중성화',
+                label: context.l10n.neuteringStatus,
                 child: Row(
                   children: [
                     Expanded(
                       child: Text(
-                        _neutered ? context.lt('완료') : context.lt('미완료'),
+                        _neutered ? context.l10n.done : context.l10n.notDone,
                         style: TextStyle(
                           fontSize: 14,
                           color: _neutered
@@ -283,10 +283,10 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
 
           // 식별 정보 (선택)
           _FormCard(
-            title: '식별 정보 (선택)',
+            title: context.l10n.idInfoOptional,
             children: [
               _LabelField(
-                label: '마이크로칩',
+                label: context.l10n.microchip,
                 child: TextField(
                   controller: _microchipCtrl,
                   keyboardType: TextInputType.number,
@@ -295,7 +295,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                     LengthLimitingTextInputFormatter(15),
                   ],
                   decoration: InputDecoration(
-                    hintText: context.lt('미등록'),
+                    hintText: context.l10n.notRegistered,
                     hintStyle: const TextStyle(color: AppColors.gray400),
                     border: InputBorder.none,
                     isDense: true,
@@ -305,11 +305,11 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
               ),
               const _Divider(),
               _LabelField(
-                label: '등록번호',
+                label: context.l10n.registrationNumber,
                 child: TextField(
                   controller: _regNumCtrl,
                   decoration: InputDecoration(
-                    hintText: context.lt('미등록'),
+                    hintText: context.l10n.notRegistered,
                     hintStyle: const TextStyle(color: AppColors.gray400),
                     border: InputBorder.none,
                     isDense: true,
@@ -336,7 +336,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                 ),
               ),
               child: Text(
-                context.lt('저장하기'),
+                context.l10n.save,
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
@@ -447,7 +447,7 @@ class _FormCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
             child: Text(
-              context.lt(title),
+              title,
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -483,7 +483,7 @@ class _LabelField extends StatelessWidget {
             width: 88,
             child: Row(
               children: [
-                Text(context.lt(label),
+                Text(label,
                     style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.gray500,
@@ -539,7 +539,7 @@ class _SegmentRow extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  context.lt(labels[i]),
+                  labels[i],
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -577,7 +577,7 @@ class _GenderChip extends StatelessWidget {
               color: selected ? AppColors.primary400 : AppColors.gray200),
         ),
         child: Text(
-          context.lt(label),
+          label,
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,

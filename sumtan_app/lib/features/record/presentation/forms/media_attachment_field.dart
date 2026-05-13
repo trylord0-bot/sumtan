@@ -10,7 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import 'form_widgets.dart';
@@ -213,15 +213,15 @@ class _RecordMediaAttachmentFieldState
     final openSettings = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(context.lt('설정에서 권한을 허용해 주세요')),
+        title: Text(context.l10n.permissionRequired),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text(context.lt('취소')),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text(context.lt('설정 열기')),
+            child: Text(context.l10n.openSettings),
           ),
         ],
       ),
@@ -256,9 +256,8 @@ class _RecordMediaAttachmentFieldState
       children: [
         FormFieldLabel(
           items.isEmpty
-              ? context.lt('사진 · 동영상')
-              : context.lt('사진 · 동영상 · {count}개',
-                  args: {'count': '${items.length}'}),
+              ? context.l10n.photoVideo
+              : context.l10n.photoVideoCount('${items.length}'),
           required: false,
         ),
         const SizedBox(height: AppSpacing.space2),
@@ -420,7 +419,7 @@ class _AddMediaButton extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 2),
                   child: Text(
-                    context.lt('미디어 추가'),
+                    context.l10n.addMedia,
                     style:
                         const TextStyle(fontSize: 9, color: AppColors.gray400),
                   ),
@@ -492,15 +491,15 @@ class _MediaPickerSheet extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
-                context.lt('미디어 추가 방법 선택'),
+                context.l10n.selectMediaSource,
                 style: const TextStyle(fontSize: 13, color: AppColors.gray400),
               ),
             ),
             _PickerRow(
               icon: Icons.photo_camera,
               iconBg: AppColors.primary100,
-              title: '카메라로 촬영',
-              subtitle: '사진 또는 동영상 촬영',
+              title: context.l10n.cameraCapture,
+              subtitle: context.l10n.cameraCaptureSubtitle,
               onTap: onCamera,
             ),
             const Divider(
@@ -508,8 +507,8 @@ class _MediaPickerSheet extends StatelessWidget {
             _PickerRow(
               icon: Icons.photo_library,
               iconBg: AppColors.info200,
-              title: '갤러리에서 선택',
-              subtitle: '사진 · 동영상 다중 선택 가능',
+              title: context.l10n.selectFromGallery,
+              subtitle: context.l10n.selectFromGallerySubtitle,
               onTap: onGallery,
             ),
             Padding(
@@ -526,7 +525,7 @@ class _MediaPickerSheet extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: Text(context.lt('취소')),
+                  child: Text(context.l10n.cancel),
                 ),
               ),
             ),
@@ -556,15 +555,15 @@ class _CameraModeSheet extends StatelessWidget {
             _PickerRow(
               icon: Icons.photo_camera,
               iconBg: AppColors.primary100,
-              title: '사진 촬영',
-              subtitle: '카메라로 사진을 촬영',
+              title: context.l10n.takePhoto,
+              subtitle: context.l10n.takePhotoSubtitle,
               onTap: () => Navigator.pop(context, RecordMediaType.photo),
             ),
             _PickerRow(
               icon: Icons.videocam,
               iconBg: AppColors.info200,
-              title: '동영상 촬영',
-              subtitle: '카메라로 동영상을 촬영',
+              title: context.l10n.recordVideo,
+              subtitle: context.l10n.recordVideoSubtitle,
               onTap: () => Navigator.pop(context, RecordMediaType.video),
             ),
           ],
@@ -608,14 +607,14 @@ class _PickerRow extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(context.lt(title),
+                  Text(title,
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: AppColors.gray900,
                       )),
                   const SizedBox(height: 2),
-                  Text(context.lt(subtitle),
+                  Text(subtitle,
                       style: const TextStyle(
                         fontSize: 12,
                         color: AppColors.gray400,
@@ -650,9 +649,9 @@ class _PhotoPreviewPage extends StatelessWidget {
           ),
           _PreviewCloseButton(onTap: () => Navigator.pop(context, false)),
           _PreviewDeleteButton(
-            label: '이 사진 삭제',
+            label: context.l10n.deleteThisPhoto,
             onTap: () async {
-              final ok = await _confirmDelete(context, '사진을 삭제할까요?');
+              final ok = await _confirmDelete(context, context.l10n.confirmDeletePhoto);
               if (ok && context.mounted) Navigator.pop(context, true);
             },
           ),
@@ -798,11 +797,12 @@ class _VideoPreviewPageState extends State<_VideoPreviewPage> {
               opacity: controlsVisible ? 1 : 0,
               duration: const Duration(milliseconds: 250),
               child: _PreviewDeleteButton(
-                label: '이 동영상 삭제',
+                label: context.l10n.deleteThisVideo,
                 onTap: () async {
+                  final confirmTitle = context.l10n.confirmDeleteVideo;
                   final wasPlaying = _controller.value.isPlaying;
                   await _controller.pause();
-                  final ok = await _confirmDelete(context, '동영상을 삭제할까요?');
+                  final ok = await _confirmDelete(context, confirmTitle);
                   if (ok && context.mounted) {
                     Navigator.pop(context, true);
                   } else if (wasPlaying) {
@@ -898,7 +898,7 @@ class _VideoControls extends StatelessWidget {
                 ),
                 icon:
                     Icon(muted ? Icons.volume_off : Icons.volume_up, size: 16),
-                label: Text(muted ? context.lt('음소거') : context.lt('소리 켜짐')),
+                label: Text(muted ? context.l10n.mute : context.l10n.soundOn),
               ),
             ],
           ),
@@ -968,7 +968,7 @@ class _PreviewDeleteButton extends StatelessWidget {
               ),
             ),
             icon: const Icon(Icons.delete_outline, size: 18),
-            label: Text(context.lt(label),
+            label: Text(label,
                 style: const TextStyle(fontWeight: FontWeight.w600)),
           ),
         ),
@@ -981,7 +981,7 @@ Future<bool> _confirmDelete(BuildContext context, String title) async {
   return await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text(context.lt(title), textAlign: TextAlign.center),
+          title: Text(title, textAlign: TextAlign.center),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
             TextButton(
@@ -990,7 +990,7 @@ Future<bool> _confirmDelete(BuildContext context, String title) async {
                 backgroundColor: AppColors.gray100,
                 foregroundColor: AppColors.gray700,
               ),
-              child: Text(context.lt('취소')),
+              child: Text(context.l10n.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
@@ -998,7 +998,7 @@ Future<bool> _confirmDelete(BuildContext context, String title) async {
                 backgroundColor: const Color(0xFFEF4444),
                 foregroundColor: AppColors.white,
               ),
-              child: Text(context.lt('삭제')),
+              child: Text(context.l10n.delete),
             ),
           ],
         ),

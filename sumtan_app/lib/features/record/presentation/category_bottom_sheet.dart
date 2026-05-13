@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../app/localization/app_localizations.dart';
+import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../features/pet/provider/pet_provider.dart';
@@ -132,7 +132,7 @@ class _CategorySheet extends ConsumerWidget {
             Row(
               children: [
                 Text(
-                  context.lt('📝 무엇을 기록할까요?'),
+                  context.l10n.whatToRecord,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
@@ -180,7 +180,6 @@ class _CategoryButton extends StatelessWidget {
     final bg = entry.category.bgColor;
     final accent = entry.category.color;
     final emoji = entry.category.emoji;
-    final label = entry.category.label;
 
     return GestureDetector(
       onTap: onTap,
@@ -209,7 +208,7 @@ class _CategoryButton extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              context.lt(label),
+              entry.category.localizedLabel(context),
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,

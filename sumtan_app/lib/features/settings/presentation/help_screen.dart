@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../app/localization/app_localizations.dart';
+import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -12,7 +12,7 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.creamBg,
-      appBar: const AppPageAppBar(title: '도움말'),
+      appBar: AppPageAppBar(title: context.l10n.help),
       body: ListView(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.space4,
@@ -216,7 +216,7 @@ class _SectionHeader extends StatelessWidget {
           Text(emoji, style: const TextStyle(fontSize: 18)),
           const SizedBox(width: AppSpacing.space2),
           Text(
-            context.lt(title),
+            title,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
@@ -245,7 +245,7 @@ class _HelpCard extends StatelessWidget {
         border: Border.all(color: AppColors.primary200),
       ),
       child: Text(
-        context.lt(content),
+        content,
         style: const TextStyle(
           fontSize: 14,
           color: AppColors.gray700,
@@ -276,7 +276,7 @@ class _HelpItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            context.lt(title),
+            title,
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -285,7 +285,7 @@ class _HelpItem extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            context.lt(desc),
+            desc,
             style: const TextStyle(
               fontSize: 13,
               color: AppColors.gray600,
@@ -332,7 +332,7 @@ class _CategoryItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  context.lt(name),
+                  name,
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -341,7 +341,7 @@ class _CategoryItem extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  context.lt(desc),
+                  desc,
                   style: const TextStyle(
                     fontSize: 13,
                     color: AppColors.gray600,
@@ -402,7 +402,7 @@ class _FaqItemState extends State<_FaqItem> {
                   const SizedBox(width: AppSpacing.space2),
                   Expanded(
                     child: Text(
-                      context.lt(widget.q),
+                      widget.q,
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -452,7 +452,7 @@ class _FaqItemState extends State<_FaqItem> {
                   const SizedBox(width: AppSpacing.space2),
                   Expanded(
                     child: Text(
-                      context.lt(widget.a),
+                      widget.a,
                       style: const TextStyle(
                         fontSize: 13,
                         color: AppColors.gray600,
@@ -484,7 +484,7 @@ class _ContactCard extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            context.lt('더 궁금한 점이 있으신가요?'),
+            context.l10n.moreQuestions,
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
@@ -493,7 +493,7 @@ class _ContactCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.space2),
           Text(
-            context.lt('설정 > 피드백 보내기를 통해 문의해 주세요.\n빠르게 답변 드릴게요 🐾'),
+            context.l10n.contactViaSendFeedback,
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 13,

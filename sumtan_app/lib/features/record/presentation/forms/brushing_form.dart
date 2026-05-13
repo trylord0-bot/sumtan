@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
 import '../../../../core/utils/date_utils.dart' as du;
@@ -45,7 +45,7 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
 
   Future<void> _save() async {
     if (_parts.isEmpty) {
-      showTopToast(context, context.lt('💡 빗질 부위를 하나 이상 선택해 주세요'));
+      showTopToast(context, context.l10n.hintSelectBrushingArea);
       return;
     }
 
@@ -77,15 +77,16 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
     ref.invalidate(lastRecordProvider);
 
     if (mounted) {
-      showTopToast(context, context.lt('🪥 빗질이 기록됐어요'));
+      showTopToast(context, context.l10n.brushingRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '🪥 빗질 기록',
+      title: l10n.brushingFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -94,17 +95,25 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormTagSelector(
-          label: '빗질 부위',
+          label: l10n.brushingArea,
           options: _partOptions,
+          optionLabels: [
+            l10n.whole,
+            l10n.back,
+            l10n.belly,
+            l10n.tail,
+            l10n.face,
+            l10n.paw,
+          ],
           selected: _parts,
           onChanged: (v) => setState(() => _parts = v),
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-          label: '소요 시간',
+          label: l10n.timeTaken,
           required: false,
           controller: _durationCtrl,
-          hint: '예: 10',
+          hint: l10n.example10,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         ),

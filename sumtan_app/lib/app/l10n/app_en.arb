@@ -1,0 +1,1695 @@
+{
+  "@@locale": "en",
+
+  "appName": "Pet Sumtan",
+  "@appName": { "description": "Application name" },
+
+  "appTagline": "Pet health care app",
+  "@appTagline": { "description": "Application tagline" },
+
+  "navHome": "Home",
+  "@navHome": { "description": "Bottom nav: Home" },
+
+  "navJournal": "Journal",
+  "@navJournal": { "description": "Bottom nav: Journal" },
+
+  "navNotifications": "Alerts",
+  "@navNotifications": { "description": "Bottom nav: Notifications/Alerts" },
+
+  "navProfile": "Profile",
+  "@navProfile": { "description": "Bottom nav: Profile" },
+
+  "navSettings": "Settings",
+  "@navSettings": { "description": "Bottom nav: Settings" },
+
+  "navAddAlarm": "Add alert",
+  "@navAddAlarm": { "description": "Nav: Add alert" },
+
+  "drawerService": "Services",
+  "@drawerService": { "description": "Drawer: Services section title" },
+
+  "drawerNearbyHospitals": "Find nearby hospitals",
+  "@drawerNearbyHospitals": { "description": "Drawer: Nearby hospitals" },
+
+  "drawerNearbyHospitalsSub": "Animal hospitals near you",
+  "@drawerNearbyHospitalsSub": { "description": "Drawer: Nearby hospitals subtitle" },
+
+  "drawerHealthGuide": "Health guide",
+  "@drawerHealthGuide": { "description": "Drawer: Health guide" },
+
+  "drawerHealthGuideSub": "Pet health handbook",
+  "@drawerHealthGuideSub": { "description": "Drawer: Health guide subtitle" },
+
+  "drawerApp": "App",
+  "@drawerApp": { "description": "Drawer: App section title" },
+
+  "drawerHelp": "Help",
+  "@drawerHelp": { "description": "Drawer: Help" },
+
+  "dialogExternalTitle": "Open an external page",
+  "@dialogExternalTitle": { "description": "Dialog: External page title" },
+
+  "dialogExternalHospitalBody": "Finding nearby animal hospitals requires an external web page.\n\nOpen it now?",
+  "@dialogExternalHospitalBody": { "description": "Dialog: External hospital page body" },
+
+  "commonCancel": "Cancel",
+  "@commonCancel": { "description": "Common: Cancel button" },
+
+  "commonGo": "Go",
+  "@commonGo": { "description": "Common: Go button" },
+
+  "commonDelete": "Delete",
+  "@commonDelete": { "description": "Common: Delete button" },
+
+  "commonSave": "Save",
+  "@commonSave": { "description": "Common: Save button" },
+
+  "commonLoading": "Preparing...",
+  "@commonLoading": { "description": "Common: Loading text" },
+
+  "commonPercent": "{percent}%",
+  "@commonPercent": {
+    "description": "Common: Percentage format",
+    "placeholders": {
+      "percent": { "type": "String" }
+    }
+  },
+
+  "toastBackToExit": "Press again to exit the app",
+  "@toastBackToExit": { "description": "Toast: Back to exit" },
+
+  "toastNeedPet": "No pet yet. Please add one from Profile first.",
+  "@toastNeedPet": { "description": "Toast: Need to add a pet" },
+
+  "settingsNotifications": "Notifications",
+  "@settingsNotifications": { "description": "Settings: Notifications section" },
+
+  "settingsPushNotifications": "Allow push notifications",
+  "@settingsPushNotifications": { "description": "Settings: Push notifications toggle" },
+
+  "settingsPushNotificationsSub": "Device notification permission",
+  "@settingsPushNotificationsSub": { "description": "Settings: Push notifications subtitle" },
+
+  "settingsLanguageSection": "Language",
+  "@settingsLanguageSection": { "description": "Settings: Language section title" },
+
+  "settingsLanguage": "App language",
+  "@settingsLanguage": { "description": "Settings: App language" },
+
+  "settingsLanguageSystem": "Use device settings",
+  "@settingsLanguageSystem": { "description": "Settings: Use system language" },
+
+  "settingsLanguageChanged": "App language changed",
+  "@settingsLanguageChanged": { "description": "Settings: Language changed toast" },
+
+  "settingsData": "Data management",
+  "@settingsData": { "description": "Settings: Data management section" },
+
+  "settingsExport": "Export data",
+  "@settingsExport": { "description": "Settings: Export data" },
+
+  "settingsExportSub": "Save as a ZIP file",
+  "@settingsExportSub": { "description": "Settings: Export subtitle" },
+
+  "settingsImport": "Import data",
+  "@settingsImport": { "description": "Settings: Import data" },
+
+  "settingsImportSub": "Restore from a ZIP file",
+  "@settingsImportSub": { "description": "Settings: Import subtitle" },
+
+  "settingsAppInfo": "App info",
+  "@settingsAppInfo": { "description": "Settings: App info section" },
+
+  "settingsVersion": "App version",
+  "@settingsVersion": { "description": "Settings: App version" },
+
+  "settingsPrivacy": "Privacy policy",
+  "@settingsPrivacy": { "description": "Settings: Privacy policy" },
+
+  "settingsFeedback": "Send feedback",
+  "@settingsFeedback": { "description": "Settings: Send feedback" },
+
+  "settingsFeedbackSubject": "Pet Sumtan feedback",
+  "@settingsFeedbackSubject": { "description": "Settings: Feedback email subject" },
+
+  "settingsEmailAppMissing": "No email app found",
+  "@settingsEmailAppMissing": { "description": "Settings: No email app" },
+
+  "settingsImportConfirmBody": "All existing data will be deleted and replaced with the backup file.\n\nContinue?",
+  "@settingsImportConfirmBody": { "description": "Settings: Import confirm dialog body" },
+
+  "settingsImportAction": "Import",
+  "@settingsImportAction": { "description": "Settings: Import action button" },
+
+  "settingsImporting": "Import data",
+  "@settingsImporting": { "description": "Settings: Importing in progress" },
+
+  "settingsImportSuccess": "Backup data restored",
+  "@settingsImportSuccess": { "description": "Settings: Import success" },
+
+  "settingsImportFailed": "Import failed",
+  "@settingsImportFailed": { "description": "Settings: Import failed" },
+
+  "settingsExportTitle": "Export data",
+  "@settingsExportTitle": { "description": "Settings: Export page title" },
+
+  "settingsExportBenefitTitle": "Keep your precious records safe",
+  "@settingsExportBenefitTitle": { "description": "Settings: Export benefit title" },
+
+  "settingsExportBenefitPets": "All pet profiles and photos",
+  "@settingsExportBenefitPets": { "description": "Settings: Export benefit - pets" },
+
+  "settingsExportBenefitRecords": "All health records, journals, and weights",
+  "@settingsExportBenefitRecords": { "description": "Settings: Export benefit - records" },
+
+  "settingsExportBenefitMedia": "Includes attached images and videos",
+  "@settingsExportBenefitMedia": { "description": "Settings: Export benefit - media" },
+
+  "settingsStoreUnavailable": "Cannot connect to the store right now.\nPlease try again later.",
+  "@settingsStoreUnavailable": { "description": "Settings: Store unavailable" },
+
+  "settingsPayAndExport": "Pay {price} and export",
+  "@settingsPayAndExport": {
+    "description": "Settings: Pay and export button",
+    "placeholders": {
+      "price": { "type": "String" }
+    }
+  },
+
+  "settingsUnlocked": "Unlocked",
+  "@settingsUnlocked": { "description": "Settings: Export unlocked badge" },
+
+  "settingsExportUnlockedBody": "Save all pet information and records as a ZIP file.\nYou can import and restore saved files for free anytime.",
+  "@settingsExportUnlockedBody": { "description": "Settings: Export unlocked body" },
+
+  "settingsExporting": "Exporting...",
+  "@settingsExporting": { "description": "Settings: Exporting in progress" },
+
+  "settingsExportZip": "Export as ZIP",
+  "@settingsExportZip": { "description": "Settings: Export as ZIP button" },
+
+  "settingsExportConfirmBody": "Export all pet information, records, and attached media as a ZIP file.",
+  "@settingsExportConfirmBody": { "description": "Settings: Export confirm body" },
+
+  "settingsExportAction": "Export",
+  "@settingsExportAction": { "description": "Settings: Export action button" },
+
+  "settingsExportSuccess": "Backup file is ready to share",
+  "@settingsExportSuccess": { "description": "Settings: Export success" },
+
+  "settingsExportFailed": "Export failed",
+  "@settingsExportFailed": { "description": "Settings: Export failed" },
+
+  "settingsPurchaseFailed": "Payment failed",
+  "@settingsPurchaseFailed": { "description": "Settings: Purchase failed" },
+
+  "errorDbInit": "There was a problem preparing app data.\nPlease try again later.",
+  "@errorDbInit": { "description": "Error: DB init failed" },
+
+  "help": "Help",
+  "@help": { "description": "Help label" },
+
+  "healthGuide": "Health guide",
+  "@healthGuide": { "description": "Health guide label" },
+
+  "dog": "Dog",
+  "@dog": { "description": "Dog label" },
+
+  "cat": "Cat",
+  "@cat": { "description": "Cat label" },
+
+  "tabDog": "🐶 Dog",
+  "@tabDog": { "description": "Tab: Dog" },
+
+  "tabCat": "🐱 Cat",
+  "@tabCat": { "description": "Tab: Cat" },
+
+  "savedMsg": "Saved",
+  "@savedMsg": { "description": "Saved message" },
+
+  "cancel": "Cancel",
+  "@cancel": { "description": "Cancel button" },
+
+  "delete": "Delete",
+  "@delete": { "description": "Delete button" },
+
+  "deleteAction": "Delete",
+  "@deleteAction": { "description": "Delete action button" },
+
+  "save": "Save",
+  "@save": { "description": "Save button" },
+
+  "memo": "Memo",
+  "@memo": { "description": "Memo label" },
+
+  "memoPlaceholder": "Add a memo freely",
+  "@memoPlaceholder": { "description": "Memo placeholder text" },
+
+  "addBtn": "+ Add",
+  "@addBtn": { "description": "Add button" },
+
+  "errorOccurred": "An error occurred",
+  "@errorOccurred": { "description": "Generic error message" },
+
+  "errorOccurredWithDetail": "An error occurred\n{error}",
+  "@errorOccurredWithDetail": {
+    "description": "Error with detail",
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "pet": "Pet",
+  "@pet": { "description": "Pet label" },
+
+  "selectPet": "Select pet",
+  "@selectPet": { "description": "Select pet label" },
+
+  "addNewPet": "Add a new pet",
+  "@addNewPet": { "description": "Add new pet label" },
+
+  "noAlarms": "No alerts yet",
+  "@noAlarms": { "description": "No alarms registered" },
+
+  "alarmEmptyDesc": "Keep {petName} healthy today.\nTap Add alert below to get started.",
+  "@alarmEmptyDesc": {
+    "description": "Alarm empty description with pet name",
+    "placeholders": {
+      "petName": { "type": "String" }
+    }
+  },
+
+  "scheduledAlarms": "Scheduled alerts",
+  "@scheduledAlarms": { "description": "Scheduled alarms label" },
+
+  "swipeToDelete": "Swipe to delete",
+  "@swipeToDelete": { "description": "Swipe to delete hint" },
+
+  "selectAlarmType": "Select alert type",
+  "@selectAlarmType": { "description": "Select alarm type" },
+
+  "vetAppointment": "Vet appointment",
+  "@vetAppointment": { "description": "Vet appointment type" },
+
+  "medication": "Medication",
+  "@medication": { "description": "Medication type" },
+
+  "mealTime": "Meal time",
+  "@mealTime": { "description": "Meal time type" },
+
+  "dailyReminder": "Daily reminder",
+  "@dailyReminder": { "description": "Daily reminder type" },
+
+  "alarmLabel": "Alert",
+  "@alarmLabel": { "description": "Alert label" },
+
+  "alarmBodyVaccination": "Please check the vaccination date.",
+  "@alarmBodyVaccination": { "description": "Alarm body: vaccination" },
+
+  "alarmBodyVetAppointment": "Your vet appointment is coming up.",
+  "@alarmBodyVetAppointment": { "description": "Alarm body: vet appointment" },
+
+  "alarmBodyMedication": "It is time for medication.",
+  "@alarmBodyMedication": { "description": "Alarm body: medication" },
+
+  "alarmBodyMealTime": "Please remember meal time.",
+  "@alarmBodyMealTime": { "description": "Alarm body: meal time" },
+
+  "alarmBodyDailyReminder": "Please add today’s health record.",
+  "@alarmBodyDailyReminder": { "description": "Alarm body: daily reminder" },
+
+  "alarmBodyDefault": "Pet health care alert.",
+  "@alarmBodyDefault": { "description": "Alarm body: default" },
+
+  "alarmDeleted": "Alert deleted",
+  "@alarmDeleted": { "description": "Alert deleted toast" },
+
+  "hidePastAlarms": "Hide past alerts",
+  "@hidePastAlarms": { "description": "Hide past alarms button" },
+
+  "showPastAlarms": "Show past alerts",
+  "@showPastAlarms": { "description": "Show past alarms button" },
+
+  "deleteAll": "Delete all",
+  "@deleteAll": { "description": "Delete all button" },
+
+  "deletePastAlarms": "Delete past alerts",
+  "@deletePastAlarms": { "description": "Delete past alarms button" },
+
+  "deletePastAlarmsConfirm": "Delete all {count} past alerts?",
+  "@deletePastAlarmsConfirm": {
+    "description": "Confirm delete past alarms",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "pastAlarmsDeleted": "All past alerts deleted",
+  "@pastAlarmsDeleted": { "description": "Past alarms deleted toast" },
+
+  "pastLabel": "Past",
+  "@pastLabel": { "description": "Past label" },
+
+  "today": "Today",
+  "@today": { "description": "Today label" },
+
+  "tomorrowSameTime": "Tomorrow, same time",
+  "@tomorrowSameTime": { "description": "Tomorrow same time option" },
+
+  "snoozeQuestion": "When should we remind you again?",
+  "@snoozeQuestion": { "description": "Snooze question" },
+
+  "snooze5min": "In 5 minutes",
+  "@snooze5min": { "description": "Snooze 5 minutes" },
+
+  "snooze10min": "In 10 minutes",
+  "@snooze10min": { "description": "Snooze 10 minutes" },
+
+  "snooze30min": "In 30 minutes",
+  "@snooze30min": { "description": "Snooze 30 minutes" },
+
+  "snooze1hour": "In 1 hour",
+  "@snooze1hour": { "description": "Snooze 1 hour" },
+
+  "snooze3hour": "In 3 hours",
+  "@snooze3hour": { "description": "Snooze 3 hours" },
+
+  "snoozeCustom": "Choose manually",
+  "@snoozeCustom": { "description": "Snooze custom time" },
+
+  "snoozeAtThisTime": "Remind me at this time",
+  "@snoozeAtThisTime": { "description": "Snooze at this time button" },
+
+  "snoozeConfirm": "We will remind you at {time}",
+  "@snoozeConfirm": {
+    "description": "Snooze confirmation",
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+
+  "selectFutureTime": "Please choose a future time",
+  "@selectFutureTime": { "description": "Select future time hint" },
+
+  "recordCheckHint": "You can check it under Record > {typeLabel}.",
+  "@recordCheckHint": {
+    "description": "Hint to check record under type label",
+    "placeholders": {
+      "typeLabel": { "type": "String" }
+    }
+  },
+
+  "pushAlsoCancel": "The scheduled push notification will also be canceled.",
+  "@pushAlsoCancel": { "description": "Push notification also canceled" },
+
+  "reschedule": "Reschedule",
+  "@reschedule": { "description": "Reschedule button" },
+
+  "deleteThisAlarm": "Delete this alert",
+  "@deleteThisAlarm": { "description": "Delete this alert button" },
+
+  "vaccineNameRequired": "Vaccine name *",
+  "@vaccineNameRequired": { "description": "Vaccine name required field label" },
+
+  "vaccineNameExample": "e.g. Rabies, combo vaccine",
+  "@vaccineNameExample": { "description": "Vaccine name example" },
+
+  "scheduledDateRequired": "Date *",
+  "@scheduledDateRequired": { "description": "Scheduled date required field label" },
+
+  "reminderTiming": "Reminder timing",
+  "@reminderTiming": { "description": "Reminder timing label" },
+
+  "sameDay": "Same day",
+  "@sameDay": { "description": "Same day option" },
+
+  "reminderTimeRequired": "Reminder time *",
+  "@reminderTimeRequired": { "description": "Reminder time required field label" },
+
+  "memoInputHint": "Enter a memo",
+  "@memoInputHint": { "description": "Memo input hint" },
+
+  "visitPurposeRequired": "Visit purpose *",
+  "@visitPurposeRequired": { "description": "Visit purpose required field label" },
+
+  "visitPurposeExample": "e.g. Checkup, skin treatment",
+  "@visitPurposeExample": { "description": "Visit purpose example" },
+
+  "appointmentDateTimeRequired": "Appointment date and time *",
+  "@appointmentDateTimeRequired": { "description": "Appointment date time required field label" },
+
+  "hospitalName": "Hospital name",
+  "@hospitalName": { "description": "Hospital name label" },
+
+  "hospitalNameHint": "Enter hospital name",
+  "@hospitalNameHint": { "description": "Hospital name hint" },
+
+  "medicineNameRequired": "Medicine name *",
+  "@medicineNameRequired": { "description": "Medicine name required field label" },
+
+  "medicineNameExample": "e.g. Heartworm, dewormer",
+  "@medicineNameExample": { "description": "Medicine name example" },
+
+  "repeatRequired": "Repeat *",
+  "@repeatRequired": { "description": "Repeat required field label" },
+
+  "none": "None",
+  "@none": { "description": "None option" },
+
+  "daily": "Daily",
+  "@daily": { "description": "Daily option" },
+
+  "weekly": "Weekly",
+  "@weekly": { "description": "Weekly option" },
+
+  "monthly": "Monthly",
+  "@monthly": { "description": "Monthly option" },
+
+  "weekdays": "Weekdays",
+  "@weekdays": { "description": "Weekdays option" },
+
+  "weekdaysOnly": "Weekdays only",
+  "@weekdaysOnly": { "description": "Weekdays only option" },
+
+  "weekends": "Weekends",
+  "@weekends": { "description": "Weekends option" },
+
+  "weekendsOnly": "Weekends only",
+  "@weekendsOnly": { "description": "Weekends only option" },
+
+  "medicationDateTimeRequired": "Medication date and time *",
+  "@medicationDateTimeRequired": { "description": "Medication date time required field label" },
+
+  "medicationTimeRequired": "Medication time *",
+  "@medicationTimeRequired": { "description": "Medication time required field label" },
+
+  "alarmNameRequired": "Alert name *",
+  "@alarmNameRequired": { "description": "Alert name required field label" },
+
+  "mealTimeExample": "e.g. Breakfast, dinner",
+  "@mealTimeExample": { "description": "Meal time example" },
+
+  "mealTimeRequired": "Meal time *",
+  "@mealTimeRequired": { "description": "Meal time required field label" },
+
+  "alarmMessage": "Alert message",
+  "@alarmMessage": { "description": "Alert message label" },
+
+  "alarmMessageExample": "e.g. Did you add today’s record?",
+  "@alarmMessageExample": { "description": "Alert message example" },
+
+  "alarmPastDueMsg": "This alert date has passed.\nYou can choose a new date or delete it.",
+  "@alarmPastDueMsg": { "description": "Alert past due message" },
+
+  "reselectDate": "Select date again",
+  "@reselectDate": { "description": "Reselect date button" },
+
+  "selectDate": "Select date",
+  "@selectDate": { "description": "Select date button" },
+
+  "selectTime": "Select time",
+  "@selectTime": { "description": "Select time button" },
+
+  "todayStatus": "Today’s status",
+  "@todayStatus": { "description": "Today status label" },
+
+  "addRecord": "+ Add record",
+  "@addRecord": { "description": "Add record button" },
+
+  "todayReminders": "Today’s reminders",
+  "@todayReminders": { "description": "Today reminders label" },
+
+  "todayRecords": "Today’s records",
+  "@todayRecords": { "description": "Today records label" },
+
+  "viewAll": "View all",
+  "@viewAll": { "description": "View all button" },
+
+  "weekStats": "This week’s stats",
+  "@weekStats": { "description": "This week stats label" },
+
+  "pottyCount": "Potty count",
+  "@pottyCount": { "description": "Potty count label" },
+
+  "mealCount": "Meal count",
+  "@mealCount": { "description": "Meal count label" },
+
+  "waterLevel": "Water level",
+  "@waterLevel": { "description": "Water level label" },
+
+  "timesUnit": "times",
+  "@timesUnit": { "description": "Times unit" },
+
+  "mealsUnit": "meals",
+  "@mealsUnit": { "description": "Meals unit" },
+
+  "pointsUnit": "pts",
+  "@pointsUnit": { "description": "Points unit" },
+
+  "recordDeleted": "Record deleted",
+  "@recordDeleted": { "description": "Record deleted toast" },
+
+  "recordUpdated": "Record updated",
+  "@recordUpdated": { "description": "Record updated toast" },
+
+  "deleteRecordConfirm": "Delete this record?",
+  "@deleteRecordConfirm": { "description": "Delete record confirmation" },
+
+  "deleteThisRecord": "Delete this record",
+  "@deleteThisRecord": { "description": "Delete this record button" },
+
+  "typeLabel": "Type",
+  "@typeLabel": { "description": "Type label" },
+
+  "statusLabel": "Status",
+  "@statusLabel": { "description": "Status label" },
+
+  "conditionScore": "Condition score",
+  "@conditionScore": { "description": "Condition score label" },
+
+  "symptomTags": "Symptom tags",
+  "@symptomTags": { "description": "Symptom tags label" },
+
+  "medicineName": "Medicine name",
+  "@medicineName": { "description": "Medicine name label" },
+
+  "dose": "Dose",
+  "@dose": { "description": "Dose label" },
+
+  "medicationMethod": "Medication method",
+  "@medicationMethod": { "description": "Medication method label" },
+
+  "weightKg": "Weight (kg)",
+  "@weightKg": { "description": "Weight in kg label" },
+
+  "measurementMethod": "Measurement method",
+  "@measurementMethod": { "description": "Measurement method label" },
+
+  "mealType": "Meal type",
+  "@mealType": { "description": "Meal type label" },
+
+  "mealAmount": "Meal amount",
+  "@mealAmount": { "description": "Meal amount label" },
+
+  "servingAmount": "Serving amount",
+  "@servingAmount": { "description": "Serving amount label" },
+
+  "waterAmount": "Water amount",
+  "@waterAmount": { "description": "Water amount label" },
+
+  "visitType": "Visit type",
+  "@visitType": { "description": "Visit type label" },
+
+  "diagnosisName": "Diagnosis",
+  "@diagnosisName": { "description": "Diagnosis label" },
+
+  "vaccineType": "Vaccine type",
+  "@vaccineType": { "description": "Vaccine type label" },
+
+  "sideEffects": "Side effects",
+  "@sideEffects": { "description": "Side effects label" },
+
+  "groomingType": "Grooming type",
+  "@groomingType": { "description": "Grooming type label" },
+
+  "shopName": "Shop name",
+  "@shopName": { "description": "Shop name label" },
+
+  "cost": "Cost",
+  "@cost": { "description": "Cost label" },
+
+  "nextAppointment": "Next appointment",
+  "@nextAppointment": { "description": "Next appointment label" },
+
+  "brushingArea": "Brushing area",
+  "@brushingArea": { "description": "Brushing area label" },
+
+  "duration": "Duration",
+  "@duration": { "description": "Duration label" },
+
+  "walkTime": "Walk time",
+  "@walkTime": { "description": "Walk time label" },
+
+  "distance": "Distance",
+  "@distance": { "description": "Distance label" },
+
+  "title": "Title",
+  "@title": { "description": "Title label" },
+
+  "priority": "Priority",
+  "@priority": { "description": "Priority label" },
+
+  "stool": "Stool",
+  "@stool": { "description": "Stool label" },
+
+  "urine": "Urine",
+  "@urine": { "description": "Urine label" },
+
+  "vomiting": "Vomiting",
+  "@vomiting": { "description": "Vomiting label" },
+
+  "normal": "Normal",
+  "@normal": { "description": "Normal label" },
+
+  "loose": "Loose",
+  "@loose": { "description": "Loose label" },
+
+  "hard": "Hard",
+  "@hard": { "description": "Hard label" },
+
+  "bloodInStool": "Blood in stool",
+  "@bloodInStool": { "description": "Blood in stool label" },
+
+  "cough": "Cough",
+  "@cough": { "description": "Cough label" },
+
+  "lethargy": "Lethargy",
+  "@lethargy": { "description": "Lethargy label" },
+
+  "lossOfAppetite": "Loss of appetite",
+  "@lossOfAppetite": { "description": "Loss of appetite label" },
+
+  "diarrhea": "Diarrhea",
+  "@diarrhea": { "description": "Diarrhea label" },
+
+  "runnyNose": "Runny nose",
+  "@runnyNose": { "description": "Runny nose label" },
+
+  "sneezing": "Sneezing",
+  "@sneezing": { "description": "Sneezing label" },
+
+  "trembling": "Trembling",
+  "@trembling": { "description": "Trembling label" },
+
+  "bloodInUrine": "Blood in urine",
+  "@bloodInUrine": { "description": "Blood in urine label" },
+
+  "oral": "Oral",
+  "@oral": { "description": "Oral label" },
+
+  "injection": "Injection",
+  "@injection": { "description": "Injection label" },
+
+  "topical": "Topical",
+  "@topical": { "description": "Topical label" },
+
+  "eyeDrops": "Eye drops",
+  "@eyeDrops": { "description": "Eye drops label" },
+
+  "earDrops": "Ear drops",
+  "@earDrops": { "description": "Ear drops label" },
+
+  "vetHospital": "Vet hospital",
+  "@vetHospital": { "description": "Vet hospital label" },
+
+  "homeScale": "Home scale",
+  "@homeScale": { "description": "Home scale label" },
+
+  "holdAndWeigh": "Hold and weigh",
+  "@holdAndWeigh": { "description": "Hold and weigh label" },
+
+  "breakfast": "Breakfast",
+  "@breakfast": { "description": "Breakfast label" },
+
+  "lunch": "Lunch",
+  "@lunch": { "description": "Lunch label" },
+
+  "dinner": "Dinner",
+  "@dinner": { "description": "Dinner label" },
+
+  "snack": "Snack",
+  "@snack": { "description": "Snack label" },
+
+  "veryLittle": "Very little",
+  "@veryLittle": { "description": "Very little label" },
+
+  "little": "Little",
+  "@little": { "description": "Little label" },
+
+  "much": "Much",
+  "@much": { "description": "Much label" },
+
+  "veryMuch": "Very much",
+  "@veryMuch": { "description": "Very much label" },
+
+  "general": "Normal",
+  "@general": { "description": "General/Normal visit type label" },
+
+  "regularCheckup": "Checkup",
+  "@regularCheckup": { "description": "Regular checkup label" },
+
+  "emergency": "Emergency",
+  "@emergency": { "description": "Emergency label" },
+
+  "mild": "Mild",
+  "@mild": { "description": "Mild label" },
+
+  "severe": "Severe",
+  "@severe": { "description": "Severe label" },
+
+  "bath": "Bath",
+  "@bath": { "description": "Bath label" },
+
+  "fullGrooming": "Full grooming",
+  "@fullGrooming": { "description": "Full grooming label" },
+
+  "partialGrooming": "Partial grooming",
+  "@partialGrooming": { "description": "Partial grooming label" },
+
+  "nails": "Nails",
+  "@nails": { "description": "Nails label" },
+
+  "earCleaning": "Ear cleaning",
+  "@earCleaning": { "description": "Ear cleaning label" },
+
+  "tartarRemoval": "Tartar removal",
+  "@tartarRemoval": { "description": "Tartar removal label" },
+
+  "analGlands": "Anal glands",
+  "@analGlands": { "description": "Anal glands label" },
+
+  "all": "All",
+  "@all": { "description": "All label" },
+
+  "back": "Back",
+  "@back": { "description": "Back (body part) label" },
+
+  "belly": "Belly",
+  "@belly": { "description": "Belly label" },
+
+  "tail": "Tail",
+  "@tail": { "description": "Tail label" },
+
+  "face": "Face",
+  "@face": { "description": "Face label" },
+
+  "paws": "Paws",
+  "@paws": { "description": "Paws label" },
+
+  "important": "Important",
+  "@important": { "description": "Important label" },
+
+  "photosAndVideos": "Photos · Videos",
+  "@photosAndVideos": { "description": "Photos and videos label" },
+
+  "addMedia": "Add media",
+  "@addMedia": { "description": "Add media button" },
+
+  "selectMediaMethod": "Choose how to add media",
+  "@selectMediaMethod": { "description": "Select media method label" },
+
+  "useCamera": "Use camera",
+  "@useCamera": { "description": "Use camera option" },
+
+  "takePhotoOrVideo": "Take a photo or video",
+  "@takePhotoOrVideo": { "description": "Take photo or video option" },
+
+  "chooseFromGallery": "Choose from gallery",
+  "@chooseFromGallery": { "description": "Choose from gallery option" },
+
+  "multiSelectHint": "Select multiple photos and videos",
+  "@multiSelectHint": { "description": "Multi-select hint" },
+
+  "takePhoto": "Take photo",
+  "@takePhoto": { "description": "Take photo button" },
+
+  "takePhotoDesc": "Take a photo with camera",
+  "@takePhotoDesc": { "description": "Take photo description" },
+
+  "recordVideo": "Record video",
+  "@recordVideo": { "description": "Record video button" },
+
+  "recordVideoDesc": "Record a video with camera",
+  "@recordVideoDesc": { "description": "Record video description" },
+
+  "deleteThisPhoto": "Delete this photo",
+  "@deleteThisPhoto": { "description": "Delete this photo button" },
+
+  "deletePhotoConfirm": "Delete this photo?",
+  "@deletePhotoConfirm": { "description": "Delete photo confirmation" },
+
+  "deleteThisVideo": "Delete this video",
+  "@deleteThisVideo": { "description": "Delete this video button" },
+
+  "deleteVideoConfirm": "Delete this video?",
+  "@deleteVideoConfirm": { "description": "Delete video confirmation" },
+
+  "muted": "Muted",
+  "@muted": { "description": "Muted label" },
+
+  "soundOn": "Sound on",
+  "@soundOn": { "description": "Sound on label" },
+
+  "allowPermissionInSettings": "Please allow permission in Settings",
+  "@allowPermissionInSettings": { "description": "Allow permission in settings hint" },
+
+  "openSettings": "Open settings",
+  "@openSettings": { "description": "Open settings button" },
+
+  "privacyPolicy": "Privacy policy",
+  "@privacyPolicy": { "description": "Privacy policy label" },
+
+  "contactDeveloper": "Contact the developer",
+  "@contactDeveloper": { "description": "Contact developer button" },
+
+  "contact": "Contact",
+  "@contact": { "description": "Contact label" },
+
+  "settingsLabel": "Settings",
+  "@settingsLabel": { "description": "Settings label" },
+
+  "exportData": "Export data",
+  "@exportData": { "description": "Export data label" },
+
+  "importData": "Import data",
+  "@importData": { "description": "Import data label" },
+
+  "sendFeedback": "Send feedback",
+  "@sendFeedback": { "description": "Send feedback label" },
+
+  "faq": "FAQ",
+  "@faq": { "description": "FAQ label" },
+
+  "homeScreen": "Home screen",
+  "@homeScreen": { "description": "Home screen label" },
+
+  "journalScreen": "Journal screen",
+  "@journalScreen": { "description": "Journal screen label" },
+
+  "alarmScreen": "Alerts screen",
+  "@alarmScreen": { "description": "Alarm screen label" },
+
+  "petManagement": "Pet management",
+  "@petManagement": { "description": "Pet management label" },
+
+  "recordCategories": "Record categories",
+  "@recordCategories": { "description": "Record categories label" },
+
+  "whatIsPetSumtan": "What is Pet Sumtan?",
+  "@whatIsPetSumtan": { "description": "What is Pet Sumtan label" },
+
+  "todayRecordSummary": "Today’s record summary",
+  "@todayRecordSummary": { "description": "Today record summary label" },
+
+  "weeklyStats": "Weekly stats",
+  "@weeklyStats": { "description": "Weekly stats label" },
+
+  "weightChangeChart": "Weight change chart",
+  "@weightChangeChart": { "description": "Weight change chart label" },
+
+  "findNearbyHospitals": "Find nearby hospitals",
+  "@findNearbyHospitals": { "description": "Find nearby hospitals label" },
+
+  "addNewRecord": "Add new record (+)",
+  "@addNewRecord": { "description": "Add new record button" },
+
+  "viewRecordList": "View records",
+  "@viewRecordList": { "description": "View record list label" },
+
+  "editDeleteRecord": "Edit and delete records",
+  "@editDeleteRecord": { "description": "Edit and delete records label" },
+
+  "attachMedia": "Attach photos/videos",
+  "@attachMedia": { "description": "Attach media label" },
+
+  "addAlarm": "Add alert",
+  "@addAlarm": { "description": "Add alarm label" },
+
+  "repeatAlarm": "Repeating alerts",
+  "@repeatAlarm": { "description": "Repeat alarm label" },
+
+  "advanceAlarmHint": "Advance alerts (D-7, D-3, D-1)",
+  "@advanceAlarmHint": { "description": "Advance alarm hint" },
+
+  "completeAlarm": "Complete alerts",
+  "@completeAlarm": { "description": "Complete alarm label" },
+
+  "deleteAlarm": "Delete alerts",
+  "@deleteAlarm": { "description": "Delete alarm label" },
+
+  "registerPet": "Add a pet",
+  "@registerPet": { "description": "Register pet label" },
+
+  "editProfile": "Edit profile",
+  "@editProfile": { "description": "Edit profile label" },
+
+  "manageMultiplePets": "Manage multiple pets",
+  "@manageMultiplePets": { "description": "Manage multiple pets label" },
+
+  "dogHealthGuide": "Dog health guide",
+  "@dogHealthGuide": { "description": "Dog health guide label" },
+
+  "catHealthGuide": "Cat health guide",
+  "@catHealthGuide": { "description": "Cat health guide label" },
+
+  "notificationSettings": "Notification settings",
+  "@notificationSettings": { "description": "Notification settings label" },
+
+  "dogHealthCareGuide": "Dog health care guide",
+  "@dogHealthCareGuide": { "description": "Dog health care guide label" },
+
+  "catHealthCareGuide": "Cat health care guide",
+  "@catHealthCareGuide": { "description": "Cat health care guide label" },
+
+  "healthGuideSubtitle": "A professional health guide\nbased on veterinary recommendations.",
+  "@healthGuideSubtitle": { "description": "Health guide subtitle" },
+
+  "vaccination": "Vaccination",
+  "@vaccination": { "description": "Vaccination label" },
+
+  "coreVaccines": "Core vaccines",
+  "@coreVaccines": { "description": "Core vaccines label" },
+
+  "required": "Required",
+  "@required": { "description": "Required label" },
+
+  "nonCoreVaccines": "Non-core vaccines",
+  "@nonCoreVaccines": { "description": "Non-core vaccines label" },
+
+  "recommended": "Recommended",
+  "@recommended": { "description": "Recommended label" },
+
+  "parasitePrevention": "Parasite prevention",
+  "@parasitePrevention": { "description": "Parasite prevention label" },
+
+  "heartworm": "Heartworm",
+  "@heartworm": { "description": "Heartworm label" },
+
+  "monthlyFreq": "Monthly",
+  "@monthlyFreq": { "description": "Monthly frequency label" },
+
+  "externalParasites": "External parasites (fleas/ticks)",
+  "@externalParasites": { "description": "External parasites label" },
+
+  "internalParasites": "Internal parasites",
+  "@internalParasites": { "description": "Internal parasites label" },
+
+  "threeToSixMonths": "3-6 months",
+  "@threeToSixMonths": { "description": "3-6 months label" },
+
+  "nutritionManagement": "Nutrition",
+  "@nutritionManagement": { "description": "Nutrition management label" },
+
+  "dentalCare": "Dental care",
+  "@dentalCare": { "description": "Dental care label" },
+
+  "healthCheckup": "Health checkups",
+  "@healthCheckup": { "description": "Health checkup label" },
+
+  "emergencySigns": "Emergency signs",
+  "@emergencySigns": { "description": "Emergency signs label" },
+
+  "age": "Age",
+  "@age": { "description": "Age label" },
+
+  "checkupCycle": "Checkup cycle",
+  "@checkupCycle": { "description": "Checkup cycle label" },
+
+  "mainItems": "Main items",
+  "@mainItems": { "description": "Main items label" },
+
+  "exerciseLevel": "Exercise level",
+  "@exerciseLevel": { "description": "Exercise level label" },
+
+  "breedExamples": "Breed examples",
+  "@breedExamples": { "description": "Breed examples label" },
+
+  "low": "Low",
+  "@low": { "description": "Low label" },
+
+  "high": "High",
+  "@high": { "description": "High label" },
+
+  "menu": "Menu",
+  "@menu": { "description": "Menu label" },
+
+  "helloGreeting": "Hello! ",
+  "@helloGreeting": { "description": "Hello greeting" },
+
+  "healthyTodayMsg": "\nFeeling healthy today?",
+  "@healthyTodayMsg": { "description": "Healthy today message" },
+
+  "noRecordsYet": "No records yet",
+  "@noRecordsYet": { "description": "No records yet label" },
+
+  "lastRecord": "Last record · {time}",
+  "@lastRecord": {
+    "description": "Last record with time",
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+
+  "avgPerDay": "Avg {value}{unit}/day",
+  "@avgPerDay": {
+    "description": "Average per day",
+    "placeholders": {
+      "value": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+
+  "weightTrend": "⚖️ Weight trend",
+  "@weightTrend": { "description": "Weight trend label" },
+
+  "weightChange": "⚖️ Weight change",
+  "@weightChange": { "description": "Weight change label" },
+
+  "noWeightData": "No weight data yet",
+  "@noWeightData": { "description": "No weight data label" },
+
+  "measuredWeight": "Measured weight",
+  "@measuredWeight": { "description": "Measured weight label" },
+
+  "standardRange": "Standard range",
+  "@standardRange": { "description": "Standard range label" },
+
+  "noTodayRecords": "No records for today yet",
+  "@noTodayRecords": { "description": "No today records label" },
+
+  "homeNoRecordHint": "Track condition, potty, and weight\nto care for your pet’s health.",
+  "@homeNoRecordHint": { "description": "Home no record hint" },
+
+  "noRecordsForDate": "No records for {date}",
+  "@noRecordsForDate": {
+    "description": "No records for date",
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+
+  "recordsForDate": "{date} records ({count})",
+  "@recordsForDate": {
+    "description": "Records for date with count",
+    "placeholders": {
+      "date": { "type": "String" },
+      "count": { "type": "String" }
+    }
+  },
+
+  "daySun": "Sun",
+  "@daySun": { "description": "Sunday abbreviation" },
+
+  "dayMon": "Mon",
+  "@dayMon": { "description": "Monday abbreviation" },
+
+  "dayTue": "Tue",
+  "@dayTue": { "description": "Tuesday abbreviation" },
+
+  "dayWed": "Wed",
+  "@dayWed": { "description": "Wednesday abbreviation" },
+
+  "dayThu": "Thu",
+  "@dayThu": { "description": "Thursday abbreviation" },
+
+  "dayFri": "Fri",
+  "@dayFri": { "description": "Friday abbreviation" },
+
+  "daySat": "Sat",
+  "@daySat": { "description": "Saturday abbreviation" },
+
+  "whatToRecord": "📝 What would you like to record?",
+  "@whatToRecord": { "description": "What to record prompt" },
+
+  "saveErrorMsg": "An error occurred while saving: {error}",
+  "@saveErrorMsg": {
+    "description": "Save error message",
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+
+  "alarmUpdated": "Alert updated",
+  "@alarmUpdated": { "description": "Alert updated toast" },
+
+  "alarmAdded": "Alert added",
+  "@alarmAdded": { "description": "Alert added toast" },
+
+  "editAlarm": "Edit alert",
+  "@editAlarm": { "description": "Edit alert label" },
+
+  "deleteAlarmConfirm": "Delete this alert?",
+  "@deleteAlarmConfirm": { "description": "Delete alarm confirmation" },
+
+  "deleteAlarmWithPushMsg": "{name} will be deleted,\nand its scheduled push notification will be canceled.",
+  "@deleteAlarmWithPushMsg": {
+    "description": "Delete alarm with push notification message",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "doneMsg": "✅ Done",
+  "@doneMsg": { "description": "Done message" },
+
+  "laterMsg": "🕐 Later",
+  "@laterMsg": { "description": "Later message" },
+
+  "saveCompletion": "✅ Save completion",
+  "@saveCompletion": { "description": "Save completion button" },
+
+  "completedQuestion": "Did you complete {type}?",
+  "@completedQuestion": {
+    "description": "Completed question",
+    "placeholders": {
+      "type": { "type": "String" }
+    }
+  },
+
+  "autoSaveToTodayMsg": "We will automatically save\n{name} to today’s records.",
+  "@autoSaveToTodayMsg": {
+    "description": "Auto save to today message",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "completionSaved": "{name} completion saved",
+  "@completionSaved": {
+    "description": "Completion saved toast",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "tapAlarmTypeHint": "👆 Tap the alert type you want",
+  "@tapAlarmTypeHint": { "description": "Tap alarm type hint" },
+
+  "countUnit": "{count}",
+  "@countUnit": {
+    "description": "Count unit",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "dateCompleted": "{date} · Completed",
+  "@dateCompleted": {
+    "description": "Date completed label",
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+
+  "datePassedTapToReschedule": "⚠️ {date} past · Tap to reschedule",
+  "@datePassedTapToReschedule": {
+    "description": "Date passed tap to reschedule label",
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+
+  "completedLabel": "Completed",
+  "@completedLabel": { "description": "Completed label" },
+
+  "edit": "Edit",
+  "@edit": { "description": "Edit button" },
+
+  "recordDeleteCannotUndo": "{category} record will be deleted\nand cannot be restored.",
+  "@recordDeleteCannotUndo": {
+    "description": "Record delete cannot undo message",
+    "placeholders": {
+      "category": { "type": "String" }
+    }
+  },
+
+  "hintMedicineNameAndDose": "Please enter medicine name and dose",
+  "@hintMedicineNameAndDose": { "description": "Hint: medicine name and dose" },
+
+  "hintMedicineName": "Please enter a medicine name",
+  "@hintMedicineName": { "description": "Hint: medicine name" },
+
+  "hintDose": "Please enter a dose",
+  "@hintDose": { "description": "Hint: dose" },
+
+  "hintWeightNumber": "Please enter weight as a number",
+  "@hintWeightNumber": { "description": "Hint: weight as number" },
+
+  "hintWeight": "Please enter weight",
+  "@hintWeight": { "description": "Hint: weight" },
+
+  "hintWeightIsNumber": "Please enter weight as a number",
+  "@hintWeightIsNumber": { "description": "Hint: weight is number" },
+
+  "hintWalkTime": "Please enter walk time",
+  "@hintWalkTime": { "description": "Hint: walk time" },
+
+  "hintWalkTimeIsNumber": "Please enter walk time as a number",
+  "@hintWalkTimeIsNumber": { "description": "Hint: walk time is number" },
+
+  "hintWalkTimeNumber": "Please enter walk time as a number",
+  "@hintWalkTimeNumber": { "description": "Hint: walk time number" },
+
+  "hintSelectBrushingArea": "Please select at least one brushing area",
+  "@hintSelectBrushingArea": { "description": "Hint: select brushing area" },
+
+  "hintSelectVaccineType": "Please select at least one vaccine type",
+  "@hintSelectVaccineType": { "description": "Hint: select vaccine type" },
+
+  "hintSelectGroomingType": "Please select at least one grooming type",
+  "@hintSelectGroomingType": { "description": "Hint: select grooming type" },
+
+  "hintTitle": "Please enter a title",
+  "@hintTitle": { "description": "Hint: title" },
+
+  "hintVaccineName": "Please enter a vaccine name",
+  "@hintVaccineName": { "description": "Hint: vaccine name" },
+
+  "hintSelectScheduledDate": "Please select a date",
+  "@hintSelectScheduledDate": { "description": "Hint: select scheduled date" },
+
+  "hintSelectScheduledTime": "Please select a time",
+  "@hintSelectScheduledTime": { "description": "Hint: select scheduled time" },
+
+  "hintVisitPurpose": "Please enter the visit purpose",
+  "@hintVisitPurpose": { "description": "Hint: visit purpose" },
+
+  "hintSelectAppointmentDate": "Please select an appointment date",
+  "@hintSelectAppointmentDate": { "description": "Hint: select appointment date" },
+
+  "hintSelectAppointmentTime": "Please select an appointment time",
+  "@hintSelectAppointmentTime": { "description": "Hint: select appointment time" },
+
+  "hintMedicineNameInput": "Please enter a medicine name",
+  "@hintMedicineNameInput": { "description": "Hint: medicine name input" },
+
+  "hintSelectMedicationDate": "Please select a medication date",
+  "@hintSelectMedicationDate": { "description": "Hint: select medication date" },
+
+  "hintSelectMedicationTime": "Please select a medication time",
+  "@hintSelectMedicationTime": { "description": "Hint: select medication time" },
+
+  "hintAlarmName": "Please enter an alert name",
+  "@hintAlarmName": { "description": "Hint: alarm name" },
+
+  "hintSelectMealTime": "Please select a meal time",
+  "@hintSelectMealTime": { "description": "Hint: select meal time" },
+
+  "hintSelectAlarmTime": "Please select an alert time",
+  "@hintSelectAlarmTime": { "description": "Hint: select alarm time" },
+
+  "noPetRegisterFirst": "No pet yet. Please add one from Profile first.",
+  "@noPetRegisterFirst": { "description": "No pet - register first" },
+
+  "alarmRescheduled": "Alert rescheduled",
+  "@alarmRescheduled": { "description": "Alert rescheduled toast" },
+
+  "examplePetName": "e.g. Kong",
+  "@examplePetName": { "description": "Example pet name" },
+
+  "exampleBreed": "e.g. Maltese",
+  "@exampleBreed": { "description": "Example breed" },
+
+  "exampleBreedMulti": "e.g. Maltese, Persian",
+  "@exampleBreedMulti": { "description": "Example breed multi" },
+
+  "example30": "e.g. 30",
+  "@example30": { "description": "Example 30" },
+
+  "example80": "e.g. 80",
+  "@example80": { "description": "Example 80" },
+
+  "example200": "e.g. 200",
+  "@example200": { "description": "Example 200" },
+
+  "example25": "e.g. 2.5",
+  "@example25": { "description": "Example 2.5" },
+
+  "example35000": "e.g. 35000",
+  "@example35000": { "description": "Example 35000" },
+
+  "example50000": "e.g. 50000",
+  "@example50000": { "description": "Example 50000" },
+
+  "enterNameHint": "Please enter a name",
+  "@enterNameHint": { "description": "Enter name hint" },
+
+  "addNewPetTitle": "Add new pet",
+  "@addNewPetTitle": { "description": "Add new pet title" },
+
+  "basicInfo": "Basic info",
+  "@basicInfo": { "description": "Basic info label" },
+
+  "idInfo": "Identification info",
+  "@idInfo": { "description": "Identification info label" },
+
+  "idInfoOptional": "Identification info (optional)",
+  "@idInfoOptional": { "description": "Identification info optional label" },
+
+  "name": "Name",
+  "@name": { "description": "Name label" },
+
+  "petKind": "Type",
+  "@petKind": { "description": "Pet kind/type label" },
+
+  "breed": "Breed",
+  "@breed": { "description": "Breed label" },
+
+  "weight": "Weight",
+  "@weight": { "description": "Weight label" },
+
+  "microchip": "Microchip",
+  "@microchip": { "description": "Microchip label" },
+
+  "registrationNumber": "Registration number",
+  "@registrationNumber": { "description": "Registration number label" },
+
+  "birthDate": "Birth date",
+  "@birthDate": { "description": "Birth date label" },
+
+  "gender": "Gender",
+  "@gender": { "description": "Gender label" },
+
+  "male": "Male",
+  "@male": { "description": "Male label" },
+
+  "female": "Female",
+  "@female": { "description": "Female label" },
+
+  "maleSym": "Male ♂",
+  "@maleSym": { "description": "Male with symbol" },
+
+  "femaleSym": "Female ♀",
+  "@femaleSym": { "description": "Female with symbol" },
+
+  "neutered": "Neutered",
+  "@neutered": { "description": "Neutered label" },
+
+  "done": "Done",
+  "@done": { "description": "Done label" },
+
+  "notDone": "Not done",
+  "@notDone": { "description": "Not done label" },
+
+  "notEntered": "Not entered",
+  "@notEntered": { "description": "Not entered label" },
+
+  "notRegistered": "Not registered",
+  "@notRegistered": { "description": "Not registered label" },
+
+  "dogEmoji": "Dog 🐶",
+  "@dogEmoji": { "description": "Dog with emoji label" },
+
+  "catEmoji": "Cat 🐱",
+  "@catEmoji": { "description": "Cat with emoji label" },
+
+  "otherEmoji": "Other 🐾",
+  "@otherEmoji": { "description": "Other with emoji label" },
+
+  "noPetsRegistered": "No pets registered",
+  "@noPetsRegistered": { "description": "No pets registered label" },
+
+  "registerPetPrompt": "Add a pet and\nmanage health together.",
+  "@registerPetPrompt": { "description": "Register pet prompt" },
+
+  "registerPetBtn": "Add pet",
+  "@registerPetBtn": { "description": "Register pet button" },
+
+  "editPet": "Edit pet",
+  "@editPet": { "description": "Edit pet label" },
+
+  "neuteringStatus": "Neutering status",
+  "@neuteringStatus": { "description": "Neutering status label" },
+
+  "neuteredDone": "Neutered",
+  "@neuteredDone": { "description": "Neutered done label" },
+
+  "notNeutered": "Not neutered",
+  "@notNeutered": { "description": "Not neutered label" },
+
+  "selectDateHint": "Select a date",
+  "@selectDateHint": { "description": "Select date hint" },
+
+  "saveChanges": "Save changes",
+  "@saveChanges": { "description": "Save changes button" },
+
+  "registerBtn": "Register",
+  "@registerBtn": { "description": "Register button" },
+
+  "deletePetName": "Delete {name}",
+  "@deletePetName": {
+    "description": "Delete pet with name",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "deletePetConfirm": "Delete {name}?",
+  "@deletePetConfirm": {
+    "description": "Delete pet confirmation",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "deletePetWarning": "All records and alerts for {name} will be deleted and cannot be restored.",
+  "@deletePetWarning": {
+    "description": "Delete pet warning",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "petDeleted": "{name} deleted",
+  "@petDeleted": {
+    "description": "Pet deleted toast",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "petAdded": "{name} added",
+  "@petAdded": {
+    "description": "Pet added toast",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+
+  "storeUnavailableMsg": "Cannot connect to the store right now. Please try again later.",
+  "@storeUnavailableMsg": { "description": "Store unavailable message" },
+
+  "checkingPaymentMsg": "Checking payment info. Please try again shortly.",
+  "@checkingPaymentMsg": { "description": "Checking payment message" },
+
+  "paymentCompleteMsg": "Payment complete. Please enter your new pet’s info.",
+  "@paymentCompleteMsg": { "description": "Payment complete message" },
+
+  "addNewFamilyMember": "Add a new family member?",
+  "@addNewFamilyMember": { "description": "Add new family member dialog title" },
+
+  "firstPetFreeDesc": "The first pet is free. From the second pet, each additional pet requires payment.",
+  "@firstPetFreeDesc": { "description": "First pet free description" },
+
+  "petsRegisteredStoreUnavailable": "{count} pets registered\nPlease try again when the store is available.",
+  "@petsRegisteredStoreUnavailable": {
+    "description": "Pets registered - store unavailable",
+    "placeholders": {
+      "count": { "type": "String" }
+    }
+  },
+
+  "petsRegisteredPayToAdd": "{count} pets registered\nPay {price} to add a new family member.",
+  "@petsRegisteredPayToAdd": {
+    "description": "Pets registered - pay to add",
+    "placeholders": {
+      "count": { "type": "String" },
+      "price": { "type": "String" }
+    }
+  },
+
+  "maybeLater": "Maybe later",
+  "@maybeLater": { "description": "Maybe later button" },
+
+  "unavailable": "Unavailable",
+  "@unavailable": { "description": "Unavailable label" },
+
+  "payAndAdd": "Pay {price} and add",
+  "@payAndAdd": {
+    "description": "Pay and add button",
+    "placeholders": {
+      "price": { "type": "String" }
+    }
+  },
+
+  "addNextAppointment": "+ Add next appointment",
+  "@addNextAppointment": { "description": "Add next appointment button" },
+
+  "pottyRecordSaved": "Potty record saved",
+  "@pottyRecordSaved": { "description": "Potty record saved toast" },
+
+  "conditionRecordSaved": "Condition record saved",
+  "@conditionRecordSaved": { "description": "Condition record saved toast" },
+
+  "medicationRecordSaved": "Medication record saved",
+  "@medicationRecordSaved": { "description": "Medication record saved toast" },
+
+  "weightRecordSaved": "Weight record saved",
+  "@weightRecordSaved": { "description": "Weight record saved toast" },
+
+  "mealRecordSaved": "Meal record saved",
+  "@mealRecordSaved": { "description": "Meal record saved toast" },
+
+  "waterRecordSaved": "Water record saved",
+  "@waterRecordSaved": { "description": "Water record saved toast" },
+
+  "vetVisitRecordSaved": "Vet visit record saved",
+  "@vetVisitRecordSaved": { "description": "Vet visit record saved toast" },
+
+  "vaccinationRecordSaved": "Vaccination record saved",
+  "@vaccinationRecordSaved": { "description": "Vaccination record saved toast" },
+
+  "groomingRecordSaved": "Grooming record saved",
+  "@groomingRecordSaved": { "description": "Grooming record saved toast" },
+
+  "brushingRecordSaved": "Brushing record saved",
+  "@brushingRecordSaved": { "description": "Brushing record saved toast" },
+
+  "walkRecordSaved": "Walk record saved",
+  "@walkRecordSaved": { "description": "Walk record saved toast" },
+
+  "memoSaved": "Memo saved",
+  "@memoSaved": { "description": "Memo saved toast" },
+
+  "moreQuestions": "Have more questions?",
+  "@moreQuestions": { "description": "More questions label" },
+
+  "contactViaSendFeedback": "Contact us from Settings > Send feedback.\nWe will get back to you soon.",
+  "@contactViaSendFeedback": { "description": "Contact via send feedback short" },
+
+  "contactViaSendFeedbackLong": "Contact us through Send feedback in Settings.\nWe will reply quickly.",
+  "@contactViaSendFeedbackLong": { "description": "Contact via send feedback long" },
+
+  "privacyPolicyEffectiveDate": "This privacy policy is effective from January 1, 2026.\nLast updated: May 8, 2026",
+  "@privacyPolicyEffectiveDate": { "description": "Privacy policy effective date" },
+
+  "privacyCollectedInfo": "Collected information is used only for the purposes below.",
+  "@privacyCollectedInfo": { "description": "Privacy collected info" },
+
+  "privacyDataFeatures": "Pet Sumtan provides data export (backup) and import (restore) features.",
+  "@privacyDataFeatures": { "description": "Privacy data features" },
+
+  "privacyPolicyMayUpdate": "This privacy policy may be updated due to legal or service changes.",
+  "@privacyPolicyMayUpdate": { "description": "Privacy policy may update" },
+
+  "privacyPolicyContact": "For questions about this privacy policy, please contact us below.",
+  "@privacyPolicyContact": { "description": "Privacy policy contact" },
+
+  "catMeal": "Meal",
+  "@catMeal": { "description": "Category: meal" },
+
+  "catWater": "Water",
+  "@catWater": { "description": "Category: water" },
+
+  "catGrooming": "Grooming",
+  "@catGrooming": { "description": "Category: grooming" },
+
+  "catBrushing": "Brushing",
+  "@catBrushing": { "description": "Category: brushing" },
+
+  "catWalk": "Walk",
+  "@catWalk": { "description": "Category: walk" },
+
+  "catHospital": "Vet visit",
+  "@catHospital": { "description": "Category: hospital/vet" },
+
+  "catCondition": "Condition",
+  "@catCondition": { "description": "Category: condition" },
+
+  "catPotty": "Potty",
+  "@catPotty": { "description": "Category: potty/poop" },
+
+  "mealFormTitle": "🍽️ Meal record",
+  "@mealFormTitle": { "description": "Meal form title" },
+
+  "walkFormTitle": "🦮 Walk record",
+  "@walkFormTitle": { "description": "Walk form title" },
+
+  "weightFormTitle": "⚖️ Weight record",
+  "@weightFormTitle": { "description": "Weight form title" },
+
+  "waterFormTitle": "💧 Water record",
+  "@waterFormTitle": { "description": "Water form title" },
+
+  "medicationFormTitle": "💊 Medication record",
+  "@medicationFormTitle": { "description": "Medication form title" },
+
+  "groomingFormTitle": "✂️ Grooming record",
+  "@groomingFormTitle": { "description": "Grooming form title" },
+
+  "brushingFormTitle": "🪥 Brushing record",
+  "@brushingFormTitle": { "description": "Brushing form title" },
+
+  "conditionFormTitle": "🌡️ Condition record",
+  "@conditionFormTitle": { "description": "Condition form title" },
+
+  "poopFormTitle": "💩 Potty record",
+  "@poopFormTitle": { "description": "Potty form title" },
+
+  "vaccinationFormTitle": "💉 Vaccination record",
+  "@vaccinationFormTitle": { "description": "Vaccination form title" },
+
+  "hospitalFormTitle": "🏥 Vet visit record",
+  "@hospitalFormTitle": { "description": "Hospital form title" },
+
+  "memoFormTitle": "📝 Memo",
+  "@memoFormTitle": { "description": "Memo form title" },
+
+  "measureMethod": "Measurement method",
+  "@measureMethod": { "description": "Weight measurement method label" },
+
+  "feedAmount": "Amount fed",
+  "@feedAmount": { "description": "Food amount fed label" },
+
+  "mlInputLabel": "Direct mL input",
+  "@mlInputLabel": { "description": "Direct mL input label" },
+
+  "alarmRescheduleNote": "This alert's scheduled date has passed.\nYou can set a new date or delete it.",
+
+  "nailTrim": "Nail trim",
+  "shopNameExample": "e.g. Fluffy Pet Salon",
+  "poopRecordSaved": "💩 Potty recorded",
+  "memoRecordSaved": "📝 Memo recorded",
+  "other": "Other",
+  "whole": "Whole body",
+  "paw": "Paw",
+  "importance": "Importance",
+  "timeTaken": "Time taken",
+  "example10": "e.g. 10",
+  "hospitalNameExample": "e.g. Happy Animal Hospital",
+  "diagnosisExample": "e.g. Enteritis, Dermatitis",
+  "memoTitlePlaceholder": "Enter memo title",
+  "hintMemoTitle": "💡 Please enter a title",
+  "poopType": "Type",
+  "poopStatus": "Status",
+  "feces": "Feces",
+  "bloody": "Bloody",
+  "vaccineDhppl": "DHPPL combo",
+  "vaccineCorona": "Corona enteritis",
+  "vaccineKennelCough": "Kennel cough",
+  "vaccineRabies": "Rabies",
+  "vaccineInfluenza": "Influenza",
+  "vaccineFvrcp": "FVRCP combo",
+  "vaccineFelv": "Leukemia (FeLV)",
+  "vaccineChlamydia": "Chlamydia",
+  "mute": "Mute",
+  "photoVideo": "Photo · Video",
+  "photoVideoCount": "Photo · Video · {count}",
+  "@photoVideoCount": { "description": "Photo video count label", "placeholders": { "count": { "type": "String" } } },
+  "selectMediaSource": "Select media source",
+  "cameraCapture": "Camera",
+  "cameraCaptureSubtitle": "Take photo or video",
+  "selectFromGallery": "Gallery",
+  "selectFromGallerySubtitle": "Select photos · videos",
+  "takePhotoSubtitle": "Take a photo with camera",
+  "recordVideoSubtitle": "Record a video with camera",
+  "permissionRequired": "Please allow permission in Settings",
+  "confirmDeletePhoto": "Delete this photo?",
+  "confirmDeleteVideo": "Delete this video?",
+  "deleteThisPhoto": "Delete photo",
+  "deleteThisVideo": "Delete video",
+  "hintMedicineAndDose": "💡 Please enter medicine name and dose",
+  "deleteRecordBody": "{category} record will be deleted\nand cannot be undone.",
+  "@deleteRecordBody": { "description": "Delete record body", "placeholders": { "category": { "type": "String" } } },
+  "edit": "Edit"
+}

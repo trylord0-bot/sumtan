@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../app/localization/app_localizations.dart';
+import '../../app/l10n/l10n_extension.dart';
 import '../../app/theme/app_colors.dart';
 import '../../app/theme/app_spacing.dart';
 
@@ -37,7 +37,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
             Row(
               children: [
                 Text(
-                  context.lt(title),
+                  title,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
@@ -55,7 +55,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                         size: 24,
                       ),
                       onPressed: () => Scaffold.of(ctx).openEndDrawer(),
-                      tooltip: context.lt('메뉴'),
+                      tooltip: context.l10n.menu,
                       padding: EdgeInsets.zero,
                       constraints: const BoxConstraints(
                         minWidth: 36,

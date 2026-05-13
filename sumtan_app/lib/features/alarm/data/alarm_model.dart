@@ -1,3 +1,6 @@
+import 'package:flutter/widgets.dart';
+import '../../../app/l10n/l10n_extension.dart';
+
 bool _isSameDay(DateTime a, DateTime b) =>
     a.year == b.year && a.month == b.month && a.day == b.day;
 
@@ -157,5 +160,23 @@ String alarmTypeLabel(String type) {
       return '일일 리마인더';
     default:
       return '알림';
+  }
+}
+
+String localizedAlarmTypeLabel(BuildContext context, String type) {
+  final l10n = context.l10n;
+  switch (type) {
+    case 'vaccination':
+      return l10n.vaccination;
+    case 'hospital':
+      return l10n.vetAppointment;
+    case 'medication':
+      return l10n.medication;
+    case 'meal':
+      return l10n.mealTime;
+    case 'daily':
+      return l10n.dailyReminder;
+    default:
+      return l10n.alarmLabel;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../app/localization/app_localizations.dart';
+import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -52,7 +52,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
 
   Future<void> _save() async {
     if (_nameCtrl.text.trim().isEmpty) {
-      showTopToast(context, context.lt('이름을 입력해 주세요'));
+      showTopToast(context, context.l10n.enterNameHint);
       return;
     }
     final now = du.toIso8601(DateTime.now());
@@ -85,52 +85,52 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.creamBg,
-      appBar: AppPageAppBar(title: _isEdit ? '반려동물 편집' : '반려동물 등록'),
+      appBar: AppPageAppBar(title: _isEdit ? context.l10n.editPet : context.l10n.registerPet),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.space4),
         children: [
           // 이름
-          const _FieldLabel('이름 *'),
+          _FieldLabel('${context.l10n.name} *'),
           const SizedBox(height: AppSpacing.space2),
           TextFormField(
             controller: _nameCtrl,
-            decoration: InputDecoration(hintText: context.lt('예: 콩이')),
+            decoration: InputDecoration(hintText: context.l10n.examplePetName),
           ),
           const SizedBox(height: AppSpacing.space4),
 
           // 종
-          const _FieldLabel('종류'),
+          _FieldLabel(context.l10n.petKind),
           const SizedBox(height: AppSpacing.space2),
           _SegmentControl(
             options: const ['dog', 'cat', 'other'],
-            labels: const ['강아지 🐶', '고양이 🐱', '기타 🐾'],
+            labels: [context.l10n.dogEmoji, context.l10n.catEmoji, context.l10n.otherEmoji],
             selected: _species,
             onChanged: (v) => setState(() => _species = v),
           ),
           const SizedBox(height: AppSpacing.space4),
 
           // 품종
-          const _FieldLabel('품종'),
+          _FieldLabel(context.l10n.breed),
           const SizedBox(height: AppSpacing.space2),
           TextFormField(
             controller: _breedCtrl,
-            decoration: InputDecoration(hintText: context.lt('예: 말티즈, 페르시안')),
+            decoration: InputDecoration(hintText: context.l10n.exampleBreedMulti),
           ),
           const SizedBox(height: AppSpacing.space4),
 
           // 성별
-          const _FieldLabel('성별'),
+          _FieldLabel(context.l10n.gender),
           const SizedBox(height: AppSpacing.space2),
           _SegmentControl(
             options: const ['male', 'female'],
-            labels: const ['수컷 ♂', '암컷 ♀'],
+            labels: [context.l10n.maleSym, context.l10n.femaleSym],
             selected: _gender,
             onChanged: (v) => setState(() => _gender = v),
           ),
           const SizedBox(height: AppSpacing.space4),
 
           // 중성화
-          const _FieldLabel('중성화 여부'),
+          _FieldLabel(context.l10n.neuteringStatus),
           const SizedBox(height: AppSpacing.space2),
           Row(
             children: [
@@ -141,7 +141,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
               ),
               const SizedBox(width: AppSpacing.space2),
               Text(
-                _neutered ? context.lt('중성화 완료') : context.lt('중성화 안 함'),
+                _neutered ? context.l10n.neuteredDone : context.l10n.notNeutered,
                 style: TextStyle(
                   fontSize: 14,
                   color: _neutered ? AppColors.primary900 : AppColors.gray500,
@@ -153,7 +153,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
           const SizedBox(height: AppSpacing.space4),
 
           // 생년월일
-          const _FieldLabel('생년월일'),
+          _FieldLabel(context.l10n.birthDate),
           const SizedBox(height: AppSpacing.space2),
           GestureDetector(
             onTap: () async {
@@ -182,7 +182,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
                   Text(
                     _birthDate != null
                         ? du.formatDate(_birthDate!)
-                        : context.lt('날짜를 선택하세요'),
+                        : context.l10n.selectDateHint,
                     style: TextStyle(
                       fontSize: 16,
                       color: _birthDate != null
@@ -210,7 +210,7 @@ class _PetRegisterScreenState extends ConsumerState<PetRegisterScreen> {
                 ),
               ),
               child: Text(
-                _isEdit ? context.lt('수정 완료') : context.lt('등록하기'),
+                _isEdit ? context.l10n.saveChanges : context.l10n.registerBtn,
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
@@ -228,7 +228,7 @@ class _FieldLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(context.lt(text),
+    return Text(text,
         style: const TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w600,
@@ -273,7 +273,7 @@ class _SegmentControl extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 alignment: Alignment.center,
-                child: Text(context.lt(labels[i]),
+                child: Text(labels[i],
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,

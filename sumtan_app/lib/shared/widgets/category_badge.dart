@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../app/localization/app_localizations.dart';
 import '../../app/theme/app_colors.dart';
 import '../../app/theme/app_spacing.dart';
 import '../constants/category_constants.dart';
@@ -34,7 +33,7 @@ class CategoryBadge extends StatelessWidget {
           ),
           const SizedBox(width: 4),
           Text(
-            context.lt(category.label),
+            category.localizedLabel(context),
             style: TextStyle(
               fontSize: compact ? 11 : 13,
               fontWeight: FontWeight.w500,
@@ -130,7 +129,7 @@ class RecordListItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(context.lt(title),
+                  Text(title,
                       style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
@@ -138,7 +137,7 @@ class RecordListItem extends StatelessWidget {
                       )),
                   const SizedBox(height: 2),
                   Text(
-                    context.lt(subtitle),
+                    subtitle,
                     style:
                         const TextStyle(fontSize: 13, color: AppColors.gray600),
                     maxLines: 1,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
@@ -29,7 +29,7 @@ class AlarmListItemPending extends ConsumerWidget {
       confirmDismiss: (_) async => true,
       onDismissed: (_) {
         notifier.delete(alarm.id!);
-        showTopToast(context, context.lt('알림이 삭제됐어요 🗑️'));
+        showTopToast(context, context.l10n.alarmDeleted);
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
@@ -64,7 +64,7 @@ class AlarmListItemPending extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            alarm.label ?? alarmTypeLabel(alarm.type),
+                            alarm.label ?? localizedAlarmTypeLabel(context, alarm.type),
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -94,9 +94,9 @@ class AlarmListItemPending extends ConsumerWidget {
                         borderRadius:
                             BorderRadius.circular(AppRadius.radiusFull),
                       ),
-                      child: const Text(
-                        '오늘',
-                        style: TextStyle(
+                      child: Text(
+                        context.l10n.today,
+                        style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w700,
                           color: AppColors.white,
@@ -130,7 +130,7 @@ class AlarmListItemPending extends ConsumerWidget {
                           ],
                         ),
                         alignment: Alignment.center,
-                        child: Text(context.lt('✅ 완료했어요'),
+                        child: Text(context.l10n.doneMsg,
                             style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700,
@@ -152,7 +152,7 @@ class AlarmListItemPending extends ConsumerWidget {
                               Border.all(color: AppColors.gray300, width: 1.5),
                         ),
                         alignment: Alignment.center,
-                        child: Text(context.lt('🕐 나중에'),
+                        child: Text(context.l10n.laterMsg,
                             style: const TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
@@ -192,7 +192,7 @@ class AlarmListItemPending extends ConsumerWidget {
   String _dateText(BuildContext context) {
     if (alarm.scheduledAt == null) return '';
     final dt = DateTime.parse(alarm.scheduledAt!);
-    return '${context.lt('오늘')} · ${TimeOfDay.fromDateTime(dt).format(context)}';
+    return '${context.l10n.today} · ${TimeOfDay.fromDateTime(dt).format(context)}';
   }
 }
 
@@ -239,7 +239,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final title = widget.alarm.label ?? alarmTypeLabel(widget.alarm.type);
+    final title = widget.alarm.label ?? localizedAlarmTypeLabel(context, widget.alarm.type);
 
     return Container(
       decoration: const BoxDecoration(
@@ -274,7 +274,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          context.lt('언제 다시 알려드릴까요?'),
+                          context.l10n.snoozeQuestion,
                           style: AppTypography.heading3,
                         ),
                         const SizedBox(height: 2),
@@ -318,7 +318,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
               const Divider(height: 1, color: AppColors.gray200),
               const SizedBox(height: AppSpacing.space4),
               Text(
-                context.lt('직접 지정'),
+                context.l10n.snoozeCustom,
                 style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
@@ -360,7 +360,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
                     ),
                   ),
                   child: Text(
-                    context.lt('이 시간에 다시 알림'),
+                    context.l10n.snoozeAtThisTime,
                     style: const TextStyle(
                         fontSize: 15, fontWeight: FontWeight.w700),
                   ),
@@ -403,10 +403,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
     if (widget.outerContext.mounted) {
       showTopToast(
         widget.outerContext,
-        widget.outerContext.lt(
-          '🕐 {time}에 다시 알려드릴게요',
-          args: {'time': widget.outerContext.lt(option.label)},
-        ),
+        widget.outerContext.l10n.snoozeConfirm(option.localizedLabel(widget.outerContext)),
       );
     }
   }
@@ -421,7 +418,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
     );
 
     if (!selected.isAfter(DateTime.now())) {
-      showTopToast(context, context.lt('지금 이후의 시간을 선택해주세요'));
+      showTopToast(context, context.l10n.selectFutureTime);
       return;
     }
 
@@ -433,12 +430,7 @@ class _SnoozeSheetState extends ConsumerState<_SnoozeSheet> {
     if (widget.outerContext.mounted) {
       showTopToast(
         widget.outerContext,
-        widget.outerContext.lt(
-          '🕐 {time}에 다시 알려드릴게요',
-          args: {
-            'time': formatLocalizedDateTime(widget.outerContext, selected),
-          },
-        ),
+        widget.outerContext.l10n.snoozeConfirm(formatLocalizedDateTime(widget.outerContext, selected)),
       );
     }
   }
@@ -452,6 +444,26 @@ class _SnoozeOption {
     required this.label,
     required this.minutes,
   });
+
+  String localizedLabel(BuildContext context) {
+    final l10n = context.l10n;
+    switch (minutes) {
+      case 5:
+        return l10n.snooze5min;
+      case 10:
+        return l10n.snooze10min;
+      case 30:
+        return l10n.snooze30min;
+      case 60:
+        return l10n.snooze1hour;
+      case 180:
+        return l10n.snooze3hour;
+      case 1440:
+        return l10n.tomorrowSameTime;
+      default:
+        return label;
+    }
+  }
 }
 
 class _SnoozeOptionButton extends StatelessWidget {
@@ -478,7 +490,7 @@ class _SnoozeOptionButton extends StatelessWidget {
             border: Border.all(color: AppColors.primary200, width: 1.2),
           ),
           child: Text(
-            context.lt(option.label),
+            option.localizedLabel(context),
             style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w700,

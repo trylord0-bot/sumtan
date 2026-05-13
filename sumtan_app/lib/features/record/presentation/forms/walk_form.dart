@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -38,12 +38,12 @@ class _WalkFormState extends ConsumerState<WalkForm> {
   Future<void> _save() async {
     final durationText = _durationCtrl.text.trim();
     if (durationText.isEmpty) {
-      showTopToast(context, context.lt('💡 산책 시간을 입력해 주세요'));
+      showTopToast(context, context.l10n.hintWalkTime);
       return;
     }
     final duration = int.tryParse(durationText);
     if (duration == null) {
-      showTopToast(context, context.lt('💡 산책 시간은 숫자로 입력해 주세요'));
+      showTopToast(context, context.l10n.hintWalkTimeIsNumber);
       return;
     }
 
@@ -74,15 +74,16 @@ class _WalkFormState extends ConsumerState<WalkForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('🦮 산책이 기록됐어요'));
+      showTopToast(context, context.l10n.walkRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '🦮 산책 기록',
+      title: l10n.walkFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -93,14 +94,14 @@ class _WalkFormState extends ConsumerState<WalkForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('산책 시간'),
+            FormFieldLabel(l10n.walkTime),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _durationCtrl,
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               decoration: InputDecoration(
-                hintText: context.lt('예: 30'),
+                hintText: l10n.example30,
                 suffixText: '분',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),
@@ -111,7 +112,7 @@ class _WalkFormState extends ConsumerState<WalkForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('거리', required: false),
+            FormFieldLabel(l10n.distance, required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _distanceCtrl,
@@ -121,7 +122,7 @@ class _WalkFormState extends ConsumerState<WalkForm> {
                 FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}')),
               ],
               decoration: InputDecoration(
-                hintText: context.lt('예: 2.5'),
+                hintText: l10n.example25,
                 suffixText: 'km',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),

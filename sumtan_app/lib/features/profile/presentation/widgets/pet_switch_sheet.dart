@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../pet/data/pet_model.dart';
@@ -62,7 +62,7 @@ class _PetSwitchSheet extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Text(
-                    context.lt('반려동물 선택'),
+                    context.l10n.selectPet,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -133,10 +133,10 @@ class _PetTile extends StatelessWidget {
     final parts = <String>[
       if (pet.breed != null) pet.breed!,
       if (pet.gender == 'male')
-        context.lt('수컷')
+        context.l10n.male
       else if (pet.gender == 'female')
-        context.lt('암컷'),
-      if (pet.ageLabel != '미입력') context.lt(pet.ageLabel),
+        context.l10n.female,
+      if (pet.ageLabel != '미입력') pet.ageLabel,
     ];
 
     return InkWell(
@@ -255,7 +255,7 @@ class _DashedAddButton extends StatelessWidget {
               const Icon(Icons.add, color: AppColors.primary600, size: 18),
               const SizedBox(width: 6),
               Text(
-                context.lt('새 반려동물 추가하기'),
+                context.l10n.addNewPet,
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../../app/localization/app_localizations.dart';
+import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/utils/date_utils.dart' as du;
@@ -53,7 +53,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   void _showSaved() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(context.lt('저장됐어요')),
+        content: Text(context.l10n.savedMsg),
         duration: const Duration(seconds: 1),
         behavior: SnackBarBehavior.floating,
         shape: const StadiumBorder(),
@@ -153,13 +153,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       context: context,
       builder: (ctx) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Text(context.lt('{name}을(를) 삭제할까요?', args: {'name': p.name})),
-        content: Text(context.lt('{name}의 모든 기록과 알림이 함께 삭제되며 복구할 수 없어요.',
-            args: {'name': p.name})),
+        title: Text(context.l10n.deletePetConfirm(p.name)),
+        content: Text(context.l10n.deletePetWarning(p.name)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text(context.lt('취소')),
+            child: Text(context.l10n.commonCancel),
           ),
           TextButton(
             style: TextButton.styleFrom(foregroundColor: AppColors.danger600),
@@ -170,15 +169,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
               ref.read(selectedPetIdProvider.notifier).state = null;
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(
-                      context.lt('{name}이(가) 삭제됐어요', args: {'name': name})),
+                  content: Text(context.l10n.petDeleted(name)),
                   behavior: SnackBarBehavior.floating,
                   shape: const StadiumBorder(),
                   backgroundColor: AppColors.gray800,
                 ));
               }
             },
-            child: Text(context.lt('삭제하기')),
+            child: Text(context.l10n.commonDelete),
           ),
         ],
       ),
@@ -278,7 +276,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     return petsAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) =>
-          Center(child: Text(context.lt('오류: {error}', args: {'error': '$e'}))),
+          Center(child: Text(context.l10n.errorOccurredWithDetail('$e'))),
       data: (pets) {
         // ── 빈 상태: 기존 화면 유지 ─────────────────────────────────────────
         if (pets.isEmpty) {
@@ -296,7 +294,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           children: [
             // 새 반려동물 추가 버튼 (최상단)
             _DashedButton(
-              label: '새 반려동물 추가하기',
+              label: context.l10n.addNewPet,
               onTap: () => openPaidAddPetScreen(context, ref),
             ),
             const SizedBox(height: AppSpacing.space4),
@@ -307,18 +305,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
             // 기본 정보
             _SectionCard(
-              title: '기본 정보',
+              title: context.l10n.basicInfo,
               children: [
                 _FieldRow(
-                  label: '이름',
+                  label: context.l10n.name,
                   controller: _nameCtrl,
                   onSave: () => _saveName(pet),
                   isLast: false,
                 ),
                 _FieldRow(
-                  label: '품종',
+                  label: context.l10n.breed,
                   controller: _breedCtrl,
-                  hint: '미입력',
+                  hint: context.l10n.notEntered,
                   onSave: () => _saveBreed(pet),
                   isLast: false,
                 ),
@@ -338,7 +336,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   isLast: false,
                 ),
                 _ReadOnlyRow(
-                  label: '나이',
+                  label: context.l10n.age,
                   value: '자동 계산 · ${pet.ageLabel}',
                   isLast: false,
                 ),
@@ -348,9 +346,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   isLast: false,
                 ),
                 _FieldRow(
-                  label: '체중',
+                  label: context.l10n.weight,
                   controller: _weightCtrl,
-                  hint: '미입력',
+                  hint: context.l10n.notEntered,
                   suffix: 'kg',
                   keyboardType:
                       const TextInputType.numberWithOptions(decimal: true),
@@ -372,12 +370,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
             // 식별 정보
             _SectionCard(
-              title: '식별 정보',
+              title: context.l10n.idInfo,
               children: [
                 _FieldRow(
-                  label: '마이크로칩',
+                  label: context.l10n.microchip,
                   controller: _microchipCtrl,
-                  hint: '미등록',
+                  hint: context.l10n.notRegistered,
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
@@ -387,9 +385,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   isLast: false,
                 ),
                 _FieldRow(
-                  label: '등록번호',
+                  label: context.l10n.registrationNumber,
                   controller: _regNumCtrl,
-                  hint: '미등록',
+                  hint: context.l10n.notRegistered,
                   onSave: () => _saveRegNum(pet),
                   isLast: true,
                 ),
@@ -411,7 +409,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                 ),
                 child: Text(
-                  context.lt('{name} 삭제하기', args: {'name': pet.name}),
+                  context.l10n.deletePetName(pet.name),
                   style: const TextStyle(
                       fontSize: 14, fontWeight: FontWeight.w600),
                 ),
@@ -445,7 +443,7 @@ class _EmptyProfileState extends StatelessWidget {
             const Text('🐾', style: TextStyle(fontSize: 56)),
             const SizedBox(height: AppSpacing.space4),
             Text(
-              context.lt('등록된 반려동물이 없어요'),
+              context.l10n.noPetsRegistered,
               style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
@@ -454,7 +452,7 @@ class _EmptyProfileState extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.space2),
             Text(
-              context.lt('반려동물을 등록하고\n건강을 함께 관리해봐요!'),
+              context.l10n.registerPetPrompt,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 14, color: AppColors.gray500),
             ),
@@ -462,7 +460,7 @@ class _EmptyProfileState extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: onAdd,
               icon: const Icon(Icons.add),
-              label: Text(context.lt('반려동물 등록하기')),
+              label: Text(context.l10n.registerPetBtn),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary400,
                 foregroundColor: AppColors.white,
@@ -504,7 +502,7 @@ class _DashedButton extends StatelessWidget {
               const Icon(Icons.add, color: AppColors.primary600, size: 16),
               const SizedBox(width: 4),
               Text(
-                context.lt(label),
+                label,
                 style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
@@ -606,7 +604,7 @@ class _SectionCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
             child: Text(
-              context.lt(title),
+              title,
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
@@ -684,7 +682,7 @@ class _FieldRowState extends State<_FieldRow> {
               SizedBox(
                 width: 88,
                 child: Text(
-                  context.lt(widget.label),
+                  widget.label,
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w500,
@@ -704,9 +702,7 @@ class _FieldRowState extends State<_FieldRow> {
                         style: const TextStyle(
                             fontSize: 14, color: AppColors.gray900),
                         decoration: InputDecoration(
-                          hintText: widget.hint == null
-                              ? null
-                              : context.lt(widget.hint!),
+                          hintText: widget.hint,
                           hintStyle: const TextStyle(
                               fontSize: 14, color: AppColors.gray400),
                           border: InputBorder.none,
@@ -771,14 +767,14 @@ class _ReadOnlyRow extends StatelessWidget {
             children: [
               SizedBox(
                 width: 88,
-                child: Text(context.lt(label),
+                child: Text(label,
                     style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
                         color: AppColors.gray500)),
               ),
               Expanded(
-                child: Text(context.lt(value),
+                child: Text(value,
                     style: const TextStyle(
                         fontSize: 13, color: AppColors.gray400)),
               ),
@@ -816,7 +812,7 @@ class _DateRow extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 88,
-                  child: Text(context.lt('생년월일'),
+                  child: Text(context.l10n.birthDate,
                       style: const TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
@@ -824,7 +820,7 @@ class _DateRow extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    value ?? context.lt('미입력'),
+                    value ?? context.l10n.notEntered,
                     style: TextStyle(
                       fontSize: 14,
                       color:
@@ -867,7 +863,7 @@ class _GenderRow extends StatelessWidget {
             children: [
               SizedBox(
                 width: 88,
-                child: Text(context.lt('성별'),
+                child: Text(context.l10n.gender,
                     style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
@@ -877,13 +873,13 @@ class _GenderRow extends StatelessWidget {
                 child: Row(
                   children: [
                     _GenderChip(
-                      label: '수컷 ♂',
+                      label: context.l10n.maleSym,
                       selected: value == 'male',
                       onTap: () => onChanged('male'),
                     ),
                     const SizedBox(width: 8),
                     _GenderChip(
-                      label: '암컷 ♀',
+                      label: context.l10n.femaleSym,
                       selected: value == 'female',
                       onTap: () => onChanged('female'),
                     ),
@@ -921,7 +917,7 @@ class _GenderChip extends StatelessWidget {
               color: selected ? AppColors.primary400 : AppColors.gray200),
         ),
         child: Text(
-          context.lt(label),
+          label,
           style: TextStyle(
             fontSize: 13,
             fontWeight: FontWeight.w500,
@@ -956,7 +952,7 @@ class _NeuteredRow extends StatelessWidget {
             children: [
               SizedBox(
                 width: 88,
-                child: Text(context.lt('중성화'),
+                child: Text(context.l10n.neuteringStatus,
                     style: const TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
@@ -964,7 +960,7 @@ class _NeuteredRow extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  value ? context.lt('완료') : context.lt('미완료'),
+                  value ? context.l10n.done : context.l10n.notDone,
                   style: TextStyle(
                     fontSize: 14,
                     color: value ? AppColors.primary700 : AppColors.gray400,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -93,15 +93,28 @@ class _MealFormState extends ConsumerState<MealForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('🍽️ 식사가 기록됐어요'));
+      showTopToast(context, context.l10n.mealRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
+  String _localizeAmount(BuildContext context, String val) {
+    final l10n = context.l10n;
+    return switch (val) {
+      'very_little' => l10n.veryLittle,
+      'little' => l10n.little,
+      'normal' => l10n.normal,
+      'much' => l10n.much,
+      'very_much' => l10n.veryMuch,
+      _ => val,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '🍽️ 식사 기록',
+      title: l10n.mealFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -111,8 +124,9 @@ class _MealFormState extends ConsumerState<MealForm> {
         const SizedBox(height: AppSpacing.space4),
 
         FormSegmentRow(
-          label: '식사 종류',
+          label: l10n.mealType,
           options: const ['아침', '점심', '저녁', '간식'],
+          optionLabels: [l10n.breakfast, l10n.lunch, l10n.dinner, l10n.snack],
           selected: _mealType,
           onChanged: (v) => setState(() => _mealType = v),
         ),
@@ -122,11 +136,11 @@ class _MealFormState extends ConsumerState<MealForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('식사량', required: false),
+            FormFieldLabel(l10n.mealAmount, required: false),
             const SizedBox(height: AppSpacing.space3),
             Row(
               children: _mealAmounts.map((entry) {
-                final (val, label, bowls) = entry;
+                final (val, _, bowls) = entry;
                 final isSelected = _mealAmount == val;
                 return Expanded(
                   child: GestureDetector(
@@ -148,7 +162,7 @@ class _MealFormState extends ConsumerState<MealForm> {
                           Text(bowls, style: const TextStyle(fontSize: 10)),
                           const SizedBox(height: 4),
                           Text(
-                            context.lt(label),
+                            _localizeAmount(context, val),
                             style: TextStyle(
                               fontSize: 9,
                               fontWeight: FontWeight.w600,
@@ -172,7 +186,7 @@ class _MealFormState extends ConsumerState<MealForm> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('급여량', required: false),
+            FormFieldLabel(l10n.feedAmount, required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _amountCtrl,
@@ -182,7 +196,7 @@ class _MealFormState extends ConsumerState<MealForm> {
                 FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}')),
               ],
               decoration: InputDecoration(
-                hintText: context.lt('예: 80'),
+                hintText: l10n.example80,
                 suffixText: 'g',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),

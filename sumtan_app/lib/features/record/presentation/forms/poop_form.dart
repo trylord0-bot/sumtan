@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
 import '../../data/record_model.dart';
@@ -55,15 +55,16 @@ class _PoopFormState extends ConsumerState<PoopForm> {
     ref.invalidate(weeklyPoopStatsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('💩 배변이 기록됐어요'));
+      showTopToast(context, context.l10n.poopRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '💩 배변 기록',
+      title: l10n.poopFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -72,15 +73,17 @@ class _PoopFormState extends ConsumerState<PoopForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
-          label: '유형',
+          label: l10n.poopType,
           options: const ['대변', '소변', '구토'],
+          optionLabels: [l10n.feces, l10n.urine, l10n.vomiting],
           selected: _type,
           onChanged: (v) => setState(() => _type = v),
         ),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
-          label: '상태',
+          label: l10n.poopStatus,
           options: const ['정상', '묽음', '딱딱함', '혈변'],
+          optionLabels: [l10n.normal, l10n.loose, l10n.hard, l10n.bloody],
           selected: _status,
           onChanged: (v) => setState(() => _status = v),
         ),

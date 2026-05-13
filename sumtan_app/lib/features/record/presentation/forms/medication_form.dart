@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
 import '../../data/record_model.dart';
@@ -38,11 +38,11 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
     final medicine = _nameCtrl.text.trim();
     final dose = _doseCtrl.text.trim();
     if (medicine.isEmpty) {
-      showTopToast(context, context.lt('💡 약품명을 입력해 주세요'));
+      showTopToast(context, context.l10n.hintMedicineName);
       return;
     }
     if (dose.isEmpty) {
-      showTopToast(context, context.lt('💡 용량을 입력해 주세요'));
+      showTopToast(context, context.l10n.hintDose);
       return;
     }
 
@@ -69,15 +69,16 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('💊 투약이 기록됐어요'));
+      showTopToast(context, context.l10n.medicationRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '💊 투약 기록',
+      title: l10n.medicationFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -86,14 +87,15 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-            label: '약품명', controller: _nameCtrl, hint: '예: 항생제, 소화제'),
+            label: l10n.medicineName, controller: _nameCtrl, hint: l10n.medicineNameExample),
         const SizedBox(height: AppSpacing.space3),
         FormInputField(
-            label: '용량', controller: _doseCtrl, hint: '예: 0.5ml, 1정'),
+            label: l10n.dose, controller: _doseCtrl, hint: 'e.g. 0.5ml, 1 tablet'),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
-          label: '투약 방법',
+          label: l10n.medicationMethod,
           options: const ['경구', '주사', '외용', '점안', '점이'],
+          optionLabels: [l10n.oral, l10n.injection, l10n.topical, l10n.eyeDrops, l10n.earDrops],
           selected: _method,
           onChanged: (v) => setState(() => _method = v),
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
@@ -68,15 +68,28 @@ class _WaterFormState extends ConsumerState<WaterForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('💧 음수가 기록됐어요'));
+      showTopToast(context, context.l10n.waterRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
+  String _localizeWaterAmount(BuildContext context, String val) {
+    final l10n = context.l10n;
+    return switch (val) {
+      'very_little' => l10n.veryLittle,
+      'little' => l10n.little,
+      'normal' => l10n.normal,
+      'much' => l10n.much,
+      'very_much' => l10n.veryMuch,
+      _ => val,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '💧 음수 기록',
+      title: l10n.waterFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -85,15 +98,14 @@ class _WaterFormState extends ConsumerState<WaterForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
 
-        // 음수량 단계 선택
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('음수량'),
+            FormFieldLabel(l10n.waterAmount),
             const SizedBox(height: AppSpacing.space3),
             Row(
               children: _amounts.map((entry) {
-                final (val, label, dots) = entry;
+                final (val, _, dots) = entry;
                 final isSelected = _waterAmount == val;
                 return Expanded(
                   child: GestureDetector(
@@ -117,7 +129,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
                           Text(dots, style: const TextStyle(fontSize: 10)),
                           const SizedBox(height: 4),
                           Text(
-                            context.lt(label),
+                            _localizeWaterAmount(context, val),
                             style: TextStyle(
                               fontSize: 9,
                               fontWeight: FontWeight.w600,
@@ -138,11 +150,10 @@ class _WaterFormState extends ConsumerState<WaterForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
 
-        // mL 직접 입력
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FormFieldLabel('mL 직접 입력', required: false),
+            FormFieldLabel(l10n.mlInputLabel, required: false),
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _mlCtrl,
@@ -152,7 +163,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
                 const _RangeLimitFormatter(max: 9999),
               ],
               decoration: InputDecoration(
-                hintText: context.lt('예: 200'),
+                hintText: l10n.example200,
                 suffixText: 'mL',
               ),
               style: const TextStyle(fontSize: 16, color: AppColors.gray900),

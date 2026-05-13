@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../app/localization/app_localizations.dart';
+import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_toast.dart';
@@ -174,16 +174,19 @@ class _NavBtn extends StatelessWidget {
 }
 
 class _WeekdayRow extends StatelessWidget {
-  static const _days = ['일', '월', '화', '수', '목', '금', '토'];
-
   const _WeekdayRow();
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final days = [
+      l10n.daySun, l10n.dayMon, l10n.dayTue, l10n.dayWed,
+      l10n.dayThu, l10n.dayFri, l10n.daySat,
+    ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.space4),
       child: Row(
-        children: _days.asMap().entries.map((e) {
+        children: days.asMap().entries.map((e) {
           final Color color = e.key == 0
               ? const Color(0xFFEF4444)
               : e.key == 6
@@ -191,7 +194,7 @@ class _WeekdayRow extends StatelessWidget {
                   : AppColors.gray400;
           return Expanded(
             child: Center(
-              child: Text(context.lt(e.value),
+              child: Text(e.value,
                   style: TextStyle(
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
@@ -339,8 +342,7 @@ class _EventList extends ConsumerWidget {
                 const Text('🐾', style: TextStyle(fontSize: 36)),
                 const SizedBox(height: AppSpacing.space3),
                 Text(
-                  context.lt('{date}의 기록이 없어요',
-                      args: {'date': du.formatMonthDay(selectedDate)}),
+                  context.l10n.noRecordsForDate(du.formatMonthDay(selectedDate)),
                   style:
                       const TextStyle(fontSize: 15, color: AppColors.gray500),
                 ),
@@ -363,10 +365,10 @@ class _EventList extends ConsumerWidget {
               return Padding(
                 padding: const EdgeInsets.only(bottom: AppSpacing.space2),
                 child: Text(
-                  context.lt('{date} 기록 ({count}건)', args: {
-                    'date': du.formatMonthDay(selectedDate),
-                    'count': '${records.length}',
-                  }),
+                  context.l10n.recordsForDate(
+                    du.formatMonthDay(selectedDate),
+                    '${records.length}',
+                  ),
                   style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -380,7 +382,7 @@ class _EventList extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (_, __) => Center(child: Text(context.lt('오류가 발생했어요'))),
+      error: (_, __) => Center(child: Text(context.l10n.errorOccurred)),
     );
   }
 }
@@ -404,7 +406,7 @@ class _EventCard extends ConsumerWidget {
         await ref.read(recordNotifierProvider.notifier).remove(id);
         _invalidateRecords(ref);
         if (context.mounted) {
-          showTopToast(context, context.lt('기록이 삭제됐어요 🗑️'));
+          showTopToast(context, context.l10n.recordDeleted);
         }
       },
       child: GestureDetector(
@@ -442,7 +444,7 @@ class _EventCard extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(context.lt(cat.label),
+                    Text(cat.localizedLabel(context),
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
@@ -450,7 +452,7 @@ class _EventCard extends ConsumerWidget {
                         )),
                     const SizedBox(height: 2),
                     Text(
-                      context.lt(_buildSubtitle(record)),
+                      _buildSubtitle(record),
                       style: const TextStyle(
                           fontSize: 12, color: AppColors.gray500),
                       maxLines: 1,

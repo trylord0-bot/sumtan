@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
 import '../../../../core/utils/date_utils.dart' as du;
@@ -35,7 +35,7 @@ class _MemoFormState extends ConsumerState<MemoForm> {
   Future<void> _save() async {
     final title = _titleCtrl.text.trim();
     if (title.isEmpty) {
-      showTopToast(context, context.lt('💡 제목을 입력해 주세요'));
+      showTopToast(context, context.l10n.hintMemoTitle);
       return;
     }
     final pet = ref.read(selectedPetProvider);
@@ -62,15 +62,16 @@ class _MemoFormState extends ConsumerState<MemoForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('📝 메모가 기록됐어요'));
+      showTopToast(context, context.l10n.memoRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '📝 메모',
+      title: l10n.memoFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -79,16 +80,17 @@ class _MemoFormState extends ConsumerState<MemoForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-          label: '제목',
+          label: l10n.title,
           controller: _titleCtrl,
-          hint: '메모 제목을 입력하세요',
+          hint: l10n.memoTitlePlaceholder,
         ),
         const SizedBox(height: AppSpacing.space4),
         FormMemoField(controller: _contentCtrl),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
-          label: '중요도',
+          label: l10n.importance,
           options: const ['일반', '중요'],
+          optionLabels: [l10n.general, l10n.important],
           selected: _pinned,
           onChanged: (v) => setState(() => _pinned = v),
         ),

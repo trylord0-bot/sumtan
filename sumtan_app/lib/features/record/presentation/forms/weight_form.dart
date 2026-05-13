@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
 import '../../data/record_model.dart';
@@ -36,13 +36,13 @@ class _WeightFormState extends ConsumerState<WeightForm> {
   Future<void> _save() async {
     final weightText = _weightCtrl.text.trim();
     if (weightText.isEmpty) {
-      showTopToast(context, context.lt('💡 체중을 입력해 주세요'));
+      showTopToast(context, context.l10n.hintWeight);
       return;
     }
 
     final weight = double.tryParse(weightText);
     if (weight == null) {
-      showTopToast(context, context.lt('💡 체중은 숫자로 입력해 주세요'));
+      showTopToast(context, context.l10n.hintWeightIsNumber);
       return;
     }
 
@@ -70,15 +70,16 @@ class _WeightFormState extends ConsumerState<WeightForm> {
     ref.invalidate(weightHistoryProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
-      showTopToast(context, context.lt('⚖️ 체중이 기록됐어요'));
+      showTopToast(context, context.l10n.weightRecordSaved);
       Navigator.pop(context, true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return FormShell(
-      title: '⚖️ 체중 기록',
+      title: l10n.weightFormTitle,
       onSave: _save,
       children: [
         FormDateTimePicker(
@@ -87,9 +88,9 @@ class _WeightFormState extends ConsumerState<WeightForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-          label: '체중 (kg)',
+          label: l10n.weightKg,
           controller: _weightCtrl,
-          hint: '예: 4.2',
+          hint: 'e.g. 4.2',
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
@@ -97,8 +98,9 @@ class _WeightFormState extends ConsumerState<WeightForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
-          label: '측정 방법',
+          label: l10n.measureMethod,
           options: const ['동물병원', '가정용 체중계', '안고 측정'],
+          optionLabels: [l10n.vetHospital, l10n.homeScale, l10n.holdAndWeigh],
           selected: _method,
           onChanged: (v) => setState(() => _method = v),
         ),

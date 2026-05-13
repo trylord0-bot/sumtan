@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../app/localization/app_localizations.dart';
+import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_toast.dart';
@@ -142,7 +142,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     switch (category) {
       case 'medication':
         if (text('medicine').isEmpty || text('dose').isEmpty) {
-          showTopToast(context, context.lt('💡 약품명과 용량을 입력해 주세요'));
+          showTopToast(context, context.l10n.hintMedicineAndDose);
           return;
         }
         data['medicine'] = text('medicine');
@@ -150,14 +150,14 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'weight':
         final weight = double.tryParse(text('weight_kg'));
         if (weight == null) {
-          showTopToast(context, context.lt('💡 체중을 숫자로 입력해 주세요'));
+          showTopToast(context, context.l10n.hintWeightIsNumber);
           return;
         }
         data['weight_kg'] = weight;
       case 'walk':
         final duration = int.tryParse(text('duration_min'));
         if (duration == null) {
-          showTopToast(context, context.lt('💡 산책 시간을 숫자로 입력해 주세요'));
+          showTopToast(context, context.l10n.hintWalkTimeIsNumber);
           return;
         }
         data['duration_min'] = duration;
@@ -169,7 +169,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         }
       case 'brushing':
         if (_stringList('parts').isEmpty) {
-          showTopToast(context, context.lt('💡 빗질 부위를 하나 이상 선택해 주세요'));
+          showTopToast(context, context.l10n.hintSelectBrushingArea);
           return;
         }
         final duration = int.tryParse(text('duration_min'));
@@ -180,17 +180,17 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         }
       case 'vaccination':
         if (_stringList('vaccines').isEmpty) {
-          showTopToast(context, context.lt('💡 백신 종류를 하나 이상 선택해 주세요'));
+          showTopToast(context, context.l10n.hintSelectVaccineType);
           return;
         }
       case 'grooming':
         if (_stringList('types').isEmpty) {
-          showTopToast(context, context.lt('💡 미용 종류를 하나 이상 선택해 주세요'));
+          showTopToast(context, context.l10n.hintSelectGroomingType);
           return;
         }
       case 'memo':
         if (text('title').isEmpty) {
-          showTopToast(context, context.lt('💡 제목을 입력해 주세요'));
+          showTopToast(context, context.l10n.hintMemoTitle);
           return;
         }
         data['title'] = text('title');
@@ -244,7 +244,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     _invalidateRecords();
 
     if (mounted) {
-      showTopToast(context, context.lt('기록이 수정됐어요'));
+      showTopToast(context, context.l10n.recordUpdated);
       Navigator.pop(context, true);
     }
   }
@@ -257,13 +257,12 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text(context.lt('기록을 삭제할까요?')),
-        content: Text(context.lt('{category} 기록이 삭제되고\n되돌릴 수 없어요.',
-            args: {'category': context.lt(cat.label)})),
+        title: Text(context.l10n.deleteRecordConfirm),
+        content: Text(context.l10n.deleteRecordBody(cat.localizedLabel(context))),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text(context.lt('취소')),
+            child: Text(context.l10n.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -271,11 +270,11 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
               await ref.read(recordNotifierProvider.notifier).remove(id);
               _invalidateRecords();
               if (!mounted) return;
-              showTopToast(context, context.lt('기록이 삭제됐어요 🗑️'));
+              showTopToast(context, context.l10n.recordDeleted);
               Navigator.pop(context, true);
             },
             style: TextButton.styleFrom(foregroundColor: AppColors.danger600),
-            child: Text(context.lt('삭제')),
+            child: Text(context.l10n.delete),
           ),
         ],
       ),
@@ -299,10 +298,10 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     final cat = RecordCategoryX.fromString(widget.record.category);
 
     return FormShell(
-      title: '${cat.emoji} ${context.lt(cat.label)} ${context.lt('수정')}',
+      title: '${cat.emoji} ${cat.localizedLabel(context)} ${context.l10n.edit}',
       onSave: _save,
       onDelete: _onDelete,
-      deleteLabel: '이 기록 삭제하기',
+      deleteLabel: context.l10n.deleteThisRecord,
       children: [
         FormDateTimePicker(
           value: _datetime,

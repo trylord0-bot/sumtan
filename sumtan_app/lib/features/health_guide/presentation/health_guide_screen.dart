@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../app/localization/app_localizations.dart';
+import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
@@ -39,7 +39,7 @@ Widget _item(Color dot, List<InlineSpan> spans) => Builder(
         InlineSpan localizeSpan(InlineSpan span) {
           if (span is TextSpan) {
             return TextSpan(
-              text: span.text == null ? null : context.lt(span.text!),
+              text: span.text,
               style: span.style,
               children: span.children?.map(localizeSpan).toList(),
             );
@@ -110,7 +110,7 @@ class _HealthGuideScreenState extends State<HealthGuideScreen>
     return Scaffold(
       backgroundColor: AppColors.creamBg,
       appBar: AppPageAppBar(
-        title: '건강관리 가이드',
+        title: context.l10n.healthGuide,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(49),
           child: Column(
@@ -128,8 +128,8 @@ class _HealthGuideScreenState extends State<HealthGuideScreen>
                 unselectedLabelStyle:
                     const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 tabs: [
-                  Tab(text: context.lt('🐶 강아지')),
-                  Tab(text: context.lt('🐱 고양이')),
+                  Tab(text: '🐶 ${context.l10n.dog}'),
+                  Tab(text: '🐱 ${context.l10n.cat}'),
                 ],
               ),
             ],
@@ -679,13 +679,13 @@ class _HeroBanner extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(context.lt(title),
+                Text(title,
                     style: TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w800,
                         color: titleColor)),
                 const SizedBox(height: 4),
-                Text(context.lt(subtitle),
+                Text(subtitle,
                     style: TextStyle(
                         fontSize: 12,
                         color: titleColor.withValues(alpha: 0.78),
@@ -723,7 +723,7 @@ class _SectionHeader extends StatelessWidget {
               Center(child: Text(emoji, style: const TextStyle(fontSize: 16))),
         ),
         const SizedBox(width: 8),
-        Text(context.lt(title),
+        Text(title,
             style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
@@ -780,7 +780,7 @@ class _CardHeader extends StatelessWidget {
           Text(emoji, style: const TextStyle(fontSize: 18)),
           const SizedBox(width: 10),
           Expanded(
-            child: Text(context.lt(title),
+            child: Text(title,
                 style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -806,7 +806,7 @@ class _CBadge extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration:
           BoxDecoration(color: bg, borderRadius: BorderRadius.circular(20)),
-      child: Text(context.lt(text),
+      child: Text(text,
           style:
               TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: fg)),
     );
@@ -843,7 +843,7 @@ class _AlertBox extends StatelessWidget {
           Text(icon, style: const TextStyle(fontSize: 15)),
           const SizedBox(width: 9),
           Expanded(
-            child: Text(context.lt(text),
+            child: Text(text,
                 style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
@@ -901,7 +901,7 @@ class _CheckupTable extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
         child: Text(
-          context.lt(text),
+          text,
           style: TextStyle(
             fontSize: 11,
             fontWeight: isHeader ? FontWeight.w700 : FontWeight.w400,
@@ -948,7 +948,7 @@ class _BreedExerciseTable extends StatelessWidget {
 
   Widget _hCell(BuildContext context, String t) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
-        child: Text(context.lt(t),
+        child: Text(t,
             style: const TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w700,
@@ -962,7 +962,7 @@ class _BreedExerciseTable extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
           decoration:
               BoxDecoration(color: bg, borderRadius: BorderRadius.circular(20)),
-          child: Text(context.lt(t),
+          child: Text(t,
               style: TextStyle(
                   fontSize: 10, fontWeight: FontWeight.w700, color: fg)),
         ),
@@ -970,7 +970,7 @@ class _BreedExerciseTable extends StatelessWidget {
 
   Widget _bCell(BuildContext context, String t) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 7),
-        child: Text(context.lt(t),
+        child: Text(t,
             style: const TextStyle(fontSize: 11, color: AppColors.gray700)),
       );
 }
@@ -988,8 +988,7 @@ class _Disclaimer extends StatelessWidget {
         border: Border.all(color: AppColors.gray200),
       ),
       child: Text(
-        context.lt(
-            '⚠️ 본 가이드는 일반적인 건강 정보 제공을 목적으로 하며, 개별 반려동물의 상태에 따라 수의사와 상담하시기 바랍니다.'),
+        '⚠️ 본 가이드는 일반적인 건강 정보 제공을 목적으로 하며, 개별 반려동물의 상태에 따라 수의사와 상담하시기 바랍니다.',
         style: const TextStyle(
             fontSize: 11, color: AppColors.gray500, height: 1.6),
       ),

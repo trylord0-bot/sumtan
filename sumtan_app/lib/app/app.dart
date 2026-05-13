@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'localization/app_localizations.dart';
+import 'l10n/generated/app_localizations.dart';
+import 'l10n/locale_controller.dart';
 import 'router.dart';
 import 'theme/app_theme.dart';
 import 'widgets/startup_splash.dart';
@@ -21,11 +21,7 @@ class SumtanApp extends ConsumerWidget {
       title: 'Pet Sumtan',
       theme: AppTheme.light,
       locale: locale,
-      localeResolutionCallback: AppLocalizations.resolve,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        ...GlobalMaterialLocalizations.delegates,
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,

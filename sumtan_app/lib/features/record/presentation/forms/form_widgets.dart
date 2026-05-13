@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/widgets/localized_pickers.dart';
@@ -17,7 +17,7 @@ class FormShell extends StatelessWidget {
     required this.title,
     required this.onSave,
     this.onDelete,
-    this.deleteLabel = '삭제하기',
+    this.deleteLabel = '',
     required this.children,
   });
 
@@ -61,7 +61,7 @@ class FormShell extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Text(context.lt(title),
+                    Text(title,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -107,7 +107,7 @@ class FormShell extends StatelessWidget {
                                   BorderRadius.circular(AppRadius.radiusXl),
                             ),
                           ),
-                          child: Text(context.lt('저장하기'),
+                          child: Text(context.l10n.save,
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w700,
@@ -132,7 +132,7 @@ class FormShell extends StatelessWidget {
                               ),
                             ),
                             icon: const Icon(Icons.delete_outline, size: 18),
-                            label: Text(context.lt(deleteLabel)),
+                            label: Text(deleteLabel),
                           ),
                         ),
                       ],
@@ -257,7 +257,7 @@ class FormFieldLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      required ? '${context.lt(label)} *' : context.lt(label),
+      required ? '$label *' : label,
       style: const TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w600,
@@ -271,6 +271,7 @@ class FormSegmentRow extends StatelessWidget {
   final String label;
   final bool required;
   final List<String> options;
+  final List<String>? optionLabels;
   final String selected;
   final ValueChanged<String> onChanged;
 
@@ -279,6 +280,7 @@ class FormSegmentRow extends StatelessWidget {
     required this.label,
     this.required = true,
     required this.options,
+    this.optionLabels,
     required this.selected,
     required this.onChanged,
   });
@@ -298,8 +300,13 @@ class FormSegmentRow extends StatelessWidget {
             border: Border.all(color: AppColors.gray200),
           ),
           child: Row(
-            children: options.map((opt) {
+            children: options.asMap().entries.map((entry) {
+              final i = entry.key;
+              final opt = entry.value;
               final sel = selected == opt;
+              final displayLabel = (optionLabels != null && i < optionLabels!.length)
+                  ? optionLabels![i]
+                  : opt;
               return Expanded(
                 child: GestureDetector(
                   onTap: () => onChanged(opt),
@@ -312,7 +319,7 @@ class FormSegmentRow extends StatelessWidget {
                           BorderRadius.circular(AppRadius.radiusSm - 2),
                     ),
                     alignment: Alignment.center,
-                    child: Text(context.lt(opt),
+                    child: Text(displayLabel,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -403,7 +410,7 @@ class _FormInputFieldState extends State<FormInputField> {
             top: 20,
             bottom: keyboardInset + 120,
           ),
-          decoration: InputDecoration(hintText: context.lt(widget.hint)),
+          decoration: InputDecoration(hintText: widget.hint),
           style: const TextStyle(fontSize: 16, color: AppColors.gray900),
         ),
       ],
@@ -459,7 +466,7 @@ class _FormMemoFieldState extends State<FormMemoField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        FormFieldLabel(context.lt('메모'), required: false),
+        FormFieldLabel(context.l10n.memo, required: false),
         const SizedBox(height: AppSpacing.space2),
         TextFormField(
           controller: widget.controller,
@@ -471,7 +478,7 @@ class _FormMemoFieldState extends State<FormMemoField> {
             top: 20,
             bottom: keyboardInset + 140,
           ),
-          decoration: InputDecoration(hintText: context.lt('자유롭게 메모를 남겨보세요')),
+          decoration: InputDecoration(hintText: context.l10n.memoPlaceholder),
           style: const TextStyle(fontSize: 16, color: AppColors.gray900),
         ),
       ],
@@ -483,6 +490,7 @@ class FormTagSelector extends StatefulWidget {
   final String label;
   final bool required;
   final List<String> options;
+  final List<String>? optionLabels;
   final List<String> selected;
   final ValueChanged<List<String>> onChanged;
 
@@ -491,6 +499,7 @@ class FormTagSelector extends StatefulWidget {
     required this.label,
     this.required = true,
     required this.options,
+    this.optionLabels,
     required this.selected,
     required this.onChanged,
   });
@@ -501,6 +510,14 @@ class FormTagSelector extends StatefulWidget {
 
 class _FormTagSelectorState extends State<FormTagSelector> {
   bool _expanded = false;
+
+  String _labelFor(String value) {
+    if (widget.optionLabels == null) return value;
+    final idx = widget.options.indexOf(value);
+    return (idx >= 0 && idx < widget.optionLabels!.length)
+        ? widget.optionLabels![idx]
+        : value;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -526,7 +543,7 @@ class _FormTagSelectorState extends State<FormTagSelector> {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(context.lt(tag),
+                          Text(_labelFor(tag),
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -560,7 +577,7 @@ class _FormTagSelectorState extends State<FormTagSelector> {
               color: AppColors.primary50,
               borderRadius: BorderRadius.circular(AppRadius.radiusFull),
             ),
-            child: Text(context.lt('+ 추가'),
+            child: Text(context.l10n.addBtn,
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -573,8 +590,14 @@ class _FormTagSelectorState extends State<FormTagSelector> {
           ClipRRect(
             borderRadius: BorderRadius.circular(AppRadius.radiusMd),
             child: Column(
-              children: widget.options.map((opt) {
+              children: widget.options.asMap().entries.map((entry) {
+                final i = entry.key;
+                final opt = entry.value;
                 final isSelected = widget.selected.contains(opt);
+                final displayLabel = (widget.optionLabels != null &&
+                        i < widget.optionLabels!.length)
+                    ? widget.optionLabels![i]
+                    : opt;
                 return GestureDetector(
                   onTap: isSelected
                       ? null
@@ -591,7 +614,7 @@ class _FormTagSelectorState extends State<FormTagSelector> {
                       vertical: 12,
                     ),
                     child: Text(
-                      context.lt(opt),
+                      displayLabel,
                       style: TextStyle(
                         fontSize: 14,
                         color:

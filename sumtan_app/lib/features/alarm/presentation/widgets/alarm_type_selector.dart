@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
+import '../../data/alarm_model.dart';
 import 'alarm_form_sheet.dart';
 
 class AlarmTypeSelector extends StatelessWidget {
@@ -11,11 +12,11 @@ class AlarmTypeSelector extends StatelessWidget {
   const AlarmTypeSelector({super.key, required this.outerContext});
 
   static const _types = [
-    ('vaccination', '💉', '예방접종'),
-    ('hospital', '🏥', '병원 예약'),
-    ('medication', '💊', '투약'),
-    ('meal', '🍽️', '식사 시간'),
-    ('daily', '📋', '일일 리마인더'),
+    ('vaccination', '💉'),
+    ('hospital', '🏥'),
+    ('medication', '💊'),
+    ('meal', '🍽️'),
+    ('daily', '📋'),
   ];
 
   @override
@@ -42,7 +43,7 @@ class AlarmTypeSelector extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Text(context.lt('알림 종류 선택'),
+                  child: Text(context.l10n.selectAlarmType,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
@@ -69,7 +70,7 @@ class AlarmTypeSelector extends StatelessWidget {
                   .map((t) => _TypeCard(
                         type: t.$1,
                         emoji: t.$2,
-                        label: t.$3,
+                        label: localizedAlarmTypeLabel(context, t.$1),
                         onTap: () {
                           // 1. Close type selector
                           Navigator.pop(context);
@@ -88,7 +89,7 @@ class AlarmTypeSelector extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 16, 0, 8),
-            child: Text(context.lt('👆 원하는 알림 종류를 탭하세요'),
+            child: Text(context.l10n.tapAlarmTypeHint,
                 style: const TextStyle(fontSize: 12, color: AppColors.gray400)),
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
@@ -126,7 +127,7 @@ class _TypeCard extends StatelessWidget {
           children: [
             Text(emoji, style: const TextStyle(fontSize: 28)),
             const SizedBox(height: 4),
-            Text(context.lt(label),
+            Text(label,
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,

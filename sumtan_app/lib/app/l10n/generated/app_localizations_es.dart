@@ -528,7 +528,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get viewAll => 'Ver todo';
 
   @override
-  String get weekStats => 'Estadísticas de esta semana';
+  String get weekStats => 'Estadísticas de salud';
 
   @override
   String get pottyCount => 'Cuenta de baño';

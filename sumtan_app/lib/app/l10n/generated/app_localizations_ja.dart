@@ -515,7 +515,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get viewAll => 'すべて表示';
 
   @override
-  String get weekStats => '今週の統計';
+  String get weekStats => '健康統計';
 
   @override
   String get pottyCount => '排泄回数';

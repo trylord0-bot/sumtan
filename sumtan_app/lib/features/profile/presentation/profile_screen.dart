@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as ph;
 import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
@@ -142,8 +144,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     try {
       final file = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (file == null) return;
+      final appDir = await getApplicationDocumentsDirectory();
+      final dir = Directory(ph.join(appDir.path, 'profile_images'));
+      await dir.create(recursive: true);
+      final ext = ph.extension(file.path).isNotEmpty ? ph.extension(file.path) : '.jpg';
+      final destPath = ph.join(dir.path, '${DateTime.now().millisecondsSinceEpoch}$ext');
+      await File(file.path).copy(destPath);
       await ref.read(petsProvider.notifier).update(
-          _full(p, profileImagePath: file.path),
+          _full(p, profileImagePath: destPath),
           previousWeight: p.weight);
     } catch (_) {}
   }

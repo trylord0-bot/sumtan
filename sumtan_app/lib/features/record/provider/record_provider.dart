@@ -49,6 +49,9 @@ final selectedDateRecordsProvider =
 // 체중 기간 토글 (7일 or 30일)
 final weightPeriodProvider = StateProvider<int>((ref) => 7);
 
+// 통계 기간 토글 (7일 or 30일)
+final statsPeriodProvider = StateProvider<int>((ref) => 7);
+
 // 체중 추세 기록
 final weightHistoryProvider =
     FutureProvider.autoDispose<List<Record>>((ref) async {
@@ -60,28 +63,37 @@ final weightHistoryProvider =
       .getWeightHistoryByPet(pet.id!, days: period);
 });
 
-// 배변 주간 통계
+// 배변 통계
 final weeklyPoopStatsProvider =
     FutureProvider.autoDispose<Map<DateTime, int>>((ref) async {
   final pet = ref.watch(selectedPetProvider);
+  final days = ref.watch(statsPeriodProvider);
   if (pet == null || pet.id == null) return {};
-  return ref.read(recordRepositoryProvider).getWeeklyPoopCountsByPet(pet.id!);
+  return ref
+      .read(recordRepositoryProvider)
+      .getWeeklyPoopCountsByPet(pet.id!, days: days);
 });
 
-// 음수 주간 통계 (단계 점수 합산)
+// 음수 통계 (횟수)
 final weeklyWaterStatsProvider =
     FutureProvider.autoDispose<Map<DateTime, int>>((ref) async {
   final pet = ref.watch(selectedPetProvider);
+  final days = ref.watch(statsPeriodProvider);
   if (pet == null || pet.id == null) return {};
-  return ref.read(recordRepositoryProvider).getWeeklyWaterStatsByPet(pet.id!);
+  return ref
+      .read(recordRepositoryProvider)
+      .getWeeklyWaterStatsByPet(pet.id!, days: days);
 });
 
-// 식사 주간 통계
+// 식사 통계
 final weeklyMealStatsProvider =
     FutureProvider.autoDispose<Map<DateTime, int>>((ref) async {
   final pet = ref.watch(selectedPetProvider);
+  final days = ref.watch(statsPeriodProvider);
   if (pet == null || pet.id == null) return {};
-  return ref.read(recordRepositoryProvider).getWeeklyMealCountsByPet(pet.id!);
+  return ref
+      .read(recordRepositoryProvider)
+      .getWeeklyMealCountsByPet(pet.id!, days: days);
 });
 
 // 가장 최근 기록

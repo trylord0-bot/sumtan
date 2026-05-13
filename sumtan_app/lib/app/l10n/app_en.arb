@@ -525,7 +525,7 @@
   "viewAll": "View all",
   "@viewAll": { "description": "View all button" },
 
-  "weekStats": "This week’s stats",
+  "weekStats": "Health Stats",
   "@weekStats": { "description": "This week stats label" },
 
   "pottyCount": "Potty count",

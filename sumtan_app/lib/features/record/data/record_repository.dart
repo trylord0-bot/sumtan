@@ -131,11 +131,12 @@ class RecordRepository {
     return rows.map(Record.fromMap).toList();
   }
 
-  /// Returns {date: count} for the last 7 days including today (poop only).
-  Future<Map<DateTime, int>> getWeeklyPoopCountsByPet(int petId) async {
+  /// Returns {date: count} for the last [days] days including today (poop only).
+  Future<Map<DateTime, int>> getWeeklyPoopCountsByPet(int petId,
+      {int days = 7}) async {
     final now = DateTime.now();
     final result = <DateTime, int>{};
-    for (int i = 6; i >= 0; i--) {
+    for (int i = days - 1; i >= 0; i--) {
       final day = DateTime(now.year, now.month, now.day - i);
       final records = await getByPetAndDate(petId, day);
       final count = records.where((r) => r.category == 'poop').length;
@@ -144,11 +145,12 @@ class RecordRepository {
     return result;
   }
 
-  /// Returns {date: count} for the last 7 days including today (meal only).
-  Future<Map<DateTime, int>> getWeeklyMealCountsByPet(int petId) async {
+  /// Returns {date: count} for the last [days] days including today (meal only).
+  Future<Map<DateTime, int>> getWeeklyMealCountsByPet(int petId,
+      {int days = 7}) async {
     final now = DateTime.now();
     final result = <DateTime, int>{};
-    for (int i = 6; i >= 0; i--) {
+    for (int i = days - 1; i >= 0; i--) {
       final day = DateTime(now.year, now.month, now.day - i);
       final records = await getByPetAndDate(petId, day);
       final count = records.where((r) => r.category == 'meal').length;
@@ -157,26 +159,16 @@ class RecordRepository {
     return result;
   }
 
-  /// Returns {date: score} for the last 7 days (water amount score sum).
-  /// Scores: very_little=1, little=2, normal=3, much=4, very_much=5
-  Future<Map<DateTime, int>> getWeeklyWaterStatsByPet(int petId) async {
-    const scores = {
-      'very_little': 1,
-      'little': 2,
-      'normal': 3,
-      'much': 4,
-      'very_much': 5,
-    };
+  /// Returns {date: count} for the last [days] days including today (water only).
+  Future<Map<DateTime, int>> getWeeklyWaterStatsByPet(int petId,
+      {int days = 7}) async {
     final now = DateTime.now();
     final result = <DateTime, int>{};
-    for (int i = 6; i >= 0; i--) {
+    for (int i = days - 1; i >= 0; i--) {
       final day = DateTime(now.year, now.month, now.day - i);
       final records = await getByPetAndDate(petId, day);
-      final score = records
-          .where((r) => r.category == 'water')
-          .map((r) => scores[r.dataJson?['water_amount'] as String?] ?? 0)
-          .fold(0, (a, b) => a + b);
-      result[DateTime(day.year, day.month, day.day)] = score;
+      final count = records.where((r) => r.category == 'water').length;
+      result[DateTime(day.year, day.month, day.day)] = count;
     }
     return result;
   }

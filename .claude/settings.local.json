@@ -14,7 +14,9 @@
       "Bash(Sort-Object)",
       "Bash(dart run *)",
       "Read(//usr/local/bin/**)",
-      "Read(//Users/lukas/flutter/bin/**)"
+      "Read(//Users/lukas/flutter/bin/**)",
+      "Bash(Select-String -Pattern \"\\(home|stat|chart\\)\")",
+      "Bash(Get-ChildItem -Path \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\\\\lib\\\\features\\\\home\" -Recurse -Filter \"*.dart\")"
     ]
   }
 }

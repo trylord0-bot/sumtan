@@ -513,7 +513,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get viewAll => '查看全部';
 
   @override
-  String get weekStats => '本周统计';
+  String get weekStats => '健康统计';
 
   @override
   String get pottyCount => '排泄次数';
@@ -3017,7 +3017,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get viewAll => '查看全部';
 
   @override
-  String get weekStats => '本周统计';
+  String get weekStats => '健康统计';
 
   @override
   String get pottyCount => '排泄次数';
@@ -5518,7 +5518,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get viewAll => '查看全部';
 
   @override
-  String get weekStats => '本週統計';
+  String get weekStats => '健康統計';
 
   @override
   String get pottyCount => '排泄次數';

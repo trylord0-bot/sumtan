@@ -66,6 +66,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
     ref.invalidate(recentRecordsProvider);
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
+    ref.invalidate(weeklyWaterStatsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
       showTopToast(context, context.l10n.waterRecordSaved);

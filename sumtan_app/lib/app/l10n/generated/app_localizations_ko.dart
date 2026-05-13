@@ -516,7 +516,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get viewAll => '전체 보기';
 
   @override
-  String get weekStats => '이번 주 통계';
+  String get weekStats => '건강 통계';
 
   @override
   String get pottyCount => '배변 횟수';

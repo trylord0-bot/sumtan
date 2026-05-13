@@ -529,7 +529,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get viewAll => 'Tout voir';
 
   @override
-  String get weekStats => 'Statistiques de la semaine';
+  String get weekStats => 'Statistiques de santé';
 
   @override
   String get pottyCount => 'Nombre de selles';

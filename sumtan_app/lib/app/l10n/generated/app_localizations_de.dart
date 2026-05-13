@@ -527,7 +527,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get viewAll => 'Alle anzeigen';
 
   @override
-  String get weekStats => 'Statistiken dieser Woche';
+  String get weekStats => 'Gesundheitsstatistiken';
 
   @override
   String get pottyCount => 'Toilettengänge';

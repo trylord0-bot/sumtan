@@ -91,6 +91,7 @@ class _MealFormState extends ConsumerState<MealForm> {
     ref.invalidate(recentRecordsProvider);
     ref.invalidate(selectedDateRecordsProvider);
     ref.invalidate(monthRecordsProvider);
+    ref.invalidate(weeklyMealStatsProvider);
     ref.invalidate(lastRecordProvider);
     if (mounted) {
       showTopToast(context, context.l10n.mealRecordSaved);

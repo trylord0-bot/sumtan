@@ -1095,7 +1095,7 @@ abstract class AppLocalizations {
   /// This week stats label
   ///
   /// In en, this message translates to:
-  /// **'This week’s stats'**
+  /// **'Health Stats'**
   String get weekStats;
 
   /// Potty count label

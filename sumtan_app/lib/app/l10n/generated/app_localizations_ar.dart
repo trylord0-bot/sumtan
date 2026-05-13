@@ -522,7 +522,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get viewAll => 'عرض الكل';
 
   @override
-  String get weekStats => 'إحصائيات هذا الأسبوع';
+  String get weekStats => 'إحصائيات الصحة';
 
   @override
   String get pottyCount => 'عدد الإخراج';

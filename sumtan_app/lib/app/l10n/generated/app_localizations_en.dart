@@ -522,7 +522,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewAll => 'View all';
 
   @override
-  String get weekStats => 'This week’s stats';
+  String get weekStats => 'Health Stats';
 
   @override
   String get pottyCount => 'Potty count';

@@ -137,9 +137,8 @@ class HomeScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSpacing.space5),
 
-                    // ⑤ 이번 주 통계
-                    _SectionHeader(
-                        title: context.l10n.weekStats, linkLabel: ''),
+                    // ⑤ 통계 추이
+                    const _StatsHeader(),
                     const SizedBox(height: AppSpacing.space3),
 
                     poopAsync.when(
@@ -150,6 +149,7 @@ class HomeScreen extends ConsumerWidget {
                         todayColor: AppColors.primary400,
                         pastColor: AppColors.primary200,
                         unit: context.l10n.timesUnit,
+                        period: ref.watch(statsPeriodProvider),
                       ),
                       loading: () => _statsLoadingBox(),
                       error: (_, __) => const SizedBox.shrink(),
@@ -164,6 +164,7 @@ class HomeScreen extends ConsumerWidget {
                         todayColor: AppColors.warning400,
                         pastColor: AppColors.warning200,
                         unit: context.l10n.mealsUnit,
+                        period: ref.watch(statsPeriodProvider),
                       ),
                       loading: () => _statsLoadingBox(),
                       error: (_, __) => const SizedBox.shrink(),
@@ -177,7 +178,8 @@ class HomeScreen extends ConsumerWidget {
                         stats: stats,
                         todayColor: AppColors.cyan400,
                         pastColor: AppColors.cyan200,
-                        unit: context.l10n.pointsUnit,
+                        unit: context.l10n.timesUnit,
+                        period: ref.watch(statsPeriodProvider),
                       ),
                       loading: () => _statsLoadingBox(),
                       error: (_, __) => const SizedBox.shrink(),
@@ -1023,7 +1025,33 @@ class _RecordList extends StatelessWidget {
   }
 }
 
-// ─── Weekly bar card (공통: 배변 / 식사) ──────────────────────────────────────
+// ─── Stats section header with period toggle ──────────────────────────────────
+
+class _StatsHeader extends ConsumerWidget {
+  const _StatsHeader();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final period = ref.watch(statsPeriodProvider);
+    return Row(
+      children: [
+        Text(context.l10n.weekStats,
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+              color: AppColors.gray600,
+            )),
+        const Spacer(),
+        _PeriodToggle(
+          selected: period,
+          onSelect: (v) => ref.read(statsPeriodProvider.notifier).state = v,
+        ),
+      ],
+    );
+  }
+}
+
+// ─── Weekly bar card (공통: 배변 / 식사 / 음수) ────────────────────────────────
 
 class _WeeklyBarCard extends StatelessWidget {
   final String emoji;
@@ -1032,6 +1060,7 @@ class _WeeklyBarCard extends StatelessWidget {
   final Color todayColor;
   final Color pastColor;
   final String unit;
+  final int period;
 
   const _WeeklyBarCard({
     required this.emoji,
@@ -1040,19 +1069,23 @@ class _WeeklyBarCard extends StatelessWidget {
     required this.todayColor,
     required this.pastColor,
     required this.unit,
+    required this.period,
   });
 
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
     final days = List.generate(
-        7, (i) => DateTime(now.year, now.month, now.day - (6 - i)));
+        period, (i) => DateTime(now.year, now.month, now.day - (period - 1 - i)));
     final counts = days.map((d) => stats[d] ?? 0).toList();
     final total = counts.fold<int>(0, (a, b) => a + b);
-    final avg = total / 7;
+    // 실제 입력된 날(count > 0)만 분모로 사용. 0도 포함(0-count 입력일 포함).
+    final activeDays = counts.where((c) => c > 0).length;
+    final avg = activeDays == 0 ? 0.0 : total / activeDays;
     final maxCount = counts.isEmpty ? 1 : counts.reduce(math.max);
     final barMax = maxCount < 1 ? 1 : maxCount;
 
+    final show7 = period == 7;
     final dayLabels = [
       context.l10n.dayMon,
       context.l10n.dayTue,
@@ -1102,10 +1135,10 @@ class _WeeklyBarCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.space4),
           SizedBox(
-            height: 80,
+            height: 88,
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: List.generate(7, (i) {
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: List.generate(period, (i) {
                 final d = days[i];
                 final count = counts[i];
                 final isToday = d.year == now.year &&
@@ -1113,43 +1146,69 @@ class _WeeklyBarCard extends StatelessWidget {
                     d.day == now.day;
                 final isFuture = d.isAfter(now);
                 final barFrac = isFuture ? 0.0 : count / barMax;
-                final barH = math.max(barFrac * 56.0, count > 0 ? 8.0 : 4.0);
+                // 바 높이: 막대 영역(62px) 기준으로 비율 적용, 최소 높이 보장
+                final barH = math.max(barFrac * 52.0, count > 0 ? 6.0 : 3.0);
                 final barColor = isToday
                     ? todayColor
                     : (count > 0 ? pastColor : AppColors.gray200);
-                final wLabel = dayLabels[(d.weekday - 1) % 7];
+
+                // 30일 뷰: 첫날·오늘·마지막 날만 라벨 표시
+                String wLabel;
+                if (show7) {
+                  wLabel = dayLabels[(d.weekday - 1) % 7];
+                } else {
+                  wLabel = (isToday || i == 0 || i == period - 1)
+                      ? '${d.month}/${d.day}'
+                      : '';
+                }
+
+                final countText = isFuture ? '' : (count > 0 ? '$count' : '');
 
                 return Expanded(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
-                        isFuture ? '-' : (count > 0 ? '$count' : ''),
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          color: isToday ? todayColor : AppColors.gray500,
-                        ),
-                      ),
-                      const SizedBox(height: 2),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: Container(
-                          height: barH,
-                          decoration: BoxDecoration(
-                            color: barColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
+                      // 바 영역: count 라벨 + 바를 하단 정렬
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              countText,
+                              style: TextStyle(
+                                fontSize: show7 ? 11 : 9,
+                                fontWeight: FontWeight.w600,
+                                color: isToday ? todayColor : AppColors.gray500,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: show7 ? 4 : 1),
+                              child: Container(
+                                height: barH,
+                                decoration: BoxDecoration(
+                                  color: barColor,
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Text(
-                        wLabel,
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: isToday ? todayColor : AppColors.gray400,
-                          fontWeight:
-                              isToday ? FontWeight.w700 : FontWeight.w400,
+                      // 요일/날짜 라벨 영역 (고정 높이)
+                      SizedBox(
+                        height: 14,
+                        child: Text(
+                          wLabel,
+                          style: TextStyle(
+                            fontSize: show7 ? 11 : 8,
+                            color: isToday ? todayColor : AppColors.gray400,
+                            fontWeight:
+                                isToday ? FontWeight.w700 : FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.visible,
                         ),
                       ),
                     ],

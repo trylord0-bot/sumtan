@@ -14,8 +14,8 @@ class SumtanApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locale = ref.watch(localeControllerProvider).valueOrNull;
-    //final locale = Locale('ja');
+    //final locale = ref.watch(localeControllerProvider).valueOrNull;
+    final locale = Locale('ja');
 
     return MaterialApp.router(
       title: 'Pet Sumtan',

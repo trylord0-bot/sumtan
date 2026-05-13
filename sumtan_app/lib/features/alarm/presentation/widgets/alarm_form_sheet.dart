@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../app/localization/app_localizations.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
@@ -89,29 +89,30 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
 
   // ── Validation ─────────────────────────────────────────────────────────────
 
-  String? _validate() {
+  String? _validate(BuildContext context) {
+    final l10n = context.l10n;
     switch (_type) {
       case 'vaccination':
-        if (_labelCtrl.text.trim().isEmpty) return '💡 백신 이름을 입력해 주세요';
-        if (_scheduledDate == null) return '💡 예정일을 선택해 주세요';
-        if (_scheduledTime == null) return '💡 예정 시각을 선택해 주세요';
+        if (_labelCtrl.text.trim().isEmpty) return l10n.hintVaccineName;
+        if (_scheduledDate == null) return l10n.hintSelectScheduledDate;
+        if (_scheduledTime == null) return l10n.hintSelectScheduledTime;
       case 'hospital':
-        if (_labelCtrl.text.trim().isEmpty) return '💡 방문 목적을 입력해 주세요';
-        if (_scheduledDate == null) return '💡 예약 날짜를 선택해 주세요';
-        if (_scheduledTime == null) return '💡 예약 시각을 선택해 주세요';
+        if (_labelCtrl.text.trim().isEmpty) return l10n.hintVisitPurpose;
+        if (_scheduledDate == null) return l10n.hintSelectAppointmentDate;
+        if (_scheduledTime == null) return l10n.hintSelectAppointmentTime;
       case 'medication':
-        if (_labelCtrl.text.trim().isEmpty) return '💡 약품 이름을 입력해 주세요';
+        if (_labelCtrl.text.trim().isEmpty) return l10n.hintMedicineNameInput;
         if (_repeatRule == 'none' && _scheduledDate == null) {
-          return '💡 투약 날짜를 선택해 주세요';
+          return l10n.hintSelectMedicationDate;
         }
         if (_repeatRule != 'none' && _repeatTime == null) {
-          return '💡 투약 시각을 선택해 주세요';
+          return l10n.hintSelectMedicationTime;
         }
       case 'meal':
-        if (_labelCtrl.text.trim().isEmpty) return '💡 알림 이름을 입력해 주세요';
-        if (_repeatTime == null) return '💡 식사 시각을 선택해 주세요';
+        if (_labelCtrl.text.trim().isEmpty) return l10n.hintAlarmName;
+        if (_repeatTime == null) return l10n.hintSelectMealTime;
       case 'daily':
-        if (_repeatTime == null) return '💡 알림 시각을 선택해 주세요';
+        if (_repeatTime == null) return l10n.hintSelectAlarmTime;
     }
     return null;
   }
@@ -124,16 +125,16 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
     if (_saving) return;
 
     // Validation
-    final err = _validate();
+    final err = _validate(context);
     if (err != null) {
-      showTopToast(context, context.lt(err));
+      showTopToast(context, err);
       return;
     }
 
     // Pet guard
     final pet = ref.read(selectedPetProvider);
     if (pet == null) {
-      showTopToast(context, context.lt('아직 반려동물이 없네요 🐾 프로필에서 먼저 등록해 주세요!'));
+      showTopToast(context, context.l10n.noPetRegisterFirst);
       return;
     }
 
@@ -207,10 +208,10 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         showTopToast(
           context,
           widget.isReschedule
-              ? context.lt('🔄 알림이 재예약됐어요')
+              ? context.l10n.alarmRescheduled
               : _isEdit
-                  ? context.lt('✅ 알림이 수정됐어요')
-                  : context.lt('🔔 알림이 추가됐어요'),
+                  ? context.l10n.alarmUpdated
+                  : context.l10n.alarmAdded,
         );
         Navigator.pop(context);
       }
@@ -219,7 +220,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
         setState(() => _saving = false);
         showTopToast(
           context,
-          context.lt('저장 중 오류가 발생했어요: {error}', args: {'error': '$e'}),
+          context.l10n.saveErrorMsg('$e'),
         );
       }
     }
@@ -232,16 +233,16 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text(context.lt('알림을 삭제할까요?')),
+        title: Text(context.l10n.deleteAlarmConfirm),
         content: Text(
-          context.lt('{name}이 삭제되고\n예정된 푸시 알림도 함께 취소돼요.', args: {
-            'name': alarm.label ?? context.lt(alarmTypeLabel(alarm.type))
-          }),
+          context.l10n.deleteAlarmWithPushMsg(
+            alarm.label ?? localizedAlarmTypeLabel(context, alarm.type),
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: Text(context.lt('취소')),
+            child: Text(context.l10n.commonCancel),
           ),
           TextButton(
             onPressed: () async {
@@ -249,11 +250,11 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
               Navigator.pop(context); // close sheet
               await ref.read(alarmListProvider.notifier).delete(alarm.id!);
               if (mounted) {
-                showTopToast(context, context.lt('알림이 삭제됐어요 🗑️'));
+                showTopToast(context, context.l10n.alarmDeleted);
               }
             },
             style: TextButton.styleFrom(foregroundColor: AppColors.danger600),
-            child: Text(context.lt('삭제')),
+            child: Text(context.l10n.commonDelete),
           ),
         ],
       ),
@@ -266,9 +267,10 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   Widget build(BuildContext context) {
     final kb = MediaQuery.viewInsetsOf(context).bottom;
     final emoji = alarmTypeEmoji(_type);
+    final typeLabel = localizedAlarmTypeLabel(context, _type);
     final title = _isEdit
-        ? '$emoji ${context.lt(alarmTypeLabel(_type))} ${context.lt('알림 수정')}'
-        : '$emoji ${context.lt(alarmTypeLabel(_type))} ${context.lt('알림 추가')}';
+        ? '$emoji $typeLabel ${context.l10n.editAlarm}'
+        : '$emoji $typeLabel ${context.l10n.addAlarm}';
 
     return AnimatedPadding(
       duration: const Duration(milliseconds: 220),
@@ -346,8 +348,8 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
                               )
                             : Text(
                                 widget.isReschedule
-                                    ? context.lt('재예약하기')
-                                    : context.lt('저장하기'),
+                                    ? context.l10n.reschedule
+                                    : context.l10n.save,
                                 style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w700),
                               ),
@@ -371,7 +373,7 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
                           ),
                           onPressed: _onDelete,
                           icon: const Icon(Icons.delete_outline, size: 18),
-                          label: Text(context.lt('이 알림 삭제하기')),
+                          label: Text(context.l10n.deleteThisAlarm),
                         ),
                       ),
                     ],
@@ -405,36 +407,38 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   // ── Vaccination fields ──────────────────────────────────────────────────────
 
   Widget _buildVaccinationFields() {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _FieldLabel('백신 이름 *'),
-        _TextInput(controller: _labelCtrl, hint: '예) 광견병, 종합백신 등'),
+        _FieldLabel(l10n.vaccineNameRequired),
+        _TextInput(controller: _labelCtrl, hint: l10n.vaccineNameExample),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('예정일 *'),
+        _FieldLabel(l10n.scheduledDateRequired),
         _DateButton(
           date: _scheduledDate,
           isReschedule: widget.isReschedule,
           onPick: _pickDate,
         ),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('알림 시점'),
+        _FieldLabel(l10n.reminderTiming),
         _MultiChips(
-          options: const [
+          options: [
             ('D-7', 'D-7'),
             ('D-3', 'D-3'),
             ('D-1', 'D-1'),
-            ('D-0', '당일')
+            ('D-0', l10n.sameDay)
           ],
           selected: _alarmDays,
           onChanged: (v) => setState(() => _alarmDays = v),
         ),
         const SizedBox(height: AppSpacing.space4),
-        const _FieldLabel('알림 시각 *'),
+        _FieldLabel(l10n.reminderTimeRequired),
         _TimeButton(time: _scheduledTime, onPick: _pickTime),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('메모', required: false),
-        _TextInput(controller: _memoCtrl, hint: '메모를 입력하세요', maxLines: 2),
+        _FieldLabel(l10n.memo),
+        _TextInput(
+            controller: _memoCtrl, hint: l10n.memoInputHint, maxLines: 2),
       ],
     );
   }
@@ -442,13 +446,14 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   // ── Hospital fields ─────────────────────────────────────────────────────────
 
   Widget _buildHospitalFields() {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _FieldLabel('방문 목적 *'),
-        _TextInput(controller: _labelCtrl, hint: '예) 정기검진, 피부 진료 등'),
+        _FieldLabel(l10n.visitPurposeRequired),
+        _TextInput(controller: _labelCtrl, hint: l10n.visitPurposeExample),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('예약 일시 *'),
+        _FieldLabel(l10n.appointmentDateTimeRequired),
         Row(
           children: [
             Expanded(
@@ -465,18 +470,19 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
           ],
         ),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('알림 시점'),
+        _FieldLabel(l10n.reminderTiming),
         _MultiChips(
-          options: const [('D-1', 'D-1'), ('D-0', '당일')],
+          options: [('D-1', 'D-1'), ('D-0', l10n.sameDay)],
           selected: _alarmDays,
           onChanged: (v) => setState(() => _alarmDays = v),
         ),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('병원명', required: false),
-        _TextInput(controller: _extraCtrl, hint: '병원 이름을 입력하세요'),
+        _FieldLabel(l10n.hospitalName),
+        _TextInput(controller: _extraCtrl, hint: l10n.hospitalNameHint),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('메모', required: false),
-        _TextInput(controller: _memoCtrl, hint: '메모를 입력하세요', maxLines: 2),
+        _FieldLabel(l10n.memo),
+        _TextInput(
+            controller: _memoCtrl, hint: l10n.memoInputHint, maxLines: 2),
       ],
     );
   }
@@ -484,26 +490,27 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   // ── Medication fields ───────────────────────────────────────────────────────
 
   Widget _buildMedicationFields() {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _FieldLabel('약품 이름 *'),
-        _TextInput(controller: _labelCtrl, hint: '예) 심장사상충, 구충제 등'),
+        _FieldLabel(l10n.medicineNameRequired),
+        _TextInput(controller: _labelCtrl, hint: l10n.medicineNameExample),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('반복 *'),
+        _FieldLabel(l10n.repeatRequired),
         _SingleChips(
-          options: const [
-            ('none', '없음'),
-            ('daily', '매일'),
-            ('weekly', '매주'),
-            ('monthly', '매달'),
+          options: [
+            ('none', l10n.none),
+            ('daily', l10n.daily),
+            ('weekly', l10n.weekly),
+            ('monthly', l10n.monthly),
           ],
           selected: _repeatRule,
           onChanged: (v) => setState(() => _repeatRule = v),
         ),
         const SizedBox(height: AppSpacing.space4),
         if (_repeatRule == 'none') ...[
-          _FieldLabel('투약 일시 *'),
+          _FieldLabel(l10n.medicationDateTimeRequired),
           Row(
             children: [
               Expanded(
@@ -520,12 +527,13 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
             ],
           ),
         ] else ...[
-          _FieldLabel('투약 시각 *'),
+          _FieldLabel(l10n.medicationTimeRequired),
           _TimeButton(time: _repeatTime, onPick: _pickRepeatTime),
         ],
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('메모', required: false),
-        _TextInput(controller: _memoCtrl, hint: '메모를 입력하세요', maxLines: 2),
+        _FieldLabel(l10n.memo),
+        _TextInput(
+            controller: _memoCtrl, hint: l10n.memoInputHint, maxLines: 2),
       ],
     );
   }
@@ -533,28 +541,30 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   // ── Meal fields ─────────────────────────────────────────────────────────────
 
   Widget _buildMealFields() {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _FieldLabel('알림 이름 *'),
-        _TextInput(controller: _labelCtrl, hint: '예) 아침 식사, 저녁 밥 등'),
+        _FieldLabel(l10n.alarmNameRequired),
+        _TextInput(controller: _labelCtrl, hint: l10n.mealTimeExample),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('식사 시각 *'),
+        _FieldLabel(l10n.mealTimeRequired),
         _TimeButton(time: _repeatTime, onPick: _pickRepeatTime),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('반복 *'),
+        _FieldLabel(l10n.repeatRequired),
         _SingleChips(
-          options: const [
-            ('daily', '매일'),
-            ('weekday', '평일만'),
-            ('weekend', '주말만'),
+          options: [
+            ('daily', l10n.daily),
+            ('weekday', l10n.weekdaysOnly),
+            ('weekend', l10n.weekendsOnly),
           ],
           selected: _repeatRule,
           onChanged: (v) => setState(() => _repeatRule = v),
         ),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('메모', required: false),
-        _TextInput(controller: _memoCtrl, hint: '메모를 입력하세요', maxLines: 2),
+        _FieldLabel(l10n.memo),
+        _TextInput(
+            controller: _memoCtrl, hint: l10n.memoInputHint, maxLines: 2),
       ],
     );
   }
@@ -562,27 +572,28 @@ class _AlarmFormSheetState extends ConsumerState<AlarmFormSheet> {
   // ── Daily reminder fields ───────────────────────────────────────────────────
 
   Widget _buildDailyFields() {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _FieldLabel('알림 시각 *'),
+        _FieldLabel(l10n.reminderTimeRequired),
         _TimeButton(time: _repeatTime, onPick: _pickRepeatTime),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('반복 *'),
+        _FieldLabel(l10n.repeatRequired),
         _SingleChips(
-          options: const [
-            ('daily', '매일'),
-            ('weekday', '평일만'),
-            ('weekend', '주말만'),
+          options: [
+            ('daily', l10n.daily),
+            ('weekday', l10n.weekdaysOnly),
+            ('weekend', l10n.weekendsOnly),
           ],
           selected: _repeatRule,
           onChanged: (v) => setState(() => _repeatRule = v),
         ),
         const SizedBox(height: AppSpacing.space4),
-        _FieldLabel('알림 문구', required: false),
+        _FieldLabel(l10n.alarmMessage),
         _TextInput(
           controller: _labelCtrl,
-          hint: '예) 콩이 오늘 기록 남기셨나요? 🐾',
+          hint: l10n.alarmMessageExample,
           maxLines: 2,
         ),
       ],
@@ -635,7 +646,7 @@ class _RescheduleBanner extends StatelessWidget {
           const SizedBox(width: AppSpacing.space2),
           Expanded(
             child: Text(
-              context.lt('이 알림의 예정일이 지났어요.\n새 날짜로 변경하거나 삭제할 수 있어요.'),
+              context.l10n.alarmPastDueMsg,
               style: const TextStyle(fontSize: 14, color: _amber700),
             ),
           ),
@@ -647,15 +658,14 @@ class _RescheduleBanner extends StatelessWidget {
 
 class _FieldLabel extends StatelessWidget {
   final String text;
-  final bool required;
-  const _FieldLabel(this.text, {this.required = true});
+  const _FieldLabel(this.text);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Text(
-        context.lt(required ? text : text),
+        text,
         style: const TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w600,
@@ -728,7 +738,7 @@ class _TextInputState extends State<_TextInput> {
         bottom: keyboardInset + 120,
       ),
       decoration: InputDecoration(
-        hintText: context.lt(widget.hint),
+        hintText: widget.hint,
         hintStyle: const TextStyle(color: AppColors.gray400, fontSize: 14),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -776,7 +786,7 @@ class _DateButton extends StatelessWidget {
         : (hasDate ? AppColors.primary800 : AppColors.gray400);
     final String txt = hasDate
         ? formatLocalizedDate(context, date!)
-        : (isReschedule ? context.lt('날짜 재선택') : context.lt('날짜 선택'));
+        : (isReschedule ? context.l10n.reselectDate : context.l10n.selectDate);
 
     return GestureDetector(
       onTap: onPick,
@@ -818,7 +828,7 @@ class _TimeButton extends StatelessWidget {
     final hasTime = time != null;
     final txt = hasTime
         ? formatLocalizedTimeOfDay(context, time!)
-        : context.lt('시각 선택');
+        : context.l10n.selectTime;
 
     return GestureDetector(
       onTap: onPick,
@@ -934,7 +944,7 @@ class _Chip extends StatelessWidget {
         ),
       ),
       child: Text(
-        context.lt(label),
+        label,
         style: TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w500,

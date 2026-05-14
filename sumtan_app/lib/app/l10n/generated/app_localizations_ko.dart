@@ -310,6 +310,17 @@ class AppLocalizationsKo extends AppLocalizations {
   String get alarmLabel => '알림';
 
   @override
+  String get notificationChannelName => '반려숨탄 알림';
+
+  @override
+  String get notificationChannelDescription => '반려동물 건강관리 알림';
+
+  @override
+  String alarmNotificationTitle(String type) {
+    return '$type 알림';
+  }
+
+  @override
   String get alarmBodyVaccination => '예방접종 예정일을 확인해 주세요.';
 
   @override

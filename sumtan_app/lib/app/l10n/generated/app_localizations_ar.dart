@@ -315,6 +315,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get alarmLabel => 'تنبيه';
 
   @override
+  String get notificationChannelName => 'تنبيهات Pet Sumtan';
+
+  @override
+  String get notificationChannelDescription =>
+      'تذكيرات رعاية صحة الحيوان الأليف';
+
+  @override
+  String alarmNotificationTitle(String type) {
+    return 'تنبيه $type';
+  }
+
+  @override
   String get alarmBodyVaccination => 'يُرجى التحقق من تاريخ التطعيم.';
 
   @override

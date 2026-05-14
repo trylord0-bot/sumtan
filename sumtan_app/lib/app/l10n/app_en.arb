@@ -307,6 +307,20 @@
   "alarmLabel": "Alert",
   "@alarmLabel": { "description": "Alert label" },
 
+  "notificationChannelName": "Pet Sumtan alerts",
+  "@notificationChannelName": { "description": "Android notification channel name for alarm notifications" },
+
+  "notificationChannelDescription": "Pet health care reminders",
+  "@notificationChannelDescription": { "description": "Android notification channel description for alarm notifications" },
+
+  "alarmNotificationTitle": "{type} alert",
+  "@alarmNotificationTitle": {
+    "description": "Default scheduled notification title when the alarm has no custom label",
+    "placeholders": {
+      "type": { "type": "String" }
+    }
+  },
+
   "alarmBodyVaccination": "Please check the vaccination date.",
   "@alarmBodyVaccination": { "description": "Alarm body: vaccination" },
 

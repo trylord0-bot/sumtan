@@ -318,6 +318,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get alarmLabel => 'Alarm';
 
   @override
+  String get notificationChannelName => 'Pet Sumtan Alarme';
+
+  @override
+  String get notificationChannelDescription =>
+      'Erinnerungen zur Tiergesundheit';
+
+  @override
+  String alarmNotificationTitle(String type) {
+    return '$type-Alarm';
+  }
+
+  @override
   String get alarmBodyVaccination => 'Bitte prüfe das Impfdatum.';
 
   @override

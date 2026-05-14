@@ -306,6 +306,17 @@ class AppLocalizationsZh extends AppLocalizations {
   String get alarmLabel => '提醒';
 
   @override
+  String get notificationChannelName => 'Pet Sumtan 提醒';
+
+  @override
+  String get notificationChannelDescription => '宠物健康管理提醒';
+
+  @override
+  String alarmNotificationTitle(String type) {
+    return '$type提醒';
+  }
+
+  @override
   String get alarmBodyVaccination => '请确认疫苗接种日期。';
 
   @override
@@ -2816,6 +2827,17 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get alarmLabel => '提醒';
 
   @override
+  String get notificationChannelName => 'Pet Sumtan 提醒';
+
+  @override
+  String get notificationChannelDescription => '宠物健康管理提醒';
+
+  @override
+  String alarmNotificationTitle(String type) {
+    return '$type提醒';
+  }
+
+  @override
   String get alarmBodyVaccination => '请确认疫苗接种日期。';
 
   @override
@@ -5321,6 +5343,17 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get alarmLabel => '提醒';
+
+  @override
+  String get notificationChannelName => 'Pet Sumtan 提醒';
+
+  @override
+  String get notificationChannelDescription => '寵物健康管理提醒';
+
+  @override
+  String alarmNotificationTitle(String type) {
+    return '$type提醒';
+  }
 
   @override
   String get alarmBodyVaccination => '請確認預防接種日期。';

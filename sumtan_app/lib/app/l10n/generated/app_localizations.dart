@@ -690,6 +690,24 @@ abstract class AppLocalizations {
   /// **'Alert'**
   String get alarmLabel;
 
+  /// Android notification channel name for alarm notifications
+  ///
+  /// In en, this message translates to:
+  /// **'Pet Sumtan alerts'**
+  String get notificationChannelName;
+
+  /// Android notification channel description for alarm notifications
+  ///
+  /// In en, this message translates to:
+  /// **'Pet health care reminders'**
+  String get notificationChannelDescription;
+
+  /// Default scheduled notification title when the alarm has no custom label
+  ///
+  /// In en, this message translates to:
+  /// **'{type} alert'**
+  String alarmNotificationTitle(String type);
+
   /// Alarm body: vaccination
   ///
   /// In en, this message translates to:

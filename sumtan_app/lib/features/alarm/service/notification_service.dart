@@ -1,8 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../../app/l10n/generated/app_localizations.dart';
 import '../data/alarm_model.dart';
 import 'notification_attachment_file.dart';
 
@@ -11,8 +15,7 @@ class NotificationService {
   static final NotificationService instance = NotificationService._();
 
   static const _channelId = 'sumtan_alarm_channel';
-  static const _channelName = '반려숨탄 알림';
-  static const _channelDescription = '반려동물 건강관리 알림';
+  static const _localeStorageKey = 'app_locale';
   static const _seoulTimeZone = 'Asia/Seoul';
 
   final FlutterLocalNotificationsPlugin _plugin =
@@ -44,13 +47,7 @@ class NotificationService {
 
     await _plugin.initialize(settings);
 
-    const channel = AndroidNotificationChannel(
-      _channelId,
-      _channelName,
-      description: _channelDescription,
-      importance: Importance.max,
-    );
-    await _androidPlugin?.createNotificationChannel(channel);
+    await _createAndroidNotificationChannel(await _localizations());
 
     _initialized = true;
   }
@@ -192,18 +189,20 @@ class NotificationService {
   }) async {
     if (kIsWeb || _isUnsupportedDesktop) return;
 
+    final l10n = await _localizations();
+    await _createAndroidNotificationChannel(l10n);
     final iosDetails = await _iosNotificationDetails();
 
     await _plugin.zonedSchedule(
       id,
-      _notificationTitle(alarm),
-      _notificationBody(alarm),
+      _notificationTitle(alarm, l10n),
+      _notificationBody(alarm, l10n),
       scheduledDate,
       NotificationDetails(
-        android: const AndroidNotificationDetails(
+        android: AndroidNotificationDetails(
           _channelId,
-          _channelName,
-          channelDescription: _channelDescription,
+          l10n.notificationChannelName,
+          channelDescription: l10n.notificationChannelDescription,
           importance: Importance.max,
           priority: Priority.high,
         ),
@@ -224,6 +223,16 @@ class NotificationService {
   IOSFlutterLocalNotificationsPlugin? get _iosPlugin =>
       _plugin.resolvePlatformSpecificImplementation<
           IOSFlutterLocalNotificationsPlugin>();
+
+  Future<void> _createAndroidNotificationChannel(AppLocalizations l10n) async {
+    final channel = AndroidNotificationChannel(
+      _channelId,
+      l10n.notificationChannelName,
+      description: l10n.notificationChannelDescription,
+      importance: Importance.max,
+    );
+    await _androidPlugin?.createNotificationChannel(channel);
+  }
 
   Future<DarwinNotificationDetails> _iosNotificationDetails() async {
     if (defaultTargetPlatform != TargetPlatform.iOS) {
@@ -251,29 +260,88 @@ class NotificationService {
       defaultTargetPlatform == TargetPlatform.macOS ||
       defaultTargetPlatform == TargetPlatform.fuchsia;
 
-  String _notificationTitle(Alarm alarm) {
-    final label = alarm.label?.trim();
-    if (label != null && label.isNotEmpty) return label;
-    return '${alarmTypeLabel(alarm.type)} 알림';
+  Future<AppLocalizations> _localizations() async {
+    final prefs = await SharedPreferences.getInstance();
+    final configuredLocale =
+        _parseLocaleTag(prefs.getString(_localeStorageKey));
+    final locale = _supportedLocale(
+      configuredLocale ?? PlatformDispatcher.instance.locale,
+    );
+    return lookupAppLocalizations(locale);
   }
 
-  String _notificationBody(Alarm alarm) {
+  Locale? _parseLocaleTag(String? tag) {
+    if (tag == null || tag == 'system') return null;
+
+    final parts = tag.replaceAll('_', '-').split('-');
+    if (parts.isEmpty || parts.first.isEmpty) return null;
+    if (parts.length == 1) return Locale(parts.first);
+
+    return Locale.fromSubtags(
+      languageCode: parts.first,
+      countryCode: parts[1].toUpperCase(),
+    );
+  }
+
+  Locale _supportedLocale(Locale locale) {
+    const supportedLocales = AppLocalizations.supportedLocales;
+
+    for (final supported in supportedLocales) {
+      if (supported.languageCode == locale.languageCode &&
+          supported.countryCode == locale.countryCode) {
+        return supported;
+      }
+    }
+
+    for (final supported in supportedLocales) {
+      if (supported.languageCode == locale.languageCode) {
+        return supported;
+      }
+    }
+
+    return const Locale('en');
+  }
+
+  String _notificationTitle(Alarm alarm, AppLocalizations l10n) {
+    final label = alarm.label?.trim();
+    if (label != null && label.isNotEmpty) return label;
+    return l10n.alarmNotificationTitle(_alarmTypeLabel(alarm.type, l10n));
+  }
+
+  String _notificationBody(Alarm alarm, AppLocalizations l10n) {
     final memo = alarm.memo?.trim();
     if (memo != null && memo.isNotEmpty) return memo;
 
     switch (alarm.type) {
       case 'vaccination':
-        return '예방접종 예정일을 확인해 주세요.';
+        return l10n.alarmBodyVaccination;
       case 'hospital':
-        return '병원 예약 시간이 다가왔어요.';
+        return l10n.alarmBodyVetAppointment;
       case 'medication':
-        return '투약할 시간이에요.';
+        return l10n.alarmBodyMedication;
       case 'meal':
-        return '식사 시간을 챙겨 주세요.';
+        return l10n.alarmBodyMealTime;
       case 'daily':
-        return '오늘의 건강 기록을 남겨 주세요.';
+        return l10n.alarmBodyDailyReminder;
       default:
-        return '반려동물 건강관리 알림입니다.';
+        return l10n.alarmBodyDefault;
+    }
+  }
+
+  String _alarmTypeLabel(String type, AppLocalizations l10n) {
+    switch (type) {
+      case 'vaccination':
+        return l10n.vaccination;
+      case 'hospital':
+        return l10n.vetAppointment;
+      case 'medication':
+        return l10n.medication;
+      case 'meal':
+        return l10n.mealTime;
+      case 'daily':
+        return l10n.dailyReminder;
+      default:
+        return l10n.alarmLabel;
     }
   }
 

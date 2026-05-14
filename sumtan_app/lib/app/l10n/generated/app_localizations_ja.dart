@@ -309,6 +309,17 @@ class AppLocalizationsJa extends AppLocalizations {
   String get alarmLabel => '通知';
 
   @override
+  String get notificationChannelName => 'Pet Sumtanの通知';
+
+  @override
+  String get notificationChannelDescription => 'ペット健康管理の通知';
+
+  @override
+  String alarmNotificationTitle(String type) {
+    return '$typeの通知';
+  }
+
+  @override
   String get alarmBodyVaccination => '予防接種の予定日をご確認ください。';
 
   @override

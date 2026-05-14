@@ -5,6 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest_all.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:flutter_timezone/flutter_timezone.dart';
 
 import '../../../app/l10n/generated/app_localizations.dart';
 import '../data/alarm_model.dart';
@@ -16,7 +17,7 @@ class NotificationService {
 
   static const _channelId = 'sumtan_alarm_channel';
   static const _localeStorageKey = 'app_locale';
-  static const _seoulTimeZone = 'Asia/Seoul';
+  //static const _seoulTimeZone = 'Asia/Seoul';
 
   final FlutterLocalNotificationsPlugin _plugin =
       FlutterLocalNotificationsPlugin();
@@ -27,7 +28,19 @@ class NotificationService {
     if (_initialized) return;
 
     tz_data.initializeTimeZones();
-    tz.setLocalLocation(tz.getLocation(_seoulTimeZone));
+    //tz.setLocalLocation(tz.getLocation(_seoulTimeZone));
+    try {
+      final TimezoneInfo timeZoneInfo = await FlutterTimezone.getLocalTimezone();
+      tz.setLocalLocation(tz.getLocation(timeZoneInfo.identifier));
+    } catch (e) {
+      // 만약 타임존을 가져오지 못하는 예외 상황이 발생하면 기본값(UTC 등)으로 폴백
+      tz.setLocalLocation(tz.getLocation('UTC'));
+    }
+
+    if (kIsWeb || _isUnsupportedDesktop) {
+      _initialized = true;
+      return;
+    }
 
     if (kIsWeb || _isUnsupportedDesktop) {
       _initialized = true;

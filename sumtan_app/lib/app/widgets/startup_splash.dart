@@ -18,7 +18,7 @@ class StartupSplash extends StatefulWidget {
 class _StartupSplashState extends State<StartupSplash>
     with SingleTickerProviderStateMixin {
   static const _backgroundColor = Color(0xFF30BE77);
-  static const _splashDuration = Duration(milliseconds: 1850);
+  static const _splashDuration = Duration(milliseconds: 2350);
   static const _fadeDuration = Duration(milliseconds: 320);
 
   late final AnimationController _particleController;

@@ -58,17 +58,25 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
-    - assets/icon/app_icon.png
+    - assets/icon/
     - assets/splash/
 
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/app_icon.png"
+
+  #image_path: "assets/icon/app_icon.png"   # 공통 아이콘 경로 (안드로이드 최신 버전과 iOS 모두에서 사용)
+  image_path_android: "assets/icon/icon_1024.png" # 안드로이드 구버전(API 25 이하)용 레거시 아이콘
+  image_path_ios: "assets/icon/icon_1024.png"   # iOS용 아이콘 (투명도 없이 배경이 꽉 채워진 이미지 사용)
+  
+  # 2. 안드로이드 최신 버전(API 26 이상)을 위한 Adaptive Icon 설정
+  adaptive_icon_background: "assets/icon/bg_1024.png"              # 안드로이드 아이콘 배경색 (이미지 경로도 사용 가능)
+  adaptive_icon_foreground: "assets/icon/logo_1024.png" # 안드로이드 아이콘 전경(투명 배경의 메인 로고)
+
   min_sdk_android: 21
   remove_alpha_ios: true
   android_notification_icon: 
-    image_path: "assets/icon/app_icon.png"
+    image_path: "assets/icon/icon_1024.png"
 
 flutter_native_splash:
   color: "#30be77"

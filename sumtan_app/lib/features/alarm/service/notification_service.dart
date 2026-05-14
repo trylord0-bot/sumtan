@@ -75,12 +75,19 @@ class NotificationService {
     if (!alarm.isEnabled || alarm.isDone || alarm.id == null) return;
     await init();
 
+    // 🌟 최적화: l10n 데이터를 한 번만 불러오고 하위 메서드로 전달
+    final l10n = await _localizations();
+
+    if (!kIsWeb && !_isUnsupportedDesktop) {
+      await _createAndroidNotificationChannel(l10n);
+    }
+
     if (alarm.repeatRule == 'none') {
-      await _scheduleOneTimeAlarm(alarm);
+      await _scheduleOneTimeAlarm(alarm, l10n);
       return;
     }
 
-    await _scheduleRepeatingAlarm(alarm);
+    await _scheduleRepeatingAlarm(alarm, l10n);
   }
 
   Future<void> cancel(int id) async {
@@ -106,7 +113,7 @@ class NotificationService {
     }
   }
 
-  Future<void> _scheduleOneTimeAlarm(Alarm alarm) async {
+  Future<void> _scheduleOneTimeAlarm(Alarm alarm, AppLocalizations l10n) async {
     final scheduledAt = alarm.scheduledAt;
     if (scheduledAt == null) return;
 
@@ -123,11 +130,13 @@ class NotificationService {
         id: notificationId,
         alarm: alarm,
         scheduledDate: _toTzDateTime(notificationDate),
+        l10n: l10n, // 🌟 l10n 전달
       );
     }
   }
 
-  Future<void> _scheduleRepeatingAlarm(Alarm alarm) async {
+  Future<void> _scheduleRepeatingAlarm(
+      Alarm alarm, AppLocalizations l10n) async {
     final time = _parseTime(alarm.repeatTime);
     if (time == null) return;
 
@@ -141,6 +150,7 @@ class NotificationService {
             alarm: alarm,
             scheduledDate: _nextWeekdayTime(weekday, time.hour, time.minute),
             matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+            l10n: l10n, // 🌟 l10n 전달
           );
         }
       case 'weekend':
@@ -150,6 +160,7 @@ class NotificationService {
             alarm: alarm,
             scheduledDate: _nextWeekdayTime(weekday, time.hour, time.minute),
             matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+            l10n: l10n, // 🌟 l10n 전달
           );
         }
       case 'weekly':
@@ -160,6 +171,7 @@ class NotificationService {
           alarm: alarm,
           scheduledDate: _nextWeekdayTime(weekday, time.hour, time.minute),
           matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+          l10n: l10n, // 🌟 l10n 전달
         );
       case 'monthly':
         final createdAt = DateTime.tryParse(alarm.createdAt);
@@ -169,6 +181,7 @@ class NotificationService {
           alarm: alarm,
           scheduledDate: _nextMonthDayTime(day, time.hour, time.minute),
           matchDateTimeComponents: DateTimeComponents.dayOfMonthAndTime,
+          l10n: l10n, // 🌟 l10n 전달
         );
       case 'daily':
       default:
@@ -177,6 +190,7 @@ class NotificationService {
           alarm: alarm,
           scheduledDate: _nextTime(time.hour, time.minute),
           matchDateTimeComponents: DateTimeComponents.time,
+          l10n: l10n, // 🌟 l10n 전달
         );
     }
   }
@@ -186,11 +200,10 @@ class NotificationService {
     required Alarm alarm,
     required tz.TZDateTime scheduledDate,
     DateTimeComponents? matchDateTimeComponents,
+    required AppLocalizations l10n, // 🌟 파라미터로 받음
   }) async {
     if (kIsWeb || _isUnsupportedDesktop) return;
 
-    final l10n = await _localizations();
-    await _createAndroidNotificationChannel(l10n);
     final iosDetails = await _iosNotificationDetails();
 
     await _plugin.zonedSchedule(

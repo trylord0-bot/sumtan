@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../app/l10n/l10n_extension.dart';
-import '../../../app/l10n/locale_controller.dart';
 import '../../../app/l10n/generated/app_localizations.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/widgets/app_toast.dart';
@@ -28,17 +27,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final selectedLocale = ref.watch(localeControllerProvider).valueOrNull;
-    final selectedLanguageLabel = selectedLocale == null
-        ? l10n.settingsLanguageSystem
-        : supportedLocaleItems
-            .firstWhere(
-              (item) =>
-                  localeTag(item.locale) ==
-                  localeTag(selectedLocale),
-              orElse: () => supportedLocaleItems.first,
-            )
-            .nativeName;
 
     return Scaffold(
       backgroundColor: AppColors.creamBg,
@@ -60,19 +48,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 activeTrackColor: AppColors.primary200,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
-            ),
-          ]),
-
-          _SectionLabel(l10n.settingsLanguageSection),
-          _SettingsCard(rows: [
-            _SettingsRow(
-              iconBg: const Color(0xFFEFF6FF),
-              icon: '🌐',
-              title: l10n.settingsLanguage,
-              sub: selectedLanguageLabel,
-              trailing: const Icon(Icons.chevron_right,
-                  size: 16, color: AppColors.gray400),
-              onTap: _showLanguageSheet,
             ),
           ]),
 
@@ -139,13 +114,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     mode: LaunchMode.externalApplication,
                   );
                   if (!launched && context.mounted) {
-                    showTopToast(
-                        context, context.l10n.settingsEmailAppMissing);
+                    showTopToast(context, context.l10n.settingsEmailAppMissing);
                   }
                 } catch (e) {
                   if (context.mounted) {
-                    showTopToast(
-                        context, context.l10n.settingsEmailAppMissing);
+                    showTopToast(context, context.l10n.settingsEmailAppMissing);
                   }
                 }
               },
@@ -163,82 +136,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       backgroundColor: Colors.transparent,
       builder: (_) => const _ExportSheet(),
     );
-  }
-
-  void _showLanguageSheet() {
-    final l10n = context.l10n;
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        final selectedLocale = ref.read(localeControllerProvider).valueOrNull;
-        final selectedTag = selectedLocale == null
-            ? 'system'
-            : localeTag(selectedLocale);
-
-        return Container(
-          decoration: const BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          ),
-          padding: const EdgeInsets.fromLTRB(20, 14, 20, 28),
-          child: SafeArea(
-            top: false,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 40,
-                  height: 4,
-                  margin: const EdgeInsets.only(bottom: 12),
-                  decoration: BoxDecoration(
-                    color: AppColors.gray300,
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                ),
-                Flexible(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: Text(l10n.settingsLanguageSystem),
-                          trailing: selectedTag == 'system'
-                              ? const Icon(Icons.check,
-                                  color: AppColors.primary600)
-                              : null,
-                          onTap: () => _selectLocale(null),
-                        ),
-                        for (final item in supportedLocaleItems)
-                          ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            title: Text(item.nativeName),
-                            subtitle: Text(item.englishName),
-                            trailing: selectedTag ==
-                                    localeTag(item.locale)
-                                ? const Icon(Icons.check,
-                                    color: AppColors.primary600)
-                                : null,
-                            onTap: () => _selectLocale(item.locale),
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> _selectLocale(Locale? locale) async {
-    await ref.read(localeControllerProvider.notifier).setLocale(locale);
-    if (!mounted) return;
-    Navigator.pop(context);
-    showTopToast(context, context.l10n.settingsLanguageChanged);
   }
 
   Future<void> _startImport() async {
@@ -451,8 +348,8 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
     ref.listen<PurchaseState>(purchaseProvider, (_, next) {
       if (!mounted) return;
       if (next.status == IapStatus.error) {
-        showTopToast(context,
-            next.errorMessage ?? context.l10n.settingsPurchaseFailed);
+        showTopToast(
+            context, next.errorMessage ?? context.l10n.settingsPurchaseFailed);
         ref.read(purchaseProvider.notifier).reset();
       }
     });
@@ -700,9 +597,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
           ),
           onPressed: _exporting ? null : _startExport,
           child: Text(
-            _exporting
-                ? l10n.settingsExporting
-                : l10n.settingsExportZip,
+            _exporting ? l10n.settingsExporting : l10n.settingsExportZip,
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
           ),
         ),

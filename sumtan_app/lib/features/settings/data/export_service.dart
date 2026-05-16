@@ -9,6 +9,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/database/database_helper.dart';
+import '../../../core/security/backup_crypto.dart';
 
 class ExportService {
   static const int schemaVersion = 1;
@@ -110,7 +111,8 @@ class ExportService {
         'alarms': alarms,
         'shared_preferences': _exportSharedPreferences(prefs),
       };
-      final meta = {
+
+      final meta = <String, dynamic>{
         'app_name': '반려숨탄',
         'app_version': '1.0.0+1',
         'schema_version': schemaVersion,
@@ -125,12 +127,19 @@ class ExportService {
         'total_pets': pets.length,
         'total_records': records.length,
         'total_alarms': alarms.length,
+        'encrypted': true,
       };
 
-      _addJsonFile(archive, 'data.json', data);
+      progress(0.75, '데이터 암호화 중...');
+
+      final dataBytes =
+          utf8.encode(const JsonEncoder.withIndent('  ').convert(data));
+      final encrypted = BackupCrypto.encrypt(dataBytes);
+      archive.addFile(ArchiveFile('data.enc', encrypted.length, encrypted));
+
       _addJsonFile(archive, 'meta.json', meta);
 
-      progress(0.85, 'ZIP 압축 중...');
+      progress(0.9, 'ZIP 압축 중...');
 
       final encoded = ZipEncoder().encode(archive);
       if (encoded == null) {
@@ -199,8 +208,10 @@ class ExportService {
   }
 
   Map<String, Object?> _exportSharedPreferences(SharedPreferences prefs) {
+    const excludeKeys = {'sumtan_db_encrypted'};
     final result = <String, Object?>{};
     for (final key in prefs.getKeys()) {
+      if (excludeKeys.contains(key)) continue;
       result[key] = prefs.get(key);
     }
     return result;

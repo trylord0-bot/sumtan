@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common/sqflite.dart';
 
 import '../../../core/database/database_helper.dart';
+import '../../../core/security/backup_crypto.dart';
 
 class ImportService {
   static const int supportedSchemaVersion = 1;
@@ -52,8 +53,7 @@ class ImportService {
       progress(0.25, '데이터 검증 중...');
 
       final metaFile = File(p.join(extractDir.path, 'meta.json'));
-      final dataFile = File(p.join(extractDir.path, 'data.json'));
-      if (!await metaFile.exists() || !await dataFile.exists()) {
+      if (!await metaFile.exists()) {
         throw Exception('유효하지 않은 백업 파일입니다.');
       }
 
@@ -67,7 +67,26 @@ class ImportService {
         );
       }
 
+      // 암호화 백업(data.enc)이면 복호화 후 data.json으로 저장.
+      // 구버전 미암호화 백업(data.json)도 그대로 처리.
+      final isEncrypted = meta['encrypted'] == true;
+      if (isEncrypted) {
+        progress(0.32, '데이터 복호화 중...');
+        final encFile = File(p.join(extractDir.path, 'data.enc'));
+        if (!await encFile.exists()) {
+          throw Exception('암호화 데이터 파일(data.enc)이 없습니다.');
+        }
+        final plainBytes = BackupCrypto.decrypt(await encFile.readAsBytes());
+        await File(p.join(extractDir.path, 'data.json'))
+            .writeAsBytes(plainBytes, flush: true);
+      }
+
       progress(0.35, 'JSON 데이터 파싱 중...');
+
+      final dataFile = File(p.join(extractDir.path, 'data.json'));
+      if (!await dataFile.exists()) {
+        throw Exception('유효하지 않은 백업 파일입니다.');
+      }
 
       final decodedData = jsonDecode(await dataFile.readAsString());
       if (decodedData is! Map) {

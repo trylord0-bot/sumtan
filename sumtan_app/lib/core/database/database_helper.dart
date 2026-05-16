@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common/sqflite.dart';
 
 import 'db_factory_stub.dart'
@@ -10,6 +11,9 @@ class DatabaseHelper {
   static DatabaseHelper? _instance;
   static Database? _db;
   static Completer<Database>? _dbCompleter;
+
+  // SharedPreferences 키: 암호화 마이그레이션 완료 플래그
+  static const _encryptedFlag = 'sumtan_db_encrypted';
 
   DatabaseHelper._();
 
@@ -37,17 +41,23 @@ class DatabaseHelper {
   Future<Database> _init() async {
     initDatabaseFactory();
     final path = await getDbPath('sumtan.db');
-    return databaseFactory.openDatabase(
-      path,
-      options: OpenDatabaseOptions(
-        version: 5,
-        onConfigure: (db) async {
-          await db.execute('PRAGMA foreign_keys = ON');
-        },
-        onCreate: _onCreate,
-        onUpgrade: _onUpgrade,
-      ),
-    );
+    final key = await getEncryptionKey();
+
+    // 기존 평문 DB → 암호화 DB 1회 마이그레이션
+    final prefs = await SharedPreferences.getInstance();
+    if (key.isNotEmpty && prefs.getBool(_encryptedFlag) != true) {
+      final success = await migrateToEncryptedIfNeeded(
+        path,
+        key,
+        _onCreate,
+        _onUpgrade,
+      );
+      if (success) {
+        await prefs.setBool(_encryptedFlag, true);
+      }
+    }
+
+    return openApplicationDatabase(path, key, 5, _onCreate, _onUpgrade);
   }
 
   Future<void> _onCreate(Database db, int version) async {

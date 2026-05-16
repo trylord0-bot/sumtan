@@ -20,7 +20,12 @@
       "Bash(xargs grep -l \"in_app_purchase\\\\|InAppPurchase\")",
       "WebFetch(domain:pub.dev)",
       "WebSearch",
-      "WebFetch(domain:docs.talsec.app)"
+      "WebFetch(domain:docs.talsec.app)",
+      "Bash(Get-ChildItem -Path \"c:\\\\WORK\\\\etc\\\\sumtan\" -Recurse -Directory)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\\\\lib\" -Recurse -Directory | ForEach-Object { $_.FullName.Replace\\(\"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\\\\lib\\\\\", \"\"\\) } | Sort-Object)",
+      "PowerShell(Set-Location \"c:\\\\WORK\\\\etc\\\\sumtan\\\\sumtan_app\"; dart pub deps --json 2>&1 | ConvertFrom-Json | Select-Object -ExpandProperty packages | Where-Object { $_.name -eq \"sqflite_sqlcipher\" } | Select-Object name, version, source)",
+      "PowerShell(cmd /c \"dir C:\\\\Users\\\\INTERACT\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\sqflite_sqlcipher-3.4.0\")",
+      "PowerShell(cmd /c \"dir C:\\\\Users\\\\INTERACT\\\\AppData\\\\Local\\\\Pub\\\\Cache\\\\hosted\\\\pub.dev\\\\sqflite_sqlcipher-3.4.0\\\\lib\")"
     ]
   }
 }

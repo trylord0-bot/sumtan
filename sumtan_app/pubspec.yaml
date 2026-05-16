@@ -20,6 +20,7 @@ dependencies:
   sqflite_common: ^2.5.4
   sqflite_common_ffi: ^2.3.3
   sqflite_common_ffi_web: ^1.0.2
+  sqflite_sqlcipher: ^3.4.0
 
   path: ^1.9.0
   path_provider: ^2.1.0
@@ -43,6 +44,7 @@ dependencies:
   in_app_purchase: ^3.2.0
   flutter_secure_storage: ^9.0.0
   crypto: ^3.0.3
+  encrypt: ^5.0.3
   freerasp: ^7.5.1
 
   cupertino_icons: ^1.0.8

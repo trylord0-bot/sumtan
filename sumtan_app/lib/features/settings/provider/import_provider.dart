@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../alarm/data/alarm_repository.dart';
+import '../../alarm/service/notification_service.dart';
 import '../data/import_service.dart';
 
 enum ImportStatus { idle, loading, success, error }
@@ -33,9 +35,12 @@ class ImportState {
 }
 
 class ImportNotifier extends StateNotifier<ImportState> {
-  ImportNotifier(this._service) : super(const ImportState());
+  ImportNotifier(this._service, this._alarmRepo, this._ns)
+      : super(const ImportState());
 
   final ImportService _service;
+  final AlarmRepository _alarmRepo;
+  final NotificationService _ns;
 
   Future<void> startImport(String zipFilePath) async {
     state = const ImportState(
@@ -50,6 +55,13 @@ class ImportNotifier extends StateNotifier<ImportState> {
           state = state.copyWith(progress: progress, message: message);
         },
       );
+
+      await _ns.cancelAll();
+      final enabledAlarms = await _alarmRepo.getAllEnabled();
+      for (final alarm in enabledAlarms) {
+        await _ns.schedule(alarm);
+      }
+
       state = state.copyWith(
         status: ImportStatus.success,
         progress: 1,
@@ -67,5 +79,9 @@ class ImportNotifier extends StateNotifier<ImportState> {
 }
 
 final importProvider = StateNotifierProvider<ImportNotifier, ImportState>(
-  (ref) => ImportNotifier(ImportService()),
+  (ref) => ImportNotifier(
+    ImportService(),
+    AlarmRepository(),
+    NotificationService.instance,
+  ),
 );

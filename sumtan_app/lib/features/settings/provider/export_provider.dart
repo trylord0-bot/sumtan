@@ -1,3 +1,4 @@
+import 'package:flutter/painting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/export_service.dart';
@@ -37,7 +38,7 @@ class ExportNotifier extends StateNotifier<ExportState> {
 
   final ExportService _service;
 
-  Future<void> startExport() async {
+  Future<void> startExport({Rect? sharePositionOrigin}) async {
     state = const ExportState(
       status: ExportStatus.loading,
       progress: 0,
@@ -48,6 +49,7 @@ class ExportNotifier extends StateNotifier<ExportState> {
         onProgress: (progress, message) {
           state = state.copyWith(progress: progress, message: message);
         },
+        sharePositionOrigin: sharePositionOrigin,
       );
       state = state.copyWith(
         status: ExportStatus.success,

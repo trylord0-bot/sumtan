@@ -339,6 +339,7 @@ class _ExportSheet extends ConsumerStatefulWidget {
 
 class _ExportSheetState extends ConsumerState<_ExportSheet> {
   bool _exporting = false;
+  final _exportButtonKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -585,6 +586,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
       ),
       const SizedBox(height: 20),
       SizedBox(
+        key: _exportButtonKey,
         height: 50,
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -654,7 +656,13 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
       mode: _ProgressMode.export,
     );
 
-    await ref.read(exportProvider.notifier).startExport();
+    final box = _exportButtonKey.currentContext?.findRenderObject() as RenderBox?;
+    Rect? shareRect;
+    if (box != null) {
+      final pos = box.localToGlobal(Offset.zero);
+      shareRect = pos & box.size;
+    }
+    await ref.read(exportProvider.notifier).startExport(sharePositionOrigin: shareRect);
     if (!mounted) return;
     Navigator.of(context, rootNavigator: true).pop();
 

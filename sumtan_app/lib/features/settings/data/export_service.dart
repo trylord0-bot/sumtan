@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:archive/archive.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/painting.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -163,12 +164,14 @@ class ExportService {
 
   Future<void> exportAndShare({
     void Function(double progress, String message)? onProgress,
+    Rect? sharePositionOrigin,
   }) async {
     final file = await exportZip(onProgress: onProgress);
     await Share.shareXFiles(
       [XFile(file.path)],
       subject: '반려숨탄 데이터 백업',
       text: '반려숨탄 앱 데이터 백업 파일입니다.',
+      sharePositionOrigin: sharePositionOrigin,
     );
   }
 

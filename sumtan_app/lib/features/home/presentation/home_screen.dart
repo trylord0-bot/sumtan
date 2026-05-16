@@ -343,8 +343,10 @@ class _PetAvatar extends StatelessWidget {
       );
     }
 
-    final hasPhoto =
-        pet!.profileImagePath != null && pet!.profileImagePath!.isNotEmpty;
+    final rawPath = pet!.profileImagePath;
+    final hasPhoto = rawPath != null &&
+        rawPath.isNotEmpty &&
+        File(rawPath).existsSync();
 
     if (hasPhoto) {
       return Container(
@@ -361,7 +363,7 @@ class _PetAvatar extends StatelessWidget {
             ),
           ],
           image: DecorationImage(
-            image: FileImage(File(pet!.profileImagePath!)),
+            image: FileImage(File(rawPath)),
             fit: BoxFit.cover,
           ),
         ),

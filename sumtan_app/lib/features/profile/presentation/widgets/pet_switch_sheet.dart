@@ -202,7 +202,9 @@ class _PetTileAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final photoPath = pet.profileImagePath;
-    final hasPhoto = photoPath != null && photoPath.isNotEmpty;
+    final hasPhoto = photoPath != null &&
+        photoPath.isNotEmpty &&
+        File(photoPath).existsSync();
 
     if (hasPhoto) {
       return Container(

@@ -544,14 +544,16 @@ class _PhotoSection extends StatelessWidget {
               height: 96,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: pet.profileImagePath == null
+                gradient: (pet.profileImagePath == null ||
+                        !File(pet.profileImagePath!).existsSync())
                     ? const LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [AppColors.primary200, AppColors.primary400],
                       )
                     : null,
-                image: pet.profileImagePath != null
+                image: (pet.profileImagePath != null &&
+                        File(pet.profileImagePath!).existsSync())
                     ? DecorationImage(
                         image: FileImage(File(pet.profileImagePath!)),
                         fit: BoxFit.cover,
@@ -559,7 +561,8 @@ class _PhotoSection extends StatelessWidget {
                     : null,
               ),
               alignment: Alignment.center,
-              child: pet.profileImagePath == null
+              child: (pet.profileImagePath == null ||
+                      !File(pet.profileImagePath!).existsSync())
                   ? Text(pet.speciesEmoji, style: const TextStyle(fontSize: 40))
                   : null,
             ),

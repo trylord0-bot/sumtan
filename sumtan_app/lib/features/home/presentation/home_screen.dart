@@ -874,12 +874,22 @@ class _RecordList extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(right: AppSpacing.space3),
+                  Padding(
+                    padding: const EdgeInsets.only(right: AppSpacing.space3),
                     child: Center(
-                      child: Text('›',
-                          style: TextStyle(
-                              fontSize: 20, color: AppColors.gray300)),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (_hasMedia(r)) ...[
+                            const Icon(Icons.photo_library_outlined,
+                                size: 14, color: AppColors.gray400),
+                            const SizedBox(width: 4),
+                          ],
+                          const Text('›',
+                              style: TextStyle(
+                                  fontSize: 20, color: AppColors.gray300)),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -889,6 +899,11 @@ class _RecordList extends StatelessWidget {
         );
       }).toList(),
     );
+  }
+
+  bool _hasMedia(Record r) {
+    final media = r.dataJson?['media'];
+    return media is List && media.isNotEmpty;
   }
 
   String _buildTitle(Record r) {

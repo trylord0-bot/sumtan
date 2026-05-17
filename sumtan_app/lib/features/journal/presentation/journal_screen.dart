@@ -487,6 +487,11 @@ class _EventCard extends ConsumerWidget {
                 ),
               ),
               const SizedBox(width: AppSpacing.space2),
+              if (_hasMedia(record)) ...[
+                const Icon(Icons.photo_library_outlined,
+                    size: 14, color: AppColors.gray400),
+                const SizedBox(width: 4),
+              ],
               Text(
                 du.formatTime(record.recordedAtDate),
                 style: const TextStyle(fontSize: 11, color: AppColors.gray400),
@@ -496,6 +501,11 @@ class _EventCard extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  bool _hasMedia(Record r) {
+    final media = r.dataJson?['media'];
+    return media is List && media.isNotEmpty;
   }
 
   void _invalidateRecords(WidgetRef ref) {

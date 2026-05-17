@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
@@ -66,10 +67,61 @@ class _CalendarSection extends ConsumerStatefulWidget {
 }
 
 class _CalendarSectionState extends ConsumerState<_CalendarSection> {
+  late PageController _pageController;
+
+  // page index = year * 12 + (month - 1)
+  static int _dateToPage(DateTime d) => d.year * 12 + d.month - 1;
+  static DateTime _pageToDate(int p) => DateTime(p ~/ 12, p % 12 + 1, 1);
+
+  static int _rowsForMonth(DateTime d) {
+    final offset = DateTime(d.year, d.month, 1).weekday % 7;
+    final days = DateTime(d.year, d.month + 1, 0).day;
+    return ((offset + days) / 7).ceil();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController =
+        PageController(initialPage: _dateToPage(ref.read(selectedDateProvider)));
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _showMonthYearPicker(
+      BuildContext context, DateTime current) async {
+    final selected = await showModalBottomSheet<DateTime>(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _MonthYearPickerSheet(initialDate: current),
+    );
+    if (selected != null) {
+      ref.read(selectedDateProvider.notifier).state =
+          DateTime(selected.year, selected.month, 1);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final selectedDate = ref.watch(selectedDateProvider);
     final monthRecordsAsync = ref.watch(monthRecordsProvider);
+
+    // 외부 변경(오늘 버튼, 연월 팝업 등)에 반응해 PageView를 애니메이션으로 이동
+    ref.listen<DateTime>(selectedDateProvider, (_, next) {
+      final newPage = _dateToPage(next);
+      final currentPage = _pageController.page?.round() ?? newPage;
+      if (newPage != currentPage) {
+        _pageController.animateToPage(
+          newPage,
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
 
     final dotsByDate = <String, Set<String>>{};
     monthRecordsAsync.whenData((records) {
@@ -86,24 +138,50 @@ class _CalendarSectionState extends ConsumerState<_CalendarSection> {
         children: [
           _MonthHeader(
             date: selectedDate,
-            onPrev: () {
-              final d = selectedDate;
-              ref.read(selectedDateProvider.notifier).state =
-                  DateTime(d.year, d.month - 1, 1);
-            },
-            onNext: () {
-              final d = selectedDate;
-              ref.read(selectedDateProvider.notifier).state =
-                  DateTime(d.year, d.month + 1, 1);
+            onPrev: () => _pageController.previousPage(
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.easeInOut,
+            ),
+            onNext: () => _pageController.nextPage(
+              duration: const Duration(milliseconds: 350),
+              curve: Curves.easeInOut,
+            ),
+            onDateTap: () => _showMonthYearPicker(context, selectedDate),
+            onTodayTap: () {
+              ref.read(selectedDateProvider.notifier).state = DateTime.now();
             },
           ),
           const _WeekdayRow(),
-          _DaysGrid(
-            selectedDate: selectedDate,
-            dotsByDate: dotsByDate,
-            onSelect: (date) {
-              ref.read(selectedDateProvider.notifier).state = date;
-            },
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeInOut,
+            height: _rowsForMonth(selectedDate) * 48.0,
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (page) {
+                final newMonth = _pageToDate(page);
+                final cur = ref.read(selectedDateProvider);
+                if (cur.year == newMonth.year && cur.month == newMonth.month) {
+                  return;
+                }
+                final maxDay =
+                    DateTime(newMonth.year, newMonth.month + 1, 0).day;
+                ref.read(selectedDateProvider.notifier).state = DateTime(
+                  newMonth.year,
+                  newMonth.month,
+                  cur.day <= maxDay ? cur.day : 1,
+                );
+              },
+              itemBuilder: (_, page) {
+                return _DaysGrid(
+                  selectedDate: selectedDate,
+                  displayMonth: _pageToDate(page),
+                  dotsByDate: dotsByDate,
+                  onSelect: (date) =>
+                      ref.read(selectedDateProvider.notifier).state = date,
+                );
+              },
+            ),
           ),
           const SizedBox(height: AppSpacing.space2),
         ],
@@ -116,11 +194,15 @@ class _MonthHeader extends StatelessWidget {
   final DateTime date;
   final VoidCallback onPrev;
   final VoidCallback onNext;
+  final VoidCallback onDateTap;
+  final VoidCallback onTodayTap;
 
   const _MonthHeader({
     required this.date,
     required this.onPrev,
     required this.onNext,
+    required this.onDateTap,
+    required this.onTodayTap,
   });
 
   @override
@@ -134,12 +216,46 @@ class _MonthHeader extends StatelessWidget {
         children: [
           _NavBtn(icon: Icons.chevron_left, onTap: onPrev),
           const Spacer(),
-          Text(
-            du.formatMonthYear(date),
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: AppColors.primary900,
+          GestureDetector(
+            onTap: onTodayTap,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              margin: const EdgeInsets.only(right: 6),
+              decoration: BoxDecoration(
+                color: AppColors.primary50,
+                borderRadius: BorderRadius.circular(AppRadius.radiusFull),
+                border: Border.all(color: AppColors.primary200, width: 1),
+              ),
+              child: const Text(
+                '오늘',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primary700,
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: onDateTap,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  du.formatMonthYear(date),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.primary900,
+                  ),
+                ),
+                const SizedBox(width: 2),
+                const Icon(
+                  Icons.arrow_drop_down,
+                  size: 20,
+                  color: AppColors.primary900,
+                ),
+              ],
             ),
           ),
           const Spacer(),
@@ -210,19 +326,21 @@ class _WeekdayRow extends StatelessWidget {
 
 class _DaysGrid extends StatelessWidget {
   final DateTime selectedDate;
+  final DateTime displayMonth;
   final Map<String, Set<String>> dotsByDate;
   final ValueChanged<DateTime> onSelect;
 
   const _DaysGrid({
     required this.selectedDate,
+    required this.displayMonth,
     required this.dotsByDate,
     required this.onSelect,
   });
 
   @override
   Widget build(BuildContext context) {
-    final year = selectedDate.year;
-    final month = selectedDate.month;
+    final year = displayMonth.year;
+    final month = displayMonth.month;
     final firstDay = DateTime(year, month, 1);
     final startOffset = firstDay.weekday % 7; // 0=Sun
     final daysInMonth = DateTime(year, month + 1, 0).day;
@@ -640,6 +758,167 @@ class _EventCard extends ConsumerWidget {
       default:
         return r.memo ?? '';
     }
+  }
+}
+
+class _MonthYearPickerSheet extends StatefulWidget {
+  final DateTime initialDate;
+
+  const _MonthYearPickerSheet({required this.initialDate});
+
+  @override
+  State<_MonthYearPickerSheet> createState() => _MonthYearPickerSheetState();
+}
+
+class _MonthYearPickerSheetState extends State<_MonthYearPickerSheet> {
+  late PageController _pageController;
+  late int _year;
+
+  @override
+  void initState() {
+    super.initState();
+    _year = widget.initialDate.year;
+    // year 값을 page index로 직접 사용
+    _pageController = PageController(initialPage: _year);
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final now = DateTime.now();
+    final initYear = widget.initialDate.year;
+    final initMonth = widget.initialDate.month;
+
+    return Container(
+      decoration: const BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.space4,
+        AppSpacing.space3,
+        AppSpacing.space4,
+        AppSpacing.space8,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 36,
+            height: 4,
+            margin: const EdgeInsets.only(bottom: AppSpacing.space4),
+            decoration: BoxDecoration(
+              color: AppColors.gray300,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _NavBtn(
+                icon: Icons.chevron_left,
+                onTap: () => _pageController.previousPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.space6),
+              Text(
+                '$_year',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary900,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.space6),
+              _NavBtn(
+                icon: Icons.chevron_right,
+                onTap: () => _pageController.nextPage(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.space4),
+          LayoutBuilder(
+            builder: (_, constraints) {
+              final itemWidth =
+                  (constraints.maxWidth - 2 * AppSpacing.space2) / 3;
+              final itemHeight = itemWidth / 2.4;
+              final gridHeight = 4 * itemHeight + 3 * AppSpacing.space2;
+              return SizedBox(
+                height: gridHeight,
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (page) => setState(() => _year = page),
+                  itemBuilder: (_, page) {
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        childAspectRatio: 2.4,
+                        crossAxisSpacing: AppSpacing.space2,
+                        mainAxisSpacing: AppSpacing.space2,
+                      ),
+                      itemCount: 12,
+                      itemBuilder: (_, i) {
+                        final month = i + 1;
+                        final isSelected =
+                            page == initYear && month == initMonth;
+                        final isToday =
+                            now.year == page && now.month == month;
+                        final label =
+                            DateFormat('MMM', Intl.defaultLocale ?? 'en')
+                                .format(DateTime(2000, month));
+                        return GestureDetector(
+                          onTap: () =>
+                              Navigator.pop(context, DateTime(page, month)),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: isSelected
+                                  ? AppColors.primary900
+                                  : AppColors.primary50,
+                              borderRadius:
+                                  BorderRadius.circular(AppRadius.radiusMd),
+                              border: isToday && !isSelected
+                                  ? Border.all(
+                                      color: AppColors.primary400,
+                                      width: 1.5,
+                                    )
+                                  : null,
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              label,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isSelected
+                                    ? AppColors.white
+                                    : AppColors.primary900,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
   }
 }
 

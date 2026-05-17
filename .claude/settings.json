@@ -22,7 +22,10 @@
       "Bash(python3 -c ' *)",
       "Bash(which flutter *)",
       "Read(//opt/homebrew/bin/**)",
-      "Bash(~/.flutter/bin/flutter analyze *)"
+      "Bash(~/.flutter/bin/flutter analyze *)",
+      "Bash(~/.fvm/default/bin/dart analyze *)",
+      "Read(//opt/**)",
+      "Bash(/Users/lukas/flutter-sdk/bin/dart analyze *)"
     ]
   }
 }

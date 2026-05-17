@@ -579,6 +579,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get deleteRecordConfirm => 'Excluir este registro?';
 
   @override
+  String get deleteConfirmBody => 'Não é possível desfazer esta ação! 😢';
+
+  @override
+  String get deleteConfirmOk => 'Excluir';
+
+  @override
   String get deleteThisRecord => 'Excluir este registro';
 
   @override

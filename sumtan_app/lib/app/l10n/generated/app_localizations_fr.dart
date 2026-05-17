@@ -579,6 +579,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get deleteRecordConfirm => 'Supprimer cette note ?';
 
   @override
+  String get deleteConfirmBody => 'Cette action est irréversible ! 😢';
+
+  @override
+  String get deleteConfirmOk => 'Supprimer';
+
+  @override
   String get deleteThisRecord => 'Supprimer cette note';
 
   @override

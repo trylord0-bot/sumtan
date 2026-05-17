@@ -26,7 +26,32 @@ class AlarmListItem extends ConsumerWidget {
       key: Key('alarm_${alarm.id}'),
       direction: DismissDirection.endToStart,
       background: _DeleteBackground(),
-      confirmDismiss: (_) async => true,
+      confirmDismiss: (_) async {
+        return await showDialog<bool>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16)),
+            title: Text(context.l10n.deleteAlarmConfirm,
+                style: const TextStyle(
+                    fontSize: 17, fontWeight: FontWeight.w700)),
+            content: Text(context.l10n.deleteConfirmBody),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: Text(context.l10n.commonCancel),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, true),
+                style: TextButton.styleFrom(
+                    foregroundColor: AppColors.danger600),
+                child: Text(context.l10n.deleteConfirmOk),
+              ),
+            ],
+          ),
+        ) ??
+            false;
+      },
       onDismissed: (_) {
         notifier.delete(alarm.id!);
         showTopToast(context, context.l10n.alarmDeleted);

@@ -564,6 +564,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get deleteRecordConfirm => '기록을 삭제할까요?';
 
   @override
+  String get deleteConfirmBody => '삭제하면 다시 되돌릴 수 없어요 😢';
+
+  @override
+  String get deleteConfirmOk => '삭제할게요';
+
+  @override
   String get deleteThisRecord => '이 기록 삭제하기';
 
   @override

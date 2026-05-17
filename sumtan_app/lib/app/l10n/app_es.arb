@@ -179,6 +179,8 @@
   "recordDeleted": "Registro eliminado",
   "recordUpdated": "Registro actualizado",
   "deleteRecordConfirm": "¿Eliminar este registro?",
+  "deleteConfirmBody": "¡No se puede deshacer! 😢",
+  "deleteConfirmOk": "Eliminar",
   "deleteThisRecord": "Eliminar este registro",
   "typeLabel": "Tipo",
   "statusLabel": "Estado",

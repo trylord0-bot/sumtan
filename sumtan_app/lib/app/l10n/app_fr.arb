@@ -179,6 +179,8 @@
   "recordDeleted": "Note supprimée",
   "recordUpdated": "Note mise à jour",
   "deleteRecordConfirm": "Supprimer cette note ?",
+  "deleteConfirmBody": "Cette action est irréversible ! 😢",
+  "deleteConfirmOk": "Supprimer",
   "deleteThisRecord": "Supprimer cette note",
   "typeLabel": "Type",
   "statusLabel": "État",

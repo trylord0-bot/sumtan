@@ -179,6 +179,8 @@
   "recordDeleted": "記録が削除されました 🗑️",
   "recordUpdated": "記録が更新されました",
   "deleteRecordConfirm": "記録を削除しますか？",
+  "deleteConfirmBody": "削除すると元に戻せません 😢",
+  "deleteConfirmOk": "削除する",
   "deleteThisRecord": "この記録を削除",
   "typeLabel": "種類",
   "statusLabel": "状態",

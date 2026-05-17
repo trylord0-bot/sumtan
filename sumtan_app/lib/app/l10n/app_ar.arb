@@ -179,6 +179,8 @@
   "recordDeleted": "تم حذف السجل",
   "recordUpdated": "تم تحديث السجل",
   "deleteRecordConfirm": "حذف هذا السجل؟",
+  "deleteConfirmBody": "لا يمكن التراجع عن الحذف! 😢",
+  "deleteConfirmOk": "احذفه",
   "deleteThisRecord": "حذف هذا السجل",
   "typeLabel": "النوع",
   "statusLabel": "الحالة",

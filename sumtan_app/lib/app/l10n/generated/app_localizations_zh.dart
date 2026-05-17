@@ -560,6 +560,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get deleteRecordConfirm => '删除此记录？';
 
   @override
+  String get deleteConfirmBody => '删除后无法恢复！😢';
+
+  @override
+  String get deleteConfirmOk => '删除';
+
+  @override
   String get deleteThisRecord => '删除此记录';
 
   @override
@@ -3081,6 +3087,12 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get deleteRecordConfirm => '删除此记录？';
 
   @override
+  String get deleteConfirmBody => '删除后无法恢复！😢';
+
+  @override
+  String get deleteConfirmOk => '删除';
+
+  @override
   String get deleteThisRecord => '删除此记录';
 
   @override
@@ -5597,6 +5609,12 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get deleteRecordConfirm => '刪除此記錄？';
+
+  @override
+  String get deleteConfirmBody => '刪除後無法復原！😢';
+
+  @override
+  String get deleteConfirmOk => '刪除';
 
   @override
   String get deleteThisRecord => '刪除此記錄';

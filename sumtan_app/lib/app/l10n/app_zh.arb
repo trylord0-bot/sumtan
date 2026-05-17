@@ -179,6 +179,8 @@
   "recordDeleted": "记录已删除 🗑️",
   "recordUpdated": "记录已更新",
   "deleteRecordConfirm": "删除此记录？",
+  "deleteConfirmBody": "删除后无法恢复！😢",
+  "deleteConfirmOk": "删除",
   "deleteThisRecord": "删除此记录",
   "typeLabel": "类型",
   "statusLabel": "状态",

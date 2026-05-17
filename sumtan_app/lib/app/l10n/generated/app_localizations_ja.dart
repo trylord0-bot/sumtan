@@ -563,6 +563,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get deleteRecordConfirm => '記録を削除しますか？';
 
   @override
+  String get deleteConfirmBody => '削除すると元に戻せません 😢';
+
+  @override
+  String get deleteConfirmOk => '削除する';
+
+  @override
   String get deleteThisRecord => 'この記録を削除';
 
   @override

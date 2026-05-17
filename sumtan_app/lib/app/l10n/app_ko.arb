@@ -179,6 +179,8 @@
   "recordDeleted": "기록이 삭제됐어요 🗑️",
   "recordUpdated": "기록이 수정됐어요",
   "deleteRecordConfirm": "기록을 삭제할까요?",
+  "deleteConfirmBody": "삭제하면 다시 되돌릴 수 없어요 😢",
+  "deleteConfirmOk": "삭제할게요",
   "deleteThisRecord": "이 기록 삭제하기",
   "typeLabel": "유형",
   "statusLabel": "상태",

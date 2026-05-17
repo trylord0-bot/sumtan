@@ -179,6 +179,8 @@
   "recordDeleted": "Eintrag gelöscht",
   "recordUpdated": "Eintrag aktualisiert",
   "deleteRecordConfirm": "Diesen Eintrag löschen?",
+  "deleteConfirmBody": "Das kann nicht rückgängig gemacht werden! 😢",
+  "deleteConfirmOk": "Löschen",
   "deleteThisRecord": "Diesen Eintrag löschen",
   "typeLabel": "Art",
   "statusLabel": "Status",

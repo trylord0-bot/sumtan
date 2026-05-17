@@ -1182,6 +1182,18 @@ abstract class AppLocalizations {
   /// **'Delete this record?'**
   String get deleteRecordConfirm;
 
+  /// Delete confirmation body message
+  ///
+  /// In en, this message translates to:
+  /// **'Once deleted, it can\'t be recovered! 😢'**
+  String get deleteConfirmBody;
+
+  /// Delete confirmation button - friendly
+  ///
+  /// In en, this message translates to:
+  /// **'Delete it'**
+  String get deleteConfirmOk;
+
   /// Delete this record button
   ///
   /// In en, this message translates to:

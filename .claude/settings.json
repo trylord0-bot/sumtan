@@ -19,7 +19,9 @@
       "Bash(flutter gen-l10n *)",
       "Bash(/Users/lukas/flutter-sdk/bin/flutter gen-l10n *)",
       "Bash(/Users/lukas/fvm/versions/stable/bin/flutter analyze *)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(which flutter *)",
+      "Read(//opt/homebrew/bin/**)"
     ]
   }
 }

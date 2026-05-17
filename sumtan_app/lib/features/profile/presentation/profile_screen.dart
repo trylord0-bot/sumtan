@@ -147,8 +147,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
       final appDir = await getApplicationDocumentsDirectory();
       final dir = Directory(ph.join(appDir.path, 'profile_images'));
       await dir.create(recursive: true);
-      final ext = ph.extension(file.path).isNotEmpty ? ph.extension(file.path) : '.jpg';
-      final destPath = ph.join(dir.path, '${DateTime.now().millisecondsSinceEpoch}$ext');
+      final ext =
+          ph.extension(file.path).isNotEmpty ? ph.extension(file.path) : '.jpg';
+      final destPath =
+          ph.join(dir.path, '${DateTime.now().millisecondsSinceEpoch}$ext');
       await File(file.path).copy(destPath);
       await ref.read(petsProvider.notifier).update(
           _full(p, profileImagePath: destPath),
@@ -300,13 +302,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         return ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
           children: [
-            // 새 반려동물 추가 버튼 (최상단)
-            _DashedButton(
-              label: context.l10n.addNewPet,
-              onTap: () => openPaidAddPetScreen(context, ref),
-            ),
-            const SizedBox(height: AppSpacing.space4),
-
             // 사진 영역
             _PhotoSection(pet: pet, onTap: () => _pickPhoto(pet)),
             const SizedBox(height: AppSpacing.space4),
@@ -422,6 +417,13 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       fontSize: 14, fontWeight: FontWeight.w600),
                 ),
               ),
+            ),
+            const SizedBox(height: AppSpacing.space4),
+
+            // 새 반려동물 추가 버튼
+            _DashedButton(
+              label: context.l10n.addNewPet,
+              onTap: () => openPaidAddPetScreen(context, ref),
             ),
           ],
         );

@@ -179,7 +179,7 @@
   "recordDeleted": "Registro excluído",
   "recordUpdated": "Registro atualizado",
   "deleteRecordConfirm": "Excluir este registro?",
-  "deleteConfirmBody": "Não é possível desfazer esta ação! 😢",
+  "deleteConfirmBody": "Não é possível desfazer esta ação!",
   "deleteConfirmOk": "Excluir",
   "deleteThisRecord": "Excluir este registro",
   "typeLabel": "Tipo",

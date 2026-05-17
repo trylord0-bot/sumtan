@@ -572,7 +572,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get deleteRecordConfirm => 'حذف هذا السجل؟';
 
   @override
-  String get deleteConfirmBody => 'لا يمكن التراجع عن الحذف! 😢';
+  String get deleteConfirmBody => 'لا يمكن التراجع عن الحذف!';
 
   @override
   String get deleteConfirmOk => 'احذفه';

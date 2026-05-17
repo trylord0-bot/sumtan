@@ -578,7 +578,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get deleteRecordConfirm => '¿Eliminar este registro?';
 
   @override
-  String get deleteConfirmBody => '¡No se puede deshacer! 😢';
+  String get deleteConfirmBody => '¡No se puede deshacer!';
 
   @override
   String get deleteConfirmOk => 'Eliminar';

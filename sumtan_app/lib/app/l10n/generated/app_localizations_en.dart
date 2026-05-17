@@ -571,7 +571,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteRecordConfirm => 'Delete this record?';
 
   @override
-  String get deleteConfirmBody => 'Once deleted, it can\'t be recovered! 😢';
+  String get deleteConfirmBody => 'Once deleted, it can\'t be recovered!';
 
   @override
   String get deleteConfirmOk => 'Delete it';

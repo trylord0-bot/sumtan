@@ -573,7 +573,7 @@
   "deleteRecordConfirm": "Delete this record?",
   "@deleteRecordConfirm": { "description": "Delete record confirmation" },
 
-  "deleteConfirmBody": "Once deleted, it can't be recovered! 😢",
+  "deleteConfirmBody": "Once deleted, it can't be recovered!",
   "@deleteConfirmBody": { "description": "Delete confirmation body message" },
   "deleteConfirmOk": "Delete it",
   "@deleteConfirmOk": { "description": "Delete confirmation button - friendly" },

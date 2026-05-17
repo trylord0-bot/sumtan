@@ -577,8 +577,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get deleteRecordConfirm => 'Diesen Eintrag löschen?';
 
   @override
-  String get deleteConfirmBody =>
-      'Das kann nicht rückgängig gemacht werden! 😢';
+  String get deleteConfirmBody => 'Das kann nicht rückgängig gemacht werden!';
 
   @override
   String get deleteConfirmOk => 'Löschen';

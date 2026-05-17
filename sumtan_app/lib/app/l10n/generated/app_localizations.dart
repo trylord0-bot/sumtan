@@ -1185,7 +1185,7 @@ abstract class AppLocalizations {
   /// Delete confirmation body message
   ///
   /// In en, this message translates to:
-  /// **'Once deleted, it can\'t be recovered! 😢'**
+  /// **'Once deleted, it can\'t be recovered!'**
   String get deleteConfirmBody;
 
   /// Delete confirmation button - friendly

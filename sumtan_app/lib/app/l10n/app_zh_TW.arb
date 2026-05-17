@@ -179,7 +179,7 @@
   "recordDeleted": "記錄已刪除 🗑️",
   "recordUpdated": "記錄已更新",
   "deleteRecordConfirm": "刪除此記錄？",
-  "deleteConfirmBody": "刪除後無法復原！😢",
+  "deleteConfirmBody": "刪除後無法復原！",
   "deleteConfirmOk": "刪除",
   "deleteThisRecord": "刪除此記錄",
   "typeLabel": "類型",

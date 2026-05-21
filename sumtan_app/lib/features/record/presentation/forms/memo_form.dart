@@ -40,7 +40,7 @@ class _MemoFormState extends ConsumerState<MemoForm> {
     }
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
-    final media = await _mediaController.saveToLocalFiles();
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
 
     final record = Record(
       petId: pet!.id!,

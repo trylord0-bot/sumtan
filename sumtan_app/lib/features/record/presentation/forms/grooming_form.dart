@@ -63,7 +63,7 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
     };
     if (cost != null) data['cost'] = cost;
     if (_nextDate != null) data['next_date'] = du.toIso8601(_nextDate!);
-    final media = await _mediaController.saveToLocalFiles();
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
     if (media.isNotEmpty) data['media'] = media;
 
     final record = Record(

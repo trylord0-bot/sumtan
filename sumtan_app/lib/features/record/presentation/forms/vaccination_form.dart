@@ -64,7 +64,7 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
           _hospitalNameCtrl.text.isEmpty ? null : _hospitalNameCtrl.text,
       'side_effect': _sideEffect,
     };
-    final media = await _mediaController.saveToLocalFiles();
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
     if (media.isNotEmpty) data['media'] = media;
 
     final record = Record(
@@ -89,18 +89,20 @@ class _VaccinationFormState extends ConsumerState<VaccinationForm> {
 
   List<String> _vaccineLabels(BuildContext context, List<String> options) {
     final l10n = context.l10n;
-    return options.map((v) => switch (v) {
-      '종합백신 (DHPPL)' => l10n.vaccineDhppl,
-      '코로나장염' => l10n.vaccineCorona,
-      '켄넬코프' => l10n.vaccineKennelCough,
-      '광견병' => l10n.vaccineRabies,
-      '인플루엔자' => l10n.vaccineInfluenza,
-      '기타' => l10n.other,
-      '종합백신 (FVRCP)' => l10n.vaccineFvrcp,
-      '백혈병 (FeLV)' => l10n.vaccineFelv,
-      '클라미디아' => l10n.vaccineChlamydia,
-      _ => v,
-    }).toList();
+    return options
+        .map((v) => switch (v) {
+              '종합백신 (DHPPL)' => l10n.vaccineDhppl,
+              '코로나장염' => l10n.vaccineCorona,
+              '켄넬코프' => l10n.vaccineKennelCough,
+              '광견병' => l10n.vaccineRabies,
+              '인플루엔자' => l10n.vaccineInfluenza,
+              '기타' => l10n.other,
+              '종합백신 (FVRCP)' => l10n.vaccineFvrcp,
+              '백혈병 (FeLV)' => l10n.vaccineFelv,
+              '클라미디아' => l10n.vaccineChlamydia,
+              _ => v,
+            })
+        .toList();
   }
 
   @override

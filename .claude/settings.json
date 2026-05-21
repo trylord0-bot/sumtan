@@ -25,7 +25,8 @@
       "Bash(~/.flutter/bin/flutter analyze *)",
       "Bash(~/.fvm/default/bin/dart analyze *)",
       "Read(//opt/**)",
-      "Bash(/Users/lukas/flutter-sdk/bin/dart analyze *)"
+      "Bash(/Users/lukas/flutter-sdk/bin/dart analyze *)",
+      "Bash(/Users/lukas/development/flutter-sdk/bin/flutter pub *)"
     ]
   }
 }

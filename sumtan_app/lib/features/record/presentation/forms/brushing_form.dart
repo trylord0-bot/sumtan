@@ -54,7 +54,7 @@ class _BrushingFormState extends ConsumerState<BrushingForm> {
 
     final duration =
         _durationCtrl.text.isEmpty ? null : int.tryParse(_durationCtrl.text);
-    final media = await _mediaController.saveToLocalFiles();
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
 
     final record = Record(
       petId: pet!.id!,

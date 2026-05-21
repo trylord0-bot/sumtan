@@ -47,7 +47,7 @@ class _WaterFormState extends ConsumerState<WaterForm> {
     if (pet?.id == null) return;
 
     final ml = _mlCtrl.text.isNotEmpty ? int.tryParse(_mlCtrl.text) : null;
-    final media = await _mediaController.saveToLocalFiles();
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
 
     final record = Record(
       petId: pet!.id!,
@@ -98,7 +98,6 @@ class _WaterFormState extends ConsumerState<WaterForm> {
           onChanged: (dt) => setState(() => _datetime = dt),
         ),
         const SizedBox(height: AppSpacing.space4),
-
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -150,7 +149,6 @@ class _WaterFormState extends ConsumerState<WaterForm> {
           ],
         ),
         const SizedBox(height: AppSpacing.space4),
-
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

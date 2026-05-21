@@ -56,7 +56,7 @@ class _WalkFormState extends ConsumerState<WalkForm> {
     if (_distanceCtrl.text.isNotEmpty) {
       data['distance_km'] = double.tryParse(_distanceCtrl.text);
     }
-    final media = await _mediaController.saveToLocalFiles();
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
     if (media.isNotEmpty) data['media'] = media;
 
     final record = Record(

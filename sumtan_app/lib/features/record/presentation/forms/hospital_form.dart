@@ -68,7 +68,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
     };
     if (cost != null) data['cost'] = cost;
     if (_nextVisit != null) data['next_visit'] = du.toIso8601(_nextVisit!);
-    final media = await _mediaController.saveToLocalFiles();
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
     if (media.isNotEmpty) data['media'] = media;
 
     final record = Record(
@@ -93,19 +93,21 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
 
   List<String> _symptomLabels(BuildContext context) {
     final l10n = context.l10n;
-    return _symptomOptions.map((v) => switch (v) {
-      '구토' => l10n.vomiting,
-      '기침' => l10n.cough,
-      '무기력' => l10n.lethargy,
-      '식욕부진' => l10n.lossOfAppetite,
-      '설사' => l10n.diarrhea,
-      '콧물' => l10n.runnyNose,
-      '재채기' => l10n.sneezing,
-      '떨림' => l10n.trembling,
-      '혈뇨' => l10n.bloodInUrine,
-      '혈변' => l10n.bloodInStool,
-      _ => v,
-    }).toList();
+    return _symptomOptions
+        .map((v) => switch (v) {
+              '구토' => l10n.vomiting,
+              '기침' => l10n.cough,
+              '무기력' => l10n.lethargy,
+              '식욕부진' => l10n.lossOfAppetite,
+              '설사' => l10n.diarrhea,
+              '콧물' => l10n.runnyNose,
+              '재채기' => l10n.sneezing,
+              '떨림' => l10n.trembling,
+              '혈뇨' => l10n.bloodInUrine,
+              '혈변' => l10n.bloodInStool,
+              _ => v,
+            })
+        .toList();
   }
 
   @override

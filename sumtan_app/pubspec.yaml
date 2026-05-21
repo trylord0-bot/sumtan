@@ -43,6 +43,8 @@ dependencies:
   file_picker: ^8.0.0
   in_app_purchase: ^3.2.0
   flutter_secure_storage: ^9.0.0
+  flutter_image_compress: ^2.3.0
+  video_compress: ^3.1.2
   crypto: ^3.0.3
   encrypt: ^5.0.3
   freerasp: ^7.5.1

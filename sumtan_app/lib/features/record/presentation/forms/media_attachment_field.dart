@@ -3,7 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:video_compress/video_compress.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -68,6 +70,7 @@ class RecordMediaController extends ChangeNotifier {
       : _items = List.of(initialItems);
 
   List<RecordMediaItem> get items => List.unmodifiable(_items);
+  bool get hasUnsavedItems => _items.any((item) => !item.saved);
 
   void addPicked(XFile file) {
     _items.add(RecordMediaItem(
@@ -113,7 +116,28 @@ class RecordMediaController extends ChangeNotifier {
           : p.extension(item.path);
       final fileName = '${const Uuid().v4()}$ext';
       final destPath = p.join(dir.path, fileName);
-      await source.copy(destPath);
+
+      if (item.type == RecordMediaType.photo) {
+        final result = await FlutterImageCompress.compressAndGetFile(
+          item.path,
+          destPath,
+          quality: 85,
+          minWidth: 1920,
+          minHeight: 1080,
+          keepExif: false,
+        );
+        if (result == null) continue;
+      } else {
+        final info = await VideoCompress.compressVideo(
+          item.path,
+          quality: VideoQuality.Res1280x720Quality,
+          frameRate: 30,
+          deleteOrigin: false,
+        );
+        if (info?.file == null) continue;
+        await info!.file!.copy(destPath);
+      }
+
       persisted.add(RecordMediaItem(
         type: item.type,
         path: destPath,
@@ -127,6 +151,66 @@ class RecordMediaController extends ChangeNotifier {
       ..addAll(persisted);
     notifyListeners();
     return persisted.map((item) => item.toJson()).toList();
+  }
+
+  Future<List<Map<String, dynamic>>> saveToLocalFilesWithProgress(
+    BuildContext context,
+  ) async {
+    if (!hasUnsavedItems) return saveToLocalFiles();
+
+    var dialogShown = false;
+    if (context.mounted) {
+      unawaited(showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => const _MediaSaveProgressDialog(),
+      ));
+      dialogShown = true;
+      await WidgetsBinding.instance.endOfFrame;
+    }
+
+    try {
+      return await saveToLocalFiles();
+    } finally {
+      if (dialogShown && context.mounted) {
+        Navigator.of(context, rootNavigator: true).pop();
+      }
+    }
+  }
+}
+
+class _MediaSaveProgressDialog extends StatelessWidget {
+  const _MediaSaveProgressDialog();
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      child: Center(
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  width: 22,
+                  height: 22,
+                  child: CircularProgressIndicator(strokeWidth: 2.5),
+                ),
+                SizedBox(width: 14),
+                Text('저장 중...', style: TextStyle(fontSize: 15)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -191,8 +275,15 @@ class _RecordMediaAttachmentFieldState
     if (choice == null) return;
     try {
       final picked = choice == RecordMediaType.video
-          ? await _picker.pickVideo(source: ImageSource.camera)
-          : await _picker.pickImage(source: ImageSource.camera);
+          ? await _picker.pickVideo(
+              source: ImageSource.camera,
+            )
+          : await _picker.pickImage(
+              source: ImageSource.camera,
+              maxWidth: 1920,
+              maxHeight: 1080,
+              imageQuality: 85,
+            );
       if (picked != null) widget.controller.addPicked(picked);
     } catch (_) {
       if (mounted) await _showPermissionDialog();
@@ -202,7 +293,11 @@ class _RecordMediaAttachmentFieldState
   Future<void> _pickFromGallery() async {
     Navigator.pop(context);
     try {
-      final picked = await _picker.pickMultipleMedia();
+      final picked = await _picker.pickMultiImage(
+        maxWidth: 1920,
+        maxHeight: 1080,
+        imageQuality: 85,
+      );
       widget.controller.addPickedMany(picked);
     } catch (_) {
       if (mounted) await _showPermissionDialog();
@@ -232,19 +327,15 @@ class _RecordMediaAttachmentFieldState
   }
 
   Future<void> _openPreview(RecordMediaItem item) async {
-    final deleted = item.type == RecordMediaType.video
-        ? await Navigator.of(context).push<bool>(
-            MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (_) => _VideoPreviewPage(item: item),
-            ),
-          )
-        : await Navigator.of(context).push<bool>(
-            MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (_) => _PhotoPreviewPage(item: item),
-            ),
-          );
+    final navigator = Navigator.of(context);
+    final route = MaterialPageRoute<bool>(
+      fullscreenDialog: true,
+      builder: (_) => item.type == RecordMediaType.video
+          ? _VideoPreviewPage(item: item)
+          : _PhotoPreviewPage(item: item),
+    );
+    final deleted = await navigator.push<bool>(route);
+    if (!mounted) return;
     if (deleted == true) widget.controller.remove(item);
   }
 
@@ -651,7 +742,8 @@ class _PhotoPreviewPage extends StatelessWidget {
           _PreviewDeleteButton(
             label: context.l10n.deleteThisPhoto,
             onTap: () async {
-              final ok = await _confirmDelete(context, context.l10n.confirmDeletePhoto);
+              final ok = await _confirmDelete(
+                  context, context.l10n.confirmDeletePhoto);
               if (ok && context.mounted) Navigator.pop(context, true);
             },
           ),
@@ -802,6 +894,7 @@ class _VideoPreviewPageState extends State<_VideoPreviewPage> {
                   final confirmTitle = context.l10n.confirmDeleteVideo;
                   final wasPlaying = _controller.value.isPlaying;
                   await _controller.pause();
+                  if (!context.mounted) return;
                   final ok = await _confirmDelete(context, confirmTitle);
                   if (ok && context.mounted) {
                     Navigator.pop(context, true);

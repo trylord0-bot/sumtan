@@ -48,7 +48,7 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
 
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
-    final media = await _mediaController.saveToLocalFiles();
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
     final record = Record(
       petId: pet!.id!,
       category: 'medication',
@@ -87,15 +87,25 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-            label: l10n.medicineName, controller: _nameCtrl, hint: l10n.medicineNameExample),
+            label: l10n.medicineName,
+            controller: _nameCtrl,
+            hint: l10n.medicineNameExample),
         const SizedBox(height: AppSpacing.space3),
         FormInputField(
-            label: l10n.dose, controller: _doseCtrl, hint: 'e.g. 0.5ml, 1 tablet'),
+            label: l10n.dose,
+            controller: _doseCtrl,
+            hint: 'e.g. 0.5ml, 1 tablet'),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
           label: l10n.medicationMethod,
           options: const ['경구', '주사', '외용', '점안', '점이'],
-          optionLabels: [l10n.oral, l10n.injection, l10n.topical, l10n.eyeDrops, l10n.earDrops],
+          optionLabels: [
+            l10n.oral,
+            l10n.injection,
+            l10n.topical,
+            l10n.eyeDrops,
+            l10n.earDrops
+          ],
           selected: _method,
           onChanged: (v) => setState(() => _method = v),
         ),

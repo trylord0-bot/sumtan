@@ -71,7 +71,8 @@ class _MealFormState extends ConsumerState<MealForm> {
     if (_amountCtrl.text.isNotEmpty) {
       await prefs.setString('meal_last_amount_g', _amountCtrl.text);
     }
-    final media = await _mediaController.saveToLocalFiles();
+    if (!mounted) return;
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
 
     final record = Record(
       petId: pet!.id!,

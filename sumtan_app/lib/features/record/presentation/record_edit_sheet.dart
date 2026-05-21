@@ -40,6 +40,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
   late TextEditingController _memoCtrl;
   late final RecordMediaController _mediaController;
   final _controllers = <String, TextEditingController>{};
+  bool _saving = false;
 
   static const _mealAmountLabels = {
     'very_little': '매우 적음',
@@ -133,6 +134,12 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
 
   String _amountKey(String label) => _amountKeysByLabel[label] ?? 'normal';
 
+  void _showSavingDialog() => setState(() => _saving = true);
+
+  void _hideSavingDialog() {
+    if (mounted) setState(() => _saving = false);
+  }
+
   Future<void> _save() async {
     final category = widget.record.category;
     final data = Map<String, dynamic>.from(_data);
@@ -222,6 +229,9 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         }
     }
 
+    _showSavingDialog();
+    await WidgetsBinding.instance.endOfFrame;
+    if (!mounted) return;
     final media = await _mediaController.saveToLocalFiles();
     if (!mounted) return;
     if (media.isEmpty) {
@@ -243,6 +253,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     await ref.read(recordNotifierProvider.notifier).update(updated);
     _invalidateRecords();
 
+    _hideSavingDialog();
     if (mounted) {
       showTopToast(context, context.l10n.recordUpdated);
       Navigator.pop(context, true);
@@ -297,24 +308,59 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
   Widget build(BuildContext context) {
     final cat = RecordCategoryX.fromString(widget.record.category);
 
-    return FormShell(
-      title: '${cat.emoji} ${cat.localizedLabel(context)} ${context.l10n.edit}',
-      onSave: _save,
-      onDelete: _onDelete,
-      deleteLabel: context.l10n.deleteThisRecord,
+    return Stack(
       children: [
-        FormDateTimePicker(
-          value: _datetime,
-          onChanged: (dt) => setState(() => _datetime = dt),
+        FormShell(
+          title:
+              '${cat.emoji} ${cat.localizedLabel(context)} ${context.l10n.edit}',
+          onSave: _save,
+          onDelete: _onDelete,
+          deleteLabel: context.l10n.deleteThisRecord,
+          children: [
+            FormDateTimePicker(
+              value: _datetime,
+              onChanged: (dt) => setState(() => _datetime = dt),
+            ),
+            const SizedBox(height: AppSpacing.space4),
+            ..._categoryFields(),
+            if (widget.record.category != 'memo') ...[
+              const SizedBox(height: AppSpacing.space4),
+              FormMemoField(controller: _memoCtrl),
+            ],
+            const SizedBox(height: AppSpacing.space4),
+            RecordMediaAttachmentField(controller: _mediaController),
+          ],
         ),
-        const SizedBox(height: AppSpacing.space4),
-        ..._categoryFields(),
-        if (widget.record.category != 'memo') ...[
-          const SizedBox(height: AppSpacing.space4),
-          FormMemoField(controller: _memoCtrl),
-        ],
-        const SizedBox(height: AppSpacing.space4),
-        RecordMediaAttachmentField(controller: _mediaController),
+        if (_saving)
+          Positioned.fill(
+            child: AbsorbPointer(
+              child: ColoredBox(
+                color: Colors.black.withValues(alpha: 0.45),
+                child: Center(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 28, vertical: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: 22,
+                          height: 22,
+                          child: CircularProgressIndicator(strokeWidth: 2.5),
+                        ),
+                        SizedBox(width: 14),
+                        Text('저장 중...', style: TextStyle(fontSize: 15)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }

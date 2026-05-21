@@ -45,7 +45,7 @@ class _ConditionFormState extends ConsumerState<ConditionForm> {
   Future<void> _save() async {
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
-    final media = await _mediaController.saveToLocalFiles();
+    final media = await _mediaController.saveToLocalFilesWithProgress(context);
     final record = Record(
       petId: pet!.id!,
       category: 'condition',

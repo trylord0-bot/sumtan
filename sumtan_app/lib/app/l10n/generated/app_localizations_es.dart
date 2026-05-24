@@ -614,9 +614,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get measurementMethod => 'Método de medición';
 
   @override
-  String get mealType => 'Tipo de comida';
-
-  @override
   String get mealAmount => 'Cantidad de comida';
 
   @override
@@ -735,18 +732,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get holdAndWeigh => 'Pesar en brazos';
-
-  @override
-  String get breakfast => 'Desayuno';
-
-  @override
-  String get lunch => 'Almuerzo';
-
-  @override
-  String get dinner => 'Cena';
-
-  @override
-  String get snack => 'Merienda';
 
   @override
   String get veryLittle => 'Muy poco';

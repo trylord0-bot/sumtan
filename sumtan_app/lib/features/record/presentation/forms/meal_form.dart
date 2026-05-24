@@ -22,7 +22,6 @@ class MealForm extends ConsumerStatefulWidget {
 
 class _MealFormState extends ConsumerState<MealForm> {
   DateTime _datetime = DateTime.now();
-  String _mealType = '아침';
   String _mealAmount = 'normal';
   final _amountCtrl = TextEditingController();
   final _memoCtrl = TextEditingController();
@@ -79,7 +78,6 @@ class _MealFormState extends ConsumerState<MealForm> {
       category: 'meal',
       recordedAt: du.toIso8601(_datetime),
       dataJson: {
-        'meal_type': _mealType,
         'meal_amount': _mealAmount,
         if (_amountCtrl.text.isNotEmpty) 'amount_g': _amountCtrl.text,
         if (media.isNotEmpty) 'media': media,
@@ -122,15 +120,6 @@ class _MealFormState extends ConsumerState<MealForm> {
         FormDateTimePicker(
           value: _datetime,
           onChanged: (dt) => setState(() => _datetime = dt),
-        ),
-        const SizedBox(height: AppSpacing.space4),
-
-        FormSegmentRow(
-          label: l10n.mealType,
-          options: const ['아침', '점심', '저녁', '간식'],
-          optionLabels: [l10n.breakfast, l10n.lunch, l10n.dinner, l10n.snack],
-          selected: _mealType,
-          onChanged: (v) => setState(() => _mealType = v),
         ),
         const SizedBox(height: AppSpacing.space4),
 

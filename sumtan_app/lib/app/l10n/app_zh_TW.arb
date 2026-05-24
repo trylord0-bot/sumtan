@@ -1,6 +1,5 @@
 {
   "@@locale": "zh_TW",
-
   "appName": "寵物 Sumtan",
   "appTagline": "寵物健康管理 App",
   "navHome": "首頁",
@@ -191,7 +190,6 @@
   "medicationMethod": "用藥方法",
   "weightKg": "體重 (kg)",
   "measurementMethod": "測量方法",
-  "mealType": "用餐類型",
   "mealAmount": "用餐量",
   "servingAmount": "餵食量",
   "waterAmount": "飲水量",
@@ -232,10 +230,6 @@
   "vetHospital": "動物醫院",
   "homeScale": "家用體重秤",
   "holdAndWeigh": "抱著稱重",
-  "breakfast": "早餐",
-  "lunch": "午餐",
-  "dinner": "晚餐",
-  "snack": "零食",
   "veryLittle": "非常少",
   "little": "少",
   "much": "多",
@@ -485,7 +479,6 @@
   "privacyDataFeatures": "寵物Sumtan提供資料匯出（備份）和匯入（還原）功能。",
   "privacyPolicyMayUpdate": "本隱私權政策可能因法律或服務變更而更新。",
   "privacyPolicyContact": "如對本隱私權政策有疑問，請透過以下方式與我們聯絡。",
-
   "catMeal": "用餐",
   "catWater": "飲水",
   "catGrooming": "美容",
@@ -494,7 +487,6 @@
   "catHospital": "醫院",
   "catCondition": "狀態",
   "catPotty": "排泄",
-
   "mealFormTitle": "🍽️ 用餐記錄",
   "walkFormTitle": "🦮 散步記錄",
   "weightFormTitle": "⚖️ 體重記錄",
@@ -507,13 +499,10 @@
   "vaccinationFormTitle": "💉 接種記錄",
   "hospitalFormTitle": "🏥 醫院記錄",
   "memoFormTitle": "📝 備忘錄",
-
   "measureMethod": "測量方式",
   "feedAmount": "餵食量",
   "mlInputLabel": "直接輸入毫升",
-
   "alarmRescheduleNote": "此提醒的預定日期已過。\n您可以設定新日期或刪除。",
-
   "nailTrim": "修指甲",
   "shopNameExample": "例: 蓬鬆寵物美容",
   "poopRecordSaved": "💩 排泄已記錄",
@@ -553,23 +542,16 @@
   "permissionRequired": "請在設定中允許權限",
   "confirmDeletePhoto": "刪除這張照片？",
   "confirmDeleteVideo": "刪除這個影片？",
-  "deleteThisPhoto": "刪除此照片",
-  "deleteThisVideo": "刪除此影片",
   "hintMedicineAndDose": "💡 請輸入藥品名稱和劑量",
   "deleteRecordBody": "{category}記錄將被刪除\n且無法恢復。",
-  "edit": "編輯",
   "dayCountShort": "{days}天",
-
   "helpIntroContent": "寵物 Sumtan 是一款可以在同一處記錄並管理寵物健康與日常的 App。\n您可以輕鬆記錄用餐、飲水、排泄、體重、用藥、就診等多種健康記錄，並透過提醒功能避免錯過重要行程。",
-
   "helpHomeTodayRecordSummaryDesc": "可以一目了然地查看今天新增的所有記錄。點選記錄項目即可查看詳細內容或進行修改。",
   "helpHomeWeeklyStatsDesc": "可以透過圖表查看本週的排泄次數、用餐量和飲水量，有助於了解寵物的生活規律。",
   "helpHomeWeightChangeChartDesc": "以圖表顯示最近的體重記錄，方便掌握體重變化趨勢。",
   "helpHomeFindNearbyHospitalsDesc": "點選按鈕後，可以在 Naver 地圖中搜尋附近的動物醫院。",
   "helpHomeAddNewRecordDesc": "點選畫面底部的 + 按鈕，選擇記錄類別後即可新增記錄。",
-
   "helpRecordCategoriesIntro": "您可以透過 12 個類別記錄寵物的日常。",
-
   "helpCategoryPottyName": "排泄",
   "helpCategoryPottyDesc": "記錄排泄情況和狀態，也可以附加照片。",
   "helpCategoryConditionName": "狀態",
@@ -594,29 +576,23 @@
   "helpCategoryWalkDesc": "記錄散步距離和時間。",
   "helpCategoryMemoName": "備忘錄",
   "helpCategoryMemoDesc": "可以自由留下備忘內容。",
-
   "helpJournalViewRecordListDesc": "可以依日期查看所有已新增的記錄。透過類別標籤可以一眼區分記錄類型。",
   "helpJournalEditDeleteRecordDesc": "點選記錄項目會開啟編輯面板，可修改或刪除內容。",
   "helpJournalAttachMediaDesc": "在用餐、飲水、醫院、美容、排泄等部分類別中，可以附加照片或影片。",
-
   "helpAlarmAddDesc": "可以新增預防接種、用藥、醫院就診、美容等多種類型的提醒。請先選擇提醒類型，再設定日期和時間。",
   "helpAlarmRepeatDesc": "可以設定每天、每週、每月等重複規則，適用於定期用藥或心絲蟲預防等情境。",
   "helpAlarmAdvanceDesc": "像預防接種這樣的重要行程，可以在 7 天前、3 天前和 1 天前提前收到提醒。",
   "helpAlarmCompleteDesc": "點選提醒項目即可標記為已完成。已完成的提醒可在過去提醒清單中查看。",
   "helpAlarmDeleteDesc": "將提醒項目向左滑動即可刪除。",
-
   "helpPetRegisterDesc": "輸入名字、種類（狗狗/貓咪）、品種、性別、出生日期和是否絕育，即可登錄寵物。",
   "helpPetEditProfileDesc": "可以在檔案畫面修改名字、品種、體重、晶片號碼、動物登記號碼和檔案照片。",
   "helpPetManageMultipleDesc": "可以登錄多隻寵物。點選上方的寵物標籤，即可切換目前管理的寵物。",
-
   "helpDogHealthGuideDesc": "提供依據獸醫學的健康資訊，包含必要和選擇性預防接種時程、心絲蟲和外部寄生蟲預防、牙齒護理、營養管理等。",
   "helpCatHealthGuideDesc": "可以查看貓咪專用預防接種時程、寄生蟲預防、牙齒護理和營養資訊。",
-
   "helpSettingsNotificationDesc": "可以開啟或關閉 App 的全部通知。",
   "helpSettingsExportDesc": "可以將所有記錄資料匯出為 ZIP 檔。更換裝置時可作為備份使用。",
   "helpSettingsImportDesc": "可以匯入之前匯出的 ZIP 備份檔來還原資料。",
   "helpSettingsFeedbackDesc": "如果在使用 App 時有不便之處或改善建議，請透過電子郵件傳送給我們。這將對改善 App 非常有幫助。",
-
   "helpFaqDeletePetQ": "刪除寵物後，記錄也會全部刪除嗎？",
   "helpFaqDeletePetA": "是的，刪除寵物後，該寵物的所有記錄和提醒也會一起刪除。刪除前請先透過匯出資料進行備份。",
   "helpFaqMultipleMediaQ": "一筆記錄可以附加多張照片嗎？",
@@ -627,7 +603,6 @@
   "helpFaqMoveDataA": "可以。在舊裝置中透過 設定 > 匯出資料 儲存備份檔後，在新裝置中透過 設定 > 匯入資料 進行還原。",
   "helpFaqMultiplePetsQ": "可以登錄多隻寵物嗎？",
   "helpFaqMultiplePetsA": "預設可以免費登錄 1 隻寵物。追加登錄可透過進階功能使用。",
-
   "privacyIntroBody": "寵物 Sumtan 是一款無需註冊即可使用的 App，所有資料僅儲存在使用者的裝置內。我們不會將個人資訊傳送至外部伺服器，並會安全保護使用者珍貴的寵物資訊。",
   "privacySection1Title": "蒐集的個人資訊項目",
   "privacySection1Body": "寵物 Sumtan 無需註冊即可使用，不會另行蒐集可識別個人身分的資訊。不過，為了提供 App 功能，以下資訊可能會儲存在裝置內。",
@@ -675,11 +650,9 @@
   "privacyPolicyChangeNotice": "如有變更，將透過 App 更新說明或 App 內公告進行通知。",
   "privacyPolicyChangeEffective": "變更後的政策將於公告後 7 天起生效。",
   "privacySection9Title": "聯絡",
-
   "hgDogHeroTitle": "狗狗健康管理指南",
   "hgCatHeroTitle": "貓咪健康管理指南",
   "hgHeroSubtitle": "依據獸醫建議編寫的\n專業健康指南。",
-
   "hgVaccination": "預防接種",
   "hgCoreVaccines": "核心必須疫苗（Core Vaccine）",
   "hgNonCoreVaccines": "選擇性疫苗（Non-Core）",
@@ -704,13 +677,11 @@
   "hgStressSignals": "辨識壓力信號",
   "hgCaution": "注意",
   "hgSocialization": "社會化與環境刺激",
-
   "hgDogCoreDhppl": "**DHPPL（綜合疫苗）** — 犬瘟熱、肝炎、犬小病毒、副流感、鉤端螺旋體。\n出生後6～8週接種第1劑，間隔3～4週共接種3次，之後每年追加接種",
   "hgDogCoreRabies": "**狂犬病** — 出生後3個月以後接種第1劑，之後每年1次（法定必須接種）",
   "hgDogCoreCorona": "**冠狀病毒腸炎** — 出生後6～8週開始，間隔3～4週接種2次，之後每年追加接種",
   "hgDogNonCoreKennel": "**犬窩咳** — 多犬環境、美容店、寵物旅館等情況建議接種。可選擇鼻腔型或注射型",
   "hgDogNonCoreFlu": "**犬流感** — 戶外活動多或經常接觸其他狗狗時建議",
-
   "hgDogHeartworm1": "蚊子活躍期（3～11月）前後，建議**每月1次**使用預防藥",
   "hgDogHeartworm2": "一旦感染，治療困難且可能致命 — **預防是最好的方法**",
   "hgDogHeartworm3": "使用前必須先檢查是否感染，並確認為陰性",
@@ -720,12 +691,10 @@
   "hgDogExternalParasites3": "移除蜱蟲時，請用鑷子垂直方向慢慢拔除（禁止扭轉）",
   "hgDogInternalParasites1": "蛔蟲、鉤蟲、鞭蟲：**每3～6個月**使用驅蟲藥",
   "hgDogInternalParasites2": "幼犬時期（出生後2週起）：每2週驅蟲1次，共4次，之後定期管理",
-
   "hgDental1": "每天刷牙最理想 — 至少建議**每週3次以上**",
   "hgDental2": "務必使用**寵物專用牙膏**（禁止使用含木糖醇的人用牙膏）",
   "hgDental3": "牙結石嚴重時，請至動物醫院洗牙（需要全身麻醉）",
   "hgDental4": "潔牙零食與牙齒玩具可作為輔助護理",
-
   "hgDogForbiddenFoodAlert": "以下食物對狗狗具有毒性。即使少量也可能危險，請絕對不要餵食。",
   "hgDogForbiddenGrape": "**葡萄·葡萄乾** — 可導致腎衰竭，少量也可能致命",
   "hgDogForbiddenChocolate": "**巧克力·可可** — 可導致可可鹼中毒、心臟衰竭與抽搐",
@@ -734,7 +703,6 @@
   "hgDogForbiddenMacadamia": "**夏威夷豆** — 可引起肌肉無力、高燒、嘔吐",
   "hgDogForbiddenDoughAlcohol": "**生麵團·酒精** — 可導致乙醇中毒與低血糖",
   "hgDogForbiddenAvocado": "**酪梨** — 含有 persin 成分，可能引起嘔吐與腹瀉",
-
   "hgEmergencyAlert": "若出現以下症狀，請立即前往動物醫院。",
   "hgDogEmergency1": "完全食欲不振超過24小時",
   "hgDogEmergency2": "一天內嘔吐或腹瀉反覆3次以上",
@@ -743,7 +711,6 @@
   "hgDogEmergency5": "抽搐、癲癇發作、意識喪失",
   "hgDogEmergency6": "超過12小時無法排尿",
   "hgDogEmergency7": "明顯外傷、骨折或大量出血",
-
   "hgDogExerciseAlert": "對狗狗來說，運動不足不只是體力問題，也可能是壓力、焦慮和破壞性行為的主要原因。",
   "hgDogWalk1": "小型犬：每天至少**20～30分鐘**；中大型犬：建議**1小時**以上",
   "hgDogWalk2": "散步不只是排便時間，而是**嗅覺刺激、社會化與壓力釋放**的時間",
@@ -761,13 +728,11 @@
   "hgDogSocial2": "與其他狗狗互動 — 可利用狗狗公園或幼犬課程",
   "hgDogSocial3": "體驗新的地點、氣味與聲音，有助於豐富心理狀態",
   "hgDogSocial4": "正向強化訓練（響片、零食）能同時刺激大腦並增進親密關係",
-
   "hgCatCoreFvrcp": "**FVRCP（綜合疫苗）** — 貓疱疹病毒、卡里西病毒、貓泛白血球減少症。\n出生後6～8週接種第1劑，間隔3～4週共接種3次，之後每1～3年追加接種",
   "hgCatCoreRabies": "**狂犬病** — 外出貓必須，室內貓也建議接種（法定必須）",
   "hgCatNonCoreFelv": "**貓白血病（FeLV）** — 外出貓、多貓家庭強烈建議",
   "hgCatNonCoreChlamydia": "**貓披衣菌** — 多貓環境中用於預防結膜炎",
   "hgCatNonCoreFiv": "**貓免疫缺陷病毒（FIV）** — 外出公貓需注意，可透過打架傷口傳播",
-
   "hgCatExternalParasites1": "外出貓：跳蚤與蜱蟲預防藥建議**每月1次**",
   "hgCatExternalParasites2": "室內貓也可能透過人的衣服或鞋子帶入跳蚤 → 建議**每3個月**預防一次",
   "hgCatExternalParasites3": "使用點滴型產品時，請正確滴在後頸部",
@@ -775,7 +740,6 @@
   "hgCatInternalParasites1": "蛔蟲、絛蟲：**每3～6個月**使用驅蟲藥",
   "hgCatInternalParasites2": "若餵食生肉或生魚，建議更頻繁檢查",
   "hgCatHeartworm1": "心絲蟲 — 貓咪**沒有治療藥物，預防是唯一方法**。外出貓強烈建議每月預防",
-
   "hgCatMajorDiseases": "貓咪主要疾病注意事項",
   "hgCatDiseaseAlert": "貓咪有隱藏疼痛與不適的習性，因此症狀出現時往往已經進展較深。定期檢查尤其重要。",
   "hgCatDiseaseFlutd": "**貓下泌尿道疾病（FLUTD）** — 公貓常見。若無法排尿，需立即急救",
@@ -784,14 +748,12 @@
   "hgCatDiseaseHyperthyroidism": "**甲狀腺功能亢進** — 10歲以上常見。注意體重下降、食欲增加與過度活躍",
   "hgCatDiseaseStomatitis": "**口炎** — 貓咪非常常見。口臭、流口水、食欲不振時應檢查",
   "hgCatDiseaseFhv": "**貓疱疹病毒（FHV-1）** — 一旦感染會終身潛伏。壓力時可能復發，表現為打噴嚏、眼屎、結膜炎",
-
   "hgHydrationDiet": "水分攝取與飲食管理",
   "hgCatHydrationAlert": "貓咪天生不太愛喝水，容易發生泌尿系統疾病。促進水分攝取非常重要。",
   "hgCatHydration1": "建議搭配濕食（罐頭、餐包）補充水分",
   "hgCatHydration2": "貓咪偏好流動水 — 安裝**寵物飲水機**很有效",
   "hgCatHydration3": "水碗應與食碗分開，貓咪通常更喜歡寬而淺的碗",
   "hgCatHydration4": "目標飲水量：每1kg體重每天約**40～60ml**",
-
   "hgCatForbiddenFoodAlert": "以下食物對貓咪具有毒性。即使少量也可能危險，請絕對不要餵食。",
   "hgCatForbiddenOnion": "**洋蔥·大蒜·蔥** — 破壞紅血球，導致溶血性貧血（貓比狗更敏感）",
   "hgCatForbiddenGrape": "**葡萄·葡萄乾** — 可導致腎衰竭",
@@ -801,7 +763,6 @@
   "hgCatForbiddenXylitolAlcohol": "**木糖醇·酒精** — 對肝臟與神經系統有毒性",
   "hgCatForbiddenAvocado": "**酪梨** — 含有 persin 成分，可能引起嘔吐與腹瀉",
   "hgCatForbiddenRawEggWhite": "**生蛋白** — 抗生物素蛋白會阻礙生物素吸收，可能導致皮膚與毛髮問題",
-
   "hgCatEmergency1": "**完全無法排尿或血尿** — 尿道阻塞屬於急症（尤其注意公貓）",
   "hgCatEmergency2": "完全食欲不振超過24小時（脂肪肝風險）",
   "hgCatEmergency3": "**張口呼吸** — 對貓來說絕不是正常現象，需立即急救",
@@ -810,7 +771,6 @@
   "hgCatEmergency6": "牙齦或舌頭蒼白，或出現黃疸（發黃）",
   "hgCatEmergency7": "一天內嘔吐或腹瀉反覆3次以上，或出現血便、吐血",
   "hgCatEmergency8": "明顯外傷、骨折或大量出血",
-
   "hgEnvironmentMentalHealth": "環境與心理健康",
   "hgIndoorEnvironment": "室內環境管理",
   "hgStressManagement": "壓力管理",
@@ -822,7 +782,6 @@
   "hgCatStress2": "搬家、新家庭成員等環境劇烈變化時，可使用費洛蒙擴散器（Feliway）",
   "hgCatStress3": "每天確保**10～15分鐘以上**使用玩具互動玩耍",
   "hgCatStress4": "多貓家庭：飯碗、貓砂盆、睡覺位置等資源應依貓咪數量分開配置",
-
   "hgAge": "年齡",
   "hgCheckupCycle": "檢查週期",
   "hgMainItems": "主要項目",
@@ -838,7 +797,6 @@
   "hgCatCheckupItems1": "血液檢查、尿液檢查、體重、牙齒",
   "hgCatCheckupItems2": "腎臟與肝臟指數、血壓、甲狀腺（T4）",
   "hgCatCheckupItems3": "綜合血液、腹部超音波、腎臟重點監測",
-
   "hgExerciseAmount": "運動量",
   "hgBreedExamples": "品種範例",
   "hgLow": "低",
@@ -847,6 +805,5 @@
   "hgBreedLowExamples": "鬥牛犬、巴吉度獵犬、西施犬、馬爾濟斯",
   "hgBreedNormalExamples": "貴賓犬、比熊犬、可卡犬、米格魯",
   "hgBreedHighExamples": "拉布拉多、黃金獵犬、哈士奇、邊境牧羊犬",
-
   "hgDisclaimer": "本指南為一般健康管理資訊，所需照護可能會因寵物狀態而異。如有異常症狀或需要治療，請務必諮詢獸醫。"
 }

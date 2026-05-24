@@ -608,9 +608,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get measurementMethod => 'طريقة القياس';
 
   @override
-  String get mealType => 'نوع الوجبة';
-
-  @override
   String get mealAmount => 'كمية الوجبة';
 
   @override
@@ -729,18 +726,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get holdAndWeigh => 'وزن بالحمل';
-
-  @override
-  String get breakfast => 'الإفطار';
-
-  @override
-  String get lunch => 'الغداء';
-
-  @override
-  String get dinner => 'العشاء';
-
-  @override
-  String get snack => 'وجبة خفيفة';
 
   @override
   String get veryLittle => 'قليل جداً';

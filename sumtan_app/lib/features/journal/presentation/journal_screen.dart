@@ -680,11 +680,9 @@ class _EventCard extends ConsumerWidget {
           'much': '많음',
           'very_much': '매우 많음',
         };
-        final mealType = d['meal_type'] as String?;
         final mealAmount = d['meal_amount'] as String?;
         final amountG = d['amount_g'];
         final parts = [
-          if (mealType != null && mealType.isNotEmpty) mealType,
           if (mealAmount != null) mealAmountLabels[mealAmount] ?? mealAmount,
           if (amountG != null) '${amountG}g',
         ];

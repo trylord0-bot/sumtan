@@ -607,9 +607,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get measurementMethod => 'Measurement method';
 
   @override
-  String get mealType => 'Meal type';
-
-  @override
   String get mealAmount => 'Meal amount';
 
   @override
@@ -728,18 +725,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get holdAndWeigh => 'Hold and weigh';
-
-  @override
-  String get breakfast => 'Breakfast';
-
-  @override
-  String get lunch => 'Lunch';
-
-  @override
-  String get dinner => 'Dinner';
-
-  @override
-  String get snack => 'Snack';
 
   @override
   String get veryLittle => 'Very little';

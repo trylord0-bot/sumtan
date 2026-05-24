@@ -923,8 +923,7 @@ class _RecordList extends StatelessWidget {
         final kg = d?['weight_kg'];
         return kg != null ? '체중 기록 — ${kg}kg' : '체중 기록';
       case 'meal':
-        final mealType = d?['meal_type'] as String?;
-        return mealType != null ? '식사 기록 — $mealType' : '식사 기록';
+        return '식사 기록';
       case 'water':
         return '음수 기록';
       case 'hospital':

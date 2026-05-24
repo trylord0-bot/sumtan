@@ -599,9 +599,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get measurementMethod => '測定方法';
 
   @override
-  String get mealType => '食事の種類';
-
-  @override
   String get mealAmount => '食事量';
 
   @override
@@ -720,18 +717,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get holdAndWeigh => '抱っこ測定';
-
-  @override
-  String get breakfast => '朝食';
-
-  @override
-  String get lunch => '昼食';
-
-  @override
-  String get dinner => '夕食';
-
-  @override
-  String get snack => 'おやつ';
 
   @override
   String get veryLittle => 'ごく少量';

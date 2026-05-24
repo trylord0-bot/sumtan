@@ -1,6 +1,5 @@
 {
   "@@locale": "fr",
-
   "appName": "Pet Sumtan",
   "appTagline": "App de santé pour animaux",
   "navHome": "Accueil",
@@ -191,7 +190,6 @@
   "medicationMethod": "Méthode de médication",
   "weightKg": "Poids (kg)",
   "measurementMethod": "Méthode de mesure",
-  "mealType": "Type de repas",
   "mealAmount": "Quantité de repas",
   "servingAmount": "Portion",
   "waterAmount": "Quantité d'eau",
@@ -232,10 +230,6 @@
   "vetHospital": "Clinique vétérinaire",
   "homeScale": "Balance domestique",
   "holdAndWeigh": "Peser dans les bras",
-  "breakfast": "Petit-déjeuner",
-  "lunch": "Déjeuner",
-  "dinner": "Dîner",
-  "snack": "Collation",
   "veryLittle": "Très peu",
   "little": "Peu",
   "much": "Beaucoup",
@@ -270,9 +264,9 @@
   "takePhotoDesc": "Prendre une photo avec la caméra",
   "recordVideo": "Enregistrer une vidéo",
   "recordVideoDesc": "Enregistrer une vidéo avec la caméra",
-  "deleteThisPhoto": "Supprimer cette photo",
+  "deleteThisPhoto": "Supprimer la photo",
   "deletePhotoConfirm": "Supprimer cette photo ?",
-  "deleteThisVideo": "Supprimer cette vidéo",
+  "deleteThisVideo": "Supprimer la vidéo",
   "deleteVideoConfirm": "Supprimer cette vidéo ?",
   "muted": "Silencieux",
   "soundOn": "Son activé",
@@ -485,7 +479,6 @@
   "privacyDataFeatures": "Pet Sumtan propose des fonctions d'exportation (sauvegarde) et d'importation (restauration) de données.",
   "privacyPolicyMayUpdate": "Cette politique de confidentialité peut être mise à jour en raison de changements légaux ou de service.",
   "privacyPolicyContact": "Pour toute question sur cette politique de confidentialité, veuillez nous contacter ci-dessous.",
-
   "catMeal": "Repas",
   "catWater": "Eau",
   "catGrooming": "Toilettage",
@@ -494,7 +487,6 @@
   "catHospital": "Clinique",
   "catCondition": "État",
   "catPotty": "Selles",
-
   "mealFormTitle": "🍽️ Enregistrement repas",
   "walkFormTitle": "🦮 Enregistrement promenade",
   "weightFormTitle": "⚖️ Enregistrement poids",
@@ -507,13 +499,10 @@
   "vaccinationFormTitle": "💉 Enregistrement vaccination",
   "hospitalFormTitle": "🏥 Enregistrement clinique",
   "memoFormTitle": "📝 Note",
-
   "measureMethod": "Méthode de mesure",
   "feedAmount": "Quantité donnée",
   "mlInputLabel": "Saisie directe en mL",
-
   "alarmRescheduleNote": "La date prévue de cette alerte est passée.\nVous pouvez définir une nouvelle date ou la supprimer.",
-
   "nailTrim": "Coupe des griffes",
   "shopNameExample": "ex: Salon Fluffy pour animaux",
   "poopRecordSaved": "💩 Selles enregistrées",
@@ -553,23 +542,16 @@
   "permissionRequired": "Autorisez l'accès dans Réglages",
   "confirmDeletePhoto": "Supprimer cette photo ?",
   "confirmDeleteVideo": "Supprimer cette vidéo ?",
-  "deleteThisPhoto": "Supprimer la photo",
-  "deleteThisVideo": "Supprimer la vidéo",
   "hintMedicineAndDose": "💡 Entrez le médicament et la dose",
   "deleteRecordBody": "L'enregistrement {category} sera supprimé\net ne pourra pas être annulé.",
-  "edit": "Modifier",
   "dayCountShort": "{days} j",
-
   "helpIntroContent": "Pet Sumtan est une application qui vous permet d’enregistrer et de gérer au même endroit la santé et le quotidien de votre animal.\nVous pouvez facilement noter différentes informations de santé, comme les repas, l’eau, les selles, le poids, les médicaments et les visites chez le vétérinaire, et utiliser les alertes pour ne pas oublier les rendez-vous importants.",
-
   "helpHomeTodayRecordSummaryDesc": "Consultez d’un coup d’œil toutes les notes ajoutées aujourd’hui. Touchez une note pour voir les détails ou la modifier.",
   "helpHomeWeeklyStatsDesc": "Consultez sous forme de graphiques le nombre de selles, les repas et la quantité d’eau de cette semaine. Cela vous aide à comprendre le rythme de vie de votre animal.",
   "helpHomeWeightChangeChartDesc": "Affiche les derniers poids enregistrés sous forme de graphique afin de suivre facilement leur évolution.",
   "helpHomeFindNearbyHospitalsDesc": "Touchez le bouton pour rechercher les cliniques vétérinaires proches dans Naver Maps.",
   "helpHomeAddNewRecordDesc": "Touchez le bouton + en bas de l’écran pour choisir une catégorie et ajouter une nouvelle note.",
-
   "helpRecordCategoriesIntro": "Vous pouvez noter le quotidien de votre animal dans 12 catégories.",
-
   "helpCategoryPottyName": "Selles",
   "helpCategoryPottyDesc": "Notez les selles et leur état. Vous pouvez aussi joindre des photos.",
   "helpCategoryConditionName": "État",
@@ -594,29 +576,23 @@
   "helpCategoryWalkDesc": "Notez la distance et la durée de la promenade.",
   "helpCategoryMemoName": "Mémo",
   "helpCategoryMemoDesc": "Laissez librement un mémo.",
-
   "helpJournalViewRecordListDesc": "Consultez tous les enregistrements par date. Les badges de catégorie permettent d’identifier rapidement le type de note.",
   "helpJournalEditDeleteRecordDesc": "Touchez une note pour ouvrir la feuille de modification. Vous pouvez modifier le contenu ou le supprimer.",
   "helpJournalAttachMediaDesc": "Dans certaines catégories, comme repas, eau, clinique, toilettage ou selles, vous pouvez joindre des photos ou des vidéos.",
-
   "helpAlarmAddDesc": "Vous pouvez ajouter différents types d’alertes, comme vaccination, médicament, visite vétérinaire ou toilettage. Choisissez d’abord le type d’alerte, puis définissez la date et l’heure.",
   "helpAlarmRepeatDesc": "Configurez des règles de répétition, par exemple tous les jours, chaque semaine ou chaque mois. C’est utile pour les traitements réguliers ou la prévention de la dirofilariose.",
   "helpAlarmAdvanceDesc": "Pour les rendez-vous importants comme la vaccination, vous pouvez recevoir des rappels 7 jours, 3 jours et 1 jour à l’avance.",
   "helpAlarmCompleteDesc": "Touchez une alerte pour la marquer comme terminée. Les alertes terminées sont visibles dans la liste des alertes passées.",
   "helpAlarmDeleteDesc": "Faites glisser une alerte vers la gauche pour la supprimer.",
-
   "helpPetRegisterDesc": "Enregistrez votre animal en saisissant son nom, son type, sa race, son sexe, sa date de naissance et son statut de stérilisation.",
   "helpPetEditProfileDesc": "Depuis l’écran de profil, vous pouvez modifier le nom, la race, le poids, le numéro de puce électronique, le numéro d’enregistrement et la photo de profil.",
   "helpPetManageMultipleDesc": "Vous pouvez enregistrer plusieurs animaux. Touchez la pastille de l’animal en haut de l’écran pour changer l’animal à gérer.",
-
   "helpDogHealthGuideDesc": "Fournit des informations de santé fondées sur des recommandations vétérinaires, notamment les calendriers de vaccins essentiels et optionnels, la prévention de la dirofilariose et des parasites externes, les soins dentaires et la nutrition.",
   "helpCatHealthGuideDesc": "Consultez le calendrier de vaccination propre aux chats, la prévention des parasites, les soins dentaires et les informations nutritionnelles.",
-
   "helpSettingsNotificationDesc": "Activez ou désactivez toutes les notifications de l’application.",
   "helpSettingsExportDesc": "Exportez toutes les données enregistrées dans un fichier ZIP. Utilisez-le comme sauvegarde lors d’un changement d’appareil.",
   "helpSettingsImportDesc": "Importez un fichier de sauvegarde ZIP précédemment exporté pour restaurer vos données.",
   "helpSettingsFeedbackDesc": "Envoyez-nous par e-mail les problèmes rencontrés ou vos suggestions d’amélioration. Cela nous aide beaucoup à améliorer l’application.",
-
   "helpFaqDeletePetQ": "Si je supprime un animal, toutes ses notes seront-elles aussi supprimées ?",
   "helpFaqDeletePetA": "Oui. Si vous supprimez un animal, toutes ses notes et alertes associées seront également supprimées. Avant de supprimer, pensez à faire une sauvegarde avec Exporter les données.",
   "helpFaqMultipleMediaQ": "Puis-je joindre plusieurs photos à une note ?",
@@ -627,7 +603,6 @@
   "helpFaqMoveDataA": "Oui. Sur l’ancien appareil, enregistrez un fichier de sauvegarde depuis Réglages > Exporter les données. Puis, sur le nouvel appareil, restaurez-le depuis Réglages > Importer les données.",
   "helpFaqMultiplePetsQ": "Puis-je enregistrer plusieurs animaux ?",
   "helpFaqMultiplePetsA": "Par défaut, vous pouvez enregistrer 1 animal gratuitement. L’enregistrement d’animaux supplémentaires est disponible via une fonctionnalité premium.",
-
   "privacyIntroBody": "Pet Sumtan est une application utilisable sans inscription, et toutes les données sont stockées uniquement sur l’appareil de l’utilisateur. Nous ne transmettons aucune information personnelle à des serveurs externes et protégeons en toute sécurité les précieuses informations de vos animaux.",
   "privacySection1Title": "Informations personnelles collectées",
   "privacySection1Body": "Pet Sumtan peut être utilisé sans inscription et ne collecte pas d’informations permettant d’identifier personnellement l’utilisateur. Toutefois, afin de fournir les fonctionnalités de l’app, les informations suivantes peuvent être stockées sur l’appareil.",
@@ -675,11 +650,9 @@
   "privacyPolicyChangeNotice": "En cas de modification, nous vous en informerons par les notes de mise à jour de l’app ou par un avis dans l’app.",
   "privacyPolicyChangeEffective": "La politique modifiée prendra effet 7 jours après l’avis.",
   "privacySection9Title": "Contact",
-
   "hgDogHeroTitle": "Guide de santé du chien",
   "hgCatHeroTitle": "Guide de santé du chat",
   "hgHeroSubtitle": "Un guide de santé professionnel\nfondé sur les recommandations vétérinaires.",
-
   "hgVaccination": "Vaccination",
   "hgCoreVaccines": "Vaccins essentiels (Core Vaccine)",
   "hgNonCoreVaccines": "Vaccins optionnels (Non-Core)",
@@ -704,13 +677,11 @@
   "hgStressSignals": "Reconnaître les signes de stress",
   "hgCaution": "Attention",
   "hgSocialization": "Socialisation et stimulation de l’environnement",
-
   "hgDogCoreDhppl": "**DHPPL (vaccin combiné)** — maladie de Carré, hépatite, parvovirose, parainfluenza et leptospirose.\n1re dose à 6–8 semaines, 3 doses espacées de 3–4 semaines, puis rappel annuel",
   "hgDogCoreRabies": "**Rage** — 1re dose après 3 mois, puis 1 fois par an (vaccination légalement obligatoire)",
   "hgDogCoreCorona": "**Entérite à coronavirus** — début à 6–8 semaines, 2 doses espacées de 3–4 semaines, puis rappel annuel",
   "hgDogNonCoreKennel": "**Toux du chenil** — recommandée en collectivité, lors de toilettage ou de garde en pension. Forme intranasale ou injectable",
   "hgDogNonCoreFlu": "**Grippe canine** — recommandée en cas d’activités extérieures fréquentes ou de contacts réguliers avec d’autres chiens",
-
   "hgDogHeartworm1": "Pendant et autour de la période d’activité des moustiques (mars à novembre), l’administration d’un préventif **1 fois par mois** est recommandée",
   "hgDogHeartworm2": "L’infection est difficile à traiter et peut être mortelle — **la prévention est la meilleure solution**",
   "hgDogHeartworm3": "Avant l’administration, un test doit confirmer l’absence d’infection",
@@ -720,12 +691,10 @@
   "hgDogExternalParasites3": "Pour retirer une tique, utilisez une pince et tirez lentement verticalement (ne pas tourner)",
   "hgDogInternalParasites1": "Ascaris, ankylostomes et trichures : vermifuge **tous les 3 à 6 mois**",
   "hgDogInternalParasites2": "Chez le chiot, dès 2 semaines : vermifuger 4 fois toutes les 2 semaines, puis assurer un suivi régulier",
-
   "hgDental1": "Le brossage quotidien est idéal — au minimum **3 fois par semaine** recommandé",
   "hgDental2": "Utilisez impérativement un **dentifrice spécial animaux** (pas de dentifrice humain contenant du xylitol)",
   "hgDental3": "En cas de tartre important, un détartrage en clinique vétérinaire est nécessaire (sous anesthésie générale)",
   "hgDental4": "Les friandises dentaires et jouets dentaires peuvent compléter les soins",
-
   "hgDogForbiddenFoodAlert": "Les aliments ci-dessous sont toxiques pour les chiens. Même de petites quantités peuvent être dangereuses : ne les donnez jamais.",
   "hgDogForbiddenGrape": "**Raisins et raisins secs** — peuvent provoquer une insuffisance rénale, même une petite quantité peut être mortelle",
   "hgDogForbiddenChocolate": "**Chocolat et cacao** — intoxication à la théobromine, insuffisance cardiaque et convulsions",
@@ -734,7 +703,6 @@
   "hgDogForbiddenMacadamia": "**Noix de macadamia** — faiblesse musculaire, forte fièvre, vomissements",
   "hgDogForbiddenDoughAlcohol": "**Pâte crue et alcool** — intoxication à l’éthanol, hypoglycémie",
   "hgDogForbiddenAvocado": "**Avocat** — contient de la persine, pouvant provoquer vomissements et diarrhée",
-
   "hgEmergencyAlert": "Si l’un des symptômes ci-dessous apparaît, consultez immédiatement une clinique vétérinaire.",
   "hgDogEmergency1": "Perte totale d’appétit pendant plus de 24 heures",
   "hgDogEmergency2": "Vomissements ou diarrhée répétés 3 fois ou plus dans la journée",
@@ -743,7 +711,6 @@
   "hgDogEmergency5": "Convulsions, crises ou perte de connaissance",
   "hgDogEmergency6": "Absence d’urine pendant plus de 12 heures",
   "hgDogEmergency7": "Traumatisme visible, fracture ou saignement abondant",
-
   "hgDogExerciseAlert": "Chez le chien, le manque d’exercice n’est pas seulement un problème physique. Il peut être une cause majeure de stress, d’anxiété et de comportements destructeurs.",
   "hgDogWalk1": "Petits chiens : au moins **20 à 30 minutes** par jour ; chiens moyens et grands : **1 heure** ou plus recommandée",
   "hgDogWalk2": "La promenade n’est pas seulement un moment pour faire ses besoins — c’est un temps de **stimulation olfactive, socialisation et détente**",
@@ -761,13 +728,11 @@
   "hgDogSocial2": "Interactions avec d’autres chiens — parcs canins ou cours pour chiots peuvent aider",
   "hgDogSocial3": "Découvrir de nouveaux lieux, odeurs et sons contribue au bien-être mental",
   "hgDogSocial4": "Le renforcement positif (clicker, friandises) stimule le cerveau et renforce le lien en même temps",
-
   "hgCatCoreFvrcp": "**FVRCP (vaccin combiné)** — herpèsvirus félin, calicivirus et panleucopénie féline.\n1re dose à 6–8 semaines, 3 doses espacées de 3–4 semaines, puis rappel tous les 1 à 3 ans",
   "hgCatCoreRabies": "**Rage** — indispensable pour les chats qui sortent, également recommandée pour les chats d’intérieur (obligatoire selon la loi)",
   "hgCatNonCoreFelv": "**Leucémie féline (FeLV)** — fortement recommandée pour les chats qui sortent et les foyers avec plusieurs chats",
   "hgCatNonCoreChlamydia": "**Chlamydia féline** — prévention de la conjonctivite en environnement multi-chats",
   "hgCatNonCoreFiv": "**Virus de l’immunodéficience féline (FIV)** — surtout chez les mâles qui sortent, transmission par morsures lors de bagarres",
-
   "hgCatExternalParasites1": "Chats qui sortent : prévention contre puces et tiques **1 fois par mois**",
   "hgCatExternalParasites2": "Même les chats d’intérieur peuvent être exposés aux puces ramenées par les vêtements ou chaussures → prévention recommandée **tous les 3 mois**",
   "hgCatExternalParasites3": "Avec les produits spot-on, appliquez correctement sur la nuque",
@@ -775,7 +740,6 @@
   "hgCatInternalParasites1": "Ascaris et ténias : vermifuge **tous les 3 à 6 mois**",
   "hgCatInternalParasites2": "En cas d’alimentation crue (viande ou poisson cru), des contrôles plus fréquents sont recommandés",
   "hgCatHeartworm1": "Dirofilariose — chez le chat, **il n’existe pas de traitement spécifique, la prévention est donc la seule solution**. Une prévention mensuelle est fortement recommandée pour les chats qui sortent",
-
   "hgCatMajorDiseases": "Principales maladies du chat à surveiller",
   "hgCatDiseaseAlert": "Les chats ont tendance à cacher la douleur et la maladie ; lorsque des symptômes apparaissent, l’affection est souvent déjà avancée. Les bilans réguliers sont particulièrement importants.",
   "hgCatDiseaseFlutd": "**Maladie du bas appareil urinaire félin (FLUTD)** — fréquente chez les mâles. Si le chat n’urine pas, c’est une urgence immédiate",
@@ -784,14 +748,12 @@
   "hgCatDiseaseHyperthyroidism": "**Hyperthyroïdie** — fréquente après 10 ans. Surveillez perte de poids, appétit augmenté et hyperactivité",
   "hgCatDiseaseStomatitis": "**Stomatite** — très fréquente chez le chat. Mauvaise haleine, salivation ou perte d’appétit nécessitent un examen",
   "hgCatDiseaseFhv": "**Herpèsvirus félin (FHV-1)** — après infection, il reste latent à vie. Le stress peut provoquer des rechutes : éternuements, sécrétions oculaires, conjonctivite",
-
   "hgHydrationDiet": "Hydratation et gestion alimentaire",
   "hgCatHydrationAlert": "Les chats boivent naturellement peu et sont vulnérables aux maladies urinaires. Favoriser l’hydratation est très important.",
   "hgCatHydration1": "L’association avec de la nourriture humide (boîtes ou sachets) est recommandée pour augmenter l’apport en eau",
   "hgCatHydration2": "Les chats préfèrent souvent l’eau qui coule — une **fontaine à eau** peut être efficace",
   "hgCatHydration3": "Placez la gamelle d’eau séparément de la nourriture ; les chats préfèrent souvent les récipients larges et peu profonds",
   "hgCatHydration4": "Objectif d’apport hydrique : environ **40 à 60 ml** par kg de poids corporel par jour",
-
   "hgCatForbiddenFoodAlert": "Les aliments ci-dessous sont toxiques pour les chats. Même de petites quantités peuvent être dangereuses : ne les donnez jamais.",
   "hgCatForbiddenOnion": "**Oignon, ail et ciboule** — destruction des globules rouges, anémie hémolytique (les chats sont encore plus sensibles que les chiens)",
   "hgCatForbiddenGrape": "**Raisins et raisins secs** — peuvent provoquer une insuffisance rénale",
@@ -801,7 +763,6 @@
   "hgCatForbiddenXylitolAlcohol": "**Xylitol et alcool** — toxicité hépatique et neurologique",
   "hgCatForbiddenAvocado": "**Avocat** — contient de la persine, pouvant provoquer vomissements et diarrhée",
   "hgCatForbiddenRawEggWhite": "**Blanc d’œuf cru** — l’avidine bloque la biotine, pouvant entraîner des problèmes de peau et de pelage",
-
   "hgCatEmergency1": "**Impossible d’uriner ou présence de sang dans les urines** — obstruction urétrale urgente, surtout chez les mâles",
   "hgCatEmergency2": "Perte totale d’appétit pendant plus de 24 heures (risque de lipidose hépatique)",
   "hgCatEmergency3": "**Respiration bouche ouverte** — jamais normale chez le chat, urgence immédiate",
@@ -810,7 +771,6 @@
   "hgCatEmergency6": "Gencives ou langue pâles, ou jaunissement/ictère",
   "hgCatEmergency7": "Vomissements ou diarrhée 3 fois ou plus dans la journée, ou sang dans les selles/vomissements",
   "hgCatEmergency8": "Traumatisme visible, fracture ou saignement abondant",
-
   "hgEnvironmentMentalHealth": "Environnement et santé mentale",
   "hgIndoorEnvironment": "Gestion de l’environnement intérieur",
   "hgStressManagement": "Gestion du stress",
@@ -822,7 +782,6 @@
   "hgCatStress2": "Lors de changements brusques d’environnement (déménagement, nouveau membre de la famille), l’usage d’un diffuseur de phéromones (Feliway) peut aider",
   "hgCatStress3": "Prévoir au moins **10 à 15 minutes par jour** de jeu avec des jouets",
   "hgCatStress4": "Foyers multi-chats : séparez les ressources (gamelles, litières, couchages) selon le nombre de chats",
-
   "hgAge": "Âge",
   "hgCheckupCycle": "Fréquence du bilan",
   "hgMainItems": "Points principaux",
@@ -838,7 +797,6 @@
   "hgCatCheckupItems1": "Analyse sanguine, analyse d’urine, poids, dents",
   "hgCatCheckupItems2": "Paramètres rénaux et hépatiques, tension artérielle, thyroïde (T4)",
   "hgCatCheckupItems3": "Bilan sanguin complet, échographie abdominale, surveillance renforcée des reins",
-
   "hgExerciseAmount": "Niveau d’exercice",
   "hgBreedExamples": "Exemples de races",
   "hgLow": "Faible",
@@ -847,6 +805,5 @@
   "hgBreedLowExamples": "Bouledogue, Basset Hound, Shih Tzu, Bichon maltais",
   "hgBreedNormalExamples": "Caniche, Bichon frisé, Cocker Spaniel, Beagle",
   "hgBreedHighExamples": "Labrador, Golden Retriever, Husky, Border Collie",
-
   "hgDisclaimer": "Ce guide fournit des informations générales de santé, et les soins nécessaires peuvent varier selon l’état de chaque animal. En cas de symptômes anormaux ou de besoin de traitement, consultez impérativement un vétérinaire."
 }

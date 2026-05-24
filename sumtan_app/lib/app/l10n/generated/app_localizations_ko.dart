@@ -600,9 +600,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get measurementMethod => '측정 방법';
 
   @override
-  String get mealType => '식사 종류';
-
-  @override
   String get mealAmount => '식사량';
 
   @override
@@ -721,18 +718,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get holdAndWeigh => '안고 측정';
-
-  @override
-  String get breakfast => '아침';
-
-  @override
-  String get lunch => '점심';
-
-  @override
-  String get dinner => '저녁';
-
-  @override
-  String get snack => '간식';
 
   @override
   String get veryLittle => '매우 적음';

@@ -26,7 +26,9 @@
       "Bash(~/.fvm/default/bin/dart analyze *)",
       "Read(//opt/**)",
       "Bash(/Users/lukas/flutter-sdk/bin/dart analyze *)",
-      "Bash(/Users/lukas/development/flutter-sdk/bin/flutter pub *)"
+      "Bash(/Users/lukas/development/flutter-sdk/bin/flutter pub *)",
+      "Bash(grep -r \"breakfast\\\\|lunch\\\\|dinner\\\\|snack\" /Users/lukas/WORK/git/sumtan/sumtan_app/lib -name \"*.arb\")",
+      "Read(//usr/local/**)"
     ]
   }
 }

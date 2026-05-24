@@ -1,6 +1,5 @@
 {
   "@@locale": "ja",
-
   "appName": "ペットスムタン",
   "appTagline": "ペット健康管理アプリ",
   "navHome": "ホーム",
@@ -191,7 +190,6 @@
   "medicationMethod": "投薬方法",
   "weightKg": "体重 (kg)",
   "measurementMethod": "測定方法",
-  "mealType": "食事の種類",
   "mealAmount": "食事量",
   "servingAmount": "給与量",
   "waterAmount": "飲水量",
@@ -232,10 +230,6 @@
   "vetHospital": "動物病院",
   "homeScale": "家庭用体重計",
   "holdAndWeigh": "抱っこ測定",
-  "breakfast": "朝食",
-  "lunch": "昼食",
-  "dinner": "夕食",
-  "snack": "おやつ",
   "veryLittle": "ごく少量",
   "little": "少量",
   "much": "多め",
@@ -485,7 +479,6 @@
   "privacyDataFeatures": "ペットスムタンはデータの書き出し（バックアップ）と読み込み（復元）機能を提供しています。",
   "privacyPolicyMayUpdate": "このプライバシーポリシーは法令またはサービスの変更により更新される場合があります。",
   "privacyPolicyContact": "このプライバシーポリシーに関するご質問は以下の方法でお問い合わせください。",
-
   "catMeal": "食事",
   "catWater": "飲水",
   "catGrooming": "グルーミング",
@@ -494,7 +487,6 @@
   "catHospital": "病院",
   "catCondition": "体調",
   "catPotty": "排泄",
-
   "mealFormTitle": "🍽️ 食事記録",
   "walkFormTitle": "🦮 散歩記録",
   "weightFormTitle": "⚖️ 体重記録",
@@ -507,13 +499,10 @@
   "vaccinationFormTitle": "💉 接種記録",
   "hospitalFormTitle": "🏥 病院記録",
   "memoFormTitle": "📝 メモ",
-
   "measureMethod": "測定方法",
   "feedAmount": "給与量",
   "mlInputLabel": "mL直接入力",
-
   "alarmRescheduleNote": "このアラームの予定日が過ぎました。\n新しい日付に変更するか削除できます。",
-
   "nailTrim": "爪切り",
   "shopNameExample": "例: ふわふわペットサロン",
   "poopRecordSaved": "💩 排泄が記録されました",
@@ -553,23 +542,16 @@
   "permissionRequired": "設定で権限を許可してください",
   "confirmDeletePhoto": "この写真を削除しますか？",
   "confirmDeleteVideo": "この動画を削除しますか？",
-  "deleteThisPhoto": "この写真を削除",
-  "deleteThisVideo": "この動画を削除",
   "hintMedicineAndDose": "💡 薬品名と用量を入力してください",
   "deleteRecordBody": "{category}の記録が削除され\n元に戻せません。",
-  "edit": "編集",
   "dayCountShort": "{days}日",
-
   "helpIntroContent": "ペットスムタンは、ペットの健康と日常をひとつの場所で記録・管理できるアプリです。\n食事、飲水、排泄、体重、投薬、病院受診など、さまざまな健康記録を手軽に残せます。通知機能で大切な予定を忘れずに管理できます。",
-
   "helpHomeTodayRecordSummaryDesc": "今日登録されたすべての記録をひと目で確認できます。記録項目をタップすると、詳細を確認したり編集したりできます。",
   "helpHomeWeeklyStatsDesc": "今週の排泄回数、食事量、飲水量をグラフで確認できます。ペットの生活パターンを把握するのに役立ちます。",
   "helpHomeWeightChangeChartDesc": "最近の体重記録をグラフで表示します。体重の変化を簡単に確認できます。",
   "helpHomeFindNearbyHospitalsDesc": "ボタンをタップすると、Naverマップで近くの動物病院を検索できます。",
   "helpHomeAddNewRecordDesc": "画面下部の + ボタンをタップすると、記録カテゴリを選んで新しい記録を追加できます。",
-
   "helpRecordCategoriesIntro": "12種類のカテゴリでペットの日常を記録できます。",
-
   "helpCategoryPottyName": "排泄",
   "helpCategoryPottyDesc": "排泄の有無や状態を記録します。写真も添付できます。",
   "helpCategoryConditionName": "体調",
@@ -594,29 +576,23 @@
   "helpCategoryWalkDesc": "散歩の距離と時間を記録します。",
   "helpCategoryMemoName": "メモ",
   "helpCategoryMemoDesc": "自由にメモを残せます。",
-
   "helpJournalViewRecordListDesc": "日付ごとに登録されたすべての記録を確認できます。カテゴリバッジで種類をひと目で区別できます。",
   "helpJournalEditDeleteRecordDesc": "記録項目をタップすると編集シートが開きます。内容を修正したり削除したりできます。",
   "helpJournalAttachMediaDesc": "食事、飲水、病院、グルーミング、排泄など一部のカテゴリでは、写真や動画を添付できます。",
-
   "helpAlarmAddDesc": "予防接種、投薬、病院受診、グルーミングなど、さまざまな種類の通知を登録できます。まず通知の種類を選択し、日付と時刻を設定します。",
   "helpAlarmRepeatDesc": "毎日、毎週、毎月などの繰り返しルールを設定できます。定期的な投薬やフィラリア予防などに便利です。",
   "helpAlarmAdvanceDesc": "予防接種のような大切な予定は、7日前、3日前、1日前に事前通知を受け取れます。",
   "helpAlarmCompleteDesc": "通知項目をタップして完了としてマークできます。完了した通知は過去の通知一覧で確認できます。",
   "helpAlarmDeleteDesc": "通知項目を左にスワイプすると削除できます。",
-
   "helpPetRegisterDesc": "名前、種類（犬／猫）、品種、性別、生年月日、避妊・去勢の有無を入力してペットを登録します。",
   "helpPetEditProfileDesc": "プロフィール画面で、名前、品種、体重、マイクロチップ番号、動物登録番号、プロフィール写真を編集できます。",
   "helpPetManageMultipleDesc": "複数のペットを登録できます。上部のペットチップをタップすると、管理するペットを切り替えられます。",
-
   "helpDogHealthGuideDesc": "必須・任意の予防接種スケジュール、フィラリア・外部寄生虫予防、歯のケア、栄養管理など、獣医学に基づいた健康情報を提供します。",
   "helpCatHealthGuideDesc": "猫専用の予防接種スケジュール、寄生虫予防、歯のケア、栄養情報を確認できます。",
-
   "helpSettingsNotificationDesc": "アプリ全体の通知をオン／オフできます。",
   "helpSettingsExportDesc": "記録されたすべてのデータをZIPファイルで書き出せます。機種変更時のバックアップとしてご利用ください。",
   "helpSettingsImportDesc": "以前に書き出したZIPバックアップファイルを読み込んで、データを復元できます。",
   "helpSettingsFeedbackDesc": "アプリの利用中に不便な点や改善のご意見があれば、メールでお送りください。より良いアプリづくりの大きな助けになります。",
-
   "helpFaqDeletePetQ": "ペットを削除すると、記録もすべて削除されますか？",
   "helpFaqDeletePetA": "はい。ペットを削除すると、そのペットのすべての記録と通知も一緒に削除されます。削除前にデータを書き出してバックアップしておくことをおすすめします。",
   "helpFaqMultipleMediaQ": "記録に写真を複数枚添付できますか？",
@@ -627,7 +603,6 @@
   "helpFaqMoveDataA": "はい。旧端末で 設定 > データを書き出す からバックアップファイルを保存し、新しい端末で 設定 > データを読み込む から復元できます。",
   "helpFaqMultiplePetsQ": "複数のペットを登録できますか？",
   "helpFaqMultiplePetsA": "基本的に1頭は無料で登録できます。追加登録はプレミアム機能として利用できます。",
-
   "privacyIntroBody": "ペットスムタンは会員登録なしで使えるアプリで、すべてのデータはユーザーの端末内にのみ保存されます。個人情報を外部サーバーへ送信することはなく、大切なペットの情報を安全に保護します。",
   "privacySection1Title": "収集する個人情報の項目",
   "privacySection1Body": "ペットスムタンは会員登録なしで利用でき、個人を識別するための情報を別途収集しません。ただし、アプリ機能を提供するため、以下のような情報が端末内に保存される場合があります。",
@@ -675,11 +650,9 @@
   "privacyPolicyChangeNotice": "変更がある場合は、アプリのアップデートノートまたはアプリ内のお知らせを通じてご案内します。",
   "privacyPolicyChangeEffective": "変更後のポリシーは、お知らせから7日が経過した日より効力を生じます。",
   "privacySection9Title": "お問い合わせ",
-
   "hgDogHeroTitle": "犬の健康管理ガイド",
   "hgCatHeroTitle": "猫の健康管理ガイド",
   "hgHeroSubtitle": "獣医師の推奨基準に基づいて\n作成された専門的な健康ガイドです。",
-
   "hgVaccination": "予防接種",
   "hgCoreVaccines": "コアワクチン（必須）",
   "hgNonCoreVaccines": "ノンコアワクチン（任意）",
@@ -704,13 +677,11 @@
   "hgStressSignals": "ストレスサインに気づく",
   "hgCaution": "注意",
   "hgSocialization": "社会化と環境刺激",
-
   "hgDogCoreDhppl": "**DHPPL（混合ワクチン）** — ジステンパー、肝炎、パルボ、パラインフルエンザ、レプトスピラ。\n生後6〜8週で1回目、3〜4週間隔で3回接種、その後は毎年追加接種",
   "hgDogCoreRabies": "**狂犬病** — 生後3か月以降に1回目、その後は毎年1回（法定必須接種）",
   "hgDogCoreCorona": "**コロナウイルス性腸炎** — 生後6〜8週から開始、3〜4週間隔で2回接種、その後は毎年追加接種",
   "hgDogNonCoreKennel": "**ケンネルコフ** — 多頭環境、トリミングサロン、ペットホテル利用時に推奨。点鼻型または注射型",
   "hgDogNonCoreFlu": "**犬インフルエンザ** — 屋外活動が多い、または他の犬との接触が多い場合に推奨",
-
   "hgDogHeartworm1": "蚊の活動期（3〜11月）前後は、予防薬を**毎月1回**投与することが推奨されます",
   "hgDogHeartworm2": "感染すると治療が難しく命に関わることがあります — **予防が最善**です",
   "hgDogHeartworm3": "投与前には必ず感染検査を行い、陰性であることを確認してください",
@@ -720,12 +691,10 @@
   "hgDogExternalParasites3": "マダニを除去する際は、ピンセットで垂直方向にゆっくり引き抜いてください（ねじらない）",
   "hgDogInternalParasites1": "回虫、鉤虫、鞭虫：**3〜6か月ごと**に駆虫薬を投与",
   "hgDogInternalParasites2": "子犬期（生後2週〜）：2週間隔で4回駆虫し、その後は定期管理",
-
   "hgDental1": "毎日の歯みがきが理想です — 少なくとも**週3回以上**を推奨",
   "hgDental2": "必ず**ペット用歯みがき粉**を使用してください（キシリトールを含む人用歯みがき粉は禁止）",
   "hgDental3": "歯石がひどい場合は動物病院でスケーリングが必要です（全身麻酔が必要）",
   "hgDental4": "デンタルガムや歯みがき用おもちゃで補助的なケアができます",
-
   "hgDogForbiddenFoodAlert": "以下の食べ物は犬に毒性があります。少量でも危険な場合があるため、絶対に与えないでください。",
   "hgDogForbiddenGrape": "**ぶどう・レーズン** — 腎不全を引き起こすことがあり、少量でも致命的になる可能性があります",
   "hgDogForbiddenChocolate": "**チョコレート・カカオ** — テオブロミン中毒、心不全、けいれん",
@@ -734,7 +703,6 @@
   "hgDogForbiddenMacadamia": "**マカダミアナッツ** — 筋力低下、高熱、嘔吐",
   "hgDogForbiddenDoughAlcohol": "**生のパン生地・アルコール** — エタノール中毒、低血糖",
   "hgDogForbiddenAvocado": "**アボカド** — ペルシン成分により、嘔吐や下痢を起こすことがあります",
-
   "hgEmergencyAlert": "以下の症状が見られる場合は、すぐに動物病院を受診してください。",
   "hgDogEmergency1": "24時間以上、完全に食欲がない",
   "hgDogEmergency2": "嘔吐や下痢が1日に3回以上繰り返される",
@@ -743,7 +711,6 @@
   "hgDogEmergency5": "けいれん、発作、意識消失",
   "hgDogEmergency6": "12時間以上尿が出ない",
   "hgDogEmergency7": "明らかな外傷、骨折、大量出血",
-
   "hgDogExerciseAlert": "犬にとって運動不足は単なる体力の問題ではありません。ストレス、不安、破壊行動の主な原因になることがあります。",
   "hgDogWalk1": "小型犬：1日**20〜30分**以上、中・大型犬：**1時間**以上を推奨",
   "hgDogWalk2": "散歩は単なる排泄時間ではなく、**嗅覚刺激・社会化・ストレス解消**の時間です",
@@ -761,13 +728,11 @@
   "hgDogSocial2": "他の犬との交流 — ドッグランやパピークラスを活用しましょう",
   "hgDogSocial3": "新しい場所、におい、音の経験は、心の豊かさにつながります",
   "hgDogSocial4": "ポジティブ強化トレーニング（クリッカー・おやつ）は、脳への刺激と絆づくりを同時に高めます",
-
   "hgCatCoreFvrcp": "**FVRCP（混合ワクチン）** — 猫ヘルペスウイルス、カリシウイルス、猫汎白血球減少症。\n生後6〜8週で1回目、3〜4週間隔で3回接種、その後は1〜3年ごと",
   "hgCatCoreRabies": "**狂犬病** — 外に出る猫は必須、室内猫にも推奨（法定必須）",
   "hgCatNonCoreFelv": "**猫白血病（FeLV）** — 外に出る猫、多頭飼育の家庭では強く推奨",
   "hgCatNonCoreChlamydia": "**猫クラミジア** — 多頭環境での結膜炎予防",
   "hgCatNonCoreFiv": "**猫免疫不全ウイルス（FIV）** — 外に出るオス猫で注意（けんかによる傷から感染）",
-
   "hgCatExternalParasites1": "外に出る猫：ノミ・マダニ予防薬を**毎月1回**投与",
   "hgCatExternalParasites2": "室内猫でも人の衣服や靴からノミが持ち込まれることがあります → **3か月ごと**の予防を推奨",
   "hgCatExternalParasites3": "スポットオン製品を使用する際は、首の後ろに正しく滴下してください",
@@ -775,7 +740,6 @@
   "hgCatInternalParasites1": "回虫・条虫：**3〜6か月ごと**に駆虫薬を投与",
   "hgCatInternalParasites2": "生肉や生魚を与える場合は、より頻繁な検査を推奨",
   "hgCatHeartworm1": "フィラリア — 猫には**治療薬がなく、予防が唯一の方法**です。外に出る猫は毎月の予防を強く推奨",
-
   "hgCatMajorDiseases": "猫の主な病気に注意",
   "hgCatDiseaseAlert": "猫は痛みや不調を隠す習性があるため、症状が出た時にはすでに進行していることが少なくありません。定期健診が特に重要です。",
   "hgCatDiseaseFlutd": "**猫下部尿路疾患（FLUTD）** — オス猫に多い病気です。尿が出ない場合は直ちに救急対応が必要です",
@@ -784,14 +748,12 @@
   "hgCatDiseaseHyperthyroidism": "**甲状腺機能亢進症** — 10歳以上で多く見られます。体重減少、食欲増加、活動過多に注意",
   "hgCatDiseaseStomatitis": "**口内炎** — 猫に非常に多い病気です。口臭、よだれ、食欲不振がある場合は検査を",
   "hgCatDiseaseFhv": "**猫ヘルペス（FHV-1）** — 一度感染すると生涯潜伏します。ストレス時に再発し、くしゃみ、目やに、結膜炎が見られます",
-
   "hgHydrationDiet": "水分摂取と食事管理",
   "hgCatHydrationAlert": "猫はもともと水をあまり飲まないため、泌尿器疾患にかかりやすい傾向があります。水分摂取を促すことがとても重要です。",
   "hgCatHydration1": "ウェットフード（缶・パウチ）を併用して水分補給を促しましょう",
   "hgCatHydration2": "流れる水を好む猫が多いため、**給水器**の設置が効果的です",
   "hgCatHydration3": "水皿はフード皿と離して置き、広く浅い器を好む傾向があります",
   "hgCatHydration4": "目標飲水量：体重1kgあたり1日約**40〜60ml**",
-
   "hgCatForbiddenFoodAlert": "以下の食べ物は猫に毒性があります。少量でも危険な場合があるため、絶対に与えないでください。",
   "hgCatForbiddenOnion": "**玉ねぎ・にんにく・ねぎ** — 赤血球を破壊し、溶血性貧血を起こします（犬よりも敏感）",
   "hgCatForbiddenGrape": "**ぶどう・レーズン** — 腎不全を引き起こすことがあります",
@@ -801,7 +763,6 @@
   "hgCatForbiddenXylitolAlcohol": "**キシリトール・アルコール** — 肝臓や神経系への毒性",
   "hgCatForbiddenAvocado": "**アボカド** — ペルシン成分により、嘔吐や下痢を起こすことがあります",
   "hgCatForbiddenRawEggWhite": "**生卵の白身** — アビジンがビオチン吸収を妨げ、皮膚や被毛のトラブルにつながることがあります",
-
   "hgCatEmergency1": "**まったく尿が出ない、または血尿** — 尿道閉塞の緊急事態（特にオス猫は注意）",
   "hgCatEmergency2": "24時間以上、完全に食欲がない（脂肪肝のリスク）",
   "hgCatEmergency3": "**口を開けて呼吸する** — 猫では決して正常ではなく、すぐに救急受診が必要です",
@@ -810,7 +771,6 @@
   "hgCatEmergency6": "歯ぐきや舌が白い、または黄疸（黄色っぽい）",
   "hgCatEmergency7": "嘔吐や下痢が1日に3回以上繰り返される、または血便・吐血がある",
   "hgCatEmergency8": "明らかな外傷、骨折、大量出血",
-
   "hgEnvironmentMentalHealth": "環境とメンタルヘルス",
   "hgIndoorEnvironment": "室内環境の管理",
   "hgStressManagement": "ストレス管理",
@@ -822,7 +782,6 @@
   "hgCatStress2": "引っ越しや新しい家族など急な環境変化の際は、フェロモンディフューザー（Feliway）の活用も有効です",
   "hgCatStress3": "1日**10〜15分以上**、おもちゃを使った遊び時間を確保しましょう",
   "hgCatStress4": "多頭飼育：食器、トイレ、寝床などの資源は猫の数に合わせて分けて配置してください",
-
   "hgAge": "年齢",
   "hgCheckupCycle": "健診周期",
   "hgMainItems": "主な項目",
@@ -838,7 +797,6 @@
   "hgCatCheckupItems1": "血液検査、尿検査、体重、歯",
   "hgCatCheckupItems2": "腎臓・肝臓の数値、血圧、甲状腺（T4）",
   "hgCatCheckupItems3": "総合血液検査、腹部超音波、腎臓の重点モニタリング",
-
   "hgExerciseAmount": "運動量",
   "hgBreedExamples": "犬種の例",
   "hgLow": "低い",
@@ -847,6 +805,5 @@
   "hgBreedLowExamples": "ブルドッグ、バセットハウンド、シー・ズー、マルチーズ",
   "hgBreedNormalExamples": "プードル、ビション・フリーゼ、コッカー・スパニエル、ビーグル",
   "hgBreedHighExamples": "ラブラドール、ゴールデン・レトリバー、ハスキー、ボーダー・コリー",
-
   "hgDisclaimer": "このガイドは一般的な健康管理情報であり、必要なケアはペットの状態によって異なる場合があります。異常な症状がある場合や治療が必要な場合は、必ず獣医師に相談してください。"
 }

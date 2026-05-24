@@ -596,9 +596,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get measurementMethod => '测量方法';
 
   @override
-  String get mealType => '进餐类型';
-
-  @override
   String get mealAmount => '进餐量';
 
   @override
@@ -717,18 +714,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get holdAndWeigh => '抱着称重';
-
-  @override
-  String get breakfast => '早餐';
-
-  @override
-  String get lunch => '午餐';
-
-  @override
-  String get dinner => '晚餐';
-
-  @override
-  String get snack => '零食';
 
   @override
   String get veryLittle => '非常少';
@@ -3123,9 +3108,6 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get measurementMethod => '测量方法';
 
   @override
-  String get mealType => '进餐类型';
-
-  @override
   String get mealAmount => '进餐量';
 
   @override
@@ -3244,18 +3226,6 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get holdAndWeigh => '抱着称重';
-
-  @override
-  String get breakfast => '早餐';
-
-  @override
-  String get lunch => '午餐';
-
-  @override
-  String get dinner => '晚餐';
-
-  @override
-  String get snack => '零食';
 
   @override
   String get veryLittle => '非常少';
@@ -5647,9 +5617,6 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get measurementMethod => '測量方法';
 
   @override
-  String get mealType => '用餐類型';
-
-  @override
   String get mealAmount => '用餐量';
 
   @override
@@ -5768,18 +5735,6 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get holdAndWeigh => '抱著稱重';
-
-  @override
-  String get breakfast => '早餐';
-
-  @override
-  String get lunch => '午餐';
-
-  @override
-  String get dinner => '晚餐';
-
-  @override
-  String get snack => '零食';
 
   @override
   String get veryLittle => '非常少';

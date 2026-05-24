@@ -1,6 +1,5 @@
 {
   "@@locale": "zh_CN",
-
   "appName": "宠物 Sumtan",
   "appTagline": "宠物健康管理应用",
   "navHome": "首页",
@@ -191,7 +190,6 @@
   "medicationMethod": "用药方法",
   "weightKg": "体重 (kg)",
   "measurementMethod": "测量方法",
-  "mealType": "进餐类型",
   "mealAmount": "进餐量",
   "servingAmount": "喂食量",
   "waterAmount": "饮水量",
@@ -232,10 +230,6 @@
   "vetHospital": "动物医院",
   "homeScale": "家用体重秤",
   "holdAndWeigh": "抱着称重",
-  "breakfast": "早餐",
-  "lunch": "午餐",
-  "dinner": "晚餐",
-  "snack": "零食",
   "veryLittle": "非常少",
   "little": "少",
   "much": "多",
@@ -485,7 +479,6 @@
   "privacyDataFeatures": "宠物Sumtan提供数据导出（备份）和导入（恢复）功能。",
   "privacyPolicyMayUpdate": "本隐私政策可能因法律或服务变更而更新。",
   "privacyPolicyContact": "如对本隐私政策有疑问，请通过以下方式联系我们。",
-
   "catMeal": "进餐",
   "catWater": "饮水",
   "catGrooming": "美容",
@@ -494,7 +487,6 @@
   "catHospital": "医院",
   "catCondition": "状态",
   "catPotty": "排泄",
-
   "mealFormTitle": "🍽️ 进餐记录",
   "walkFormTitle": "🦮 散步记录",
   "weightFormTitle": "⚖️ 体重记录",
@@ -507,13 +499,10 @@
   "vaccinationFormTitle": "💉 接种记录",
   "hospitalFormTitle": "🏥 医院记录",
   "memoFormTitle": "📝 备忘录",
-
   "measureMethod": "测量方法",
   "feedAmount": "喂食量",
   "mlInputLabel": "直接输入毫升",
-
   "alarmRescheduleNote": "此提醒的预定日期已过。\n您可以设置新日期或删除。",
-
   "nailTrim": "修指甲",
   "shopNameExample": "例: 蓬松宠物美容",
   "poopRecordSaved": "💩 排泄已记录",
@@ -553,23 +542,16 @@
   "permissionRequired": "请在设置中允许权限",
   "confirmDeletePhoto": "删除这张照片？",
   "confirmDeleteVideo": "删除这个视频？",
-  "deleteThisPhoto": "删除此照片",
-  "deleteThisVideo": "删除此视频",
   "hintMedicineAndDose": "💡 请输入药品名称和剂量",
   "deleteRecordBody": "{category}记录将被删除\n且无法恢复。",
-  "edit": "编辑",
   "dayCountShort": "{days}天",
-
   "helpIntroContent": "宠物 Sumtan 是一款可以在一个地方记录并管理宠物健康与日常的应用。\n您可以轻松记录饮食、饮水、排泄、体重、用药、就诊等多种健康记录，并通过提醒功能避免错过重要日程。",
-
   "helpHomeTodayRecordSummaryDesc": "可以一目了然地查看今天添加的所有记录。点击记录项目即可查看详细内容或进行修改。",
   "helpHomeWeeklyStatsDesc": "可以通过图表查看本周的排泄次数、进餐量和饮水量，有助于了解宠物的生活规律。",
   "helpHomeWeightChangeChartDesc": "以图表显示最近的体重记录，便于掌握体重变化趋势。",
   "helpHomeFindNearbyHospitalsDesc": "点击按钮后，可以在 Naver 地图中搜索附近的动物医院。",
   "helpHomeAddNewRecordDesc": "点击屏幕底部的 + 按钮，选择记录类别后即可添加新记录。",
-
   "helpRecordCategoriesIntro": "您可以通过 12 个类别记录宠物的日常。",
-
   "helpCategoryPottyName": "排泄",
   "helpCategoryPottyDesc": "记录排泄情况和状态，也可以附加照片。",
   "helpCategoryConditionName": "状态",
@@ -594,29 +576,23 @@
   "helpCategoryWalkDesc": "记录散步距离和时间。",
   "helpCategoryMemoName": "备忘",
   "helpCategoryMemoDesc": "可以自由留下备忘内容。",
-
   "helpJournalViewRecordListDesc": "可以按日期查看所有已添加的记录。通过类别标签可以一眼区分记录类型。",
   "helpJournalEditDeleteRecordDesc": "点击记录项目会打开编辑面板，可修改或删除内容。",
   "helpJournalAttachMediaDesc": "在进餐、饮水、医院、美容、排泄等部分类别中，可以附加照片或视频。",
-
   "helpAlarmAddDesc": "可以添加疫苗接种、用药、医院就诊、美容等多种类型的提醒。请先选择提醒类型，再设置日期和时间。",
   "helpAlarmRepeatDesc": "可以设置每天、每周、每月等重复规则，适用于定期用药或心丝虫预防等场景。",
   "helpAlarmAdvanceDesc": "像疫苗接种这样的重要日程，可以在 7 天前、3 天前和 1 天前提前收到提醒。",
   "helpAlarmCompleteDesc": "点击提醒项目即可标记为已完成。已完成的提醒可在过去提醒列表中查看。",
   "helpAlarmDeleteDesc": "将提醒项目向左滑动即可删除。",
-
   "helpPetRegisterDesc": "输入姓名、种类（狗狗/猫咪）、品种、性别、出生日期和是否绝育，即可注册宠物。",
   "helpPetEditProfileDesc": "可以在档案画面修改姓名、品种、体重、微芯片编号、动物登记号和档案照片。",
   "helpPetManageMultipleDesc": "可以注册多只宠物。点击顶部的宠物标签，即可切换当前管理的宠物。",
-
   "helpDogHealthGuideDesc": "提供基于兽医学的健康信息，包括必需和可选疫苗接种时间表、心丝虫和外部寄生虫预防、牙齿护理、营养管理等。",
   "helpCatHealthGuideDesc": "可以查看猫咪专用疫苗接种时间表、寄生虫预防、牙齿护理和营养信息。",
-
   "helpSettingsNotificationDesc": "可以开启或关闭应用的全部通知。",
   "helpSettingsExportDesc": "可以将所有记录数据导出为 ZIP 文件。更换设备时可作为备份使用。",
   "helpSettingsImportDesc": "可以导入之前导出的 ZIP 备份文件来恢复数据。",
   "helpSettingsFeedbackDesc": "如果在使用应用时有不便之处或改进建议，请通过电子邮件发送给我们。这将对改进应用非常有帮助。",
-
   "helpFaqDeletePetQ": "删除宠物后，记录也会全部删除吗？",
   "helpFaqDeletePetA": "是的，删除宠物后，该宠物的所有记录和提醒也会一起删除。删除前请先通过导出数据进行备份。",
   "helpFaqMultipleMediaQ": "一条记录可以附加多张照片吗？",
@@ -627,7 +603,6 @@
   "helpFaqMoveDataA": "可以。在旧设备中通过 设置 > 导出数据 保存备份文件后，在新设备中通过 设置 > 导入数据 进行恢复。",
   "helpFaqMultiplePetsQ": "可以注册多只宠物吗？",
   "helpFaqMultiplePetsA": "默认可以免费注册 1 只宠物。追加注册可通过高级功能使用。",
-
   "privacyIntroBody": "宠物 Sumtan 是一款无需注册即可使用的应用，所有数据仅保存在用户的设备内。我们不会将个人信息传输到外部服务器，并会安全保护用户珍贵的宠物信息。",
   "privacySection1Title": "收集的个人信息项目",
   "privacySection1Body": "宠物 Sumtan 无需注册即可使用，不会另行收集可识别个人身份的信息。但为了提供应用功能，以下信息可能会保存在设备内。",
@@ -675,11 +650,9 @@
   "privacyPolicyChangeNotice": "如有变更，将通过应用更新说明或应用内公告进行通知。",
   "privacyPolicyChangeEffective": "变更后的政策将在公告发布 7 天后生效。",
   "privacySection9Title": "联系",
-
   "hgDogHeroTitle": "狗狗健康管理指南",
   "hgCatHeroTitle": "猫咪健康管理指南",
   "hgHeroSubtitle": "基于兽医建议编写的\n专业健康指南。",
-
   "hgVaccination": "疫苗接种",
   "hgCoreVaccines": "核心必需疫苗（Core Vaccine）",
   "hgNonCoreVaccines": "选择性疫苗（Non-Core）",
@@ -704,13 +677,11 @@
   "hgStressSignals": "识别压力信号",
   "hgCaution": "注意",
   "hgSocialization": "社会化与环境刺激",
-
   "hgDogCoreDhppl": "**DHPPL（综合疫苗）** — 犬瘟热、肝炎、细小病毒、副流感、钩端螺旋体。\n出生后6～8周接种第1针，间隔3～4周共接种3次，之后每年加强接种",
   "hgDogCoreRabies": "**狂犬病** — 出生后3个月以后接种第1针，之后每年1次（法定必需接种）",
   "hgDogCoreCorona": "**冠状病毒肠炎** — 出生后6～8周开始，间隔3～4周接种2次，之后每年加强接种",
   "hgDogNonCoreKennel": "**犬窝咳** — 多犬环境、美容店、宠物寄养等场景推荐接种。可选择鼻腔型或注射型",
   "hgDogNonCoreFlu": "**犬流感** — 户外活动多或经常接触其他狗狗时推荐",
-
   "hgDogHeartworm1": "蚊虫活跃期（3～11月）前后，建议**每月1次**使用预防药",
   "hgDogHeartworm2": "一旦感染，治疗困难且可能致命 — **预防是最好的方法**",
   "hgDogHeartworm3": "使用预防药前，必须先检查是否感染并确认阴性",
@@ -720,12 +691,10 @@
   "hgDogExternalParasites3": "去除蜱虫时，用镊子沿垂直方向慢慢拔出（禁止扭转）",
   "hgDogInternalParasites1": "蛔虫、钩虫、鞭虫：**每3～6个月**使用驱虫药",
   "hgDogInternalParasites2": "幼犬时期（出生后2周起）：每2周驱虫1次，共4次，之后定期管理",
-
   "hgDental1": "每天刷牙最理想 — 至少建议**每周3次以上**",
   "hgDental2": "必须使用**宠物专用牙膏**（禁止使用含木糖醇的人用牙膏）",
   "hgDental3": "牙结石严重时，应在动物医院进行洁牙（需要全身麻醉）",
   "hgDental4": "洁齿零食和牙齿玩具可作为辅助护理",
-
   "hgDogForbiddenFoodAlert": "以下食物对狗狗具有毒性。即使少量也可能危险，请绝对不要喂食。",
   "hgDogForbiddenGrape": "**葡萄·葡萄干** — 可导致肾衰竭，少量也可能致命",
   "hgDogForbiddenChocolate": "**巧克力·可可** — 可导致可可碱中毒、心力衰竭和抽搐",
@@ -734,7 +703,6 @@
   "hgDogForbiddenMacadamia": "**夏威夷果** — 可引起肌肉无力、高热、呕吐",
   "hgDogForbiddenDoughAlcohol": "**生面团·酒精** — 可导致乙醇中毒和低血糖",
   "hgDogForbiddenAvocado": "**牛油果** — 含有persin成分，可能引起呕吐和腹泻",
-
   "hgEmergencyAlert": "如果出现以下症状，请立即前往动物医院。",
   "hgDogEmergency1": "完全食欲不振超过24小时",
   "hgDogEmergency2": "一天内呕吐或腹泻反复3次以上",
@@ -743,7 +711,6 @@
   "hgDogEmergency5": "抽搐、癫痫发作、意识丧失",
   "hgDogEmergency6": "超过12小时无法排尿",
   "hgDogEmergency7": "明显外伤、骨折或大量出血",
-
   "hgDogExerciseAlert": "对狗狗来说，运动不足不只是体力问题，也可能成为压力、焦虑和破坏性行为的主要原因。",
   "hgDogWalk1": "小型犬：每天至少**20～30分钟**；中大型犬：建议**1小时**以上",
   "hgDogWalk2": "散步不只是排便时间，而是**嗅觉刺激、社会化和压力释放**的时间",
@@ -761,13 +728,11 @@
   "hgDogSocial2": "与其他狗狗交流 — 可利用狗狗公园或幼犬课程",
   "hgDogSocial3": "体验新的地点、气味和声音，有助于丰富心理状态",
   "hgDogSocial4": "正向强化训练（响片、零食）能同时刺激大脑并增强亲密关系",
-
   "hgCatCoreFvrcp": "**FVRCP（综合疫苗）** — 猫疱疹病毒、杯状病毒、猫泛白细胞减少症。\n出生后6～8周接种第1针，间隔3～4周共接种3次，之后每1～3年加强接种",
   "hgCatCoreRabies": "**狂犬病** — 外出猫必需，室内猫也推荐接种（法定必需）",
   "hgCatNonCoreFelv": "**猫白血病（FeLV）** — 外出猫、多猫家庭强烈推荐",
   "hgCatNonCoreChlamydia": "**猫衣原体** — 多猫环境中用于预防结膜炎",
   "hgCatNonCoreFiv": "**猫免疫缺陷病毒（FIV）** — 外出公猫需注意，可通过打斗伤口传播",
-
   "hgCatExternalParasites1": "外出猫：跳蚤和蜱虫预防药建议**每月1次**",
   "hgCatExternalParasites2": "室内猫也可能通过人的衣服或鞋子带入跳蚤 → 建议**每3个月**预防一次",
   "hgCatExternalParasites3": "使用点涂型产品时，请准确涂抹在后颈部",
@@ -775,7 +740,6 @@
   "hgCatInternalParasites1": "蛔虫、绦虫：**每3～6个月**使用驱虫药",
   "hgCatInternalParasites2": "若喂食生肉或生鱼，建议更频繁地进行检查",
   "hgCatHeartworm1": "心丝虫 — 猫咪**没有治疗药物，预防是唯一方法**。外出猫强烈建议每月预防",
-
   "hgCatMajorDiseases": "猫咪主要疾病注意事项",
   "hgCatDiseaseAlert": "猫咪有隐藏疼痛和不适的习性，因此症状出现时往往已经发展较深。定期检查尤其重要。",
   "hgCatDiseaseFlutd": "**猫下泌尿道疾病（FLUTD）** — 公猫常见。若无法排尿，需立即急救",
@@ -784,14 +748,12 @@
   "hgCatDiseaseHyperthyroidism": "**甲状腺功能亢进** — 10岁以上常见。注意体重下降、食欲增加和活动过度",
   "hgCatDiseaseStomatitis": "**口炎** — 猫咪非常常见。口臭、流口水、食欲不振时应检查",
   "hgCatDiseaseFhv": "**猫疱疹病毒（FHV-1）** — 一旦感染会终身潜伏。压力时可能复发，表现为打喷嚏、眼屎、结膜炎",
-
   "hgHydrationDiet": "水分摄入与饮食管理",
   "hgCatHydrationAlert": "猫咪天生不太爱喝水，容易发生泌尿系统疾病。促进水分摄入非常重要。",
   "hgCatHydration1": "建议搭配湿粮（罐头、妙鲜包）补充水分",
   "hgCatHydration2": "猫咪偏好流动水 — 安装**宠物饮水机**很有效",
   "hgCatHydration3": "水碗应与食碗分开，猫咪更喜欢宽而浅的碗",
   "hgCatHydration4": "目标饮水量：每1kg体重每天约**40～60ml**",
-
   "hgCatForbiddenFoodAlert": "以下食物对猫咪具有毒性。即使少量也可能危险，请绝对不要喂食。",
   "hgCatForbiddenOnion": "**洋葱·大蒜·葱** — 破坏红细胞，导致溶血性贫血（猫比狗更敏感）",
   "hgCatForbiddenGrape": "**葡萄·葡萄干** — 可导致肾衰竭",
@@ -801,7 +763,6 @@
   "hgCatForbiddenXylitolAlcohol": "**木糖醇·酒精** — 对肝脏和神经系统有毒性",
   "hgCatForbiddenAvocado": "**牛油果** — 含有persin成分，可能引起呕吐和腹泻",
   "hgCatForbiddenRawEggWhite": "**生蛋清** — 抗生物素蛋白会阻碍生物素吸收，可能导致皮肤和毛发问题",
-
   "hgCatEmergency1": "**完全无法排尿或血尿** — 尿道堵塞属于急症（尤其注意公猫）",
   "hgCatEmergency2": "完全食欲不振超过24小时（脂肪肝风险）",
   "hgCatEmergency3": "**张口呼吸** — 对猫来说绝不是正常现象，需立即急救",
@@ -810,7 +771,6 @@
   "hgCatEmergency6": "牙龈或舌头苍白，或出现黄疸（发黄）",
   "hgCatEmergency7": "一天内呕吐或腹泻反复3次以上，或出现血便、吐血",
   "hgCatEmergency8": "明显外伤、骨折或大量出血",
-
   "hgEnvironmentMentalHealth": "环境与心理健康",
   "hgIndoorEnvironment": "室内环境管理",
   "hgStressManagement": "压力管理",
@@ -822,7 +782,6 @@
   "hgCatStress2": "搬家、新家庭成员等环境剧烈变化时，可使用信息素扩散器（Feliway）",
   "hgCatStress3": "每天确保**10～15分钟以上**使用玩具互动玩耍",
   "hgCatStress4": "多猫家庭：饭碗、猫砂盆、睡觉位置等资源应按猫咪数量分开配置",
-
   "hgAge": "年龄",
   "hgCheckupCycle": "检查周期",
   "hgMainItems": "主要项目",
@@ -838,7 +797,6 @@
   "hgCatCheckupItems1": "血液检查、尿液检查、体重、牙齿",
   "hgCatCheckupItems2": "肾脏与肝脏指标、血压、甲状腺（T4）",
   "hgCatCheckupItems3": "综合血液、腹部超声、肾脏重点监测",
-
   "hgExerciseAmount": "运动量",
   "hgBreedExamples": "品种示例",
   "hgLow": "低",
@@ -847,6 +805,5 @@
   "hgBreedLowExamples": "斗牛犬、巴吉度猎犬、西施犬、马尔济斯犬",
   "hgBreedNormalExamples": "贵宾犬、比熊犬、可卡犬、比格犬",
   "hgBreedHighExamples": "拉布拉多、金毛寻回犬、哈士奇、边境牧羊犬",
-
   "hgDisclaimer": "本指南为一般健康管理信息，所需护理可能会因宠物状态而异。如有异常症状或需要治疗，请务必咨询兽医。"
 }

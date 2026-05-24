@@ -437,13 +437,6 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'meal':
         return [
           FormSegmentRow(
-            label: '식사 종류',
-            options: const ['아침', '점심', '저녁', '간식'],
-            selected: _data['meal_type'] as String? ?? '아침',
-            onChanged: (v) => _setData('meal_type', v),
-          ),
-          const SizedBox(height: AppSpacing.space4),
-          FormSegmentRow(
             label: '식사량',
             required: false,
             options: const ['매우 적음', '적음', '보통', '많음', '매우 많음'],

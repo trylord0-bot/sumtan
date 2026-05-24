@@ -615,9 +615,6 @@ class AppLocalizationsPt extends AppLocalizations {
   String get measurementMethod => 'Método de medição';
 
   @override
-  String get mealType => 'Tipo de refeição';
-
-  @override
   String get mealAmount => 'Quantidade de refeição';
 
   @override
@@ -736,18 +733,6 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get holdAndWeigh => 'Pesar no colo';
-
-  @override
-  String get breakfast => 'Café da manhã';
-
-  @override
-  String get lunch => 'Almoço';
-
-  @override
-  String get dinner => 'Jantar';
-
-  @override
-  String get snack => 'Petisco';
 
   @override
   String get veryLittle => 'Muito pouco';

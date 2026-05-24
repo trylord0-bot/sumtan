@@ -1254,12 +1254,6 @@ abstract class AppLocalizations {
   /// **'Measurement method'**
   String get measurementMethod;
 
-  /// Meal type label
-  ///
-  /// In en, this message translates to:
-  /// **'Meal type'**
-  String get mealType;
-
   /// Meal amount label
   ///
   /// In en, this message translates to:
@@ -1499,30 +1493,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hold and weigh'**
   String get holdAndWeigh;
-
-  /// Breakfast label
-  ///
-  /// In en, this message translates to:
-  /// **'Breakfast'**
-  String get breakfast;
-
-  /// Lunch label
-  ///
-  /// In en, this message translates to:
-  /// **'Lunch'**
-  String get lunch;
-
-  /// Dinner label
-  ///
-  /// In en, this message translates to:
-  /// **'Dinner'**
-  String get dinner;
-
-  /// Snack label
-  ///
-  /// In en, this message translates to:
-  /// **'Snack'**
-  String get snack;
 
   /// Very little label
   ///

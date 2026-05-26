@@ -1054,9 +1054,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get measuredWeight => '실측 체중';
 
   @override
-  String get standardRange => '표준 범위';
-
-  @override
   String get noTodayRecords => '아직 오늘의 기록이 없어요';
 
   @override

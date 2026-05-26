@@ -1053,9 +1053,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get measuredWeight => '実測体重';
 
   @override
-  String get standardRange => '標準範囲';
-
-  @override
   String get noTodayRecords => '今日の記録はまだありません';
 
   @override

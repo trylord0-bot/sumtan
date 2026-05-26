@@ -1413,10 +1413,6 @@
   "@measuredWeight": {
     "description": "Measured weight label"
   },
-  "standardRange": "Standard range",
-  "@standardRange": {
-    "description": "Standard range label"
-  },
   "noTodayRecords": "No records for today yet",
   "@noTodayRecords": {
     "description": "No today records label"

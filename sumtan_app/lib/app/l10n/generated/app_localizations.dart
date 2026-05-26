@@ -2154,12 +2154,6 @@ abstract class AppLocalizations {
   /// **'Measured weight'**
   String get measuredWeight;
 
-  /// Standard range label
-  ///
-  /// In en, this message translates to:
-  /// **'Standard range'**
-  String get standardRange;
-
   /// No today records label
   ///
   /// In en, this message translates to:

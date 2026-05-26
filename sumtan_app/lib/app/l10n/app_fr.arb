@@ -340,7 +340,6 @@
   "weightChange": "⚖️ Évolution du poids",
   "noWeightData": "Pas encore de données de poids",
   "measuredWeight": "Poids mesuré",
-  "standardRange": "Plage standard",
   "noTodayRecords": "Pas encore de notes pour aujourd'hui",
   "homeNoRecordHint": "Notez l'état, les selles et le poids\npour gérer la santé de votre animal.",
   "noRecordsForDate": "Pas de notes pour {date}",

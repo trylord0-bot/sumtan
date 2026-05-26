@@ -340,7 +340,6 @@
   "weightChange": "⚖️ 体重変化",
   "noWeightData": "体重データがありません",
   "measuredWeight": "実測体重",
-  "standardRange": "標準範囲",
   "noTodayRecords": "今日の記録はまだありません",
   "homeNoRecordHint": "体調・排泄・体重を記録して\nペットの健康を管理しましょう！",
   "noRecordsForDate": "{date}の記録がありません",

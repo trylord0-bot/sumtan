@@ -340,7 +340,6 @@
   "weightChange": "⚖️ 體重變化",
   "noWeightData": "還沒有體重資料",
   "measuredWeight": "實測體重",
-  "standardRange": "標準範圍",
   "noTodayRecords": "今天還沒有記錄",
   "homeNoRecordHint": "記錄狀態、排泄和體重\n來管理寵物的健康！",
   "noRecordsForDate": "{date}沒有記錄",

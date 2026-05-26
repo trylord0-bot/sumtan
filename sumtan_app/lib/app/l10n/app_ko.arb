@@ -341,7 +341,6 @@
   "weightChange": "⚖️ 체중 변화",
   "noWeightData": "체중 데이터가 없어요",
   "measuredWeight": "실측 체중",
-  "standardRange": "표준 범위",
   "noTodayRecords": "아직 오늘의 기록이 없어요",
   "homeNoRecordHint": "반려동물의 컨디션, 배변, 체중을\n기록해 건강을 관리해 보세요!",
   "noRecordsForDate": "{date}의 기록이 없어요",

@@ -340,7 +340,6 @@
   "weightChange": "⚖️ Variação de peso",
   "noWeightData": "Ainda não há dados de peso",
   "measuredWeight": "Peso medido",
-  "standardRange": "Faixa padrão",
   "noTodayRecords": "Ainda não há registros para hoje",
   "homeNoRecordHint": "Registre condição, evacuações e peso\npara cuidar da saúde do seu pet.",
   "noRecordsForDate": "Sem registros para {date}",

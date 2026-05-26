@@ -1401,16 +1401,9 @@ class _WeightGraphCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.space2),
-          Row(
-            children: [
-              _LegendDot(
-                  color: AppColors.primary400,
-                  label: context.l10n.measuredWeight),
-              const SizedBox(width: 12),
-              _LegendDot(
-                  color: AppColors.gray300, label: context.l10n.standardRange),
-            ],
-          ),
+          _LegendDot(
+              color: AppColors.primary400,
+              label: context.l10n.measuredWeight),
         ],
       ),
     );

@@ -340,7 +340,6 @@
   "weightChange": "⚖️ Gewichtsveränderung",
   "noWeightData": "Noch keine Gewichtsdaten",
   "measuredWeight": "Gemessenes Gewicht",
-  "standardRange": "Normalbereich",
   "noTodayRecords": "Heute noch keine Einträge",
   "homeNoRecordHint": "Kondition, Toilette und Gewicht erfassen\nfür die Gesundheitsvorsorge deines Tieres.",
   "noRecordsForDate": "Keine Einträge für {date}",

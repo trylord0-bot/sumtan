@@ -340,7 +340,6 @@
   "weightChange": "⚖️ تغير الوزن",
   "noWeightData": "لا توجد بيانات وزن بعد",
   "measuredWeight": "الوزن المقاس",
-  "standardRange": "النطاق المعياري",
   "noTodayRecords": "لا توجد سجلات لليوم بعد",
   "homeNoRecordHint": "سجّل الحالة والإخراج والوزن\nللعناية بصحة حيوانك الأليف.",
   "noRecordsForDate": "لا توجد سجلات لـ {date}",

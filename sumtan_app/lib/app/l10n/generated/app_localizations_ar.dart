@@ -1062,9 +1062,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get measuredWeight => 'الوزن المقاس';
 
   @override
-  String get standardRange => 'النطاق المعياري';
-
-  @override
   String get noTodayRecords => 'لا توجد سجلات لليوم بعد';
 
   @override

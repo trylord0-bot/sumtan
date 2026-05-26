@@ -340,7 +340,6 @@
   "weightChange": "⚖️ Cambio de peso",
   "noWeightData": "Sin datos de peso aún",
   "measuredWeight": "Peso medido",
-  "standardRange": "Rango estándar",
   "noTodayRecords": "Sin registros para hoy aún",
   "homeNoRecordHint": "Registra condición, baño y peso\npara cuidar la salud de tu mascota.",
   "noRecordsForDate": "Sin registros para {date}",

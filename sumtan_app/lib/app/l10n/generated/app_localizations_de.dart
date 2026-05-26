@@ -1069,9 +1069,6 @@ class AppLocalizationsDe extends AppLocalizations {
   String get measuredWeight => 'Gemessenes Gewicht';
 
   @override
-  String get standardRange => 'Normalbereich';
-
-  @override
   String get noTodayRecords => 'Heute noch keine Einträge';
 
   @override

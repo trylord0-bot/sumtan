@@ -1050,9 +1050,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get measuredWeight => '实测体重';
 
   @override
-  String get standardRange => '标准范围';
-
-  @override
   String get noTodayRecords => '今天还没有记录';
 
   @override
@@ -3562,9 +3559,6 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get measuredWeight => '实测体重';
 
   @override
-  String get standardRange => '标准范围';
-
-  @override
   String get noTodayRecords => '今天还没有记录';
 
   @override
@@ -6069,9 +6063,6 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get measuredWeight => '實測體重';
-
-  @override
-  String get standardRange => '標準範圍';
 
   @override
   String get noTodayRecords => '今天還沒有記錄';

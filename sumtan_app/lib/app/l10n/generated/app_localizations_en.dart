@@ -1062,9 +1062,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get measuredWeight => 'Measured weight';
 
   @override
-  String get standardRange => 'Standard range';
-
-  @override
   String get noTodayRecords => 'No records for today yet';
 
   @override

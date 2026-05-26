@@ -415,7 +415,8 @@ class _DaysGrid extends StatelessWidget {
                             child: Wrap(
                               alignment: WrapAlignment.center,
                               spacing: 2,
-                              children: dots.take(4).map((cat) {
+                              runSpacing: 2,
+                              children: dots.map((cat) {
                                 final c = RecordCategoryX.fromString(cat).color;
                                 return Container(
                                   width: 4,

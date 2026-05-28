@@ -13,6 +13,7 @@ import '../../../core/utils/date_utils.dart' as du;
 import '../../../core/widgets/localized_pickers.dart';
 import '../../pet/data/pet_model.dart';
 import '../../pet/provider/pet_provider.dart';
+import '../../record/provider/record_provider.dart';
 import 'widgets/pet_add_payment.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -31,7 +32,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   int? _syncedPetId;
 
-  // Only reset controllers when the selected pet actually changes
   void _syncControllers(Pet pet) {
     if (pet.id == _syncedPetId) return;
     _syncedPetId = pet.id;
@@ -298,6 +298,20 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         // ── 반려동물 있음: 선택된 반려동물 상세 화면 ──────────────────────────
         final pet = ref.watch(selectedPetProvider)!;
         _syncControllers(pet);
+
+        ref.listen(latestWeightRecordProvider, (prev, next) {
+          next.whenData((record) {
+            if (record != null) {
+              final kg = record.dataJson?['weight_kg'];
+              if (kg != null) {
+                _weightCtrl.text = '$kg';
+                return;
+              }
+            }
+            _weightCtrl.text =
+                pet.weight != null ? '${pet.weight}' : '';
+          });
+        });
 
         return ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),

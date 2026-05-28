@@ -115,6 +115,19 @@ class RecordRepository {
     }
   }
 
+  Future<Record?> getLatestWeightByPet(int petId) async {
+    final db = await _db.database;
+    final rows = await db.query(
+      'records',
+      where: "pet_id = ? AND category = 'weight'",
+      whereArgs: [petId],
+      orderBy: 'recorded_at DESC',
+      limit: 1,
+    );
+    if (rows.isEmpty) return null;
+    return Record.fromMap(rows.first);
+  }
+
   /// Weight records for the last [days] days, ordered ASC.
   Future<List<Record>> getWeightHistoryByPet(int petId, {int days = 7}) async {
     final db = await _db.database;

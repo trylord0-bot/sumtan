@@ -101,6 +101,16 @@ final lastRecordProvider = FutureProvider.autoDispose<Record?>((ref) async {
   return ref.read(recordRepositoryProvider).getLastRecordByPet(pet.id!);
 });
 
+// 가장 최근 체중 기록 (일지에서 가장 마지막으로 입력된 체중)
+final latestWeightRecordProvider =
+    FutureProvider.autoDispose<Record?>((ref) async {
+  final pet = ref.watch(selectedPetProvider);
+  if (pet == null || pet.id == null) return null;
+  return ref
+      .read(recordRepositoryProvider)
+      .getLatestWeightByPet(pet.id!);
+});
+
 class RecordNotifier extends StateNotifier<void> {
   RecordNotifier(this._repo) : super(null);
   final RecordRepository _repo;

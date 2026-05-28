@@ -69,6 +69,11 @@ class _WeightFormState extends ConsumerState<WeightForm> {
     ref.invalidate(monthRecordsProvider);
     ref.invalidate(weightHistoryProvider);
     ref.invalidate(lastRecordProvider);
+    if (pet.weight != weight) {
+      final updatedPet = pet.copyWith(weight: weight);
+      await ref.read(petRepositoryProvider).update(updatedPet);
+      ref.invalidate(petsProvider);
+    }
     if (mounted) {
       showTopToast(context, context.l10n.weightRecordSaved);
       Navigator.pop(context, true);

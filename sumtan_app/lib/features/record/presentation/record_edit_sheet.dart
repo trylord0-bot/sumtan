@@ -9,6 +9,7 @@ import '../../../app/widgets/app_toast.dart';
 import '../../../core/utils/date_utils.dart' as du;
 import '../../../shared/constants/category_constants.dart';
 import '../data/record_model.dart';
+import '../../pet/provider/pet_provider.dart';
 import '../provider/record_provider.dart';
 import 'forms/form_widgets.dart';
 import 'forms/media_attachment_field.dart';
@@ -251,6 +252,17 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     );
 
     await ref.read(recordNotifierProvider.notifier).update(updated);
+    if (category == 'weight') {
+      final pet = ref.read(selectedPetProvider);
+      if (pet != null && pet.id != null) {
+        final newWeight = data['weight_kg'];
+        if (newWeight != null && newWeight is double && pet.weight != newWeight) {
+          final updatedPet = pet.copyWith(weight: newWeight);
+          await ref.read(petRepositoryProvider).update(updatedPet);
+          ref.invalidate(petsProvider);
+        }
+      }
+    }
     _invalidateRecords();
 
     _hideSavingDialog();

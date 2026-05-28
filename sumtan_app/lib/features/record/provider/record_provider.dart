@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../data/record_model.dart';
 import '../data/record_repository.dart';
 import '../../pet/provider/pet_provider.dart';
+import '../../../shared/constants/category_constants.dart';
 
 final recordRepositoryProvider = Provider((ref) => RecordRepository());
 
@@ -108,6 +109,10 @@ class RecordNotifier extends StateNotifier<void> {
   Future<void> update(Record record) => _repo.update(record);
   Future<void> remove(int id) => _repo.delete(id);
 }
+
+final categoryFilterProvider = StateProvider<Set<RecordCategory>>(
+  (ref) => RecordCategory.values.toSet(),
+);
 
 final recordNotifierProvider = StateNotifierProvider<RecordNotifier, void>(
   (ref) => RecordNotifier(ref.read(recordRepositoryProvider)),

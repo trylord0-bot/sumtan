@@ -8,6 +8,7 @@ import '../../../app/widgets/app_toast.dart';
 import '../../../features/record/provider/record_provider.dart';
 import '../../../features/record/data/record_model.dart';
 import '../../../features/record/presentation/record_edit_sheet.dart';
+import '../../../features/pet/provider/pet_provider.dart';
 import '../../../shared/constants/category_constants.dart';
 import '../../../core/utils/date_utils.dart' as du;
 
@@ -105,10 +106,20 @@ class _CalendarSectionState extends ConsumerState<_CalendarSection> {
     }
   }
 
+  Future<void> _showFilterSheet(BuildContext context) async {
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (_) => const _CategoryFilterSheet(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final selectedDate = ref.watch(selectedDateProvider);
     final monthRecordsAsync = ref.watch(monthRecordsProvider);
+    final enabledCategories = ref.watch(categoryFilterProvider);
 
     // 외부 변경(오늘 버튼, 연월 팝업 등)에 반응해 PageView를 애니메이션으로 이동
     ref.listen<DateTime>(selectedDateProvider, (_, next) {
@@ -126,6 +137,8 @@ class _CalendarSectionState extends ConsumerState<_CalendarSection> {
     final dotsByDate = <String, Set<String>>{};
     monthRecordsAsync.whenData((records) {
       for (final r in records) {
+        final cat = RecordCategoryX.fromString(r.category);
+        if (!enabledCategories.contains(cat)) continue;
         final key = r.recordedAt.substring(0, 10);
         dotsByDate.putIfAbsent(key, () => {}).add(r.category);
       }
@@ -150,6 +163,7 @@ class _CalendarSectionState extends ConsumerState<_CalendarSection> {
             onTodayTap: () {
               ref.read(selectedDateProvider.notifier).state = DateTime.now();
             },
+            onFilterTap: () => _showFilterSheet(context),
           ),
           const _WeekdayRow(),
           AnimatedContainer(
@@ -196,6 +210,7 @@ class _MonthHeader extends StatelessWidget {
   final VoidCallback onNext;
   final VoidCallback onDateTap;
   final VoidCallback onTodayTap;
+  final VoidCallback onFilterTap;
 
   const _MonthHeader({
     required this.date,
@@ -203,6 +218,7 @@ class _MonthHeader extends StatelessWidget {
     required this.onNext,
     required this.onDateTap,
     required this.onTodayTap,
+    required this.onFilterTap,
   });
 
   @override
@@ -256,6 +272,20 @@ class _MonthHeader extends StatelessWidget {
                   color: AppColors.primary900,
                 ),
               ],
+            ),
+          ),
+          const SizedBox(width: AppSpacing.space2),
+          GestureDetector(
+            onTap: onFilterTap,
+            child: Container(
+              width: 30,
+              height: 30,
+              decoration: const BoxDecoration(
+                color: AppColors.primary50,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.filter_list,
+                  size: 18, color: AppColors.primary900),
             ),
           ),
           const Spacer(),
@@ -450,10 +480,15 @@ class _EventList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDate = ref.watch(selectedDateProvider);
     final recordsAsync = ref.watch(selectedDateRecordsProvider);
+    final enabledCategories = ref.watch(categoryFilterProvider);
 
     return recordsAsync.when(
       data: (records) {
-        if (records.isEmpty) {
+        final filtered = records
+            .where((r) =>
+                enabledCategories.contains(RecordCategoryX.fromString(r.category)))
+            .toList();
+        if (filtered.isEmpty) {
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -476,7 +511,7 @@ class _EventList extends ConsumerWidget {
             AppSpacing.space4,
             120,
           ),
-          itemCount: records.length + 1,
+          itemCount: filtered.length + 1,
           separatorBuilder: (_, __) =>
               const SizedBox(height: AppSpacing.space2),
           itemBuilder: (context, idx) {
@@ -486,7 +521,7 @@ class _EventList extends ConsumerWidget {
                 child: Text(
                   context.l10n.recordsForDate(
                     du.formatMonthDay(selectedDate),
-                    '${records.length}',
+                    '${filtered.length}',
                   ),
                   style: const TextStyle(
                     fontSize: 13,
@@ -496,7 +531,7 @@ class _EventList extends ConsumerWidget {
                 ),
               );
             }
-            return _EventCard(record: records[idx - 1]);
+            return _EventCard(record: filtered[idx - 1]);
           },
         );
       },
@@ -916,6 +951,267 @@ class _MonthYearPickerSheetState extends State<_MonthYearPickerSheet> {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _CategoryFilterSheet extends ConsumerStatefulWidget {
+  const _CategoryFilterSheet();
+
+  @override
+  ConsumerState<_CategoryFilterSheet> createState() =>
+      _CategoryFilterSheetState();
+}
+
+class _CategoryFilterSheetState extends ConsumerState<_CategoryFilterSheet> {
+  late Set<RecordCategory> _selected;
+
+  List<RecordCategory> _availableCategories(String? species) {
+    final categories = <RecordCategory>[
+      RecordCategory.poop,
+      RecordCategory.condition,
+      RecordCategory.medication,
+      RecordCategory.weight,
+      RecordCategory.meal,
+      RecordCategory.water,
+      RecordCategory.hospital,
+      RecordCategory.vaccination,
+      RecordCategory.grooming,
+      RecordCategory.brushing,
+      RecordCategory.memo,
+    ];
+    if (species == 'dog') {
+      categories.insert(categories.length - 1, RecordCategory.walk);
+    }
+    return categories;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selected = {...ref.read(categoryFilterProvider)};
+  }
+
+  void _toggle(RecordCategory cat) {
+    setState(() {
+      if (_selected.contains(cat)) {
+        _selected.remove(cat);
+      } else {
+        _selected.add(cat);
+      }
+    });
+  }
+
+  void _selectAll(List<RecordCategory> available) {
+    setState(() {
+      _selected.addAll(available);
+    });
+  }
+
+  void _deselectAll() {
+    setState(() {
+      _selected.clear();
+    });
+  }
+
+  void _apply() {
+    ref.read(categoryFilterProvider.notifier).state = {..._selected};
+    Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final pet = ref.watch(selectedPetProvider);
+    final available = _availableCategories(pet?.species);
+
+    return Container(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.7,
+      ),
+      decoration: const BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.space5,
+        0,
+        AppSpacing.space5,
+        AppSpacing.space5,
+      ),
+      child: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 12),
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: AppColors.gray300,
+                borderRadius: BorderRadius.circular(9999),
+              ),
+            ),
+            Row(
+              children: [
+                const Text(
+                  '카테고리 필터',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.gray900,
+                  ),
+                ),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.close, color: AppColors.gray500),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.space1),
+            Row(
+              children: [
+                _FilterActionBtn(
+                  label: '전체 선택',
+                  onTap: () => _selectAll(available),
+                ),
+                const SizedBox(width: AppSpacing.space2),
+                _FilterActionBtn(
+                  label: '전체 해제',
+                  onTap: _deselectAll,
+                ),
+                const Spacer(),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.space3),
+            Expanded(
+              child: ListView.separated(
+                itemCount: available.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 2),
+                itemBuilder: (_, i) {
+                  final cat = available[i];
+                  final checked = _selected.contains(cat);
+                  return _FilterCheckTile(
+                    category: cat,
+                    checked: checked,
+                    onToggle: () => _toggle(cat),
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: AppSpacing.space2),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _apply,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary400,
+                  foregroundColor: AppColors.white,
+                  disabledBackgroundColor: AppColors.gray300,
+                  disabledForegroundColor: AppColors.gray500,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                child: const Text(
+                  '적용',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _FilterActionBtn extends StatelessWidget {
+  final String label;
+  final VoidCallback onTap;
+
+  const _FilterActionBtn({required this.label, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+          color: AppColors.primary50,
+          borderRadius: BorderRadius.circular(AppRadius.radiusFull),
+          border: Border.all(color: AppColors.primary200, width: 1),
+        ),
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+            color: AppColors.primary700,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _FilterCheckTile extends StatelessWidget {
+  final RecordCategory category;
+  final bool checked;
+  final VoidCallback onToggle;
+
+  const _FilterCheckTile({
+    required this.category,
+    required this.checked,
+    required this.onToggle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onToggle,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+        decoration: BoxDecoration(
+          color: checked ? category.bgColor : AppColors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: checked ? category.color.withValues(alpha: 0.35) : AppColors.gray200,
+            width: 1.2,
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: category.color.withValues(alpha: 0.15),
+                shape: BoxShape.circle,
+              ),
+              alignment: Alignment.center,
+              child: Text(category.emoji, style: const TextStyle(fontSize: 17)),
+            ),
+            const SizedBox(width: AppSpacing.space3),
+            Expanded(
+              child: Text(
+                category.localizedLabel(context),
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: checked ? category.color : AppColors.gray600,
+                ),
+              ),
+            ),
+            Icon(
+              checked ? Icons.check_box : Icons.check_box_outline_blank,
+              size: 22,
+              color: checked ? category.color : AppColors.gray400,
+            ),
+          ],
+        ),
       ),
     );
   }

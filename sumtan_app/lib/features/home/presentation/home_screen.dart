@@ -32,6 +32,14 @@ class HomeScreen extends ConsumerWidget {
     final mealAsync = ref.watch(weeklyMealStatsProvider);
     final waterAsync = ref.watch(weeklyWaterStatsProvider);
     final alarmAsync = ref.watch(alarmListProvider);
+    final latestWeightRecord =
+        ref.watch(latestWeightRecordProvider).valueOrNull;
+    double? diaryWeight;
+    if (latestWeightRecord != null) {
+      final kg = latestWeightRecord.dataJson?['weight_kg'];
+      if (kg != null) diaryWeight = (kg as num).toDouble();
+    }
+    final displayWeight = diaryWeight ?? pet?.weight;
 
     return Scaffold(
       backgroundColor: AppColors.creamBg,
@@ -190,6 +198,7 @@ class HomeScreen extends ConsumerWidget {
                       data: (records) => _WeightGraphCard(
                         records: records,
                         period: ref.watch(statsPeriodProvider),
+                        displayWeight: displayWeight,
                       ),
                       loading: () => _statsLoadingBox(),
                       error: (_, __) => const SizedBox.shrink(),
@@ -1320,35 +1329,16 @@ class _ToggleBtn extends StatelessWidget {
 class _WeightGraphCard extends StatelessWidget {
   final List<Record> records;
   final int period;
+  final double? displayWeight;
 
-  const _WeightGraphCard({required this.records, required this.period});
+  const _WeightGraphCard({
+    required this.records,
+    required this.period,
+    required this.displayWeight,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (records.isEmpty) {
-      return Container(
-        padding: const EdgeInsets.all(AppSpacing.space5),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.gray200),
-        ),
-        child: Center(
-          child: Text(context.l10n.noWeightData,
-              style: const TextStyle(fontSize: 14, color: AppColors.gray400)),
-        ),
-      );
-    }
-
-    double? currentWeight;
-    for (final r in records.reversed) {
-      final kg = r.dataJson?['weight_kg'];
-      if (kg != null) {
-        currentWeight = (kg as num).toDouble();
-        break;
-      }
-    }
-
     return Container(
       padding: const EdgeInsets.all(AppSpacing.space4),
       decoration: BoxDecoration(
@@ -1368,38 +1358,49 @@ class _WeightGraphCard extends StatelessWidget {
                     color: AppColors.gray700,
                   )),
               const Spacer(),
-              if (currentWeight != null)
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary50,
-                    borderRadius: BorderRadius.circular(9999),
-                    border: Border.all(color: AppColors.primary200),
-                  ),
-                  child: Text(
-                    '${currentWeight.toStringAsFixed(1)}kg',
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.primary700,
-                    ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: AppColors.primary50,
+                  borderRadius: BorderRadius.circular(9999),
+                  border: Border.all(color: AppColors.primary200),
+                ),
+                child: Text(
+                  displayWeight != null
+                      ? '${displayWeight!.toStringAsFixed(2)}kg'
+                      : '--kg',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primary700,
                   ),
                 ),
+              ),
             ],
           ),
           const SizedBox(height: AppSpacing.space3),
-          SizedBox(
-            height: 90,
-            child: CustomPaint(
-              painter: _WeightLinePainter(
-                records: records,
-                period: period,
-                todayLabel: context.l10n.today,
+          if (records.isNotEmpty)
+            SizedBox(
+              height: 90,
+              child: CustomPaint(
+                painter: _WeightLinePainter(
+                  records: records,
+                  period: period,
+                  todayLabel: context.l10n.today,
+                ),
+                size: Size.infinite,
               ),
-              size: Size.infinite,
+            )
+          else
+            SizedBox(
+              height: 90,
+              child: Center(
+                child: Text(context.l10n.noWeightData,
+                    style: const TextStyle(
+                        fontSize: 14, color: AppColors.gray400)),
+              ),
             ),
-          ),
           const SizedBox(height: AppSpacing.space2),
           _LegendDot(
               color: AppColors.primary400,

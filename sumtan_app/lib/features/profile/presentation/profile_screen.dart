@@ -37,7 +37,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     _syncedPetId = pet.id;
     _nameCtrl.text = pet.name;
     _breedCtrl.text = pet.breed ?? '';
-    _weightCtrl.text = pet.weight != null ? '${pet.weight}' : '';
+    _weightCtrl.text =
+        pet.weight != null ? pet.weight!.toStringAsFixed(2) : '';
     _microchipCtrl.text = pet.microchipId ?? '';
     _regNumCtrl.text = pet.regNumber ?? '';
   }
@@ -304,12 +305,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             if (record != null) {
               final kg = record.dataJson?['weight_kg'];
               if (kg != null) {
-                _weightCtrl.text = '$kg';
+                _weightCtrl.text =
+                    (kg as num).toDouble().toStringAsFixed(2);
                 return;
               }
             }
-            _weightCtrl.text =
-                pet.weight != null ? '${pet.weight}' : '';
+            _weightCtrl.text = pet.weight != null
+                ? pet.weight!.toStringAsFixed(2)
+                : '';
           });
         });
 

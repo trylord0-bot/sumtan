@@ -168,7 +168,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.memo:
         return '📝';
       case RecordCategory.abnormalSymptom:
-        return '⚡';
+        return '🚨';
     }
   }
 

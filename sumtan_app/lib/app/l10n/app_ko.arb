@@ -478,7 +478,7 @@
   "brushingRecordSaved": "🪥 빗질이 기록됐어요",
   "walkRecordSaved": "🦮 산책이 기록됐어요",
   "memoSaved": "📝 메모가 기록됐어요",
-  "abnormalSymptomRecordSaved": "⚡ 이상징후가 기록됐어요",
+  "abnormalSymptomRecordSaved": "🚨 이상징후가 기록됐어요",
   "moreQuestions": "더 궁금한 점이 있으신가요?",
   "contactViaSendFeedback": "설정 > 피드백 보내기를 통해 문의해 주세요.\n빠르게 답변 드릴게요 🐾",
   "contactViaSendFeedbackLong": "설정 화면의 [피드백 보내기] 버튼을 통해 문의하시면\n빠르게 답변드리겠습니다.",
@@ -509,7 +509,7 @@
   "poopFormTitle": "💩 배변 기록",
   "vaccinationFormTitle": "💉 접종 기록",
   "hospitalFormTitle": "🏥 병원 기록",
-  "abnormalSymptomFormTitle": "⚡ 이상징후 기록",
+  "abnormalSymptomFormTitle": "🚨 이상징후 기록",
   "memoFormTitle": "📝 메모",
 
   "measureMethod": "측정 방법",

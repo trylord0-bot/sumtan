@@ -1540,7 +1540,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get memoSaved => 'Nota salva';
 
   @override
-  String get abnormalSymptomRecordSaved => '⚡ Sintoma anormal registrado';
+  String get abnormalSymptomRecordSaved => '🚨 Sintoma anormal registrado';
 
   @override
   String get moreQuestions => 'Mais perguntas?';
@@ -1634,7 +1634,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get hospitalFormTitle => '🏥 Registro hospitalar';
 
   @override
-  String get abnormalSymptomFormTitle => '⚡ Sintoma Anormal';
+  String get abnormalSymptomFormTitle => '🚨 Sintoma Anormal';
 
   @override
   String get memoFormTitle => '📝 Nota';

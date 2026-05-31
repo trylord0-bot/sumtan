@@ -1499,7 +1499,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get memoSaved => '📝 备忘已记录';
 
   @override
-  String get abnormalSymptomRecordSaved => '⚡ 异常症状已记录';
+  String get abnormalSymptomRecordSaved => '🚨 异常症状已记录';
 
   @override
   String get moreQuestions => '还有其他问题吗？';
@@ -1587,7 +1587,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get hospitalFormTitle => '🏥 医院记录';
 
   @override
-  String get abnormalSymptomFormTitle => '⚡ 异常症状记录';
+  String get abnormalSymptomFormTitle => '🚨 异常症状记录';
 
   @override
   String get memoFormTitle => '📝 备忘录';
@@ -4038,7 +4038,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get memoSaved => '📝 备忘已记录';
 
   @override
-  String get abnormalSymptomRecordSaved => '⚡ 异常症状已记录';
+  String get abnormalSymptomRecordSaved => '🚨 异常症状已记录';
 
   @override
   String get moreQuestions => '还有其他问题吗？';
@@ -4126,7 +4126,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get hospitalFormTitle => '🏥 医院记录';
 
   @override
-  String get abnormalSymptomFormTitle => '⚡ 异常症状记录';
+  String get abnormalSymptomFormTitle => '🚨 异常症状记录';
 
   @override
   String get memoFormTitle => '📝 备忘录';
@@ -6574,7 +6574,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get memoSaved => '📝 備忘已記錄';
 
   @override
-  String get abnormalSymptomRecordSaved => '⚡ 異常症狀已記錄';
+  String get abnormalSymptomRecordSaved => '🚨 異常症狀已記錄';
 
   @override
   String get moreQuestions => '還有其他問題嗎？';
@@ -6662,7 +6662,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get hospitalFormTitle => '🏥 醫院記錄';
 
   @override
-  String get abnormalSymptomFormTitle => '⚡ 異常症狀記錄';
+  String get abnormalSymptomFormTitle => '🚨 異常症狀記錄';
 
   @override
   String get memoFormTitle => '📝 備忘錄';

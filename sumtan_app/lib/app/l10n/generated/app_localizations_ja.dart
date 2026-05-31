@@ -1502,7 +1502,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get memoSaved => '📝 メモが記録されました';
 
   @override
-  String get abnormalSymptomRecordSaved => '⚡ 異常症状を記録しました';
+  String get abnormalSymptomRecordSaved => '🚨 異常症状を記録しました';
 
   @override
   String get moreQuestions => '他にご質問はありますか？';
@@ -1594,7 +1594,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get hospitalFormTitle => '🏥 病院記録';
 
   @override
-  String get abnormalSymptomFormTitle => '⚡ 異常症状の記録';
+  String get abnormalSymptomFormTitle => '🚨 異常症状の記録';
 
   @override
   String get memoFormTitle => '📝 メモ';

@@ -11,7 +11,6 @@ import 'forms/medication_form.dart';
 import 'forms/weight_form.dart';
 import 'forms/meal_form.dart';
 import 'forms/hospital_form.dart';
-import 'forms/vaccination_form.dart';
 import 'forms/grooming_form.dart';
 import 'forms/brushing_form.dart';
 import 'forms/walk_form.dart';
@@ -46,7 +45,6 @@ class _CategorySheet extends ConsumerWidget {
       const _CategoryEntry(RecordCategory.meal),
       const _CategoryEntry(RecordCategory.water),
       const _CategoryEntry(RecordCategory.hospital),
-      const _CategoryEntry(RecordCategory.vaccination),
       const _CategoryEntry(RecordCategory.grooming),
       const _CategoryEntry(RecordCategory.brushing),
       const _CategoryEntry(RecordCategory.memo),
@@ -80,8 +78,6 @@ class _CategorySheet extends ConsumerWidget {
         form = const WaterForm();
       case RecordCategory.hospital:
         form = const HospitalForm();
-      case RecordCategory.vaccination:
-        form = const VaccinationForm();
       case RecordCategory.grooming:
         form = const GroomingForm();
       case RecordCategory.brushing:

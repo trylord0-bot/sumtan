@@ -187,10 +187,20 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           data['duration_min'] = duration;
         }
       case 'vaccination':
-        if (_stringList('vaccines').isEmpty) {
-          showTopToast(context, context.l10n.hintSelectVaccineType);
-          return;
+        // Migrate legacy vaccination record to hospital category
+        data['visit_type'] = '예방접종';
+        data['hospital_name'] =
+            text('hospital_name').isEmpty ? null : text('hospital_name');
+        data['diagnosis'] =
+            text('diagnosis').isEmpty ? null : text('diagnosis');
+        data['symptoms'] = _stringList('symptoms');
+        final cost = double.tryParse(text('cost'));
+        if (cost == null) {
+          data.remove('cost');
+        } else {
+          data['cost'] = cost;
         }
+        break;
       case 'grooming':
         if (_stringList('types').isEmpty) {
           showTopToast(context, context.l10n.hintSelectGroomingType);
@@ -241,10 +251,15 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       data['media'] = media;
     }
 
+    // Migrate legacy vaccination records to hospital category
+    final updatedCategory = widget.record.category == 'vaccination'
+        ? 'hospital'
+        : widget.record.category;
+
     final updated = Record(
       id: widget.record.id,
       petId: widget.record.petId,
-      category: widget.record.category,
+      category: updatedCategory,
       recordedAt: du.toIso8601(_datetime),
       dataJson: data,
       memo: _memoCtrl.text.trim().isEmpty ? null : _memoCtrl.text.trim(),
@@ -486,6 +501,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           ),
         ];
       case 'hospital':
+        final visitType = _data['visit_type'] as String? ?? '일반';
         return [
           FormInputField(
             label: '병원명',
@@ -496,8 +512,8 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
             label: '진료 유형',
-            options: const ['일반', '정기검진', '응급'],
-            selected: _data['visit_type'] as String? ?? '일반',
+            options: const ['일반', '정기검진', '응급', '예방접종'],
+            selected: visitType,
             onChanged: (v) => _setData('visit_type', v),
           ),
           const SizedBox(height: AppSpacing.space4),
@@ -521,31 +537,15 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           ),
           const SizedBox(height: AppSpacing.space4),
           FormInputField(
-            label: '진단명',
+            label: '진료내용',
             required: false,
             controller: _ctrl('diagnosis'),
             hint: '예: 장염',
           ),
         ];
       case 'vaccination':
+        _data['visit_type'] = '예방접종';
         return [
-          FormTagSelector(
-            label: '백신 종류',
-            options: const [
-              '종합백신 (DHPPL)',
-              '코로나장염',
-              '켄넬코프',
-              '광견병',
-              '인플루엔자',
-              '종합백신 (FVRCP)',
-              '백혈병 (FeLV)',
-              '클라미디아',
-              '기타'
-            ],
-            selected: _stringList('vaccines'),
-            onChanged: (v) => _setStringList('vaccines', v),
-          ),
-          const SizedBox(height: AppSpacing.space4),
           FormInputField(
             label: '병원명',
             required: false,
@@ -554,11 +554,36 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           ),
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
-            label: '부작용',
+            label: '진료 유형',
+            options: const ['예방접종'],
+            selected: '예방접종',
+            onChanged: (_) {},
+          ),
+          const SizedBox(height: AppSpacing.space4),
+          FormTagSelector(
+            label: '증상 태그',
             required: false,
-            options: const ['없음', '경미', '심각'],
-            selected: _data['side_effect'] as String? ?? '없음',
-            onChanged: (v) => _setData('side_effect', v),
+            options: const [
+              '구토',
+              '기침',
+              '무기력',
+              '식욕부진',
+              '설사',
+              '콧물',
+              '재채기',
+              '떨림',
+              '혈뇨',
+              '혈변'
+            ],
+            selected: _stringList('symptoms'),
+            onChanged: (v) => _setStringList('symptoms', v),
+          ),
+          const SizedBox(height: AppSpacing.space4),
+          FormInputField(
+            label: '진료내용',
+            required: false,
+            controller: _ctrl('diagnosis'),
+            hint: '예: 장염',
           ),
         ];
       case 'grooming':

@@ -736,6 +736,7 @@ class _EventCard extends ConsumerWidget {
         final amountStr = waterLabels[amount] ?? amount ?? '';
         return ml != null ? '$amountStr · ${ml}mL' : amountStr;
       case 'hospital':
+      case 'vaccination':
         final visitType = d['visit_type'] as String? ?? '';
         final hospital = d['hospital_name'] as String?;
         final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
@@ -745,14 +746,6 @@ class _EventCard extends ConsumerWidget {
           if (hospital != null && hospital.isNotEmpty) hospital,
           if (symptoms.isNotEmpty) symptoms,
           if (diagnosis != null && diagnosis.isNotEmpty) diagnosis,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'vaccination':
-        final vaccines = (d['vaccines'] as List?)?.join(', ') ?? '';
-        final hospital = d['hospital_name'] as String?;
-        final parts = [
-          if (vaccines.isNotEmpty) vaccines,
-          if (hospital != null && hospital.isNotEmpty) hospital,
         ];
         return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'grooming':
@@ -976,7 +969,6 @@ class _CategoryFilterSheetState extends ConsumerState<_CategoryFilterSheet> {
       RecordCategory.meal,
       RecordCategory.water,
       RecordCategory.hospital,
-      RecordCategory.vaccination,
       RecordCategory.grooming,
       RecordCategory.brushing,
       RecordCategory.memo,

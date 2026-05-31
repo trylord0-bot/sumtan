@@ -936,10 +936,9 @@ class _RecordList extends StatelessWidget {
       case 'water':
         return '음수 기록';
       case 'hospital':
+      case 'vaccination':
         final visitType = d?['visit_type'] as String?;
         return visitType != null ? '병원 기록 — $visitType' : '병원 기록';
-      case 'vaccination':
-        return '접종 기록';
       case 'grooming':
         return '미용 기록';
       case 'brushing':
@@ -1007,13 +1006,6 @@ class _RecordList extends StatelessWidget {
         final amountStr = waterLabels[amount] ?? amount ?? '';
         return ml != null ? '$amountStr · ${ml}mL' : amountStr;
       case 'vaccination':
-        final vaccines = (d['vaccines'] as List?)?.join(', ') ?? '';
-        final hospital = d['hospital_name'] as String?;
-        final parts = [
-          if (vaccines.isNotEmpty) vaccines,
-          if (hospital != null && hospital.isNotEmpty) hospital,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'hospital':
         final hospital = d['hospital_name'] as String?;
         final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';

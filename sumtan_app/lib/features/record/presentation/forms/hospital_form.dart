@@ -68,6 +68,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
     };
     if (cost != null) data['cost'] = cost;
     if (_nextVisit != null) data['next_visit'] = du.toIso8601(_nextVisit!);
+
     final media = await _mediaController.saveToLocalFilesWithProgress(context);
     if (media.isNotEmpty) data['media'] = media;
 
@@ -131,8 +132,13 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
           label: l10n.visitType,
-          options: const ['일반', '정기검진', '응급'],
-          optionLabels: [l10n.general, l10n.regularCheckup, l10n.emergency],
+          options: const ['일반', '정기검진', '응급', '예방접종'],
+          optionLabels: [
+            l10n.general,
+            l10n.regularCheckup,
+            l10n.emergency,
+            l10n.vaccination,
+          ],
           selected: _visitType,
           onChanged: (v) => setState(() => _visitType = v),
         ),
@@ -147,7 +153,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-          label: l10n.diagnosisName,
+          label: '진료내용',
           required: false,
           controller: _diagnosisCtrl,
           hint: l10n.diagnosisExample,

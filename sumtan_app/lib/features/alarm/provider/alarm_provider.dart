@@ -129,10 +129,14 @@ class AlarmNotifier extends StateNotifier<AsyncValue<List<Alarm>>> {
 
     // Auto-create a record entry for the completed alarm
     if (_pet != null) {
+      final isVaccination = alarm.type == 'vaccination';
       await _recordRepo.insert(Record(
         petId: _pet!.id!,
-        category: alarm.type,
+        category: isVaccination ? 'hospital' : alarm.type,
         recordedAt: DateTime.now().toIso8601String(),
+        dataJson: isVaccination
+            ? {'visit_type': '예방접종'}
+            : null,
         memo: alarm.label,
         createdAt: DateTime.now().toIso8601String(),
       ));

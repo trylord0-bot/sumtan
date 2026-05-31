@@ -1045,6 +1045,26 @@ class AppLocalizationsFr extends AppLocalizations {
   String get age => 'Âge';
 
   @override
+  String ageAutoCalculated(String age) {
+    return 'Calcul automatique · $age';
+  }
+
+  @override
+  String petAgeMonths(int months) {
+    return '$months mois';
+  }
+
+  @override
+  String petAgeYears(int years) {
+    return '$years ans';
+  }
+
+  @override
+  String petAgeYearsMonths(int years, int months) {
+    return '$years ans $months mois';
+  }
+
+  @override
   String get checkupCycle => 'Fréquence des bilans';
 
   @override

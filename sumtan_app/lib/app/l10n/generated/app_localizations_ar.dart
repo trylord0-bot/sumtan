@@ -1032,6 +1032,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get age => 'العمر';
 
   @override
+  String ageAutoCalculated(String age) {
+    return 'محسوب تلقائياً · $age';
+  }
+
+  @override
+  String petAgeMonths(int months) {
+    return '$months شهر';
+  }
+
+  @override
+  String petAgeYears(int years) {
+    return '$years سنة';
+  }
+
+  @override
+  String petAgeYearsMonths(int years, int months) {
+    return '$years سنة $months شهر';
+  }
+
+  @override
   String get checkupCycle => 'وتيرة الفحص';
 
   @override

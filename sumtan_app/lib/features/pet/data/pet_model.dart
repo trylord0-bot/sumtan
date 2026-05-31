@@ -1,3 +1,5 @@
+import '../../../app/l10n/generated/app_localizations.dart';
+
 class Pet {
   final int? id;
   final String name;
@@ -110,16 +112,24 @@ class Pet {
     return age;
   }
 
-  String get ageLabel {
-    if (birthDate == null) return '미입력';
+  int? get ageMonthsTotal {
+    if (birthDate == null) return null;
     final birth = DateTime.tryParse(birthDate!);
-    if (birth == null) return '미입력';
+    if (birth == null) return null;
     final now = DateTime.now();
     final months = (now.year - birth.year) * 12 + (now.month - birth.month);
-    if (months < 0) return '미입력';
-    if (months < 12) return '$months개월';
-    final y = months ~/ 12;
-    final m = months % 12;
-    return m > 0 ? '$y살 $m개월' : '$y살';
+    if (months < 0) return null;
+    return months;
+  }
+
+  String localizedAgeLabel(AppLocalizations l10n) {
+    final months = ageMonthsTotal;
+    if (months == null) return l10n.notEntered;
+    if (months < 12) return l10n.petAgeMonths(months);
+    final years = months ~/ 12;
+    final remainingMonths = months % 12;
+    return remainingMonths > 0
+        ? l10n.petAgeYearsMonths(years, remainingMonths)
+        : l10n.petAgeYears(years);
   }
 }

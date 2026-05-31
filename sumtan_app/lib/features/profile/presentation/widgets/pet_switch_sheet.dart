@@ -130,13 +130,15 @@ class _PetTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ageLabel = pet.localizedAgeLabel(context.l10n);
+    final hasAge = pet.ageMonthsTotal != null;
     final parts = <String>[
       if (pet.breed != null) pet.breed!,
       if (pet.gender == 'male')
         context.l10n.male
       else if (pet.gender == 'female')
         context.l10n.female,
-      if (pet.ageLabel != '미입력') pet.ageLabel,
+      if (hasAge) ageLabel,
     ];
 
     return InkWell(

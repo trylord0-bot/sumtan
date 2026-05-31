@@ -1031,6 +1031,50 @@ class AppLocalizationsEn extends AppLocalizations {
   String get age => 'Age';
 
   @override
+  String ageAutoCalculated(String age) {
+    return 'Auto calculated · $age';
+  }
+
+  @override
+  String petAgeMonths(int months) {
+    String _temp0 = intl.Intl.pluralLogic(
+      months,
+      locale: localeName,
+      other: '$months months',
+      one: '1 month',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String petAgeYears(int years) {
+    String _temp0 = intl.Intl.pluralLogic(
+      years,
+      locale: localeName,
+      other: '$years years',
+      one: '1 year',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String petAgeYearsMonths(int years, int months) {
+    String _temp0 = intl.Intl.pluralLogic(
+      years,
+      locale: localeName,
+      other: '$years years',
+      one: '1 year',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      months,
+      locale: localeName,
+      other: '$months months',
+      one: '1 month',
+    );
+    return '$_temp0 $_temp1';
+  }
+
+  @override
   String get checkupCycle => 'Checkup cycle';
 
   @override

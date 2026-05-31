@@ -1364,6 +1364,50 @@
   "@age": {
     "description": "Age label"
   },
+  "ageAutoCalculated": "Auto calculated · {age}",
+  "@ageAutoCalculated": {
+    "description": "Profile age value shown when age is calculated from date of birth",
+    "placeholders": {
+      "age": {
+        "type": "String",
+        "example": "2 years 3 months"
+      }
+    }
+  },
+  "petAgeMonths": "{months, plural, =1{1 month} other{{months} months}}",
+  "@petAgeMonths": {
+    "description": "Pet age shown when under one year old",
+    "placeholders": {
+      "months": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "petAgeYears": "{years, plural, =1{1 year} other{{years} years}}",
+  "@petAgeYears": {
+    "description": "Pet age shown in years when there are no remaining months",
+    "placeholders": {
+      "years": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "petAgeYearsMonths": "{years, plural, =1{1 year} other{{years} years}} {months, plural, =1{1 month} other{{months} months}}",
+  "@petAgeYearsMonths": {
+    "description": "Pet age shown in years and months",
+    "placeholders": {
+      "years": {
+        "type": "int",
+        "example": "2"
+      },
+      "months": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
   "checkupCycle": "Checkup cycle",
   "@checkupCycle": {
     "description": "Checkup cycle label"

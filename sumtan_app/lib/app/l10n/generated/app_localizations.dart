@@ -2100,6 +2100,30 @@ abstract class AppLocalizations {
   /// **'Age'**
   String get age;
 
+  /// Profile age value shown when age is calculated from date of birth
+  ///
+  /// In en, this message translates to:
+  /// **'Auto calculated · {age}'**
+  String ageAutoCalculated(String age);
+
+  /// Pet age shown when under one year old
+  ///
+  /// In en, this message translates to:
+  /// **'{months, plural, =1{1 month} other{{months} months}}'**
+  String petAgeMonths(int months);
+
+  /// Pet age shown in years when there are no remaining months
+  ///
+  /// In en, this message translates to:
+  /// **'{years, plural, =1{1 year} other{{years} years}}'**
+  String petAgeYears(int years);
+
+  /// Pet age shown in years and months
+  ///
+  /// In en, this message translates to:
+  /// **'{years, plural, =1{1 year} other{{years} years}} {months, plural, =1{1 month} other{{months} months}}'**
+  String petAgeYearsMonths(int years, int months);
+
   /// Checkup cycle label
   ///
   /// In en, this message translates to:

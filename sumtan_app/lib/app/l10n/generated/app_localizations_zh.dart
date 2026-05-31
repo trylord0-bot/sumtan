@@ -1019,6 +1019,26 @@ class AppLocalizationsZh extends AppLocalizations {
   String get age => '年龄';
 
   @override
+  String ageAutoCalculated(String age) {
+    return '自动计算 · $age';
+  }
+
+  @override
+  String petAgeMonths(int months) {
+    return '$months个月';
+  }
+
+  @override
+  String petAgeYears(int years) {
+    return '$years岁';
+  }
+
+  @override
+  String petAgeYearsMonths(int years, int months) {
+    return '$years岁 $months个月';
+  }
+
+  @override
   String get checkupCycle => '体检周期';
 
   @override
@@ -3602,6 +3622,26 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get age => '年龄';
 
   @override
+  String ageAutoCalculated(String age) {
+    return '自动计算 · $age';
+  }
+
+  @override
+  String petAgeMonths(int months) {
+    return '$months个月';
+  }
+
+  @override
+  String petAgeYears(int years) {
+    return '$years岁';
+  }
+
+  @override
+  String petAgeYearsMonths(int years, int months) {
+    return '$years岁 $months个月';
+  }
+
+  @override
   String get checkupCycle => '体检周期';
 
   @override
@@ -6108,6 +6148,26 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get age => '年齡';
+
+  @override
+  String ageAutoCalculated(String age) {
+    return '自動計算 · $age';
+  }
+
+  @override
+  String petAgeMonths(int months) {
+    return '$months個月';
+  }
+
+  @override
+  String petAgeYears(int years) {
+    return '$years歲';
+  }
+
+  @override
+  String petAgeYearsMonths(int years, int months) {
+    return '$years歲 $months個月';
+  }
 
   @override
   String get checkupCycle => '檢查頻率';

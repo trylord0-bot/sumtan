@@ -362,7 +362,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ),
                 _ReadOnlyRow(
                   label: context.l10n.age,
-                  value: '자동 계산 · ${pet.ageLabel}',
+                  value: context.l10n
+                      .ageAutoCalculated(pet.localizedAgeLabel(context.l10n)),
                   isLast: false,
                 ),
                 _GenderRow(

@@ -1023,6 +1023,26 @@ class AppLocalizationsKo extends AppLocalizations {
   String get age => '나이';
 
   @override
+  String ageAutoCalculated(String age) {
+    return '자동 계산 · $age';
+  }
+
+  @override
+  String petAgeMonths(int months) {
+    return '$months개월';
+  }
+
+  @override
+  String petAgeYears(int years) {
+    return '$years살';
+  }
+
+  @override
+  String petAgeYearsMonths(int years, int months) {
+    return '$years살 $months개월';
+  }
+
+  @override
   String get checkupCycle => '검진 주기';
 
   @override

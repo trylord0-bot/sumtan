@@ -2059,7 +2059,7 @@
   "@memoSaved": {
     "description": "Memo saved toast"
   },
-  "abnormalSymptomRecordSaved": "⚠️ Abnormal sign recorded",
+  "abnormalSymptomRecordSaved": "⚡ Abnormal sign recorded",
   "@abnormalSymptomRecordSaved": {
     "description": "Abnormal symptom record saved toast"
   },
@@ -2175,7 +2175,7 @@
   "@hospitalFormTitle": {
     "description": "Hospital form title"
   },
-  "abnormalSymptomFormTitle": "⚠️ Abnormal Sign",
+  "abnormalSymptomFormTitle": "⚡ Abnormal Sign",
   "@abnormalSymptomFormTitle": {
     "description": "Abnormal symptom form title"
   },

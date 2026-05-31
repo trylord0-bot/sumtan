@@ -2979,7 +2979,7 @@ abstract class AppLocalizations {
   /// Abnormal symptom record saved toast
   ///
   /// In en, this message translates to:
-  /// **'⚠️ Abnormal sign recorded'**
+  /// **'⚡ Abnormal sign recorded'**
   String get abnormalSymptomRecordSaved;
 
   /// More questions label
@@ -3153,7 +3153,7 @@ abstract class AppLocalizations {
   /// Abnormal symptom form title
   ///
   /// In en, this message translates to:
-  /// **'⚠️ Abnormal Sign'**
+  /// **'⚡ Abnormal Sign'**
   String get abnormalSymptomFormTitle;
 
   /// Memo form title

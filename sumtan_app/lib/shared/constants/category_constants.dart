@@ -168,7 +168,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.memo:
         return '📝';
       case RecordCategory.abnormalSymptom:
-        return '➕';
+        return '⚡';
     }
   }
 
@@ -197,7 +197,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.memo:
         return const Color(0xFF94A3B8); // slate
       case RecordCategory.abnormalSymptom:
-        return const Color(0xFFF43F5E); // coral/rose
+        return const Color(0xFF8B5CF6); // violet/purple
     }
   }
 
@@ -226,7 +226,7 @@ extension RecordCategoryX on RecordCategory {
       case RecordCategory.memo:
         return const Color(0xFFF8FAFC); // slate light
       case RecordCategory.abnormalSymptom:
-        return const Color(0xFFFFF1F2); // rose light
+        return const Color(0xFFF5F3FF); // violet light
     }
   }
 

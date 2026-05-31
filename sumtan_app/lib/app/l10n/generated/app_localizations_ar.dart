@@ -1518,7 +1518,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get memoSaved => 'تم حفظ الملاحظة';
 
   @override
-  String get abnormalSymptomRecordSaved => '⚠️ تم تسجيل العرض غير الطبيعي';
+  String get abnormalSymptomRecordSaved => '⚡ تم تسجيل العرض غير الطبيعي';
 
   @override
   String get moreQuestions => 'هل لديك المزيد من الأسئلة؟';
@@ -1612,7 +1612,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hospitalFormTitle => '🏥 تسجيل العيادة';
 
   @override
-  String get abnormalSymptomFormTitle => '⚠️ عرض غير طبيعي';
+  String get abnormalSymptomFormTitle => '⚡ عرض غير طبيعي';
 
   @override
   String get memoFormTitle => '📝 ملاحظة';

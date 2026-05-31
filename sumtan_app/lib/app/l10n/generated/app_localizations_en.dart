@@ -1519,7 +1519,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get memoSaved => 'Memo saved';
 
   @override
-  String get abnormalSymptomRecordSaved => '⚠️ Abnormal sign recorded';
+  String get abnormalSymptomRecordSaved => '⚡ Abnormal sign recorded';
 
   @override
   String get moreQuestions => 'Have more questions?';
@@ -1613,7 +1613,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hospitalFormTitle => '🏥 Vet visit record';
 
   @override
-  String get abnormalSymptomFormTitle => '⚠️ Abnormal Sign';
+  String get abnormalSymptomFormTitle => '⚡ Abnormal Sign';
 
   @override
   String get memoFormTitle => '📝 Memo';

@@ -1504,7 +1504,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get memoSaved => '📝 메모가 기록됐어요';
 
   @override
-  String get abnormalSymptomRecordSaved => '⚠️ 이상징후가 기록됐어요';
+  String get abnormalSymptomRecordSaved => '⚡ 이상징후가 기록됐어요';
 
   @override
   String get moreQuestions => '더 궁금한 점이 있으신가요?';
@@ -1595,7 +1595,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get hospitalFormTitle => '🏥 병원 기록';
 
   @override
-  String get abnormalSymptomFormTitle => '⚠️ 이상징후 기록';
+  String get abnormalSymptomFormTitle => '⚡ 이상징후 기록';
 
   @override
   String get memoFormTitle => '📝 메모';

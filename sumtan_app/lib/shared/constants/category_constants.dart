@@ -14,6 +14,7 @@ enum RecordCategory {
   brushing,
   walk,
   memo,
+  abnormalSymptom,
 }
 
 class ConditionScoreLabel {
@@ -78,6 +79,8 @@ extension RecordCategoryX on RecordCategory {
         return 'walk';
       case RecordCategory.memo:
         return 'memo';
+      case RecordCategory.abnormalSymptom:
+        return 'abnormal_symptom';
     }
   }
 
@@ -105,6 +108,8 @@ extension RecordCategoryX on RecordCategory {
         return '산책';
       case RecordCategory.memo:
         return '메모';
+      case RecordCategory.abnormalSymptom:
+        return '이상징후';
     }
   }
 
@@ -133,6 +138,8 @@ extension RecordCategoryX on RecordCategory {
         return l10n.catWalk;
       case RecordCategory.memo:
         return l10n.memo;
+      case RecordCategory.abnormalSymptom:
+        return l10n.catAbnormalSymptom;
     }
   }
 
@@ -160,6 +167,8 @@ extension RecordCategoryX on RecordCategory {
         return '🦮';
       case RecordCategory.memo:
         return '📝';
+      case RecordCategory.abnormalSymptom:
+        return '➕';
     }
   }
 
@@ -187,6 +196,8 @@ extension RecordCategoryX on RecordCategory {
         return const Color(0xFF818CF8); // indigo
       case RecordCategory.memo:
         return const Color(0xFF94A3B8); // slate
+      case RecordCategory.abnormalSymptom:
+        return const Color(0xFFF43F5E); // coral/rose
     }
   }
 
@@ -214,6 +225,8 @@ extension RecordCategoryX on RecordCategory {
         return const Color(0xFFEEF2FF); // indigo light
       case RecordCategory.memo:
         return const Color(0xFFF8FAFC); // slate light
+      case RecordCategory.abnormalSymptom:
+        return const Color(0xFFFFF1F2); // rose light
     }
   }
 

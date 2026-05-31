@@ -824,6 +824,18 @@
   "@vaccineType": {
     "description": "Vaccine type label"
   },
+  "abnormalSymptomType": "Abnormal Sign Type",
+  "@abnormalSymptomType": {
+    "description": "Abnormal symptom type label"
+  },
+  "customSymptom": "Custom Symptom",
+  "@customSymptom": {
+    "description": "Custom symptom input label"
+  },
+  "customSymptomPlaceholder": "Enter symptom description",
+  "@customSymptomPlaceholder": {
+    "description": "Custom symptom input placeholder"
+  },
   "sideEffects": "Side effects",
   "@sideEffects": {
     "description": "Side effects label"
@@ -879,6 +891,15 @@
   "vomiting": "Vomiting",
   "@vomiting": {
     "description": "Vomiting label"
+  },
+  "bleeding": "Bleeding",
+  "@bleeding": {
+    "description": "Bleeding label"
+  },
+  "dyspnea": "Dyspnea",
+  "seizure": "Seizure/Convulsion",
+  "@drooling": {
+    "description": "Drooling label"
   },
   "normal": "Normal",
   "@normal": {
@@ -1643,6 +1664,10 @@
   "@hintSelectGroomingType": {
     "description": "Hint: select grooming type"
   },
+  "hintSelectSymptomType": "Please select at least one symptom type",
+  "@hintSelectSymptomType": {
+    "description": "Hint: select symptom type"
+  },
   "hintTitle": "Please enter a title",
   "@hintTitle": {
     "description": "Hint: title"
@@ -2034,6 +2059,10 @@
   "@memoSaved": {
     "description": "Memo saved toast"
   },
+  "abnormalSymptomRecordSaved": "⚠️ Abnormal sign recorded",
+  "@abnormalSymptomRecordSaved": {
+    "description": "Abnormal symptom record saved toast"
+  },
   "moreQuestions": "Have more questions?",
   "@moreQuestions": {
     "description": "More questions label"
@@ -2090,6 +2119,10 @@
   "@catHospital": {
     "description": "Category: hospital/vet"
   },
+  "catAbnormalSymptom": "Abnormal Sign",
+  "@catAbnormalSymptom": {
+    "description": "Category: abnormal symptom"
+  },
   "catCondition": "Condition",
   "@catCondition": {
     "description": "Category: condition"
@@ -2141,6 +2174,10 @@
   "hospitalFormTitle": "🏥 Vet visit record",
   "@hospitalFormTitle": {
     "description": "Hospital form title"
+  },
+  "abnormalSymptomFormTitle": "⚠️ Abnormal Sign",
+  "@abnormalSymptomFormTitle": {
+    "description": "Abnormal symptom form title"
   },
   "memoFormTitle": "📝 Memo",
   "@memoFormTitle": {

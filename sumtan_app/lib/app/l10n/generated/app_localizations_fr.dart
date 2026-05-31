@@ -633,6 +633,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vaccineType => 'Type de vaccin';
 
   @override
+  String get abnormalSymptomType => 'Type de Symptôme Anormal';
+
+  @override
+  String get customSymptom => 'Symptôme Personnalisé';
+
+  @override
+  String get customSymptomPlaceholder => 'Décrivez le symptôme';
+
+  @override
   String get sideEffects => 'Effets secondaires';
 
   @override
@@ -673,6 +682,15 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get vomiting => 'Vomissement';
+
+  @override
+  String get bleeding => 'Saignement';
+
+  @override
+  String get dyspnea => 'Dyspnée';
+
+  @override
+  String get seizure => 'Convulsion';
 
   @override
   String get normal => 'Normal';
@@ -1229,6 +1247,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez sélectionner au moins un type de toilettage';
 
   @override
+  String get hintSelectSymptomType =>
+      '💡 Veuillez sélectionner au moins un type de symptôme';
+
+  @override
   String get hintTitle => 'Veuillez saisir un titre';
 
   @override
@@ -1516,6 +1538,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get memoSaved => 'Mémo enregistré';
 
   @override
+  String get abnormalSymptomRecordSaved => '⚠️ Symptôme anormal enregistré';
+
+  @override
   String get moreQuestions => 'D\'autres questions ?';
 
   @override
@@ -1565,6 +1590,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get catHospital => 'Clinique';
 
   @override
+  String get catAbnormalSymptom => 'Symptôme Anormal';
+
+  @override
   String get catCondition => 'État';
 
   @override
@@ -1602,6 +1630,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get hospitalFormTitle => '🏥 Enregistrement clinique';
+
+  @override
+  String get abnormalSymptomFormTitle => '⚠️ Symptôme Anormal';
 
   @override
   String get memoFormTitle => '📝 Note';

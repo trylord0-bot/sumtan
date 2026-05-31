@@ -783,6 +783,14 @@ class _EventCard extends ConsumerWidget {
           if (content != null && content.isNotEmpty) content,
         ];
         return parts.isNotEmpty ? parts.join(' · ') : '';
+      case 'abnormal_symptom':
+        final symptom = d['symptom'] as String? ?? '';
+        final custom = d['custom_symptom'] as String?;
+        final parts = [
+          if (symptom.isNotEmpty) symptom,
+          if (custom != null && custom.isNotEmpty) custom,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       default:
         return r.memo ?? '';
     }
@@ -973,6 +981,7 @@ class _CategoryFilterSheetState extends ConsumerState<_CategoryFilterSheet> {
       RecordCategory.grooming,
       RecordCategory.brushing,
       RecordCategory.memo,
+      RecordCategory.abnormalSymptom,
     ];
     if (species == 'dog') {
       categories.insert(categories.length - 1, RecordCategory.walk);

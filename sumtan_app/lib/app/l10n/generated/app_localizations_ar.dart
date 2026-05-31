@@ -626,6 +626,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get vaccineType => 'نوع اللقاح';
 
   @override
+  String get abnormalSymptomType => 'نوع العرض غير الطبيعي';
+
+  @override
+  String get customSymptom => 'عرض مخصص';
+
+  @override
+  String get customSymptomPlaceholder => 'أدخل وصف العرض';
+
+  @override
   String get sideEffects => 'الآثار الجانبية';
 
   @override
@@ -666,6 +675,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get vomiting => 'القيء';
+
+  @override
+  String get bleeding => 'نزيف';
+
+  @override
+  String get dyspnea => 'ضيق التنفس';
+
+  @override
+  String get seizure => 'تشنج/نوبة';
 
   @override
   String get normal => 'طبيعي';
@@ -1215,6 +1233,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hintSelectGroomingType => 'يُرجى اختيار نوع عناية واحد على الأقل';
 
   @override
+  String get hintSelectSymptomType => '💡 يرجى تحديد نوع عرض واحد على الأقل';
+
+  @override
   String get hintTitle => 'يُرجى إدخال عنوان';
 
   @override
@@ -1497,6 +1518,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get memoSaved => 'تم حفظ الملاحظة';
 
   @override
+  String get abnormalSymptomRecordSaved => '⚠️ تم تسجيل العرض غير الطبيعي';
+
+  @override
   String get moreQuestions => 'هل لديك المزيد من الأسئلة؟';
 
   @override
@@ -1546,6 +1570,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get catHospital => 'عيادة';
 
   @override
+  String get catAbnormalSymptom => 'عرض غير طبيعي';
+
+  @override
   String get catCondition => 'الحالة';
 
   @override
@@ -1583,6 +1610,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get hospitalFormTitle => '🏥 تسجيل العيادة';
+
+  @override
+  String get abnormalSymptomFormTitle => '⚠️ عرض غير طبيعي';
 
   @override
   String get memoFormTitle => '📝 ملاحظة';

@@ -110,6 +110,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       'distance_km',
       'title',
       'content',
+      'custom_symptom',
     ]) {
       seed(key);
     }
@@ -238,6 +239,11 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         } else {
           data['cost'] = cost;
         }
+      case 'abnormal_symptom':
+        data['symptom'] = _data['symptom'] as String? ?? '구토';
+        data['custom_symptom'] =
+            text('custom_symptom').isEmpty ? null : text('custom_symptom');
+        break;
     }
 
     _showSavingDialog();
@@ -654,6 +660,26 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
             selected: _data['pinned'] as String? ?? '일반',
             onChanged: (v) => _setData('pinned', v),
           ),
+        ];
+      case 'abnormal_symptom':
+        final symptom = _data['symptom'] as String? ?? '구토';
+        final showCustom = symptom == '기타';
+        return [
+          FormSegmentRow(
+            label: '이상징후 유형',
+            options: const ['구토', '출혈', '경련/발작', '호흡곤란', '기타'],
+            selected: symptom,
+            onChanged: (v) => _setData('symptom', v),
+          ),
+          if (showCustom) ...[
+            const SizedBox(height: AppSpacing.space4),
+            FormInputField(
+              label: '기타 증상',
+              required: false,
+              controller: _ctrl('custom_symptom'),
+              hint: '증상을 직접 입력하세요',
+            ),
+          ],
         ];
       default:
         return const [];

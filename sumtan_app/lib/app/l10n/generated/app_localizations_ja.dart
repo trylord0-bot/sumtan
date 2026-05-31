@@ -617,6 +617,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get vaccineType => 'ワクチンの種類';
 
   @override
+  String get abnormalSymptomType => '異常症状タイプ';
+
+  @override
+  String get customSymptom => 'その他の症状';
+
+  @override
+  String get customSymptomPlaceholder => '症状の説明を入力';
+
+  @override
   String get sideEffects => '副作用';
 
   @override
@@ -657,6 +666,15 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get vomiting => '嘔吐';
+
+  @override
+  String get bleeding => '出血';
+
+  @override
+  String get dyspnea => '呼吸困難';
+
+  @override
+  String get seizure => '痙攣/発作';
 
   @override
   String get normal => '正常';
@@ -1204,6 +1222,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get hintSelectGroomingType => '💡 グルーミングの種類を1つ以上選択してください';
 
   @override
+  String get hintSelectSymptomType => '💡 少なくとも1つの症状タイプを選択してください';
+
+  @override
   String get hintTitle => '💡 タイトルを入力してください';
 
   @override
@@ -1481,6 +1502,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get memoSaved => '📝 メモが記録されました';
 
   @override
+  String get abnormalSymptomRecordSaved => '⚠️ 異常症状を記録しました';
+
+  @override
   String get moreQuestions => '他にご質問はありますか？';
 
   @override
@@ -1528,6 +1552,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get catHospital => '病院';
 
   @override
+  String get catAbnormalSymptom => '異常症状';
+
+  @override
   String get catCondition => '体調';
 
   @override
@@ -1565,6 +1592,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get hospitalFormTitle => '🏥 病院記録';
+
+  @override
+  String get abnormalSymptomFormTitle => '⚠️ 異常症状の記録';
 
   @override
   String get memoFormTitle => '📝 メモ';

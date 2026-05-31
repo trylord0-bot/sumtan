@@ -999,6 +999,14 @@ class _RecordList extends StatelessWidget {
           if (content != null && content.isNotEmpty) content,
         ];
         return parts.isNotEmpty ? parts.join(' · ') : '';
+      case 'abnormal_symptom':
+        final symptom = d['symptom'] as String? ?? '';
+        final custom = d['custom_symptom'] as String?;
+        final parts = [
+          if (symptom.isNotEmpty) symptom,
+          if (custom != null && custom.isNotEmpty) custom,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       default:
         return r.memo ?? '';
     }

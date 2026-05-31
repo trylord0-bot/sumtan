@@ -625,6 +625,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vaccineType => 'Vaccine type';
 
   @override
+  String get abnormalSymptomType => 'Abnormal Sign Type';
+
+  @override
+  String get customSymptom => 'Custom Symptom';
+
+  @override
+  String get customSymptomPlaceholder => 'Enter symptom description';
+
+  @override
   String get sideEffects => 'Side effects';
 
   @override
@@ -665,6 +674,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get vomiting => 'Vomiting';
+
+  @override
+  String get bleeding => 'Bleeding';
+
+  @override
+  String get dyspnea => 'Dyspnea';
+
+  @override
+  String get seizure => 'Seizure/Convulsion';
 
   @override
   String get normal => 'Normal';
@@ -1216,6 +1234,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please select at least one grooming type';
 
   @override
+  String get hintSelectSymptomType => 'Please select at least one symptom type';
+
+  @override
   String get hintTitle => 'Please enter a title';
 
   @override
@@ -1498,6 +1519,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get memoSaved => 'Memo saved';
 
   @override
+  String get abnormalSymptomRecordSaved => '⚠️ Abnormal sign recorded';
+
+  @override
   String get moreQuestions => 'Have more questions?';
 
   @override
@@ -1547,6 +1571,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get catHospital => 'Vet visit';
 
   @override
+  String get catAbnormalSymptom => 'Abnormal Sign';
+
+  @override
   String get catCondition => 'Condition';
 
   @override
@@ -1584,6 +1611,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get hospitalFormTitle => '🏥 Vet visit record';
+
+  @override
+  String get abnormalSymptomFormTitle => '⚠️ Abnormal Sign';
 
   @override
   String get memoFormTitle => '📝 Memo';

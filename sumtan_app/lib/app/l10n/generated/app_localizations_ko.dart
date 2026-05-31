@@ -618,6 +618,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get vaccineType => '백신 종류';
 
   @override
+  String get abnormalSymptomType => '이상징후 유형';
+
+  @override
+  String get customSymptom => '기타 증상';
+
+  @override
+  String get customSymptomPlaceholder => '증상을 직접 입력하세요';
+
+  @override
   String get sideEffects => '부작용';
 
   @override
@@ -658,6 +667,15 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get vomiting => '구토';
+
+  @override
+  String get bleeding => '출혈';
+
+  @override
+  String get dyspnea => '호흡곤란';
+
+  @override
+  String get seizure => '경련/발작';
 
   @override
   String get normal => '정상';
@@ -1205,6 +1223,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get hintSelectGroomingType => '💡 미용 종류를 하나 이상 선택해 주세요';
 
   @override
+  String get hintSelectSymptomType => '💡 이상징후 유형을 하나 이상 선택해 주세요';
+
+  @override
   String get hintTitle => '💡 제목을 입력해 주세요';
 
   @override
@@ -1483,6 +1504,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get memoSaved => '📝 메모가 기록됐어요';
 
   @override
+  String get abnormalSymptomRecordSaved => '⚠️ 이상징후가 기록됐어요';
+
+  @override
   String get moreQuestions => '더 궁금한 점이 있으신가요?';
 
   @override
@@ -1529,6 +1553,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get catHospital => '병원';
 
   @override
+  String get catAbnormalSymptom => '이상징후';
+
+  @override
   String get catCondition => '컨디션';
 
   @override
@@ -1566,6 +1593,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get hospitalFormTitle => '🏥 병원 기록';
+
+  @override
+  String get abnormalSymptomFormTitle => '⚠️ 이상징후 기록';
 
   @override
   String get memoFormTitle => '📝 메모';

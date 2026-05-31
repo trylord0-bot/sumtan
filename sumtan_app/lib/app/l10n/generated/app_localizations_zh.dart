@@ -614,6 +614,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get vaccineType => '疫苗类型';
 
   @override
+  String get abnormalSymptomType => '异常症状类型';
+
+  @override
+  String get customSymptom => '自定义症状';
+
+  @override
+  String get customSymptomPlaceholder => '请输入症状描述';
+
+  @override
   String get sideEffects => '副作用';
 
   @override
@@ -654,6 +663,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get vomiting => '呕吐';
+
+  @override
+  String get bleeding => '出血';
+
+  @override
+  String get dyspnea => '呼吸困难';
+
+  @override
+  String get seizure => '痉挛/发作';
 
   @override
   String get normal => '正常';
@@ -1201,6 +1219,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get hintSelectGroomingType => '💡 请至少选择一种美容类型';
 
   @override
+  String get hintSelectSymptomType => '💡 请至少选择一种异常症状类型';
+
+  @override
   String get hintTitle => '💡 请输入标题';
 
   @override
@@ -1478,6 +1499,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get memoSaved => '📝 备忘已记录';
 
   @override
+  String get abnormalSymptomRecordSaved => '⚠️ 异常症状已记录';
+
+  @override
   String get moreQuestions => '还有其他问题吗？';
 
   @override
@@ -1521,6 +1545,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get catHospital => '医院';
 
   @override
+  String get catAbnormalSymptom => '异常症状';
+
+  @override
   String get catCondition => '状态';
 
   @override
@@ -1558,6 +1585,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get hospitalFormTitle => '🏥 医院记录';
+
+  @override
+  String get abnormalSymptomFormTitle => '⚠️ 异常症状记录';
 
   @override
   String get memoFormTitle => '📝 备忘录';
@@ -3123,6 +3153,15 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get vaccineType => '疫苗类型';
 
   @override
+  String get abnormalSymptomType => '异常症状类型';
+
+  @override
+  String get customSymptom => '自定义症状';
+
+  @override
+  String get customSymptomPlaceholder => '请输入症状描述';
+
+  @override
   String get sideEffects => '副作用';
 
   @override
@@ -3163,6 +3202,15 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get vomiting => '呕吐';
+
+  @override
+  String get bleeding => '出血';
+
+  @override
+  String get dyspnea => '呼吸困难';
+
+  @override
+  String get seizure => '痉挛/发作';
 
   @override
   String get normal => '正常';
@@ -3710,6 +3758,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get hintSelectGroomingType => '💡 请至少选择一种美容类型';
 
   @override
+  String get hintSelectSymptomType => '💡 请至少选择一种异常症状类型';
+
+  @override
   String get hintTitle => '💡 请输入标题';
 
   @override
@@ -3987,6 +4038,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get memoSaved => '📝 备忘已记录';
 
   @override
+  String get abnormalSymptomRecordSaved => '⚠️ 异常症状已记录';
+
+  @override
   String get moreQuestions => '还有其他问题吗？';
 
   @override
@@ -4030,6 +4084,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get catHospital => '医院';
 
   @override
+  String get catAbnormalSymptom => '异常症状';
+
+  @override
   String get catCondition => '状态';
 
   @override
@@ -4067,6 +4124,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get hospitalFormTitle => '🏥 医院记录';
+
+  @override
+  String get abnormalSymptomFormTitle => '⚠️ 异常症状记录';
 
   @override
   String get memoFormTitle => '📝 备忘录';
@@ -5629,6 +5689,15 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get vaccineType => '疫苗類型';
 
   @override
+  String get abnormalSymptomType => '異常症狀類型';
+
+  @override
+  String get customSymptom => '自訂症狀';
+
+  @override
+  String get customSymptomPlaceholder => '請輸入症狀描述';
+
+  @override
   String get sideEffects => '副作用';
 
   @override
@@ -5669,6 +5738,15 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get vomiting => '嘔吐';
+
+  @override
+  String get bleeding => '出血';
+
+  @override
+  String get dyspnea => '呼吸困難';
+
+  @override
+  String get seizure => '痙攣/發作';
 
   @override
   String get normal => '正常';
@@ -6216,6 +6294,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get hintSelectGroomingType => '💡 請至少選擇一種美容類型';
 
   @override
+  String get hintSelectSymptomType => '💡 請至少選擇一種異常症狀類型';
+
+  @override
   String get hintTitle => '💡 請輸入標題';
 
   @override
@@ -6493,6 +6574,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get memoSaved => '📝 備忘已記錄';
 
   @override
+  String get abnormalSymptomRecordSaved => '⚠️ 異常症狀已記錄';
+
+  @override
   String get moreQuestions => '還有其他問題嗎？';
 
   @override
@@ -6536,6 +6620,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get catHospital => '醫院';
 
   @override
+  String get catAbnormalSymptom => '異常症狀';
+
+  @override
   String get catCondition => '狀態';
 
   @override
@@ -6573,6 +6660,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get hospitalFormTitle => '🏥 醫院記錄';
+
+  @override
+  String get abnormalSymptomFormTitle => '⚠️ 異常症狀記錄';
 
   @override
   String get memoFormTitle => '📝 備忘錄';

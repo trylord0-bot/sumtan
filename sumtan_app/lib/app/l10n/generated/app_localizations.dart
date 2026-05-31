@@ -1290,6 +1290,24 @@ abstract class AppLocalizations {
   /// **'Vaccine type'**
   String get vaccineType;
 
+  /// Abnormal symptom type label
+  ///
+  /// In en, this message translates to:
+  /// **'Abnormal Sign Type'**
+  String get abnormalSymptomType;
+
+  /// Custom symptom input label
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Symptom'**
+  String get customSymptom;
+
+  /// Custom symptom input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Enter symptom description'**
+  String get customSymptomPlaceholder;
+
   /// Side effects label
   ///
   /// In en, this message translates to:
@@ -1373,6 +1391,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vomiting'**
   String get vomiting;
+
+  /// Bleeding label
+  ///
+  /// In en, this message translates to:
+  /// **'Bleeding'**
+  String get bleeding;
+
+  /// No description provided for @dyspnea.
+  ///
+  /// In en, this message translates to:
+  /// **'Dyspnea'**
+  String get dyspnea;
+
+  /// No description provided for @seizure.
+  ///
+  /// In en, this message translates to:
+  /// **'Seizure/Convulsion'**
+  String get seizure;
 
   /// Normal label
   ///
@@ -2412,6 +2448,12 @@ abstract class AppLocalizations {
   /// **'Please select at least one grooming type'**
   String get hintSelectGroomingType;
 
+  /// Hint: select symptom type
+  ///
+  /// In en, this message translates to:
+  /// **'Please select at least one symptom type'**
+  String get hintSelectSymptomType;
+
   /// Hint: title
   ///
   /// In en, this message translates to:
@@ -2934,6 +2976,12 @@ abstract class AppLocalizations {
   /// **'Memo saved'**
   String get memoSaved;
 
+  /// Abnormal symptom record saved toast
+  ///
+  /// In en, this message translates to:
+  /// **'⚠️ Abnormal sign recorded'**
+  String get abnormalSymptomRecordSaved;
+
   /// More questions label
   ///
   /// In en, this message translates to:
@@ -3018,6 +3066,12 @@ abstract class AppLocalizations {
   /// **'Vet visit'**
   String get catHospital;
 
+  /// Category: abnormal symptom
+  ///
+  /// In en, this message translates to:
+  /// **'Abnormal Sign'**
+  String get catAbnormalSymptom;
+
   /// Category: condition
   ///
   /// In en, this message translates to:
@@ -3095,6 +3149,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'🏥 Vet visit record'**
   String get hospitalFormTitle;
+
+  /// Abnormal symptom form title
+  ///
+  /// In en, this message translates to:
+  /// **'⚠️ Abnormal Sign'**
+  String get abnormalSymptomFormTitle;
 
   /// Memo form title
   ///

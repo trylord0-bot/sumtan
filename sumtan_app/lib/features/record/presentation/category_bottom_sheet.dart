@@ -16,6 +16,7 @@ import 'forms/brushing_form.dart';
 import 'forms/walk_form.dart';
 import 'forms/water_form.dart';
 import 'forms/memo_form.dart';
+import 'forms/abnormal_symptom_form.dart';
 
 Future<void> showCategoryBottomSheet(BuildContext context) async {
   await showModalBottomSheet(
@@ -48,6 +49,7 @@ class _CategorySheet extends ConsumerWidget {
       const _CategoryEntry(RecordCategory.grooming),
       const _CategoryEntry(RecordCategory.brushing),
       const _CategoryEntry(RecordCategory.memo),
+      const _CategoryEntry(RecordCategory.abnormalSymptom),
     ];
 
     // 종별 항목 추가 (메모 앞에 삽입)
@@ -86,6 +88,8 @@ class _CategorySheet extends ConsumerWidget {
         form = const WalkForm();
       case RecordCategory.memo:
         form = const MemoForm();
+      case RecordCategory.abnormalSymptom:
+        form = const AbnormalSymptomForm();
     }
 
     showModalBottomSheet(

@@ -31,18 +31,44 @@ final appRouter = GoRouter(
         child: child,
       ),
       routes: [
-        GoRoute(path: '/', builder: (_, __) => const HomeScreen()),
         GoRoute(
-          path: '/journal',
-          builder: (_, state) => JournalScreen(
-            initialEditRecord:
-                state.extra is Record ? state.extra as Record : null,
+          path: '/',
+          pageBuilder: (_, state) => _mainTabPage(
+            state,
+            const HomeScreen(),
           ),
         ),
         GoRoute(
-            path: '/notifications', builder: (_, __) => const AlarmScreen()),
-        GoRoute(path: '/profile', builder: (_, __) => const ProfileScreen()),
-        GoRoute(path: '/settings', builder: (_, __) => const SettingsScreen()),
+          path: '/journal',
+          pageBuilder: (_, state) => _mainTabPage(
+            state,
+            JournalScreen(
+              initialEditRecord:
+                  state.extra is Record ? state.extra as Record : null,
+            ),
+          ),
+        ),
+        GoRoute(
+          path: '/notifications',
+          pageBuilder: (_, state) => _mainTabPage(
+            state,
+            const AlarmScreen(),
+          ),
+        ),
+        GoRoute(
+          path: '/profile',
+          pageBuilder: (_, state) => _mainTabPage(
+            state,
+            const ProfileScreen(),
+          ),
+        ),
+        GoRoute(
+          path: '/settings',
+          pageBuilder: (_, state) => _mainTabPage(
+            state,
+            const SettingsScreen(),
+          ),
+        ),
       ],
     ),
     GoRoute(
@@ -71,6 +97,16 @@ final appRouter = GoRouter(
     ),
   ],
 );
+
+Page<void> _mainTabPage(GoRouterState state, Widget child) {
+  return NoTransitionPage<void>(
+    key: state.pageKey,
+    child: ColoredBox(
+      color: AppColors.creamBg,
+      child: child,
+    ),
+  );
+}
 
 // ─── Main scaffold ─────────────────────────────────────────────────────────────
 

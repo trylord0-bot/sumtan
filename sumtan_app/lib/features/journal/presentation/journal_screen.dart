@@ -487,7 +487,8 @@ class _EventList extends ConsumerWidget {
         final filtered = records
             .where((r) =>
                 enabledCategories.contains(RecordCategoryX.fromString(r.category)))
-            .toList();
+            .toList()
+          ..sort((a, b) => b.recordedAtDate.compareTo(a.recordedAtDate));
         if (filtered.isEmpty) {
           return Center(
             child: Column(

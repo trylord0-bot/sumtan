@@ -16,7 +16,6 @@ import '../../../features/record/provider/record_provider.dart';
 import '../../../features/record/data/record_model.dart';
 import '../../../features/record/presentation/category_bottom_sheet.dart';
 import '../../../shared/constants/category_constants.dart';
-import '../../../shared/widgets/app_card.dart';
 import '../../../core/utils/date_utils.dart' as du;
 
 class HomeScreen extends ConsumerWidget {
@@ -812,94 +811,71 @@ class _RecordList extends StatelessWidget {
       children: records.map((r) {
         final cat = RecordCategoryX.fromString(r.category);
         final time = du.formatTime(r.recordedAtDate);
-        final title = _buildTitle(r);
         final subtitle = _buildSubtitle(r);
 
         return Padding(
           padding: const EdgeInsets.only(bottom: AppSpacing.space2),
-          child: AppCard(
-            padding: EdgeInsets.zero,
+          child: GestureDetector(
             onTap: () => context.go('/journal', extra: r),
-            child: IntrinsicHeight(
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: 14,
+              ),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
-                    width: 4,
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
-                      color: cat.color,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(16),
-                        bottomLeft: Radius.circular(16),
-                      ),
+                      color: cat.bgColor,
+                      borderRadius: BorderRadius.circular(AppRadius.radiusMd),
                     ),
-                  ),
-                  const SizedBox(width: AppSpacing.space3),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Container(
-                      width: 36,
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: cat.bgColor,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      alignment: Alignment.center,
-                      child:
-                          Text(cat.emoji, style: const TextStyle(fontSize: 18)),
-                    ),
+                    alignment: Alignment.center,
+                    child: Text(cat.emoji, style: const TextStyle(fontSize: 20)),
                   ),
                   const SizedBox(width: AppSpacing.space3),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(title,
-                              style: const TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.gray900,
-                              )),
-                          if (subtitle.isNotEmpty) ...[
-                            const SizedBox(height: 2),
-                            Text(subtitle,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  color: AppColors.gray600,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis),
-                          ],
-                          const SizedBox(height: 2),
-                          Text(time,
-                              style: const TextStyle(
-                                fontSize: 11,
-                                color: AppColors.gray400,
-                              )),
-                        ],
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(cat.localizedLabel(context),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.gray900,
+                            )),
+                        const SizedBox(height: 2),
+                        Text(
+                          subtitle,
+                          style: const TextStyle(
+                              fontSize: 12, color: AppColors.gray500),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: AppSpacing.space3),
-                    child: Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (_hasMedia(r)) ...[
-                            const Icon(Icons.photo_library_outlined,
-                                size: 14, color: AppColors.gray400),
-                            const SizedBox(width: 4),
-                          ],
-                          const Text('›',
-                              style: TextStyle(
-                                  fontSize: 20, color: AppColors.gray300)),
-                        ],
-                      ),
-                    ),
+                  const SizedBox(width: AppSpacing.space2),
+                  if (_hasMedia(r)) ...[
+                    const Icon(Icons.photo_library_outlined,
+                        size: 14, color: AppColors.gray400),
+                    const SizedBox(width: 4),
+                  ],
+                  Text(
+                    time,
+                    style: const TextStyle(fontSize: 11, color: AppColors.gray400),
                   ),
                 ],
               ),
@@ -915,67 +891,40 @@ class _RecordList extends StatelessWidget {
     return media is List && media.isNotEmpty;
   }
 
-  String _buildTitle(Record r) {
-    final d = r.dataJson;
-    switch (r.category) {
-      case 'condition':
-        final score = (d?['score'] as num?)?.toInt();
-        if (score == null) return '컨디션';
-        return ConditionScoreLabel.fromScore(score).recordText;
-      case 'poop':
-        final type = d?['type'] as String? ?? '';
-        return type.isNotEmpty ? '배변 — $type' : '대변';
-      case 'medication':
-        final med = d?['medicine'] as String? ?? '';
-        return med.isNotEmpty ? med : '투약';
-      case 'weight':
-        final kg = d?['weight_kg'];
-        return kg != null ? '체중 기록 — ${kg}kg' : '체중 기록';
-      case 'meal':
-        return '식사 기록';
-      case 'water':
-        return '음수 기록';
-      case 'hospital':
-      case 'vaccination':
-        final visitType = d?['visit_type'] as String?;
-        return visitType != null ? '병원 기록 — $visitType' : '병원 기록';
-      case 'grooming':
-        return '미용 기록';
-      case 'brushing':
-        return '빗질 기록';
-      case 'walk':
-        final duration = d?['duration_min'];
-        return duration != null ? '산책 기록 — $duration분' : '산책 기록';
-      case 'memo':
-        final title = d?['title'] as String?;
-        return title != null && title.isNotEmpty ? title : '메모';
-      default:
-        return RecordCategoryX.fromString(r.category).label;
-    }
-  }
-
   String _buildSubtitle(Record r) {
     final d = r.dataJson;
     if (d == null || d.isEmpty) return r.memo ?? '';
     switch (r.category) {
       case 'poop':
+        final type = d['type'] as String? ?? '';
         final status = d['status'] as String? ?? '';
-        final color = d['color'] as String? ?? '';
-        return [status, color].where((s) => s.isNotEmpty).join(', ');
+        return [type, status].where((s) => s.isNotEmpty).join(' · ');
       case 'condition':
-        final tags = (d['symptoms'] as List?)?.join(', ') ?? '';
-        return tags.isNotEmpty ? tags : (r.memo ?? '');
+        final score = (d['score'] as num?)?.toInt();
+        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
+        final parts = [
+          if (score != null) ConditionScoreLabel.fromScore(score).recordText,
+          if (symptoms.isNotEmpty) symptoms,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'medication':
+        final medicine = d['medicine'] as String? ?? '';
         final dose = d['dose'] as String? ?? '';
         final method = d['method'] as String? ?? '';
         final parts = [
+          if (medicine.isNotEmpty) medicine,
           if (dose.isNotEmpty) dose,
           if (method.isNotEmpty) method,
         ];
-        return parts.isNotEmpty ? '${parts.join(' · ')} 투여 완료' : (r.memo ?? '');
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'weight':
+        final kg = d['weight_kg'];
         final method = d['method'] as String? ?? '';
-        return method.isNotEmpty ? method : (r.memo ?? '');
+        final parts = [
+          if (kg != null) '${kg}kg',
+          if (method.isNotEmpty) method,
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
       case 'meal':
         const mealAmountLabels = {
           'very_little': '매우 적음',
@@ -984,12 +933,10 @@ class _RecordList extends StatelessWidget {
           'much': '많음',
           'very_much': '매우 많음',
         };
-        final mealAmt = d['meal_amount'] as String?;
-        final foodName = d['food_name'] as String?;
+        final mealAmount = d['meal_amount'] as String?;
         final amountG = d['amount_g'];
         final parts = [
-          if (mealAmt != null) mealAmountLabels[mealAmt] ?? mealAmt,
-          if (foodName != null && foodName.isNotEmpty) foodName,
+          if (mealAmount != null) mealAmountLabels[mealAmount] ?? mealAmount,
           if (amountG != null) '${amountG}g',
         ];
         return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
@@ -1005,12 +952,14 @@ class _RecordList extends StatelessWidget {
         final ml = d['milliliter'];
         final amountStr = waterLabels[amount] ?? amount ?? '';
         return ml != null ? '$amountStr · ${ml}mL' : amountStr;
-      case 'vaccination':
       case 'hospital':
+      case 'vaccination':
+        final visitType = d['visit_type'] as String? ?? '';
         final hospital = d['hospital_name'] as String?;
         final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
         final diagnosis = d['diagnosis'] as String?;
         final parts = [
+          if (visitType.isNotEmpty) visitType,
           if (hospital != null && hospital.isNotEmpty) hospital,
           if (symptoms.isNotEmpty) symptoms,
           if (diagnosis != null && diagnosis.isNotEmpty) diagnosis,
@@ -1033,13 +982,20 @@ class _RecordList extends StatelessWidget {
         ];
         return items.isNotEmpty ? items.join(' · ') : (r.memo ?? '');
       case 'walk':
+        final duration = d['duration_min'];
         final distance = d['distance_km'];
-        return distance != null ? '${distance}km' : (r.memo ?? '');
-      case 'memo':
-        final content = d['content'] as String?;
-        final pinned = d['pinned'] as String?;
         final parts = [
-          if (pinned != null && pinned.isNotEmpty) pinned,
+          if (duration != null) '$duration분',
+          if (distance != null) '${distance}km',
+        ];
+        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
+      case 'memo':
+        final title = d['title'] as String? ?? '';
+        final pinned = d['pinned'] as String? ?? '';
+        final content = d['content'] as String?;
+        final parts = [
+          if (title.isNotEmpty) title,
+          if (pinned.isNotEmpty) pinned,
           if (content != null && content.isNotEmpty) content,
         ];
         return parts.isNotEmpty ? parts.join(' · ') : '';

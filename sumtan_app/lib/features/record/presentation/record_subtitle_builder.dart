@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import '../../../app/l10n/generated/app_localizations.dart';
+import '../../../core/utils/number_utils.dart';
 import '../../../shared/constants/category_constants.dart';
 import '../data/record_model.dart';
 
@@ -37,7 +38,7 @@ String buildRecordSubtitle(BuildContext context, Record record) {
       final kg = data['weight_kg'];
       final method = _localizedRecordValue(l10n, data['method']);
       final parts = [
-        if (kg != null) '${kg}kg',
+        if (kg != null) '${_formatRecordNumber(context, kg)}kg',
         if (method.isNotEmpty) method,
       ];
       return parts.isNotEmpty ? parts.join(' · ') : (record.memo ?? '');
@@ -46,7 +47,7 @@ String buildRecordSubtitle(BuildContext context, Record record) {
       final amountG = data['amount_g'];
       final parts = [
         if (amount.isNotEmpty) amount,
-        if (amountG != null) '${amountG}g',
+        if (amountG != null) '${_formatRecordNumber(context, amountG)}g',
       ];
       return parts.isNotEmpty ? parts.join(' · ') : (record.memo ?? '');
     case 'water':
@@ -102,7 +103,7 @@ String buildRecordSubtitle(BuildContext context, Record record) {
       final distance = data['distance_km'];
       final parts = [
         if (duration != null) '$duration ${l10n.minuteUnit}',
-        if (distance != null) '${distance}km',
+        if (distance != null) '${_formatRecordNumber(context, distance)}km',
       ];
       return parts.isNotEmpty ? parts.join(' · ') : (record.memo ?? '');
     case 'memo':
@@ -123,6 +124,12 @@ String buildRecordSubtitle(BuildContext context, Record record) {
     default:
       return record.memo ?? '';
   }
+}
+
+String _formatRecordNumber(BuildContext context, Object raw) {
+  final value = raw is num ? raw : parseLocalizedDecimal(raw.toString());
+  if (value == null) return raw.toString();
+  return formatLocalizedDecimal(context, value);
 }
 
 String _localizedRecordList(AppLocalizations l10n, Object? raw) {

@@ -10,6 +10,7 @@ import '../../../app/l10n/l10n_extension.dart';
 import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/utils/date_utils.dart' as du;
+import '../../../core/utils/number_utils.dart';
 import '../../../core/widgets/localized_pickers.dart';
 import '../../pet/data/pet_model.dart';
 import '../../pet/provider/pet_provider.dart';
@@ -37,8 +38,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     _syncedPetId = pet.id;
     _nameCtrl.text = pet.name;
     _breedCtrl.text = pet.breed ?? '';
-    _weightCtrl.text =
-        pet.weight != null ? pet.weight!.toStringAsFixed(2) : '';
+    _weightCtrl.text = pet.weight != null
+        ? formatLocalizedDecimal(context, pet.weight!, decimalDigits: 2)
+        : '';
     _microchipCtrl.text = pet.microchipId ?? '';
     _regNumCtrl.text = pet.regNumber ?? '';
   }
@@ -88,7 +90,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   Future<void> _saveWeight(Pet p) async {
     final prev = p.weight;
-    final next = double.tryParse(_weightCtrl.text.trim());
+    final next = parseLocalizedDecimal(_weightCtrl.text);
     if (next == prev) return;
     await ref
         .read(petsProvider.notifier)
@@ -305,13 +307,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             if (record != null) {
               final kg = record.dataJson?['weight_kg'];
               if (kg != null) {
-                _weightCtrl.text =
-                    (kg as num).toDouble().toStringAsFixed(2);
+                _weightCtrl.text = formatLocalizedDecimal(
+                  context,
+                  (kg as num).toDouble(),
+                  decimalDigits: 2,
+                );
                 return;
               }
             }
             _weightCtrl.text = pet.weight != null
-                ? pet.weight!.toStringAsFixed(2)
+                ? formatLocalizedDecimal(context, pet.weight!, decimalDigits: 2)
                 : '';
           });
         });
@@ -374,7 +379,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       const TextInputType.numberWithOptions(decimal: true),
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(
-                        RegExp(r'^\d+\.?\d{0,2}')),
+                        RegExp(r'^\d+([.,]\d{0,2})?')),
                   ],
                   onSave: () => _saveWeight(pet),
                   isLast: false,

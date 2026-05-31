@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/date_utils.dart' as du;
+import '../../../../core/utils/number_utils.dart';
 import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
@@ -40,7 +41,7 @@ class _WeightFormState extends ConsumerState<WeightForm> {
       return;
     }
 
-    final weight = double.tryParse(weightText);
+    final weight = parseLocalizedDecimal(weightText);
     if (weight == null) {
       showTopToast(context, context.l10n.hintWeightIsNumber);
       return;
@@ -98,7 +99,7 @@ class _WeightFormState extends ConsumerState<WeightForm> {
           hint: l10n.example42,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+            FilteringTextInputFormatter.allow(RegExp(r'^\d+([.,]\d{0,2})?')),
           ],
         ),
         const SizedBox(height: AppSpacing.space4),

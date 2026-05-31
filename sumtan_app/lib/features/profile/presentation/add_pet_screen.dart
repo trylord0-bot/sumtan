@@ -9,6 +9,7 @@ import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_page_app_bar.dart';
 import '../../../core/utils/date_utils.dart' as du;
+import '../../../core/utils/number_utils.dart';
 import '../../../core/widgets/localized_pickers.dart';
 import '../../pet/data/pet_model.dart';
 import '../../pet/provider/pet_provider.dart';
@@ -73,7 +74,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
       breed: _breedCtrl.text.trim().isEmpty ? null : _breedCtrl.text.trim(),
       birthDate: _birthDate?.toIso8601String().substring(0, 10),
       gender: _gender,
-      weight: double.tryParse(_weightCtrl.text.trim()),
+      weight: parseLocalizedDecimal(_weightCtrl.text),
       isNeutered: _neutered,
       microchipId: _microchipCtrl.text.trim().isEmpty
           ? null
@@ -143,7 +144,11 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                 label: context.l10n.petKind,
                 child: _SegmentRow(
                   options: const ['dog', 'cat', 'other'],
-                  labels: [context.l10n.dogEmoji, context.l10n.catEmoji, context.l10n.otherEmoji],
+                  labels: [
+                    context.l10n.dogEmoji,
+                    context.l10n.catEmoji,
+                    context.l10n.otherEmoji
+                  ],
                   selected: _species,
                   onChanged: (v) => setState(() => _species = v),
                 ),
@@ -236,7 +241,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                             decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
-                              RegExp(r'^\d+\.?\d{0,2}')),
+                              RegExp(r'^\d+([.,]\d{0,2})?')),
                         ],
                         decoration: InputDecoration(
                           hintText: context.l10n.notEntered,

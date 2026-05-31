@@ -7,6 +7,7 @@ import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../app/widgets/app_toast.dart';
 import '../../../core/utils/date_utils.dart' as du;
+import '../../../core/utils/number_utils.dart';
 import '../../../shared/constants/category_constants.dart';
 import '../data/record_model.dart';
 import '../../pet/provider/pet_provider.dart';
@@ -158,7 +159,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         data['dose'] = text('dose');
         break;
       case 'weight':
-        final weight = double.tryParse(text('weight_kg'));
+        final weight = parseLocalizedDecimal(text('weight_kg'));
         if (weight == null) {
           showTopToast(context, context.l10n.hintWeightIsNumber);
           return;
@@ -172,7 +173,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           return;
         }
         data['duration_min'] = duration;
-        final distance = double.tryParse(text('distance_km'));
+        final distance = parseLocalizedDecimal(text('distance_km'));
         if (distance == null) {
           data.remove('distance_km');
         } else {
@@ -199,7 +200,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         data['diagnosis'] =
             text('diagnosis').isEmpty ? null : text('diagnosis');
         data['symptoms'] = _stringList('symptoms');
-        final cost = double.tryParse(text('cost'));
+        final cost = parseLocalizedDecimal(text('cost'));
         if (cost == null) {
           data.remove('cost');
         } else {
@@ -221,7 +222,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         data['content'] = text('content').isEmpty ? null : text('content');
         break;
       case 'meal':
-        final amount = double.tryParse(text('amount_g'));
+        final amount = parseLocalizedDecimal(text('amount_g'));
         if (amount == null) {
           data.remove('amount_g');
         } else {
@@ -241,7 +242,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
             text('hospital_name').isEmpty ? null : text('hospital_name');
         data['diagnosis'] =
             text('diagnosis').isEmpty ? null : text('diagnosis');
-        final cost = double.tryParse(text('cost'));
+        final cost = parseLocalizedDecimal(text('cost'));
         if (cost == null) {
           data.remove('cost');
         } else {
@@ -498,7 +499,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
             hint: l10n.example42,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+([.,]\d{0,2})?'))
             ],
           ),
           const SizedBox(height: AppSpacing.space4),
@@ -534,7 +535,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
             hint: l10n.example80,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+([.,]\d{0,1})?'))
             ],
           ),
         ];
@@ -748,7 +749,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
             hint: l10n.example25,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+([.,]\d{0,1})?'))
             ],
           ),
         ];

@@ -5,6 +5,7 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
 import '../../../../core/utils/date_utils.dart' as du;
+import '../../../../core/utils/number_utils.dart';
 import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
@@ -54,8 +55,9 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
     final pet = ref.read(selectedPetProvider);
     if (pet?.id == null) return;
 
-    final cost =
-        _costCtrl.text.isNotEmpty ? double.tryParse(_costCtrl.text) : null;
+    final cost = _costCtrl.text.isNotEmpty
+        ? parseLocalizedDecimal(_costCtrl.text)
+        : null;
 
     final data = <String, dynamic>{
       'types': _types,
@@ -128,7 +130,8 @@ class _GroomingFormState extends ConsumerState<GroomingForm> {
             const SizedBox(height: AppSpacing.space2),
             TextFormField(
               controller: _costCtrl,
-              keyboardType: TextInputType.number,
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
                 hintText: l10n.example50000,
                 prefixText: '₩',

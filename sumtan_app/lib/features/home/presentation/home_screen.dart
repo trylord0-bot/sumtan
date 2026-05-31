@@ -18,6 +18,7 @@ import '../../../features/record/presentation/category_bottom_sheet.dart';
 import '../../../features/record/presentation/record_subtitle_builder.dart';
 import '../../../shared/constants/category_constants.dart';
 import '../../../core/utils/date_utils.dart' as du;
+import '../../../core/utils/number_utils.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -996,7 +997,9 @@ class _WeeklyBarCard extends StatelessWidget {
                   border: Border.all(color: AppColors.primary200),
                 ),
                 child: Text(
-                  context.l10n.avgPerDay(avg.toStringAsFixed(1), unit),
+                  context.l10n.avgPerDay(
+                      formatLocalizedDecimal(context, avg, decimalDigits: 1),
+                      unit),
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
@@ -1208,7 +1211,7 @@ class _WeightGraphCard extends StatelessWidget {
                 ),
                 child: Text(
                   displayWeight != null
-                      ? '${displayWeight!.toStringAsFixed(2)}kg'
+                      ? '${formatLocalizedDecimal(context, displayWeight!, decimalDigits: 2)}kg'
                       : '--kg',
                   style: const TextStyle(
                     fontSize: 12,

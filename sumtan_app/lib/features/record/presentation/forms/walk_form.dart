@@ -6,6 +6,7 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/widgets/app_toast.dart';
 import '../../../../core/utils/date_utils.dart' as du;
+import '../../../../core/utils/number_utils.dart';
 import '../../data/record_model.dart';
 import '../../provider/record_provider.dart';
 import '../../../../features/pet/provider/pet_provider.dart';
@@ -54,7 +55,7 @@ class _WalkFormState extends ConsumerState<WalkForm> {
       'duration_min': duration,
     };
     if (_distanceCtrl.text.isNotEmpty) {
-      data['distance_km'] = double.tryParse(_distanceCtrl.text);
+      data['distance_km'] = parseLocalizedDecimal(_distanceCtrl.text);
     }
     final media = await _mediaController.saveToLocalFilesWithProgress(context);
     if (media.isNotEmpty) data['media'] = media;
@@ -119,7 +120,8 @@ class _WalkFormState extends ConsumerState<WalkForm> {
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}')),
+                FilteringTextInputFormatter.allow(
+                    RegExp(r'^\d+([.,]\d{0,1})?')),
               ],
               decoration: InputDecoration(
                 hintText: l10n.example25,

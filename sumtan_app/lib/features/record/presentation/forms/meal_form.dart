@@ -184,7 +184,8 @@ class _MealFormState extends ConsumerState<MealForm> {
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}')),
+                FilteringTextInputFormatter.allow(
+                    RegExp(r'^\d+([.,]\d{0,1})?')),
               ],
               decoration: InputDecoration(
                 hintText: l10n.example80,

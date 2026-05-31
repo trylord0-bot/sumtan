@@ -143,6 +143,7 @@
   "hospitalNameHint": "أدخل اسم العيادة",
   "medicineNameRequired": "اسم الدواء *",
   "medicineNameExample": "مثال: دواء الديدان القلبية، مضاد للطفيليات",
+  "doseExample": "مثال: 0.5 مل، قرص واحد",
   "repeatRequired": "التكرار *",
   "none": "لا يوجد",
   "daily": "يومياً",
@@ -412,6 +413,7 @@
   "example80": "مثال: 80",
   "example200": "مثال: 200",
   "example25": "مثال: 2.5",
+  "example42": "مثال: 4.2",
   "example35000": "مثال: 35000",
   "example50000": "مثال: 50000",
   "enterNameHint": "يُرجى إدخال اسم",
@@ -522,6 +524,7 @@
   "importance": "الأهمية",
   "timeTaken": "الوقت المستغرق",
   "example10": "مثال: 10",
+  "minuteUnit": "دقيقة",
   "hospitalNameExample": "مثال: مستشفى الحيوانات السعيد",
   "diagnosisExample": "مثال: التهاب الأمعاء، التهاب الجلد",
   "memoTitlePlaceholder": "أدخل عنوان المذكرة",
@@ -814,5 +817,20 @@
   "hgBreedLowExamples": "بولدوغ، باسيت هاوند، شيه تزو، مالتيز",
   "hgBreedNormalExamples": "بودل، بيشون فريز، كوكر سبانيل، بيغل",
   "hgBreedHighExamples": "لابرادور، غولدن ريتريفر، هاسكي، بوردر كولي",
-  "hgDisclaimer": "يقدّم هذا الدليل معلومات عامة للعناية الصحية، وقد تختلف الرعاية المطلوبة حسب حالة حيوانك الأليف. إذا ظهرت أعراض غير طبيعية أو كانت هناك حاجة للعلاج، فاستشر طبيبًا بيطريًا دائمًا."
+  "hgDisclaimer": "يقدّم هذا الدليل معلومات عامة للعناية الصحية، وقد تختلف الرعاية المطلوبة حسب حالة حيوانك الأليف. إذا ظهرت أعراض غير طبيعية أو كانت هناك حاجة للعلاج، فاستشر طبيبًا بيطريًا دائمًا.",
+
+  "categoryFilter": "تصفية الفئة",
+  "selectAll": "تحديد الكل",
+  "deselectAll": "إلغاء تحديد الكل",
+  "apply": "تطبيق",
+  "saving": "جاري الحفظ...",
+  "treatmentContent": "العلاج",
+
+  "conditionScoreWord1": "سيء جداً",
+  "conditionScoreWord2": "سيء",
+  "conditionScoreWord3": "متوسط",
+  "conditionScoreWord4": "جيد",
+  "conditionScoreWord5": "ممتاز",
+  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "conditionScoreFormat": "الحالة {score} نقطة - {word}"
 }

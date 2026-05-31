@@ -95,8 +95,8 @@ Future<bool?> _showAdditionalPetPaymentDialog(
             ),
             child: Text(
               notAvailable
-                  ? context.l10n.petsRegisteredStoreUnavailable('$petCount')
-                  : context.l10n.petsRegisteredPayToAdd('$petCount', priceLabel),
+                  ? context.l10n.petsRegisteredStoreUnavailable(petCount)
+                  : context.l10n.petsRegisteredPayToAdd(petCount, priceLabel),
               style: const TextStyle(
                 fontSize: 13,
                 height: 1.5,

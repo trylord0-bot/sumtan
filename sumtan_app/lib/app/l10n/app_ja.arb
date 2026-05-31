@@ -143,6 +143,7 @@
   "hospitalNameHint": "病院名を入力してください",
   "medicineNameRequired": "薬品名 *",
   "medicineNameExample": "例）フィラリア予防薬、駆虫薬など",
+  "doseExample": "例: 0.5ml、1錠",
   "repeatRequired": "繰り返し *",
   "none": "なし",
   "daily": "毎日",
@@ -412,6 +413,7 @@
   "example80": "例: 80",
   "example200": "例: 200",
   "example25": "例: 2.5",
+  "example42": "例: 4.2",
   "example35000": "例: 35000",
   "example50000": "例: 50000",
   "enterNameHint": "名前を入力してください",
@@ -522,6 +524,7 @@
   "importance": "重要度",
   "timeTaken": "所要時間",
   "example10": "例: 10",
+  "minuteUnit": "分",
   "hospitalNameExample": "例: ハッピー動物病院",
   "diagnosisExample": "例: 腸炎, 皮膚炎",
   "memoTitlePlaceholder": "メモのタイトルを入力",
@@ -814,5 +817,20 @@
   "hgBreedLowExamples": "ブルドッグ、バセットハウンド、シー・ズー、マルチーズ",
   "hgBreedNormalExamples": "プードル、ビション・フリーゼ、コッカー・スパニエル、ビーグル",
   "hgBreedHighExamples": "ラブラドール、ゴールデン・レトリバー、ハスキー、ボーダー・コリー",
-  "hgDisclaimer": "このガイドは一般的な健康管理情報であり、必要なケアはペットの状態によって異なる場合があります。異常な症状がある場合や治療が必要な場合は、必ず獣医師に相談してください。"
+  "hgDisclaimer": "このガイドは一般的な健康管理情報であり、必要なケアはペットの状態によって異なる場合があります。異常な症状がある場合や治療が必要な場合は、必ず獣医師に相談してください。",
+
+  "categoryFilter": "カテゴリフィルター",
+  "selectAll": "すべて選択",
+  "deselectAll": "すべて解除",
+  "apply": "適用",
+  "saving": "保存中...",
+  "treatmentContent": "治療内容",
+
+  "conditionScoreWord1": "最悪",
+  "conditionScoreWord2": "不良",
+  "conditionScoreWord3": "普通",
+  "conditionScoreWord4": "良好",
+  "conditionScoreWord5": "優秀",
+  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "conditionScoreFormat": "コンディション {score}点 - {word}"
 }

@@ -8,11 +8,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:video_compress/video_compress.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
+import '../../../../app/l10n/l10n_extension.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../../app/l10n/l10n_extension.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import 'form_widgets.dart';
@@ -195,16 +195,16 @@ class _MediaSaveProgressDialog extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
             ),
-            child: const Row(
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 22,
                   height: 22,
                   child: CircularProgressIndicator(strokeWidth: 2.5),
                 ),
-                SizedBox(width: 14),
-                Text('저장 중...', style: TextStyle(fontSize: 15)),
+                const SizedBox(width: 14),
+                Text(context.l10n.saving, style: const TextStyle(fontSize: 15)),
               ],
             ),
           ),
@@ -348,7 +348,7 @@ class _RecordMediaAttachmentFieldState
         FormFieldLabel(
           items.isEmpty
               ? context.l10n.photoVideo
-              : context.l10n.photoVideoCount('${items.length}'),
+              : context.l10n.photoVideoCount(items.length),
           required: false,
         ),
         const SizedBox(height: AppSpacing.space2),

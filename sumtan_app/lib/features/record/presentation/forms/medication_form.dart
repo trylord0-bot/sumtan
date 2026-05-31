@@ -92,9 +92,7 @@ class _MedicationFormState extends ConsumerState<MedicationForm> {
             hint: l10n.medicineNameExample),
         const SizedBox(height: AppSpacing.space3),
         FormInputField(
-            label: l10n.dose,
-            controller: _doseCtrl,
-            hint: 'e.g. 0.5ml, 1 tablet'),
+            label: l10n.dose, controller: _doseCtrl, hint: l10n.doseExample),
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
           label: l10n.medicationMethod,

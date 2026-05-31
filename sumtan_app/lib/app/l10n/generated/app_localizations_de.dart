@@ -470,6 +470,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get medicineNameExample => 'Z.B. Herzwurm-Mittel, Entwurmungsmittel';
 
   @override
+  String get doseExample => 'Z.B. 0,5ml, 1 Tablette';
+
+  @override
   String get repeatRequired => 'Wiederholen *';
 
   @override
@@ -1316,6 +1319,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get example25 => 'Z.B. 2.5';
 
   @override
+  String get example42 => 'Z.B. 4.2';
+
+  @override
   String get example35000 => 'Z.B. 35000';
 
   @override
@@ -1472,12 +1478,12 @@ class AppLocalizationsDe extends AppLocalizations {
       'Das erste Haustier ist kostenlos. Ab dem zweiten Haustier ist eine Zahlung pro Tier erforderlich.';
 
   @override
-  String petsRegisteredStoreUnavailable(String count) {
+  String petsRegisteredStoreUnavailable(int count) {
     return '$count Haustiere registriert\nBitte versuche es erneut, wenn der Store verfügbar ist.';
   }
 
   @override
-  String petsRegisteredPayToAdd(String count, String price) {
+  String petsRegisteredPayToAdd(int count, String price) {
     return '$count Haustiere registriert\n$price bezahlen, um ein neues Familienmitglied hinzuzufügen.';
   }
 
@@ -1676,6 +1682,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get example10 => 'z.B. 10';
 
   @override
+  String get minuteUnit => 'Min.';
+
+  @override
   String get hospitalNameExample => 'z.B. Tierarztpraxis Happy';
 
   @override
@@ -1730,7 +1739,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get photoVideo => 'Foto · Video';
 
   @override
-  String photoVideoCount(String count) {
+  String photoVideoCount(int count) {
     return 'Foto · Video · $count';
   }
 
@@ -2746,4 +2755,42 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get hgDisclaimer =>
       'Dieser Ratgeber bietet allgemeine Informationen zur Gesundheitsvorsorge. Die erforderliche Pflege kann je nach Zustand Ihres Haustiers variieren. Wenn ungewöhnliche Symptome auftreten oder eine Behandlung erforderlich ist, konsultieren Sie immer einen Tierarzt.';
+
+  @override
+  String get categoryFilter => 'Kategoriefilter';
+
+  @override
+  String get selectAll => 'Alle auswählen';
+
+  @override
+  String get deselectAll => 'Alle abwählen';
+
+  @override
+  String get apply => 'Anwenden';
+
+  @override
+  String get saving => 'Wird gespeichert...';
+
+  @override
+  String get treatmentContent => 'Behandlung';
+
+  @override
+  String get conditionScoreWord1 => 'Schrecklich';
+
+  @override
+  String get conditionScoreWord2 => 'Schlecht';
+
+  @override
+  String get conditionScoreWord3 => 'Durchschnittlich';
+
+  @override
+  String get conditionScoreWord4 => 'Gut';
+
+  @override
+  String get conditionScoreWord5 => 'Ausgezeichnet';
+
+  @override
+  String conditionScoreFormat(Object score, Object word) {
+    return 'Zustand $score Pkt - $word';
+  }
 }

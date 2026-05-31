@@ -143,6 +143,7 @@
   "hospitalNameHint": "請輸入醫院名稱",
   "medicineNameRequired": "藥品名稱 *",
   "medicineNameExample": "例：心絲蟲預防藥、驅蟲藥等",
+  "doseExample": "例：0.5ml、1錠",
   "repeatRequired": "重複 *",
   "none": "無",
   "daily": "每天",
@@ -412,6 +413,7 @@
   "example80": "例：80",
   "example200": "例：200",
   "example25": "例：2.5",
+  "example42": "例：4.2",
   "example35000": "例：35000",
   "example50000": "例：50000",
   "enterNameHint": "請輸入名字",
@@ -522,6 +524,7 @@
   "importance": "重要性",
   "timeTaken": "所需時間",
   "example10": "例: 10",
+  "minuteUnit": "分鐘",
   "hospitalNameExample": "例: 幸福動物醫院",
   "diagnosisExample": "例: 腸炎, 皮膚炎",
   "memoTitlePlaceholder": "輸入備忘錄標題",
@@ -814,5 +817,12 @@
   "hgBreedLowExamples": "鬥牛犬、巴吉度獵犬、西施犬、馬爾濟斯",
   "hgBreedNormalExamples": "貴賓犬、比熊犬、可卡犬、米格魯",
   "hgBreedHighExamples": "拉布拉多、黃金獵犬、哈士奇、邊境牧羊犬",
-  "hgDisclaimer": "本指南為一般健康管理資訊，所需照護可能會因寵物狀態而異。如有異常症狀或需要治療，請務必諮詢獸醫。"
+  "hgDisclaimer": "本指南為一般健康管理資訊，所需照護可能會因寵物狀態而異。如有異常症狀或需要治療，請務必諮詢獸醫。",
+
+  "categoryFilter": "類別篩選",
+  "selectAll": "全選",
+  "deselectAll": "取消全選",
+  "apply": "套用",
+  "saving": "儲存中...",
+  "treatmentContent": "治療內容"
 }

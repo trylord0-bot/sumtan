@@ -143,6 +143,7 @@
   "hospitalNameHint": "Entrez le nom de la clinique",
   "medicineNameRequired": "Nom du médicament *",
   "medicineNameExample": "Ex. Antiparasitaire, vermifuge",
+  "doseExample": "Ex. 0,5ml, 1 comprimé",
   "repeatRequired": "Répétition *",
   "none": "Aucun",
   "daily": "Quotidien",
@@ -412,6 +413,7 @@
   "example80": "Ex. 80",
   "example200": "Ex. 200",
   "example25": "Ex. 2.5",
+  "example42": "Ex. 4.2",
   "example35000": "Ex. 35000",
   "example50000": "Ex. 50000",
   "enterNameHint": "Veuillez saisir un nom",
@@ -522,6 +524,7 @@
   "importance": "Importance",
   "timeTaken": "Temps requis",
   "example10": "ex: 10",
+  "minuteUnit": "min",
   "hospitalNameExample": "ex: Clinique Happy Animal",
   "diagnosisExample": "ex: Entérite, Dermatite",
   "memoTitlePlaceholder": "Entrez le titre du mémo",
@@ -814,5 +817,20 @@
   "hgBreedLowExamples": "Bouledogue, Basset Hound, Shih Tzu, Bichon maltais",
   "hgBreedNormalExamples": "Caniche, Bichon frisé, Cocker Spaniel, Beagle",
   "hgBreedHighExamples": "Labrador, Golden Retriever, Husky, Border Collie",
-  "hgDisclaimer": "Ce guide fournit des informations générales de santé, et les soins nécessaires peuvent varier selon l’état de chaque animal. En cas de symptômes anormaux ou de besoin de traitement, consultez impérativement un vétérinaire."
+  "hgDisclaimer": "Ce guide fournit des informations générales de santé, et les soins nécessaires peuvent varier selon l’état de chaque animal. En cas de symptômes anormaux ou de besoin de traitement, consultez impérativement un vétérinaire.",
+
+  "categoryFilter": "Filtre de Catégorie",
+  "selectAll": "Tout Sélectionner",
+  "deselectAll": "Tout Désélectionner",
+  "apply": "Appliquer",
+  "saving": "Enregistrement...",
+  "treatmentContent": "Traitement",
+
+  "conditionScoreWord1": "Exécrable",
+  "conditionScoreWord2": "Mauvais",
+  "conditionScoreWord3": "Moyen",
+  "conditionScoreWord4": "Bon",
+  "conditionScoreWord5": "Excellent",
+  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "conditionScoreFormat": "Condition {score} pts - {word}"
 }

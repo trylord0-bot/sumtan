@@ -455,6 +455,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get medicineNameExample => '例：心丝虫预防药、驱虫药等';
 
   @override
+  String get doseExample => '例：0.5ml、1片';
+
+  @override
   String get repeatRequired => '重复 *';
 
   @override
@@ -1288,6 +1291,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get example25 => '例：2.5';
 
   @override
+  String get example42 => '例：4.2';
+
+  @override
   String get example35000 => '例：35000';
 
   @override
@@ -1439,12 +1445,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get firstPetFreeDesc => '第一只宠物可以免费注册，第二只起每只需要付费。';
 
   @override
-  String petsRegisteredStoreUnavailable(String count) {
+  String petsRegisteredStoreUnavailable(int count) {
     return '当前注册的宠物：$count只\n请在商店可用时重试。';
   }
 
   @override
-  String petsRegisteredPayToAdd(String count, String price) {
+  String petsRegisteredPayToAdd(int count, String price) {
     return '当前注册的宠物：$count只\n支付$price后可以添加新家庭成员。';
   }
 
@@ -1635,6 +1641,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get example10 => '例: 10';
 
   @override
+  String get minuteUnit => '分钟';
+
+  @override
   String get hospitalNameExample => '例: 幸福动物医院';
 
   @override
@@ -1689,7 +1698,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get photoVideo => '照片・视频';
 
   @override
-  String photoVideoCount(String count) {
+  String photoVideoCount(int count) {
     return '照片・视频 · $count个';
   }
 
@@ -2541,6 +2550,44 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get hgDisclaimer =>
       '本指南提供一般性健康护理信息，所需护理可能会根据宠物状态而有所不同。如果出现异常症状或需要治疗，请务必咨询兽医。';
+
+  @override
+  String get categoryFilter => '类别筛选';
+
+  @override
+  String get selectAll => '全选';
+
+  @override
+  String get deselectAll => '取消全选';
+
+  @override
+  String get apply => '应用';
+
+  @override
+  String get saving => '保存中...';
+
+  @override
+  String get treatmentContent => '治疗内容';
+
+  @override
+  String get conditionScoreWord1 => '极差';
+
+  @override
+  String get conditionScoreWord2 => '较差';
+
+  @override
+  String get conditionScoreWord3 => '一般';
+
+  @override
+  String get conditionScoreWord4 => '良好';
+
+  @override
+  String get conditionScoreWord5 => '优秀';
+
+  @override
+  String conditionScoreFormat(Object score, Object word) {
+    return '状况 $score分 - $word';
+  }
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).
@@ -2992,6 +3039,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get medicineNameExample => '例：心丝虫预防药、驱虫药等';
+
+  @override
+  String get doseExample => '例：0.5ml、1片';
 
   @override
   String get repeatRequired => '重复 *';
@@ -3827,6 +3877,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get example25 => '例：2.5';
 
   @override
+  String get example42 => '例：4.2';
+
+  @override
   String get example35000 => '例：35000';
 
   @override
@@ -3978,12 +4031,12 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get firstPetFreeDesc => '第一只宠物可以免费注册，第二只起每只需要付费。';
 
   @override
-  String petsRegisteredStoreUnavailable(String count) {
+  String petsRegisteredStoreUnavailable(int count) {
     return '当前注册的宠物：$count只\n请在商店可用时重试。';
   }
 
   @override
-  String petsRegisteredPayToAdd(String count, String price) {
+  String petsRegisteredPayToAdd(int count, String price) {
     return '当前注册的宠物：$count只\n支付$price后可以添加新家庭成员。';
   }
 
@@ -4174,6 +4227,9 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get example10 => '例: 10';
 
   @override
+  String get minuteUnit => '分钟';
+
+  @override
   String get hospitalNameExample => '例: 幸福动物医院';
 
   @override
@@ -4228,7 +4284,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get photoVideo => '照片・视频';
 
   @override
-  String photoVideoCount(String count) {
+  String photoVideoCount(int count) {
     return '照片・视频 · $count个';
   }
 
@@ -5076,7 +5132,25 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get hgBreedHighExamples => '拉布拉多、金毛寻回犬、哈士奇、边境牧羊犬';
 
   @override
-  String get hgDisclaimer => '本指南为一般健康管理信息，所需护理可能会因宠物状态而异。如有异常症状或需要治疗，请务必咨询兽医。';
+  String get hgDisclaimer => '本指南为一般健康管理信息，所需护理可能會因寵物狀態而異。如有異常症狀或需要治療，請務必諮詢獸醫。';
+
+  @override
+  String get categoryFilter => '类别筛选';
+
+  @override
+  String get selectAll => '全选';
+
+  @override
+  String get deselectAll => '取消全选';
+
+  @override
+  String get apply => '应用';
+
+  @override
+  String get saving => '保存中...';
+
+  @override
+  String get treatmentContent => '治疗内容';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -5528,6 +5602,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get medicineNameExample => '例：心絲蟲預防藥、驅蟲藥等';
+
+  @override
+  String get doseExample => '例：0.5ml、1錠';
 
   @override
   String get repeatRequired => '重複 *';
@@ -6363,6 +6440,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get example25 => '例：2.5';
 
   @override
+  String get example42 => '例：4.2';
+
+  @override
   String get example35000 => '例：35000';
 
   @override
@@ -6514,12 +6594,12 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get firstPetFreeDesc => '第一隻寵物可以免費登錄，第二隻起每隻需要付費。';
 
   @override
-  String petsRegisteredStoreUnavailable(String count) {
+  String petsRegisteredStoreUnavailable(int count) {
     return '目前登錄的寵物：$count隻\n請在商店可用時重試。';
   }
 
   @override
-  String petsRegisteredPayToAdd(String count, String price) {
+  String petsRegisteredPayToAdd(int count, String price) {
     return '目前登錄的寵物：$count隻\n支付$price後可以新增新家庭成員。';
   }
 
@@ -6710,6 +6790,9 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get example10 => '例: 10';
 
   @override
+  String get minuteUnit => '分鐘';
+
+  @override
   String get hospitalNameExample => '例: 幸福動物醫院';
 
   @override
@@ -6764,7 +6847,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get photoVideo => '照片・影片';
 
   @override
-  String photoVideoCount(String count) {
+  String photoVideoCount(int count) {
     return '照片・影片 · $count個';
   }
 
@@ -7613,4 +7696,22 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get hgDisclaimer => '本指南為一般健康管理資訊，所需照護可能會因寵物狀態而異。如有異常症狀或需要治療，請務必諮詢獸醫。';
+
+  @override
+  String get categoryFilter => '類別篩選';
+
+  @override
+  String get selectAll => '全選';
+
+  @override
+  String get deselectAll => '取消全選';
+
+  @override
+  String get apply => '套用';
+
+  @override
+  String get saving => '儲存中...';
+
+  @override
+  String get treatmentContent => '治療內容';
 }

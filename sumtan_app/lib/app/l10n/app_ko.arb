@@ -1,6 +1,5 @@
 {
   "@@locale": "ko",
-
   "appName": "반려숨탄",
   "appTagline": "반려동물 건강관리 앱",
   "navHome": "홈",
@@ -11,7 +10,7 @@
   "navAddAlarm": "알림 추가",
   "drawerService": "서비스",
   "drawerNearbyHospitals": "주변 병원 찾기",
-  "drawerNearbyHospitalsSub": "내 위치 기반 동물병원",
+  "drawerNearbyHospitalsSub": "가까운 동물병원",
   "drawerHealthGuide": "건강관리 가이드",
   "drawerHealthGuideSub": "반려동물 건강 안내서",
   "drawerApp": "앱",
@@ -19,7 +18,7 @@
   "dialogExternalTitle": "외부 웹페이지로 이동해요",
   "dialogExternalHospitalBody": "주변 동물병원을 찾으려면\n외부 웹페이지가 필요해요.\n\n지금 바로 이동할까요?",
   "commonCancel": "취소",
-  "commonGo": "이동할게요",
+  "commonGo": "이동하기",
   "commonDelete": "삭제",
   "commonSave": "저장하기",
   "commonLoading": "준비 중...",
@@ -44,7 +43,7 @@
   "settingsFeedback": "피드백 보내기",
   "settingsFeedbackSubject": "반려숨탄 피드백",
   "settingsEmailAppMissing": "이메일 앱을 찾을 수 없어요",
-  "settingsImportConfirmBody": "기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체됩니다.\n\n계속하시겠어요?",
+  "settingsImportConfirmBody": "기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체돼요.\n\n계속하시겠어요?",
   "settingsImportAction": "가져오기",
   "settingsImporting": "데이터 가져오기",
   "settingsImportSuccess": "백업 데이터를 복원했어요",
@@ -57,7 +56,7 @@
   "settingsStoreUnavailable": "현재 스토어에 연결할 수 없어요.\n잠시 후 다시 시도해 주세요.",
   "settingsPayAndExport": "{price} 결제하고 내보내기",
   "settingsUnlocked": "잠금 해제됨",
-  "settingsExportUnlockedBody": "모든 반려동물 정보와 기록을 ZIP 파일로 저장합니다.\n저장된 파일은 언제든 무료로 가져오기 복원할 수 있어요.",
+  "settingsExportUnlockedBody": "모든 반려동물 정보와 기록을 ZIP 파일로 저장해요.\n저장된 파일은 언제든 무료로 가져와서 복원할 수 있어요.",
   "settingsExporting": "내보내는 중...",
   "settingsExportZip": "ZIP 파일로 내보내기",
   "settingsExportConfirmBody": "모든 반려동물 정보와 기록, 첨부 미디어를 ZIP 파일로 내보냅니다.",
@@ -88,7 +87,7 @@
   "selectPet": "반려동물 선택",
   "addNewPet": "새 반려동물 추가하기",
   "noAlarms": "등록된 알림이 없네요",
-  "alarmEmptyDesc": "{petName}는 오늘도 건강하게 지내봐요!\n아래 알림 추가 버튼을 눌러 시작해보세요.",
+  "alarmEmptyDesc": "우리 {petName}, 오늘도 건강하게 지내봐요!\n아래 알림 추가 버튼을 눌러 시작해보세요.",
   "scheduledAlarms": "예정된 알림",
   "swipeToDelete": "스와이프하면 삭제할 수 있어요",
   "selectAlarmType": "알림 종류 선택",
@@ -144,6 +143,7 @@
   "hospitalNameHint": "병원 이름을 입력하세요",
   "medicineNameRequired": "약품 이름 *",
   "medicineNameExample": "예) 심장사상충, 구충제 등",
+  "doseExample": "예: 0.5ml, 1정",
   "repeatRequired": "반복 *",
   "none": "없음",
   "daily": "매일",
@@ -413,6 +413,7 @@
   "example80": "예: 80",
   "example200": "예: 200",
   "example25": "예: 2.5",
+  "example42": "예: 4.2",
   "example35000": "예: 35000",
   "example50000": "예: 50000",
   "enterNameHint": "이름을 입력해 주세요",
@@ -487,7 +488,6 @@
   "privacyDataFeatures": "반려숨탄은 데이터 내보내기(백업) 및 가져오기(복원) 기능을 제공합니다.",
   "privacyPolicyMayUpdate": "본 개인정보 처리방침은 법령 또는 서비스 변경에 따라 업데이트될 수 있습니다.",
   "privacyPolicyContact": "개인정보 처리방침에 관한 문의사항은 아래 방법으로 연락해 주세요.",
-
   "catMeal": "식사",
   "catWater": "음수",
   "catGrooming": "미용",
@@ -497,7 +497,6 @@
   "catAbnormalSymptom": "이상징후",
   "catCondition": "컨디션",
   "catPotty": "배변",
-
   "mealFormTitle": "🍽️ 식사 기록",
   "walkFormTitle": "🦮 산책 기록",
   "weightFormTitle": "⚖️ 체중 기록",
@@ -511,13 +510,10 @@
   "hospitalFormTitle": "🏥 병원 기록",
   "abnormalSymptomFormTitle": "🚨 이상징후 기록",
   "memoFormTitle": "📝 메모",
-
   "measureMethod": "측정 방법",
   "feedAmount": "급여량",
   "mlInputLabel": "mL 직접 입력",
-
   "alarmRescheduleNote": "이 알림의 예정일이 지났어요.\n새 날짜로 변경하거나 삭제할 수 있어요.",
-
   "nailTrim": "발톱",
   "shopNameExample": "예: 뽀송뽀송 펫샵",
   "poopRecordSaved": "💩 배변이 기록됐어요",
@@ -528,6 +524,7 @@
   "importance": "중요도",
   "timeTaken": "소요 시간",
   "example10": "예: 10",
+  "minuteUnit": "분",
   "hospitalNameExample": "예: 행복동물병원",
   "diagnosisExample": "예: 장염, 피부염",
   "memoTitlePlaceholder": "메모 제목을 입력하세요",
@@ -557,23 +554,16 @@
   "permissionRequired": "설정에서 권한을 허용해 주세요",
   "confirmDeletePhoto": "이 사진을 삭제할까요?",
   "confirmDeleteVideo": "이 동영상을 삭제할까요?",
-  "deleteThisPhoto": "이 사진 삭제",
-  "deleteThisVideo": "이 동영상 삭제",
   "hintMedicineAndDose": "💡 약품명과 용량을 입력해 주세요",
   "deleteRecordBody": "{category} 기록이 삭제되고\n되돌릴 수 없어요.",
-  "edit": "수정",
   "dayCountShort": "{days}일",
-
   "helpIntroContent": "반려숨탄은 반려동물의 건강과 일상을 한 곳에서 기록하고 관리할 수 있는 앱이에요.\n식사, 음수, 배변, 체중, 투약, 병원 방문 등 다양한 건강 기록을 손쉽게 남기고, 알림 기능으로 중요한 일정을 놓치지 않을 수 있어요.",
-
   "helpHomeTodayRecordSummaryDesc": "오늘 등록된 모든 기록을 한눈에 확인할 수 있어요. 기록 항목을 탭하면 상세 내용을 보거나 수정할 수 있어요.",
   "helpHomeWeeklyStatsDesc": "이번 주 배변 횟수, 식사량, 음수량을 그래프로 확인할 수 있어요. 반려동물의 생활 패턴을 파악하는 데 도움이 돼요.",
   "helpHomeWeightChangeChartDesc": "최근 체중 기록을 그래프로 보여줘요. 체중 변화 추이를 쉽게 파악할 수 있어요.",
   "helpHomeFindNearbyHospitalsDesc": "버튼을 탭하면 네이버 지도에서 주변 동물병원을 검색할 수 있어요.",
   "helpHomeAddNewRecordDesc": "화면 하단의 + 버튼을 탭하면 기록 카테고리를 선택해 새 기록을 추가할 수 있어요.",
-
   "helpRecordCategoriesIntro": "총 12가지 카테고리로 반려동물의 일상을 기록할 수 있어요.",
-
   "helpCategoryPottyName": "배변",
   "helpCategoryPottyDesc": "배변 여부와 상태를 기록해요. 사진도 첨부할 수 있어요.",
   "helpCategoryConditionName": "컨디션",
@@ -598,29 +588,23 @@
   "helpCategoryWalkDesc": "산책 거리와 시간을 기록해요.",
   "helpCategoryMemoName": "메모",
   "helpCategoryMemoDesc": "자유롭게 메모를 남길 수 있어요.",
-
   "helpJournalViewRecordListDesc": "날짜별로 등록된 모든 기록을 확인할 수 있어요. 카테고리 배지로 종류를 한눈에 구분할 수 있어요.",
   "helpJournalEditDeleteRecordDesc": "기록 항목을 탭하면 수정 시트가 열려요. 내용을 수정하거나 삭제할 수 있어요.",
   "helpJournalAttachMediaDesc": "식사, 음수, 병원, 미용, 배변 등 일부 카테고리에서는 사진이나 영상을 첨부할 수 있어요.",
-
   "helpAlarmAddDesc": "예방접종, 투약, 병원 방문, 미용 등 다양한 유형의 알림을 등록할 수 있어요. 알림 유형을 먼저 선택한 후 날짜와 시간을 설정해요.",
   "helpAlarmRepeatDesc": "매일, 매주, 매월 등 반복 규칙을 설정할 수 있어요. 정기적인 투약이나 심장사상충 예방에 유용해요.",
   "helpAlarmAdvanceDesc": "예방접종처럼 중요한 일정은 7일 전, 3일 전, 1일 전에 미리 알림을 받을 수 있어요.",
   "helpAlarmCompleteDesc": "알림 항목을 탭해 완료로 표시할 수 있어요. 완료된 알림은 지난 알림 목록에서 확인할 수 있어요.",
   "helpAlarmDeleteDesc": "알림 항목을 왼쪽으로 스와이프하면 삭제할 수 있어요.",
-
   "helpPetRegisterDesc": "이름, 종(강아지/고양이), 품종, 성별, 생년월일, 중성화 여부를 입력해 반려동물을 등록해요.",
   "helpPetEditProfileDesc": "프로필 화면에서 이름, 품종, 체중, 마이크로칩 번호, 동물등록번호, 프로필 사진을 수정할 수 있어요.",
   "helpPetManageMultipleDesc": "반려동물을 여러 마리 등록할 수 있어요. 상단의 반려동물 칩을 탭하면 관리할 반려동물을 전환할 수 있어요.",
-
   "helpDogHealthGuideDesc": "필수·선택 예방접종 스케줄, 심장사상충·외부기생충 예방, 치아 관리, 영양 관리 등 수의학 기반의 건강 정보를 제공해요.",
   "helpCatHealthGuideDesc": "고양이 전용 예방접종 스케줄, 기생충 예방, 치아 관리, 영양 정보를 확인할 수 있어요.",
-
   "helpSettingsNotificationDesc": "앱 전체 알림을 켜거나 끌 수 있어요.",
   "helpSettingsExportDesc": "기록된 모든 데이터를 ZIP 파일로 내보낼 수 있어요. 기기 변경 시 백업용으로 사용하세요.",
   "helpSettingsImportDesc": "이전에 내보낸 ZIP 백업 파일을 불러와 데이터를 복원할 수 있어요.",
   "helpSettingsFeedbackDesc": "앱 사용 중 불편한 점이나 개선 의견을 이메일로 보내주세요. 더 나은 앱을 만드는 데 큰 도움이 돼요.",
-
   "helpFaqDeletePetQ": "반려동물을 삭제하면 기록도 모두 삭제되나요?",
   "helpFaqDeletePetA": "네, 반려동물을 삭제하면 해당 반려동물의 모든 기록과 알림이 함께 삭제돼요. 삭제 전에 데이터를 내보내기로 백업해 두세요.",
   "helpFaqMultipleMediaQ": "기록에 사진을 여러 장 첨부할 수 있나요?",
@@ -631,7 +615,6 @@
   "helpFaqMoveDataA": "설정 > 데이터 내보내기로 백업 파일을 저장한 후, 새 기기에서 설정 > 데이터 가져오기로 복원할 수 있어요.",
   "helpFaqMultiplePetsQ": "여러 마리의 반려동물을 등록할 수 있나요?",
   "helpFaqMultiplePetsA": "기본적으로 1마리를 무료로 등록할 수 있어요. 추가 등록은 프리미엄 기능을 통해 이용할 수 있어요.",
-
   "privacyIntroBody": "반려숨탄은 회원가입 없이 사용하는 앱으로, 모든 데이터는 사용자의 기기 내에만 저장됩니다. 외부 서버로 개인정보를 전송하지 않으며, 사용자의 소중한 반려동물 정보를 안전하게 보호합니다.",
   "privacySection1Title": "수집하는 개인정보 항목",
   "privacySection1Body": "반려숨탄은 회원가입 없이 사용할 수 있으며, 별도의 개인 식별 정보를 수집하지 않습니다. 다만, 앱 기능 제공을 위해 아래와 같은 정보가 기기 내에 저장될 수 있습니다.",
@@ -679,11 +662,9 @@
   "privacyPolicyChangeNotice": "변경 시 앱 업데이트 노트 또는 앱 내 공지를 통해 안내합니다.",
   "privacyPolicyChangeEffective": "변경된 방침은 공지 후 7일이 경과한 날부터 효력이 발생합니다.",
   "privacySection9Title": "문의",
-
   "hgDogHeroTitle": "강아지 건강관리 가이드",
   "hgCatHeroTitle": "고양이 건강관리 가이드",
   "hgHeroSubtitle": "수의사 권장 기준을 바탕으로\n작성된 전문 건강 안내서예요.",
-
   "hgVaccination": "예방접종",
   "hgCoreVaccines": "핵심 필수 접종 (Core Vaccine)",
   "hgNonCoreVaccines": "선택 접종 (Non-Core)",
@@ -708,13 +689,11 @@
   "hgStressSignals": "스트레스 신호 알아채기",
   "hgCaution": "주의",
   "hgSocialization": "사회화 & 환경 자극",
-
   "hgDogCoreDhppl": "**DHPPL (종합백신)** — 홍역·간염·파보·파라인플루엔자·렙토스피라.\n생후 6~8주 1차, 3~4주 간격 3회, 매년 추가접종",
   "hgDogCoreRabies": "**광견병** — 생후 3개월 이후 1차, 이후 매년 1회 (법정 의무접종)",
   "hgDogCoreCorona": "**코로나 장염** — 생후 6~8주 시작, 3~4주 간격 2회, 매년 추가접종",
   "hgDogNonCoreKennel": "**켄넬코프** — 다견 환경·미용실·펜션 이용 시 권장. 비강 또는 주사형",
   "hgDogNonCoreFlu": "**인플루엔자** — 야외 활동이 많거나 다른 개와 접촉이 잦은 경우",
-
   "hgDogHeartworm1": "모기 활동기(3~11월) 전후로 **매월 1회** 예방약 투여 권장",
   "hgDogHeartworm2": "감염 시 치료가 어렵고 치명적 — **예방이 최선**",
   "hgDogHeartworm3": "투여 전 반드시 감염 여부 검사 후 음성 확인 필요",
@@ -724,12 +703,10 @@
   "hgDogExternalParasites3": "진드기 제거 시 핀셋으로 수직 방향으로 천천히 제거 (비틀기 금지)",
   "hgDogInternalParasites1": "회충·구충·편충: **3~6개월마다** 구충제 투여",
   "hgDogInternalParasites2": "강아지 시기(생후 2주~): 2주 간격으로 4회 구충 후 정기 관리",
-
   "hgDental1": "매일 양치질이 이상적 — 최소 **주 3회 이상** 권장",
   "hgDental2": "반드시 **반려동물 전용 치약** 사용 (자일리톨 함유 인체용 치약 금지)",
   "hgDental3": "치석이 심한 경우 동물병원에서 스케일링 (전신마취 필요)",
   "hgDental4": "덴탈껌·치아 장난감으로 보조적 관리 가능",
-
   "hgDogForbiddenFoodAlert": "아래 음식은 강아지에게 독성을 가집니다. 소량도 위험할 수 있으니 절대 급여하지 마세요.",
   "hgDogForbiddenGrape": "**포도·건포도** — 신부전 유발, 소량도 치명적",
   "hgDogForbiddenChocolate": "**초콜릿·카카오** — 테오브로민 중독, 심부전·경련",
@@ -738,7 +715,6 @@
   "hgDogForbiddenMacadamia": "**마카다미아 너트** — 근육 약화, 고열, 구토",
   "hgDogForbiddenDoughAlcohol": "**날 반죽·알코올** — 에탄올 중독, 저혈당",
   "hgDogForbiddenAvocado": "**아보카도** — 퍼신(persin) 성분, 구토·설사",
-
   "hgEmergencyAlert": "아래 증상이 나타나면 즉시 동물병원을 방문하세요.",
   "hgDogEmergency1": "24시간 이상 식욕 완전 소실",
   "hgDogEmergency2": "구토·설사가 하루 3회 이상 반복",
@@ -747,7 +723,6 @@
   "hgDogEmergency5": "경련·발작·의식 소실",
   "hgDogEmergency6": "소변을 12시간 이상 보지 못함",
   "hgDogEmergency7": "눈에 띄는 외상·골절·다량 출혈",
-
   "hgDogExerciseAlert": "강아지에게 운동 부족은 단순한 체력 문제가 아니에요. 스트레스·불안·파괴적 행동의 주요 원인이 됩니다.",
   "hgDogWalk1": "소형견: 하루 **20~30분** 이상, 중·대형견: **1시간** 이상 권장",
   "hgDogWalk2": "산책은 단순 배변이 아닌 **후각 자극·사회화·스트레스 해소**의 시간",
@@ -765,13 +740,11 @@
   "hgDogSocial2": "다른 강아지와의 교류 — 도그파크·퍼피 클래스 활용",
   "hgDogSocial3": "새로운 장소·냄새·소리 경험이 정신적 풍요로움에 기여",
   "hgDogSocial4": "긍정 강화 훈련(클리커·간식)은 두뇌 자극과 유대감을 동시에 높임",
-
   "hgCatCoreFvrcp": "**FVRCP (종합백신)** — 허피스바이러스·칼리시·범백혈구감소증.\n생후 6~8주 1차, 3~4주 간격 3회, 이후 1~3년마다",
   "hgCatCoreRabies": "**광견병** — 외출 고양이 필수, 실내 고양이도 권장 (법정 의무)",
   "hgCatNonCoreFelv": "**고양이 백혈병(FeLV)** — 외출 고양이·다묘 가정 강력 권장",
   "hgCatNonCoreChlamydia": "**고양이 클라미디아** — 다묘 환경, 결막염 예방",
   "hgCatNonCoreFiv": "**고양이 면역결핍바이러스(FIV)** — 외출 수컷 고양이 (싸움 상처 통해 전파)",
-
   "hgCatExternalParasites1": "외출 고양이: 벼룩·진드기 예방약 **매월 1회** 투여",
   "hgCatExternalParasites2": "실내 고양이도 사람 옷·신발 통해 벼룩 유입 가능 → **3개월마다** 예방 권장",
   "hgCatExternalParasites3": "스팟온 제품 사용 시 목덜미에 정확히 도포",
@@ -779,7 +752,6 @@
   "hgCatInternalParasites1": "회충·조충: **3~6개월마다** 구충제 투여",
   "hgCatInternalParasites2": "생식(날고기·날생선) 급여 시 더 자주 검사 권장",
   "hgCatHeartworm1": "심장사상충 — 고양이는 **치료제가 없어 예방이 유일한 방법**. 외출 고양이 매월 투여 강력 권장",
-
   "hgCatMajorDiseases": "고양이 주요 질환 주의",
   "hgCatDiseaseAlert": "고양이는 아픔을 숨기는 습성이 있어 증상이 나타날 때는 이미 진행된 경우가 많습니다. 정기 검진이 특히 중요해요.",
   "hgCatDiseaseFlutd": "**하부요로기계질환(FLUTD)** — 수컷에 흔함. 소변 못 보면 즉시 응급처치 필요",
@@ -788,14 +760,12 @@
   "hgCatDiseaseHyperthyroidism": "**갑상선기능항진증** — 10세 이상 흔함. 체중 감소·과식·과활동 증상",
   "hgCatDiseaseStomatitis": "**구내염** — 고양이에 매우 흔함. 입냄새·침흘림·식욕부진 시 검진",
   "hgCatDiseaseFhv": "**고양이 허피스(FHV-1)** — 한번 감염 시 평생 잠복. 스트레스 시 재발, 재채기·눈곱·결막염",
-
   "hgHydrationDiet": "수분 섭취 & 식이 관리",
   "hgCatHydrationAlert": "고양이는 원래 물을 잘 마시지 않아 비뇨기 질환에 취약해요. 수분 섭취 유도가 매우 중요합니다.",
   "hgCatHydration1": "습식 사료(캔·파우치) 병행으로 수분 보충 권장",
   "hgCatHydration2": "흐르는 물 선호 — **분수형 음수대** 설치 효과적",
   "hgCatHydration3": "물그릇은 사료그릇과 분리, 넓고 얕은 그릇 선호",
   "hgCatHydration4": "목표 수분 섭취량: 체중 1kg당 하루 약 **40~60ml**",
-
   "hgCatForbiddenFoodAlert": "아래 음식은 고양이에게 독성을 가집니다. 소량도 위험할 수 있으니 절대 급여하지 마세요.",
   "hgCatForbiddenOnion": "**양파·마늘·파** — 적혈구 파괴, 용혈성 빈혈 (개보다 더 민감)",
   "hgCatForbiddenGrape": "**포도·건포도** — 신부전 유발",
@@ -805,7 +775,6 @@
   "hgCatForbiddenXylitolAlcohol": "**자일리톨·알코올** — 간·신경 독성",
   "hgCatForbiddenAvocado": "**아보카도** — 퍼신(persin) 성분, 구토·설사",
   "hgCatForbiddenRawEggWhite": "**날 달걀 흰자** — 아비딘이 비오틴 차단, 피부·털 문제",
-
   "hgCatEmergency1": "**소변을 전혀 못 보거나 혈뇨** — 요도폐색 응급 (수컷 고양이 특히 주의)",
   "hgCatEmergency2": "24시간 이상 완전 식욕 소실 (지방간 위험)",
   "hgCatEmergency3": "**입을 벌리고 호흡** — 고양이는 절대 정상이 아님, 즉시 응급",
@@ -814,7 +783,6 @@
   "hgCatEmergency6": "잇몸·혀 창백 또는 황달(노란빛)",
   "hgCatEmergency7": "구토·설사가 하루 3회 이상 반복되거나 혈변·혈토",
   "hgCatEmergency8": "눈에 띄는 외상·골절·다량 출혈",
-
   "hgEnvironmentMentalHealth": "환경 & 정신 건강",
   "hgIndoorEnvironment": "실내 환경 관리",
   "hgStressManagement": "스트레스 관리",
@@ -826,7 +794,6 @@
   "hgCatStress2": "급격한 환경 변화(이사·새 가족) 시 페로몬 디퓨저(Feliway) 활용",
   "hgCatStress3": "하루 **10~15분 이상** 장난감을 이용한 놀이 시간 확보",
   "hgCatStress4": "다묘 가정: 자원(밥그릇·화장실·잠자리) 개체 수만큼 분리 배치",
-
   "hgAge": "나이",
   "hgCheckupCycle": "검진 주기",
   "hgMainItems": "주요 항목",
@@ -842,7 +809,6 @@
   "hgCatCheckupItems1": "혈액검사, 소변검사, 체중, 치아",
   "hgCatCheckupItems2": "신장·간 수치, 혈압, 갑상선(T4)",
   "hgCatCheckupItems3": "종합혈액, 복부초음파, 신장 집중 모니터링",
-
   "hgExerciseAmount": "운동량",
   "hgBreedExamples": "해당 품종 예시",
   "hgLow": "낮음",
@@ -851,6 +817,20 @@
   "hgBreedLowExamples": "불독, 바셋하운드, 시추, 말티즈",
   "hgBreedNormalExamples": "푸들, 비숑, 코커스패니얼, 비글",
   "hgBreedHighExamples": "래브라도, 골든, 허스키, 보더콜리",
+  "hgDisclaimer": "이 가이드는 일반적인 건강관리 정보이며, 반려동물의 상태에 따라 필요한 관리가 달라질 수 있습니다. 이상 증상이 있거나 치료가 필요한 경우 반드시 수의사와 상담하세요.",
 
-  "hgDisclaimer": "이 가이드는 일반적인 건강관리 정보이며, 반려동물의 상태에 따라 필요한 관리가 달라질 수 있습니다. 이상 증상이 있거나 치료가 필요한 경우 반드시 수의사와 상담하세요."
+  "categoryFilter": "카테고리 필터",
+  "selectAll": "전체 선택",
+  "deselectAll": "전체 해제",
+  "apply": "적용",
+  "saving": "저장 중...",
+  "treatmentContent": "진료내용",
+
+  "conditionScoreWord1": "최악",
+  "conditionScoreWord2": "저조",
+  "conditionScoreWord3": "보통",
+  "conditionScoreWord4": "양호",
+  "conditionScoreWord5": "최상",
+  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "conditionScoreFormat": "컨디션 {score}점 - {word}"
 }

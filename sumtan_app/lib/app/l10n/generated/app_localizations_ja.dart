@@ -458,6 +458,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get medicineNameExample => '例）フィラリア予防薬、駆虫薬など';
 
   @override
+  String get doseExample => '例: 0.5ml、1錠';
+
+  @override
   String get repeatRequired => '繰り返し *';
 
   @override
@@ -1291,6 +1294,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get example25 => '例: 2.5';
 
   @override
+  String get example42 => '例: 4.2';
+
+  @override
   String get example35000 => '例: 35000';
 
   @override
@@ -1442,12 +1448,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get firstPetFreeDesc => '最初のペットは無料で登録できます。2頭目以降は1頭につき料金が必要です。';
 
   @override
-  String petsRegisteredStoreUnavailable(String count) {
+  String petsRegisteredStoreUnavailable(int count) {
     return '現在登録されているペット: $count頭\nストアに接続できるときに再試行してください。';
   }
 
   @override
-  String petsRegisteredPayToAdd(String count, String price) {
+  String petsRegisteredPayToAdd(int count, String price) {
     return '現在登録されているペット: $count頭\n$priceを支払って新しい家族を追加できます。';
   }
 
@@ -1642,6 +1648,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get example10 => '例: 10';
 
   @override
+  String get minuteUnit => '分';
+
+  @override
   String get hospitalNameExample => '例: ハッピー動物病院';
 
   @override
@@ -1696,7 +1705,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get photoVideo => '写真・動画';
 
   @override
-  String photoVideoCount(String count) {
+  String photoVideoCount(int count) {
     return '写真・動画 · $count件';
   }
 
@@ -2589,4 +2598,42 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get hgDisclaimer =>
       'このガイドは一般的な健康管理情報であり、必要なケアはペットの状態によって異なる場合があります。異常な症状がある場合や治療が必要な場合は、必ず獣医師に相談してください。';
+
+  @override
+  String get categoryFilter => 'カテゴリフィルター';
+
+  @override
+  String get selectAll => 'すべて選択';
+
+  @override
+  String get deselectAll => 'すべて解除';
+
+  @override
+  String get apply => '適用';
+
+  @override
+  String get saving => '保存中...';
+
+  @override
+  String get treatmentContent => '治療内容';
+
+  @override
+  String get conditionScoreWord1 => '最悪';
+
+  @override
+  String get conditionScoreWord2 => '不良';
+
+  @override
+  String get conditionScoreWord3 => '普通';
+
+  @override
+  String get conditionScoreWord4 => '良好';
+
+  @override
+  String get conditionScoreWord5 => '優秀';
+
+  @override
+  String conditionScoreFormat(Object score, Object word) {
+    return 'コンディション $score点 - $word';
+  }
 }

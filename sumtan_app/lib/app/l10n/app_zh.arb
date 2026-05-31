@@ -143,6 +143,7 @@
   "hospitalNameHint": "请输入医院名称",
   "medicineNameRequired": "药品名称 *",
   "medicineNameExample": "例：心丝虫预防药、驱虫药等",
+  "doseExample": "例：0.5ml、1片",
   "repeatRequired": "重复 *",
   "none": "无",
   "daily": "每天",
@@ -412,6 +413,7 @@
   "example80": "例：80",
   "example200": "例：200",
   "example25": "例：2.5",
+  "example42": "例：4.2",
   "example35000": "例：35000",
   "example50000": "例：50000",
   "enterNameHint": "请输入名字",
@@ -522,6 +524,7 @@
   "importance": "重要性",
   "timeTaken": "所需时间",
   "example10": "例: 10",
+  "minuteUnit": "分钟",
   "hospitalNameExample": "例: 幸福动物医院",
   "diagnosisExample": "例: 肠炎, 皮炎",
   "memoTitlePlaceholder": "输入备忘录标题",
@@ -814,5 +817,20 @@
   "hgBreedLowExamples": "斗牛犬、巴吉度犬、西施犬、马尔济斯",
   "hgBreedNormalExamples": "贵宾犬、比熊犬、可卡犬、比格犬",
   "hgBreedHighExamples": "拉布拉多、金毛寻回犬、哈士奇、边境牧羊犬",
-  "hgDisclaimer": "本指南提供一般性健康护理信息，所需护理可能会根据宠物状态而有所不同。如果出现异常症状或需要治疗，请务必咨询兽医。"
+  "hgDisclaimer": "本指南提供一般性健康护理信息，所需护理可能会根据宠物状态而有所不同。如果出现异常症状或需要治疗，请务必咨询兽医。",
+
+  "categoryFilter": "类别筛选",
+  "selectAll": "全选",
+  "deselectAll": "取消全选",
+  "apply": "应用",
+  "saving": "保存中...",
+  "treatmentContent": "治疗内容",
+
+  "conditionScoreWord1": "极差",
+  "conditionScoreWord2": "较差",
+  "conditionScoreWord3": "一般",
+  "conditionScoreWord4": "良好",
+  "conditionScoreWord5": "优秀",
+  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "conditionScoreFormat": "状况 {score}分 - {word}"
 }

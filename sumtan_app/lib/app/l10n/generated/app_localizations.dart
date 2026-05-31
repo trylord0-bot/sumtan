@@ -972,6 +972,12 @@ abstract class AppLocalizations {
   /// **'e.g. Heartworm, dewormer'**
   String get medicineNameExample;
 
+  /// Dose input example
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 0.5ml, 1 tablet'**
+  String get doseExample;
+
   /// Repeat required field label
   ///
   /// In en, this message translates to:
@@ -1398,13 +1404,13 @@ abstract class AppLocalizations {
   /// **'Bleeding'**
   String get bleeding;
 
-  /// No description provided for @dyspnea.
+  /// Dyspnea label
   ///
   /// In en, this message translates to:
   /// **'Dyspnea'**
   String get dyspnea;
 
-  /// No description provided for @seizure.
+  /// Seizure label
   ///
   /// In en, this message translates to:
   /// **'Seizure/Convulsion'**
@@ -2379,157 +2385,157 @@ abstract class AppLocalizations {
   /// Hint: medicine name and dose
   ///
   /// In en, this message translates to:
-  /// **'Please enter medicine name and dose'**
+  /// **'💡 Please enter medicine name and dose'**
   String get hintMedicineNameAndDose;
 
   /// Hint: medicine name
   ///
   /// In en, this message translates to:
-  /// **'Please enter a medicine name'**
+  /// **'💡 Please enter a medicine name'**
   String get hintMedicineName;
 
   /// Hint: dose
   ///
   /// In en, this message translates to:
-  /// **'Please enter a dose'**
+  /// **'💡 Please enter a dose'**
   String get hintDose;
 
   /// Hint: weight as number
   ///
   /// In en, this message translates to:
-  /// **'Please enter weight as a number'**
+  /// **'💡 Please enter weight as a number'**
   String get hintWeightNumber;
 
   /// Hint: weight
   ///
   /// In en, this message translates to:
-  /// **'Please enter weight'**
+  /// **'💡 Please enter weight'**
   String get hintWeight;
 
   /// Hint: weight is number
   ///
   /// In en, this message translates to:
-  /// **'Please enter weight as a number'**
+  /// **'💡 Please enter weight as a number'**
   String get hintWeightIsNumber;
 
   /// Hint: walk time
   ///
   /// In en, this message translates to:
-  /// **'Please enter walk time'**
+  /// **'💡 Please enter walk time'**
   String get hintWalkTime;
 
   /// Hint: walk time is number
   ///
   /// In en, this message translates to:
-  /// **'Please enter walk time as a number'**
+  /// **'💡 Please enter walk time as a number'**
   String get hintWalkTimeIsNumber;
 
   /// Hint: walk time number
   ///
   /// In en, this message translates to:
-  /// **'Please enter walk time as a number'**
+  /// **'💡 Please enter walk time as a number'**
   String get hintWalkTimeNumber;
 
   /// Hint: select brushing area
   ///
   /// In en, this message translates to:
-  /// **'Please select at least one brushing area'**
+  /// **'💡 Please select at least one brushing area'**
   String get hintSelectBrushingArea;
 
   /// Hint: select vaccine type
   ///
   /// In en, this message translates to:
-  /// **'Please select at least one vaccine type'**
+  /// **'💡 Please select at least one vaccine type'**
   String get hintSelectVaccineType;
 
   /// Hint: select grooming type
   ///
   /// In en, this message translates to:
-  /// **'Please select at least one grooming type'**
+  /// **'💡 Please select at least one grooming type'**
   String get hintSelectGroomingType;
 
   /// Hint: select symptom type
   ///
   /// In en, this message translates to:
-  /// **'Please select at least one symptom type'**
+  /// **'💡 Please select at least one symptom type'**
   String get hintSelectSymptomType;
 
   /// Hint: title
   ///
   /// In en, this message translates to:
-  /// **'Please enter a title'**
+  /// **'💡 Please enter a title'**
   String get hintTitle;
 
   /// Hint: vaccine name
   ///
   /// In en, this message translates to:
-  /// **'Please enter a vaccine name'**
+  /// **'💡 Please enter a vaccine name'**
   String get hintVaccineName;
 
   /// Hint: select scheduled date
   ///
   /// In en, this message translates to:
-  /// **'Please select a date'**
+  /// **'💡 Please select a date'**
   String get hintSelectScheduledDate;
 
   /// Hint: select scheduled time
   ///
   /// In en, this message translates to:
-  /// **'Please select a time'**
+  /// **'💡 Please select a time'**
   String get hintSelectScheduledTime;
 
   /// Hint: visit purpose
   ///
   /// In en, this message translates to:
-  /// **'Please enter the visit purpose'**
+  /// **'💡 Please enter the visit purpose'**
   String get hintVisitPurpose;
 
   /// Hint: select appointment date
   ///
   /// In en, this message translates to:
-  /// **'Please select an appointment date'**
+  /// **'💡 Please select an appointment date'**
   String get hintSelectAppointmentDate;
 
   /// Hint: select appointment time
   ///
   /// In en, this message translates to:
-  /// **'Please select an appointment time'**
+  /// **'💡 Please select an appointment time'**
   String get hintSelectAppointmentTime;
 
   /// Hint: medicine name input
   ///
   /// In en, this message translates to:
-  /// **'Please enter a medicine name'**
+  /// **'💡 Please enter a medicine name'**
   String get hintMedicineNameInput;
 
   /// Hint: select medication date
   ///
   /// In en, this message translates to:
-  /// **'Please select a medication date'**
+  /// **'💡 Please select a medication date'**
   String get hintSelectMedicationDate;
 
   /// Hint: select medication time
   ///
   /// In en, this message translates to:
-  /// **'Please select a medication time'**
+  /// **'💡 Please select a medication time'**
   String get hintSelectMedicationTime;
 
   /// Hint: alarm name
   ///
   /// In en, this message translates to:
-  /// **'Please enter an alert name'**
+  /// **'💡 Please enter an alert name'**
   String get hintAlarmName;
 
   /// Hint: select meal time
   ///
   /// In en, this message translates to:
-  /// **'Please select a meal time'**
+  /// **'💡 Please select a meal time'**
   String get hintSelectMealTime;
 
   /// Hint: select alarm time
   ///
   /// In en, this message translates to:
-  /// **'Please select an alert time'**
+  /// **'💡 Please select an alert time'**
   String get hintSelectAlarmTime;
 
   /// No pet - register first
@@ -2585,6 +2591,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'e.g. 2.5'**
   String get example25;
+
+  /// Example 4.2
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. 4.2'**
+  String get example42;
 
   /// Example 35000
   ///
@@ -2667,7 +2679,7 @@ abstract class AppLocalizations {
   /// Birth date label
   ///
   /// In en, this message translates to:
-  /// **'Birth date'**
+  /// **'Date of birth'**
   String get birthDate;
 
   /// Gender label
@@ -2688,13 +2700,13 @@ abstract class AppLocalizations {
   /// **'Female'**
   String get female;
 
-  /// Male with symbol
+  /// Male symbol label
   ///
   /// In en, this message translates to:
   /// **'Male ♂'**
   String get maleSym;
 
-  /// Female with symbol
+  /// Female symbol label
   ///
   /// In en, this message translates to:
   /// **'Female ♀'**
@@ -2730,19 +2742,19 @@ abstract class AppLocalizations {
   /// **'Not registered'**
   String get notRegistered;
 
-  /// Dog with emoji label
+  /// Dog emoji label
   ///
   /// In en, this message translates to:
   /// **'Dog 🐶'**
   String get dogEmoji;
 
-  /// Cat with emoji label
+  /// Cat emoji label
   ///
   /// In en, this message translates to:
   /// **'Cat 🐱'**
   String get catEmoji;
 
-  /// Other with emoji label
+  /// Other emoji label
   ///
   /// In en, this message translates to:
   /// **'Other 🐾'**
@@ -2757,13 +2769,13 @@ abstract class AppLocalizations {
   /// Register pet prompt
   ///
   /// In en, this message translates to:
-  /// **'Add a pet and\nmanage health together.'**
+  /// **'Register your pet and\nmanage their health together!'**
   String get registerPetPrompt;
 
   /// Register pet button
   ///
   /// In en, this message translates to:
-  /// **'Add pet'**
+  /// **'Register a pet'**
   String get registerPetBtn;
 
   /// Edit pet label
@@ -2808,7 +2820,7 @@ abstract class AppLocalizations {
   /// **'Register'**
   String get registerBtn;
 
-  /// Delete pet with name
+  /// Delete pet name button
   ///
   /// In en, this message translates to:
   /// **'Delete {name}'**
@@ -2823,19 +2835,19 @@ abstract class AppLocalizations {
   /// Delete pet warning
   ///
   /// In en, this message translates to:
-  /// **'All records and alerts for {name} will be deleted and cannot be restored.'**
+  /// **'All records and alerts for {name} will be deleted and cannot be recovered.'**
   String deletePetWarning(String name);
 
   /// Pet deleted toast
   ///
   /// In en, this message translates to:
-  /// **'{name} deleted'**
+  /// **'{name} has been deleted'**
   String petDeleted(String name);
 
   /// Pet added toast
   ///
   /// In en, this message translates to:
-  /// **'{name} added'**
+  /// **'{name} has been added 🐾'**
   String petAdded(String name);
 
   /// Store unavailable message
@@ -2844,19 +2856,19 @@ abstract class AppLocalizations {
   /// **'Cannot connect to the store right now. Please try again later.'**
   String get storeUnavailableMsg;
 
-  /// Checking payment message
+  /// Checking payment info message
   ///
   /// In en, this message translates to:
-  /// **'Checking payment info. Please try again shortly.'**
+  /// **'Checking payment info. Please tap again shortly.'**
   String get checkingPaymentMsg;
 
   /// Payment complete message
   ///
   /// In en, this message translates to:
-  /// **'Payment complete. Please enter your new pet’s info.'**
+  /// **'Payment completed. Please enter your new friend\'s info.'**
   String get paymentCompleteMsg;
 
-  /// Add new family member dialog title
+  /// Add new family member prompt
   ///
   /// In en, this message translates to:
   /// **'Add a new family member?'**
@@ -2865,20 +2877,20 @@ abstract class AppLocalizations {
   /// First pet free description
   ///
   /// In en, this message translates to:
-  /// **'The first pet is free. From the second pet, each additional pet requires payment.'**
+  /// **'The first pet is free to register. Adding more pets requires a one-time payment per pet.'**
   String get firstPetFreeDesc;
 
-  /// Pets registered - store unavailable
+  /// Pets registered store unavailable
   ///
   /// In en, this message translates to:
-  /// **'{count} pets registered\nPlease try again when the store is available.'**
-  String petsRegisteredStoreUnavailable(String count);
+  /// **'Currently {count} pets registered.\nPlease try again when the store is available.'**
+  String petsRegisteredStoreUnavailable(int count);
 
-  /// Pets registered - pay to add
+  /// Pets registered pay to add
   ///
   /// In en, this message translates to:
-  /// **'{count} pets registered\nPay {price} to add a new family member.'**
-  String petsRegisteredPayToAdd(String count, String price);
+  /// **'Currently {count} pets registered.\nYou can add a new family member after paying {price}.'**
+  String petsRegisteredPayToAdd(int count, String price);
 
   /// Maybe later button
   ///
@@ -2907,73 +2919,73 @@ abstract class AppLocalizations {
   /// Potty record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Potty record saved'**
+  /// **'💩 Potty recorded'**
   String get pottyRecordSaved;
 
   /// Condition record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Condition record saved'**
+  /// **'💗 Condition recorded'**
   String get conditionRecordSaved;
 
   /// Medication record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Medication record saved'**
+  /// **'💊 Medication recorded'**
   String get medicationRecordSaved;
 
   /// Weight record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Weight record saved'**
+  /// **'⚖️ Weight recorded'**
   String get weightRecordSaved;
 
   /// Meal record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Meal record saved'**
+  /// **'🍽️ Meal recorded'**
   String get mealRecordSaved;
 
   /// Water record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Water record saved'**
+  /// **'💧 Water recorded'**
   String get waterRecordSaved;
 
   /// Vet visit record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Vet visit record saved'**
+  /// **'🏥 Vet visit recorded'**
   String get vetVisitRecordSaved;
 
   /// Vaccination record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Vaccination record saved'**
+  /// **'💉 Vaccination recorded'**
   String get vaccinationRecordSaved;
 
   /// Grooming record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Grooming record saved'**
+  /// **'✂️ Grooming recorded'**
   String get groomingRecordSaved;
 
   /// Brushing record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Brushing record saved'**
+  /// **'🪥 Brushing recorded'**
   String get brushingRecordSaved;
 
   /// Walk record saved toast
   ///
   /// In en, this message translates to:
-  /// **'Walk record saved'**
+  /// **'🦮 Walk recorded'**
   String get walkRecordSaved;
 
   /// Memo saved toast
   ///
   /// In en, this message translates to:
-  /// **'Memo saved'**
+  /// **'📝 Memo recorded'**
   String get memoSaved;
 
   /// Abnormal symptom record saved toast
@@ -2985,31 +2997,31 @@ abstract class AppLocalizations {
   /// More questions label
   ///
   /// In en, this message translates to:
-  /// **'Have more questions?'**
+  /// **'Do you have any more questions?'**
   String get moreQuestions;
 
   /// Contact via send feedback short
   ///
   /// In en, this message translates to:
-  /// **'Contact us from Settings > Send feedback.\nWe will get back to you soon.'**
+  /// **'Please contact us via Settings > Send feedback.\nWe will reply promptly 🐾'**
   String get contactViaSendFeedback;
 
   /// Contact via send feedback long
   ///
   /// In en, this message translates to:
-  /// **'Contact us through Send feedback in Settings.\nWe will reply quickly.'**
+  /// **'If you contact us via the [Send feedback] button in Settings,\nwe will respond as quickly as possible.'**
   String get contactViaSendFeedbackLong;
 
   /// Privacy policy effective date
   ///
   /// In en, this message translates to:
-  /// **'This privacy policy is effective from January 1, 2026.\nLast updated: May 8, 2026'**
+  /// **'This privacy policy is effective as of January 1, 2026.\nLast updated: May 8, 2026'**
   String get privacyPolicyEffectiveDate;
 
   /// Privacy collected info
   ///
   /// In en, this message translates to:
-  /// **'Collected information is used only for the purposes below.'**
+  /// **'Collected information is used only for the following purposes.'**
   String get privacyCollectedInfo;
 
   /// Privacy data features
@@ -3027,58 +3039,58 @@ abstract class AppLocalizations {
   /// Privacy policy contact
   ///
   /// In en, this message translates to:
-  /// **'For questions about this privacy policy, please contact us below.'**
+  /// **'For inquiries regarding the privacy policy, please contact us below.'**
   String get privacyPolicyContact;
 
-  /// Category: meal
+  /// Category: Meal
   ///
   /// In en, this message translates to:
   /// **'Meal'**
   String get catMeal;
 
-  /// Category: water
+  /// Category: Water
   ///
   /// In en, this message translates to:
   /// **'Water'**
   String get catWater;
 
-  /// Category: grooming
+  /// Category: Grooming
   ///
   /// In en, this message translates to:
   /// **'Grooming'**
   String get catGrooming;
 
-  /// Category: brushing
+  /// Category: Brushing
   ///
   /// In en, this message translates to:
   /// **'Brushing'**
   String get catBrushing;
 
-  /// Category: walk
+  /// Category: Walk
   ///
   /// In en, this message translates to:
   /// **'Walk'**
   String get catWalk;
 
-  /// Category: hospital/vet
+  /// Category: Hospital/Vet
   ///
   /// In en, this message translates to:
-  /// **'Vet visit'**
+  /// **'Vet'**
   String get catHospital;
 
-  /// Category: abnormal symptom
+  /// Category: Abnormal Symptom
   ///
   /// In en, this message translates to:
-  /// **'Abnormal Sign'**
+  /// **'Abnormal'**
   String get catAbnormalSymptom;
 
-  /// Category: condition
+  /// Category: Condition
   ///
   /// In en, this message translates to:
   /// **'Condition'**
   String get catCondition;
 
-  /// Category: potty/poop
+  /// Category: Potty
   ///
   /// In en, this message translates to:
   /// **'Potty'**
@@ -3087,73 +3099,73 @@ abstract class AppLocalizations {
   /// Meal form title
   ///
   /// In en, this message translates to:
-  /// **'🍽️ Meal record'**
+  /// **'🍽️ Meal Record'**
   String get mealFormTitle;
 
   /// Walk form title
   ///
   /// In en, this message translates to:
-  /// **'🦮 Walk record'**
+  /// **'🦮 Walk Record'**
   String get walkFormTitle;
 
   /// Weight form title
   ///
   /// In en, this message translates to:
-  /// **'⚖️ Weight record'**
+  /// **'⚖️ Weight Record'**
   String get weightFormTitle;
 
   /// Water form title
   ///
   /// In en, this message translates to:
-  /// **'💧 Water record'**
+  /// **'💧 Water Record'**
   String get waterFormTitle;
 
   /// Medication form title
   ///
   /// In en, this message translates to:
-  /// **'💊 Medication record'**
+  /// **'💊 Medication Record'**
   String get medicationFormTitle;
 
   /// Grooming form title
   ///
   /// In en, this message translates to:
-  /// **'✂️ Grooming record'**
+  /// **'✂️ Grooming Record'**
   String get groomingFormTitle;
 
   /// Brushing form title
   ///
   /// In en, this message translates to:
-  /// **'🪥 Brushing record'**
+  /// **'🪥 Brushing Record'**
   String get brushingFormTitle;
 
   /// Condition form title
   ///
   /// In en, this message translates to:
-  /// **'🌡️ Condition record'**
+  /// **'🌡️ Condition Record'**
   String get conditionFormTitle;
 
   /// Potty form title
   ///
   /// In en, this message translates to:
-  /// **'💩 Potty record'**
+  /// **'💩 Potty Record'**
   String get poopFormTitle;
 
   /// Vaccination form title
   ///
   /// In en, this message translates to:
-  /// **'💉 Vaccination record'**
+  /// **'💉 Vaccination Record'**
   String get vaccinationFormTitle;
 
   /// Hospital form title
   ///
   /// In en, this message translates to:
-  /// **'🏥 Vet visit record'**
+  /// **'🏥 Vet Record'**
   String get hospitalFormTitle;
 
   /// Abnormal symptom form title
   ///
   /// In en, this message translates to:
-  /// **'🚨 Abnormal Sign'**
+  /// **'🚨 Abnormal Record'**
   String get abnormalSymptomFormTitle;
 
   /// Memo form title
@@ -3162,193 +3174,199 @@ abstract class AppLocalizations {
   /// **'📝 Memo'**
   String get memoFormTitle;
 
-  /// Weight measurement method label
+  /// Measurement method label
   ///
   /// In en, this message translates to:
   /// **'Measurement method'**
   String get measureMethod;
 
-  /// Food amount fed label
+  /// Feeding amount label
   ///
   /// In en, this message translates to:
-  /// **'Amount fed'**
+  /// **'Feeding amount'**
   String get feedAmount;
 
-  /// Direct mL input label
+  /// mL input label
   ///
   /// In en, this message translates to:
-  /// **'Direct mL input'**
+  /// **'Enter mL manually'**
   String get mlInputLabel;
 
-  /// No description provided for @alarmRescheduleNote.
+  /// Alarm reschedule note
   ///
   /// In en, this message translates to:
-  /// **'This alert\'s scheduled date has passed.\nYou can set a new date or delete it.'**
+  /// **'This alert date has passed.\nYou can choose a new date or delete it.'**
   String get alarmRescheduleNote;
 
-  /// No description provided for @nailTrim.
+  /// Nail trim label
   ///
   /// In en, this message translates to:
   /// **'Nail trim'**
   String get nailTrim;
 
-  /// No description provided for @shopNameExample.
+  /// Shop name example
   ///
   /// In en, this message translates to:
-  /// **'e.g. Fluffy Pet Salon'**
+  /// **'e.g. Fluffy Pet Shop'**
   String get shopNameExample;
 
-  /// No description provided for @poopRecordSaved.
+  /// Potty record saved toast
   ///
   /// In en, this message translates to:
   /// **'💩 Potty recorded'**
   String get poopRecordSaved;
 
-  /// No description provided for @memoRecordSaved.
+  /// Memo record saved toast
   ///
   /// In en, this message translates to:
   /// **'📝 Memo recorded'**
   String get memoRecordSaved;
 
-  /// No description provided for @other.
+  /// Other label
   ///
   /// In en, this message translates to:
   /// **'Other'**
   String get other;
 
-  /// No description provided for @whole.
+  /// Whole body label
   ///
   /// In en, this message translates to:
   /// **'Whole body'**
   String get whole;
 
-  /// No description provided for @paw.
+  /// Paws label
   ///
   /// In en, this message translates to:
-  /// **'Paw'**
+  /// **'Paws'**
   String get paw;
 
-  /// No description provided for @importance.
+  /// Importance label
   ///
   /// In en, this message translates to:
   /// **'Importance'**
   String get importance;
 
-  /// No description provided for @timeTaken.
+  /// Time taken label
   ///
   /// In en, this message translates to:
   /// **'Time taken'**
   String get timeTaken;
 
-  /// No description provided for @example10.
+  /// Example 10
   ///
   /// In en, this message translates to:
   /// **'e.g. 10'**
   String get example10;
 
-  /// No description provided for @hospitalNameExample.
+  /// Abbreviated minute unit for record summaries
+  ///
+  /// In en, this message translates to:
+  /// **'min'**
+  String get minuteUnit;
+
+  /// Hospital name example
   ///
   /// In en, this message translates to:
   /// **'e.g. Happy Animal Hospital'**
   String get hospitalNameExample;
 
-  /// No description provided for @diagnosisExample.
+  /// Diagnosis example
   ///
   /// In en, this message translates to:
   /// **'e.g. Enteritis, Dermatitis'**
   String get diagnosisExample;
 
-  /// No description provided for @memoTitlePlaceholder.
+  /// Memo title placeholder
   ///
   /// In en, this message translates to:
   /// **'Enter memo title'**
   String get memoTitlePlaceholder;
 
-  /// No description provided for @hintMemoTitle.
+  /// Hint: memo title
   ///
   /// In en, this message translates to:
   /// **'💡 Please enter a title'**
   String get hintMemoTitle;
 
-  /// No description provided for @poopType.
+  /// Poop type label
   ///
   /// In en, this message translates to:
   /// **'Type'**
   String get poopType;
 
-  /// No description provided for @poopStatus.
+  /// Poop status label
   ///
   /// In en, this message translates to:
   /// **'Status'**
   String get poopStatus;
 
-  /// No description provided for @feces.
+  /// Feces label
   ///
   /// In en, this message translates to:
   /// **'Feces'**
   String get feces;
 
-  /// No description provided for @bloody.
+  /// Bloody label
   ///
   /// In en, this message translates to:
   /// **'Bloody'**
   String get bloody;
 
-  /// No description provided for @vaccineDhppl.
+  /// Vaccine DHPPL
   ///
   /// In en, this message translates to:
-  /// **'DHPPL combo'**
+  /// **'Combo (DHPPL)'**
   String get vaccineDhppl;
 
-  /// No description provided for @vaccineCorona.
+  /// Vaccine Corona
   ///
   /// In en, this message translates to:
-  /// **'Corona enteritis'**
+  /// **'Coronavirus'**
   String get vaccineCorona;
 
-  /// No description provided for @vaccineKennelCough.
+  /// Vaccine Kennel Cough
   ///
   /// In en, this message translates to:
-  /// **'Kennel cough'**
+  /// **'Kennel Cough'**
   String get vaccineKennelCough;
 
-  /// No description provided for @vaccineRabies.
+  /// Vaccine Rabies
   ///
   /// In en, this message translates to:
   /// **'Rabies'**
   String get vaccineRabies;
 
-  /// No description provided for @vaccineInfluenza.
+  /// Vaccine Influenza
   ///
   /// In en, this message translates to:
   /// **'Influenza'**
   String get vaccineInfluenza;
 
-  /// No description provided for @vaccineFvrcp.
+  /// Vaccine FVRCP
   ///
   /// In en, this message translates to:
-  /// **'FVRCP combo'**
+  /// **'Combo (FVRCP)'**
   String get vaccineFvrcp;
 
-  /// No description provided for @vaccineFelv.
+  /// Vaccine FeLV
   ///
   /// In en, this message translates to:
   /// **'Leukemia (FeLV)'**
   String get vaccineFelv;
 
-  /// No description provided for @vaccineChlamydia.
+  /// Vaccine Chlamydia
   ///
   /// In en, this message translates to:
   /// **'Chlamydia'**
   String get vaccineChlamydia;
 
-  /// No description provided for @mute.
+  /// Mute label
   ///
   /// In en, this message translates to:
   /// **'Mute'**
   String get mute;
 
-  /// No description provided for @photoVideo.
+  /// Photo video label
   ///
   /// In en, this message translates to:
   /// **'Photo · Video'**
@@ -3358,69 +3376,69 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Photo · Video · {count}'**
-  String photoVideoCount(String count);
+  String photoVideoCount(int count);
 
-  /// No description provided for @selectMediaSource.
+  /// Select media source label
   ///
   /// In en, this message translates to:
-  /// **'Select media source'**
+  /// **'Choose media source'**
   String get selectMediaSource;
 
-  /// No description provided for @cameraCapture.
+  /// Camera capture label
   ///
   /// In en, this message translates to:
-  /// **'Camera'**
+  /// **'Take with camera'**
   String get cameraCapture;
 
-  /// No description provided for @cameraCaptureSubtitle.
+  /// Camera capture subtitle
   ///
   /// In en, this message translates to:
-  /// **'Take photo or video'**
+  /// **'Take a photo or video'**
   String get cameraCaptureSubtitle;
 
-  /// No description provided for @selectFromGallery.
+  /// Select from gallery label
   ///
   /// In en, this message translates to:
-  /// **'Gallery'**
+  /// **'Choose from gallery'**
   String get selectFromGallery;
 
-  /// No description provided for @selectFromGallerySubtitle.
+  /// Select from gallery subtitle
   ///
   /// In en, this message translates to:
-  /// **'Select photos · videos'**
+  /// **'Multiple selection allowed'**
   String get selectFromGallerySubtitle;
 
-  /// No description provided for @takePhotoSubtitle.
+  /// Take photo subtitle
   ///
   /// In en, this message translates to:
   /// **'Take a photo with camera'**
   String get takePhotoSubtitle;
 
-  /// No description provided for @recordVideoSubtitle.
+  /// Record video subtitle
   ///
   /// In en, this message translates to:
   /// **'Record a video with camera'**
   String get recordVideoSubtitle;
 
-  /// No description provided for @permissionRequired.
+  /// Permission required label
   ///
   /// In en, this message translates to:
   /// **'Please allow permission in Settings'**
   String get permissionRequired;
 
-  /// No description provided for @confirmDeletePhoto.
+  /// Confirm delete photo
   ///
   /// In en, this message translates to:
   /// **'Delete this photo?'**
   String get confirmDeletePhoto;
 
-  /// No description provided for @confirmDeleteVideo.
+  /// Confirm delete video
   ///
   /// In en, this message translates to:
   /// **'Delete this video?'**
   String get confirmDeleteVideo;
 
-  /// No description provided for @hintMedicineAndDose.
+  /// Hint: medicine and dose
   ///
   /// In en, this message translates to:
   /// **'💡 Please enter medicine name and dose'**
@@ -3429,1580 +3447,1652 @@ abstract class AppLocalizations {
   /// Delete record body
   ///
   /// In en, this message translates to:
-  /// **'{category} record will be deleted\nand cannot be undone.'**
+  /// **'{category} record will be deleted\nand cannot be restored.'**
   String deleteRecordBody(String category);
 
-  /// Short day count label, such as 3d or 7d.
+  /// Day count short format
   ///
   /// In en, this message translates to:
   /// **'{days}d'**
   String dayCountShort(int days);
 
-  /// Help screen: Intro content explaining what Pet Sumtan is
+  /// Help: Intro content
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan is an app where you can record and manage your pet’s health and daily life in one place.\nYou can easily keep various health records, such as meals, water intake, potty, weight, medication, and vet visits, and use alerts so you do not miss important schedules.'**
+  /// **'Pet Sumtan is an app where you can record and manage your pet\'s health and daily life in one place.\nYou can easily log meals, water, potty, weight, medication, vet visits, and set alerts so you never miss important schedules.'**
   String get helpIntroContent;
 
-  /// Help screen: Home today record summary description
+  /// Help: Home today record summary
   ///
   /// In en, this message translates to:
-  /// **'View all records added today at a glance. Tap a record to see details or edit it.'**
+  /// **'See all records registered today at a glance. Tap a record to view details or edit it.'**
   String get helpHomeTodayRecordSummaryDesc;
 
-  /// Help screen: Home weekly stats description
+  /// Help: Home weekly stats
   ///
   /// In en, this message translates to:
-  /// **'Check this week’s potty count, meal amount, and water intake in charts. It helps you understand your pet’s daily patterns.'**
+  /// **'Check this week\'s potty count, meal amount, and water intake on a graph to understand your pet\'s lifestyle patterns.'**
   String get helpHomeWeeklyStatsDesc;
 
-  /// Help screen: Home weight change chart description
+  /// Help: Home weight change chart
   ///
   /// In en, this message translates to:
-  /// **'Shows recent weight records in a chart so you can easily track weight changes.'**
+  /// **'Shows recent weight records on a graph so you can easily track weight changes.'**
   String get helpHomeWeightChangeChartDesc;
 
-  /// Help screen: Find nearby hospitals description
+  /// Help: Home find nearby hospitals
   ///
   /// In en, this message translates to:
-  /// **'Tap the button to search nearby animal hospitals in Naver Maps.'**
+  /// **'Tap the button to search for nearby animal hospitals on the map.'**
   String get helpHomeFindNearbyHospitalsDesc;
 
-  /// Help screen: Add new record description
+  /// Help: Home add new record
   ///
   /// In en, this message translates to:
-  /// **'Tap the + button at the bottom of the screen to choose a record category and add a new record.'**
+  /// **'Tap the + button at the bottom to select a category and add a new record.'**
   String get helpHomeAddNewRecordDesc;
 
-  /// Help screen: Record categories intro
+  /// Help: Record categories intro
   ///
   /// In en, this message translates to:
-  /// **'You can record your pet’s daily life in 12 categories.'**
+  /// **'You can record your pet\'s daily life in 12 different categories.'**
   String get helpRecordCategoriesIntro;
 
-  /// Help screen category name: Potty
+  /// Help: Category potty name
   ///
   /// In en, this message translates to:
   /// **'Potty'**
   String get helpCategoryPottyName;
 
-  /// Help screen category description: Potty
+  /// Help: Category potty desc
   ///
   /// In en, this message translates to:
-  /// **'Record potty activity and condition. You can also attach photos.'**
+  /// **'Record potty status and type. You can also attach photos.'**
   String get helpCategoryPottyDesc;
 
-  /// Help screen category name: Condition
+  /// Help: Category condition name
   ///
   /// In en, this message translates to:
   /// **'Condition'**
   String get helpCategoryConditionName;
 
-  /// Help screen category description: Condition
+  /// Help: Category condition desc
   ///
   /// In en, this message translates to:
-  /// **'Record your pet’s overall condition.'**
+  /// **'Record your pet\'s overall condition.'**
   String get helpCategoryConditionDesc;
 
-  /// Help screen category name: Medication
+  /// Help: Category medication name
   ///
   /// In en, this message translates to:
   /// **'Medication'**
   String get helpCategoryMedicationName;
 
-  /// Help screen category description: Medication
+  /// Help: Category medication desc
   ///
   /// In en, this message translates to:
-  /// **'Record the medicine name, dose, and medication time.'**
+  /// **'Record medicine name, dose, and time.'**
   String get helpCategoryMedicationDesc;
 
-  /// Help screen category name: Weight
+  /// Help: Category weight name
   ///
   /// In en, this message translates to:
   /// **'Weight'**
   String get helpCategoryWeightName;
 
-  /// Help screen category description: Weight
+  /// Help: Category weight desc
   ///
   /// In en, this message translates to:
-  /// **'Record weight in kg. You can check weight trends on the Home screen.'**
+  /// **'Record weight (kg). You can check the trend on the home screen.'**
   String get helpCategoryWeightDesc;
 
-  /// Help screen category name: Meal
+  /// Help: Category meal name
   ///
   /// In en, this message translates to:
   /// **'Meal'**
   String get helpCategoryMealName;
 
-  /// Help screen category description: Meal
+  /// Help: Category meal desc
   ///
   /// In en, this message translates to:
-  /// **'Record meal amount and food type. You can also attach photos and videos.'**
+  /// **'Record meal amount and type. You can attach photos/videos.'**
   String get helpCategoryMealDesc;
 
-  /// Help screen category name: Water
+  /// Help: Category water name
   ///
   /// In en, this message translates to:
   /// **'Water'**
   String get helpCategoryWaterName;
 
-  /// Help screen category description: Water
+  /// Help: Category water desc
   ///
   /// In en, this message translates to:
-  /// **'Record water intake in ml. You can also attach photos and videos.'**
+  /// **'Record water intake (ml). You can attach photos/videos.'**
   String get helpCategoryWaterDesc;
 
-  /// Help screen category name: Hospital
+  /// Help: Category hospital name
   ///
   /// In en, this message translates to:
-  /// **'Hospital'**
+  /// **'Vet'**
   String get helpCategoryHospitalName;
 
-  /// Help screen category description: Hospital
+  /// Help: Category hospital desc
   ///
   /// In en, this message translates to:
-  /// **'Record the hospital name and visit details. You can also attach photos and videos.'**
+  /// **'Record hospital name and diagnosis. You can attach photos/videos.'**
   String get helpCategoryHospitalDesc;
 
-  /// Help screen category name: Vaccination
+  /// Help: Category vaccination name
   ///
   /// In en, this message translates to:
   /// **'Vaccination'**
   String get helpCategoryVaccinationName;
 
-  /// Help screen category description: Vaccination
+  /// Help: Category vaccination desc
   ///
   /// In en, this message translates to:
-  /// **'Record the vaccine type and vaccination date.'**
+  /// **'Record vaccine type and date.'**
   String get helpCategoryVaccinationDesc;
 
-  /// Help screen category name: Grooming
+  /// Help: Category grooming name
   ///
   /// In en, this message translates to:
   /// **'Grooming'**
   String get helpCategoryGroomingName;
 
-  /// Help screen category description: Grooming
+  /// Help: Category grooming desc
   ///
   /// In en, this message translates to:
-  /// **'Record grooming details and attach photos or videos.'**
+  /// **'Record grooming details and attach photos/videos.'**
   String get helpCategoryGroomingDesc;
 
-  /// Help screen category name: Dental brushing
+  /// Help: Category dental name
   ///
   /// In en, this message translates to:
-  /// **'Dental brushing'**
+  /// **'Brushing'**
   String get helpCategoryDentalName;
 
-  /// Help screen category description: Dental brushing
+  /// Help: Category dental desc
   ///
   /// In en, this message translates to:
-  /// **'Record whether dental brushing was done and add a memo.'**
+  /// **'Record brushing status and memos.'**
   String get helpCategoryDentalDesc;
 
-  /// Help screen category name: Walk
+  /// Help: Category walk name
   ///
   /// In en, this message translates to:
   /// **'Walk'**
   String get helpCategoryWalkName;
 
-  /// Help screen category description: Walk
+  /// Help: Category walk desc
   ///
   /// In en, this message translates to:
-  /// **'Record walk distance and duration.'**
+  /// **'Record walk distance and time.'**
   String get helpCategoryWalkDesc;
 
-  /// Help screen category name: Memo
+  /// Help: Category memo name
   ///
   /// In en, this message translates to:
   /// **'Memo'**
   String get helpCategoryMemoName;
 
-  /// Help screen category description: Memo
+  /// Help: Category memo desc
   ///
   /// In en, this message translates to:
-  /// **'Leave any memo freely.'**
+  /// **'Leave any free-form notes.'**
   String get helpCategoryMemoDesc;
 
-  /// Help screen: Journal record list description
+  /// Help: Journal view record list
   ///
   /// In en, this message translates to:
-  /// **'View all records by date. Category badges help you quickly identify each record type.'**
+  /// **'View all records by date. Category badges help you identify them easily.'**
   String get helpJournalViewRecordListDesc;
 
-  /// Help screen: Journal edit and delete description
+  /// Help: Journal edit delete record
   ///
   /// In en, this message translates to:
-  /// **'Tap a record to open the edit sheet. You can update the content or delete it.'**
+  /// **'Tap a record to open the edit sheet. You can modify or delete it.'**
   String get helpJournalEditDeleteRecordDesc;
 
-  /// Help screen: Journal attach media description
+  /// Help: Journal attach media
   ///
   /// In en, this message translates to:
-  /// **'In some categories, such as meal, water, hospital, grooming, and potty, you can attach photos or videos.'**
+  /// **'You can attach photos or videos to categories like meals, water, vet, grooming, and potty.'**
   String get helpJournalAttachMediaDesc;
 
-  /// Help screen: Add alert description
+  /// Help: Alarm add desc
   ///
   /// In en, this message translates to:
-  /// **'You can add various types of alerts, such as vaccination, medication, vet visits, and grooming. First choose an alert type, then set the date and time.'**
+  /// **'Set alerts for vaccinations, medication, vet visits, grooming, etc. Choose the type first, then set the date and time.'**
   String get helpAlarmAddDesc;
 
-  /// Help screen: Repeat alert description
+  /// Help: Alarm repeat desc
   ///
   /// In en, this message translates to:
-  /// **'Set repeat rules such as daily, weekly, or monthly. This is useful for regular medication or heartworm prevention.'**
+  /// **'Set repeat rules like daily, weekly, or monthly. Useful for regular medication or heartworm prevention.'**
   String get helpAlarmRepeatDesc;
 
-  /// Help screen: Advance alert description
+  /// Help: Alarm advance desc
   ///
   /// In en, this message translates to:
-  /// **'For important schedules like vaccination, you can receive advance alerts 7 days, 3 days, and 1 day before.'**
+  /// **'For important events like vaccinations, get advance alerts 7 days, 3 days, or 1 day before.'**
   String get helpAlarmAdvanceDesc;
 
-  /// Help screen: Complete alert description
+  /// Help: Alarm complete desc
   ///
   /// In en, this message translates to:
-  /// **'Tap an alert to mark it as completed. Completed alerts can be checked in the past alerts list.'**
+  /// **'Tap an alert to mark it as completed. Completed alerts move to the past alerts list.'**
   String get helpAlarmCompleteDesc;
 
-  /// Help screen: Delete alert description
+  /// Help: Alarm delete desc
   ///
   /// In en, this message translates to:
   /// **'Swipe an alert to the left to delete it.'**
   String get helpAlarmDeleteDesc;
 
-  /// Help screen: Pet registration description
+  /// Help: Pet register desc
   ///
   /// In en, this message translates to:
-  /// **'Add your pet by entering name, type, breed, gender, birth date, and neutering status.'**
+  /// **'Register your pet by entering their name, type (dog/cat), breed, gender, birth date, and neutering status.'**
   String get helpPetRegisterDesc;
 
-  /// Help screen: Edit pet profile description
+  /// Help: Pet edit profile desc
   ///
   /// In en, this message translates to:
-  /// **'On the Profile screen, you can edit name, breed, weight, microchip number, registration number, and profile photo.'**
+  /// **'Edit name, breed, weight, microchip number, registration number, and profile photo on the profile screen.'**
   String get helpPetEditProfileDesc;
 
-  /// Help screen: Manage multiple pets description
+  /// Help: Pet manage multiple desc
   ///
   /// In en, this message translates to:
-  /// **'You can add multiple pets. Tap the pet chip at the top to switch the pet you want to manage.'**
+  /// **'Register multiple pets. Tap the pet chip at the top to switch between them.'**
   String get helpPetManageMultipleDesc;
 
-  /// Help screen: Dog health guide description
+  /// Help: Dog health guide desc
   ///
   /// In en, this message translates to:
-  /// **'Provides veterinary-based health information, including essential and optional vaccination schedules, heartworm and external parasite prevention, dental care, and nutrition.'**
+  /// **'Provides vet-based health info: core/non-core vaccine schedules, parasite prevention, dental care, and nutrition.'**
   String get helpDogHealthGuideDesc;
 
-  /// Help screen: Cat health guide description
+  /// Help: Cat health guide desc
   ///
   /// In en, this message translates to:
-  /// **'Check cat-specific vaccination schedules, parasite prevention, dental care, and nutrition information.'**
+  /// **'Check cat-specific vaccine schedules, parasite prevention, dental care, and nutrition info.'**
   String get helpCatHealthGuideDesc;
 
-  /// Help screen: Settings notification description
+  /// Help: Settings notification desc
   ///
   /// In en, this message translates to:
   /// **'Turn all app notifications on or off.'**
   String get helpSettingsNotificationDesc;
 
-  /// Help screen: Settings export data description
+  /// Help: Settings export desc
   ///
   /// In en, this message translates to:
   /// **'Export all recorded data as a ZIP file. Use it as a backup when changing devices.'**
   String get helpSettingsExportDesc;
 
-  /// Help screen: Settings import data description
+  /// Help: Settings import desc
   ///
   /// In en, this message translates to:
-  /// **'Import a previously exported ZIP backup file to restore your data.'**
+  /// **'Restore data by importing a previously saved ZIP backup file.'**
   String get helpSettingsImportDesc;
 
-  /// Help screen: Settings feedback description
+  /// Help: Settings feedback desc
   ///
   /// In en, this message translates to:
-  /// **'Send us any inconvenience or improvement suggestions by email. It helps us make the app better.'**
+  /// **'Send us an email with any issues or suggestions. It helps us improve the app.'**
   String get helpSettingsFeedbackDesc;
 
-  /// Help screen FAQ question: Delete pet records
+  /// Help: FAQ delete pet Q
   ///
   /// In en, this message translates to:
-  /// **'If I delete a pet, will all records be deleted too?'**
+  /// **'If I delete a pet, are all records deleted too?'**
   String get helpFaqDeletePetQ;
 
-  /// Help screen FAQ answer: Delete pet records
+  /// Help: FAQ delete pet A
   ///
   /// In en, this message translates to:
-  /// **'Yes. If you delete a pet, all records and alerts for that pet will also be deleted. Please back up your data with Export data before deleting.'**
+  /// **'Yes, deleting a pet removes all their records and alerts. Please export and backup your data before deleting.'**
   String get helpFaqDeletePetA;
 
-  /// Help screen FAQ question: Multiple media
+  /// Help: FAQ multiple media Q
   ///
   /// In en, this message translates to:
   /// **'Can I attach multiple photos to a record?'**
   String get helpFaqMultipleMediaQ;
 
-  /// Help screen FAQ answer: Multiple media
+  /// Help: FAQ multiple media A
   ///
   /// In en, this message translates to:
-  /// **'Yes. You can attach multiple photos and videos. You can choose them from the gallery or capture them directly with the camera.'**
+  /// **'Yes, you can attach multiple photos and videos. Choose from the gallery or take them directly with the camera.'**
   String get helpFaqMultipleMediaA;
 
-  /// Help screen FAQ question: Notifications not received
+  /// Help: FAQ no notification Q
   ///
   /// In en, this message translates to:
-  /// **'I am not receiving notifications.'**
+  /// **'I am not receiving alerts.'**
   String get helpFaqNoNotificationQ;
 
-  /// Help screen FAQ answer: Notifications not received
+  /// Help: FAQ no notification A
   ///
   /// In en, this message translates to:
-  /// **'Check whether notifications for Pet Sumtan are allowed in your device notification settings. Also check whether app notifications are turned on in Settings > Notification settings.'**
+  /// **'Please check your device settings to ensure notifications are allowed for the Pet Sumtan app. Also, check if app notifications are enabled in Settings > Notification settings.'**
   String get helpFaqNoNotificationA;
 
-  /// Help screen FAQ question: Move data to new device
+  /// Help: FAQ move data Q
   ///
   /// In en, this message translates to:
   /// **'Can I move my data to a new device?'**
   String get helpFaqMoveDataQ;
 
-  /// Help screen FAQ answer: Move data to new device
+  /// Help: FAQ move data A
   ///
   /// In en, this message translates to:
-  /// **'Yes. On your old device, save a backup file from Settings > Export data. Then restore it on your new device from Settings > Import data.'**
+  /// **'Save a backup file via Settings > Export data, then restore it on your new device via Settings > Import data.'**
   String get helpFaqMoveDataA;
 
-  /// Help screen FAQ question: Multiple pets
+  /// Help: FAQ multiple pets Q
   ///
   /// In en, this message translates to:
-  /// **'Can I add multiple pets?'**
+  /// **'Can I register multiple pets?'**
   String get helpFaqMultiplePetsQ;
 
-  /// Help screen FAQ answer: Multiple pets
+  /// Help: FAQ multiple pets A
   ///
   /// In en, this message translates to:
-  /// **'By default, you can add 1 pet for free. Adding more pets is available as a premium feature.'**
+  /// **'You can register 1 pet for free. Additional pets can be added using the premium feature.'**
   String get helpFaqMultiplePetsA;
 
-  /// Introductory paragraph for the privacy policy screen
+  /// Privacy: Intro body
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan is an app that can be used without signing up, and all data is stored only on the user’s device. We do not transmit personal information to external servers and securely protect your valuable pet information.'**
+  /// **'Pet Sumtan is an app used without signing up, and all data is stored only on your device. We do not transmit personal information to external servers, keeping your precious pet information safe.'**
   String get privacyIntroBody;
 
-  /// Title for privacy policy section 1
+  /// Privacy: Section 1 title
   ///
   /// In en, this message translates to:
   /// **'Personal Information Collected'**
   String get privacySection1Title;
 
-  /// Body text for privacy policy section 1
+  /// Privacy: Section 1 body
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan can be used without signing up and does not collect separate personally identifiable information. However, to provide app features, the following information may be stored on the device.'**
+  /// **'Pet Sumtan can be used without registration and does not collect personal identification information. However, the following information may be stored on your device to provide app features.'**
   String get privacySection1Body;
 
-  /// Subtitle for locally stored information
+  /// Privacy: Local storage info
   ///
   /// In en, this message translates to:
   /// **'Information stored locally on the device'**
   String get privacyLocalStorageInfo;
 
-  /// Bullet item describing pet information stored locally
+  /// Privacy: Pet info
   ///
   /// In en, this message translates to:
-  /// **'Pet information: name, species, breed, date of birth, gender, weight, neutering status, microchip number, and animal registration number'**
+  /// **'Pet information: Name, species, breed, date of birth, gender, weight, neutering status, microchip number, animal registration number'**
   String get privacyPetInfo;
 
-  /// Bullet item describing health records stored locally
+  /// Privacy: Health records
   ///
   /// In en, this message translates to:
-  /// **'Health records: potty, meal, water, weight, medication, vaccination, hospital, grooming, brushing, walk, condition, memo, and other records entered directly by the user'**
+  /// **'Health records: Potty, meals, water, weight, medication, vaccinations, vet visits, grooming, brushing, walks, condition, memos, etc., entered directly by the user'**
   String get privacyHealthRecords;
 
-  /// Bullet item describing attached media stored locally
+  /// Privacy: Attached media
   ///
   /// In en, this message translates to:
-  /// **'Attached media: photos and videos taken or selected directly by the user'**
+  /// **'Attached media: Photos and videos taken or selected directly by the user'**
   String get privacyAttachedMedia;
 
-  /// Bullet item describing notification settings stored locally
+  /// Privacy: Notification settings
   ///
   /// In en, this message translates to:
-  /// **'Alert settings: alert type, scheduled date and time, and repeat rules'**
+  /// **'Alert settings: Alert type, scheduled date and time, repeat rules'**
   String get privacyNotificationSettings;
 
-  /// Subtitle for in-app purchase related privacy information
+  /// Privacy: In-app purchase title
   ///
   /// In en, this message translates to:
-  /// **'In-App Purchases'**
+  /// **'Regarding In-App Purchases'**
   String get privacyInAppPurchaseTitle;
 
-  /// Bullet item explaining payment processing
+  /// Privacy: Payment processing
   ///
   /// In en, this message translates to:
-  /// **'Payments are processed through the Apple App Store or Google Play Store, and the app does not directly collect or store payment information.'**
+  /// **'Payment processing is handled through the Apple App Store or Google Play Store, and the app does not directly collect or store payment information.'**
   String get privacyPaymentProcessing;
 
-  /// Bullet item explaining receipt verification
+  /// Privacy: Receipt verification
   ///
   /// In en, this message translates to:
-  /// **'Only the minimum information required to verify purchase receipts is processed according to each platform’s policies.'**
+  /// **'Only the minimum information necessary for purchase receipt verification is processed according to each platform\'s policies.'**
   String get privacyReceiptVerification;
 
-  /// Title for privacy policy section 2
+  /// Privacy: Section 2 title
   ///
   /// In en, this message translates to:
-  /// **'Purpose of Collecting and Using Personal Information'**
+  /// **'Purpose of Collection and Use'**
   String get privacySection2Title;
 
-  /// Bullet item describing purpose of saving and viewing health records
+  /// Privacy: Purpose records
   ///
   /// In en, this message translates to:
-  /// **'Saving and viewing pet health records'**
+  /// **'Storing and viewing pet health records'**
   String get privacyPurposeRecords;
 
-  /// Bullet item describing purpose of providing statistics
+  /// Privacy: Purpose stats
   ///
   /// In en, this message translates to:
-  /// **'Providing home screen statistics, such as weekly potty, meal, and water status, as well as weight change charts'**
+  /// **'Providing home screen statistics (weekly potty, meal, water status, weight change graphs, etc.)'**
   String get privacyPurposeStats;
 
-  /// Bullet item describing purpose of sending reminders
+  /// Privacy: Purpose reminders
   ///
   /// In en, this message translates to:
-  /// **'Sending health-related alerts, such as vaccination, medication, and hospital visit reminders'**
+  /// **'Sending health-related alerts such as vaccinations, medication, and vet visits'**
   String get privacyPurposeReminders;
 
-  /// Bullet item describing purpose of backup and restore
+  /// Privacy: Purpose backup restore
   ///
   /// In en, this message translates to:
   /// **'Providing data backup and restore features'**
   String get privacyPurposeBackupRestore;
 
-  /// Bullet item describing purpose of verifying paid feature eligibility
+  /// Privacy: Purpose paid eligibility
   ///
   /// In en, this message translates to:
-  /// **'Verifying eligibility to use paid features'**
+  /// **'Verifying eligibility for paid features'**
   String get privacyPurposePaidEligibility;
 
-  /// Title for privacy policy section 3
+  /// Privacy: Section 3 title
   ///
   /// In en, this message translates to:
-  /// **'Retention and Deletion of Personal Information'**
+  /// **'Retention and Destruction of Information'**
   String get privacySection3Title;
 
-  /// Body text explaining data retention
+  /// Privacy: Retention body
   ///
   /// In en, this message translates to:
-  /// **'All Pet Sumtan data is stored only in the local database (SQLite) on the user’s device and is not transmitted to external servers.'**
+  /// **'All data in Pet Sumtan is stored only in the local database (SQLite) on the user\'s device and is not transmitted to external servers.'**
   String get privacyRetentionBody;
 
-  /// Subtitle for data deletion methods
+  /// Privacy: Data deletion method
   ///
   /// In en, this message translates to:
-  /// **'How to delete data'**
+  /// **'Data Destruction Method'**
   String get privacyDataDeletionMethod;
 
-  /// Bullet item explaining in-app data deletion
+  /// Privacy: Delete in app
   ///
   /// In en, this message translates to:
-  /// **'You can directly delete pet information and records in Settings > Data Management within the app.'**
+  /// **'You can directly delete pet information and records in App Settings > Data Management.'**
   String get privacyDeleteInApp;
 
-  /// Bullet item explaining data deletion when uninstalling the app
+  /// Privacy: Delete uninstall
   ///
   /// In en, this message translates to:
-  /// **'When you delete the app, all data stored on the device will also be deleted.'**
+  /// **'Deleting the app will also delete all data stored on the device.'**
   String get privacyDeleteUninstall;
 
-  /// Bullet item warning about data recovery after deleting the app
+  /// Privacy: Delete backup warning
   ///
   /// In en, this message translates to:
-  /// **'Please note that if you do not back up (export) your data before deleting the app, the data cannot be recovered.'**
+  /// **'However, please note that if you do not back up (export) before deleting the app, the data cannot be recovered.'**
   String get privacyDeleteBackupWarning;
 
-  /// Title for privacy policy section 4
+  /// Privacy: Section 4 title
   ///
   /// In en, this message translates to:
-  /// **'Sharing Personal Information with Third Parties'**
+  /// **'Provision of Information to Third Parties'**
   String get privacySection4Title;
 
-  /// Body text explaining third-party sharing
+  /// Privacy: Third party body
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan does not provide users’ personal information to third parties. However, the following cases are exceptions.'**
+  /// **'Pet Sumtan does not provide users\' personal information to external parties. However, the following cases are exceptions.'**
   String get privacyThirdPartyBody;
 
-  /// Bullet item describing user-initiated data sharing through export
+  /// Privacy: Third party user export
   ///
   /// In en, this message translates to:
-  /// **'When the user directly uses the data export feature, such as sharing a backup file'**
+  /// **'When the user directly uses the data export (backup file sharing) feature'**
   String get privacyThirdPartyUserExport;
 
-  /// Bullet item describing legal exceptions for third-party disclosure
+  /// Privacy: Third party legal request
   ///
   /// In en, this message translates to:
-  /// **'When required by law or upon a lawful request from investigative authorities'**
+  /// **'When required by law or upon a lawful request from an investigative agency'**
   String get privacyThirdPartyLegalRequest;
 
-  /// Title for privacy policy section 5
+  /// Privacy: Section 5 title
   ///
   /// In en, this message translates to:
-  /// **'Access Permissions'**
+  /// **'Access Permissions Guide'**
   String get privacySection5Title;
 
-  /// Body text explaining app permissions
+  /// Privacy: Permissions body
   ///
   /// In en, this message translates to:
-  /// **'To provide app features, the following permissions may be requested. Even if you do not grant a permission, you can still use the remaining features normally, except for the feature that requires that permission.'**
+  /// **'We may request the following permissions to provide app features. Even if you do not allow the permissions, you can still use the rest of the features normally.'**
   String get privacyPermissionsBody;
 
-  /// Name of camera permission
+  /// Privacy: Permission camera name
   ///
   /// In en, this message translates to:
   /// **'Camera'**
   String get privacyPermissionCameraName;
 
-  /// Description of camera permission usage
+  /// Privacy: Permission camera desc
   ///
   /// In en, this message translates to:
-  /// **'Used to directly take photos or videos and attach them to health records.'**
+  /// **'Used when directly taking and attaching photos/videos to health records.'**
   String get privacyPermissionCameraDesc;
 
-  /// Name of photos and media access permission
+  /// Privacy: Permission media name
   ///
   /// In en, this message translates to:
-  /// **'Photos and media access'**
+  /// **'Photo and Media Access'**
   String get privacyPermissionMediaName;
 
-  /// Description of photos and media access permission usage
+  /// Privacy: Permission media desc
   ///
   /// In en, this message translates to:
-  /// **'Used to select photos and videos from the gallery and attach them to records.'**
+  /// **'Used when selecting photos/videos from the gallery to attach to records.'**
   String get privacyPermissionMediaDesc;
 
-  /// Name of notification permission
+  /// Privacy: Permission notification name
   ///
   /// In en, this message translates to:
   /// **'Notifications'**
   String get privacyPermissionNotificationName;
 
-  /// Description of notification permission usage
+  /// Privacy: Permission notification desc
   ///
   /// In en, this message translates to:
-  /// **'Used to send health-related alerts, such as vaccination, medication, and hospital visit reminders.'**
+  /// **'Used to send health-related alerts such as vaccinations, medication, and vet visits.'**
   String get privacyPermissionNotificationDesc;
 
-  /// Name of file access permission on Android
+  /// Privacy: Permission file name
   ///
   /// In en, this message translates to:
-  /// **'File access (Android)'**
+  /// **'File Access (Android)'**
   String get privacyPermissionFileName;
 
-  /// Description of file access permission usage
+  /// Privacy: Permission file desc
   ///
   /// In en, this message translates to:
-  /// **'Used to save or load data backup files.'**
+  /// **'Used when saving or loading data backup files.'**
   String get privacyPermissionFileDesc;
 
-  /// Title for privacy policy section 6
+  /// Privacy: Section 6 title
   ///
   /// In en, this message translates to:
   /// **'Data Backup and Restore'**
   String get privacySection6Title;
 
-  /// Bullet item describing data export
+  /// Privacy: Backup export
   ///
   /// In en, this message translates to:
-  /// **'Export: save or share all app data as a file (.zip).'**
+  /// **'Export: You can save or share all data in the app as a file (.zip).'**
   String get privacyBackupExport;
 
-  /// Bullet item describing data import
+  /// Privacy: Backup import
   ///
   /// In en, this message translates to:
-  /// **'Import: load a previously exported backup file and restore data.'**
+  /// **'Import: You can load a previously exported backup file to restore data.'**
   String get privacyBackupImport;
 
-  /// Bullet item warning about backup file management
+  /// Privacy: Backup warning
   ///
   /// In en, this message translates to:
-  /// **'Backup files are managed directly by the user. Please be careful not to share files with others.'**
+  /// **'Users manage backup files directly, so please be careful not to share the files with others.'**
   String get privacyBackupWarning;
 
-  /// Title for privacy policy section 7
+  /// Privacy: Section 7 title
   ///
   /// In en, this message translates to:
-  /// **'Protection of Children’s Personal Information'**
+  /// **'Protection of Children\'s Privacy'**
   String get privacySection7Title;
 
-  /// Body text explaining protection of children’s personal information
+  /// Privacy: Children body
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan does not separately collect personal information from children under the age of 14. All app data is stored only on the device and is not transmitted to external servers, so children can also use the app safely.'**
+  /// **'Pet Sumtan does not collect separate personal information from children under 14. All app data is stored only on the device, and since there is no external server transmission, children can use it safely.'**
   String get privacyChildrenBody;
 
-  /// Title for privacy policy section 8
+  /// Privacy: Section 8 title
   ///
   /// In en, this message translates to:
-  /// **'Changes to This Privacy Policy'**
+  /// **'Changes to Privacy Policy'**
   String get privacySection8Title;
 
-  /// Bullet item explaining how privacy policy changes are announced
+  /// Privacy: Policy change notice
   ///
   /// In en, this message translates to:
-  /// **'If changes are made, we will notify you through app update notes or in-app notices.'**
+  /// **'Changes will be notified through app update notes or in-app announcements.'**
   String get privacyPolicyChangeNotice;
 
-  /// Bullet item explaining when privacy policy changes take effect
+  /// Privacy: Policy change effective
   ///
   /// In en, this message translates to:
-  /// **'The updated policy will take effect 7 days after the notice.'**
+  /// **'The changed policy takes effect 7 days after the announcement.'**
   String get privacyPolicyChangeEffective;
 
-  /// Title for privacy policy section 9
+  /// Privacy: Section 9 title
   ///
   /// In en, this message translates to:
   /// **'Contact'**
   String get privacySection9Title;
 
-  /// Title of the dog health guide hero banner.
+  /// Health guide: Dog hero title
   ///
   /// In en, this message translates to:
   /// **'Dog Health Care Guide'**
   String get hgDogHeroTitle;
 
-  /// Title of the cat health guide hero banner.
+  /// Health guide: Cat hero title
   ///
   /// In en, this message translates to:
   /// **'Cat Health Care Guide'**
   String get hgCatHeroTitle;
 
-  /// Subtitle shown in the health guide hero banner.
+  /// Health guide: Hero subtitle
   ///
   /// In en, this message translates to:
   /// **'A professional health guide\nbased on veterinary recommendations.'**
   String get hgHeroSubtitle;
 
-  /// Section title for vaccination.
+  /// Health guide: Vaccination section
   ///
   /// In en, this message translates to:
   /// **'Vaccination'**
   String get hgVaccination;
 
-  /// Card title for essential/core vaccines.
+  /// Health guide: Core vaccines
   ///
   /// In en, this message translates to:
   /// **'Core Vaccines'**
   String get hgCoreVaccines;
 
-  /// Card title for optional/non-core vaccines.
+  /// Health guide: Non-core vaccines
   ///
   /// In en, this message translates to:
   /// **'Non-Core Vaccines'**
   String get hgNonCoreVaccines;
 
-  /// Badge label indicating a required item.
+  /// Health guide: Required badge
   ///
   /// In en, this message translates to:
   /// **'Required'**
   String get hgRequired;
 
-  /// Badge label indicating a recommended item.
+  /// Health guide: Recommended badge
   ///
   /// In en, this message translates to:
   /// **'Recommended'**
   String get hgRecommended;
 
-  /// Section title for parasite prevention.
+  /// Health guide: Parasite prevention section
   ///
   /// In en, this message translates to:
   /// **'Parasite Prevention'**
   String get hgParasitePrevention;
 
-  /// Card title for heartworm prevention.
+  /// Health guide: Heartworm
   ///
   /// In en, this message translates to:
   /// **'Heartworm'**
   String get hgHeartworm;
 
-  /// Badge label for monthly frequency.
+  /// Health guide: Monthly badge
   ///
   /// In en, this message translates to:
   /// **'Monthly'**
   String get hgMonthly;
 
-  /// Card title for flea and tick prevention.
+  /// Health guide: External parasites
   ///
   /// In en, this message translates to:
-  /// **'External Parasites (Fleas & Ticks)'**
+  /// **'External Parasites (Fleas/Ticks)'**
   String get hgExternalParasites;
 
-  /// Card title for internal parasite prevention.
+  /// Health guide: Internal parasites
   ///
   /// In en, this message translates to:
   /// **'Internal Parasites'**
   String get hgInternalParasites;
 
-  /// Badge label for a 3 to 6 month interval.
+  /// Health guide: 3-6 months badge
   ///
   /// In en, this message translates to:
-  /// **'Every 3–6 Months'**
+  /// **'Every 3-6 months'**
   String get hgThreeToSixMonths;
 
-  /// Badge label for regular management.
+  /// Health guide: Regular badge
   ///
   /// In en, this message translates to:
   /// **'Regular'**
   String get hgRegular;
 
-  /// Section title for regular health checkups.
+  /// Health guide: Regular checkup section
   ///
   /// In en, this message translates to:
   /// **'Regular Health Checkup'**
   String get hgRegularCheckup;
 
-  /// Section title for dental and oral care.
+  /// Health guide: Dental care section
   ///
   /// In en, this message translates to:
   /// **'Dental & Oral Care'**
   String get hgDentalCare;
 
-  /// Section title for toxic or forbidden foods.
+  /// Health guide: Forbidden foods section
   ///
   /// In en, this message translates to:
   /// **'Strictly Forbidden Foods'**
   String get hgForbiddenFoods;
 
-  /// Section title for emergency symptoms.
+  /// Health guide: Emergency symptoms section
   ///
   /// In en, this message translates to:
-  /// **'Symptoms Requiring Immediate Vet Care'**
+  /// **'Symptoms Requiring Immediate Vet Visit'**
   String get hgEmergencySymptoms;
 
-  /// Section title for dog exercise and mental health.
+  /// Health guide: Exercise & mental health section
   ///
   /// In en, this message translates to:
   /// **'Exercise & Mental Health'**
   String get hgExerciseMentalHealth;
 
-  /// Card title for walking guidance.
+  /// Health guide: Walks
   ///
   /// In en, this message translates to:
-  /// **'Walk'**
+  /// **'Walks'**
   String get hgWalk;
 
-  /// Badge label for daily frequency.
+  /// Health guide: Daily badge
   ///
   /// In en, this message translates to:
   /// **'Daily'**
   String get hgDaily;
 
-  /// Card title for breed-based exercise recommendations.
+  /// Health guide: Breed exercise amount
   ///
   /// In en, this message translates to:
   /// **'Recommended Exercise by Breed'**
   String get hgBreedExerciseAmount;
 
-  /// Card title for play and mental stimulation.
+  /// Health guide: Play & brain stimulation
   ///
   /// In en, this message translates to:
   /// **'Play & Brain Stimulation'**
   String get hgPlayBrainStimulation;
 
-  /// Card title for stress signals.
+  /// Health guide: Stress signals
   ///
   /// In en, this message translates to:
   /// **'Recognizing Stress Signals'**
   String get hgStressSignals;
 
-  /// Badge label indicating caution.
+  /// Health guide: Caution badge
   ///
   /// In en, this message translates to:
   /// **'Caution'**
   String get hgCaution;
 
-  /// Card title for dog socialization and environmental stimulation.
+  /// Health guide: Socialization
   ///
   /// In en, this message translates to:
   /// **'Socialization & Environmental Stimulation'**
   String get hgSocialization;
 
-  /// Dog core vaccine description for DHPPL.
+  /// Health guide: Dog DHPPL
   ///
   /// In en, this message translates to:
-  /// **'**DHPPL (Combination Vaccine)** — Distemper, Hepatitis, Parvovirus, Parainfluenza, and Leptospirosis.\n1st dose at 6–8 weeks of age, 3 doses at 3–4 week intervals, then annual boosters'**
+  /// **'**DHPPL (Combo Vaccine)** — Distemper, Hepatitis, Parvovirus, Parainfluenza, Leptospirosis.\n1st dose at 6-8 weeks, 3 doses at 3-4 week intervals, then annual boosters.'**
   String get hgDogCoreDhppl;
 
-  /// Dog core vaccine description for rabies.
+  /// Health guide: Dog Rabies
   ///
   /// In en, this message translates to:
-  /// **'**Rabies** — 1st dose after 3 months of age, then once annually (legally required vaccination)'**
+  /// **'**Rabies** — 1st dose after 3 months of age, then annually (Legally required in many areas).'**
   String get hgDogCoreRabies;
 
-  /// Dog core vaccine description for coronavirus enteritis.
+  /// Health guide: Dog Corona
   ///
   /// In en, this message translates to:
-  /// **'**Coronavirus Enteritis** — Starts at 6–8 weeks of age, 2 doses at 3–4 week intervals, then annual boosters'**
+  /// **'**Coronavirus** — Starts at 6-8 weeks, 2 doses at 3-4 week intervals, then annual boosters.'**
   String get hgDogCoreCorona;
 
-  /// Dog non-core vaccine description for kennel cough.
+  /// Health guide: Dog Kennel Cough
   ///
   /// In en, this message translates to:
-  /// **'**Kennel Cough** — Recommended for multi-dog environments, grooming salons, or boarding facilities. Available as intranasal or injectable type'**
+  /// **'**Kennel Cough** — Recommended for multi-dog environments, grooming salons, or boarding. Nasal or injectable.'**
   String get hgDogNonCoreKennel;
 
-  /// Dog non-core vaccine description for influenza.
+  /// Health guide: Dog Influenza
   ///
   /// In en, this message translates to:
-  /// **'**Canine Influenza** — Recommended for dogs with frequent outdoor activity or frequent contact with other dogs'**
+  /// **'**Influenza** — If highly active outdoors or frequently in contact with other dogs.'**
   String get hgDogNonCoreFlu;
 
-  /// Dog heartworm prevention guidance item 1.
+  /// Health guide: Dog Heartworm 1
   ///
   /// In en, this message translates to:
-  /// **'Around mosquito season (March–November), monthly preventive medication is recommended'**
+  /// **'Recommended to administer preventative medication **once a month** around mosquito season (March-November).'**
   String get hgDogHeartworm1;
 
-  /// Dog heartworm prevention guidance item 2.
+  /// Health guide: Dog Heartworm 2
   ///
   /// In en, this message translates to:
-  /// **'Infection is difficult to treat and can be fatal — **prevention is the best protection**'**
+  /// **'Treatment is difficult and fatal if infected — **Prevention is the best method**.'**
   String get hgDogHeartworm2;
 
-  /// Dog heartworm prevention guidance item 3.
+  /// Health guide: Dog Heartworm 3
   ///
   /// In en, this message translates to:
-  /// **'Before starting medication, testing is required to confirm a negative infection status'**
+  /// **'Must test for infection and confirm negative before administering.'**
   String get hgDogHeartworm3;
 
-  /// Dog heartworm prevention guidance item 4.
+  /// Health guide: Dog Heartworm 4
   ///
   /// In en, this message translates to:
-  /// **'Year-round prevention is safer and commonly recommended by veterinarians'**
+  /// **'Year-round administration is safer (Recommended by vets).'**
   String get hgDogHeartworm4;
 
-  /// Dog external parasite prevention guidance item 1.
+  /// Health guide: Dog External Parasites 1
   ///
   /// In en, this message translates to:
-  /// **'Administer spot-on or oral preventives **monthly**'**
+  /// **'Administer spot-on or oral preventative **monthly**.'**
   String get hgDogExternalParasites1;
 
-  /// Dog external parasite prevention guidance item 2.
+  /// Health guide: Dog External Parasites 2
   ///
   /// In en, this message translates to:
-  /// **'After walks, always check the ears, between the toes, and armpits for ticks'**
+  /// **'Must check for ticks in ears, between toes, and armpits after walks.'**
   String get hgDogExternalParasites2;
 
-  /// Dog external parasite prevention guidance item 3.
+  /// Health guide: Dog External Parasites 3
   ///
   /// In en, this message translates to:
-  /// **'When removing a tick, use tweezers and pull slowly straight upward without twisting'**
+  /// **'When removing ticks, use tweezers to pull straight out slowly (Do not twist).'**
   String get hgDogExternalParasites3;
 
-  /// Dog internal parasite prevention guidance item 1.
+  /// Health guide: Dog Internal Parasites 1
   ///
   /// In en, this message translates to:
-  /// **'Roundworms, hookworms, and whipworms: administer dewormer **every 3–6 months**'**
+  /// **'Roundworms, hookworms, whipworms: Administer dewormer **every 3-6 months**.'**
   String get hgDogInternalParasites1;
 
-  /// Dog internal parasite prevention guidance item 2.
+  /// Health guide: Dog Internal Parasites 2
   ///
   /// In en, this message translates to:
-  /// **'For puppies from 2 weeks of age: deworm 4 times at 2-week intervals, then continue regular management'**
+  /// **'Puppy stage (from 2 weeks): Deworm 4 times at 2-week intervals, then regular maintenance.'**
   String get hgDogInternalParasites2;
 
-  /// Dental care guidance item 1.
+  /// Health guide: Dental 1
   ///
   /// In en, this message translates to:
-  /// **'Daily brushing is ideal — at least **3 times per week** is recommended'**
+  /// **'Daily brushing is ideal — Recommended at least **3 times a week**.'**
   String get hgDental1;
 
-  /// Dental care guidance item 2.
+  /// Health guide: Dental 2
   ///
   /// In en, this message translates to:
-  /// **'Always use **pet-specific toothpaste**. Do not use human toothpaste containing xylitol'**
+  /// **'Must use **pet-specific toothpaste** (Human toothpaste containing xylitol is strictly forbidden).'**
   String get hgDental2;
 
-  /// Dental care guidance item 3.
+  /// Health guide: Dental 3
   ///
   /// In en, this message translates to:
-  /// **'Severe tartar requires professional scaling at a veterinary clinic under general anesthesia'**
+  /// **'If tartar is severe, scaling at the vet is required (Requires general anesthesia).'**
   String get hgDental3;
 
-  /// Dental care guidance item 4.
+  /// Health guide: Dental 4
   ///
   /// In en, this message translates to:
-  /// **'Dental chews and dental toys can support oral care as supplementary tools'**
+  /// **'Dental chews and tooth toys can be used as supplementary care.'**
   String get hgDental4;
 
-  /// Warning text for foods forbidden to dogs.
+  /// Health guide: Dog forbidden food alert
   ///
   /// In en, this message translates to:
-  /// **'The foods below are toxic to dogs. Even small amounts can be dangerous, so never feed them.'**
+  /// **'The following foods are toxic to dogs. Even small amounts can be dangerous, so never feed them.'**
   String get hgDogForbiddenFoodAlert;
 
-  /// Dog forbidden food description for grapes and raisins.
+  /// Health guide: Dog forbidden grape
   ///
   /// In en, this message translates to:
-  /// **'**Grapes and raisins** — can cause kidney failure; even small amounts may be fatal'**
+  /// **'**Grapes/Raisins** — Causes kidney failure, even small amounts are fatal.'**
   String get hgDogForbiddenGrape;
 
-  /// Dog forbidden food description for chocolate and cacao.
+  /// Health guide: Dog forbidden chocolate
   ///
   /// In en, this message translates to:
-  /// **'**Chocolate and cacao** — theobromine poisoning, heart failure, and seizures'**
+  /// **'**Chocolate/Cacao** — Theobromine poisoning, heart failure, seizures.'**
   String get hgDogForbiddenChocolate;
 
-  /// Dog forbidden food description for onions, garlic, and leeks.
+  /// Health guide: Dog forbidden onion
   ///
   /// In en, this message translates to:
-  /// **'**Onions, garlic, and leeks** — destroy red blood cells and cause hemolytic anemia'**
+  /// **'**Onions/Garlic/Leeks** — Destroys red blood cells, hemolytic anemia.'**
   String get hgDogForbiddenOnion;
 
-  /// Dog forbidden food description for xylitol.
+  /// Health guide: Dog forbidden xylitol
   ///
   /// In en, this message translates to:
-  /// **'**Xylitol** — causes excessive insulin release, hypoglycemia, and liver failure'**
+  /// **'**Xylitol** — Insulin hypersecretion, hypoglycemia, liver failure.'**
   String get hgDogForbiddenXylitol;
 
-  /// Dog forbidden food description for macadamia nuts.
+  /// Health guide: Dog forbidden macadamia
   ///
   /// In en, this message translates to:
-  /// **'**Macadamia nuts** — muscle weakness, high fever, and vomiting'**
+  /// **'**Macadamia Nuts** — Muscle weakness, high fever, vomiting.'**
   String get hgDogForbiddenMacadamia;
 
-  /// Dog forbidden food description for raw dough and alcohol.
+  /// Health guide: Dog forbidden dough/alcohol
   ///
   /// In en, this message translates to:
-  /// **'**Raw dough and alcohol** — ethanol poisoning and hypoglycemia'**
+  /// **'**Raw Dough/Alcohol** — Ethanol poisoning, hypoglycemia.'**
   String get hgDogForbiddenDoughAlcohol;
 
-  /// Dog forbidden food description for avocado.
+  /// Health guide: Dog forbidden avocado
   ///
   /// In en, this message translates to:
-  /// **'**Avocado** — contains persin and may cause vomiting and diarrhea'**
+  /// **'**Avocado** — Contains persin, causes vomiting and diarrhea.'**
   String get hgDogForbiddenAvocado;
 
-  /// Common emergency warning text for dog and cat guides.
+  /// Health guide: Emergency alert
   ///
   /// In en, this message translates to:
-  /// **'If any of the symptoms below appear, visit a veterinary clinic immediately.'**
+  /// **'If the following symptoms appear, visit the vet immediately.'**
   String get hgEmergencyAlert;
 
-  /// Dog emergency symptom item 1.
+  /// Health guide: Dog emergency 1
   ///
   /// In en, this message translates to:
-  /// **'Complete loss of appetite for more than 24 hours'**
+  /// **'Complete loss of appetite for more than 24 hours.'**
   String get hgDogEmergency1;
 
-  /// Dog emergency symptom item 2.
+  /// Health guide: Dog emergency 2
   ///
   /// In en, this message translates to:
-  /// **'Vomiting or diarrhea repeated 3 or more times in one day'**
+  /// **'Vomiting/diarrhea repeated 3 or more times a day.'**
   String get hgDogEmergency2;
 
-  /// Dog emergency symptom item 3.
+  /// Health guide: Dog emergency 3
   ///
   /// In en, this message translates to:
-  /// **'Abdominal bloating and unproductive retching, possible gastric dilatation-volvulus'**
+  /// **'Abdominal distension/retching (Suspected gastric dilatation-volvulus).'**
   String get hgDogEmergency3;
 
-  /// Dog emergency symptom item 4.
+  /// Health guide: Dog emergency 4
   ///
   /// In en, this message translates to:
-  /// **'Difficulty breathing, pale gums, or cyanosis'**
+  /// **'Difficulty breathing, pale gums, cyanosis.'**
   String get hgDogEmergency4;
 
-  /// Dog emergency symptom item 5.
+  /// Health guide: Dog emergency 5
   ///
   /// In en, this message translates to:
-  /// **'Seizures, convulsions, or loss of consciousness'**
+  /// **'Convulsions, seizures, loss of consciousness.'**
   String get hgDogEmergency5;
 
-  /// Dog emergency symptom item 6.
+  /// Health guide: Dog emergency 6
   ///
   /// In en, this message translates to:
-  /// **'No urination for more than 12 hours'**
+  /// **'Inability to urinate for more than 12 hours.'**
   String get hgDogEmergency6;
 
-  /// Dog emergency symptom item 7.
+  /// Health guide: Dog emergency 7
   ///
   /// In en, this message translates to:
-  /// **'Visible trauma, fracture, or heavy bleeding'**
+  /// **'Noticeable trauma, fractures, heavy bleeding.'**
   String get hgDogEmergency7;
 
-  /// Alert text for dog exercise and mental health section.
+  /// Health guide: Dog exercise alert
   ///
   /// In en, this message translates to:
-  /// **'For dogs, lack of exercise is not just a fitness issue. It can be a major cause of stress, anxiety, and destructive behavior.'**
+  /// **'Lack of exercise in dogs is not just a physical issue. It is a major cause of stress, anxiety, and destructive behavior.'**
   String get hgDogExerciseAlert;
 
-  /// Dog walking guidance item 1.
+  /// Health guide: Dog walk 1
   ///
   /// In en, this message translates to:
-  /// **'Small breeds: at least **20–30 minutes** daily; medium and large breeds: **1 hour or more** recommended'**
+  /// **'Small breeds: **20-30 mins**+ daily, Medium/Large breeds: **1 hour**+ recommended.'**
   String get hgDogWalk1;
 
-  /// Dog walking guidance item 2.
+  /// Health guide: Dog walk 2
   ///
   /// In en, this message translates to:
-  /// **'Walks are not only for elimination — they provide **scent stimulation, socialization, and stress relief**'**
+  /// **'Walks are not just for potty, but for **olfactory stimulation, socialization, and stress relief**.'**
   String get hgDogWalk2;
 
-  /// Dog walking guidance item 3.
+  /// Health guide: Dog walk 3
   ///
   /// In en, this message translates to:
-  /// **'Allow plenty of sniffing time — it is highly effective for relieving mental fatigue'**
+  /// **'Allow plenty of sniffing — Very effective for relieving mental fatigue.'**
   String get hgDogWalk3;
 
-  /// Dog walking guidance item 4.
+  /// Health guide: Dog walk 4
   ///
   /// In en, this message translates to:
-  /// **'In summer, beware of asphalt burns — walks before 7 a.m. or in the evening are recommended'**
+  /// **'Beware of asphalt burns in summer — Recommend walking before 7 AM or in the evening.'**
   String get hgDogWalk4;
 
-  /// Dog play guidance item 1.
+  /// Health guide: Dog play 1
   ///
   /// In en, this message translates to:
-  /// **'**Fetch and tug-of-war** — help release physical energy and strengthen the bond with the owner'**
+  /// **'**Fetch / Tug-of-war** — Releases physical energy, strengthens bond with owner.'**
   String get hgDogPlay1;
 
-  /// Dog play guidance item 2.
+  /// Health guide: Dog play 2
   ///
   /// In en, this message translates to:
-  /// **'**Nosework** — stimulates the brain and can provide an effect similar to a 30-minute walk in just 15 minutes'**
+  /// **'**Nosework** — Brain stimulation, 15 mins equals 30 mins of walking effect.'**
   String get hgDogPlay2;
 
-  /// Dog play guidance item 3.
+  /// Health guide: Dog play 3
   ///
   /// In en, this message translates to:
-  /// **'**Puzzle toys and Kong toys** — help reduce separation anxiety during alone time'**
+  /// **'**Puzzle/Kong toys** — Effective in alleviating separation anxiety when alone.'**
   String get hgDogPlay3;
 
-  /// Dog play guidance item 4.
+  /// Health guide: Dog play 4
   ///
   /// In en, this message translates to:
-  /// **'Just **10–15 minutes** of focused play each day can significantly reduce stress'**
+  /// **'Just **10-15 mins** of focused play daily significantly reduces stress levels.'**
   String get hgDogPlay4;
 
-  /// Dog stress signal item 1.
+  /// Health guide: Dog stress 1
   ///
   /// In en, this message translates to:
-  /// **'Destroying furniture or objects and excessive barking may signal lack of exercise or stimulation'**
+  /// **'Destroying furniture/objects, excessive barking — Signs of lack of exercise/stimulation.'**
   String get hgDogStress1;
 
-  /// Dog stress signal item 2.
+  /// Health guide: Dog stress 2
   ///
   /// In en, this message translates to:
-  /// **'Tail biting or excessive licking of paws/body may indicate compulsive behavior or stress relief attempts'**
+  /// **'Tail chasing, excessive licking (paws, body) — Compulsive behavior, attempt to relieve stress.'**
   String get hgDogStress2;
 
-  /// Dog stress signal item 3.
+  /// Health guide: Dog stress 3
   ///
   /// In en, this message translates to:
-  /// **'Extreme anxiety when the owner leaves and potty accidents may suggest separation anxiety'**
+  /// **'Excessive anxiety or potty mistakes when owner leaves — Suspected separation anxiety.'**
   String get hgDogStress3;
 
-  /// Dog stress signal item 4.
+  /// Health guide: Dog stress 4
   ///
   /// In en, this message translates to:
-  /// **'If symptoms persist, consult a veterinarian or animal behavior specialist'**
+  /// **'If it persists, consulting a vet or pet behavior specialist is recommended.'**
   String get hgDogStress4;
 
-  /// Dog socialization guidance item 1.
+  /// Health guide: Dog social 1
   ///
   /// In en, this message translates to:
-  /// **'**3–14 weeks of age** is the golden period for socialization — exposure to various people, sounds, and environments is important'**
+  /// **'**3-14 weeks** of age is the golden period for socialization — Exposure to various people, sounds, and environments is crucial.'**
   String get hgDogSocial1;
 
-  /// Dog socialization guidance item 2.
+  /// Health guide: Dog social 2
   ///
   /// In en, this message translates to:
-  /// **'Interaction with other dogs — dog parks and puppy classes can help'**
+  /// **'Interaction with other dogs — Utilize dog parks or puppy classes.'**
   String get hgDogSocial2;
 
-  /// Dog socialization guidance item 3.
+  /// Health guide: Dog social 3
   ///
   /// In en, this message translates to:
-  /// **'Experiencing new places, smells, and sounds contributes to mental enrichment'**
+  /// **'Experiencing new places, smells, and sounds contributes to mental enrichment.'**
   String get hgDogSocial3;
 
-  /// Dog socialization guidance item 4.
+  /// Health guide: Dog social 4
   ///
   /// In en, this message translates to:
-  /// **'Positive reinforcement training, such as clickers and treats, stimulates the brain and strengthens bonding'**
+  /// **'Positive reinforcement training (clicker, treats) increases brain stimulation and bonding simultaneously.'**
   String get hgDogSocial4;
 
-  /// Cat core vaccine description for FVRCP.
+  /// Health guide: Cat FVRCP
   ///
   /// In en, this message translates to:
-  /// **'**FVRCP (Combination Vaccine)** — feline herpesvirus, calicivirus, and panleukopenia.\n1st dose at 6–8 weeks of age, 3 doses at 3–4 week intervals, then every 1–3 years'**
+  /// **'**FVRCP (Combo Vaccine)** — Herpesvirus, Calicivirus, Panleukopenia.\n1st dose at 6-8 weeks, 3 doses at 3-4 week intervals, then every 1-3 years.'**
   String get hgCatCoreFvrcp;
 
-  /// Cat core vaccine description for rabies.
+  /// Health guide: Cat Rabies
   ///
   /// In en, this message translates to:
-  /// **'**Rabies** — required for outdoor cats and recommended for indoor cats as well (legally required)'**
+  /// **'**Rabies** — Mandatory for outdoor cats, recommended for indoor cats (Legally required in many areas).'**
   String get hgCatCoreRabies;
 
-  /// Cat non-core vaccine description for FeLV.
+  /// Health guide: Cat FeLV
   ///
   /// In en, this message translates to:
-  /// **'**Feline Leukemia (FeLV)** — strongly recommended for outdoor cats and multi-cat households'**
+  /// **'**Feline Leukemia (FeLV)** — Highly recommended for outdoor cats or multi-cat households.'**
   String get hgCatNonCoreFelv;
 
-  /// Cat non-core vaccine description for chlamydia.
+  /// Health guide: Cat Chlamydia
   ///
   /// In en, this message translates to:
-  /// **'**Feline Chlamydia** — helps prevent conjunctivitis in multi-cat environments'**
+  /// **'**Feline Chlamydia** — Multi-cat environments, prevents conjunctivitis.'**
   String get hgCatNonCoreChlamydia;
 
-  /// Cat non-core vaccine description for FIV.
+  /// Health guide: Cat FIV
   ///
   /// In en, this message translates to:
-  /// **'**Feline Immunodeficiency Virus (FIV)** — especially relevant for outdoor male cats; transmitted through fight wounds'**
+  /// **'**Feline Immunodeficiency Virus (FIV)** — Outdoor male cats (transmitted through bite wounds).'**
   String get hgCatNonCoreFiv;
 
-  /// Cat external parasite prevention guidance item 1.
+  /// Health guide: Cat External Parasites 1
   ///
   /// In en, this message translates to:
-  /// **'Outdoor cats: administer flea and tick prevention **once a month**'**
+  /// **'Outdoor cats: Administer flea/tick preventative **once a month**.'**
   String get hgCatExternalParasites1;
 
-  /// Cat external parasite prevention guidance item 2.
+  /// Health guide: Cat External Parasites 2
   ///
   /// In en, this message translates to:
-  /// **'Even indoor cats can be exposed to fleas carried in on clothing or shoes → prevention **every 3 months** is recommended'**
+  /// **'Indoor cats can also get fleas via human clothes/shoes → Preventative recommended **every 3 months**.'**
   String get hgCatExternalParasites2;
 
-  /// Cat external parasite prevention guidance item 3.
+  /// Health guide: Cat External Parasites 3
   ///
   /// In en, this message translates to:
-  /// **'When using spot-on products, apply accurately to the back of the neck'**
+  /// **'When using spot-on products, apply accurately to the back of the neck.'**
   String get hgCatExternalParasites3;
 
-  /// Card title for cat internal parasites and heartworm.
+  /// Health guide: Cat Internal & Heartworm
   ///
   /// In en, this message translates to:
   /// **'Internal Parasites & Heartworm'**
   String get hgCatInternalHeartworm;
 
-  /// Cat internal parasite prevention guidance item 1.
+  /// Health guide: Cat Internal Parasites 1
   ///
   /// In en, this message translates to:
-  /// **'Roundworms and tapeworms: administer dewormer **every 3–6 months**'**
+  /// **'Roundworms/Tapeworms: Administer dewormer **every 3-6 months**.'**
   String get hgCatInternalParasites1;
 
-  /// Cat internal parasite prevention guidance item 2.
+  /// Health guide: Cat Internal Parasites 2
   ///
   /// In en, this message translates to:
-  /// **'If fed raw meat or raw fish, more frequent testing is recommended'**
+  /// **'If feeding a raw diet (raw meat/fish), more frequent testing is recommended.'**
   String get hgCatInternalParasites2;
 
-  /// Cat heartworm prevention warning.
+  /// Health guide: Cat Heartworm 1
   ///
   /// In en, this message translates to:
-  /// **'Heartworm — cats have **no curative treatment, so prevention is the only option**. Monthly prevention is strongly recommended for outdoor cats'**
+  /// **'Heartworm — **There is no cure for cats, prevention is the only way**. Monthly administration highly recommended for outdoor cats.'**
   String get hgCatHeartworm1;
 
-  /// Section title for major feline diseases.
+  /// Health guide: Cat major diseases section
   ///
   /// In en, this message translates to:
-  /// **'Major Feline Diseases to Watch For'**
+  /// **'Beware of Major Cat Diseases'**
   String get hgCatMajorDiseases;
 
-  /// Alert text for major feline diseases section.
+  /// Health guide: Cat disease alert
   ///
   /// In en, this message translates to:
-  /// **'Cats tend to hide pain and illness, so symptoms often appear only after a condition has progressed. Regular checkups are especially important.'**
+  /// **'Cats hide their pain, so when symptoms appear, the disease has often already progressed. Regular checkups are especially important.'**
   String get hgCatDiseaseAlert;
 
-  /// Description of FLUTD in cats.
+  /// Health guide: Cat FLUTD
   ///
   /// In en, this message translates to:
-  /// **'**Feline Lower Urinary Tract Disease (FLUTD)** — common in male cats. Inability to urinate is an immediate emergency'**
+  /// **'**Feline Lower Urinary Tract Disease (FLUTD)** — Common in males. If unable to urinate, immediate emergency care is needed.'**
   String get hgCatDiseaseFlutd;
 
-  /// Description of chronic kidney disease in cats.
+  /// Health guide: Cat CKD
   ///
   /// In en, this message translates to:
-  /// **'**Chronic Kidney Disease (CKD)** — one of the leading causes of death in senior cats. Regular kidney screening is essential from age 7'**
+  /// **'**Chronic Kidney Disease (CKD)** — #1 cause of death in senior cats. Regular kidney panel tests essential for cats 7+ years old.'**
   String get hgCatDiseaseCkd;
 
-  /// Description of feline diabetes.
+  /// Health guide: Cat Diabetes
   ///
   /// In en, this message translates to:
-  /// **'**Feline Diabetes** — higher risk in obese and senior cats. Watch for increased thirst and urination'**
+  /// **'**Feline Diabetes** — Risk for obese/senior cats. Watch for increased thirst and urination.'**
   String get hgCatDiseaseDiabetes;
 
-  /// Description of hyperthyroidism in cats.
+  /// Health guide: Cat Hyperthyroidism
   ///
   /// In en, this message translates to:
-  /// **'**Hyperthyroidism** — common in cats over 10 years old. Watch for weight loss, increased appetite, and hyperactivity'**
+  /// **'**Hyperthyroidism** — Common in cats 10+ years old. Symptoms include weight loss, overeating, and hyperactivity.'**
   String get hgCatDiseaseHyperthyroidism;
 
-  /// Description of stomatitis in cats.
+  /// Health guide: Cat Stomatitis
   ///
   /// In en, this message translates to:
-  /// **'**Stomatitis** — very common in cats. Bad breath, drooling, or appetite loss should be checked'**
+  /// **'**Stomatitis** — Very common in cats. Check if there is bad breath, drooling, or loss of appetite.'**
   String get hgCatDiseaseStomatitis;
 
-  /// Description of feline herpesvirus.
+  /// Health guide: Cat FHV
   ///
   /// In en, this message translates to:
-  /// **'**Feline Herpesvirus (FHV-1)** — once infected, it remains latent for life. Stress can trigger recurrence with sneezing, eye discharge, and conjunctivitis'**
+  /// **'**Feline Herpes (FHV-1)** — Once infected, it remains dormant for life. Relapses during stress, causing sneezing, eye discharge, conjunctivitis.'**
   String get hgCatDiseaseFhv;
 
-  /// Section title for cat hydration and diet.
+  /// Health guide: Hydration & Diet section
   ///
   /// In en, this message translates to:
   /// **'Hydration & Diet Management'**
   String get hgHydrationDiet;
 
-  /// Alert text for cat hydration section.
+  /// Health guide: Cat hydration alert
   ///
   /// In en, this message translates to:
-  /// **'Cats naturally drink little water and are vulnerable to urinary diseases. Encouraging water intake is very important.'**
+  /// **'Cats naturally do not drink much water, making them vulnerable to urinary diseases. Encouraging water intake is very important.'**
   String get hgCatHydrationAlert;
 
-  /// Cat hydration guidance item 1.
+  /// Health guide: Cat hydration 1
   ///
   /// In en, this message translates to:
-  /// **'Wet food, such as cans or pouches, is recommended to help increase hydration'**
+  /// **'Combining wet food (cans/pouches) is recommended to supplement hydration.'**
   String get hgCatHydration1;
 
-  /// Cat hydration guidance item 2.
+  /// Health guide: Cat hydration 2
   ///
   /// In en, this message translates to:
-  /// **'Many cats prefer running water — a **water fountain** can be effective'**
+  /// **'Prefers flowing water — Installing a **water fountain** is effective.'**
   String get hgCatHydration2;
 
-  /// Cat hydration guidance item 3.
+  /// Health guide: Cat hydration 3
   ///
   /// In en, this message translates to:
-  /// **'Place the water bowl away from the food bowl; wide, shallow bowls are often preferred'**
+  /// **'Separate water bowls from food bowls; prefer wide, shallow bowls.'**
   String get hgCatHydration3;
 
-  /// Cat hydration guidance item 4.
+  /// Health guide: Cat hydration 4
   ///
   /// In en, this message translates to:
-  /// **'Target water intake: about **40–60 ml** per kg of body weight per day'**
+  /// **'Target water intake: About **40-60ml** per 1kg of body weight per day.'**
   String get hgCatHydration4;
 
-  /// Warning text for foods forbidden to cats.
+  /// Health guide: Cat forbidden food alert
   ///
   /// In en, this message translates to:
-  /// **'The foods below are toxic to cats. Even small amounts can be dangerous, so never feed them.'**
+  /// **'The following foods are toxic to cats. Even small amounts can be dangerous, so never feed them.'**
   String get hgCatForbiddenFoodAlert;
 
-  /// Cat forbidden food description for onions, garlic, and leeks.
+  /// Health guide: Cat forbidden onion
   ///
   /// In en, this message translates to:
-  /// **'**Onions, garlic, and leeks** — destroy red blood cells and cause hemolytic anemia; cats are more sensitive than dogs'**
+  /// **'**Onions/Garlic/Leeks** — Destroys red blood cells, hemolytic anemia (More sensitive than dogs).'**
   String get hgCatForbiddenOnion;
 
-  /// Cat forbidden food description for grapes and raisins.
+  /// Health guide: Cat forbidden grape
   ///
   /// In en, this message translates to:
-  /// **'**Grapes and raisins** — can cause kidney failure'**
+  /// **'**Grapes/Raisins** — Causes kidney failure.'**
   String get hgCatForbiddenGrape;
 
-  /// Cat forbidden food description for chocolate and caffeine.
+  /// Health guide: Cat forbidden chocolate
   ///
   /// In en, this message translates to:
-  /// **'**Chocolate and caffeine** — toxic to the heart and nervous system'**
+  /// **'**Chocolate/Caffeine** — Heart and nervous system toxicity.'**
   String get hgCatForbiddenChocolate;
 
-  /// Cat forbidden food description for raw fish.
+  /// Health guide: Cat forbidden raw fish
   ///
   /// In en, this message translates to:
-  /// **'**Raw fish when fed continuously** — may cause thiamine, vitamin B1, deficiency'**
+  /// **'**Raw Fish (continuous feeding)** — Causes Thiamine (B1) deficiency.'**
   String get hgCatForbiddenRawFish;
 
-  /// Cat forbidden food description for milk and dairy products.
+  /// Health guide: Cat forbidden milk
   ///
   /// In en, this message translates to:
-  /// **'**Milk and dairy products** — many adult cats are lactose intolerant and may develop diarrhea'**
+  /// **'**Milk/Dairy** — Adult cats are lactose intolerant, causes diarrhea.'**
   String get hgCatForbiddenMilk;
 
-  /// Cat forbidden food description for xylitol and alcohol.
+  /// Health guide: Cat forbidden xylitol/alcohol
   ///
   /// In en, this message translates to:
-  /// **'**Xylitol and alcohol** — toxic to the liver and nervous system'**
+  /// **'**Xylitol/Alcohol** — Liver and nervous system toxicity.'**
   String get hgCatForbiddenXylitolAlcohol;
 
-  /// Cat forbidden food description for avocado.
+  /// Health guide: Cat forbidden avocado
   ///
   /// In en, this message translates to:
-  /// **'**Avocado** — contains persin and may cause vomiting and diarrhea'**
+  /// **'**Avocado** — Contains persin, causes vomiting and diarrhea.'**
   String get hgCatForbiddenAvocado;
 
-  /// Cat forbidden food description for raw egg whites.
+  /// Health guide: Cat forbidden raw egg white
   ///
   /// In en, this message translates to:
-  /// **'**Raw egg whites** — avidin blocks biotin absorption and may cause skin and coat problems'**
+  /// **'**Raw Egg Whites** — Avidin blocks biotin, causing skin/coat issues.'**
   String get hgCatForbiddenRawEggWhite;
 
-  /// Cat emergency symptom item 1.
+  /// Health guide: Cat emergency 1
   ///
   /// In en, this message translates to:
-  /// **'**Unable to urinate or blood in urine** — urethral obstruction is an emergency, especially in male cats'**
+  /// **'**Unable to urinate at all or blood in urine** — Urethral obstruction emergency (Especially watch male cats).'**
   String get hgCatEmergency1;
 
-  /// Cat emergency symptom item 2.
+  /// Health guide: Cat emergency 2
   ///
   /// In en, this message translates to:
-  /// **'Complete loss of appetite for more than 24 hours, with risk of fatty liver disease'**
+  /// **'Complete loss of appetite for more than 24 hours (Risk of fatty liver).'**
   String get hgCatEmergency2;
 
-  /// Cat emergency symptom item 3.
+  /// Health guide: Cat emergency 3
   ///
   /// In en, this message translates to:
-  /// **'**Open-mouth breathing** — never normal in cats and requires immediate emergency care'**
+  /// **'**Open-mouth breathing** — Never normal for cats, immediate emergency.'**
   String get hgCatEmergency3;
 
-  /// Cat emergency symptom item 4.
+  /// Health guide: Cat emergency 4
   ///
   /// In en, this message translates to:
-  /// **'Sudden hind leg paralysis or coldness, possible thromboembolism'**
+  /// **'Sudden paralysis or coldness in hind legs (Suspected thrombosis).'**
   String get hgCatEmergency4;
 
-  /// Cat emergency symptom item 5.
+  /// Health guide: Cat emergency 5
   ///
   /// In en, this message translates to:
-  /// **'Seizures, convulsions, or loss of consciousness'**
+  /// **'Convulsions, seizures, loss of consciousness.'**
   String get hgCatEmergency5;
 
-  /// Cat emergency symptom item 6.
+  /// Health guide: Cat emergency 6
   ///
   /// In en, this message translates to:
-  /// **'Pale gums or tongue, or yellow discoloration/jaundice'**
+  /// **'Pale or jaundiced (yellowish) gums/tongue.'**
   String get hgCatEmergency6;
 
-  /// Cat emergency symptom item 7.
+  /// Health guide: Cat emergency 7
   ///
   /// In en, this message translates to:
-  /// **'Vomiting or diarrhea 3 or more times in one day, or blood in stool/vomit'**
+  /// **'Vomiting/diarrhea repeated 3 or more times a day, or bloody stool/vomit.'**
   String get hgCatEmergency7;
 
-  /// Cat emergency symptom item 8.
+  /// Health guide: Cat emergency 8
   ///
   /// In en, this message translates to:
-  /// **'Visible trauma, fracture, or heavy bleeding'**
+  /// **'Noticeable trauma, fractures, heavy bleeding.'**
   String get hgCatEmergency8;
 
-  /// Section title for cat environment and mental health.
+  /// Health guide: Environment & Mental Health section
   ///
   /// In en, this message translates to:
   /// **'Environment & Mental Health'**
   String get hgEnvironmentMentalHealth;
 
-  /// Card title for indoor environment management.
+  /// Health guide: Indoor environment
   ///
   /// In en, this message translates to:
   /// **'Indoor Environment Management'**
   String get hgIndoorEnvironment;
 
-  /// Card title for stress management.
+  /// Health guide: Stress management
   ///
   /// In en, this message translates to:
   /// **'Stress Management'**
   String get hgStressManagement;
 
-  /// Cat indoor environment guidance item 1.
+  /// Health guide: Cat environment 1
   ///
   /// In en, this message translates to:
-  /// **'**Litter boxes**: number of cats + 1 or more, cleaned daily'**
+  /// **'**Litter Boxes**: Number of cats + 1 or more placed, clean daily.'**
   String get hgCatEnvironment1;
 
-  /// Cat indoor environment guidance item 2.
+  /// Health guide: Cat environment 2
   ///
   /// In en, this message translates to:
-  /// **'**Scratchers**: at least 2, combining vertical and horizontal types'**
+  /// **'**Scratchers**: At least 2 or more (combine vertical and horizontal).'**
   String get hgCatEnvironment2;
 
-  /// Cat indoor environment guidance item 3.
+  /// Health guide: Cat environment 3
   ///
   /// In en, this message translates to:
-  /// **'**High spaces**: provide cat towers, shelves, or vertical spaces to satisfy territorial instincts'**
+  /// **'**High Spaces**: Provide vertical spaces like cat trees or shelves (satisfies territorial instincts).'**
   String get hgCatEnvironment3;
 
-  /// Cat indoor environment guidance item 4.
+  /// Health guide: Cat environment 4
   ///
   /// In en, this message translates to:
-  /// **'**Hiding places**: provide boxes, tunnels, or safe spaces where the cat can hide'**
+  /// **'**Hiding Spots**: Provide safe hiding spaces like boxes or tunnels.'**
   String get hgCatEnvironment4;
 
-  /// Cat stress management guidance item 1.
+  /// Health guide: Cat stress 1
   ///
   /// In en, this message translates to:
-  /// **'Stress in cats is directly linked to lowered immunity, FLUTD, and feline herpesvirus recurrence'**
+  /// **'Cat stress is directly linked to weakened immunity, FLUTD, herpes relapses, etc.'**
   String get hgCatStress1;
 
-  /// Cat stress management guidance item 2.
+  /// Health guide: Cat stress 2
   ///
   /// In en, this message translates to:
-  /// **'During major environmental changes such as moving or a new family member, a pheromone diffuser such as Feliway may help'**
+  /// **'Use pheromone diffusers (Feliway) during sudden environmental changes (moving, new family members).'**
   String get hgCatStress2;
 
-  /// Cat stress management guidance item 3.
+  /// Health guide: Cat stress 3
   ///
   /// In en, this message translates to:
-  /// **'Provide at least **10–15 minutes** of interactive toy play every day'**
+  /// **'Secure at least **10-15 mins** of playtime with toys daily.'**
   String get hgCatStress3;
 
-  /// Cat stress management guidance item 4.
+  /// Health guide: Cat stress 4
   ///
   /// In en, this message translates to:
-  /// **'In multi-cat households, separate resources such as food bowls, litter boxes, and sleeping areas according to the number of cats'**
+  /// **'Multi-cat households: Separate resources (food bowls, litter boxes, beds) according to the number of cats.'**
   String get hgCatStress4;
 
-  /// Table header for age.
+  /// Health guide: Age
   ///
   /// In en, this message translates to:
   /// **'Age'**
   String get hgAge;
 
-  /// Table header for health checkup cycle.
+  /// Health guide: Checkup cycle
   ///
   /// In en, this message translates to:
   /// **'Checkup Cycle'**
   String get hgCheckupCycle;
 
-  /// Table header for main checkup items.
+  /// Health guide: Main items
   ///
   /// In en, this message translates to:
   /// **'Main Items'**
   String get hgMainItems;
 
-  /// Age range from 1 to 6 years.
+  /// Health guide: Age 1-6
   ///
   /// In en, this message translates to:
-  /// **'1–6 Years'**
+  /// **'1-6 years'**
   String get hgAge1to6;
 
-  /// Age range from 7 to 10 years.
+  /// Health guide: Age 7-10
   ///
   /// In en, this message translates to:
-  /// **'7–10 Years'**
+  /// **'7-10 years'**
   String get hgAge7to10;
 
-  /// Age range of 11 years and older.
+  /// Health guide: Age 11+
   ///
   /// In en, this message translates to:
-  /// **'11+ Years'**
+  /// **'11+ years'**
   String get hgAge11Plus;
 
-  /// Checkup frequency of once per year.
+  /// Health guide: Yearly once
   ///
   /// In en, this message translates to:
-  /// **'Once a Year'**
+  /// **'Once a year'**
   String get hgYearlyOnce;
 
-  /// Checkup frequency of twice per year.
+  /// Health guide: Yearly twice
   ///
   /// In en, this message translates to:
-  /// **'Twice a Year'**
+  /// **'Twice a year'**
   String get hgYearlyTwice;
 
-  /// Checkup frequency of every 3 to 4 months.
+  /// Health guide: Every 3-4 months
   ///
   /// In en, this message translates to:
-  /// **'Every 3–4 Months'**
+  /// **'Every 3-4 months'**
   String get hgEvery3to4Months;
 
-  /// Dog checkup items for age 1 to 6.
+  /// Health guide: Dog checkup items 1
   ///
   /// In en, this message translates to:
-  /// **'Blood test, heart auscultation, weight, dental check'**
+  /// **'Blood test, heart auscultation, weight, teeth'**
   String get hgDogCheckupItems1;
 
-  /// Dog checkup items for age 7 to 10.
+  /// Health guide: Dog checkup items 2
   ///
   /// In en, this message translates to:
   /// **'Blood, urine, X-ray, blood pressure, joints'**
   String get hgDogCheckupItems2;
 
-  /// Dog checkup items for age 11 and older.
+  /// Health guide: Dog checkup items 3
   ///
   /// In en, this message translates to:
-  /// **'Comprehensive blood work, ultrasound, kidney and liver function'**
+  /// **'Comprehensive blood, ultrasound, kidney/liver function'**
   String get hgDogCheckupItems3;
 
-  /// Cat checkup items for age 1 to 6.
+  /// Health guide: Cat checkup items 1
   ///
   /// In en, this message translates to:
-  /// **'Blood test, urine test, weight, dental check'**
+  /// **'Blood test, urine test, weight, teeth'**
   String get hgCatCheckupItems1;
 
-  /// Cat checkup items for age 7 to 10.
+  /// Health guide: Cat checkup items 2
   ///
   /// In en, this message translates to:
-  /// **'Kidney and liver values, blood pressure, thyroid T4'**
+  /// **'Kidney/liver panel, blood pressure, thyroid (T4)'**
   String get hgCatCheckupItems2;
 
-  /// Cat checkup items for age 11 and older.
+  /// Health guide: Cat checkup items 3
   ///
   /// In en, this message translates to:
-  /// **'Comprehensive blood work, abdominal ultrasound, intensive kidney monitoring'**
+  /// **'Comprehensive blood, abdominal ultrasound, intensive kidney monitoring'**
   String get hgCatCheckupItems3;
 
-  /// Table header for exercise level.
+  /// Health guide: Exercise amount
   ///
   /// In en, this message translates to:
   /// **'Exercise Level'**
   String get hgExerciseAmount;
 
-  /// Table header for breed examples.
+  /// Health guide: Breed examples
   ///
   /// In en, this message translates to:
   /// **'Breed Examples'**
   String get hgBreedExamples;
 
-  /// Low exercise level label.
+  /// Health guide: Low
   ///
   /// In en, this message translates to:
   /// **'Low'**
   String get hgLow;
 
-  /// Moderate exercise level label.
+  /// Health guide: Normal
   ///
   /// In en, this message translates to:
-  /// **'Moderate'**
+  /// **'Normal'**
   String get hgNormal;
 
-  /// High exercise level label.
+  /// Health guide: High
   ///
   /// In en, this message translates to:
   /// **'High'**
   String get hgHigh;
 
-  /// Examples of breeds with low exercise needs.
+  /// Health guide: Breed low examples
   ///
   /// In en, this message translates to:
   /// **'Bulldog, Basset Hound, Shih Tzu, Maltese'**
   String get hgBreedLowExamples;
 
-  /// Examples of breeds with moderate exercise needs.
+  /// Health guide: Breed normal examples
   ///
   /// In en, this message translates to:
-  /// **'Poodle, Bichon Frise, Cocker Spaniel, Beagle'**
+  /// **'Poodle, Bichon, Cocker Spaniel, Beagle'**
   String get hgBreedNormalExamples;
 
-  /// Examples of breeds with high exercise needs.
+  /// Health guide: Breed high examples
   ///
   /// In en, this message translates to:
   /// **'Labrador, Golden Retriever, Husky, Border Collie'**
   String get hgBreedHighExamples;
 
-  /// Disclaimer shown at the bottom of the health guide.
+  /// Health guide: Disclaimer
   ///
   /// In en, this message translates to:
-  /// **'This guide provides general health care information, and the care needed may vary depending on your pet’s condition. If abnormal symptoms appear or treatment is needed, always consult a veterinarian.'**
+  /// **'This guide provides general health care information, and necessary care may vary depending on your pet\'s condition. If there are abnormal symptoms or treatment is needed, be sure to consult a veterinarian.'**
   String get hgDisclaimer;
+
+  /// No description provided for @categoryFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Category Filter'**
+  String get categoryFilter;
+
+  /// No description provided for @selectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select All'**
+  String get selectAll;
+
+  /// No description provided for @deselectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Deselect All'**
+  String get deselectAll;
+
+  /// No description provided for @apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get apply;
+
+  /// No description provided for @saving.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving...'**
+  String get saving;
+
+  /// No description provided for @treatmentContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Treatment'**
+  String get treatmentContent;
+
+  /// No description provided for @conditionScoreWord1.
+  ///
+  /// In en, this message translates to:
+  /// **'Terrible'**
+  String get conditionScoreWord1;
+
+  /// No description provided for @conditionScoreWord2.
+  ///
+  /// In en, this message translates to:
+  /// **'Poor'**
+  String get conditionScoreWord2;
+
+  /// No description provided for @conditionScoreWord3.
+  ///
+  /// In en, this message translates to:
+  /// **'Fair'**
+  String get conditionScoreWord3;
+
+  /// No description provided for @conditionScoreWord4.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get conditionScoreWord4;
+
+  /// No description provided for @conditionScoreWord5.
+  ///
+  /// In en, this message translates to:
+  /// **'Excellent'**
+  String get conditionScoreWord5;
+
+  /// No description provided for @conditionScoreFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Condition {score} pts - {word}'**
+  String conditionScoreFormat(Object score, Object word);
 }
 
 class _AppLocalizationsDelegate

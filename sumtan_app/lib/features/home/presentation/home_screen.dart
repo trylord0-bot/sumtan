@@ -15,6 +15,7 @@ import '../../../features/pet/provider/pet_provider.dart';
 import '../../../features/record/provider/record_provider.dart';
 import '../../../features/record/data/record_model.dart';
 import '../../../features/record/presentation/category_bottom_sheet.dart';
+import '../../../features/record/presentation/record_subtitle_builder.dart';
 import '../../../shared/constants/category_constants.dart';
 import '../../../core/utils/date_utils.dart' as du;
 
@@ -352,9 +353,8 @@ class _PetAvatar extends StatelessWidget {
     }
 
     final rawPath = pet!.profileImagePath;
-    final hasPhoto = rawPath != null &&
-        rawPath.isNotEmpty &&
-        File(rawPath).existsSync();
+    final hasPhoto =
+        rawPath != null && rawPath.isNotEmpty && File(rawPath).existsSync();
 
     if (hasPhoto) {
       return Container(
@@ -429,8 +429,9 @@ class _TodaySummaryGrid extends StatelessWidget {
         ? (conditionRecord.dataJson?['score'] as num?)?.toInt()
         : null;
 
-    final condLabel =
-        condScore != null ? ConditionScoreLabel.fromScore(condScore) : null;
+    final condLabel = condScore != null
+        ? ConditionScoreLabel.localizedFromScore(context, condScore)
+        : null;
 
     // 종별 추가 뱃지
     final species = pet?.species ?? 'dog';
@@ -811,7 +812,7 @@ class _RecordList extends StatelessWidget {
       children: records.map((r) {
         final cat = RecordCategoryX.fromString(r.category);
         final time = du.formatTime(r.recordedAtDate);
-        final subtitle = _buildSubtitle(r);
+        final subtitle = _buildSubtitle(context, r);
 
         return Padding(
           padding: const EdgeInsets.only(bottom: AppSpacing.space2),
@@ -843,7 +844,8 @@ class _RecordList extends StatelessWidget {
                       borderRadius: BorderRadius.circular(AppRadius.radiusMd),
                     ),
                     alignment: Alignment.center,
-                    child: Text(cat.emoji, style: const TextStyle(fontSize: 20)),
+                    child:
+                        Text(cat.emoji, style: const TextStyle(fontSize: 20)),
                   ),
                   const SizedBox(width: AppSpacing.space3),
                   Expanded(
@@ -875,7 +877,8 @@ class _RecordList extends StatelessWidget {
                   ],
                   Text(
                     time,
-                    style: const TextStyle(fontSize: 11, color: AppColors.gray400),
+                    style:
+                        const TextStyle(fontSize: 11, color: AppColors.gray400),
                   ),
                 ],
               ),
@@ -891,126 +894,8 @@ class _RecordList extends StatelessWidget {
     return media is List && media.isNotEmpty;
   }
 
-  String _buildSubtitle(Record r) {
-    final d = r.dataJson;
-    if (d == null || d.isEmpty) return r.memo ?? '';
-    switch (r.category) {
-      case 'poop':
-        final type = d['type'] as String? ?? '';
-        final status = d['status'] as String? ?? '';
-        return [type, status].where((s) => s.isNotEmpty).join(' · ');
-      case 'condition':
-        final score = (d['score'] as num?)?.toInt();
-        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
-        final parts = [
-          if (score != null) ConditionScoreLabel.fromScore(score).recordText,
-          if (symptoms.isNotEmpty) symptoms,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'medication':
-        final medicine = d['medicine'] as String? ?? '';
-        final dose = d['dose'] as String? ?? '';
-        final method = d['method'] as String? ?? '';
-        final parts = [
-          if (medicine.isNotEmpty) medicine,
-          if (dose.isNotEmpty) dose,
-          if (method.isNotEmpty) method,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'weight':
-        final kg = d['weight_kg'];
-        final method = d['method'] as String? ?? '';
-        final parts = [
-          if (kg != null) '${kg}kg',
-          if (method.isNotEmpty) method,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'meal':
-        const mealAmountLabels = {
-          'very_little': '매우 적음',
-          'little': '적음',
-          'normal': '보통',
-          'much': '많음',
-          'very_much': '매우 많음',
-        };
-        final mealAmount = d['meal_amount'] as String?;
-        final amountG = d['amount_g'];
-        final parts = [
-          if (mealAmount != null) mealAmountLabels[mealAmount] ?? mealAmount,
-          if (amountG != null) '${amountG}g',
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'water':
-        const waterLabels = {
-          'very_little': '매우 적음',
-          'little': '적음',
-          'normal': '보통',
-          'much': '많음',
-          'very_much': '매우 많음',
-        };
-        final amount = d['water_amount'] as String?;
-        final ml = d['milliliter'];
-        final amountStr = waterLabels[amount] ?? amount ?? '';
-        return ml != null ? '$amountStr · ${ml}mL' : amountStr;
-      case 'hospital':
-      case 'vaccination':
-        final visitType = d['visit_type'] as String? ?? '';
-        final hospital = d['hospital_name'] as String?;
-        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
-        final diagnosis = d['diagnosis'] as String?;
-        final parts = [
-          if (visitType.isNotEmpty) visitType,
-          if (hospital != null && hospital.isNotEmpty) hospital,
-          if (symptoms.isNotEmpty) symptoms,
-          if (diagnosis != null && diagnosis.isNotEmpty) diagnosis,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'grooming':
-        final types = (d['types'] as List?)?.join(', ') ?? '';
-        final shop = d['shop_name'] as String?;
-        final parts = [
-          if (types.isNotEmpty) types,
-          if (shop != null && shop.isNotEmpty) shop,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'brushing':
-        final parts = (d['parts'] as List?)?.join(', ') ?? '';
-        final duration = d['duration_min'];
-        final items = [
-          if (parts.isNotEmpty) parts,
-          if (duration != null) '$duration분',
-        ];
-        return items.isNotEmpty ? items.join(' · ') : (r.memo ?? '');
-      case 'walk':
-        final duration = d['duration_min'];
-        final distance = d['distance_km'];
-        final parts = [
-          if (duration != null) '$duration분',
-          if (distance != null) '${distance}km',
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'memo':
-        final title = d['title'] as String? ?? '';
-        final pinned = d['pinned'] as String? ?? '';
-        final content = d['content'] as String?;
-        final parts = [
-          if (title.isNotEmpty) title,
-          if (pinned.isNotEmpty) pinned,
-          if (content != null && content.isNotEmpty) content,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : '';
-      case 'abnormal_symptom':
-        final symptom = d['symptom'] as String? ?? '';
-        final custom = d['custom_symptom'] as String?;
-        final parts = [
-          if (symptom.isNotEmpty) symptom,
-          if (custom != null && custom.isNotEmpty) custom,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      default:
-        return r.memo ?? '';
-    }
-  }
+  String _buildSubtitle(BuildContext context, Record r) =>
+      buildRecordSubtitle(context, r);
 }
 
 // ─── Stats section header with period toggle ──────────────────────────────────
@@ -1315,8 +1200,7 @@ class _WeightGraphCard extends StatelessWidget {
                   )),
               const Spacer(),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
                   color: AppColors.primary50,
                   borderRadius: BorderRadius.circular(9999),
@@ -1359,8 +1243,7 @@ class _WeightGraphCard extends StatelessWidget {
             ),
           const SizedBox(height: AppSpacing.space2),
           _LegendDot(
-              color: AppColors.primary400,
-              label: context.l10n.measuredWeight),
+              color: AppColors.primary400, label: context.l10n.measuredWeight),
         ],
       ),
     );

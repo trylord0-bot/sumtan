@@ -466,6 +466,9 @@ class AppLocalizationsAr extends AppLocalizations {
       'مثال: دواء الديدان القلبية، مضاد للطفيليات';
 
   @override
+  String get doseExample => 'مثال: 0.5 مل، قرص واحد';
+
+  @override
   String get repeatRequired => 'التكرار *';
 
   @override
@@ -1303,6 +1306,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get example25 => 'مثال: 2.5';
 
   @override
+  String get example42 => 'مثال: 4.2';
+
+  @override
   String get example35000 => 'مثال: 35000';
 
   @override
@@ -1458,12 +1464,12 @@ class AppLocalizationsAr extends AppLocalizations {
       'الحيوان الأليف الأول مجاني. من الثاني فصاعداً، يلزم دفع رسوم لكل حيوان.';
 
   @override
-  String petsRegisteredStoreUnavailable(String count) {
+  String petsRegisteredStoreUnavailable(int count) {
     return '$count حيوانات أليفة مسجّلة\nيُرجى المحاولة عند توفر المتجر.';
   }
 
   @override
-  String petsRegisteredPayToAdd(String count, String price) {
+  String petsRegisteredPayToAdd(int count, String price) {
     return '$count حيوانات أليفة مسجّلة\nادفع $price لإضافة فرد عائلة جديد.';
   }
 
@@ -1661,6 +1667,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get example10 => 'مثال: 10';
 
   @override
+  String get minuteUnit => 'دقيقة';
+
+  @override
   String get hospitalNameExample => 'مثال: مستشفى الحيوانات السعيد';
 
   @override
@@ -1715,7 +1724,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get photoVideo => 'صورة · فيديو';
 
   @override
-  String photoVideoCount(String count) {
+  String photoVideoCount(int count) {
     return 'صورة · فيديو · $count';
   }
 
@@ -2709,4 +2718,42 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get hgDisclaimer =>
       'يقدّم هذا الدليل معلومات عامة للعناية الصحية، وقد تختلف الرعاية المطلوبة حسب حالة حيوانك الأليف. إذا ظهرت أعراض غير طبيعية أو كانت هناك حاجة للعلاج، فاستشر طبيبًا بيطريًا دائمًا.';
+
+  @override
+  String get categoryFilter => 'تصفية الفئة';
+
+  @override
+  String get selectAll => 'تحديد الكل';
+
+  @override
+  String get deselectAll => 'إلغاء تحديد الكل';
+
+  @override
+  String get apply => 'تطبيق';
+
+  @override
+  String get saving => 'جاري الحفظ...';
+
+  @override
+  String get treatmentContent => 'العلاج';
+
+  @override
+  String get conditionScoreWord1 => 'سيء جداً';
+
+  @override
+  String get conditionScoreWord2 => 'سيء';
+
+  @override
+  String get conditionScoreWord3 => 'متوسط';
+
+  @override
+  String get conditionScoreWord4 => 'جيد';
+
+  @override
+  String get conditionScoreWord5 => 'ممتاز';
+
+  @override
+  String conditionScoreFormat(Object score, Object word) {
+    return 'الحالة $score نقطة - $word';
+  }
 }

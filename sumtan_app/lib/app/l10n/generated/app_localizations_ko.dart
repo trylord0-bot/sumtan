@@ -39,7 +39,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get drawerNearbyHospitals => '주변 병원 찾기';
 
   @override
-  String get drawerNearbyHospitalsSub => '내 위치 기반 동물병원';
+  String get drawerNearbyHospitalsSub => '가까운 동물병원';
 
   @override
   String get drawerHealthGuide => '건강관리 가이드';
@@ -64,7 +64,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get commonCancel => '취소';
 
   @override
-  String get commonGo => '이동할게요';
+  String get commonGo => '이동하기';
 
   @override
   String get commonDelete => '삭제';
@@ -142,7 +142,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsImportConfirmBody =>
-      '기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체됩니다.\n\n계속하시겠어요?';
+      '기존의 모든 데이터가 삭제되고 백업 파일의 데이터로 교체돼요.\n\n계속하시겠어요?';
 
   @override
   String get settingsImportAction => '가져오기';
@@ -184,7 +184,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get settingsExportUnlockedBody =>
-      '모든 반려동물 정보와 기록을 ZIP 파일로 저장합니다.\n저장된 파일은 언제든 무료로 가져오기 복원할 수 있어요.';
+      '모든 반려동물 정보와 기록을 ZIP 파일로 저장해요.\n저장된 파일은 언제든 무료로 가져와서 복원할 수 있어요.';
 
   @override
   String get settingsExporting => '내보내는 중...';
@@ -282,7 +282,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String alarmEmptyDesc(String petName) {
-    return '$petName는 오늘도 건강하게 지내봐요!\n아래 알림 추가 버튼을 눌러 시작해보세요.';
+    return '우리 $petName, 오늘도 건강하게 지내봐요!\n아래 알림 추가 버튼을 눌러 시작해보세요.';
   }
 
   @override
@@ -457,6 +457,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get medicineNameExample => '예) 심장사상충, 구충제 등';
+
+  @override
+  String get doseExample => '예: 0.5ml, 1정';
 
   @override
   String get repeatRequired => '반복 *';
@@ -1292,6 +1295,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get example25 => '예: 2.5';
 
   @override
+  String get example42 => '예: 4.2';
+
+  @override
   String get example35000 => '예: 35000';
 
   @override
@@ -1444,12 +1450,12 @@ class AppLocalizationsKo extends AppLocalizations {
       '첫 번째 반려동물은 무료로 등록할 수 있고, 두 번째 가족부터는 한 가족당 결제가 필요해요.';
 
   @override
-  String petsRegisteredStoreUnavailable(String count) {
+  String petsRegisteredStoreUnavailable(int count) {
     return '현재 등록된 반려동물 $count마리\n스토어 연결이 가능할 때 다시 시도해 주세요.';
   }
 
   @override
-  String petsRegisteredPayToAdd(String count, String price) {
+  String petsRegisteredPayToAdd(int count, String price) {
     return '현재 등록된 반려동물 $count마리\n$price 결제 후 새 가족을 추가할 수 있어요.';
   }
 
@@ -1643,6 +1649,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get example10 => '예: 10';
 
   @override
+  String get minuteUnit => '분';
+
+  @override
   String get hospitalNameExample => '예: 행복동물병원';
 
   @override
@@ -1697,7 +1706,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get photoVideo => '사진 · 동영상';
 
   @override
-  String photoVideoCount(String count) {
+  String photoVideoCount(int count) {
     return '사진 · 동영상 · $count개';
   }
 
@@ -2586,4 +2595,42 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get hgDisclaimer =>
       '이 가이드는 일반적인 건강관리 정보이며, 반려동물의 상태에 따라 필요한 관리가 달라질 수 있습니다. 이상 증상이 있거나 치료가 필요한 경우 반드시 수의사와 상담하세요.';
+
+  @override
+  String get categoryFilter => '카테고리 필터';
+
+  @override
+  String get selectAll => '전체 선택';
+
+  @override
+  String get deselectAll => '전체 해제';
+
+  @override
+  String get apply => '적용';
+
+  @override
+  String get saving => '저장 중...';
+
+  @override
+  String get treatmentContent => '진료내용';
+
+  @override
+  String get conditionScoreWord1 => '최악';
+
+  @override
+  String get conditionScoreWord2 => '저조';
+
+  @override
+  String get conditionScoreWord3 => '보통';
+
+  @override
+  String get conditionScoreWord4 => '양호';
+
+  @override
+  String get conditionScoreWord5 => '최상';
+
+  @override
+  String conditionScoreFormat(Object score, Object word) {
+    return '컨디션 $score점 - $word';
+  }
 }

@@ -95,7 +95,7 @@ class _WeightFormState extends ConsumerState<WeightForm> {
         FormInputField(
           label: l10n.weightKg,
           controller: _weightCtrl,
-          hint: 'e.g. 4.2',
+          hint: l10n.example42,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),

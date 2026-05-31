@@ -8,6 +8,7 @@ import '../../../app/widgets/app_toast.dart';
 import '../../../features/record/provider/record_provider.dart';
 import '../../../features/record/data/record_model.dart';
 import '../../../features/record/presentation/record_edit_sheet.dart';
+import '../../../features/record/presentation/record_subtitle_builder.dart';
 import '../../../features/pet/provider/pet_provider.dart';
 import '../../../shared/constants/category_constants.dart';
 import '../../../core/utils/date_utils.dart' as du;
@@ -83,8 +84,8 @@ class _CalendarSectionState extends ConsumerState<_CalendarSection> {
   @override
   void initState() {
     super.initState();
-    _pageController =
-        PageController(initialPage: _dateToPage(ref.read(selectedDateProvider)));
+    _pageController = PageController(
+        initialPage: _dateToPage(ref.read(selectedDateProvider)));
   }
 
   @override
@@ -242,8 +243,8 @@ class _MonthHeader extends StatelessWidget {
                 borderRadius: BorderRadius.circular(AppRadius.radiusFull),
                 border: Border.all(color: AppColors.primary200, width: 1),
               ),
-              child: const Text(
-                '오늘',
+              child: Text(
+                context.l10n.today,
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
@@ -326,8 +327,13 @@ class _WeekdayRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final days = [
-      l10n.daySun, l10n.dayMon, l10n.dayTue, l10n.dayWed,
-      l10n.dayThu, l10n.dayFri, l10n.daySat,
+      l10n.daySun,
+      l10n.dayMon,
+      l10n.dayTue,
+      l10n.dayWed,
+      l10n.dayThu,
+      l10n.dayFri,
+      l10n.daySat,
     ];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.space4),
@@ -485,8 +491,8 @@ class _EventList extends ConsumerWidget {
     return recordsAsync.when(
       data: (records) {
         final filtered = records
-            .where((r) =>
-                enabledCategories.contains(RecordCategoryX.fromString(r.category)))
+            .where((r) => enabledCategories
+                .contains(RecordCategoryX.fromString(r.category)))
             .toList()
           ..sort((a, b) => b.recordedAtDate.compareTo(a.recordedAtDate));
         if (filtered.isEmpty) {
@@ -497,7 +503,8 @@ class _EventList extends ConsumerWidget {
                 const Text('🐾', style: TextStyle(fontSize: 36)),
                 const SizedBox(height: AppSpacing.space3),
                 Text(
-                  context.l10n.noRecordsForDate(du.formatMonthDay(selectedDate)),
+                  context.l10n
+                      .noRecordsForDate(du.formatMonthDay(selectedDate)),
                   style:
                       const TextStyle(fontSize: 15, color: AppColors.gray500),
                 ),
@@ -556,28 +563,28 @@ class _EventCard extends ConsumerWidget {
       background: const _DeleteBackground(),
       confirmDismiss: (_) async {
         return await showDialog<bool>(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16)),
-            title: Text(context.l10n.deleteRecordConfirm,
-                style: const TextStyle(
-                    fontSize: 17, fontWeight: FontWeight.w700)),
-            content: Text(context.l10n.deleteConfirmBody),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(ctx, false),
-                child: Text(context.l10n.commonCancel),
+              context: context,
+              builder: (ctx) => AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                title: Text(context.l10n.deleteRecordConfirm,
+                    style: const TextStyle(
+                        fontSize: 17, fontWeight: FontWeight.w700)),
+                content: Text(context.l10n.deleteConfirmBody),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(ctx, false),
+                    child: Text(context.l10n.commonCancel),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(ctx, true),
+                    style: TextButton.styleFrom(
+                        foregroundColor: AppColors.danger600),
+                    child: Text(context.l10n.deleteConfirmOk),
+                  ),
+                ],
               ),
-              TextButton(
-                onPressed: () => Navigator.pop(ctx, true),
-                style: TextButton.styleFrom(
-                    foregroundColor: AppColors.danger600),
-                child: Text(context.l10n.deleteConfirmOk),
-              ),
-            ],
-          ),
-        ) ??
+            ) ??
             false;
       },
       onDismissed: (_) async {
@@ -632,7 +639,7 @@ class _EventCard extends ConsumerWidget {
                         )),
                     const SizedBox(height: 2),
                     Text(
-                      _buildSubtitle(record),
+                      _buildSubtitle(context, record),
                       style: const TextStyle(
                           fontSize: 12, color: AppColors.gray500),
                       maxLines: 1,
@@ -675,126 +682,8 @@ class _EventCard extends ConsumerWidget {
     ref.invalidate(weeklyWaterStatsProvider);
   }
 
-  String _buildSubtitle(Record r) {
-    final d = r.dataJson;
-    if (d == null || d.isEmpty) return r.memo ?? '';
-    switch (r.category) {
-      case 'poop':
-        final type = d['type'] as String? ?? '';
-        final status = d['status'] as String? ?? '';
-        return [type, status].where((s) => s.isNotEmpty).join(' · ');
-      case 'condition':
-        final score = (d['score'] as num?)?.toInt();
-        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
-        final parts = [
-          if (score != null) ConditionScoreLabel.fromScore(score).recordText,
-          if (symptoms.isNotEmpty) symptoms,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'medication':
-        final medicine = d['medicine'] as String? ?? '';
-        final dose = d['dose'] as String? ?? '';
-        final method = d['method'] as String? ?? '';
-        final parts = [
-          if (medicine.isNotEmpty) medicine,
-          if (dose.isNotEmpty) dose,
-          if (method.isNotEmpty) method,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'weight':
-        final kg = d['weight_kg'];
-        final method = d['method'] as String? ?? '';
-        final parts = [
-          if (kg != null) '${kg}kg',
-          if (method.isNotEmpty) method,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'meal':
-        const mealAmountLabels = {
-          'very_little': '매우 적음',
-          'little': '적음',
-          'normal': '보통',
-          'much': '많음',
-          'very_much': '매우 많음',
-        };
-        final mealAmount = d['meal_amount'] as String?;
-        final amountG = d['amount_g'];
-        final parts = [
-          if (mealAmount != null) mealAmountLabels[mealAmount] ?? mealAmount,
-          if (amountG != null) '${amountG}g',
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'water':
-        const waterLabels = {
-          'very_little': '매우 적음',
-          'little': '적음',
-          'normal': '보통',
-          'much': '많음',
-          'very_much': '매우 많음',
-        };
-        final amount = d['water_amount'] as String?;
-        final ml = d['milliliter'];
-        final amountStr = waterLabels[amount] ?? amount ?? '';
-        return ml != null ? '$amountStr · ${ml}mL' : amountStr;
-      case 'hospital':
-      case 'vaccination':
-        final visitType = d['visit_type'] as String? ?? '';
-        final hospital = d['hospital_name'] as String?;
-        final symptoms = (d['symptoms'] as List?)?.join(', ') ?? '';
-        final diagnosis = d['diagnosis'] as String?;
-        final parts = [
-          if (visitType.isNotEmpty) visitType,
-          if (hospital != null && hospital.isNotEmpty) hospital,
-          if (symptoms.isNotEmpty) symptoms,
-          if (diagnosis != null && diagnosis.isNotEmpty) diagnosis,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'grooming':
-        final types = (d['types'] as List?)?.join(', ') ?? '';
-        final shop = d['shop_name'] as String?;
-        final parts = [
-          if (types.isNotEmpty) types,
-          if (shop != null && shop.isNotEmpty) shop,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'brushing':
-        final parts = (d['parts'] as List?)?.join(', ') ?? '';
-        final duration = d['duration_min'];
-        final items = [
-          if (parts.isNotEmpty) parts,
-          if (duration != null) '$duration분',
-        ];
-        return items.isNotEmpty ? items.join(' · ') : (r.memo ?? '');
-      case 'walk':
-        final duration = d['duration_min'];
-        final distance = d['distance_km'];
-        final parts = [
-          if (duration != null) '$duration분',
-          if (distance != null) '${distance}km',
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      case 'memo':
-        final title = d['title'] as String? ?? '';
-        final pinned = d['pinned'] as String? ?? '';
-        final content = d['content'] as String?;
-        final parts = [
-          if (title.isNotEmpty) title,
-          if (pinned.isNotEmpty) pinned,
-          if (content != null && content.isNotEmpty) content,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : '';
-      case 'abnormal_symptom':
-        final symptom = d['symptom'] as String? ?? '';
-        final custom = d['custom_symptom'] as String?;
-        final parts = [
-          if (symptom.isNotEmpty) symptom,
-          if (custom != null && custom.isNotEmpty) custom,
-        ];
-        return parts.isNotEmpty ? parts.join(' · ') : (r.memo ?? '');
-      default:
-        return r.memo ?? '';
-    }
-  }
+  String _buildSubtitle(BuildContext context, Record r) =>
+      buildRecordSubtitle(context, r);
 }
 
 class _MonthYearPickerSheet extends StatefulWidget {
@@ -910,8 +799,7 @@ class _MonthYearPickerSheetState extends State<_MonthYearPickerSheet> {
                         final month = i + 1;
                         final isSelected =
                             page == initYear && month == initMonth;
-                        final isToday =
-                            now.year == page && now.month == month;
+                        final isToday = now.year == page && now.month == month;
                         final label =
                             DateFormat('MMM', Intl.defaultLocale ?? 'en')
                                 .format(DateTime(2000, month));
@@ -1055,9 +943,9 @@ class _CategoryFilterSheetState extends ConsumerState<_CategoryFilterSheet> {
             ),
             Row(
               children: [
-                const Text(
-                  '카테고리 필터',
-                  style: TextStyle(
+                Text(
+                  context.l10n.categoryFilter,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
                     color: AppColors.gray900,
@@ -1074,12 +962,12 @@ class _CategoryFilterSheetState extends ConsumerState<_CategoryFilterSheet> {
             Row(
               children: [
                 _FilterActionBtn(
-                  label: '전체 선택',
+                  label: context.l10n.selectAll,
                   onTap: () => _selectAll(available),
                 ),
                 const SizedBox(width: AppSpacing.space2),
                 _FilterActionBtn(
-                  label: '전체 해제',
+                  label: context.l10n.deselectAll,
                   onTap: _deselectAll,
                 ),
                 const Spacer(),
@@ -1116,9 +1004,10 @@ class _CategoryFilterSheetState extends ConsumerState<_CategoryFilterSheet> {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                child: const Text(
-                  '적용',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                child: Text(
+                  context.l10n.apply,
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.w700),
                 ),
               ),
             ),
@@ -1180,7 +1069,9 @@ class _FilterCheckTile extends StatelessWidget {
           color: checked ? category.bgColor : AppColors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: checked ? category.color.withValues(alpha: 0.35) : AppColors.gray200,
+            color: checked
+                ? category.color.withValues(alpha: 0.35)
+                : AppColors.gray200,
             width: 1.2,
           ),
         ),

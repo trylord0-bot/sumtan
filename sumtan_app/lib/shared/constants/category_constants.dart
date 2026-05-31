@@ -52,6 +52,36 @@ class ConditionScoreLabel {
         return fallback;
     }
   }
+
+  static ConditionScoreLabel localizedFromScore(
+      BuildContext context, int score) {
+    final l10n = context.l10n;
+    String word;
+    switch (score) {
+      case 1:
+        word = l10n.conditionScoreWord1;
+        return ConditionScoreLabel(score: 1, word: word, emoji: '😫');
+      case 2:
+        word = l10n.conditionScoreWord2;
+        return ConditionScoreLabel(score: 2, word: word, emoji: '😞');
+      case 3:
+        word = l10n.conditionScoreWord3;
+        return ConditionScoreLabel(score: 3, word: word, emoji: '😐');
+      case 4:
+        word = l10n.conditionScoreWord4;
+        return ConditionScoreLabel(score: 4, word: word, emoji: '😊');
+      case 5:
+        word = l10n.conditionScoreWord5;
+        return ConditionScoreLabel(score: 5, word: word, emoji: '🌟');
+      default:
+        return localizedFromScore(context, 3);
+    }
+  }
+
+  static String localizedRecordText(BuildContext context, int score) {
+    final label = localizedFromScore(context, score);
+    return context.l10n.conditionScoreFormat(label.score, label.word);
+  }
 }
 
 extension RecordCategoryX on RecordCategory {

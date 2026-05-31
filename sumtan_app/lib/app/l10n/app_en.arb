@@ -612,6 +612,10 @@
   "@medicineNameExample": {
     "description": "Medicine name example"
   },
+  "doseExample": "e.g. 0.5ml, 1 tablet",
+  "@doseExample": {
+    "description": "Dose input example"
+  },
   "repeatRequired": "Repeat *",
   "@repeatRequired": {
     "description": "Repeat required field label"
@@ -897,9 +901,12 @@
     "description": "Bleeding label"
   },
   "dyspnea": "Dyspnea",
+  "@dyspnea": {
+    "description": "Dyspnea label"
+  },
   "seizure": "Seizure/Convulsion",
-  "@drooling": {
-    "description": "Drooling label"
+  "@seizure": {
+    "description": "Seizure label"
   },
   "normal": "Normal",
   "@normal": {
@@ -1616,107 +1623,107 @@
       }
     }
   },
-  "hintMedicineNameAndDose": "Please enter medicine name and dose",
+  "hintMedicineNameAndDose": "💡 Please enter medicine name and dose",
   "@hintMedicineNameAndDose": {
     "description": "Hint: medicine name and dose"
   },
-  "hintMedicineName": "Please enter a medicine name",
+  "hintMedicineName": "💡 Please enter a medicine name",
   "@hintMedicineName": {
     "description": "Hint: medicine name"
   },
-  "hintDose": "Please enter a dose",
+  "hintDose": "💡 Please enter a dose",
   "@hintDose": {
     "description": "Hint: dose"
   },
-  "hintWeightNumber": "Please enter weight as a number",
+  "hintWeightNumber": "💡 Please enter weight as a number",
   "@hintWeightNumber": {
     "description": "Hint: weight as number"
   },
-  "hintWeight": "Please enter weight",
+  "hintWeight": "💡 Please enter weight",
   "@hintWeight": {
     "description": "Hint: weight"
   },
-  "hintWeightIsNumber": "Please enter weight as a number",
+  "hintWeightIsNumber": "💡 Please enter weight as a number",
   "@hintWeightIsNumber": {
     "description": "Hint: weight is number"
   },
-  "hintWalkTime": "Please enter walk time",
+  "hintWalkTime": "💡 Please enter walk time",
   "@hintWalkTime": {
     "description": "Hint: walk time"
   },
-  "hintWalkTimeIsNumber": "Please enter walk time as a number",
+  "hintWalkTimeIsNumber": "💡 Please enter walk time as a number",
   "@hintWalkTimeIsNumber": {
     "description": "Hint: walk time is number"
   },
-  "hintWalkTimeNumber": "Please enter walk time as a number",
+  "hintWalkTimeNumber": "💡 Please enter walk time as a number",
   "@hintWalkTimeNumber": {
     "description": "Hint: walk time number"
   },
-  "hintSelectBrushingArea": "Please select at least one brushing area",
+  "hintSelectBrushingArea": "💡 Please select at least one brushing area",
   "@hintSelectBrushingArea": {
     "description": "Hint: select brushing area"
   },
-  "hintSelectVaccineType": "Please select at least one vaccine type",
+  "hintSelectVaccineType": "💡 Please select at least one vaccine type",
   "@hintSelectVaccineType": {
     "description": "Hint: select vaccine type"
   },
-  "hintSelectGroomingType": "Please select at least one grooming type",
+  "hintSelectGroomingType": "💡 Please select at least one grooming type",
   "@hintSelectGroomingType": {
     "description": "Hint: select grooming type"
   },
-  "hintSelectSymptomType": "Please select at least one symptom type",
+  "hintSelectSymptomType": "💡 Please select at least one symptom type",
   "@hintSelectSymptomType": {
     "description": "Hint: select symptom type"
   },
-  "hintTitle": "Please enter a title",
+  "hintTitle": "💡 Please enter a title",
   "@hintTitle": {
     "description": "Hint: title"
   },
-  "hintVaccineName": "Please enter a vaccine name",
+  "hintVaccineName": "💡 Please enter a vaccine name",
   "@hintVaccineName": {
     "description": "Hint: vaccine name"
   },
-  "hintSelectScheduledDate": "Please select a date",
+  "hintSelectScheduledDate": "💡 Please select a date",
   "@hintSelectScheduledDate": {
     "description": "Hint: select scheduled date"
   },
-  "hintSelectScheduledTime": "Please select a time",
+  "hintSelectScheduledTime": "💡 Please select a time",
   "@hintSelectScheduledTime": {
     "description": "Hint: select scheduled time"
   },
-  "hintVisitPurpose": "Please enter the visit purpose",
+  "hintVisitPurpose": "💡 Please enter the visit purpose",
   "@hintVisitPurpose": {
     "description": "Hint: visit purpose"
   },
-  "hintSelectAppointmentDate": "Please select an appointment date",
+  "hintSelectAppointmentDate": "💡 Please select an appointment date",
   "@hintSelectAppointmentDate": {
     "description": "Hint: select appointment date"
   },
-  "hintSelectAppointmentTime": "Please select an appointment time",
+  "hintSelectAppointmentTime": "💡 Please select an appointment time",
   "@hintSelectAppointmentTime": {
     "description": "Hint: select appointment time"
   },
-  "hintMedicineNameInput": "Please enter a medicine name",
+  "hintMedicineNameInput": "💡 Please enter a medicine name",
   "@hintMedicineNameInput": {
     "description": "Hint: medicine name input"
   },
-  "hintSelectMedicationDate": "Please select a medication date",
+  "hintSelectMedicationDate": "💡 Please select a medication date",
   "@hintSelectMedicationDate": {
     "description": "Hint: select medication date"
   },
-  "hintSelectMedicationTime": "Please select a medication time",
+  "hintSelectMedicationTime": "💡 Please select a medication time",
   "@hintSelectMedicationTime": {
     "description": "Hint: select medication time"
   },
-  "hintAlarmName": "Please enter an alert name",
+  "hintAlarmName": "💡 Please enter an alert name",
   "@hintAlarmName": {
     "description": "Hint: alarm name"
   },
-  "hintSelectMealTime": "Please select a meal time",
+  "hintSelectMealTime": "💡 Please select a meal time",
   "@hintSelectMealTime": {
     "description": "Hint: select meal time"
   },
-  "hintSelectAlarmTime": "Please select an alert time",
+  "hintSelectAlarmTime": "💡 Please select an alert time",
   "@hintSelectAlarmTime": {
     "description": "Hint: select alarm time"
   },
@@ -1755,6 +1762,10 @@
   "example25": "e.g. 2.5",
   "@example25": {
     "description": "Example 2.5"
+  },
+  "example42": "e.g. 4.2",
+  "@example42": {
+    "description": "Example 4.2"
   },
   "example35000": "e.g. 35000",
   "@example35000": {
@@ -1808,7 +1819,7 @@
   "@registrationNumber": {
     "description": "Registration number label"
   },
-  "birthDate": "Birth date",
+  "birthDate": "Date of birth",
   "@birthDate": {
     "description": "Birth date label"
   },
@@ -1826,11 +1837,11 @@
   },
   "maleSym": "Male ♂",
   "@maleSym": {
-    "description": "Male with symbol"
+    "description": "Male symbol label"
   },
   "femaleSym": "Female ♀",
   "@femaleSym": {
-    "description": "Female with symbol"
+    "description": "Female symbol label"
   },
   "neutered": "Neutered",
   "@neutered": {
@@ -1854,25 +1865,25 @@
   },
   "dogEmoji": "Dog 🐶",
   "@dogEmoji": {
-    "description": "Dog with emoji label"
+    "description": "Dog emoji label"
   },
   "catEmoji": "Cat 🐱",
   "@catEmoji": {
-    "description": "Cat with emoji label"
+    "description": "Cat emoji label"
   },
   "otherEmoji": "Other 🐾",
   "@otherEmoji": {
-    "description": "Other with emoji label"
+    "description": "Other emoji label"
   },
   "noPetsRegistered": "No pets registered",
   "@noPetsRegistered": {
     "description": "No pets registered label"
   },
-  "registerPetPrompt": "Add a pet and\nmanage health together.",
+  "registerPetPrompt": "Register your pet and\nmanage their health together!",
   "@registerPetPrompt": {
     "description": "Register pet prompt"
   },
-  "registerPetBtn": "Add pet",
+  "registerPetBtn": "Register a pet",
   "@registerPetBtn": {
     "description": "Register pet button"
   },
@@ -1906,7 +1917,7 @@
   },
   "deletePetName": "Delete {name}",
   "@deletePetName": {
-    "description": "Delete pet with name",
+    "description": "Delete pet name button",
     "placeholders": {
       "name": {
         "type": "String"
@@ -1922,7 +1933,7 @@
       }
     }
   },
-  "deletePetWarning": "All records and alerts for {name} will be deleted and cannot be restored.",
+  "deletePetWarning": "All records and alerts for {name} will be deleted and cannot be recovered.",
   "@deletePetWarning": {
     "description": "Delete pet warning",
     "placeholders": {
@@ -1931,7 +1942,7 @@
       }
     }
   },
-  "petDeleted": "{name} deleted",
+  "petDeleted": "{name} has been deleted",
   "@petDeleted": {
     "description": "Pet deleted toast",
     "placeholders": {
@@ -1940,7 +1951,7 @@
       }
     }
   },
-  "petAdded": "{name} added",
+  "petAdded": "{name} has been added 🐾",
   "@petAdded": {
     "description": "Pet added toast",
     "placeholders": {
@@ -1953,37 +1964,37 @@
   "@storeUnavailableMsg": {
     "description": "Store unavailable message"
   },
-  "checkingPaymentMsg": "Checking payment info. Please try again shortly.",
+  "checkingPaymentMsg": "Checking payment info. Please tap again shortly.",
   "@checkingPaymentMsg": {
-    "description": "Checking payment message"
+    "description": "Checking payment info message"
   },
-  "paymentCompleteMsg": "Payment complete. Please enter your new pet’s info.",
+  "paymentCompleteMsg": "Payment completed. Please enter your new friend's info.",
   "@paymentCompleteMsg": {
     "description": "Payment complete message"
   },
   "addNewFamilyMember": "Add a new family member?",
   "@addNewFamilyMember": {
-    "description": "Add new family member dialog title"
+    "description": "Add new family member prompt"
   },
-  "firstPetFreeDesc": "The first pet is free. From the second pet, each additional pet requires payment.",
+  "firstPetFreeDesc": "The first pet is free to register. Adding more pets requires a one-time payment per pet.",
   "@firstPetFreeDesc": {
     "description": "First pet free description"
   },
-  "petsRegisteredStoreUnavailable": "{count} pets registered\nPlease try again when the store is available.",
+  "petsRegisteredStoreUnavailable": "Currently {count} pets registered.\nPlease try again when the store is available.",
   "@petsRegisteredStoreUnavailable": {
-    "description": "Pets registered - store unavailable",
+    "description": "Pets registered store unavailable",
     "placeholders": {
       "count": {
-        "type": "String"
+        "type": "int"
       }
     }
   },
-  "petsRegisteredPayToAdd": "{count} pets registered\nPay {price} to add a new family member.",
+  "petsRegisteredPayToAdd": "Currently {count} pets registered.\nYou can add a new family member after paying {price}.",
   "@petsRegisteredPayToAdd": {
-    "description": "Pets registered - pay to add",
+    "description": "Pets registered pay to add",
     "placeholders": {
       "count": {
-        "type": "String"
+        "type": "int"
       },
       "price": {
         "type": "String"
@@ -2011,51 +2022,51 @@
   "@addNextAppointment": {
     "description": "Add next appointment button"
   },
-  "pottyRecordSaved": "Potty record saved",
+  "pottyRecordSaved": "💩 Potty recorded",
   "@pottyRecordSaved": {
     "description": "Potty record saved toast"
   },
-  "conditionRecordSaved": "Condition record saved",
+  "conditionRecordSaved": "💗 Condition recorded",
   "@conditionRecordSaved": {
     "description": "Condition record saved toast"
   },
-  "medicationRecordSaved": "Medication record saved",
+  "medicationRecordSaved": "💊 Medication recorded",
   "@medicationRecordSaved": {
     "description": "Medication record saved toast"
   },
-  "weightRecordSaved": "Weight record saved",
+  "weightRecordSaved": "⚖️ Weight recorded",
   "@weightRecordSaved": {
     "description": "Weight record saved toast"
   },
-  "mealRecordSaved": "Meal record saved",
+  "mealRecordSaved": "🍽️ Meal recorded",
   "@mealRecordSaved": {
     "description": "Meal record saved toast"
   },
-  "waterRecordSaved": "Water record saved",
+  "waterRecordSaved": "💧 Water recorded",
   "@waterRecordSaved": {
     "description": "Water record saved toast"
   },
-  "vetVisitRecordSaved": "Vet visit record saved",
+  "vetVisitRecordSaved": "🏥 Vet visit recorded",
   "@vetVisitRecordSaved": {
     "description": "Vet visit record saved toast"
   },
-  "vaccinationRecordSaved": "Vaccination record saved",
+  "vaccinationRecordSaved": "💉 Vaccination recorded",
   "@vaccinationRecordSaved": {
     "description": "Vaccination record saved toast"
   },
-  "groomingRecordSaved": "Grooming record saved",
+  "groomingRecordSaved": "✂️ Grooming recorded",
   "@groomingRecordSaved": {
     "description": "Grooming record saved toast"
   },
-  "brushingRecordSaved": "Brushing record saved",
+  "brushingRecordSaved": "🪥 Brushing recorded",
   "@brushingRecordSaved": {
     "description": "Brushing record saved toast"
   },
-  "walkRecordSaved": "Walk record saved",
+  "walkRecordSaved": "🦮 Walk recorded",
   "@walkRecordSaved": {
     "description": "Walk record saved toast"
   },
-  "memoSaved": "Memo saved",
+  "memoSaved": "📝 Memo recorded",
   "@memoSaved": {
     "description": "Memo saved toast"
   },
@@ -2063,23 +2074,23 @@
   "@abnormalSymptomRecordSaved": {
     "description": "Abnormal symptom record saved toast"
   },
-  "moreQuestions": "Have more questions?",
+  "moreQuestions": "Do you have any more questions?",
   "@moreQuestions": {
     "description": "More questions label"
   },
-  "contactViaSendFeedback": "Contact us from Settings > Send feedback.\nWe will get back to you soon.",
+  "contactViaSendFeedback": "Please contact us via Settings > Send feedback.\nWe will reply promptly 🐾",
   "@contactViaSendFeedback": {
     "description": "Contact via send feedback short"
   },
-  "contactViaSendFeedbackLong": "Contact us through Send feedback in Settings.\nWe will reply quickly.",
+  "contactViaSendFeedbackLong": "If you contact us via the [Send feedback] button in Settings,\nwe will respond as quickly as possible.",
   "@contactViaSendFeedbackLong": {
     "description": "Contact via send feedback long"
   },
-  "privacyPolicyEffectiveDate": "This privacy policy is effective from January 1, 2026.\nLast updated: May 8, 2026",
+  "privacyPolicyEffectiveDate": "This privacy policy is effective as of January 1, 2026.\nLast updated: May 8, 2026",
   "@privacyPolicyEffectiveDate": {
     "description": "Privacy policy effective date"
   },
-  "privacyCollectedInfo": "Collected information is used only for the purposes below.",
+  "privacyCollectedInfo": "Collected information is used only for the following purposes.",
   "@privacyCollectedInfo": {
     "description": "Privacy collected info"
   },
@@ -2091,91 +2102,91 @@
   "@privacyPolicyMayUpdate": {
     "description": "Privacy policy may update"
   },
-  "privacyPolicyContact": "For questions about this privacy policy, please contact us below.",
+  "privacyPolicyContact": "For inquiries regarding the privacy policy, please contact us below.",
   "@privacyPolicyContact": {
     "description": "Privacy policy contact"
   },
   "catMeal": "Meal",
   "@catMeal": {
-    "description": "Category: meal"
+    "description": "Category: Meal"
   },
   "catWater": "Water",
   "@catWater": {
-    "description": "Category: water"
+    "description": "Category: Water"
   },
   "catGrooming": "Grooming",
   "@catGrooming": {
-    "description": "Category: grooming"
+    "description": "Category: Grooming"
   },
   "catBrushing": "Brushing",
   "@catBrushing": {
-    "description": "Category: brushing"
+    "description": "Category: Brushing"
   },
   "catWalk": "Walk",
   "@catWalk": {
-    "description": "Category: walk"
+    "description": "Category: Walk"
   },
-  "catHospital": "Vet visit",
+  "catHospital": "Vet",
   "@catHospital": {
-    "description": "Category: hospital/vet"
+    "description": "Category: Hospital/Vet"
   },
-  "catAbnormalSymptom": "Abnormal Sign",
+  "catAbnormalSymptom": "Abnormal",
   "@catAbnormalSymptom": {
-    "description": "Category: abnormal symptom"
+    "description": "Category: Abnormal Symptom"
   },
   "catCondition": "Condition",
   "@catCondition": {
-    "description": "Category: condition"
+    "description": "Category: Condition"
   },
   "catPotty": "Potty",
   "@catPotty": {
-    "description": "Category: potty/poop"
+    "description": "Category: Potty"
   },
-  "mealFormTitle": "🍽️ Meal record",
+  "mealFormTitle": "🍽️ Meal Record",
   "@mealFormTitle": {
     "description": "Meal form title"
   },
-  "walkFormTitle": "🦮 Walk record",
+  "walkFormTitle": "🦮 Walk Record",
   "@walkFormTitle": {
     "description": "Walk form title"
   },
-  "weightFormTitle": "⚖️ Weight record",
+  "weightFormTitle": "⚖️ Weight Record",
   "@weightFormTitle": {
     "description": "Weight form title"
   },
-  "waterFormTitle": "💧 Water record",
+  "waterFormTitle": "💧 Water Record",
   "@waterFormTitle": {
     "description": "Water form title"
   },
-  "medicationFormTitle": "💊 Medication record",
+  "medicationFormTitle": "💊 Medication Record",
   "@medicationFormTitle": {
     "description": "Medication form title"
   },
-  "groomingFormTitle": "✂️ Grooming record",
+  "groomingFormTitle": "✂️ Grooming Record",
   "@groomingFormTitle": {
     "description": "Grooming form title"
   },
-  "brushingFormTitle": "🪥 Brushing record",
+  "brushingFormTitle": "🪥 Brushing Record",
   "@brushingFormTitle": {
     "description": "Brushing form title"
   },
-  "conditionFormTitle": "🌡️ Condition record",
+  "conditionFormTitle": "🌡️ Condition Record",
   "@conditionFormTitle": {
     "description": "Condition form title"
   },
-  "poopFormTitle": "💩 Potty record",
+  "poopFormTitle": "💩 Potty Record",
   "@poopFormTitle": {
     "description": "Potty form title"
   },
-  "vaccinationFormTitle": "💉 Vaccination record",
+  "vaccinationFormTitle": "💉 Vaccination Record",
   "@vaccinationFormTitle": {
     "description": "Vaccination form title"
   },
-  "hospitalFormTitle": "🏥 Vet visit record",
+  "hospitalFormTitle": "🏥 Vet Record",
   "@hospitalFormTitle": {
     "description": "Hospital form title"
   },
-  "abnormalSymptomFormTitle": "🚨 Abnormal Sign",
+  "abnormalSymptomFormTitle": "🚨 Abnormal Record",
   "@abnormalSymptomFormTitle": {
     "description": "Abnormal symptom form title"
   },
@@ -2185,66 +2196,190 @@
   },
   "measureMethod": "Measurement method",
   "@measureMethod": {
-    "description": "Weight measurement method label"
+    "description": "Measurement method label"
   },
-  "feedAmount": "Amount fed",
+  "feedAmount": "Feeding amount",
   "@feedAmount": {
-    "description": "Food amount fed label"
+    "description": "Feeding amount label"
   },
-  "mlInputLabel": "Direct mL input",
+  "mlInputLabel": "Enter mL manually",
   "@mlInputLabel": {
-    "description": "Direct mL input label"
+    "description": "mL input label"
   },
-  "alarmRescheduleNote": "This alert's scheduled date has passed.\nYou can set a new date or delete it.",
+  "alarmRescheduleNote": "This alert date has passed.\nYou can choose a new date or delete it.",
+  "@alarmRescheduleNote": {
+    "description": "Alarm reschedule note"
+  },
   "nailTrim": "Nail trim",
-  "shopNameExample": "e.g. Fluffy Pet Salon",
+  "@nailTrim": {
+    "description": "Nail trim label"
+  },
+  "shopNameExample": "e.g. Fluffy Pet Shop",
+  "@shopNameExample": {
+    "description": "Shop name example"
+  },
   "poopRecordSaved": "💩 Potty recorded",
+  "@poopRecordSaved": {
+    "description": "Potty record saved toast"
+  },
   "memoRecordSaved": "📝 Memo recorded",
+  "@memoRecordSaved": {
+    "description": "Memo record saved toast"
+  },
   "other": "Other",
+  "@other": {
+    "description": "Other label"
+  },
   "whole": "Whole body",
-  "paw": "Paw",
+  "@whole": {
+    "description": "Whole body label"
+  },
+  "paw": "Paws",
+  "@paw": {
+    "description": "Paws label"
+  },
   "importance": "Importance",
+  "@importance": {
+    "description": "Importance label"
+  },
   "timeTaken": "Time taken",
+  "@timeTaken": {
+    "description": "Time taken label"
+  },
   "example10": "e.g. 10",
+  "@example10": {
+    "description": "Example 10"
+  },
+  "minuteUnit": "min",
+  "@minuteUnit": {
+    "description": "Abbreviated minute unit for record summaries"
+  },
   "hospitalNameExample": "e.g. Happy Animal Hospital",
+  "@hospitalNameExample": {
+    "description": "Hospital name example"
+  },
   "diagnosisExample": "e.g. Enteritis, Dermatitis",
+  "@diagnosisExample": {
+    "description": "Diagnosis example"
+  },
   "memoTitlePlaceholder": "Enter memo title",
+  "@memoTitlePlaceholder": {
+    "description": "Memo title placeholder"
+  },
   "hintMemoTitle": "💡 Please enter a title",
+  "@hintMemoTitle": {
+    "description": "Hint: memo title"
+  },
   "poopType": "Type",
+  "@poopType": {
+    "description": "Poop type label"
+  },
   "poopStatus": "Status",
+  "@poopStatus": {
+    "description": "Poop status label"
+  },
   "feces": "Feces",
+  "@feces": {
+    "description": "Feces label"
+  },
   "bloody": "Bloody",
-  "vaccineDhppl": "DHPPL combo",
-  "vaccineCorona": "Corona enteritis",
-  "vaccineKennelCough": "Kennel cough",
+  "@bloody": {
+    "description": "Bloody label"
+  },
+  "vaccineDhppl": "Combo (DHPPL)",
+  "@vaccineDhppl": {
+    "description": "Vaccine DHPPL"
+  },
+  "vaccineCorona": "Coronavirus",
+  "@vaccineCorona": {
+    "description": "Vaccine Corona"
+  },
+  "vaccineKennelCough": "Kennel Cough",
+  "@vaccineKennelCough": {
+    "description": "Vaccine Kennel Cough"
+  },
   "vaccineRabies": "Rabies",
+  "@vaccineRabies": {
+    "description": "Vaccine Rabies"
+  },
   "vaccineInfluenza": "Influenza",
-  "vaccineFvrcp": "FVRCP combo",
+  "@vaccineInfluenza": {
+    "description": "Vaccine Influenza"
+  },
+  "vaccineFvrcp": "Combo (FVRCP)",
+  "@vaccineFvrcp": {
+    "description": "Vaccine FVRCP"
+  },
   "vaccineFelv": "Leukemia (FeLV)",
+  "@vaccineFelv": {
+    "description": "Vaccine FeLV"
+  },
   "vaccineChlamydia": "Chlamydia",
+  "@vaccineChlamydia": {
+    "description": "Vaccine Chlamydia"
+  },
   "mute": "Mute",
+  "@mute": {
+    "description": "Mute label"
+  },
   "photoVideo": "Photo · Video",
+  "@photoVideo": {
+    "description": "Photo video label"
+  },
   "photoVideoCount": "Photo · Video · {count}",
   "@photoVideoCount": {
     "description": "Photo video count label",
     "placeholders": {
       "count": {
-        "type": "String"
+        "type": "int"
       }
     }
   },
-  "selectMediaSource": "Select media source",
-  "cameraCapture": "Camera",
-  "cameraCaptureSubtitle": "Take photo or video",
-  "selectFromGallery": "Gallery",
-  "selectFromGallerySubtitle": "Select photos · videos",
+  "selectMediaSource": "Choose media source",
+  "@selectMediaSource": {
+    "description": "Select media source label"
+  },
+  "cameraCapture": "Take with camera",
+  "@cameraCapture": {
+    "description": "Camera capture label"
+  },
+  "cameraCaptureSubtitle": "Take a photo or video",
+  "@cameraCaptureSubtitle": {
+    "description": "Camera capture subtitle"
+  },
+  "selectFromGallery": "Choose from gallery",
+  "@selectFromGallery": {
+    "description": "Select from gallery label"
+  },
+  "selectFromGallerySubtitle": "Multiple selection allowed",
+  "@selectFromGallerySubtitle": {
+    "description": "Select from gallery subtitle"
+  },
   "takePhotoSubtitle": "Take a photo with camera",
+  "@takePhotoSubtitle": {
+    "description": "Take photo subtitle"
+  },
   "recordVideoSubtitle": "Record a video with camera",
+  "@recordVideoSubtitle": {
+    "description": "Record video subtitle"
+  },
   "permissionRequired": "Please allow permission in Settings",
+  "@permissionRequired": {
+    "description": "Permission required label"
+  },
   "confirmDeletePhoto": "Delete this photo?",
+  "@confirmDeletePhoto": {
+    "description": "Confirm delete photo"
+  },
   "confirmDeleteVideo": "Delete this video?",
+  "@confirmDeleteVideo": {
+    "description": "Confirm delete video"
+  },
   "hintMedicineAndDose": "💡 Please enter medicine name and dose",
-  "deleteRecordBody": "{category} record will be deleted\nand cannot be undone.",
+  "@hintMedicineAndDose": {
+    "description": "Hint: medicine and dose"
+  },
+  "deleteRecordBody": "{category} record will be deleted\nand cannot be restored.",
   "@deleteRecordBody": {
     "description": "Delete record body",
     "placeholders": {
@@ -2255,1055 +2390,1070 @@
   },
   "dayCountShort": "{days}d",
   "@dayCountShort": {
-    "description": "Short day count label, such as 3d or 7d.",
+    "description": "Day count short format",
     "placeholders": {
       "days": {
         "type": "int"
       }
     }
   },
-  "helpIntroContent": "Pet Sumtan is an app where you can record and manage your pet’s health and daily life in one place.\nYou can easily keep various health records, such as meals, water intake, potty, weight, medication, and vet visits, and use alerts so you do not miss important schedules.",
+  "helpIntroContent": "Pet Sumtan is an app where you can record and manage your pet's health and daily life in one place.\nYou can easily log meals, water, potty, weight, medication, vet visits, and set alerts so you never miss important schedules.",
   "@helpIntroContent": {
-    "description": "Help screen: Intro content explaining what Pet Sumtan is"
+    "description": "Help: Intro content"
   },
-  "helpHomeTodayRecordSummaryDesc": "View all records added today at a glance. Tap a record to see details or edit it.",
+  "helpHomeTodayRecordSummaryDesc": "See all records registered today at a glance. Tap a record to view details or edit it.",
   "@helpHomeTodayRecordSummaryDesc": {
-    "description": "Help screen: Home today record summary description"
+    "description": "Help: Home today record summary"
   },
-  "helpHomeWeeklyStatsDesc": "Check this week’s potty count, meal amount, and water intake in charts. It helps you understand your pet’s daily patterns.",
+  "helpHomeWeeklyStatsDesc": "Check this week's potty count, meal amount, and water intake on a graph to understand your pet's lifestyle patterns.",
   "@helpHomeWeeklyStatsDesc": {
-    "description": "Help screen: Home weekly stats description"
+    "description": "Help: Home weekly stats"
   },
-  "helpHomeWeightChangeChartDesc": "Shows recent weight records in a chart so you can easily track weight changes.",
+  "helpHomeWeightChangeChartDesc": "Shows recent weight records on a graph so you can easily track weight changes.",
   "@helpHomeWeightChangeChartDesc": {
-    "description": "Help screen: Home weight change chart description"
+    "description": "Help: Home weight change chart"
   },
-  "helpHomeFindNearbyHospitalsDesc": "Tap the button to search nearby animal hospitals in Naver Maps.",
+  "helpHomeFindNearbyHospitalsDesc": "Tap the button to search for nearby animal hospitals on the map.",
   "@helpHomeFindNearbyHospitalsDesc": {
-    "description": "Help screen: Find nearby hospitals description"
+    "description": "Help: Home find nearby hospitals"
   },
-  "helpHomeAddNewRecordDesc": "Tap the + button at the bottom of the screen to choose a record category and add a new record.",
+  "helpHomeAddNewRecordDesc": "Tap the + button at the bottom to select a category and add a new record.",
   "@helpHomeAddNewRecordDesc": {
-    "description": "Help screen: Add new record description"
+    "description": "Help: Home add new record"
   },
-  "helpRecordCategoriesIntro": "You can record your pet’s daily life in 12 categories.",
+  "helpRecordCategoriesIntro": "You can record your pet's daily life in 12 different categories.",
   "@helpRecordCategoriesIntro": {
-    "description": "Help screen: Record categories intro"
+    "description": "Help: Record categories intro"
   },
   "helpCategoryPottyName": "Potty",
   "@helpCategoryPottyName": {
-    "description": "Help screen category name: Potty"
+    "description": "Help: Category potty name"
   },
-  "helpCategoryPottyDesc": "Record potty activity and condition. You can also attach photos.",
+  "helpCategoryPottyDesc": "Record potty status and type. You can also attach photos.",
   "@helpCategoryPottyDesc": {
-    "description": "Help screen category description: Potty"
+    "description": "Help: Category potty desc"
   },
   "helpCategoryConditionName": "Condition",
   "@helpCategoryConditionName": {
-    "description": "Help screen category name: Condition"
+    "description": "Help: Category condition name"
   },
-  "helpCategoryConditionDesc": "Record your pet’s overall condition.",
+  "helpCategoryConditionDesc": "Record your pet's overall condition.",
   "@helpCategoryConditionDesc": {
-    "description": "Help screen category description: Condition"
+    "description": "Help: Category condition desc"
   },
   "helpCategoryMedicationName": "Medication",
   "@helpCategoryMedicationName": {
-    "description": "Help screen category name: Medication"
+    "description": "Help: Category medication name"
   },
-  "helpCategoryMedicationDesc": "Record the medicine name, dose, and medication time.",
+  "helpCategoryMedicationDesc": "Record medicine name, dose, and time.",
   "@helpCategoryMedicationDesc": {
-    "description": "Help screen category description: Medication"
+    "description": "Help: Category medication desc"
   },
   "helpCategoryWeightName": "Weight",
   "@helpCategoryWeightName": {
-    "description": "Help screen category name: Weight"
+    "description": "Help: Category weight name"
   },
-  "helpCategoryWeightDesc": "Record weight in kg. You can check weight trends on the Home screen.",
+  "helpCategoryWeightDesc": "Record weight (kg). You can check the trend on the home screen.",
   "@helpCategoryWeightDesc": {
-    "description": "Help screen category description: Weight"
+    "description": "Help: Category weight desc"
   },
   "helpCategoryMealName": "Meal",
   "@helpCategoryMealName": {
-    "description": "Help screen category name: Meal"
+    "description": "Help: Category meal name"
   },
-  "helpCategoryMealDesc": "Record meal amount and food type. You can also attach photos and videos.",
+  "helpCategoryMealDesc": "Record meal amount and type. You can attach photos/videos.",
   "@helpCategoryMealDesc": {
-    "description": "Help screen category description: Meal"
+    "description": "Help: Category meal desc"
   },
   "helpCategoryWaterName": "Water",
   "@helpCategoryWaterName": {
-    "description": "Help screen category name: Water"
+    "description": "Help: Category water name"
   },
-  "helpCategoryWaterDesc": "Record water intake in ml. You can also attach photos and videos.",
+  "helpCategoryWaterDesc": "Record water intake (ml). You can attach photos/videos.",
   "@helpCategoryWaterDesc": {
-    "description": "Help screen category description: Water"
+    "description": "Help: Category water desc"
   },
-  "helpCategoryHospitalName": "Hospital",
+  "helpCategoryHospitalName": "Vet",
   "@helpCategoryHospitalName": {
-    "description": "Help screen category name: Hospital"
+    "description": "Help: Category hospital name"
   },
-  "helpCategoryHospitalDesc": "Record the hospital name and visit details. You can also attach photos and videos.",
+  "helpCategoryHospitalDesc": "Record hospital name and diagnosis. You can attach photos/videos.",
   "@helpCategoryHospitalDesc": {
-    "description": "Help screen category description: Hospital"
+    "description": "Help: Category hospital desc"
   },
   "helpCategoryVaccinationName": "Vaccination",
   "@helpCategoryVaccinationName": {
-    "description": "Help screen category name: Vaccination"
+    "description": "Help: Category vaccination name"
   },
-  "helpCategoryVaccinationDesc": "Record the vaccine type and vaccination date.",
+  "helpCategoryVaccinationDesc": "Record vaccine type and date.",
   "@helpCategoryVaccinationDesc": {
-    "description": "Help screen category description: Vaccination"
+    "description": "Help: Category vaccination desc"
   },
   "helpCategoryGroomingName": "Grooming",
   "@helpCategoryGroomingName": {
-    "description": "Help screen category name: Grooming"
+    "description": "Help: Category grooming name"
   },
-  "helpCategoryGroomingDesc": "Record grooming details and attach photos or videos.",
+  "helpCategoryGroomingDesc": "Record grooming details and attach photos/videos.",
   "@helpCategoryGroomingDesc": {
-    "description": "Help screen category description: Grooming"
+    "description": "Help: Category grooming desc"
   },
-  "helpCategoryDentalName": "Dental brushing",
+  "helpCategoryDentalName": "Brushing",
   "@helpCategoryDentalName": {
-    "description": "Help screen category name: Dental brushing"
+    "description": "Help: Category dental name"
   },
-  "helpCategoryDentalDesc": "Record whether dental brushing was done and add a memo.",
+  "helpCategoryDentalDesc": "Record brushing status and memos.",
   "@helpCategoryDentalDesc": {
-    "description": "Help screen category description: Dental brushing"
+    "description": "Help: Category dental desc"
   },
   "helpCategoryWalkName": "Walk",
   "@helpCategoryWalkName": {
-    "description": "Help screen category name: Walk"
+    "description": "Help: Category walk name"
   },
-  "helpCategoryWalkDesc": "Record walk distance and duration.",
+  "helpCategoryWalkDesc": "Record walk distance and time.",
   "@helpCategoryWalkDesc": {
-    "description": "Help screen category description: Walk"
+    "description": "Help: Category walk desc"
   },
   "helpCategoryMemoName": "Memo",
   "@helpCategoryMemoName": {
-    "description": "Help screen category name: Memo"
+    "description": "Help: Category memo name"
   },
-  "helpCategoryMemoDesc": "Leave any memo freely.",
+  "helpCategoryMemoDesc": "Leave any free-form notes.",
   "@helpCategoryMemoDesc": {
-    "description": "Help screen category description: Memo"
+    "description": "Help: Category memo desc"
   },
-  "helpJournalViewRecordListDesc": "View all records by date. Category badges help you quickly identify each record type.",
+  "helpJournalViewRecordListDesc": "View all records by date. Category badges help you identify them easily.",
   "@helpJournalViewRecordListDesc": {
-    "description": "Help screen: Journal record list description"
+    "description": "Help: Journal view record list"
   },
-  "helpJournalEditDeleteRecordDesc": "Tap a record to open the edit sheet. You can update the content or delete it.",
+  "helpJournalEditDeleteRecordDesc": "Tap a record to open the edit sheet. You can modify or delete it.",
   "@helpJournalEditDeleteRecordDesc": {
-    "description": "Help screen: Journal edit and delete description"
+    "description": "Help: Journal edit delete record"
   },
-  "helpJournalAttachMediaDesc": "In some categories, such as meal, water, hospital, grooming, and potty, you can attach photos or videos.",
+  "helpJournalAttachMediaDesc": "You can attach photos or videos to categories like meals, water, vet, grooming, and potty.",
   "@helpJournalAttachMediaDesc": {
-    "description": "Help screen: Journal attach media description"
+    "description": "Help: Journal attach media"
   },
-  "helpAlarmAddDesc": "You can add various types of alerts, such as vaccination, medication, vet visits, and grooming. First choose an alert type, then set the date and time.",
+  "helpAlarmAddDesc": "Set alerts for vaccinations, medication, vet visits, grooming, etc. Choose the type first, then set the date and time.",
   "@helpAlarmAddDesc": {
-    "description": "Help screen: Add alert description"
+    "description": "Help: Alarm add desc"
   },
-  "helpAlarmRepeatDesc": "Set repeat rules such as daily, weekly, or monthly. This is useful for regular medication or heartworm prevention.",
+  "helpAlarmRepeatDesc": "Set repeat rules like daily, weekly, or monthly. Useful for regular medication or heartworm prevention.",
   "@helpAlarmRepeatDesc": {
-    "description": "Help screen: Repeat alert description"
+    "description": "Help: Alarm repeat desc"
   },
-  "helpAlarmAdvanceDesc": "For important schedules like vaccination, you can receive advance alerts 7 days, 3 days, and 1 day before.",
+  "helpAlarmAdvanceDesc": "For important events like vaccinations, get advance alerts 7 days, 3 days, or 1 day before.",
   "@helpAlarmAdvanceDesc": {
-    "description": "Help screen: Advance alert description"
+    "description": "Help: Alarm advance desc"
   },
-  "helpAlarmCompleteDesc": "Tap an alert to mark it as completed. Completed alerts can be checked in the past alerts list.",
+  "helpAlarmCompleteDesc": "Tap an alert to mark it as completed. Completed alerts move to the past alerts list.",
   "@helpAlarmCompleteDesc": {
-    "description": "Help screen: Complete alert description"
+    "description": "Help: Alarm complete desc"
   },
   "helpAlarmDeleteDesc": "Swipe an alert to the left to delete it.",
   "@helpAlarmDeleteDesc": {
-    "description": "Help screen: Delete alert description"
+    "description": "Help: Alarm delete desc"
   },
-  "helpPetRegisterDesc": "Add your pet by entering name, type, breed, gender, birth date, and neutering status.",
+  "helpPetRegisterDesc": "Register your pet by entering their name, type (dog/cat), breed, gender, birth date, and neutering status.",
   "@helpPetRegisterDesc": {
-    "description": "Help screen: Pet registration description"
+    "description": "Help: Pet register desc"
   },
-  "helpPetEditProfileDesc": "On the Profile screen, you can edit name, breed, weight, microchip number, registration number, and profile photo.",
+  "helpPetEditProfileDesc": "Edit name, breed, weight, microchip number, registration number, and profile photo on the profile screen.",
   "@helpPetEditProfileDesc": {
-    "description": "Help screen: Edit pet profile description"
+    "description": "Help: Pet edit profile desc"
   },
-  "helpPetManageMultipleDesc": "You can add multiple pets. Tap the pet chip at the top to switch the pet you want to manage.",
+  "helpPetManageMultipleDesc": "Register multiple pets. Tap the pet chip at the top to switch between them.",
   "@helpPetManageMultipleDesc": {
-    "description": "Help screen: Manage multiple pets description"
+    "description": "Help: Pet manage multiple desc"
   },
-  "helpDogHealthGuideDesc": "Provides veterinary-based health information, including essential and optional vaccination schedules, heartworm and external parasite prevention, dental care, and nutrition.",
+  "helpDogHealthGuideDesc": "Provides vet-based health info: core/non-core vaccine schedules, parasite prevention, dental care, and nutrition.",
   "@helpDogHealthGuideDesc": {
-    "description": "Help screen: Dog health guide description"
+    "description": "Help: Dog health guide desc"
   },
-  "helpCatHealthGuideDesc": "Check cat-specific vaccination schedules, parasite prevention, dental care, and nutrition information.",
+  "helpCatHealthGuideDesc": "Check cat-specific vaccine schedules, parasite prevention, dental care, and nutrition info.",
   "@helpCatHealthGuideDesc": {
-    "description": "Help screen: Cat health guide description"
+    "description": "Help: Cat health guide desc"
   },
   "helpSettingsNotificationDesc": "Turn all app notifications on or off.",
   "@helpSettingsNotificationDesc": {
-    "description": "Help screen: Settings notification description"
+    "description": "Help: Settings notification desc"
   },
   "helpSettingsExportDesc": "Export all recorded data as a ZIP file. Use it as a backup when changing devices.",
   "@helpSettingsExportDesc": {
-    "description": "Help screen: Settings export data description"
+    "description": "Help: Settings export desc"
   },
-  "helpSettingsImportDesc": "Import a previously exported ZIP backup file to restore your data.",
+  "helpSettingsImportDesc": "Restore data by importing a previously saved ZIP backup file.",
   "@helpSettingsImportDesc": {
-    "description": "Help screen: Settings import data description"
+    "description": "Help: Settings import desc"
   },
-  "helpSettingsFeedbackDesc": "Send us any inconvenience or improvement suggestions by email. It helps us make the app better.",
+  "helpSettingsFeedbackDesc": "Send us an email with any issues or suggestions. It helps us improve the app.",
   "@helpSettingsFeedbackDesc": {
-    "description": "Help screen: Settings feedback description"
+    "description": "Help: Settings feedback desc"
   },
-  "helpFaqDeletePetQ": "If I delete a pet, will all records be deleted too?",
+  "helpFaqDeletePetQ": "If I delete a pet, are all records deleted too?",
   "@helpFaqDeletePetQ": {
-    "description": "Help screen FAQ question: Delete pet records"
+    "description": "Help: FAQ delete pet Q"
   },
-  "helpFaqDeletePetA": "Yes. If you delete a pet, all records and alerts for that pet will also be deleted. Please back up your data with Export data before deleting.",
+  "helpFaqDeletePetA": "Yes, deleting a pet removes all their records and alerts. Please export and backup your data before deleting.",
   "@helpFaqDeletePetA": {
-    "description": "Help screen FAQ answer: Delete pet records"
+    "description": "Help: FAQ delete pet A"
   },
   "helpFaqMultipleMediaQ": "Can I attach multiple photos to a record?",
   "@helpFaqMultipleMediaQ": {
-    "description": "Help screen FAQ question: Multiple media"
+    "description": "Help: FAQ multiple media Q"
   },
-  "helpFaqMultipleMediaA": "Yes. You can attach multiple photos and videos. You can choose them from the gallery or capture them directly with the camera.",
+  "helpFaqMultipleMediaA": "Yes, you can attach multiple photos and videos. Choose from the gallery or take them directly with the camera.",
   "@helpFaqMultipleMediaA": {
-    "description": "Help screen FAQ answer: Multiple media"
+    "description": "Help: FAQ multiple media A"
   },
-  "helpFaqNoNotificationQ": "I am not receiving notifications.",
+  "helpFaqNoNotificationQ": "I am not receiving alerts.",
   "@helpFaqNoNotificationQ": {
-    "description": "Help screen FAQ question: Notifications not received"
+    "description": "Help: FAQ no notification Q"
   },
-  "helpFaqNoNotificationA": "Check whether notifications for Pet Sumtan are allowed in your device notification settings. Also check whether app notifications are turned on in Settings > Notification settings.",
+  "helpFaqNoNotificationA": "Please check your device settings to ensure notifications are allowed for the Pet Sumtan app. Also, check if app notifications are enabled in Settings > Notification settings.",
   "@helpFaqNoNotificationA": {
-    "description": "Help screen FAQ answer: Notifications not received"
+    "description": "Help: FAQ no notification A"
   },
   "helpFaqMoveDataQ": "Can I move my data to a new device?",
   "@helpFaqMoveDataQ": {
-    "description": "Help screen FAQ question: Move data to new device"
+    "description": "Help: FAQ move data Q"
   },
-  "helpFaqMoveDataA": "Yes. On your old device, save a backup file from Settings > Export data. Then restore it on your new device from Settings > Import data.",
+  "helpFaqMoveDataA": "Save a backup file via Settings > Export data, then restore it on your new device via Settings > Import data.",
   "@helpFaqMoveDataA": {
-    "description": "Help screen FAQ answer: Move data to new device"
+    "description": "Help: FAQ move data A"
   },
-  "helpFaqMultiplePetsQ": "Can I add multiple pets?",
+  "helpFaqMultiplePetsQ": "Can I register multiple pets?",
   "@helpFaqMultiplePetsQ": {
-    "description": "Help screen FAQ question: Multiple pets"
+    "description": "Help: FAQ multiple pets Q"
   },
-  "helpFaqMultiplePetsA": "By default, you can add 1 pet for free. Adding more pets is available as a premium feature.",
+  "helpFaqMultiplePetsA": "You can register 1 pet for free. Additional pets can be added using the premium feature.",
   "@helpFaqMultiplePetsA": {
-    "description": "Help screen FAQ answer: Multiple pets"
+    "description": "Help: FAQ multiple pets A"
   },
-  "privacyIntroBody": "Pet Sumtan is an app that can be used without signing up, and all data is stored only on the user’s device. We do not transmit personal information to external servers and securely protect your valuable pet information.",
+  "privacyIntroBody": "Pet Sumtan is an app used without signing up, and all data is stored only on your device. We do not transmit personal information to external servers, keeping your precious pet information safe.",
   "@privacyIntroBody": {
-    "description": "Introductory paragraph for the privacy policy screen"
+    "description": "Privacy: Intro body"
   },
   "privacySection1Title": "Personal Information Collected",
   "@privacySection1Title": {
-    "description": "Title for privacy policy section 1"
+    "description": "Privacy: Section 1 title"
   },
-  "privacySection1Body": "Pet Sumtan can be used without signing up and does not collect separate personally identifiable information. However, to provide app features, the following information may be stored on the device.",
+  "privacySection1Body": "Pet Sumtan can be used without registration and does not collect personal identification information. However, the following information may be stored on your device to provide app features.",
   "@privacySection1Body": {
-    "description": "Body text for privacy policy section 1"
+    "description": "Privacy: Section 1 body"
   },
   "privacyLocalStorageInfo": "Information stored locally on the device",
   "@privacyLocalStorageInfo": {
-    "description": "Subtitle for locally stored information"
+    "description": "Privacy: Local storage info"
   },
-  "privacyPetInfo": "Pet information: name, species, breed, date of birth, gender, weight, neutering status, microchip number, and animal registration number",
+  "privacyPetInfo": "Pet information: Name, species, breed, date of birth, gender, weight, neutering status, microchip number, animal registration number",
   "@privacyPetInfo": {
-    "description": "Bullet item describing pet information stored locally"
+    "description": "Privacy: Pet info"
   },
-  "privacyHealthRecords": "Health records: potty, meal, water, weight, medication, vaccination, hospital, grooming, brushing, walk, condition, memo, and other records entered directly by the user",
+  "privacyHealthRecords": "Health records: Potty, meals, water, weight, medication, vaccinations, vet visits, grooming, brushing, walks, condition, memos, etc., entered directly by the user",
   "@privacyHealthRecords": {
-    "description": "Bullet item describing health records stored locally"
+    "description": "Privacy: Health records"
   },
-  "privacyAttachedMedia": "Attached media: photos and videos taken or selected directly by the user",
+  "privacyAttachedMedia": "Attached media: Photos and videos taken or selected directly by the user",
   "@privacyAttachedMedia": {
-    "description": "Bullet item describing attached media stored locally"
+    "description": "Privacy: Attached media"
   },
-  "privacyNotificationSettings": "Alert settings: alert type, scheduled date and time, and repeat rules",
+  "privacyNotificationSettings": "Alert settings: Alert type, scheduled date and time, repeat rules",
   "@privacyNotificationSettings": {
-    "description": "Bullet item describing notification settings stored locally"
+    "description": "Privacy: Notification settings"
   },
-  "privacyInAppPurchaseTitle": "In-App Purchases",
+  "privacyInAppPurchaseTitle": "Regarding In-App Purchases",
   "@privacyInAppPurchaseTitle": {
-    "description": "Subtitle for in-app purchase related privacy information"
+    "description": "Privacy: In-app purchase title"
   },
-  "privacyPaymentProcessing": "Payments are processed through the Apple App Store or Google Play Store, and the app does not directly collect or store payment information.",
+  "privacyPaymentProcessing": "Payment processing is handled through the Apple App Store or Google Play Store, and the app does not directly collect or store payment information.",
   "@privacyPaymentProcessing": {
-    "description": "Bullet item explaining payment processing"
+    "description": "Privacy: Payment processing"
   },
-  "privacyReceiptVerification": "Only the minimum information required to verify purchase receipts is processed according to each platform’s policies.",
+  "privacyReceiptVerification": "Only the minimum information necessary for purchase receipt verification is processed according to each platform's policies.",
   "@privacyReceiptVerification": {
-    "description": "Bullet item explaining receipt verification"
+    "description": "Privacy: Receipt verification"
   },
-  "privacySection2Title": "Purpose of Collecting and Using Personal Information",
+  "privacySection2Title": "Purpose of Collection and Use",
   "@privacySection2Title": {
-    "description": "Title for privacy policy section 2"
+    "description": "Privacy: Section 2 title"
   },
-  "privacyPurposeRecords": "Saving and viewing pet health records",
+  "privacyPurposeRecords": "Storing and viewing pet health records",
   "@privacyPurposeRecords": {
-    "description": "Bullet item describing purpose of saving and viewing health records"
+    "description": "Privacy: Purpose records"
   },
-  "privacyPurposeStats": "Providing home screen statistics, such as weekly potty, meal, and water status, as well as weight change charts",
+  "privacyPurposeStats": "Providing home screen statistics (weekly potty, meal, water status, weight change graphs, etc.)",
   "@privacyPurposeStats": {
-    "description": "Bullet item describing purpose of providing statistics"
+    "description": "Privacy: Purpose stats"
   },
-  "privacyPurposeReminders": "Sending health-related alerts, such as vaccination, medication, and hospital visit reminders",
+  "privacyPurposeReminders": "Sending health-related alerts such as vaccinations, medication, and vet visits",
   "@privacyPurposeReminders": {
-    "description": "Bullet item describing purpose of sending reminders"
+    "description": "Privacy: Purpose reminders"
   },
   "privacyPurposeBackupRestore": "Providing data backup and restore features",
   "@privacyPurposeBackupRestore": {
-    "description": "Bullet item describing purpose of backup and restore"
+    "description": "Privacy: Purpose backup restore"
   },
-  "privacyPurposePaidEligibility": "Verifying eligibility to use paid features",
+  "privacyPurposePaidEligibility": "Verifying eligibility for paid features",
   "@privacyPurposePaidEligibility": {
-    "description": "Bullet item describing purpose of verifying paid feature eligibility"
+    "description": "Privacy: Purpose paid eligibility"
   },
-  "privacySection3Title": "Retention and Deletion of Personal Information",
+  "privacySection3Title": "Retention and Destruction of Information",
   "@privacySection3Title": {
-    "description": "Title for privacy policy section 3"
+    "description": "Privacy: Section 3 title"
   },
-  "privacyRetentionBody": "All Pet Sumtan data is stored only in the local database (SQLite) on the user’s device and is not transmitted to external servers.",
+  "privacyRetentionBody": "All data in Pet Sumtan is stored only in the local database (SQLite) on the user's device and is not transmitted to external servers.",
   "@privacyRetentionBody": {
-    "description": "Body text explaining data retention"
+    "description": "Privacy: Retention body"
   },
-  "privacyDataDeletionMethod": "How to delete data",
+  "privacyDataDeletionMethod": "Data Destruction Method",
   "@privacyDataDeletionMethod": {
-    "description": "Subtitle for data deletion methods"
+    "description": "Privacy: Data deletion method"
   },
-  "privacyDeleteInApp": "You can directly delete pet information and records in Settings > Data Management within the app.",
+  "privacyDeleteInApp": "You can directly delete pet information and records in App Settings > Data Management.",
   "@privacyDeleteInApp": {
-    "description": "Bullet item explaining in-app data deletion"
+    "description": "Privacy: Delete in app"
   },
-  "privacyDeleteUninstall": "When you delete the app, all data stored on the device will also be deleted.",
+  "privacyDeleteUninstall": "Deleting the app will also delete all data stored on the device.",
   "@privacyDeleteUninstall": {
-    "description": "Bullet item explaining data deletion when uninstalling the app"
+    "description": "Privacy: Delete uninstall"
   },
-  "privacyDeleteBackupWarning": "Please note that if you do not back up (export) your data before deleting the app, the data cannot be recovered.",
+  "privacyDeleteBackupWarning": "However, please note that if you do not back up (export) before deleting the app, the data cannot be recovered.",
   "@privacyDeleteBackupWarning": {
-    "description": "Bullet item warning about data recovery after deleting the app"
+    "description": "Privacy: Delete backup warning"
   },
-  "privacySection4Title": "Sharing Personal Information with Third Parties",
+  "privacySection4Title": "Provision of Information to Third Parties",
   "@privacySection4Title": {
-    "description": "Title for privacy policy section 4"
+    "description": "Privacy: Section 4 title"
   },
-  "privacyThirdPartyBody": "Pet Sumtan does not provide users’ personal information to third parties. However, the following cases are exceptions.",
+  "privacyThirdPartyBody": "Pet Sumtan does not provide users' personal information to external parties. However, the following cases are exceptions.",
   "@privacyThirdPartyBody": {
-    "description": "Body text explaining third-party sharing"
+    "description": "Privacy: Third party body"
   },
-  "privacyThirdPartyUserExport": "When the user directly uses the data export feature, such as sharing a backup file",
+  "privacyThirdPartyUserExport": "When the user directly uses the data export (backup file sharing) feature",
   "@privacyThirdPartyUserExport": {
-    "description": "Bullet item describing user-initiated data sharing through export"
+    "description": "Privacy: Third party user export"
   },
-  "privacyThirdPartyLegalRequest": "When required by law or upon a lawful request from investigative authorities",
+  "privacyThirdPartyLegalRequest": "When required by law or upon a lawful request from an investigative agency",
   "@privacyThirdPartyLegalRequest": {
-    "description": "Bullet item describing legal exceptions for third-party disclosure"
+    "description": "Privacy: Third party legal request"
   },
-  "privacySection5Title": "Access Permissions",
+  "privacySection5Title": "Access Permissions Guide",
   "@privacySection5Title": {
-    "description": "Title for privacy policy section 5"
+    "description": "Privacy: Section 5 title"
   },
-  "privacyPermissionsBody": "To provide app features, the following permissions may be requested. Even if you do not grant a permission, you can still use the remaining features normally, except for the feature that requires that permission.",
+  "privacyPermissionsBody": "We may request the following permissions to provide app features. Even if you do not allow the permissions, you can still use the rest of the features normally.",
   "@privacyPermissionsBody": {
-    "description": "Body text explaining app permissions"
+    "description": "Privacy: Permissions body"
   },
   "privacyPermissionCameraName": "Camera",
   "@privacyPermissionCameraName": {
-    "description": "Name of camera permission"
+    "description": "Privacy: Permission camera name"
   },
-  "privacyPermissionCameraDesc": "Used to directly take photos or videos and attach them to health records.",
+  "privacyPermissionCameraDesc": "Used when directly taking and attaching photos/videos to health records.",
   "@privacyPermissionCameraDesc": {
-    "description": "Description of camera permission usage"
+    "description": "Privacy: Permission camera desc"
   },
-  "privacyPermissionMediaName": "Photos and media access",
+  "privacyPermissionMediaName": "Photo and Media Access",
   "@privacyPermissionMediaName": {
-    "description": "Name of photos and media access permission"
+    "description": "Privacy: Permission media name"
   },
-  "privacyPermissionMediaDesc": "Used to select photos and videos from the gallery and attach them to records.",
+  "privacyPermissionMediaDesc": "Used when selecting photos/videos from the gallery to attach to records.",
   "@privacyPermissionMediaDesc": {
-    "description": "Description of photos and media access permission usage"
+    "description": "Privacy: Permission media desc"
   },
   "privacyPermissionNotificationName": "Notifications",
   "@privacyPermissionNotificationName": {
-    "description": "Name of notification permission"
+    "description": "Privacy: Permission notification name"
   },
-  "privacyPermissionNotificationDesc": "Used to send health-related alerts, such as vaccination, medication, and hospital visit reminders.",
+  "privacyPermissionNotificationDesc": "Used to send health-related alerts such as vaccinations, medication, and vet visits.",
   "@privacyPermissionNotificationDesc": {
-    "description": "Description of notification permission usage"
+    "description": "Privacy: Permission notification desc"
   },
-  "privacyPermissionFileName": "File access (Android)",
+  "privacyPermissionFileName": "File Access (Android)",
   "@privacyPermissionFileName": {
-    "description": "Name of file access permission on Android"
+    "description": "Privacy: Permission file name"
   },
-  "privacyPermissionFileDesc": "Used to save or load data backup files.",
+  "privacyPermissionFileDesc": "Used when saving or loading data backup files.",
   "@privacyPermissionFileDesc": {
-    "description": "Description of file access permission usage"
+    "description": "Privacy: Permission file desc"
   },
   "privacySection6Title": "Data Backup and Restore",
   "@privacySection6Title": {
-    "description": "Title for privacy policy section 6"
+    "description": "Privacy: Section 6 title"
   },
-  "privacyBackupExport": "Export: save or share all app data as a file (.zip).",
+  "privacyBackupExport": "Export: You can save or share all data in the app as a file (.zip).",
   "@privacyBackupExport": {
-    "description": "Bullet item describing data export"
+    "description": "Privacy: Backup export"
   },
-  "privacyBackupImport": "Import: load a previously exported backup file and restore data.",
+  "privacyBackupImport": "Import: You can load a previously exported backup file to restore data.",
   "@privacyBackupImport": {
-    "description": "Bullet item describing data import"
+    "description": "Privacy: Backup import"
   },
-  "privacyBackupWarning": "Backup files are managed directly by the user. Please be careful not to share files with others.",
+  "privacyBackupWarning": "Users manage backup files directly, so please be careful not to share the files with others.",
   "@privacyBackupWarning": {
-    "description": "Bullet item warning about backup file management"
+    "description": "Privacy: Backup warning"
   },
-  "privacySection7Title": "Protection of Children’s Personal Information",
+  "privacySection7Title": "Protection of Children's Privacy",
   "@privacySection7Title": {
-    "description": "Title for privacy policy section 7"
+    "description": "Privacy: Section 7 title"
   },
-  "privacyChildrenBody": "Pet Sumtan does not separately collect personal information from children under the age of 14. All app data is stored only on the device and is not transmitted to external servers, so children can also use the app safely.",
+  "privacyChildrenBody": "Pet Sumtan does not collect separate personal information from children under 14. All app data is stored only on the device, and since there is no external server transmission, children can use it safely.",
   "@privacyChildrenBody": {
-    "description": "Body text explaining protection of children’s personal information"
+    "description": "Privacy: Children body"
   },
-  "privacySection8Title": "Changes to This Privacy Policy",
+  "privacySection8Title": "Changes to Privacy Policy",
   "@privacySection8Title": {
-    "description": "Title for privacy policy section 8"
+    "description": "Privacy: Section 8 title"
   },
-  "privacyPolicyChangeNotice": "If changes are made, we will notify you through app update notes or in-app notices.",
+  "privacyPolicyChangeNotice": "Changes will be notified through app update notes or in-app announcements.",
   "@privacyPolicyChangeNotice": {
-    "description": "Bullet item explaining how privacy policy changes are announced"
+    "description": "Privacy: Policy change notice"
   },
-  "privacyPolicyChangeEffective": "The updated policy will take effect 7 days after the notice.",
+  "privacyPolicyChangeEffective": "The changed policy takes effect 7 days after the announcement.",
   "@privacyPolicyChangeEffective": {
-    "description": "Bullet item explaining when privacy policy changes take effect"
+    "description": "Privacy: Policy change effective"
   },
   "privacySection9Title": "Contact",
   "@privacySection9Title": {
-    "description": "Title for privacy policy section 9"
+    "description": "Privacy: Section 9 title"
   },
-  "hgDogHeroTitle": "Dog Health Care Guide",
+    "hgDogHeroTitle": "Dog Health Care Guide",
   "@hgDogHeroTitle": {
-    "description": "Title of the dog health guide hero banner."
+    "description": "Health guide: Dog hero title"
   },
   "hgCatHeroTitle": "Cat Health Care Guide",
   "@hgCatHeroTitle": {
-    "description": "Title of the cat health guide hero banner."
+    "description": "Health guide: Cat hero title"
   },
   "hgHeroSubtitle": "A professional health guide\nbased on veterinary recommendations.",
   "@hgHeroSubtitle": {
-    "description": "Subtitle shown in the health guide hero banner."
+    "description": "Health guide: Hero subtitle"
   },
   "hgVaccination": "Vaccination",
   "@hgVaccination": {
-    "description": "Section title for vaccination."
+    "description": "Health guide: Vaccination section"
   },
   "hgCoreVaccines": "Core Vaccines",
   "@hgCoreVaccines": {
-    "description": "Card title for essential/core vaccines."
+    "description": "Health guide: Core vaccines"
   },
   "hgNonCoreVaccines": "Non-Core Vaccines",
   "@hgNonCoreVaccines": {
-    "description": "Card title for optional/non-core vaccines."
+    "description": "Health guide: Non-core vaccines"
   },
   "hgRequired": "Required",
   "@hgRequired": {
-    "description": "Badge label indicating a required item."
+    "description": "Health guide: Required badge"
   },
   "hgRecommended": "Recommended",
   "@hgRecommended": {
-    "description": "Badge label indicating a recommended item."
+    "description": "Health guide: Recommended badge"
   },
   "hgParasitePrevention": "Parasite Prevention",
   "@hgParasitePrevention": {
-    "description": "Section title for parasite prevention."
+    "description": "Health guide: Parasite prevention section"
   },
   "hgHeartworm": "Heartworm",
   "@hgHeartworm": {
-    "description": "Card title for heartworm prevention."
+    "description": "Health guide: Heartworm"
   },
   "hgMonthly": "Monthly",
   "@hgMonthly": {
-    "description": "Badge label for monthly frequency."
+    "description": "Health guide: Monthly badge"
   },
-  "hgExternalParasites": "External Parasites (Fleas & Ticks)",
+  "hgExternalParasites": "External Parasites (Fleas/Ticks)",
   "@hgExternalParasites": {
-    "description": "Card title for flea and tick prevention."
+    "description": "Health guide: External parasites"
   },
   "hgInternalParasites": "Internal Parasites",
   "@hgInternalParasites": {
-    "description": "Card title for internal parasite prevention."
+    "description": "Health guide: Internal parasites"
   },
-  "hgThreeToSixMonths": "Every 3–6 Months",
+  "hgThreeToSixMonths": "Every 3-6 months",
   "@hgThreeToSixMonths": {
-    "description": "Badge label for a 3 to 6 month interval."
+    "description": "Health guide: 3-6 months badge"
   },
   "hgRegular": "Regular",
   "@hgRegular": {
-    "description": "Badge label for regular management."
+    "description": "Health guide: Regular badge"
   },
   "hgRegularCheckup": "Regular Health Checkup",
   "@hgRegularCheckup": {
-    "description": "Section title for regular health checkups."
+    "description": "Health guide: Regular checkup section"
   },
   "hgDentalCare": "Dental & Oral Care",
   "@hgDentalCare": {
-    "description": "Section title for dental and oral care."
+    "description": "Health guide: Dental care section"
   },
   "hgForbiddenFoods": "Strictly Forbidden Foods",
   "@hgForbiddenFoods": {
-    "description": "Section title for toxic or forbidden foods."
+    "description": "Health guide: Forbidden foods section"
   },
-  "hgEmergencySymptoms": "Symptoms Requiring Immediate Vet Care",
+  "hgEmergencySymptoms": "Symptoms Requiring Immediate Vet Visit",
   "@hgEmergencySymptoms": {
-    "description": "Section title for emergency symptoms."
+    "description": "Health guide: Emergency symptoms section"
   },
   "hgExerciseMentalHealth": "Exercise & Mental Health",
   "@hgExerciseMentalHealth": {
-    "description": "Section title for dog exercise and mental health."
+    "description": "Health guide: Exercise & mental health section"
   },
-  "hgWalk": "Walk",
+  "hgWalk": "Walks",
   "@hgWalk": {
-    "description": "Card title for walking guidance."
+    "description": "Health guide: Walks"
   },
   "hgDaily": "Daily",
   "@hgDaily": {
-    "description": "Badge label for daily frequency."
+    "description": "Health guide: Daily badge"
   },
   "hgBreedExerciseAmount": "Recommended Exercise by Breed",
   "@hgBreedExerciseAmount": {
-    "description": "Card title for breed-based exercise recommendations."
+    "description": "Health guide: Breed exercise amount"
   },
   "hgPlayBrainStimulation": "Play & Brain Stimulation",
   "@hgPlayBrainStimulation": {
-    "description": "Card title for play and mental stimulation."
+    "description": "Health guide: Play & brain stimulation"
   },
   "hgStressSignals": "Recognizing Stress Signals",
   "@hgStressSignals": {
-    "description": "Card title for stress signals."
+    "description": "Health guide: Stress signals"
   },
   "hgCaution": "Caution",
   "@hgCaution": {
-    "description": "Badge label indicating caution."
+    "description": "Health guide: Caution badge"
   },
   "hgSocialization": "Socialization & Environmental Stimulation",
   "@hgSocialization": {
-    "description": "Card title for dog socialization and environmental stimulation."
+    "description": "Health guide: Socialization"
   },
-  "hgDogCoreDhppl": "**DHPPL (Combination Vaccine)** — Distemper, Hepatitis, Parvovirus, Parainfluenza, and Leptospirosis.\n1st dose at 6–8 weeks of age, 3 doses at 3–4 week intervals, then annual boosters",
+  "hgDogCoreDhppl": "**DHPPL (Combo Vaccine)** — Distemper, Hepatitis, Parvovirus, Parainfluenza, Leptospirosis.\n1st dose at 6-8 weeks, 3 doses at 3-4 week intervals, then annual boosters.",
   "@hgDogCoreDhppl": {
-    "description": "Dog core vaccine description for DHPPL."
+    "description": "Health guide: Dog DHPPL"
   },
-  "hgDogCoreRabies": "**Rabies** — 1st dose after 3 months of age, then once annually (legally required vaccination)",
+  "hgDogCoreRabies": "**Rabies** — 1st dose after 3 months of age, then annually (Legally required in many areas).",
   "@hgDogCoreRabies": {
-    "description": "Dog core vaccine description for rabies."
+    "description": "Health guide: Dog Rabies"
   },
-  "hgDogCoreCorona": "**Coronavirus Enteritis** — Starts at 6–8 weeks of age, 2 doses at 3–4 week intervals, then annual boosters",
+  "hgDogCoreCorona": "**Coronavirus** — Starts at 6-8 weeks, 2 doses at 3-4 week intervals, then annual boosters.",
   "@hgDogCoreCorona": {
-    "description": "Dog core vaccine description for coronavirus enteritis."
+    "description": "Health guide: Dog Corona"
   },
-  "hgDogNonCoreKennel": "**Kennel Cough** — Recommended for multi-dog environments, grooming salons, or boarding facilities. Available as intranasal or injectable type",
+  "hgDogNonCoreKennel": "**Kennel Cough** — Recommended for multi-dog environments, grooming salons, or boarding. Nasal or injectable.",
   "@hgDogNonCoreKennel": {
-    "description": "Dog non-core vaccine description for kennel cough."
+    "description": "Health guide: Dog Kennel Cough"
   },
-  "hgDogNonCoreFlu": "**Canine Influenza** — Recommended for dogs with frequent outdoor activity or frequent contact with other dogs",
+  "hgDogNonCoreFlu": "**Influenza** — If highly active outdoors or frequently in contact with other dogs.",
   "@hgDogNonCoreFlu": {
-    "description": "Dog non-core vaccine description for influenza."
+    "description": "Health guide: Dog Influenza"
   },
-  "hgDogHeartworm1": "Around mosquito season (March–November), monthly preventive medication is recommended",
+  "hgDogHeartworm1": "Recommended to administer preventative medication **once a month** around mosquito season (March-November).",
   "@hgDogHeartworm1": {
-    "description": "Dog heartworm prevention guidance item 1."
+    "description": "Health guide: Dog Heartworm 1"
   },
-  "hgDogHeartworm2": "Infection is difficult to treat and can be fatal — **prevention is the best protection**",
+  "hgDogHeartworm2": "Treatment is difficult and fatal if infected — **Prevention is the best method**.",
   "@hgDogHeartworm2": {
-    "description": "Dog heartworm prevention guidance item 2."
+    "description": "Health guide: Dog Heartworm 2"
   },
-  "hgDogHeartworm3": "Before starting medication, testing is required to confirm a negative infection status",
+  "hgDogHeartworm3": "Must test for infection and confirm negative before administering.",
   "@hgDogHeartworm3": {
-    "description": "Dog heartworm prevention guidance item 3."
+    "description": "Health guide: Dog Heartworm 3"
   },
-  "hgDogHeartworm4": "Year-round prevention is safer and commonly recommended by veterinarians",
+  "hgDogHeartworm4": "Year-round administration is safer (Recommended by vets).",
   "@hgDogHeartworm4": {
-    "description": "Dog heartworm prevention guidance item 4."
+    "description": "Health guide: Dog Heartworm 4"
   },
-  "hgDogExternalParasites1": "Administer spot-on or oral preventives **monthly**",
+  "hgDogExternalParasites1": "Administer spot-on or oral preventative **monthly**.",
   "@hgDogExternalParasites1": {
-    "description": "Dog external parasite prevention guidance item 1."
+    "description": "Health guide: Dog External Parasites 1"
   },
-  "hgDogExternalParasites2": "After walks, always check the ears, between the toes, and armpits for ticks",
+  "hgDogExternalParasites2": "Must check for ticks in ears, between toes, and armpits after walks.",
   "@hgDogExternalParasites2": {
-    "description": "Dog external parasite prevention guidance item 2."
+    "description": "Health guide: Dog External Parasites 2"
   },
-  "hgDogExternalParasites3": "When removing a tick, use tweezers and pull slowly straight upward without twisting",
+  "hgDogExternalParasites3": "When removing ticks, use tweezers to pull straight out slowly (Do not twist).",
   "@hgDogExternalParasites3": {
-    "description": "Dog external parasite prevention guidance item 3."
+    "description": "Health guide: Dog External Parasites 3"
   },
-  "hgDogInternalParasites1": "Roundworms, hookworms, and whipworms: administer dewormer **every 3–6 months**",
+  "hgDogInternalParasites1": "Roundworms, hookworms, whipworms: Administer dewormer **every 3-6 months**.",
   "@hgDogInternalParasites1": {
-    "description": "Dog internal parasite prevention guidance item 1."
+    "description": "Health guide: Dog Internal Parasites 1"
   },
-  "hgDogInternalParasites2": "For puppies from 2 weeks of age: deworm 4 times at 2-week intervals, then continue regular management",
+  "hgDogInternalParasites2": "Puppy stage (from 2 weeks): Deworm 4 times at 2-week intervals, then regular maintenance.",
   "@hgDogInternalParasites2": {
-    "description": "Dog internal parasite prevention guidance item 2."
+    "description": "Health guide: Dog Internal Parasites 2"
   },
-  "hgDental1": "Daily brushing is ideal — at least **3 times per week** is recommended",
+  "hgDental1": "Daily brushing is ideal — Recommended at least **3 times a week**.",
   "@hgDental1": {
-    "description": "Dental care guidance item 1."
+    "description": "Health guide: Dental 1"
   },
-  "hgDental2": "Always use **pet-specific toothpaste**. Do not use human toothpaste containing xylitol",
+  "hgDental2": "Must use **pet-specific toothpaste** (Human toothpaste containing xylitol is strictly forbidden).",
   "@hgDental2": {
-    "description": "Dental care guidance item 2."
+    "description": "Health guide: Dental 2"
   },
-  "hgDental3": "Severe tartar requires professional scaling at a veterinary clinic under general anesthesia",
+  "hgDental3": "If tartar is severe, scaling at the vet is required (Requires general anesthesia).",
   "@hgDental3": {
-    "description": "Dental care guidance item 3."
+    "description": "Health guide: Dental 3"
   },
-  "hgDental4": "Dental chews and dental toys can support oral care as supplementary tools",
+  "hgDental4": "Dental chews and tooth toys can be used as supplementary care.",
   "@hgDental4": {
-    "description": "Dental care guidance item 4."
+    "description": "Health guide: Dental 4"
   },
-  "hgDogForbiddenFoodAlert": "The foods below are toxic to dogs. Even small amounts can be dangerous, so never feed them.",
+  "hgDogForbiddenFoodAlert": "The following foods are toxic to dogs. Even small amounts can be dangerous, so never feed them.",
   "@hgDogForbiddenFoodAlert": {
-    "description": "Warning text for foods forbidden to dogs."
+    "description": "Health guide: Dog forbidden food alert"
   },
-  "hgDogForbiddenGrape": "**Grapes and raisins** — can cause kidney failure; even small amounts may be fatal",
+  "hgDogForbiddenGrape": "**Grapes/Raisins** — Causes kidney failure, even small amounts are fatal.",
   "@hgDogForbiddenGrape": {
-    "description": "Dog forbidden food description for grapes and raisins."
+    "description": "Health guide: Dog forbidden grape"
   },
-  "hgDogForbiddenChocolate": "**Chocolate and cacao** — theobromine poisoning, heart failure, and seizures",
+  "hgDogForbiddenChocolate": "**Chocolate/Cacao** — Theobromine poisoning, heart failure, seizures.",
   "@hgDogForbiddenChocolate": {
-    "description": "Dog forbidden food description for chocolate and cacao."
+    "description": "Health guide: Dog forbidden chocolate"
   },
-  "hgDogForbiddenOnion": "**Onions, garlic, and leeks** — destroy red blood cells and cause hemolytic anemia",
+  "hgDogForbiddenOnion": "**Onions/Garlic/Leeks** — Destroys red blood cells, hemolytic anemia.",
   "@hgDogForbiddenOnion": {
-    "description": "Dog forbidden food description for onions, garlic, and leeks."
+    "description": "Health guide: Dog forbidden onion"
   },
-  "hgDogForbiddenXylitol": "**Xylitol** — causes excessive insulin release, hypoglycemia, and liver failure",
+  "hgDogForbiddenXylitol": "**Xylitol** — Insulin hypersecretion, hypoglycemia, liver failure.",
   "@hgDogForbiddenXylitol": {
-    "description": "Dog forbidden food description for xylitol."
+    "description": "Health guide: Dog forbidden xylitol"
   },
-  "hgDogForbiddenMacadamia": "**Macadamia nuts** — muscle weakness, high fever, and vomiting",
+  "hgDogForbiddenMacadamia": "**Macadamia Nuts** — Muscle weakness, high fever, vomiting.",
   "@hgDogForbiddenMacadamia": {
-    "description": "Dog forbidden food description for macadamia nuts."
+    "description": "Health guide: Dog forbidden macadamia"
   },
-  "hgDogForbiddenDoughAlcohol": "**Raw dough and alcohol** — ethanol poisoning and hypoglycemia",
+  "hgDogForbiddenDoughAlcohol": "**Raw Dough/Alcohol** — Ethanol poisoning, hypoglycemia.",
   "@hgDogForbiddenDoughAlcohol": {
-    "description": "Dog forbidden food description for raw dough and alcohol."
+    "description": "Health guide: Dog forbidden dough/alcohol"
   },
-  "hgDogForbiddenAvocado": "**Avocado** — contains persin and may cause vomiting and diarrhea",
+  "hgDogForbiddenAvocado": "**Avocado** — Contains persin, causes vomiting and diarrhea.",
   "@hgDogForbiddenAvocado": {
-    "description": "Dog forbidden food description for avocado."
+    "description": "Health guide: Dog forbidden avocado"
   },
-  "hgEmergencyAlert": "If any of the symptoms below appear, visit a veterinary clinic immediately.",
+  "hgEmergencyAlert": "If the following symptoms appear, visit the vet immediately.",
   "@hgEmergencyAlert": {
-    "description": "Common emergency warning text for dog and cat guides."
+    "description": "Health guide: Emergency alert"
   },
-  "hgDogEmergency1": "Complete loss of appetite for more than 24 hours",
+  "hgDogEmergency1": "Complete loss of appetite for more than 24 hours.",
   "@hgDogEmergency1": {
-    "description": "Dog emergency symptom item 1."
+    "description": "Health guide: Dog emergency 1"
   },
-  "hgDogEmergency2": "Vomiting or diarrhea repeated 3 or more times in one day",
+  "hgDogEmergency2": "Vomiting/diarrhea repeated 3 or more times a day.",
   "@hgDogEmergency2": {
-    "description": "Dog emergency symptom item 2."
+    "description": "Health guide: Dog emergency 2"
   },
-  "hgDogEmergency3": "Abdominal bloating and unproductive retching, possible gastric dilatation-volvulus",
+  "hgDogEmergency3": "Abdominal distension/retching (Suspected gastric dilatation-volvulus).",
   "@hgDogEmergency3": {
-    "description": "Dog emergency symptom item 3."
+    "description": "Health guide: Dog emergency 3"
   },
-  "hgDogEmergency4": "Difficulty breathing, pale gums, or cyanosis",
+  "hgDogEmergency4": "Difficulty breathing, pale gums, cyanosis.",
   "@hgDogEmergency4": {
-    "description": "Dog emergency symptom item 4."
+    "description": "Health guide: Dog emergency 4"
   },
-  "hgDogEmergency5": "Seizures, convulsions, or loss of consciousness",
+  "hgDogEmergency5": "Convulsions, seizures, loss of consciousness.",
   "@hgDogEmergency5": {
-    "description": "Dog emergency symptom item 5."
+    "description": "Health guide: Dog emergency 5"
   },
-  "hgDogEmergency6": "No urination for more than 12 hours",
+  "hgDogEmergency6": "Inability to urinate for more than 12 hours.",
   "@hgDogEmergency6": {
-    "description": "Dog emergency symptom item 6."
+    "description": "Health guide: Dog emergency 6"
   },
-  "hgDogEmergency7": "Visible trauma, fracture, or heavy bleeding",
+  "hgDogEmergency7": "Noticeable trauma, fractures, heavy bleeding.",
   "@hgDogEmergency7": {
-    "description": "Dog emergency symptom item 7."
+    "description": "Health guide: Dog emergency 7"
   },
-  "hgDogExerciseAlert": "For dogs, lack of exercise is not just a fitness issue. It can be a major cause of stress, anxiety, and destructive behavior.",
+  "hgDogExerciseAlert": "Lack of exercise in dogs is not just a physical issue. It is a major cause of stress, anxiety, and destructive behavior.",
   "@hgDogExerciseAlert": {
-    "description": "Alert text for dog exercise and mental health section."
+    "description": "Health guide: Dog exercise alert"
   },
-  "hgDogWalk1": "Small breeds: at least **20–30 minutes** daily; medium and large breeds: **1 hour or more** recommended",
+  "hgDogWalk1": "Small breeds: **20-30 mins**+ daily, Medium/Large breeds: **1 hour**+ recommended.",
   "@hgDogWalk1": {
-    "description": "Dog walking guidance item 1."
+    "description": "Health guide: Dog walk 1"
   },
-  "hgDogWalk2": "Walks are not only for elimination — they provide **scent stimulation, socialization, and stress relief**",
+  "hgDogWalk2": "Walks are not just for potty, but for **olfactory stimulation, socialization, and stress relief**.",
   "@hgDogWalk2": {
-    "description": "Dog walking guidance item 2."
+    "description": "Health guide: Dog walk 2"
   },
-  "hgDogWalk3": "Allow plenty of sniffing time — it is highly effective for relieving mental fatigue",
+  "hgDogWalk3": "Allow plenty of sniffing — Very effective for relieving mental fatigue.",
   "@hgDogWalk3": {
-    "description": "Dog walking guidance item 3."
+    "description": "Health guide: Dog walk 3"
   },
-  "hgDogWalk4": "In summer, beware of asphalt burns — walks before 7 a.m. or in the evening are recommended",
+  "hgDogWalk4": "Beware of asphalt burns in summer — Recommend walking before 7 AM or in the evening.",
   "@hgDogWalk4": {
-    "description": "Dog walking guidance item 4."
+    "description": "Health guide: Dog walk 4"
   },
-  "hgDogPlay1": "**Fetch and tug-of-war** — help release physical energy and strengthen the bond with the owner",
+  "hgDogPlay1": "**Fetch / Tug-of-war** — Releases physical energy, strengthens bond with owner.",
   "@hgDogPlay1": {
-    "description": "Dog play guidance item 1."
+    "description": "Health guide: Dog play 1"
   },
-  "hgDogPlay2": "**Nosework** — stimulates the brain and can provide an effect similar to a 30-minute walk in just 15 minutes",
+  "hgDogPlay2": "**Nosework** — Brain stimulation, 15 mins equals 30 mins of walking effect.",
   "@hgDogPlay2": {
-    "description": "Dog play guidance item 2."
+    "description": "Health guide: Dog play 2"
   },
-  "hgDogPlay3": "**Puzzle toys and Kong toys** — help reduce separation anxiety during alone time",
+  "hgDogPlay3": "**Puzzle/Kong toys** — Effective in alleviating separation anxiety when alone.",
   "@hgDogPlay3": {
-    "description": "Dog play guidance item 3."
+    "description": "Health guide: Dog play 3"
   },
-  "hgDogPlay4": "Just **10–15 minutes** of focused play each day can significantly reduce stress",
+  "hgDogPlay4": "Just **10-15 mins** of focused play daily significantly reduces stress levels.",
   "@hgDogPlay4": {
-    "description": "Dog play guidance item 4."
+    "description": "Health guide: Dog play 4"
   },
-  "hgDogStress1": "Destroying furniture or objects and excessive barking may signal lack of exercise or stimulation",
+  "hgDogStress1": "Destroying furniture/objects, excessive barking — Signs of lack of exercise/stimulation.",
   "@hgDogStress1": {
-    "description": "Dog stress signal item 1."
+    "description": "Health guide: Dog stress 1"
   },
-  "hgDogStress2": "Tail biting or excessive licking of paws/body may indicate compulsive behavior or stress relief attempts",
+  "hgDogStress2": "Tail chasing, excessive licking (paws, body) — Compulsive behavior, attempt to relieve stress.",
   "@hgDogStress2": {
-    "description": "Dog stress signal item 2."
+    "description": "Health guide: Dog stress 2"
   },
-  "hgDogStress3": "Extreme anxiety when the owner leaves and potty accidents may suggest separation anxiety",
+  "hgDogStress3": "Excessive anxiety or potty mistakes when owner leaves — Suspected separation anxiety.",
   "@hgDogStress3": {
-    "description": "Dog stress signal item 3."
+    "description": "Health guide: Dog stress 3"
   },
-  "hgDogStress4": "If symptoms persist, consult a veterinarian or animal behavior specialist",
+  "hgDogStress4": "If it persists, consulting a vet or pet behavior specialist is recommended.",
   "@hgDogStress4": {
-    "description": "Dog stress signal item 4."
+    "description": "Health guide: Dog stress 4"
   },
-  "hgDogSocial1": "**3–14 weeks of age** is the golden period for socialization — exposure to various people, sounds, and environments is important",
+  "hgDogSocial1": "**3-14 weeks** of age is the golden period for socialization — Exposure to various people, sounds, and environments is crucial.",
   "@hgDogSocial1": {
-    "description": "Dog socialization guidance item 1."
+    "description": "Health guide: Dog social 1"
   },
-  "hgDogSocial2": "Interaction with other dogs — dog parks and puppy classes can help",
+  "hgDogSocial2": "Interaction with other dogs — Utilize dog parks or puppy classes.",
   "@hgDogSocial2": {
-    "description": "Dog socialization guidance item 2."
+    "description": "Health guide: Dog social 2"
   },
-  "hgDogSocial3": "Experiencing new places, smells, and sounds contributes to mental enrichment",
+  "hgDogSocial3": "Experiencing new places, smells, and sounds contributes to mental enrichment.",
   "@hgDogSocial3": {
-    "description": "Dog socialization guidance item 3."
+    "description": "Health guide: Dog social 3"
   },
-  "hgDogSocial4": "Positive reinforcement training, such as clickers and treats, stimulates the brain and strengthens bonding",
+  "hgDogSocial4": "Positive reinforcement training (clicker, treats) increases brain stimulation and bonding simultaneously.",
   "@hgDogSocial4": {
-    "description": "Dog socialization guidance item 4."
+    "description": "Health guide: Dog social 4"
   },
-  "hgCatCoreFvrcp": "**FVRCP (Combination Vaccine)** — feline herpesvirus, calicivirus, and panleukopenia.\n1st dose at 6–8 weeks of age, 3 doses at 3–4 week intervals, then every 1–3 years",
+  "hgCatCoreFvrcp": "**FVRCP (Combo Vaccine)** — Herpesvirus, Calicivirus, Panleukopenia.\n1st dose at 6-8 weeks, 3 doses at 3-4 week intervals, then every 1-3 years.",
   "@hgCatCoreFvrcp": {
-    "description": "Cat core vaccine description for FVRCP."
+    "description": "Health guide: Cat FVRCP"
   },
-  "hgCatCoreRabies": "**Rabies** — required for outdoor cats and recommended for indoor cats as well (legally required)",
+  "hgCatCoreRabies": "**Rabies** — Mandatory for outdoor cats, recommended for indoor cats (Legally required in many areas).",
   "@hgCatCoreRabies": {
-    "description": "Cat core vaccine description for rabies."
+    "description": "Health guide: Cat Rabies"
   },
-  "hgCatNonCoreFelv": "**Feline Leukemia (FeLV)** — strongly recommended for outdoor cats and multi-cat households",
+  "hgCatNonCoreFelv": "**Feline Leukemia (FeLV)** — Highly recommended for outdoor cats or multi-cat households.",
   "@hgCatNonCoreFelv": {
-    "description": "Cat non-core vaccine description for FeLV."
+    "description": "Health guide: Cat FeLV"
   },
-  "hgCatNonCoreChlamydia": "**Feline Chlamydia** — helps prevent conjunctivitis in multi-cat environments",
+  "hgCatNonCoreChlamydia": "**Feline Chlamydia** — Multi-cat environments, prevents conjunctivitis.",
   "@hgCatNonCoreChlamydia": {
-    "description": "Cat non-core vaccine description for chlamydia."
+    "description": "Health guide: Cat Chlamydia"
   },
-  "hgCatNonCoreFiv": "**Feline Immunodeficiency Virus (FIV)** — especially relevant for outdoor male cats; transmitted through fight wounds",
+  "hgCatNonCoreFiv": "**Feline Immunodeficiency Virus (FIV)** — Outdoor male cats (transmitted through bite wounds).",
   "@hgCatNonCoreFiv": {
-    "description": "Cat non-core vaccine description for FIV."
+    "description": "Health guide: Cat FIV"
   },
-  "hgCatExternalParasites1": "Outdoor cats: administer flea and tick prevention **once a month**",
+  "hgCatExternalParasites1": "Outdoor cats: Administer flea/tick preventative **once a month**.",
   "@hgCatExternalParasites1": {
-    "description": "Cat external parasite prevention guidance item 1."
+    "description": "Health guide: Cat External Parasites 1"
   },
-  "hgCatExternalParasites2": "Even indoor cats can be exposed to fleas carried in on clothing or shoes → prevention **every 3 months** is recommended",
+  "hgCatExternalParasites2": "Indoor cats can also get fleas via human clothes/shoes → Preventative recommended **every 3 months**.",
   "@hgCatExternalParasites2": {
-    "description": "Cat external parasite prevention guidance item 2."
+    "description": "Health guide: Cat External Parasites 2"
   },
-  "hgCatExternalParasites3": "When using spot-on products, apply accurately to the back of the neck",
+  "hgCatExternalParasites3": "When using spot-on products, apply accurately to the back of the neck.",
   "@hgCatExternalParasites3": {
-    "description": "Cat external parasite prevention guidance item 3."
+    "description": "Health guide: Cat External Parasites 3"
   },
   "hgCatInternalHeartworm": "Internal Parasites & Heartworm",
   "@hgCatInternalHeartworm": {
-    "description": "Card title for cat internal parasites and heartworm."
+    "description": "Health guide: Cat Internal & Heartworm"
   },
-  "hgCatInternalParasites1": "Roundworms and tapeworms: administer dewormer **every 3–6 months**",
+  "hgCatInternalParasites1": "Roundworms/Tapeworms: Administer dewormer **every 3-6 months**.",
   "@hgCatInternalParasites1": {
-    "description": "Cat internal parasite prevention guidance item 1."
+    "description": "Health guide: Cat Internal Parasites 1"
   },
-  "hgCatInternalParasites2": "If fed raw meat or raw fish, more frequent testing is recommended",
+  "hgCatInternalParasites2": "If feeding a raw diet (raw meat/fish), more frequent testing is recommended.",
   "@hgCatInternalParasites2": {
-    "description": "Cat internal parasite prevention guidance item 2."
+    "description": "Health guide: Cat Internal Parasites 2"
   },
-  "hgCatHeartworm1": "Heartworm — cats have **no curative treatment, so prevention is the only option**. Monthly prevention is strongly recommended for outdoor cats",
+  "hgCatHeartworm1": "Heartworm — **There is no cure for cats, prevention is the only way**. Monthly administration highly recommended for outdoor cats.",
   "@hgCatHeartworm1": {
-    "description": "Cat heartworm prevention warning."
+    "description": "Health guide: Cat Heartworm 1"
   },
-  "hgCatMajorDiseases": "Major Feline Diseases to Watch For",
+  "hgCatMajorDiseases": "Beware of Major Cat Diseases",
   "@hgCatMajorDiseases": {
-    "description": "Section title for major feline diseases."
+    "description": "Health guide: Cat major diseases section"
   },
-  "hgCatDiseaseAlert": "Cats tend to hide pain and illness, so symptoms often appear only after a condition has progressed. Regular checkups are especially important.",
+  "hgCatDiseaseAlert": "Cats hide their pain, so when symptoms appear, the disease has often already progressed. Regular checkups are especially important.",
   "@hgCatDiseaseAlert": {
-    "description": "Alert text for major feline diseases section."
+    "description": "Health guide: Cat disease alert"
   },
-  "hgCatDiseaseFlutd": "**Feline Lower Urinary Tract Disease (FLUTD)** — common in male cats. Inability to urinate is an immediate emergency",
+  "hgCatDiseaseFlutd": "**Feline Lower Urinary Tract Disease (FLUTD)** — Common in males. If unable to urinate, immediate emergency care is needed.",
   "@hgCatDiseaseFlutd": {
-    "description": "Description of FLUTD in cats."
+    "description": "Health guide: Cat FLUTD"
   },
-  "hgCatDiseaseCkd": "**Chronic Kidney Disease (CKD)** — one of the leading causes of death in senior cats. Regular kidney screening is essential from age 7",
+  "hgCatDiseaseCkd": "**Chronic Kidney Disease (CKD)** — #1 cause of death in senior cats. Regular kidney panel tests essential for cats 7+ years old.",
   "@hgCatDiseaseCkd": {
-    "description": "Description of chronic kidney disease in cats."
+    "description": "Health guide: Cat CKD"
   },
-  "hgCatDiseaseDiabetes": "**Feline Diabetes** — higher risk in obese and senior cats. Watch for increased thirst and urination",
+  "hgCatDiseaseDiabetes": "**Feline Diabetes** — Risk for obese/senior cats. Watch for increased thirst and urination.",
   "@hgCatDiseaseDiabetes": {
-    "description": "Description of feline diabetes."
+    "description": "Health guide: Cat Diabetes"
   },
-  "hgCatDiseaseHyperthyroidism": "**Hyperthyroidism** — common in cats over 10 years old. Watch for weight loss, increased appetite, and hyperactivity",
+  "hgCatDiseaseHyperthyroidism": "**Hyperthyroidism** — Common in cats 10+ years old. Symptoms include weight loss, overeating, and hyperactivity.",
   "@hgCatDiseaseHyperthyroidism": {
-    "description": "Description of hyperthyroidism in cats."
+    "description": "Health guide: Cat Hyperthyroidism"
   },
-  "hgCatDiseaseStomatitis": "**Stomatitis** — very common in cats. Bad breath, drooling, or appetite loss should be checked",
+  "hgCatDiseaseStomatitis": "**Stomatitis** — Very common in cats. Check if there is bad breath, drooling, or loss of appetite.",
   "@hgCatDiseaseStomatitis": {
-    "description": "Description of stomatitis in cats."
+    "description": "Health guide: Cat Stomatitis"
   },
-  "hgCatDiseaseFhv": "**Feline Herpesvirus (FHV-1)** — once infected, it remains latent for life. Stress can trigger recurrence with sneezing, eye discharge, and conjunctivitis",
+  "hgCatDiseaseFhv": "**Feline Herpes (FHV-1)** — Once infected, it remains dormant for life. Relapses during stress, causing sneezing, eye discharge, conjunctivitis.",
   "@hgCatDiseaseFhv": {
-    "description": "Description of feline herpesvirus."
+    "description": "Health guide: Cat FHV"
   },
   "hgHydrationDiet": "Hydration & Diet Management",
   "@hgHydrationDiet": {
-    "description": "Section title for cat hydration and diet."
+    "description": "Health guide: Hydration & Diet section"
   },
-  "hgCatHydrationAlert": "Cats naturally drink little water and are vulnerable to urinary diseases. Encouraging water intake is very important.",
+  "hgCatHydrationAlert": "Cats naturally do not drink much water, making them vulnerable to urinary diseases. Encouraging water intake is very important.",
   "@hgCatHydrationAlert": {
-    "description": "Alert text for cat hydration section."
+    "description": "Health guide: Cat hydration alert"
   },
-  "hgCatHydration1": "Wet food, such as cans or pouches, is recommended to help increase hydration",
+  "hgCatHydration1": "Combining wet food (cans/pouches) is recommended to supplement hydration.",
   "@hgCatHydration1": {
-    "description": "Cat hydration guidance item 1."
+    "description": "Health guide: Cat hydration 1"
   },
-  "hgCatHydration2": "Many cats prefer running water — a **water fountain** can be effective",
+  "hgCatHydration2": "Prefers flowing water — Installing a **water fountain** is effective.",
   "@hgCatHydration2": {
-    "description": "Cat hydration guidance item 2."
+    "description": "Health guide: Cat hydration 2"
   },
-  "hgCatHydration3": "Place the water bowl away from the food bowl; wide, shallow bowls are often preferred",
+  "hgCatHydration3": "Separate water bowls from food bowls; prefer wide, shallow bowls.",
   "@hgCatHydration3": {
-    "description": "Cat hydration guidance item 3."
+    "description": "Health guide: Cat hydration 3"
   },
-  "hgCatHydration4": "Target water intake: about **40–60 ml** per kg of body weight per day",
+  "hgCatHydration4": "Target water intake: About **40-60ml** per 1kg of body weight per day.",
   "@hgCatHydration4": {
-    "description": "Cat hydration guidance item 4."
+    "description": "Health guide: Cat hydration 4"
   },
-  "hgCatForbiddenFoodAlert": "The foods below are toxic to cats. Even small amounts can be dangerous, so never feed them.",
+  "hgCatForbiddenFoodAlert": "The following foods are toxic to cats. Even small amounts can be dangerous, so never feed them.",
   "@hgCatForbiddenFoodAlert": {
-    "description": "Warning text for foods forbidden to cats."
+    "description": "Health guide: Cat forbidden food alert"
   },
-  "hgCatForbiddenOnion": "**Onions, garlic, and leeks** — destroy red blood cells and cause hemolytic anemia; cats are more sensitive than dogs",
+  "hgCatForbiddenOnion": "**Onions/Garlic/Leeks** — Destroys red blood cells, hemolytic anemia (More sensitive than dogs).",
   "@hgCatForbiddenOnion": {
-    "description": "Cat forbidden food description for onions, garlic, and leeks."
+    "description": "Health guide: Cat forbidden onion"
   },
-  "hgCatForbiddenGrape": "**Grapes and raisins** — can cause kidney failure",
+  "hgCatForbiddenGrape": "**Grapes/Raisins** — Causes kidney failure.",
   "@hgCatForbiddenGrape": {
-    "description": "Cat forbidden food description for grapes and raisins."
+    "description": "Health guide: Cat forbidden grape"
   },
-  "hgCatForbiddenChocolate": "**Chocolate and caffeine** — toxic to the heart and nervous system",
+  "hgCatForbiddenChocolate": "**Chocolate/Caffeine** — Heart and nervous system toxicity.",
   "@hgCatForbiddenChocolate": {
-    "description": "Cat forbidden food description for chocolate and caffeine."
+    "description": "Health guide: Cat forbidden chocolate"
   },
-  "hgCatForbiddenRawFish": "**Raw fish when fed continuously** — may cause thiamine, vitamin B1, deficiency",
+  "hgCatForbiddenRawFish": "**Raw Fish (continuous feeding)** — Causes Thiamine (B1) deficiency.",
   "@hgCatForbiddenRawFish": {
-    "description": "Cat forbidden food description for raw fish."
+    "description": "Health guide: Cat forbidden raw fish"
   },
-  "hgCatForbiddenMilk": "**Milk and dairy products** — many adult cats are lactose intolerant and may develop diarrhea",
+  "hgCatForbiddenMilk": "**Milk/Dairy** — Adult cats are lactose intolerant, causes diarrhea.",
   "@hgCatForbiddenMilk": {
-    "description": "Cat forbidden food description for milk and dairy products."
+    "description": "Health guide: Cat forbidden milk"
   },
-  "hgCatForbiddenXylitolAlcohol": "**Xylitol and alcohol** — toxic to the liver and nervous system",
+  "hgCatForbiddenXylitolAlcohol": "**Xylitol/Alcohol** — Liver and nervous system toxicity.",
   "@hgCatForbiddenXylitolAlcohol": {
-    "description": "Cat forbidden food description for xylitol and alcohol."
+    "description": "Health guide: Cat forbidden xylitol/alcohol"
   },
-  "hgCatForbiddenAvocado": "**Avocado** — contains persin and may cause vomiting and diarrhea",
+  "hgCatForbiddenAvocado": "**Avocado** — Contains persin, causes vomiting and diarrhea.",
   "@hgCatForbiddenAvocado": {
-    "description": "Cat forbidden food description for avocado."
+    "description": "Health guide: Cat forbidden avocado"
   },
-  "hgCatForbiddenRawEggWhite": "**Raw egg whites** — avidin blocks biotin absorption and may cause skin and coat problems",
+  "hgCatForbiddenRawEggWhite": "**Raw Egg Whites** — Avidin blocks biotin, causing skin/coat issues.",
   "@hgCatForbiddenRawEggWhite": {
-    "description": "Cat forbidden food description for raw egg whites."
+    "description": "Health guide: Cat forbidden raw egg white"
   },
-  "hgCatEmergency1": "**Unable to urinate or blood in urine** — urethral obstruction is an emergency, especially in male cats",
+  "hgCatEmergency1": "**Unable to urinate at all or blood in urine** — Urethral obstruction emergency (Especially watch male cats).",
   "@hgCatEmergency1": {
-    "description": "Cat emergency symptom item 1."
+    "description": "Health guide: Cat emergency 1"
   },
-  "hgCatEmergency2": "Complete loss of appetite for more than 24 hours, with risk of fatty liver disease",
+  "hgCatEmergency2": "Complete loss of appetite for more than 24 hours (Risk of fatty liver).",
   "@hgCatEmergency2": {
-    "description": "Cat emergency symptom item 2."
+    "description": "Health guide: Cat emergency 2"
   },
-  "hgCatEmergency3": "**Open-mouth breathing** — never normal in cats and requires immediate emergency care",
+  "hgCatEmergency3": "**Open-mouth breathing** — Never normal for cats, immediate emergency.",
   "@hgCatEmergency3": {
-    "description": "Cat emergency symptom item 3."
+    "description": "Health guide: Cat emergency 3"
   },
-  "hgCatEmergency4": "Sudden hind leg paralysis or coldness, possible thromboembolism",
+  "hgCatEmergency4": "Sudden paralysis or coldness in hind legs (Suspected thrombosis).",
   "@hgCatEmergency4": {
-    "description": "Cat emergency symptom item 4."
+    "description": "Health guide: Cat emergency 4"
   },
-  "hgCatEmergency5": "Seizures, convulsions, or loss of consciousness",
+  "hgCatEmergency5": "Convulsions, seizures, loss of consciousness.",
   "@hgCatEmergency5": {
-    "description": "Cat emergency symptom item 5."
+    "description": "Health guide: Cat emergency 5"
   },
-  "hgCatEmergency6": "Pale gums or tongue, or yellow discoloration/jaundice",
+  "hgCatEmergency6": "Pale or jaundiced (yellowish) gums/tongue.",
   "@hgCatEmergency6": {
-    "description": "Cat emergency symptom item 6."
+    "description": "Health guide: Cat emergency 6"
   },
-  "hgCatEmergency7": "Vomiting or diarrhea 3 or more times in one day, or blood in stool/vomit",
+  "hgCatEmergency7": "Vomiting/diarrhea repeated 3 or more times a day, or bloody stool/vomit.",
   "@hgCatEmergency7": {
-    "description": "Cat emergency symptom item 7."
+    "description": "Health guide: Cat emergency 7"
   },
-  "hgCatEmergency8": "Visible trauma, fracture, or heavy bleeding",
+  "hgCatEmergency8": "Noticeable trauma, fractures, heavy bleeding.",
   "@hgCatEmergency8": {
-    "description": "Cat emergency symptom item 8."
+    "description": "Health guide: Cat emergency 8"
   },
   "hgEnvironmentMentalHealth": "Environment & Mental Health",
   "@hgEnvironmentMentalHealth": {
-    "description": "Section title for cat environment and mental health."
+    "description": "Health guide: Environment & Mental Health section"
   },
   "hgIndoorEnvironment": "Indoor Environment Management",
   "@hgIndoorEnvironment": {
-    "description": "Card title for indoor environment management."
+    "description": "Health guide: Indoor environment"
   },
   "hgStressManagement": "Stress Management",
   "@hgStressManagement": {
-    "description": "Card title for stress management."
+    "description": "Health guide: Stress management"
   },
-  "hgCatEnvironment1": "**Litter boxes**: number of cats + 1 or more, cleaned daily",
+  "hgCatEnvironment1": "**Litter Boxes**: Number of cats + 1 or more placed, clean daily.",
   "@hgCatEnvironment1": {
-    "description": "Cat indoor environment guidance item 1."
+    "description": "Health guide: Cat environment 1"
   },
-  "hgCatEnvironment2": "**Scratchers**: at least 2, combining vertical and horizontal types",
+  "hgCatEnvironment2": "**Scratchers**: At least 2 or more (combine vertical and horizontal).",
   "@hgCatEnvironment2": {
-    "description": "Cat indoor environment guidance item 2."
+    "description": "Health guide: Cat environment 2"
   },
-  "hgCatEnvironment3": "**High spaces**: provide cat towers, shelves, or vertical spaces to satisfy territorial instincts",
+  "hgCatEnvironment3": "**High Spaces**: Provide vertical spaces like cat trees or shelves (satisfies territorial instincts).",
   "@hgCatEnvironment3": {
-    "description": "Cat indoor environment guidance item 3."
+    "description": "Health guide: Cat environment 3"
   },
-  "hgCatEnvironment4": "**Hiding places**: provide boxes, tunnels, or safe spaces where the cat can hide",
+  "hgCatEnvironment4": "**Hiding Spots**: Provide safe hiding spaces like boxes or tunnels.",
   "@hgCatEnvironment4": {
-    "description": "Cat indoor environment guidance item 4."
+    "description": "Health guide: Cat environment 4"
   },
-  "hgCatStress1": "Stress in cats is directly linked to lowered immunity, FLUTD, and feline herpesvirus recurrence",
+  "hgCatStress1": "Cat stress is directly linked to weakened immunity, FLUTD, herpes relapses, etc.",
   "@hgCatStress1": {
-    "description": "Cat stress management guidance item 1."
+    "description": "Health guide: Cat stress 1"
   },
-  "hgCatStress2": "During major environmental changes such as moving or a new family member, a pheromone diffuser such as Feliway may help",
+  "hgCatStress2": "Use pheromone diffusers (Feliway) during sudden environmental changes (moving, new family members).",
   "@hgCatStress2": {
-    "description": "Cat stress management guidance item 2."
+    "description": "Health guide: Cat stress 2"
   },
-  "hgCatStress3": "Provide at least **10–15 minutes** of interactive toy play every day",
+  "hgCatStress3": "Secure at least **10-15 mins** of playtime with toys daily.",
   "@hgCatStress3": {
-    "description": "Cat stress management guidance item 3."
+    "description": "Health guide: Cat stress 3"
   },
-  "hgCatStress4": "In multi-cat households, separate resources such as food bowls, litter boxes, and sleeping areas according to the number of cats",
+  "hgCatStress4": "Multi-cat households: Separate resources (food bowls, litter boxes, beds) according to the number of cats.",
   "@hgCatStress4": {
-    "description": "Cat stress management guidance item 4."
+    "description": "Health guide: Cat stress 4"
   },
   "hgAge": "Age",
   "@hgAge": {
-    "description": "Table header for age."
+    "description": "Health guide: Age"
   },
   "hgCheckupCycle": "Checkup Cycle",
   "@hgCheckupCycle": {
-    "description": "Table header for health checkup cycle."
+    "description": "Health guide: Checkup cycle"
   },
   "hgMainItems": "Main Items",
   "@hgMainItems": {
-    "description": "Table header for main checkup items."
+    "description": "Health guide: Main items"
   },
-  "hgAge1to6": "1–6 Years",
+  "hgAge1to6": "1-6 years",
   "@hgAge1to6": {
-    "description": "Age range from 1 to 6 years."
+    "description": "Health guide: Age 1-6"
   },
-  "hgAge7to10": "7–10 Years",
+  "hgAge7to10": "7-10 years",
   "@hgAge7to10": {
-    "description": "Age range from 7 to 10 years."
+    "description": "Health guide: Age 7-10"
   },
-  "hgAge11Plus": "11+ Years",
+  "hgAge11Plus": "11+ years",
   "@hgAge11Plus": {
-    "description": "Age range of 11 years and older."
+    "description": "Health guide: Age 11+"
   },
-  "hgYearlyOnce": "Once a Year",
+  "hgYearlyOnce": "Once a year",
   "@hgYearlyOnce": {
-    "description": "Checkup frequency of once per year."
+    "description": "Health guide: Yearly once"
   },
-  "hgYearlyTwice": "Twice a Year",
+  "hgYearlyTwice": "Twice a year",
   "@hgYearlyTwice": {
-    "description": "Checkup frequency of twice per year."
+    "description": "Health guide: Yearly twice"
   },
-  "hgEvery3to4Months": "Every 3–4 Months",
+  "hgEvery3to4Months": "Every 3-4 months",
   "@hgEvery3to4Months": {
-    "description": "Checkup frequency of every 3 to 4 months."
+    "description": "Health guide: Every 3-4 months"
   },
-  "hgDogCheckupItems1": "Blood test, heart auscultation, weight, dental check",
+  "hgDogCheckupItems1": "Blood test, heart auscultation, weight, teeth",
   "@hgDogCheckupItems1": {
-    "description": "Dog checkup items for age 1 to 6."
+    "description": "Health guide: Dog checkup items 1"
   },
   "hgDogCheckupItems2": "Blood, urine, X-ray, blood pressure, joints",
   "@hgDogCheckupItems2": {
-    "description": "Dog checkup items for age 7 to 10."
+    "description": "Health guide: Dog checkup items 2"
   },
-  "hgDogCheckupItems3": "Comprehensive blood work, ultrasound, kidney and liver function",
+  "hgDogCheckupItems3": "Comprehensive blood, ultrasound, kidney/liver function",
   "@hgDogCheckupItems3": {
-    "description": "Dog checkup items for age 11 and older."
+    "description": "Health guide: Dog checkup items 3"
   },
-  "hgCatCheckupItems1": "Blood test, urine test, weight, dental check",
+  "hgCatCheckupItems1": "Blood test, urine test, weight, teeth",
   "@hgCatCheckupItems1": {
-    "description": "Cat checkup items for age 1 to 6."
+    "description": "Health guide: Cat checkup items 1"
   },
-  "hgCatCheckupItems2": "Kidney and liver values, blood pressure, thyroid T4",
+  "hgCatCheckupItems2": "Kidney/liver panel, blood pressure, thyroid (T4)",
   "@hgCatCheckupItems2": {
-    "description": "Cat checkup items for age 7 to 10."
+    "description": "Health guide: Cat checkup items 2"
   },
-  "hgCatCheckupItems3": "Comprehensive blood work, abdominal ultrasound, intensive kidney monitoring",
+  "hgCatCheckupItems3": "Comprehensive blood, abdominal ultrasound, intensive kidney monitoring",
   "@hgCatCheckupItems3": {
-    "description": "Cat checkup items for age 11 and older."
+    "description": "Health guide: Cat checkup items 3"
   },
   "hgExerciseAmount": "Exercise Level",
   "@hgExerciseAmount": {
-    "description": "Table header for exercise level."
+    "description": "Health guide: Exercise amount"
   },
   "hgBreedExamples": "Breed Examples",
   "@hgBreedExamples": {
-    "description": "Table header for breed examples."
+    "description": "Health guide: Breed examples"
   },
   "hgLow": "Low",
   "@hgLow": {
-    "description": "Low exercise level label."
+    "description": "Health guide: Low"
   },
-  "hgNormal": "Moderate",
+  "hgNormal": "Normal",
   "@hgNormal": {
-    "description": "Moderate exercise level label."
+    "description": "Health guide: Normal"
   },
   "hgHigh": "High",
   "@hgHigh": {
-    "description": "High exercise level label."
+    "description": "Health guide: High"
   },
   "hgBreedLowExamples": "Bulldog, Basset Hound, Shih Tzu, Maltese",
   "@hgBreedLowExamples": {
-    "description": "Examples of breeds with low exercise needs."
+    "description": "Health guide: Breed low examples"
   },
-  "hgBreedNormalExamples": "Poodle, Bichon Frise, Cocker Spaniel, Beagle",
+  "hgBreedNormalExamples": "Poodle, Bichon, Cocker Spaniel, Beagle",
   "@hgBreedNormalExamples": {
-    "description": "Examples of breeds with moderate exercise needs."
+    "description": "Health guide: Breed normal examples"
   },
   "hgBreedHighExamples": "Labrador, Golden Retriever, Husky, Border Collie",
   "@hgBreedHighExamples": {
-    "description": "Examples of breeds with high exercise needs."
+    "description": "Health guide: Breed high examples"
   },
-  "hgDisclaimer": "This guide provides general health care information, and the care needed may vary depending on your pet’s condition. If abnormal symptoms appear or treatment is needed, always consult a veterinarian.",
+  "hgDisclaimer": "This guide provides general health care information, and necessary care may vary depending on your pet's condition. If there are abnormal symptoms or treatment is needed, be sure to consult a veterinarian.",
   "@hgDisclaimer": {
-    "description": "Disclaimer shown at the bottom of the health guide."
+    "description": "Health guide: Disclaimer"
   }
+,
+  "categoryFilter": "Category Filter",
+  "selectAll": "Select All",
+  "deselectAll": "Deselect All",
+  "apply": "Apply",
+  "saving": "Saving...",
+  "treatmentContent": "Treatment",
+
+  "conditionScoreWord1": "Terrible",
+  "conditionScoreWord2": "Poor",
+  "conditionScoreWord3": "Fair",
+  "conditionScoreWord4": "Good",
+  "conditionScoreWord5": "Excellent",
+  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "conditionScoreFormat": "Condition {score} pts - {word}"
 }

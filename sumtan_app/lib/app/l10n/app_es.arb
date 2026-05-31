@@ -143,6 +143,7 @@
   "hospitalNameHint": "Escribe el nombre del hospital",
   "medicineNameRequired": "Nombre del medicamento *",
   "medicineNameExample": "Ej. Antipulgas, desparasitante",
+  "doseExample": "Ej. 0.5ml, 1 tableta",
   "repeatRequired": "Repetir *",
   "none": "Ninguno",
   "daily": "Diario",
@@ -412,6 +413,7 @@
   "example80": "Ej. 80",
   "example200": "Ej. 200",
   "example25": "Ej. 2.5",
+  "example42": "Ej. 4.2",
   "example35000": "Ej. 35000",
   "example50000": "Ej. 50000",
   "enterNameHint": "Por favor, introduce un nombre",
@@ -522,6 +524,7 @@
   "importance": "Importancia",
   "timeTaken": "Tiempo empleado",
   "example10": "ej. 10",
+  "minuteUnit": "min",
   "hospitalNameExample": "ej. Hospital Happy Pet",
   "diagnosisExample": "ej. Enteritis, Dermatitis",
   "memoTitlePlaceholder": "Ingresa el título del memo",
@@ -814,5 +817,20 @@
   "hgBreedLowExamples": "Bulldog, Basset Hound, Shih Tzu, Maltés",
   "hgBreedNormalExamples": "Poodle, Bichón Frisé, Cocker Spaniel, Beagle",
   "hgBreedHighExamples": "Labrador, Golden Retriever, Husky, Border Collie",
-  "hgDisclaimer": "Esta guía ofrece información general de salud, y los cuidados necesarios pueden variar según el estado de cada mascota. Si hay síntomas anormales o se necesita tratamiento, consulta siempre a un veterinario."
+  "hgDisclaimer": "Esta guía ofrece información general de salud, y los cuidados necesarios pueden variar según el estado de cada mascota. Si hay síntomas anormales o se necesita tratamiento, consulta siempre a un veterinario.",
+
+  "categoryFilter": "Filtro de Categoría",
+  "selectAll": "Seleccionar Todo",
+  "deselectAll": "Deseleccionar Todo",
+  "apply": "Aplicar",
+  "saving": "Guardando...",
+  "treatmentContent": "Tratamiento",
+
+  "conditionScoreWord1": "Pésimo",
+  "conditionScoreWord2": "Malo",
+  "conditionScoreWord3": "Regular",
+  "conditionScoreWord4": "Bueno",
+  "conditionScoreWord5": "Excelente",
+  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "conditionScoreFormat": "Condición {score} pts - {word}"
 }

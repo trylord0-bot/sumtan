@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'l10n/generated/app_localizations.dart';
-import 'l10n/locale_controller.dart';
 import 'router.dart';
 import 'theme/app_theme.dart';
 import 'widgets/startup_splash.dart';
@@ -14,8 +13,8 @@ class SumtanApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final locale = ref.watch(localeControllerProvider).valueOrNull;
-    //final locale = Locale('ja');
+    //final locale = ref.watch(localeControllerProvider).valueOrNull;
+    final locale = Locale('en');
 
     return MaterialApp.router(
       title: 'Pet Sumtan',

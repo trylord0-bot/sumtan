@@ -472,6 +472,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get medicineNameExample => 'Ej. Antipulgas, desparasitante';
 
   @override
+  String get doseExample => 'Ej. 0.5ml, 1 tableta';
+
+  @override
   String get repeatRequired => 'Repetir *';
 
   @override
@@ -1323,6 +1326,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get example25 => 'Ej. 2.5';
 
   @override
+  String get example42 => 'Ej. 4.2';
+
+  @override
   String get example35000 => 'Ej. 35000';
 
   @override
@@ -1479,12 +1485,12 @@ class AppLocalizationsEs extends AppLocalizations {
       'La primera mascota es gratuita. A partir de la segunda, cada mascota adicional requiere pago.';
 
   @override
-  String petsRegisteredStoreUnavailable(String count) {
+  String petsRegisteredStoreUnavailable(int count) {
     return '$count mascotas registradas\nPor favor, inténtalo cuando la tienda esté disponible.';
   }
 
   @override
-  String petsRegisteredPayToAdd(String count, String price) {
+  String petsRegisteredPayToAdd(int count, String price) {
     return '$count mascotas registradas\nPaga $price para añadir un nuevo miembro.';
   }
 
@@ -1682,6 +1688,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get example10 => 'ej. 10';
 
   @override
+  String get minuteUnit => 'min';
+
+  @override
   String get hospitalNameExample => 'ej. Hospital Happy Pet';
 
   @override
@@ -1736,7 +1745,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get photoVideo => 'Foto · Video';
 
   @override
-  String photoVideoCount(String count) {
+  String photoVideoCount(int count) {
     return 'Foto · Video · $count';
   }
 
@@ -2752,4 +2761,42 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get hgDisclaimer =>
       'Esta guía ofrece información general de salud, y los cuidados necesarios pueden variar según el estado de cada mascota. Si hay síntomas anormales o se necesita tratamiento, consulta siempre a un veterinario.';
+
+  @override
+  String get categoryFilter => 'Filtro de Categoría';
+
+  @override
+  String get selectAll => 'Seleccionar Todo';
+
+  @override
+  String get deselectAll => 'Deseleccionar Todo';
+
+  @override
+  String get apply => 'Aplicar';
+
+  @override
+  String get saving => 'Guardando...';
+
+  @override
+  String get treatmentContent => 'Tratamiento';
+
+  @override
+  String get conditionScoreWord1 => 'Pésimo';
+
+  @override
+  String get conditionScoreWord2 => 'Malo';
+
+  @override
+  String get conditionScoreWord3 => 'Regular';
+
+  @override
+  String get conditionScoreWord4 => 'Bueno';
+
+  @override
+  String get conditionScoreWord5 => 'Excelente';
+
+  @override
+  String conditionScoreFormat(Object score, Object word) {
+    return 'Condición $score pts - $word';
+  }
 }

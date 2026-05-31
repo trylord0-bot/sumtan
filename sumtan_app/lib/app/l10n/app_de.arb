@@ -143,6 +143,7 @@
   "hospitalNameHint": "Klinikname eingeben",
   "medicineNameRequired": "Medikamentenname *",
   "medicineNameExample": "Z.B. Herzwurm-Mittel, Entwurmungsmittel",
+  "doseExample": "Z.B. 0,5ml, 1 Tablette",
   "repeatRequired": "Wiederholen *",
   "none": "Keine",
   "daily": "Täglich",
@@ -412,6 +413,7 @@
   "example80": "Z.B. 80",
   "example200": "Z.B. 200",
   "example25": "Z.B. 2.5",
+  "example42": "Z.B. 4.2",
   "example35000": "Z.B. 35000",
   "example50000": "Z.B. 50000",
   "enterNameHint": "Bitte einen Namen eingeben",
@@ -522,6 +524,7 @@
   "importance": "Wichtigkeit",
   "timeTaken": "Benötigte Zeit",
   "example10": "z.B. 10",
+  "minuteUnit": "Min.",
   "hospitalNameExample": "z.B. Tierarztpraxis Happy",
   "diagnosisExample": "z.B. Enteritis, Dermatitis",
   "memoTitlePlaceholder": "Memo-Titel eingeben",
@@ -814,5 +817,20 @@
   "hgBreedLowExamples": "Bulldogge, Basset Hound, Shih Tzu, Malteser",
   "hgBreedNormalExamples": "Pudel, Bichon Frisé, Cocker Spaniel, Beagle",
   "hgBreedHighExamples": "Labrador, Golden Retriever, Husky, Border Collie",
-  "hgDisclaimer": "Dieser Ratgeber bietet allgemeine Informationen zur Gesundheitsvorsorge. Die erforderliche Pflege kann je nach Zustand Ihres Haustiers variieren. Wenn ungewöhnliche Symptome auftreten oder eine Behandlung erforderlich ist, konsultieren Sie immer einen Tierarzt."
+  "hgDisclaimer": "Dieser Ratgeber bietet allgemeine Informationen zur Gesundheitsvorsorge. Die erforderliche Pflege kann je nach Zustand Ihres Haustiers variieren. Wenn ungewöhnliche Symptome auftreten oder eine Behandlung erforderlich ist, konsultieren Sie immer einen Tierarzt.",
+
+  "categoryFilter": "Kategoriefilter",
+  "selectAll": "Alle auswählen",
+  "deselectAll": "Alle abwählen",
+  "apply": "Anwenden",
+  "saving": "Wird gespeichert...",
+  "treatmentContent": "Behandlung",
+
+  "conditionScoreWord1": "Schrecklich",
+  "conditionScoreWord2": "Schlecht",
+  "conditionScoreWord3": "Durchschnittlich",
+  "conditionScoreWord4": "Gut",
+  "conditionScoreWord5": "Ausgezeichnet",
+  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "conditionScoreFormat": "Zustand {score} Pkt - {word}"
 }

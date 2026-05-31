@@ -143,6 +143,7 @@
   "hospitalNameHint": "Digite o nome do hospital",
   "medicineNameRequired": "Nome do medicamento *",
   "medicineNameExample": "Ex. Antipulgas, vermífugo",
+  "doseExample": "Ex. 0,5ml, 1 comprimido",
   "repeatRequired": "Repetir *",
   "none": "Nenhum",
   "daily": "Diário",
@@ -412,6 +413,7 @@
   "example80": "Ex. 80",
   "example200": "Ex. 200",
   "example25": "Ex. 2.5",
+  "example42": "Ex. 4.2",
   "example35000": "Ex. 35000",
   "example50000": "Ex. 50000",
   "enterNameHint": "Por favor, insira um nome",
@@ -522,6 +524,7 @@
   "importance": "Importância",
   "timeTaken": "Tempo gasto",
   "example10": "ex: 10",
+  "minuteUnit": "min",
   "hospitalNameExample": "ex: Hospital Happy Animal",
   "diagnosisExample": "ex: Enterite, Dermatite",
   "memoTitlePlaceholder": "Digite o título do memo",
@@ -814,5 +817,20 @@
   "hgBreedLowExamples": "Bulldog, Basset Hound, Shih Tzu, Maltês",
   "hgBreedNormalExamples": "Poodle, Bichon Frisé, Cocker Spaniel, Beagle",
   "hgBreedHighExamples": "Labrador, Golden Retriever, Husky, Border Collie",
-  "hgDisclaimer": "Este guia oferece informações gerais de saúde, e os cuidados necessários podem variar conforme a condição de cada pet. Se houver sintomas anormais ou necessidade de tratamento, consulte obrigatoriamente um veterinário."
+  "hgDisclaimer": "Este guia oferece informações gerais de saúde, e os cuidados necessários podem variar conforme a condição de cada pet. Se houver sintomas anormais ou necessidade de tratamento, consulte obrigatoriamente um veterinário.",
+
+  "categoryFilter": "Filtro de Categoria",
+  "selectAll": "Selecionar Todos",
+  "deselectAll": "Desmarcar Todos",
+  "apply": "Aplicar",
+  "saving": "Salvando...",
+  "treatmentContent": "Tratamento",
+
+  "conditionScoreWord1": "Péssimo",
+  "conditionScoreWord2": "Ruim",
+  "conditionScoreWord3": "Regular",
+  "conditionScoreWord4": "Bom",
+  "conditionScoreWord5": "Excelente",
+  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "conditionScoreFormat": "Condição {score} pts - {word}"
 }

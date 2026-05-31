@@ -156,6 +156,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         }
         data['medicine'] = text('medicine');
         data['dose'] = text('dose');
+        break;
       case 'weight':
         final weight = double.tryParse(text('weight_kg'));
         if (weight == null) {
@@ -163,6 +164,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           return;
         }
         data['weight_kg'] = weight;
+        break;
       case 'walk':
         final duration = int.tryParse(text('duration_min'));
         if (duration == null) {
@@ -176,6 +178,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         } else {
           data['distance_km'] = distance;
         }
+        break;
       case 'brushing':
         if (_stringList('parts').isEmpty) {
           showTopToast(context, context.l10n.hintSelectBrushingArea);
@@ -187,6 +190,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         } else {
           data['duration_min'] = duration;
         }
+        break;
       case 'vaccination':
         // Migrate legacy vaccination record to hospital category
         data['visit_type'] = '예방접종';
@@ -207,6 +211,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           showTopToast(context, context.l10n.hintSelectGroomingType);
           return;
         }
+        break;
       case 'memo':
         if (text('title').isEmpty) {
           showTopToast(context, context.l10n.hintMemoTitle);
@@ -214,6 +219,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         }
         data['title'] = text('title');
         data['content'] = text('content').isEmpty ? null : text('content');
+        break;
       case 'meal':
         final amount = double.tryParse(text('amount_g'));
         if (amount == null) {
@@ -221,6 +227,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         } else {
           data['amount_g'] = text('amount_g');
         }
+        break;
       case 'water':
         final ml = int.tryParse(text('milliliter'));
         if (ml == null) {
@@ -228,6 +235,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         } else {
           data['milliliter'] = ml;
         }
+        break;
       case 'hospital':
         data['hospital_name'] =
             text('hospital_name').isEmpty ? null : text('hospital_name');
@@ -239,6 +247,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         } else {
           data['cost'] = cost;
         }
+        break;
       case 'abnormal_symptom':
         data['symptom'] = _data['symptom'] as String? ?? '구토';
         data['custom_symptom'] =
@@ -277,7 +286,9 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       final pet = ref.read(selectedPetProvider);
       if (pet != null && pet.id != null) {
         final newWeight = data['weight_kg'];
-        if (newWeight != null && newWeight is double && pet.weight != newWeight) {
+        if (newWeight != null &&
+            newWeight is double &&
+            pet.weight != newWeight) {
           final updatedPet = pet.copyWith(weight: newWeight);
           await ref.read(petRepositoryProvider).update(updatedPet);
           ref.invalidate(petsProvider);
@@ -302,7 +313,8 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(context.l10n.deleteRecordConfirm),
-        content: Text(context.l10n.deleteRecordBody(cat.localizedLabel(context))),
+        content:
+            Text(context.l10n.deleteRecordBody(cat.localizedLabel(context))),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
@@ -368,7 +380,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           Positioned.fill(
             child: AbsorbPointer(
               child: ColoredBox(
-                color: Colors.black.withValues(alpha: 0.45),
+                color: Colors.black.withOpacity(0.45),
                 child: Center(
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -377,16 +389,17 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 22,
                           height: 22,
                           child: CircularProgressIndicator(strokeWidth: 2.5),
                         ),
-                        SizedBox(width: 14),
-                        Text('저장 중...', style: TextStyle(fontSize: 15)),
+                        const SizedBox(width: 14),
+                        Text(context.l10n.saving,
+                            style: const TextStyle(fontSize: 15)),
                       ],
                     ),
                   ),
@@ -399,19 +412,27 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
   }
 
   List<Widget> _categoryFields() {
+    final l10n = context.l10n;
     switch (widget.record.category) {
       case 'poop':
         return [
           FormSegmentRow(
-            label: '유형',
+            label: l10n.poopType,
             options: const ['대변', '소변', '구토'],
+            optionLabels: [l10n.stool, l10n.urine, l10n.vomiting],
             selected: _data['type'] as String? ?? '대변',
             onChanged: (v) => _setData('type', v),
           ),
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
-            label: '상태',
+            label: l10n.poopStatus,
             options: const ['정상', '묽음', '딱딱함', '혈변'],
+            optionLabels: [
+              l10n.normal,
+              l10n.loose,
+              l10n.hard,
+              l10n.bloodInStool
+            ],
             selected: _data['status'] as String? ?? '정상',
             onChanged: (v) => _setData('status', v),
           ),
@@ -419,16 +440,26 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'condition':
         return [
           FormSegmentRow(
-            label: '컨디션 점수',
+            label: l10n.conditionScore,
             options: const ['1', '2', '3', '4', '5'],
             selected: (_data['score'] ?? 3).toString(),
             onChanged: (v) => _setData('score', int.parse(v)),
           ),
           const SizedBox(height: AppSpacing.space4),
           FormTagSelector(
-            label: '증상 태그',
+            label: l10n.symptomTags,
             required: false,
             options: const ['구토', '기침', '무기력', '식욕부진', '설사', '콧물', '재채기', '떨림'],
+            optionLabels: [
+              l10n.vomiting,
+              l10n.cough,
+              l10n.lethargy,
+              l10n.lossOfAppetite,
+              l10n.diarrhea,
+              l10n.runnyNose,
+              l10n.sneezing,
+              l10n.trembling
+            ],
             selected: _stringList('symptoms'),
             onChanged: (v) => _setStringList('symptoms', v),
           ),
@@ -436,14 +467,25 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'medication':
         return [
           FormInputField(
-              label: '약품명', controller: _ctrl('medicine'), hint: '예: 항생제'),
+              label: l10n.medicineName,
+              controller: _ctrl('medicine'),
+              hint: l10n.medicineNameExample),
           const SizedBox(height: AppSpacing.space4),
           FormInputField(
-              label: '용량', controller: _ctrl('dose'), hint: '예: 0.5ml'),
+              label: l10n.dose,
+              controller: _ctrl('dose'),
+              hint: l10n.doseExample),
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
-            label: '투약 방법',
+            label: l10n.medicationMethod,
             options: const ['경구', '주사', '외용', '점안', '점이'],
+            optionLabels: [
+              l10n.oral,
+              l10n.injection,
+              l10n.topical,
+              l10n.eyeDrops,
+              l10n.earDrops
+            ],
             selected: _data['method'] as String? ?? '경구',
             onChanged: (v) => _setData('method', v),
           ),
@@ -451,9 +493,9 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'weight':
         return [
           FormInputField(
-            label: '체중 (kg)',
+            label: l10n.weightKg,
             controller: _ctrl('weight_kg'),
-            hint: '예: 4.2',
+            hint: l10n.example42,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}'))
@@ -461,8 +503,9 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           ),
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
-            label: '측정 방법',
+            label: l10n.measurementMethod,
             options: const ['동물병원', '가정용 체중계', '안고 측정'],
+            optionLabels: [l10n.vetHospital, l10n.homeScale, l10n.holdAndWeigh],
             selected: _data['method'] as String? ?? '동물병원',
             onChanged: (v) => _setData('method', v),
           ),
@@ -470,18 +513,25 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'meal':
         return [
           FormSegmentRow(
-            label: '식사량',
+            label: l10n.mealAmount,
             required: false,
             options: const ['매우 적음', '적음', '보통', '많음', '매우 많음'],
+            optionLabels: [
+              l10n.veryLittle,
+              l10n.little,
+              l10n.normal,
+              l10n.much,
+              l10n.veryMuch
+            ],
             selected: _amountLabel(_data['meal_amount'] as String?),
             onChanged: (v) => _setData('meal_amount', _amountKey(v)),
           ),
           const SizedBox(height: AppSpacing.space4),
           FormInputField(
-            label: '급여량',
+            label: l10n.servingAmount,
             required: false,
             controller: _ctrl('amount_g'),
-            hint: '예: 80',
+            hint: l10n.example80,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))
@@ -491,17 +541,24 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'water':
         return [
           FormSegmentRow(
-            label: '음수량',
+            label: l10n.waterAmount,
             options: const ['매우 적음', '적음', '보통', '많음', '매우 많음'],
+            optionLabels: [
+              l10n.veryLittle,
+              l10n.little,
+              l10n.normal,
+              l10n.much,
+              l10n.veryMuch
+            ],
             selected: _amountLabel(_data['water_amount'] as String?),
             onChanged: (v) => _setData('water_amount', _amountKey(v)),
           ),
           const SizedBox(height: AppSpacing.space4),
           FormInputField(
-            label: 'mL 직접 입력',
+            label: l10n.mlInputLabel,
             required: false,
             controller: _ctrl('milliliter'),
-            hint: '예: 200',
+            hint: l10n.example200,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -510,21 +567,27 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         final visitType = _data['visit_type'] as String? ?? '일반';
         return [
           FormInputField(
-            label: '병원명',
+            label: l10n.hospitalName,
             required: false,
             controller: _ctrl('hospital_name'),
-            hint: '예: 행복동물병원',
+            hint: l10n.hospitalNameExample,
           ),
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
-            label: '진료 유형',
+            label: l10n.visitType,
             options: const ['일반', '정기검진', '응급', '예방접종'],
+            optionLabels: [
+              l10n.general,
+              l10n.regularCheckup,
+              l10n.emergency,
+              l10n.vaccination
+            ],
             selected: visitType,
             onChanged: (v) => _setData('visit_type', v),
           ),
           const SizedBox(height: AppSpacing.space4),
           FormTagSelector(
-            label: '증상 태그',
+            label: l10n.symptomTags,
             required: false,
             options: const [
               '구토',
@@ -538,36 +601,49 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
               '혈뇨',
               '혈변'
             ],
+            optionLabels: [
+              l10n.vomiting,
+              l10n.cough,
+              l10n.lethargy,
+              l10n.lossOfAppetite,
+              l10n.diarrhea,
+              l10n.runnyNose,
+              l10n.sneezing,
+              l10n.trembling,
+              l10n.bloodInUrine,
+              l10n.bloodInStool
+            ],
             selected: _stringList('symptoms'),
             onChanged: (v) => _setStringList('symptoms', v),
           ),
           const SizedBox(height: AppSpacing.space4),
           FormInputField(
-            label: '진료내용',
+            label: l10n.treatmentContent,
             required: false,
             controller: _ctrl('diagnosis'),
-            hint: '예: 장염',
+            hint: l10n.diagnosisExample,
           ),
         ];
       case 'vaccination':
         _data['visit_type'] = '예방접종';
         return [
           FormInputField(
-            label: '병원명',
+            label: l10n.hospitalName,
             required: false,
             controller: _ctrl('hospital_name'),
-            hint: '예: 행복동물병원',
+            hint: l10n.hospitalNameExample,
           ),
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
-            label: '진료 유형',
+            label: l10n.visitType,
             options: const ['예방접종'],
+            optionLabels: [l10n.vaccination],
             selected: '예방접종',
             onChanged: (_) {},
           ),
           const SizedBox(height: AppSpacing.space4),
           FormTagSelector(
-            label: '증상 태그',
+            label: l10n.symptomTags,
             required: false,
             options: const [
               '구토',
@@ -581,47 +657,76 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
               '혈뇨',
               '혈변'
             ],
+            optionLabels: [
+              l10n.vomiting,
+              l10n.cough,
+              l10n.lethargy,
+              l10n.lossOfAppetite,
+              l10n.diarrhea,
+              l10n.runnyNose,
+              l10n.sneezing,
+              l10n.trembling,
+              l10n.bloodInUrine,
+              l10n.bloodInStool
+            ],
             selected: _stringList('symptoms'),
             onChanged: (v) => _setStringList('symptoms', v),
           ),
           const SizedBox(height: AppSpacing.space4),
           FormInputField(
-            label: '진료내용',
+            label: l10n.treatmentContent,
             required: false,
             controller: _ctrl('diagnosis'),
-            hint: '예: 장염',
+            hint: l10n.diagnosisExample,
           ),
         ];
       case 'grooming':
         return [
           FormTagSelector(
-            label: '미용 종류',
+            label: l10n.groomingType,
             options: const ['목욕', '전체미용', '부분미용', '발톱', '귀청소', '치석제거', '항문낭'],
+            optionLabels: [
+              l10n.bath,
+              l10n.fullGrooming,
+              l10n.partialGrooming,
+              l10n.nailTrim,
+              l10n.earCleaning,
+              l10n.tartarRemoval,
+              l10n.analGlands
+            ],
             selected: _stringList('types'),
             onChanged: (v) => _setStringList('types', v),
           ),
           const SizedBox(height: AppSpacing.space4),
           FormInputField(
-            label: '샵 이름',
+            label: l10n.shopName,
             required: false,
             controller: _ctrl('shop_name'),
-            hint: '예: 뽀송뽀송 펫샵',
+            hint: l10n.shopNameExample,
           ),
         ];
       case 'brushing':
         return [
           FormTagSelector(
-            label: '빗질 부위',
+            label: l10n.brushingArea,
             options: const ['전체', '등', '배', '꼬리', '얼굴', '발'],
+            optionLabels: [
+              l10n.whole,
+              l10n.back,
+              l10n.belly,
+              l10n.tail,
+              l10n.face,
+              l10n.paw
+            ],
             selected: _stringList('parts'),
             onChanged: (v) => _setStringList('parts', v),
           ),
           const SizedBox(height: AppSpacing.space4),
           FormInputField(
-            label: '소요 시간',
+            label: l10n.timeTaken,
             required: false,
             controller: _ctrl('duration_min'),
-            hint: '예: 10',
+            hint: l10n.example10,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
@@ -629,18 +734,18 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'walk':
         return [
           FormInputField(
-            label: '산책 시간',
+            label: l10n.walkTime,
             controller: _ctrl('duration_min'),
-            hint: '예: 30',
+            hint: l10n.example30,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
           const SizedBox(height: AppSpacing.space4),
           FormInputField(
-            label: '거리',
+            label: l10n.distance,
             required: false,
             controller: _ctrl('distance_km'),
-            hint: '예: 2.5',
+            hint: l10n.example25,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}'))
@@ -650,13 +755,16 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
       case 'memo':
         return [
           FormInputField(
-              label: '제목', controller: _ctrl('title'), hint: '메모 제목'),
+              label: l10n.title,
+              controller: _ctrl('title'),
+              hint: l10n.memoTitlePlaceholder),
           const SizedBox(height: AppSpacing.space4),
           FormMemoField(controller: _ctrl('content')),
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
-            label: '중요도',
+            label: l10n.importance,
             options: const ['일반', '중요'],
+            optionLabels: [l10n.general, l10n.important],
             selected: _data['pinned'] as String? ?? '일반',
             onChanged: (v) => _setData('pinned', v),
           ),
@@ -666,18 +774,25 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         final showCustom = symptom == '기타';
         return [
           FormSegmentRow(
-            label: '이상징후 유형',
+            label: l10n.abnormalSymptomType,
             options: const ['구토', '출혈', '경련/발작', '호흡곤란', '기타'],
+            optionLabels: [
+              l10n.vomiting,
+              l10n.bleeding,
+              l10n.seizure,
+              l10n.dyspnea,
+              l10n.other
+            ],
             selected: symptom,
             onChanged: (v) => _setData('symptom', v),
           ),
           if (showCustom) ...[
             const SizedBox(height: AppSpacing.space4),
             FormInputField(
-              label: '기타 증상',
+              label: l10n.customSymptom,
               required: false,
               controller: _ctrl('custom_symptom'),
-              hint: '증상을 직접 입력하세요',
+              hint: l10n.customSymptomPlaceholder,
             ),
           ],
         ];

@@ -153,7 +153,7 @@ class _HospitalFormState extends ConsumerState<HospitalForm> {
         ),
         const SizedBox(height: AppSpacing.space4),
         FormInputField(
-          label: '진료내용',
+          label: l10n.treatmentContent,
           required: false,
           controller: _diagnosisCtrl,
           hint: l10n.diagnosisExample,

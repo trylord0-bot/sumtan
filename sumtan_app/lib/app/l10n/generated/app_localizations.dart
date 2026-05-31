@@ -255,7 +255,7 @@ abstract class AppLocalizations {
   /// Toast: Back to exit
   ///
   /// In en, this message translates to:
-  /// **'Press again to exit the app'**
+  /// **'Tap again to exit'**
   String get toastBackToExit;
 
   /// Toast: Need to add a pet
@@ -513,7 +513,7 @@ abstract class AppLocalizations {
   /// Error: DB init failed
   ///
   /// In en, this message translates to:
-  /// **'There was a problem preparing app data.\nPlease try again later.'**
+  /// **'We had a problem preparing the app data.\nPlease try again in a moment.'**
   String get errorDbInit;
 
   /// Help label
@@ -897,7 +897,7 @@ abstract class AppLocalizations {
   /// Vaccine name example
   ///
   /// In en, this message translates to:
-  /// **'e.g. Rabies, combo vaccine'**
+  /// **'e.g. Rabies, Combo vaccine'**
   String get vaccineNameExample;
 
   /// Scheduled date required field label
@@ -939,7 +939,7 @@ abstract class AppLocalizations {
   /// Visit purpose example
   ///
   /// In en, this message translates to:
-  /// **'e.g. Checkup, skin treatment'**
+  /// **'e.g. Checkup, Skin treatment'**
   String get visitPurposeExample;
 
   /// Appointment date time required field label
@@ -969,7 +969,7 @@ abstract class AppLocalizations {
   /// Medicine name example
   ///
   /// In en, this message translates to:
-  /// **'e.g. Heartworm, dewormer'**
+  /// **'e.g. Heartworm, Dewormer'**
   String get medicineNameExample;
 
   /// Dose input example
@@ -1053,7 +1053,7 @@ abstract class AppLocalizations {
   /// Meal time example
   ///
   /// In en, this message translates to:
-  /// **'e.g. Breakfast, dinner'**
+  /// **'e.g. Breakfast, Dinner'**
   String get mealTimeExample;
 
   /// Meal time required field label
@@ -2649,7 +2649,7 @@ abstract class AppLocalizations {
   /// Pet kind/type label
   ///
   /// In en, this message translates to:
-  /// **'Type'**
+  /// **'Species'**
   String get petKind;
 
   /// Breed label
@@ -3009,7 +3009,7 @@ abstract class AppLocalizations {
   /// Contact via send feedback long
   ///
   /// In en, this message translates to:
-  /// **'If you contact us via the [Send feedback] button in Settings,\nwe will respond as quickly as possible.'**
+  /// **'Please contact us via the [Send feedback] button in Settings,\nand we\'ll get back to you as soon as possible.'**
   String get contactViaSendFeedbackLong;
 
   /// Privacy policy effective date

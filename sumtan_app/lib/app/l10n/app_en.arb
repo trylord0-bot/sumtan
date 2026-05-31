@@ -97,7 +97,7 @@
       }
     }
   },
-  "toastBackToExit": "Press again to exit the app",
+  "toastBackToExit": "Tap again to exit",
   "@toastBackToExit": {
     "description": "Toast: Back to exit"
   },
@@ -274,7 +274,7 @@
   "@settingsPurchaseStartFailed": {
     "description": "Settings: Purchase flow failed to start"
   },
-  "errorDbInit": "There was a problem preparing app data.\nPlease try again later.",
+  "errorDbInit": "We had a problem preparing the app data.\nPlease try again in a moment.",
   "@errorDbInit": {
     "description": "Error: DB init failed"
   },
@@ -560,7 +560,7 @@
   "@vaccineNameRequired": {
     "description": "Vaccine name required field label"
   },
-  "vaccineNameExample": "e.g. Rabies, combo vaccine",
+  "vaccineNameExample": "e.g. Rabies, Combo vaccine",
   "@vaccineNameExample": {
     "description": "Vaccine name example"
   },
@@ -588,7 +588,7 @@
   "@visitPurposeRequired": {
     "description": "Visit purpose required field label"
   },
-  "visitPurposeExample": "e.g. Checkup, skin treatment",
+  "visitPurposeExample": "e.g. Checkup, Skin treatment",
   "@visitPurposeExample": {
     "description": "Visit purpose example"
   },
@@ -608,7 +608,7 @@
   "@medicineNameRequired": {
     "description": "Medicine name required field label"
   },
-  "medicineNameExample": "e.g. Heartworm, dewormer",
+  "medicineNameExample": "e.g. Heartworm, Dewormer",
   "@medicineNameExample": {
     "description": "Medicine name example"
   },
@@ -664,7 +664,7 @@
   "@alarmNameRequired": {
     "description": "Alert name required field label"
   },
-  "mealTimeExample": "e.g. Breakfast, dinner",
+  "mealTimeExample": "e.g. Breakfast, Dinner",
   "@mealTimeExample": {
     "description": "Meal time example"
   },
@@ -1799,7 +1799,7 @@
   "@name": {
     "description": "Name label"
   },
-  "petKind": "Type",
+  "petKind": "Species",
   "@petKind": {
     "description": "Pet kind/type label"
   },
@@ -2082,7 +2082,7 @@
   "@contactViaSendFeedback": {
     "description": "Contact via send feedback short"
   },
-  "contactViaSendFeedbackLong": "If you contact us via the [Send feedback] button in Settings,\nwe will respond as quickly as possible.",
+  "contactViaSendFeedbackLong": "Please contact us via the [Send feedback] button in Settings,\nand we'll get back to you as soon as possible.",
   "@contactViaSendFeedbackLong": {
     "description": "Contact via send feedback long"
   },
@@ -2817,7 +2817,7 @@
   "@privacySection9Title": {
     "description": "Privacy: Section 9 title"
   },
-    "hgDogHeroTitle": "Dog Health Care Guide",
+  "hgDogHeroTitle": "Dog Health Care Guide",
   "@hgDogHeroTitle": {
     "description": "Health guide: Dog hero title"
   },
@@ -3233,7 +3233,7 @@
   "@hgCatHydration4": {
     "description": "Health guide: Cat hydration 4"
   },
-  "hgCatForbiddenFoodAlert": "The following foods are toxic to cats. Even small amounts can be dangerous, so never feed them.",
+    "hgCatForbiddenFoodAlert": "The following foods are toxic to cats. Even small amounts can be dangerous, so never feed them.",
   "@hgCatForbiddenFoodAlert": {
     "description": "Health guide: Cat forbidden food alert"
   },
@@ -3440,20 +3440,23 @@
   "hgDisclaimer": "This guide provides general health care information, and necessary care may vary depending on your pet's condition. If there are abnormal symptoms or treatment is needed, be sure to consult a veterinarian.",
   "@hgDisclaimer": {
     "description": "Health guide: Disclaimer"
-  }
-,
+  },
   "categoryFilter": "Category Filter",
   "selectAll": "Select All",
   "deselectAll": "Deselect All",
   "apply": "Apply",
   "saving": "Saving...",
   "treatmentContent": "Treatment",
-
   "conditionScoreWord1": "Terrible",
   "conditionScoreWord2": "Poor",
   "conditionScoreWord3": "Fair",
   "conditionScoreWord4": "Good",
   "conditionScoreWord5": "Excellent",
-  "@conditionScoreFormat": {"placeholders": {"score": {}, "word": {}}},
+  "@conditionScoreFormat": {
+    "placeholders": {
+      "score": {},
+      "word": {}
+    }
+  },
   "conditionScoreFormat": "Condition {score} pts - {word}"
 }

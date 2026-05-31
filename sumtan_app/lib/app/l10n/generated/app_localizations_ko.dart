@@ -81,7 +81,7 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get toastBackToExit => '한 번 더 누르면 앱을 종료합니다';
+  String get toastBackToExit => '한 번 더 누르면 앱이 종료돼요';
 
   @override
   String get toastNeedPet => '아직 반려동물이 없네요. 프로필에서 먼저 등록해 주세요!';
@@ -216,7 +216,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsPurchaseStartFailed => '결제를 시작하지 못했어요. 잠시 후 다시 시도해 주세요.';
 
   @override
-  String get errorDbInit => '앱 데이터를 준비하는 중 문제가 발생했습니다.\n잠시 후 다시 실행해 주세요.';
+  String get errorDbInit => '앱 데이터를 준비하는 중 문제가 발생했어요.\n잠시 후 다시 실행해 주세요.';
 
   @override
   String get help => '도움말';
@@ -289,7 +289,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get scheduledAlarms => '예정된 알림';
 
   @override
-  String get swipeToDelete => '스와이프하면 삭제할 수 있어요';
+  String get swipeToDelete => '옆으로 밀어서 삭제할 수 있어요';
 
   @override
   String get selectAlarmType => '알림 종류 선택';
@@ -420,7 +420,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get vaccineNameRequired => '백신 이름 *';
 
   @override
-  String get vaccineNameExample => '예) 광견병, 종합백신 등';
+  String get vaccineNameExample => '예: 광견병, 종합백신 등';
 
   @override
   String get scheduledDateRequired => '예정일 *';
@@ -441,7 +441,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get visitPurposeRequired => '방문 목적 *';
 
   @override
-  String get visitPurposeExample => '예) 정기검진, 피부 진료 등';
+  String get visitPurposeExample => '예: 정기검진, 피부 진료 등';
 
   @override
   String get appointmentDateTimeRequired => '예약 일시 *';
@@ -456,7 +456,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get medicineNameRequired => '약품 이름 *';
 
   @override
-  String get medicineNameExample => '예) 심장사상충, 구충제 등';
+  String get medicineNameExample => '예: 심장사상충, 구충제 등';
 
   @override
   String get doseExample => '예: 0.5ml, 1정';
@@ -498,7 +498,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get alarmNameRequired => '알림 이름 *';
 
   @override
-  String get mealTimeExample => '예) 아침 식사, 저녁 밥 등';
+  String get mealTimeExample => '예: 아침 식사, 저녁 밥 등';
 
   @override
   String get mealTimeRequired => '식사 시각 *';
@@ -717,19 +717,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String get bloodInUrine => '혈뇨';
 
   @override
-  String get oral => '경구';
+  String get oral => '먹는 약 (경구)';
 
   @override
   String get injection => '주사';
 
   @override
-  String get topical => '외용';
+  String get topical => '바르는 약 (외용)';
 
   @override
-  String get eyeDrops => '점안';
+  String get eyeDrops => '안약 (점안)';
 
   @override
-  String get earDrops => '점이';
+  String get earDrops => '귀약 (점이)';
 
   @override
   String get vetHospital => '동물병원';
@@ -1322,7 +1322,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get name => '이름';
 
   @override
-  String get petKind => '종류';
+  String get petKind => '동물 종';
 
   @override
   String get breed => '품종';
@@ -1521,7 +1521,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get contactViaSendFeedbackLong =>
-      '설정 화면의 [피드백 보내기] 버튼을 통해 문의하시면\n빠르게 답변드리겠습니다.';
+      '설정 화면의 [피드백 보내기] 버튼을 통해 문의하시면\n빠르게 답변 드릴게요.';
 
   @override
   String get privacyPolicyEffectiveDate =>

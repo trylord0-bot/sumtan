@@ -12,7 +12,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get appName => 'Pet Sumtan';
 
   @override
-  String get appTagline => 'App de santé pour animaux';
+  String get appTagline => 'Appli de santé pour animaux';
 
   @override
   String get navHome => 'Accueil';
@@ -27,7 +27,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get navProfile => 'Profil';
 
   @override
-  String get navSettings => 'Réglages';
+  String get navSettings => 'Paramètres';
 
   @override
   String get navAddAlarm => 'Ajouter une alerte';
@@ -36,19 +36,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get drawerService => 'Services';
 
   @override
-  String get drawerNearbyHospitals => 'Trouver des cliniques proches';
+  String get drawerNearbyHospitals => 'Vétérinaires à proximité';
 
   @override
-  String get drawerNearbyHospitalsSub => 'Cliniques vétérinaires près de vous';
+  String get drawerNearbyHospitalsSub => 'Trouver une clinique vétérinaire';
 
   @override
-  String get drawerHealthGuide => 'Guide santé';
+  String get drawerHealthGuide => 'Guide de santé';
 
   @override
-  String get drawerHealthGuideSub => 'Guide santé pour animaux';
+  String get drawerHealthGuideSub => 'Manuel de santé pour animaux';
 
   @override
-  String get drawerApp => 'App';
+  String get drawerApp => 'Application';
 
   @override
   String get drawerHelp => 'Aide';
@@ -58,13 +58,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get dialogExternalHospitalBody =>
-      'Trouver des cliniques vétérinaires\nnécessite une page web externe.\n\nOuvrir maintenant ?';
+      'Pour trouver des cliniques à proximité, nous devons ouvrir une page web externe.\n\nVoulez-vous l\'ouvrir maintenant ?';
 
   @override
   String get commonCancel => 'Annuler';
 
   @override
-  String get commonGo => 'Ouvrir';
+  String get commonGo => 'Aller';
 
   @override
   String get commonDelete => 'Supprimer';
@@ -77,36 +77,36 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String commonPercent(String percent) {
-    return '$percent %';
+    return '$percent%';
   }
 
   @override
-  String get toastBackToExit => 'Appuyez à nouveau pour quitter';
+  String get toastBackToExit => 'Appuyez encore une fois pour quitter';
 
   @override
   String get toastNeedPet =>
-      'Aucun animal enregistré. Ajoutez-en un depuis Profil !';
+      'Aucun animal enregistré. Veuillez en ajouter un dans le Profil.';
 
   @override
   String get settingsNotifications => 'Notifications';
 
   @override
-  String get settingsPushNotifications => 'Autoriser les notifications';
+  String get settingsPushNotifications => 'Autoriser les notifications push';
 
   @override
-  String get settingsPushNotificationsSub => 'Autorisations de notification';
+  String get settingsPushNotificationsSub => 'Autorisations de l\'appareil';
 
   @override
   String get settingsLanguageSection => 'Langue';
 
   @override
-  String get settingsLanguage => 'Langue de l\'app';
+  String get settingsLanguage => 'Langue de l\'application';
 
   @override
-  String get settingsLanguageSystem => 'Utiliser la langue de l\'appareil';
+  String get settingsLanguageSystem => 'Langue du système';
 
   @override
-  String get settingsLanguageChanged => 'Langue de l\'app modifiée';
+  String get settingsLanguageChanged => 'Langue de l\'application modifiée';
 
   @override
   String get settingsData => 'Gestion des données';
@@ -115,44 +115,45 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsExport => 'Exporter les données';
 
   @override
-  String get settingsExportSub => 'Enregistrer en ZIP';
+  String get settingsExportSub => 'Enregistrer en fichier ZIP';
 
   @override
   String get settingsImport => 'Importer les données';
 
   @override
-  String get settingsImportSub => 'Restaurer depuis un ZIP';
+  String get settingsImportSub => 'Restaurer depuis un fichier ZIP';
 
   @override
-  String get settingsAppInfo => 'Infos de l\'app';
+  String get settingsAppInfo => 'Infos sur l\'application';
 
   @override
-  String get settingsVersion => 'Version de l\'app';
+  String get settingsVersion => 'Version de l\'application';
 
   @override
   String get settingsPrivacy => 'Politique de confidentialité';
 
   @override
-  String get settingsFeedback => 'Envoyer un avis';
+  String get settingsFeedback => 'Envoyer des commentaires';
 
   @override
-  String get settingsFeedbackSubject => 'Pet Sumtan – Avis';
+  String get settingsFeedbackSubject => 'Commentaires sur Pet Sumtan';
 
   @override
-  String get settingsEmailAppMissing => 'Aucune app e-mail trouvée';
+  String get settingsEmailAppMissing =>
+      'Aucune application de messagerie trouvée';
 
   @override
   String get settingsImportConfirmBody =>
-      'Toutes les données existantes seront supprimées et remplacées par celles du fichier de sauvegarde.\n\nContinuer ?';
+      'Toutes les données actuelles seront supprimées et remplacées par le fichier de sauvegarde.\n\nVoulez-vous continuer ?';
 
   @override
   String get settingsImportAction => 'Importer';
 
   @override
-  String get settingsImporting => 'Importation en cours';
+  String get settingsImporting => 'Importation des données...';
 
   @override
-  String get settingsImportSuccess => 'Sauvegarde restaurée';
+  String get settingsImportSuccess => 'Données restaurées avec succès';
 
   @override
   String get settingsImportFailed => 'Échec de l\'importation';
@@ -161,24 +162,23 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsExportTitle => 'Exporter les données';
 
   @override
-  String get settingsExportBenefitTitle =>
-      'Gardez vos précieux enregistrements en sécurité';
+  String get settingsExportBenefitTitle => 'Gardez vos dossiers en sécurité';
 
   @override
   String get settingsExportBenefitPets =>
-      'Tous les profils et photos d\'animaux';
+      'Profils et photos de tous vos animaux';
 
   @override
   String get settingsExportBenefitRecords =>
-      'Tous les journaux, enregistrements et poids';
+      'Tous les dossiers médicaux, journaux et poids';
 
   @override
   String get settingsExportBenefitMedia =>
-      'Inclut les images et vidéos jointes';
+      'Inclut les photos et vidéos jointes';
 
   @override
   String get settingsStoreUnavailable =>
-      'Impossible de se connecter au Store.\nVeuillez réessayer plus tard.';
+      'Impossible de se connecter à la boutique pour le moment.\nVeuillez réessayer plus tard.';
 
   @override
   String settingsPayAndExport(String price) {
@@ -186,11 +186,11 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get settingsUnlocked => 'Débloqué';
+  String get settingsUnlocked => 'Déverrouillé';
 
   @override
   String get settingsExportUnlockedBody =>
-      'Enregistrez toutes les infos et données de vos animaux en ZIP.\nVous pouvez les importer et restaurer gratuitement à tout moment.';
+      'Enregistrez toutes les informations de vos animaux sous forme de fichier ZIP.\nVous pouvez importer et restaurer ce fichier gratuitement à tout moment.';
 
   @override
   String get settingsExporting => 'Exportation...';
@@ -200,13 +200,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsExportConfirmBody =>
-      'Exporte toutes les infos, données et médias de vos animaux en ZIP.';
+      'Exporter toutes les informations, dossiers et médias sous forme de fichier ZIP.';
 
   @override
   String get settingsExportAction => 'Exporter';
 
   @override
-  String get settingsExportSuccess => 'Fichier de sauvegarde prêt à partager';
+  String get settingsExportSuccess =>
+      'Fichier de sauvegarde prêt à être partagé';
 
   @override
   String get settingsExportFailed => 'Échec de l\'exportation';
@@ -216,21 +217,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get settingsPurchaseProductLoadFailed =>
-      'Impossible de charger les informations du produit. Veuillez réessayer dans un instant.';
+      'Impossible de charger les informations du produit. Veuillez réessayer plus tard.';
 
   @override
   String get settingsPurchaseStartFailed =>
-      'Impossible de démarrer le paiement. Veuillez réessayer dans un instant.';
+      'Impossible de lancer le paiement. Veuillez réessayer plus tard.';
 
   @override
   String get errorDbInit =>
-      'Un problème est survenu lors de la préparation des données.\nVeuillez réessayer plus tard.';
+      'Un problème est survenu lors de la préparation des données de l\'application.\nVeuillez réessayer plus tard.';
 
   @override
   String get help => 'Aide';
 
   @override
-  String get healthGuide => 'Guide santé';
+  String get healthGuide => 'Guide de santé';
 
   @override
   String get dog => 'Chien';
@@ -260,13 +261,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get save => 'Enregistrer';
 
   @override
-  String get memo => 'Mémo';
+  String get memo => 'Note';
 
   @override
-  String get memoPlaceholder => 'Laissez un mémo librement';
+  String get memoPlaceholder => 'Ajouter une note ici';
 
   @override
-  String get addBtn => '+ Ajouter';
+  String get addBtn => '＋ Ajouter';
 
   @override
   String get errorOccurred => 'Une erreur s\'est produite';
@@ -277,7 +278,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get pet => 'animal';
+  String get pet => 'Animal';
 
   @override
   String get selectPet => 'Sélectionner un animal';
@@ -286,18 +287,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get addNewPet => 'Ajouter un nouvel animal';
 
   @override
-  String get noAlarms => 'Pas encore d\'alertes';
+  String get noAlarms => 'Aucune alerte';
 
   @override
   String alarmEmptyDesc(String petName) {
-    return 'Gardez $petName en bonne santé aujourd\'hui.\nAppuyez sur Ajouter une alerte pour commencer.';
+    return 'Prenons soin de la santé de $petName aujourd\'hui.\nAppuyez sur « Ajouter une alerte » ci-dessous pour commencer.';
   }
 
   @override
   String get scheduledAlarms => 'Alertes programmées';
 
   @override
-  String get swipeToDelete => 'Glissez pour supprimer';
+  String get swipeToDelete => 'Balayez pour supprimer';
 
   @override
   String get selectAlarmType => 'Sélectionner le type d\'alerte';
@@ -321,12 +322,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get notificationChannelName => 'Alertes Pet Sumtan';
 
   @override
-  String get notificationChannelDescription =>
-      'Rappels de santé pour votre animal';
+  String get notificationChannelDescription => 'Rappels de soins pour animaux';
 
   @override
   String alarmNotificationTitle(String type) {
-    return 'Alerte $type';
+    return 'Alerte : $type';
   }
 
   @override
@@ -338,17 +338,17 @@ class AppLocalizationsFr extends AppLocalizations {
       'Votre rendez-vous vétérinaire approche.';
 
   @override
-  String get alarmBodyMedication => 'C\'est l\'heure du médicament.';
+  String get alarmBodyMedication => 'C\'est l\'heure des médicaments.';
 
   @override
   String get alarmBodyMealTime => 'N\'oubliez pas l\'heure du repas.';
 
   @override
   String get alarmBodyDailyReminder =>
-      'Veuillez ajouter le bilan de santé d\'aujourd\'hui.';
+      'Veuillez ajouter votre journal de santé d\'aujourd\'hui.';
 
   @override
-  String get alarmBodyDefault => 'Alerte de soins pour votre animal.';
+  String get alarmBodyDefault => 'Rappel de santé pour votre animal.';
 
   @override
   String get alarmDeleted => 'Alerte supprimée';
@@ -367,11 +367,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String deletePastAlarmsConfirm(int count) {
-    return 'Supprimer les $count alertes passées ?';
+    return 'Voulez-vous vraiment supprimer toutes les $count alertes passées ?';
   }
 
   @override
-  String get pastAlarmsDeleted => 'Toutes les alertes passées supprimées';
+  String get pastAlarmsDeleted =>
+      'Toutes les alertes passées ont été supprimées';
 
   @override
   String get pastLabel => 'Passé';
@@ -383,7 +384,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get tomorrowSameTime => 'Demain, même heure';
 
   @override
-  String get snoozeQuestion => 'Quand souhaitez-vous être rappelé ?';
+  String get snoozeQuestion => 'Quand voulez-vous un rappel ?';
 
   @override
   String get snooze5min => 'Dans 5 minutes';
@@ -401,27 +402,27 @@ class AppLocalizationsFr extends AppLocalizations {
   String get snooze3hour => 'Dans 3 heures';
 
   @override
-  String get snoozeCustom => 'Choisir manuellement';
+  String get snoozeCustom => 'Choisir l\'heure';
 
   @override
-  String get snoozeAtThisTime => 'Me rappeler à cette heure';
+  String get snoozeAtThisTime => 'Rappeler à cette heure';
 
   @override
   String snoozeConfirm(String time) {
-    return 'Nous vous rappellerons à $time';
+    return 'Nous vous le rappellerons à $time';
   }
 
   @override
-  String get selectFutureTime => 'Choisissez une heure future';
+  String get selectFutureTime => 'Veuillez sélectionner une heure future';
 
   @override
   String recordCheckHint(String typeLabel) {
-    return 'Vous pouvez le voir sous Note > $typeLabel.';
+    return 'Vous pouvez vérifier dans Journal > $typeLabel.';
   }
 
   @override
   String get pushAlsoCancel =>
-      'La notification push programmée sera également annulée.';
+      'Les notifications push programmées seront également annulées.';
 
   @override
   String get reschedule => 'Reprogrammer';
@@ -433,28 +434,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vaccineNameRequired => 'Nom du vaccin *';
 
   @override
-  String get vaccineNameExample => 'Ex. Rage, vaccin combiné';
+  String get vaccineNameExample => 'Ex : Rage, CHPPi';
 
   @override
   String get scheduledDateRequired => 'Date *';
 
   @override
-  String get reminderTiming => 'Moment du rappel';
+  String get reminderTiming => 'Quand être averti';
 
   @override
-  String get sameDay => 'Même jour';
+  String get sameDay => 'Le jour même';
 
   @override
-  String get reminderTimeRequired => 'Heure du rappel *';
+  String get reminderTimeRequired => 'Heure de l\'alerte *';
 
   @override
-  String get memoInputHint => 'Saisir un mémo';
+  String get memoInputHint => 'Saisir une note';
 
   @override
   String get visitPurposeRequired => 'Motif de la visite *';
 
   @override
-  String get visitPurposeExample => 'Ex. Bilan, traitement cutané';
+  String get visitPurposeExample => 'Ex : Bilan de santé, Problème de peau';
 
   @override
   String get appointmentDateTimeRequired => 'Date et heure du rendez-vous *';
@@ -463,105 +464,105 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hospitalName => 'Nom de la clinique';
 
   @override
-  String get hospitalNameHint => 'Entrez le nom de la clinique';
+  String get hospitalNameHint => 'Saisir le nom de la clinique';
 
   @override
   String get medicineNameRequired => 'Nom du médicament *';
 
   @override
-  String get medicineNameExample => 'Ex. Antiparasitaire, vermifuge';
+  String get medicineNameExample => 'Ex : Vermifuge, Anti-puces';
 
   @override
-  String get doseExample => 'Ex. 0,5ml, 1 comprimé';
+  String get doseExample => 'Ex : 0.5ml, 1 comprimé';
 
   @override
-  String get repeatRequired => 'Répétition *';
+  String get repeatRequired => 'Répéter *';
 
   @override
   String get none => 'Aucun';
 
   @override
-  String get daily => 'Quotidien';
+  String get daily => 'Tous les jours';
 
   @override
-  String get weekly => 'Hebdomadaire';
+  String get weekly => 'Toutes les semaines';
 
   @override
-  String get monthly => 'Mensuel';
+  String get monthly => 'Tous les mois';
 
   @override
-  String get weekdays => 'Jours ouvrables';
+  String get weekdays => 'En semaine';
 
   @override
-  String get weekdaysOnly => 'Jours ouvrables uniquement';
+  String get weekdaysOnly => 'En semaine uniquement';
 
   @override
-  String get weekends => 'Week-ends';
+  String get weekends => 'Le week-end';
 
   @override
-  String get weekendsOnly => 'Week-ends uniquement';
+  String get weekendsOnly => 'Le week-end uniquement';
 
   @override
-  String get medicationDateTimeRequired => 'Date et heure du médicament *';
+  String get medicationDateTimeRequired => 'Date et heure de médication *';
 
   @override
-  String get medicationTimeRequired => 'Heure du médicament *';
+  String get medicationTimeRequired => 'Heure de médication *';
 
   @override
   String get alarmNameRequired => 'Nom de l\'alerte *';
 
   @override
-  String get mealTimeExample => 'Ex. Petit-déjeuner, dîner';
+  String get mealTimeExample => 'Ex : Petit-déjeuner, Dîner';
 
   @override
   String get mealTimeRequired => 'Heure du repas *';
 
   @override
-  String get alarmMessage => 'Message d\'alerte';
+  String get alarmMessage => 'Message de l\'alerte';
 
   @override
   String get alarmMessageExample =>
-      'Ex. As-tu ajouté le bilan d\'aujourd\'hui ?';
+      'Ex : Avez-vous ajouté le journal d\'aujourd\'hui ?';
 
   @override
   String get alarmPastDueMsg =>
-      'La date de cette alerte est passée.\nVous pouvez choisir une nouvelle date ou la supprimer.';
+      'La date de cette alerte est dépassée.\nVeuillez sélectionner une nouvelle date ou la supprimer.';
 
   @override
   String get reselectDate => 'Resélectionner la date';
 
   @override
-  String get selectDate => 'Sélectionner une date';
+  String get selectDate => 'Sélectionner la date';
 
   @override
-  String get selectTime => 'Sélectionner une heure';
+  String get selectTime => 'Sélectionner l\'heure';
 
   @override
-  String get todayStatus => 'État d\'aujourd\'hui';
+  String get todayStatus => 'Statut d\'aujourd\'hui';
 
   @override
-  String get addRecord => '+ Ajouter une note';
+  String get addRecord => '＋ Ajouter un journal';
 
   @override
   String get todayReminders => 'Rappels d\'aujourd\'hui';
 
   @override
-  String get todayRecords => 'Notes d\'aujourd\'hui';
+  String get todayRecords => 'Journaux d\'aujourd\'hui';
 
   @override
   String get viewAll => 'Tout voir';
 
   @override
-  String get weekStats => 'Statistiques de santé';
+  String get weekStats => 'Statistiques hebdomadaires';
 
   @override
-  String get pottyCount => 'Nombre de selles';
+  String get pottyCount => 'Besoins';
 
   @override
-  String get mealCount => 'Nombre de repas';
+  String get mealCount => 'Repas';
 
   @override
-  String get waterLevel => 'Niveau d\'eau';
+  String get waterLevel => 'Eau';
 
   @override
   String get timesUnit => 'fois';
@@ -573,34 +574,36 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pointsUnit => 'pts';
 
   @override
-  String get recordDeleted => 'Note supprimée';
+  String get recordDeleted => 'Journal supprimé';
 
   @override
-  String get recordUpdated => 'Note mise à jour';
+  String get recordUpdated => 'Journal mis à jour';
 
   @override
-  String get deleteRecordConfirm => 'Supprimer cette note ?';
+  String get deleteRecordConfirm =>
+      'Voulez-vous vraiment supprimer ce journal ?';
 
   @override
-  String get deleteConfirmBody => 'Cette action est irréversible !';
+  String get deleteConfirmBody =>
+      'Une fois supprimé, il ne peut pas être récupéré !';
 
   @override
   String get deleteConfirmOk => 'Supprimer';
 
   @override
-  String get deleteThisRecord => 'Supprimer cette note';
+  String get deleteThisRecord => 'Supprimer ce journal';
 
   @override
   String get typeLabel => 'Type';
 
   @override
-  String get statusLabel => 'État';
+  String get statusLabel => 'Statut';
 
   @override
-  String get conditionScore => 'Score de condition';
+  String get conditionScore => 'Score d\'état';
 
   @override
-  String get symptomTags => 'Étiquettes de symptômes';
+  String get symptomTags => 'Symptômes';
 
   @override
   String get medicineName => 'Nom du médicament';
@@ -609,7 +612,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dose => 'Dose';
 
   @override
-  String get medicationMethod => 'Méthode de médication';
+  String get medicationMethod => 'Méthode d\'administration';
 
   @override
   String get weightKg => 'Poids (kg)';
@@ -636,10 +639,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vaccineType => 'Type de vaccin';
 
   @override
-  String get abnormalSymptomType => 'Type de Symptôme Anormal';
+  String get abnormalSymptomType => 'Type de symptôme anormal';
 
   @override
-  String get customSymptom => 'Symptôme Personnalisé';
+  String get customSymptom => 'Autre symptôme';
 
   @override
   String get customSymptomPlaceholder => 'Décrivez le symptôme';
@@ -690,10 +693,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get bleeding => 'Saignement';
 
   @override
-  String get dyspnea => 'Dyspnée';
+  String get dyspnea => 'Difficulté à respirer';
 
   @override
-  String get seizure => 'Convulsion';
+  String get seizure => 'Convulsion/Crise';
 
   @override
   String get normal => 'Normal';
@@ -720,7 +723,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get diarrhea => 'Diarrhée';
 
   @override
-  String get runnyNose => 'Nez qui coule';
+  String get runnyNose => 'Écoulement nasal';
 
   @override
   String get sneezing => 'Éternuements';
@@ -741,19 +744,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get topical => 'Topique';
 
   @override
-  String get eyeDrops => 'Gouttes oculaires';
+  String get eyeDrops => 'Gouttes pour les yeux';
 
   @override
-  String get earDrops => 'Gouttes auriculaires';
+  String get earDrops => 'Gouttes pour les oreilles';
 
   @override
   String get vetHospital => 'Clinique vétérinaire';
 
   @override
-  String get homeScale => 'Balance domestique';
+  String get homeScale => 'Balance à la maison';
 
   @override
-  String get holdAndWeigh => 'Peser dans les bras';
+  String get holdAndWeigh => 'Tenir et peser';
 
   @override
   String get veryLittle => 'Très peu';
@@ -765,13 +768,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get much => 'Beaucoup';
 
   @override
-  String get veryMuch => 'Très beaucoup';
+  String get veryMuch => 'Énormément';
 
   @override
-  String get general => 'Normal';
+  String get general => 'Général';
 
   @override
-  String get regularCheckup => 'Bilan';
+  String get regularCheckup => 'Bilan de santé régulier';
 
   @override
   String get emergency => 'Urgence';
@@ -792,7 +795,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get partialGrooming => 'Toilettage partiel';
 
   @override
-  String get nails => 'Griffes';
+  String get nails => 'Coupe des griffes';
 
   @override
   String get earCleaning => 'Nettoyage des oreilles';
@@ -825,62 +828,64 @@ class AppLocalizationsFr extends AppLocalizations {
   String get important => 'Important';
 
   @override
-  String get photosAndVideos => 'Photos · Vidéos';
+  String get photosAndVideos => 'Photos et vidéos';
 
   @override
-  String get addMedia => 'Ajouter des médias';
+  String get addMedia => 'Ajouter un média';
 
   @override
-  String get selectMediaMethod => 'Choisir comment ajouter des médias';
+  String get selectMediaMethod => 'Sélectionner la méthode';
 
   @override
   String get useCamera => 'Utiliser la caméra';
 
   @override
-  String get takePhotoOrVideo => 'Prendre une photo ou vidéo';
+  String get takePhotoOrVideo => 'Prendre une photo ou une vidéo';
 
   @override
   String get chooseFromGallery => 'Choisir dans la galerie';
 
   @override
-  String get multiSelectHint => 'Sélection multiple de photos et vidéos';
+  String get multiSelectHint => 'Vous pouvez en sélectionner plusieurs';
 
   @override
   String get takePhoto => 'Prendre une photo';
 
   @override
-  String get takePhotoDesc => 'Prendre une photo avec la caméra';
+  String get takePhotoDesc => 'Prendre une photo avec l\'appareil photo';
 
   @override
   String get recordVideo => 'Enregistrer une vidéo';
 
   @override
-  String get recordVideoDesc => 'Enregistrer une vidéo avec la caméra';
+  String get recordVideoDesc => 'Enregistrer une vidéo avec l\'appareil photo';
 
   @override
   String get deleteThisPhoto => 'Supprimer la photo';
 
   @override
-  String get deletePhotoConfirm => 'Supprimer cette photo ?';
+  String get deletePhotoConfirm =>
+      'Voulez-vous vraiment supprimer cette photo ?';
 
   @override
   String get deleteThisVideo => 'Supprimer la vidéo';
 
   @override
-  String get deleteVideoConfirm => 'Supprimer cette vidéo ?';
+  String get deleteVideoConfirm =>
+      'Voulez-vous vraiment supprimer cette vidéo ?';
 
   @override
-  String get muted => 'Silencieux';
+  String get muted => 'Sourdine';
 
   @override
   String get soundOn => 'Son activé';
 
   @override
   String get allowPermissionInSettings =>
-      'Veuillez autoriser la permission dans Réglages';
+      'Veuillez autoriser l\'accès dans les Paramètres';
 
   @override
-  String get openSettings => 'Ouvrir les réglages';
+  String get openSettings => 'Ouvrir les Paramètres';
 
   @override
   String get privacyPolicy => 'Politique de confidentialité';
@@ -892,7 +897,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get contact => 'Contact';
 
   @override
-  String get settingsLabel => 'Réglages';
+  String get settingsLabel => 'Paramètres';
 
   @override
   String get exportData => 'Exporter les données';
@@ -901,16 +906,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get importData => 'Importer les données';
 
   @override
-  String get sendFeedback => 'Envoyer un avis';
+  String get sendFeedback => 'Envoyer des commentaires';
 
   @override
-  String get faq => 'Questions fréquentes';
+  String get faq => 'FAQ';
 
   @override
   String get homeScreen => 'Écran d\'accueil';
 
   @override
-  String get journalScreen => 'Écran journal';
+  String get journalScreen => 'Écran du journal';
 
   @override
   String get alarmScreen => 'Écran des alertes';
@@ -919,13 +924,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get petManagement => 'Gestion des animaux';
 
   @override
-  String get recordCategories => 'Catégories de notes';
+  String get recordCategories => 'Catégories de journal';
 
   @override
   String get whatIsPetSumtan => 'Qu\'est-ce que Pet Sumtan ?';
 
   @override
-  String get todayRecordSummary => 'Résumé des notes d\'aujourd\'hui';
+  String get todayRecordSummary => 'Résumé du journal d\'aujourd\'hui';
 
   @override
   String get weeklyStats => 'Statistiques hebdomadaires';
@@ -934,34 +939,34 @@ class AppLocalizationsFr extends AppLocalizations {
   String get weightChangeChart => 'Graphique d\'évolution du poids';
 
   @override
-  String get findNearbyHospitals => 'Trouver des cliniques proches';
+  String get findNearbyHospitals => 'Trouver des cliniques vétérinaires';
 
   @override
-  String get addNewRecord => 'Ajouter une nouvelle note (+)';
+  String get addNewRecord => 'Ajouter un nouveau journal (+)';
 
   @override
-  String get viewRecordList => 'Voir les notes';
+  String get viewRecordList => 'Voir la liste des journaux';
 
   @override
-  String get editDeleteRecord => 'Modifier et supprimer des notes';
+  String get editDeleteRecord => 'Modifier et supprimer des journaux';
 
   @override
-  String get attachMedia => 'Joindre photos/vidéos';
+  String get attachMedia => 'Joindre des photos/vidéos';
 
   @override
   String get addAlarm => 'Ajouter une alerte';
 
   @override
-  String get repeatAlarm => 'Alertes répétées';
+  String get repeatAlarm => 'Répéter l\'alerte';
 
   @override
-  String get advanceAlarmHint => 'Alertes anticipées (J-7, J-3, J-1)';
+  String get advanceAlarmHint => 'Alerte anticipée (J-7, J-3, J-1)';
 
   @override
-  String get completeAlarm => 'Compléter les alertes';
+  String get completeAlarm => 'Terminer l\'alerte';
 
   @override
-  String get deleteAlarm => 'Supprimer les alertes';
+  String get deleteAlarm => 'Supprimer l\'alerte';
 
   @override
   String get registerPet => 'Enregistrer un animal';
@@ -973,23 +978,23 @@ class AppLocalizationsFr extends AppLocalizations {
   String get manageMultiplePets => 'Gérer plusieurs animaux';
 
   @override
-  String get dogHealthGuide => 'Guide santé du chien';
+  String get dogHealthGuide => 'Guide de santé pour chiens';
 
   @override
-  String get catHealthGuide => 'Guide santé du chat';
+  String get catHealthGuide => 'Guide de santé pour chats';
 
   @override
-  String get notificationSettings => 'Paramètres de notifications';
+  String get notificationSettings => 'Paramètres de notification';
 
   @override
-  String get dogHealthCareGuide => 'Guide santé du chien';
+  String get dogHealthCareGuide => 'Guide de soins de santé pour chiens';
 
   @override
-  String get catHealthCareGuide => 'Guide santé du chat';
+  String get catHealthCareGuide => 'Guide de soins de santé pour chats';
 
   @override
   String get healthGuideSubtitle =>
-      'Un guide santé professionnel\nfondé sur les recommandations vétérinaires.';
+      'Guide de santé professionnel\nbasé sur les recommandations vétérinaires.';
 
   @override
   String get vaccination => 'Vaccination';
@@ -1001,37 +1006,37 @@ class AppLocalizationsFr extends AppLocalizations {
   String get required => 'Obligatoire';
 
   @override
-  String get nonCoreVaccines => 'Vaccins optionnels';
+  String get nonCoreVaccines => 'Vaccins non essentiels';
 
   @override
-  String get recommended => 'Conseillé';
+  String get recommended => 'Recommandé';
 
   @override
   String get parasitePrevention => 'Prévention des parasites';
 
   @override
-  String get heartworm => 'Dirofilariose';
+  String get heartworm => 'Ver du cœur';
 
   @override
   String get monthlyFreq => 'Mensuel';
 
   @override
-  String get externalParasites => 'Parasites externes (puces/tiques)';
+  String get externalParasites => 'Parasites externes (Puces/Tiques)';
 
   @override
   String get internalParasites => 'Parasites internes';
 
   @override
-  String get threeToSixMonths => '3-6 mois';
+  String get threeToSixMonths => 'Tous les 3 à 6 mois';
 
   @override
-  String get nutritionManagement => 'Nutrition';
+  String get nutritionManagement => 'Gestion de la nutrition';
 
   @override
   String get dentalCare => 'Soins dentaires';
 
   @override
-  String get healthCheckup => 'Bilans de santé';
+  String get healthCheckup => 'Bilan de santé';
 
   @override
   String get emergencySigns => 'Signes d\'urgence';
@@ -1040,19 +1045,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get age => 'Âge';
 
   @override
-  String get checkupCycle => 'Fréquence';
+  String get checkupCycle => 'Fréquence des bilans';
 
   @override
-  String get mainItems => 'Points principaux';
+  String get mainItems => 'Examens principaux';
 
   @override
   String get exerciseLevel => 'Niveau d\'exercice';
 
   @override
-  String get breedExamples => 'Exemples de races';
+  String get breedExamples => 'Races représentatives';
 
   @override
-  String get low => 'Bas';
+  String get low => 'Faible';
 
   @override
   String get high => 'Élevé';
@@ -1061,22 +1066,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get menu => 'Menu';
 
   @override
-  String get helloGreeting => 'Bonjour ! ';
+  String get helloGreeting => 'Bonjour !';
 
   @override
-  String get healthyTodayMsg => '\nEn bonne santé aujourd\'hui ? 🐾';
+  String get healthyTodayMsg => '\nComment va la santé aujourd\'hui ?';
 
   @override
-  String get noRecordsYet => 'Pas encore de notes';
+  String get noRecordsYet => 'Aucun journal pour le moment';
 
   @override
   String lastRecord(String time) {
-    return 'Dernière note · $time';
+    return 'Dernier journal · $time';
   }
 
   @override
   String avgPerDay(String value, String unit) {
-    return 'Moy. $value$unit/jour';
+    return 'Moyenne $value$unit/jour';
   }
 
   @override
@@ -1086,26 +1091,26 @@ class AppLocalizationsFr extends AppLocalizations {
   String get weightChange => '⚖️ Évolution du poids';
 
   @override
-  String get noWeightData => 'Pas encore de données de poids';
+  String get noWeightData => 'Aucune donnée de poids';
 
   @override
   String get measuredWeight => 'Poids mesuré';
 
   @override
-  String get noTodayRecords => 'Pas encore de notes pour aujourd\'hui';
+  String get noTodayRecords => 'Aucun journal aujourd\'hui';
 
   @override
   String get homeNoRecordHint =>
-      'Notez l\'état, les selles et le poids\npour gérer la santé de votre animal.';
+      'Enregistrez son état, ses besoins et son poids\npour suivre sa santé.';
 
   @override
   String noRecordsForDate(String date) {
-    return 'Pas de notes pour $date';
+    return 'Aucun journal pour le $date';
   }
 
   @override
   String recordsForDate(String date, String count) {
-    return 'Notes du $date ($count)';
+    return 'Journaux du $date ($count)';
   }
 
   @override
@@ -1130,11 +1135,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get daySat => 'Sam';
 
   @override
-  String get whatToRecord => '📝 Que voulez-vous noter ?';
+  String get whatToRecord => '📝 Que voulez-vous enregistrer ?';
 
   @override
   String saveErrorMsg(String error) {
-    return 'Une erreur s\'est produite lors de l\'enregistrement : $error';
+    return 'Erreur d\'enregistrement : $error';
   }
 
   @override
@@ -1147,11 +1152,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get editAlarm => 'Modifier l\'alerte';
 
   @override
-  String get deleteAlarmConfirm => 'Supprimer cette alerte ?';
+  String get deleteAlarmConfirm =>
+      'Voulez-vous vraiment supprimer cette alerte ?';
 
   @override
   String deleteAlarmWithPushMsg(String name) {
-    return '$name sera supprimée,\net sa notification push programmée sera également annulée.';
+    return '$name sera supprimée.\nLes notifications push programmées seront également annulées.';
   }
 
   @override
@@ -1161,7 +1167,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get laterMsg => '🕐 Plus tard';
 
   @override
-  String get saveCompletion => '✅ Enregistrer la finalisation';
+  String get saveCompletion => '✅ Enregistrer comme terminé';
 
   @override
   String completedQuestion(String type) {
@@ -1170,16 +1176,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String autoSaveToTodayMsg(String name) {
-    return 'Nous enregistrerons automatiquement\n$name dans les notes d\'aujourd\'hui.';
+    return 'Nous enregistrerons automatiquement $name\ndans le journal d\'aujourd\'hui.';
   }
 
   @override
   String completionSaved(String name) {
-    return 'Finalisation de $name enregistrée';
+    return 'Statut terminé de $name enregistré';
   }
 
   @override
-  String get tapAlarmTypeHint => '👆 Appuyez sur le type d\'alerte souhaité';
+  String get tapAlarmTypeHint =>
+      '👆 Appuyez sur le type d\'alerte dont vous avez besoin';
 
   @override
   String countUnit(int count) {
@@ -1193,7 +1200,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String datePassedTapToReschedule(String date) {
-    return '⚠️ $date passé · Appuyez pour reprogrammer';
+    return '⚠️ $date est passée · Appuyez pour reprogrammer';
   }
 
   @override
@@ -1204,137 +1211,137 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String recordDeleteCannotUndo(String category) {
-    return 'La note $category sera supprimée\net ne pourra pas être restaurée.';
+    return 'Le journal de $category sera supprimé.\nCette action est irréversible.';
   }
 
   @override
   String get hintMedicineNameAndDose =>
-      'Veuillez saisir le nom et la dose du médicament';
+      '💡 Saisissez le nom du médicament et la dose';
 
   @override
-  String get hintMedicineName => 'Veuillez saisir un nom de médicament';
+  String get hintMedicineName => '💡 Saisissez le nom du médicament';
 
   @override
-  String get hintDose => 'Veuillez saisir une dose';
+  String get hintDose => '💡 Saisissez la dose';
 
   @override
-  String get hintWeightNumber => 'Veuillez saisir le poids en chiffres';
+  String get hintWeightNumber => '💡 Saisissez le poids en chiffres';
 
   @override
-  String get hintWeight => 'Veuillez saisir le poids';
+  String get hintWeight => '💡 Saisissez le poids';
 
   @override
-  String get hintWeightIsNumber => 'Veuillez saisir le poids en chiffres';
+  String get hintWeightIsNumber => '💡 Le poids doit être un nombre';
 
   @override
-  String get hintWalkTime => 'Veuillez saisir le temps de promenade';
+  String get hintWalkTime => '💡 Saisissez le temps de promenade';
 
   @override
   String get hintWalkTimeIsNumber =>
-      'Veuillez saisir le temps de promenade en chiffres';
+      '💡 Le temps de promenade doit être un nombre';
 
   @override
   String get hintWalkTimeNumber =>
-      'Veuillez saisir le temps de promenade en chiffres';
+      '💡 Saisissez le temps de promenade en chiffres';
 
   @override
   String get hintSelectBrushingArea =>
-      'Veuillez sélectionner au moins une zone de brossage';
+      '💡 Sélectionnez au moins une zone de brossage';
 
   @override
   String get hintSelectVaccineType =>
-      'Veuillez sélectionner au moins un type de vaccin';
+      '💡 Sélectionnez au moins un type de vaccin';
 
   @override
   String get hintSelectGroomingType =>
-      'Veuillez sélectionner au moins un type de toilettage';
+      '💡 Sélectionnez au moins un type de toilettage';
 
   @override
   String get hintSelectSymptomType =>
-      '💡 Veuillez sélectionner au moins un type de symptôme';
+      '💡 Sélectionnez au moins un type de symptôme';
 
   @override
-  String get hintTitle => 'Veuillez saisir un titre';
+  String get hintTitle => '💡 Saisissez un titre';
 
   @override
-  String get hintVaccineName => 'Veuillez saisir un nom de vaccin';
+  String get hintVaccineName => '💡 Saisissez le nom du vaccin';
 
   @override
-  String get hintSelectScheduledDate => 'Veuillez sélectionner une date';
+  String get hintSelectScheduledDate => '💡 Sélectionnez une date';
 
   @override
-  String get hintSelectScheduledTime => 'Veuillez sélectionner une heure';
+  String get hintSelectScheduledTime => '💡 Sélectionnez une heure';
 
   @override
-  String get hintVisitPurpose => 'Veuillez saisir le motif de la visite';
+  String get hintVisitPurpose => '💡 Saisissez le motif de la visite';
 
   @override
   String get hintSelectAppointmentDate =>
-      'Veuillez sélectionner une date de rendez-vous';
+      '💡 Sélectionnez la date du rendez-vous';
 
   @override
   String get hintSelectAppointmentTime =>
-      'Veuillez sélectionner une heure de rendez-vous';
+      '💡 Sélectionnez l\'heure du rendez-vous';
 
   @override
-  String get hintMedicineNameInput => 'Veuillez saisir un nom de médicament';
+  String get hintMedicineNameInput => '💡 Saisissez le nom du médicament';
 
   @override
   String get hintSelectMedicationDate =>
-      'Veuillez sélectionner une date de médicament';
+      '💡 Sélectionnez la date de médication';
 
   @override
   String get hintSelectMedicationTime =>
-      'Veuillez sélectionner une heure de médicament';
+      '💡 Sélectionnez l\'heure de médication';
 
   @override
-  String get hintAlarmName => 'Veuillez saisir un nom d\'alerte';
+  String get hintAlarmName => '💡 Saisissez le nom de l\'alerte';
 
   @override
-  String get hintSelectMealTime => 'Veuillez sélectionner une heure de repas';
+  String get hintSelectMealTime => '💡 Sélectionnez l\'heure du repas';
 
   @override
-  String get hintSelectAlarmTime => 'Veuillez sélectionner une heure d\'alerte';
+  String get hintSelectAlarmTime => '💡 Sélectionnez l\'heure de l\'alerte';
 
   @override
   String get noPetRegisterFirst =>
-      'Pas encore d\'animal. Ajoutez-en un depuis Profil d\'abord.';
+      'Aucun animal enregistré. Veuillez en ajouter un dans le Profil.';
 
   @override
   String get alarmRescheduled => 'Alerte reprogrammée';
 
   @override
-  String get examplePetName => 'Ex. Luna';
+  String get examplePetName => 'Ex : Coco';
 
   @override
-  String get exampleBreed => 'Ex. Maltais';
+  String get exampleBreed => 'Ex : Caniche';
 
   @override
-  String get exampleBreedMulti => 'Ex. Maltais, Persan';
+  String get exampleBreedMulti => 'Ex : Caniche, Persan';
 
   @override
-  String get example30 => 'Ex. 30';
+  String get example30 => 'Ex : 30';
 
   @override
-  String get example80 => 'Ex. 80';
+  String get example80 => 'Ex : 80';
 
   @override
-  String get example200 => 'Ex. 200';
+  String get example200 => 'Ex : 200';
 
   @override
-  String get example25 => 'Ex. 2.5';
+  String get example25 => 'Ex : 2.5';
 
   @override
-  String get example42 => 'Ex. 4.2';
+  String get example42 => 'Ex : 4.2';
 
   @override
-  String get example35000 => 'Ex. 35000';
+  String get example35000 => 'Ex : 35000';
 
   @override
-  String get example50000 => 'Ex. 50000';
+  String get example50000 => 'Ex : 50000';
 
   @override
-  String get enterNameHint => 'Veuillez saisir un nom';
+  String get enterNameHint => 'Saisissez le nom';
 
   @override
   String get addNewPetTitle => 'Ajouter un nouvel animal';
@@ -1343,16 +1350,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get basicInfo => 'Informations de base';
 
   @override
-  String get idInfo => 'Identification';
+  String get idInfo => 'Informations d\'identification';
 
   @override
-  String get idInfoOptional => 'Identification (optionnel)';
+  String get idInfoOptional => 'Identification (Optionnel)';
 
   @override
   String get name => 'Nom';
 
   @override
-  String get petKind => 'Type';
+  String get petKind => 'Espèce';
 
   @override
   String get breed => 'Race';
@@ -1361,7 +1368,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get weight => 'Poids';
 
   @override
-  String get microchip => 'Puce électronique';
+  String get microchip => 'Numéro de puce';
 
   @override
   String get registrationNumber => 'Numéro d\'enregistrement';
@@ -1385,13 +1392,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get femaleSym => 'Femelle ♀';
 
   @override
-  String get neutered => 'Stérilisation';
+  String get neutered => 'Stérilisé(e)/Castré(e)';
 
   @override
-  String get done => 'Terminé';
+  String get done => 'Oui';
 
   @override
-  String get notDone => 'Non terminé';
+  String get notDone => 'Non';
 
   @override
   String get notEntered => 'Non renseigné';
@@ -1413,25 +1420,25 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get registerPetPrompt =>
-      'Ajoutez un animal et\ngérez sa santé ensemble.';
+      'Enregistrez votre animal\net gérons sa santé ensemble !';
 
   @override
-  String get registerPetBtn => 'Ajouter un animal';
+  String get registerPetBtn => 'Enregistrer un animal';
 
   @override
-  String get editPet => 'Modifier l\'animal';
+  String get editPet => 'Modifier les informations';
 
   @override
   String get neuteringStatus => 'Statut de stérilisation';
 
   @override
-  String get neuteredDone => 'Stérilisé';
+  String get neuteredDone => 'Stérilisé(e)/Castré(e)';
 
   @override
-  String get notNeutered => 'Non stérilisé';
+  String get notNeutered => 'Intact(e)';
 
   @override
-  String get selectDateHint => 'Sélectionner une date';
+  String get selectDateHint => 'Sélectionnez une date';
 
   @override
   String get saveChanges => 'Enregistrer les modifications';
@@ -1446,58 +1453,58 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String deletePetConfirm(String name) {
-    return 'Supprimer $name ?';
+    return 'Voulez-vous vraiment supprimer $name ?';
   }
 
   @override
   String deletePetWarning(String name) {
-    return 'Toutes les notes et alertes de $name seront supprimées et ne pourront pas être restaurées.';
+    return 'Tous les journaux et alertes de $name seront supprimés et ne pourront pas être récupérés.';
   }
 
   @override
   String petDeleted(String name) {
-    return '$name supprimé';
+    return '$name a été supprimé(e)';
   }
 
   @override
   String petAdded(String name) {
-    return '$name ajouté';
+    return '$name a été ajouté(e) 🐾';
   }
 
   @override
   String get storeUnavailableMsg =>
-      'Impossible de se connecter au Store. Veuillez réessayer plus tard.';
+      'Impossible de se connecter à la boutique pour le moment. Veuillez réessayer plus tard.';
 
   @override
   String get checkingPaymentMsg =>
-      'Vérification des informations de paiement. Veuillez réessayer dans un instant.';
+      'Vérification des informations de paiement. Veuillez patienter un instant et réessayer.';
 
   @override
   String get paymentCompleteMsg =>
-      'Paiement effectué. Veuillez saisir les informations de votre nouvel animal.';
+      'Paiement terminé. Veuillez saisir les informations du nouveau membre de la famille.';
 
   @override
-  String get addNewFamilyMember => 'Ajouter un nouveau membre de la famille ?';
+  String get addNewFamilyMember => 'Ajouter un nouveau membre à la famille ?';
 
   @override
   String get firstPetFreeDesc =>
-      'Le premier animal est gratuit. À partir du deuxième, chaque animal supplémentaire nécessite un paiement.';
+      'Le premier animal est enregistré gratuitement. Pour ajouter d\'autres animaux, un paiement unique est requis pour chaque animal supplémentaire.';
 
   @override
   String petsRegisteredStoreUnavailable(int count) {
-    return '$count animaux enregistrés\nVeuillez réessayer quand le Store est disponible.';
+    return 'Vous avez actuellement $count animaux enregistrés.\nVeuillez réessayer lorsque la boutique sera disponible.';
   }
 
   @override
   String petsRegisteredPayToAdd(int count, String price) {
-    return '$count animaux enregistrés\nPayez $price pour ajouter un nouveau membre.';
+    return 'Vous avez actuellement $count animaux enregistrés.\nVous pouvez ajouter un nouveau membre pour $price.';
   }
 
   @override
   String get maybeLater => 'Peut-être plus tard';
 
   @override
-  String get unavailable => 'Non disponible';
+  String get unavailable => 'Indisponible';
 
   @override
   String payAndAdd(String price) {
@@ -1505,77 +1512,77 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get addNextAppointment => '+ Ajouter le prochain rendez-vous';
+  String get addNextAppointment => '＋ Ajouter un prochain rendez-vous';
 
   @override
-  String get pottyRecordSaved => 'Note de selles enregistrée';
+  String get pottyRecordSaved => '💩 Besoins enregistrés';
 
   @override
-  String get conditionRecordSaved => 'Note d\'état enregistrée';
+  String get conditionRecordSaved => '💗 État enregistré';
 
   @override
-  String get medicationRecordSaved => 'Note de médicament enregistrée';
+  String get medicationRecordSaved => '💊 Médicament enregistré';
 
   @override
-  String get weightRecordSaved => 'Note de poids enregistrée';
+  String get weightRecordSaved => '⚖️ Poids enregistré';
 
   @override
-  String get mealRecordSaved => 'Note de repas enregistrée';
+  String get mealRecordSaved => '🍽️ Repas enregistré';
 
   @override
-  String get waterRecordSaved => 'Note d\'eau enregistrée';
+  String get waterRecordSaved => '💧 Eau enregistrée';
 
   @override
-  String get vetVisitRecordSaved => 'Note de visite vétérinaire enregistrée';
+  String get vetVisitRecordSaved => '🏥 Visite vétérinaire enregistrée';
 
   @override
-  String get vaccinationRecordSaved => 'Note de vaccination enregistrée';
+  String get vaccinationRecordSaved => '💉 Vaccin enregistré';
 
   @override
-  String get groomingRecordSaved => 'Note de toilettage enregistrée';
+  String get groomingRecordSaved => '✂️ Toilettage enregistré';
 
   @override
-  String get brushingRecordSaved => 'Note de brossage enregistrée';
+  String get brushingRecordSaved => '🪥 Brossage enregistré';
 
   @override
-  String get walkRecordSaved => 'Note de promenade enregistrée';
+  String get walkRecordSaved => '🦮 Promenade enregistrée';
 
   @override
-  String get memoSaved => 'Mémo enregistré';
+  String get memoSaved => '📝 Note enregistrée';
 
   @override
   String get abnormalSymptomRecordSaved => '🚨 Symptôme anormal enregistré';
 
   @override
-  String get moreQuestions => 'D\'autres questions ?';
+  String get moreQuestions => 'Vous avez d\'autres questions ?';
 
   @override
   String get contactViaSendFeedback =>
-      'Contactez-nous depuis Réglages > Envoyer un avis.\nNous vous répondrons rapidement.';
+      'Contactez-nous via Paramètres > Envoyer des commentaires.\nNous vous répondrons dans les plus brefs délais 🐾';
 
   @override
   String get contactViaSendFeedbackLong =>
-      'Contactez-nous via Envoyer un avis dans Réglages.\nNous répondrons rapidement.';
+      'Veuillez nous contacter en utilisant le bouton [Envoyer des commentaires] dans les Paramètres.\nNous vous répondrons le plus rapidement possible.';
 
   @override
   String get privacyPolicyEffectiveDate =>
-      'Cette politique de confidentialité est en vigueur depuis le 1er janvier 2026.\nDernière mise à jour : 8 mai 2026';
+      'Cette politique de confidentialité est en vigueur à compter du 1er janvier 2026.\nDernière mise à jour : 8 mai 2026';
 
   @override
   String get privacyCollectedInfo =>
-      'Les informations collectées ne sont utilisées qu\'aux fins indiquées.';
+      'Les informations collectées sont utilisées uniquement aux fins suivantes.';
 
   @override
   String get privacyDataFeatures =>
-      'Pet Sumtan propose des fonctions d\'exportation (sauvegarde) et d\'importation (restauration) de données.';
+      'Pet Sumtan propose des fonctionnalités d\'exportation (sauvegarde) et d\'importation (restauration) des données.';
 
   @override
   String get privacyPolicyMayUpdate =>
-      'Cette politique de confidentialité peut être mise à jour en raison de changements légaux ou de service.';
+      'Cette politique de confidentialité peut être mise à jour en raison de modifications de la loi ou du service.';
 
   @override
   String get privacyPolicyContact =>
-      'Pour toute question sur cette politique de confidentialité, veuillez nous contacter ci-dessous.';
+      'Si vous avez des questions sur la politique de confidentialité, veuillez nous contacter ci-dessous.';
 
   @override
   String get catMeal => 'Repas';
@@ -1593,52 +1600,52 @@ class AppLocalizationsFr extends AppLocalizations {
   String get catWalk => 'Promenade';
 
   @override
-  String get catHospital => 'Clinique';
+  String get catHospital => 'Vétérinaire';
 
   @override
-  String get catAbnormalSymptom => 'Symptôme Anormal';
+  String get catAbnormalSymptom => 'Anormal';
 
   @override
   String get catCondition => 'État';
 
   @override
-  String get catPotty => 'Selles';
+  String get catPotty => 'Besoins';
 
   @override
-  String get mealFormTitle => '🍽️ Enregistrement repas';
+  String get mealFormTitle => '🍽️ Journal des repas';
 
   @override
-  String get walkFormTitle => '🦮 Enregistrement promenade';
+  String get walkFormTitle => '🦮 Journal de promenade';
 
   @override
-  String get weightFormTitle => '⚖️ Enregistrement poids';
+  String get weightFormTitle => '⚖️ Journal de poids';
 
   @override
-  String get waterFormTitle => '💧 Enregistrement eau';
+  String get waterFormTitle => '💧 Journal d\'eau';
 
   @override
-  String get medicationFormTitle => '💊 Enregistrement médicament';
+  String get medicationFormTitle => '💊 Journal de médication';
 
   @override
-  String get groomingFormTitle => '✂️ Enregistrement toilettage';
+  String get groomingFormTitle => '✂️ Journal de toilettage';
 
   @override
-  String get brushingFormTitle => '🪥 Enregistrement brossage';
+  String get brushingFormTitle => '🪥 Journal de brossage';
 
   @override
-  String get conditionFormTitle => '🌡️ Enregistrement état';
+  String get conditionFormTitle => '🌡️ Journal d\'état';
 
   @override
-  String get poopFormTitle => '💩 Enregistrement selles';
+  String get poopFormTitle => '💩 Journal des besoins';
 
   @override
-  String get vaccinationFormTitle => '💉 Enregistrement vaccination';
+  String get vaccinationFormTitle => '💉 Journal de vaccination';
 
   @override
-  String get hospitalFormTitle => '🏥 Enregistrement clinique';
+  String get hospitalFormTitle => '🏥 Journal vétérinaire';
 
   @override
-  String get abnormalSymptomFormTitle => '🚨 Symptôme Anormal';
+  String get abnormalSymptomFormTitle => '🚨 Journal des symptômes';
 
   @override
   String get memoFormTitle => '📝 Note';
@@ -1647,26 +1654,26 @@ class AppLocalizationsFr extends AppLocalizations {
   String get measureMethod => 'Méthode de mesure';
 
   @override
-  String get feedAmount => 'Quantité donnée';
+  String get feedAmount => 'Quantité';
 
   @override
-  String get mlInputLabel => 'Saisie directe en mL';
+  String get mlInputLabel => 'Saisir les mL manuellement';
 
   @override
   String get alarmRescheduleNote =>
-      'La date prévue de cette alerte est passée.\nVous pouvez définir une nouvelle date ou la supprimer.';
+      'La date de cette alerte est dépassée.\nVeuillez sélectionner une nouvelle date ou la supprimer.';
 
   @override
   String get nailTrim => 'Coupe des griffes';
 
   @override
-  String get shopNameExample => 'ex: Salon Fluffy pour animaux';
+  String get shopNameExample => 'Ex : Salon de Toilettage Happy';
 
   @override
-  String get poopRecordSaved => '💩 Selles enregistrées';
+  String get poopRecordSaved => '💩 Besoins enregistrés';
 
   @override
-  String get memoRecordSaved => '📝 Mémo enregistré';
+  String get memoRecordSaved => '📝 Note enregistrée';
 
   @override
   String get other => 'Autre';
@@ -1681,43 +1688,43 @@ class AppLocalizationsFr extends AppLocalizations {
   String get importance => 'Importance';
 
   @override
-  String get timeTaken => 'Temps requis';
+  String get timeTaken => 'Temps écoulé';
 
   @override
-  String get example10 => 'ex: 10';
+  String get example10 => 'Ex : 10';
 
   @override
   String get minuteUnit => 'min';
 
   @override
-  String get hospitalNameExample => 'ex: Clinique Happy Animal';
+  String get hospitalNameExample => 'Ex : Clinique Vétérinaire Happy';
 
   @override
-  String get diagnosisExample => 'ex: Entérite, Dermatite';
+  String get diagnosisExample => 'Ex : Entérite, Dermatite';
 
   @override
-  String get memoTitlePlaceholder => 'Entrez le titre du mémo';
+  String get memoTitlePlaceholder => 'Saisissez le titre de la note';
 
   @override
-  String get hintMemoTitle => '💡 Veuillez entrer un titre';
+  String get hintMemoTitle => '💡 Saisissez un titre';
 
   @override
   String get poopType => 'Type';
 
   @override
-  String get poopStatus => 'État';
+  String get poopStatus => 'Statut';
 
   @override
   String get feces => 'Selles';
 
   @override
-  String get bloody => 'Sang dans les selles';
+  String get bloody => 'Avec du sang';
 
   @override
-  String get vaccineDhppl => 'Combo DHPPL';
+  String get vaccineDhppl => 'CHPPi (Maladie de Carré, etc.)';
 
   @override
-  String get vaccineCorona => 'Entérite coronavirale';
+  String get vaccineCorona => 'Coronavirus';
 
   @override
   String get vaccineKennelCough => 'Toux du chenil';
@@ -1729,16 +1736,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vaccineInfluenza => 'Grippe';
 
   @override
-  String get vaccineFvrcp => 'Combo FVRCP';
+  String get vaccineFvrcp => 'Typhus/Coryza (FVRCP)';
 
   @override
-  String get vaccineFelv => 'Leucémie (FeLV)';
+  String get vaccineFelv => 'Leucose (FeLV)';
 
   @override
-  String get vaccineChlamydia => 'Chlamydia';
+  String get vaccineChlamydia => 'Chlamydiose';
 
   @override
-  String get mute => 'Muet';
+  String get mute => 'Sourdine';
 
   @override
   String get photoVideo => 'Photo · Vidéo';
@@ -1749,249 +1756,257 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get selectMediaSource => 'Choisir la source';
+  String get selectMediaSource => 'Sélectionner la source média';
 
   @override
-  String get cameraCapture => 'Appareil photo';
+  String get cameraCapture => 'Prendre avec l\'appareil photo';
 
   @override
-  String get cameraCaptureSubtitle => 'Prendre une photo ou vidéo';
+  String get cameraCaptureSubtitle =>
+      'Prendre une photo ou enregistrer une vidéo';
 
   @override
-  String get selectFromGallery => 'Galerie';
+  String get selectFromGallery => 'Choisir dans la galerie';
 
   @override
-  String get selectFromGallerySubtitle => 'Sélectionner photos · vidéos';
+  String get selectFromGallerySubtitle =>
+      'Vous pouvez en sélectionner plusieurs';
 
   @override
-  String get takePhotoSubtitle => 'Prendre une photo';
+  String get takePhotoSubtitle => 'Prendre une photo avec l\'appareil photo';
 
   @override
-  String get recordVideoSubtitle => 'Enregistrer une vidéo';
+  String get recordVideoSubtitle =>
+      'Enregistrer une vidéo avec l\'appareil photo';
 
   @override
-  String get permissionRequired => 'Autorisez l\'accès dans Réglages';
+  String get permissionRequired =>
+      'Veuillez autoriser l\'accès dans les Paramètres';
 
   @override
-  String get confirmDeletePhoto => 'Supprimer cette photo ?';
+  String get confirmDeletePhoto =>
+      'Voulez-vous vraiment supprimer cette photo ?';
 
   @override
-  String get confirmDeleteVideo => 'Supprimer cette vidéo ?';
+  String get confirmDeleteVideo =>
+      'Voulez-vous vraiment supprimer cette vidéo ?';
 
   @override
-  String get hintMedicineAndDose => '💡 Entrez le médicament et la dose';
+  String get hintMedicineAndDose =>
+      '💡 Saisissez le nom du médicament et la dose';
 
   @override
   String deleteRecordBody(String category) {
-    return 'L\'enregistrement $category sera supprimé\net ne pourra pas être annulé.';
+    return 'Le journal de $category sera supprimé.\nCette action est irréversible.';
   }
 
   @override
   String dayCountShort(int days) {
-    return '$days j';
+    return '$days jours';
   }
 
   @override
   String get helpIntroContent =>
-      'Pet Sumtan est une application qui vous permet d’enregistrer et de gérer au même endroit la santé et le quotidien de votre animal.\nVous pouvez facilement noter différentes informations de santé, comme les repas, l’eau, les selles, le poids, les médicaments et les visites chez le vétérinaire, et utiliser les alertes pour ne pas oublier les rendez-vous importants.';
+      'Pet Sumtan est une application où vous pouvez enregistrer et gérer la santé et la vie quotidienne de votre animal au même endroit.\nVous pouvez facilement enregistrer les repas, l\'eau, les besoins, le poids, les médicaments, les visites chez le vétérinaire et configurer des alertes pour ne pas oublier les événements importants.';
 
   @override
   String get helpHomeTodayRecordSummaryDesc =>
-      'Consultez d’un coup d’œil toutes les notes ajoutées aujourd’hui. Touchez une note pour voir les détails ou la modifier.';
+      'Consultez tous les journaux ajoutés aujourd\'hui en un coup d\'œil. Appuyez sur un journal pour voir les détails ou le modifier.';
 
   @override
   String get helpHomeWeeklyStatsDesc =>
-      'Consultez sous forme de graphiques le nombre de selles, les repas et la quantité d’eau de cette semaine. Cela vous aide à comprendre le rythme de vie de votre animal.';
+      'Vérifiez le nombre de fois où il a fait ses besoins, la quantité de repas et la consommation d\'eau de cette semaine sous forme de graphiques pour comprendre les habitudes de votre animal.';
 
   @override
   String get helpHomeWeightChangeChartDesc =>
-      'Affiche les derniers poids enregistrés sous forme de graphique afin de suivre facilement leur évolution.';
+      'Affiche les récents relevés de poids sur un graphique pour suivre facilement l\'évolution du poids.';
 
   @override
   String get helpHomeFindNearbyHospitalsDesc =>
-      'Touchez le bouton pour rechercher les cliniques vétérinaires proches dans Naver Maps.';
+      'Appuyez sur le bouton pour rechercher des cliniques vétérinaires à proximité sur la carte.';
 
   @override
   String get helpHomeAddNewRecordDesc =>
-      'Touchez le bouton + en bas de l’écran pour choisir une catégorie et ajouter une nouvelle note.';
+      'Appuyez sur le bouton \'+\' en bas pour sélectionner une catégorie et ajouter un nouveau journal.';
 
   @override
   String get helpRecordCategoriesIntro =>
-      'Vous pouvez noter le quotidien de votre animal dans 12 catégories.';
+      'Vous pouvez enregistrer la vie quotidienne de votre animal dans 12 catégories différentes.';
 
   @override
-  String get helpCategoryPottyName => 'Selles';
+  String get helpCategoryPottyName => 'Besoins';
 
   @override
   String get helpCategoryPottyDesc =>
-      'Notez les selles et leur état. Vous pouvez aussi joindre des photos.';
+      'Enregistrez l\'état et le type des selles/urines. Vous pouvez également joindre des photos.';
 
   @override
   String get helpCategoryConditionName => 'État';
 
   @override
   String get helpCategoryConditionDesc =>
-      'Notez l’état général de votre animal.';
+      'Enregistrez l\'état de santé général de votre animal.';
 
   @override
   String get helpCategoryMedicationName => 'Médicament';
 
   @override
   String get helpCategoryMedicationDesc =>
-      'Notez le nom du médicament, la dose et l’heure d’administration.';
+      'Enregistrez le nom du médicament, la dose et l\'heure.';
 
   @override
   String get helpCategoryWeightName => 'Poids';
 
   @override
   String get helpCategoryWeightDesc =>
-      'Notez le poids en kg. Vous pouvez suivre son évolution sur l’écran d’accueil.';
+      'Enregistrez le poids (kg). Vous pouvez vérifier la tendance sur l\'écran d\'accueil.';
 
   @override
   String get helpCategoryMealName => 'Repas';
 
   @override
   String get helpCategoryMealDesc =>
-      'Notez la quantité de nourriture et le type d’aliment. Vous pouvez aussi joindre des photos et des vidéos.';
+      'Enregistrez la quantité et le type de repas. Vous pouvez joindre des photos/vidéos.';
 
   @override
   String get helpCategoryWaterName => 'Eau';
 
   @override
   String get helpCategoryWaterDesc =>
-      'Notez la quantité d’eau en ml. Vous pouvez aussi joindre des photos et des vidéos.';
+      'Enregistrez la consommation d\'eau (ml). Vous pouvez joindre des photos/vidéos.';
 
   @override
-  String get helpCategoryHospitalName => 'Clinique';
+  String get helpCategoryHospitalName => 'Vétérinaire';
 
   @override
   String get helpCategoryHospitalDesc =>
-      'Notez le nom de la clinique et les détails de la consultation. Vous pouvez aussi joindre des photos et des vidéos.';
+      'Enregistrez le nom de la clinique et le diagnostic. Vous pouvez joindre des photos/vidéos.';
 
   @override
-  String get helpCategoryVaccinationName => 'Vaccination';
+  String get helpCategoryVaccinationName => 'Vaccin';
 
   @override
   String get helpCategoryVaccinationDesc =>
-      'Notez le type de vaccin et la date de vaccination.';
+      'Enregistrez le type de vaccin et la date.';
 
   @override
   String get helpCategoryGroomingName => 'Toilettage';
 
   @override
   String get helpCategoryGroomingDesc =>
-      'Notez les détails du toilettage et joignez des photos ou des vidéos.';
+      'Enregistrez les détails du toilettage et joignez des photos/vidéos.';
 
   @override
-  String get helpCategoryDentalName => 'Brossage des dents';
+  String get helpCategoryDentalName => 'Brossage';
 
   @override
   String get helpCategoryDentalDesc =>
-      'Notez si le brossage des dents a été fait et ajoutez un mémo.';
+      'Enregistrez l\'état du brossage des dents et des notes.';
 
   @override
   String get helpCategoryWalkName => 'Promenade';
 
   @override
   String get helpCategoryWalkDesc =>
-      'Notez la distance et la durée de la promenade.';
+      'Enregistrez la distance et la durée de la promenade.';
 
   @override
-  String get helpCategoryMemoName => 'Mémo';
+  String get helpCategoryMemoName => 'Note';
 
   @override
-  String get helpCategoryMemoDesc => 'Laissez librement un mémo.';
+  String get helpCategoryMemoDesc =>
+      'Vous pouvez laisser des notes au format libre.';
 
   @override
   String get helpJournalViewRecordListDesc =>
-      'Consultez tous les enregistrements par date. Les badges de catégorie permettent d’identifier rapidement le type de note.';
+      'Affiche tous les journaux par date. Vous pouvez facilement les distinguer par les icônes de catégorie.';
 
   @override
   String get helpJournalEditDeleteRecordDesc =>
-      'Touchez une note pour ouvrir la feuille de modification. Vous pouvez modifier le contenu ou le supprimer.';
+      'Appuyer sur un journal ouvre la page de modification. Vous pouvez modifier le contenu ou supprimer le journal.';
 
   @override
   String get helpJournalAttachMediaDesc =>
-      'Dans certaines catégories, comme repas, eau, clinique, toilettage ou selles, vous pouvez joindre des photos ou des vidéos.';
+      'Vous pouvez joindre des photos ou des vidéos à des catégories telles que Repas, Eau, Vétérinaire, Toilettage et Besoins.';
 
   @override
   String get helpAlarmAddDesc =>
-      'Vous pouvez ajouter différents types d’alertes, comme vaccination, médicament, visite vétérinaire ou toilettage. Choisissez d’abord le type d’alerte, puis définissez la date et l’heure.';
+      'Configurez des alertes pour les vaccins, les médicaments, le vétérinaire, le toilettage, etc. Choisissez d\'abord le type, puis définissez la date et l\'heure.';
 
   @override
   String get helpAlarmRepeatDesc =>
-      'Configurez des règles de répétition, par exemple tous les jours, chaque semaine ou chaque mois. C’est utile pour les traitements réguliers ou la prévention de la dirofilariose.';
+      'Vous pouvez définir des règles de répétition telles que quotidienne, hebdomadaire ou mensuelle. Idéal pour les médicaments réguliers ou la prévention du ver du cœur.';
 
   @override
   String get helpAlarmAdvanceDesc =>
-      'Pour les rendez-vous importants comme la vaccination, vous pouvez recevoir des rappels 7 jours, 3 jours et 1 jour à l’avance.';
+      'Pour des événements importants comme les vaccins, vous pouvez recevoir des alertes anticipées 7 jours, 3 jours ou 1 jour avant.';
 
   @override
   String get helpAlarmCompleteDesc =>
-      'Touchez une alerte pour la marquer comme terminée. Les alertes terminées sont visibles dans la liste des alertes passées.';
+      'Appuyez sur une alerte pour la marquer comme terminée. Les alertes terminées sont déplacées vers la liste des \'Alertes passées\'.';
 
   @override
   String get helpAlarmDeleteDesc =>
-      'Faites glisser une alerte vers la gauche pour la supprimer.';
+      'Balayez une alerte vers la gauche pour la supprimer.';
 
   @override
   String get helpPetRegisterDesc =>
-      'Enregistrez votre animal en saisissant son nom, son type, sa race, son sexe, sa date de naissance et son statut de stérilisation.';
+      'Enregistrez votre animal en saisissant son nom, son espèce (chien/chat), sa race, son sexe, sa date de naissance et son statut de stérilisation.';
 
   @override
   String get helpPetEditProfileDesc =>
-      'Depuis l’écran de profil, vous pouvez modifier le nom, la race, le poids, le numéro de puce électronique, le numéro d’enregistrement et la photo de profil.';
+      'Vous pouvez modifier le nom, la race, le poids, le numéro de puce, le numéro d\'enregistrement et la photo de profil sur l\'écran Profil.';
 
   @override
   String get helpPetManageMultipleDesc =>
-      'Vous pouvez enregistrer plusieurs animaux. Touchez la pastille de l’animal en haut de l’écran pour changer l’animal à gérer.';
+      'Vous pouvez enregistrer plusieurs animaux. Appuyez sur l\'étiquette de l\'animal en haut pour basculer entre eux.';
 
   @override
   String get helpDogHealthGuideDesc =>
-      'Fournit des informations de santé fondées sur des recommandations vétérinaires, notamment les calendriers de vaccins essentiels et optionnels, la prévention de la dirofilariose et des parasites externes, les soins dentaires et la nutrition.';
+      'Fournit des informations de santé basées sur les recommandations vétérinaires : calendrier des vaccins essentiels/non essentiels, prévention des parasites, soins dentaires, nutrition, etc.';
 
   @override
   String get helpCatHealthGuideDesc =>
-      'Consultez le calendrier de vaccination propre aux chats, la prévention des parasites, les soins dentaires et les informations nutritionnelles.';
+      'Consultez le calendrier de vaccination spécifique aux chats, la prévention des parasites, les soins dentaires et les informations nutritionnelles.';
 
   @override
   String get helpSettingsNotificationDesc =>
-      'Activez ou désactivez toutes les notifications de l’application.';
+      'Activez ou désactivez toutes les notifications de l\'application.';
 
   @override
   String get helpSettingsExportDesc =>
-      'Exportez toutes les données enregistrées dans un fichier ZIP. Utilisez-le comme sauvegarde lors d’un changement d’appareil.';
+      'Exportez toutes les données enregistrées sous forme de fichier ZIP. Peut être utilisé comme sauvegarde lors d\'un changement d\'appareil.';
 
   @override
   String get helpSettingsImportDesc =>
-      'Importez un fichier de sauvegarde ZIP précédemment exporté pour restaurer vos données.';
+      'Importez un fichier de sauvegarde ZIP précédemment enregistré pour restaurer les données.';
 
   @override
   String get helpSettingsFeedbackDesc =>
-      'Envoyez-nous par e-mail les problèmes rencontrés ou vos suggestions d’amélioration. Cela nous aide beaucoup à améliorer l’application.';
+      'Si vous avez des problèmes ou des suggestions, faites-le nous savoir par e-mail. Cela nous aidera à améliorer l\'application.';
 
   @override
   String get helpFaqDeletePetQ =>
-      'Si je supprime un animal, toutes ses notes seront-elles aussi supprimées ?';
+      'Si je supprime un animal, tous ses journaux sont-ils également supprimés ?';
 
   @override
   String get helpFaqDeletePetA =>
-      'Oui. Si vous supprimez un animal, toutes ses notes et alertes associées seront également supprimées. Avant de supprimer, pensez à faire une sauvegarde avec Exporter les données.';
+      'Oui, si vous supprimez un animal, tous ses journaux et alertes seront également supprimés. Veuillez exporter et sauvegarder vos données avant de supprimer.';
 
   @override
   String get helpFaqMultipleMediaQ =>
-      'Puis-je joindre plusieurs photos à une note ?';
+      'Puis-je joindre plusieurs photos à un seul journal ?';
 
   @override
   String get helpFaqMultipleMediaA =>
-      'Oui. Vous pouvez joindre plusieurs photos et vidéos. Vous pouvez les choisir depuis la galerie ou les prendre directement avec l’appareil photo.';
+      'Oui, vous pouvez joindre plusieurs photos ou vidéos. Vous pouvez les sélectionner dans votre galerie ou prendre des photos directement avec l\'appareil photo.';
 
   @override
-  String get helpFaqNoNotificationQ => 'Je ne reçois pas les notifications.';
+  String get helpFaqNoNotificationQ => 'Je ne reçois pas d\'alertes.';
 
   @override
   String get helpFaqNoNotificationA =>
-      'Vérifiez que les notifications de Pet Sumtan sont autorisées dans les réglages de notification de l’appareil. Vérifiez aussi que les notifications de l’app sont activées dans Réglages > Paramètres de notifications.';
+      'Veuillez vérifier si les notifications pour l\'application Pet Sumtan sont autorisées dans les paramètres de votre appareil. De plus, vérifiez si les \'Paramètres de notification\' dans l\'application (Paramètres > Notifications) sont activés.';
 
   @override
   String get helpFaqMoveDataQ =>
@@ -1999,147 +2014,147 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get helpFaqMoveDataA =>
-      'Oui. Sur l’ancien appareil, enregistrez un fichier de sauvegarde depuis Réglages > Exporter les données. Puis, sur le nouvel appareil, restaurez-le depuis Réglages > Importer les données.';
+      'Enregistrez un fichier de sauvegarde via \'Paramètres > Exporter les données\' sur votre ancien appareil, puis restaurez-le via \'Paramètres > Importer les données\' sur votre nouvel appareil.';
 
   @override
   String get helpFaqMultiplePetsQ => 'Puis-je enregistrer plusieurs animaux ?';
 
   @override
   String get helpFaqMultiplePetsA =>
-      'Par défaut, vous pouvez enregistrer 1 animal gratuitement. L’enregistrement d’animaux supplémentaires est disponible via une fonctionnalité premium.';
+      'Vous pouvez enregistrer un animal gratuitement. Des animaux supplémentaires peuvent être ajoutés en utilisant des fonctionnalités premium.';
 
   @override
   String get privacyIntroBody =>
-      'Pet Sumtan est une application utilisable sans inscription, et toutes les données sont stockées uniquement sur l’appareil de l’utilisateur. Nous ne transmettons aucune information personnelle à des serveurs externes et protégeons en toute sécurité les précieuses informations de vos animaux.';
+      'Pet Sumtan est une application qui peut être utilisée sans inscription, et toutes les données sont enregistrées uniquement sur votre appareil. Nous n\'envoyons pas vos informations personnelles à des serveurs externes, gardant ainsi les informations précieuses de votre animal en sécurité.';
 
   @override
   String get privacySection1Title => 'Informations personnelles collectées';
 
   @override
   String get privacySection1Body =>
-      'Pet Sumtan peut être utilisé sans inscription et ne collecte pas d’informations permettant d’identifier personnellement l’utilisateur. Toutefois, afin de fournir les fonctionnalités de l’app, les informations suivantes peuvent être stockées sur l’appareil.';
+      'Pet Sumtan peut être utilisé sans inscription et ne collecte aucune information personnellement identifiable. Cependant, pour fournir les fonctionnalités de l\'application, les informations suivantes peuvent être enregistrées sur votre appareil.';
 
   @override
   String get privacyLocalStorageInfo =>
-      'Informations stockées localement sur l’appareil';
+      'Informations enregistrées localement sur l\'appareil';
 
   @override
   String get privacyPetInfo =>
-      'Informations sur l’animal : nom, espèce, race, date de naissance, sexe, poids, statut de stérilisation, numéro de puce électronique et numéro d’enregistrement';
+      'Informations sur l\'animal : Nom, espèce, race, date de naissance, sexe, poids, statut de stérilisation, numéro de puce, numéro d\'enregistrement';
 
   @override
   String get privacyHealthRecords =>
-      'Notes de santé : selles, repas, eau, poids, médicaments, vaccinations, clinique, toilettage, brossage des dents, promenade, état, mémos et autres notes saisies directement par l’utilisateur';
+      'Dossiers de santé : Besoins, repas, eau, poids, médicament, vaccin, vétérinaire, toilettage, brossage, promenade, état, notes, etc., saisis directement par vous';
 
   @override
   String get privacyAttachedMedia =>
-      'Médias joints : photos et vidéos prises ou sélectionnées directement par l’utilisateur';
+      'Fichiers multimédias joints : Photos et vidéos prises ou sélectionnées directement par vous';
 
   @override
   String get privacyNotificationSettings =>
-      'Paramètres d’alerte : type d’alerte, date et heure prévues, règles de répétition';
+      'Paramètres d\'alerte : Type d\'alerte, date et heure programmées, règles de répétition';
 
   @override
-  String get privacyInAppPurchaseTitle => 'Achats intégrés';
+  String get privacyInAppPurchaseTitle => 'À propos des achats intégrés';
 
   @override
   String get privacyPaymentProcessing =>
-      'Les paiements sont traités par l’Apple App Store ou le Google Play Store, et l’app ne collecte ni ne stocke directement les informations de paiement.';
+      'Le traitement des paiements est effectué via l\'App Store d\'Apple ou le Google Play Store, et l\'application ne collecte ni n\'enregistre directement vos informations de paiement.';
 
   @override
   String get privacyReceiptVerification =>
-      'Seules les informations minimales nécessaires à la vérification des reçus d’achat sont traitées conformément aux politiques de chaque plateforme.';
+      'Conformément aux politiques de chaque plateforme, seules les informations minimales nécessaires à la vérification du reçu d\'achat sont traitées.';
 
   @override
   String get privacySection2Title =>
-      'Finalités de la collecte et de l’utilisation des informations personnelles';
+      'Objectif de la collecte et de l\'utilisation';
 
   @override
   String get privacyPurposeRecords =>
-      'Enregistrer et consulter les notes de santé des animaux';
+      'Enregistrer et consulter les dossiers de santé de l\'animal';
 
   @override
   String get privacyPurposeStats =>
-      'Fournir des statistiques sur l’écran d’accueil, comme les selles, les repas et la consommation d’eau de la semaine, ainsi que des graphiques d’évolution du poids';
+      'Fournir des statistiques sur l\'écran d\'accueil (état hebdomadaire des besoins, repas, eau, graphique d\'évolution du poids, etc.)';
 
   @override
   String get privacyPurposeReminders =>
-      'Envoyer des alertes liées à la santé, comme les vaccinations, les médicaments et les visites vétérinaires';
+      'Envoyer des alertes liées à la santé, telles que les vaccins, les médicaments, le vétérinaire, etc.';
 
   @override
   String get privacyPurposeBackupRestore =>
-      'Fournir des fonctions de sauvegarde et de restauration des données';
+      'Fournir des fonctionnalités de sauvegarde et de restauration des données';
 
   @override
   String get privacyPurposePaidEligibility =>
-      'Vérifier l’éligibilité à l’utilisation des fonctionnalités payantes';
+      'Vérifier l\'éligibilité à l\'utilisation des fonctionnalités payantes';
 
   @override
   String get privacySection3Title =>
-      'Conservation et suppression des informations personnelles';
+      'Conservation et destruction des informations';
 
   @override
   String get privacyRetentionBody =>
-      'Toutes les données de Pet Sumtan sont stockées uniquement dans la base de données locale de l’appareil de l’utilisateur (SQLite) et ne sont pas transmises à des serveurs externes.';
+      'Toutes les données de Pet Sumtan sont enregistrées uniquement dans la base de données locale (SQLite) de votre appareil et ne sont pas envoyées à des serveurs externes.';
 
   @override
-  String get privacyDataDeletionMethod => 'Méthodes de suppression des données';
+  String get privacyDataDeletionMethod => 'Méthode de destruction des données';
 
   @override
   String get privacyDeleteInApp =>
-      'Vous pouvez supprimer directement les informations et notes de vos animaux dans Réglages > Gestion des données dans l’app.';
+      'Vous pouvez supprimer directement les informations et les journaux de l\'animal via \'Paramètres > Gestion des données\' dans l\'application.';
 
   @override
   String get privacyDeleteUninstall =>
-      'Lorsque vous supprimez l’app, toutes les données stockées sur l’appareil sont également supprimées.';
+      'La suppression de l\'application supprimera également toutes les données enregistrées sur l\'appareil.';
 
   @override
   String get privacyDeleteBackupWarning =>
-      'Veuillez noter que si vous n’effectuez pas de sauvegarde (exportation) avant de supprimer l’app, les données ne pourront pas être récupérées.';
+      'Veuillez noter que si vous ne sauvegardez pas (exporter) avant de supprimer l\'application, les données ne pourront pas être récupérées.';
 
   @override
-  String get privacySection4Title =>
-      'Partage des informations personnelles avec des tiers';
+  String get privacySection4Title => 'Fourniture d\'informations à des tiers';
 
   @override
   String get privacyThirdPartyBody =>
-      'Pet Sumtan ne fournit pas les informations personnelles de l’utilisateur à des tiers. Toutefois, les situations suivantes constituent des exceptions.';
+      'Pet Sumtan ne fournit pas vos informations personnelles à des tiers externes. Cependant, il existe les exceptions suivantes :';
 
   @override
   String get privacyThirdPartyUserExport =>
-      'Lorsque l’utilisateur utilise lui-même la fonction d’exportation des données, par exemple pour partager un fichier de sauvegarde';
+      'Lorsque vous utilisez vous-même la fonction d\'exportation de données (partage de fichier de sauvegarde)';
 
   @override
   String get privacyThirdPartyLegalRequest =>
-      'Lorsque cela est requis par la loi ou à la suite d’une demande légale des autorités compétentes';
+      'Lorsque la loi l\'exige ou qu\'il y a une demande légale des autorités compétentes';
 
   @override
-  String get privacySection5Title => 'Autorisations d’accès';
+  String get privacySection5Title =>
+      'Informations sur les autorisations d\'accès';
 
   @override
   String get privacyPermissionsBody =>
-      'Afin de fournir les fonctionnalités de l’app, les autorisations ci-dessous peuvent être demandées. Même si vous refusez une autorisation, vous pouvez continuer à utiliser normalement les autres fonctionnalités, à l’exception de celle qui dépend de cette autorisation.';
+      'Pour fournir les fonctionnalités de l\'application, nous pouvons demander les autorisations suivantes. Même si vous n\'accordez pas les autorisations, vous pouvez utiliser les autres fonctionnalités normalement.';
 
   @override
   String get privacyPermissionCameraName => 'Appareil photo';
 
   @override
   String get privacyPermissionCameraDesc =>
-      'Utilisé pour prendre directement des photos ou enregistrer des vidéos et les joindre aux notes de santé.';
+      'Utilisé pour prendre des photos ou enregistrer des vidéos directement pour les joindre aux dossiers de santé.';
 
   @override
   String get privacyPermissionMediaName => 'Accès aux photos et médias';
 
   @override
   String get privacyPermissionMediaDesc =>
-      'Utilisé pour sélectionner des photos et vidéos depuis la galerie et les joindre aux notes.';
+      'Utilisé pour sélectionner des photos ou des vidéos dans la galerie pour les joindre aux journaux.';
 
   @override
   String get privacyPermissionNotificationName => 'Notifications';
 
   @override
   String get privacyPermissionNotificationDesc =>
-      'Utilisées pour envoyer des alertes liées à la santé, comme les vaccinations, les médicaments et les visites vétérinaires.';
+      'Utilisé pour envoyer des alertes liées à la santé, telles que les vaccins, les médicaments, le vétérinaire, etc.';
 
   @override
   String get privacyPermissionFileName => 'Accès aux fichiers (Android)';
@@ -2153,542 +2168,541 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get privacyBackupExport =>
-      'Exporter : permet d’enregistrer ou de partager toutes les données de l’app sous forme de fichier (.zip).';
+      'Exporter : Vous pouvez enregistrer ou partager toutes les données de l\'application sous forme de fichier (.zip).';
 
   @override
   String get privacyBackupImport =>
-      'Importer : permet de charger un fichier de sauvegarde précédemment exporté et de restaurer les données.';
+      'Importer : Vous pouvez charger un fichier de sauvegarde précédemment exporté pour restaurer les données.';
 
   @override
   String get privacyBackupWarning =>
-      'Les fichiers de sauvegarde sont gérés directement par l’utilisateur. Veillez à ne pas les partager avec d’autres personnes.';
+      'Le fichier de sauvegarde est géré par vous, alors faites attention à ne pas partager le fichier avec d\'autres.';
 
   @override
-  String get privacySection7Title =>
-      'Protection des informations personnelles des enfants';
+  String get privacySection7Title => 'Protection de la vie privée des enfants';
 
   @override
   String get privacyChildrenBody =>
-      'Pet Sumtan ne collecte pas séparément d’informations personnelles auprès des enfants de moins de 14 ans. Toutes les données de l’app sont stockées uniquement sur l’appareil et ne sont pas transmises à des serveurs externes, ce qui permet également aux enfants de l’utiliser en toute sécurité.';
+      'Pet Sumtan ne collecte pas séparément les informations personnelles des enfants de moins de 14 ans. Toutes les données de l\'application sont enregistrées uniquement sur l\'appareil et ne sont pas envoyées à des serveurs externes, de sorte que les enfants peuvent l\'utiliser en toute sécurité.';
 
   @override
   String get privacySection8Title =>
-      'Modifications de la présente politique de confidentialité';
+      'Modifications de la politique de confidentialité';
 
   @override
   String get privacyPolicyChangeNotice =>
-      'En cas de modification, nous vous en informerons par les notes de mise à jour de l’app ou par un avis dans l’app.';
+      'S\'il y a des changements, nous vous en informerons via les notes de mise à jour de l\'application ou des avis dans l\'application.';
 
   @override
   String get privacyPolicyChangeEffective =>
-      'La politique modifiée prendra effet 7 jours après l’avis.';
+      'La politique modifiée entrera en vigueur 7 jours après la notification.';
 
   @override
   String get privacySection9Title => 'Contact';
 
   @override
-  String get hgDogHeroTitle => 'Guide de santé du chien';
+  String get hgDogHeroTitle => 'Guide de santé pour chiens';
 
   @override
-  String get hgCatHeroTitle => 'Guide de santé du chat';
+  String get hgCatHeroTitle => 'Guide de santé pour chats';
 
   @override
   String get hgHeroSubtitle =>
-      'Un guide de santé professionnel\nfondé sur les recommandations vétérinaires.';
+      'A professional health guide\nbased on veterinary recommendations.';
 
   @override
   String get hgVaccination => 'Vaccination';
 
   @override
-  String get hgCoreVaccines => 'Vaccins essentiels (Core Vaccine)';
+  String get hgCoreVaccines => 'Core Vaccines';
 
   @override
-  String get hgNonCoreVaccines => 'Vaccins optionnels (Non-Core)';
+  String get hgNonCoreVaccines => 'Non-Core Vaccines';
 
   @override
-  String get hgRequired => 'Obligatoire';
+  String get hgRequired => 'Required';
 
   @override
-  String get hgRecommended => 'Conseillé';
+  String get hgRecommended => 'Recommended';
 
   @override
-  String get hgParasitePrevention => 'Prévention des parasites';
+  String get hgParasitePrevention => 'Parasite Prevention';
 
   @override
-  String get hgHeartworm => 'Dirofilariose';
+  String get hgHeartworm => 'Heartworm';
 
   @override
-  String get hgMonthly => 'Mensuel';
+  String get hgMonthly => 'Monthly';
 
   @override
-  String get hgExternalParasites => 'Parasites externes (puces et tiques)';
+  String get hgExternalParasites => 'External Parasites (Fleas/Ticks)';
 
   @override
-  String get hgInternalParasites => 'Parasites internes';
+  String get hgInternalParasites => 'Internal Parasites';
 
   @override
-  String get hgThreeToSixMonths => '3 à 6 mois';
+  String get hgThreeToSixMonths => 'Every 3-6 months';
 
   @override
-  String get hgRegular => 'Régulier';
+  String get hgRegular => 'Regular';
 
   @override
-  String get hgRegularCheckup => 'Bilan de santé régulier';
+  String get hgRegularCheckup => 'Regular Health Checkup';
 
   @override
-  String get hgDentalCare => 'Soins dentaires et bucco-dentaires';
+  String get hgDentalCare => 'Dental & Oral Care';
 
   @override
-  String get hgForbiddenFoods => 'Aliments strictement interdits';
+  String get hgForbiddenFoods => 'Strictly Forbidden Foods';
 
   @override
-  String get hgEmergencySymptoms =>
-      'Symptômes nécessitant une consultation immédiate';
+  String get hgEmergencySymptoms => 'Symptoms Requiring Immediate Vet Visit';
 
   @override
-  String get hgExerciseMentalHealth => 'Exercice et santé mentale';
+  String get hgExerciseMentalHealth => 'Exercise & Mental Health';
 
   @override
-  String get hgWalk => 'Promenade';
+  String get hgWalk => 'Walks';
 
   @override
-  String get hgDaily => 'Tous les jours';
+  String get hgDaily => 'Daily';
 
   @override
-  String get hgBreedExerciseAmount => 'Exercice recommandé selon la race';
+  String get hgBreedExerciseAmount => 'Recommended Exercise by Breed';
 
   @override
-  String get hgPlayBrainStimulation => 'Jeu et stimulation mentale';
+  String get hgPlayBrainStimulation => 'Play & Brain Stimulation';
 
   @override
-  String get hgStressSignals => 'Reconnaître les signes de stress';
+  String get hgStressSignals => 'Recognizing Stress Signals';
 
   @override
-  String get hgCaution => 'Attention';
+  String get hgCaution => 'Caution';
 
   @override
-  String get hgSocialization =>
-      'Socialisation et stimulation de l’environnement';
+  String get hgSocialization => 'Socialization & Environmental Stimulation';
 
   @override
   String get hgDogCoreDhppl =>
-      '**DHPPL (vaccin combiné)** — maladie de Carré, hépatite, parvovirose, parainfluenza et leptospirose.\n1re dose à 6–8 semaines, 3 doses espacées de 3–4 semaines, puis rappel annuel';
+      '**Vaccin CHPPi** — Maladie de Carré, Hépatite, Parvovirose, Parainfluenza, Leptospirose.\n1ère dose à 6-8 semaines, puis toutes les 3-4 semaines (3 doses au total), rappel annuel.';
 
   @override
   String get hgDogCoreRabies =>
-      '**Rage** — 1re dose après 3 mois, puis 1 fois par an (vaccination légalement obligatoire)';
+      '**Rage** — 1ère dose à partir de 3 mois, puis rappel annuel (obligatoire dans de nombreuses régions).';
 
   @override
   String get hgDogCoreCorona =>
-      '**Entérite à coronavirus** — début à 6–8 semaines, 2 doses espacées de 3–4 semaines, puis rappel annuel';
+      '**Coronavirus** — À partir de 6-8 semaines, 2 doses à 3-4 semaines d\'intervalle, rappel annuel.';
 
   @override
   String get hgDogNonCoreKennel =>
-      '**Toux du chenil** — recommandée en collectivité, lors de toilettage ou de garde en pension. Forme intranasale ou injectable';
+      '**Toux du chenil** — Recommandé pour les chiens allant en pension, au toilettage ou dans les parcs. Intranasal ou injection.';
 
   @override
   String get hgDogNonCoreFlu =>
-      '**Grippe canine** — recommandée en cas d’activités extérieures fréquentes ou de contacts réguliers avec d’autres chiens';
+      '**Grippe canine** — Recommandé en cas de forte activité en extérieur ou de contacts fréquents avec d\'autres chiens.';
 
   @override
   String get hgDogHeartworm1 =>
-      'Pendant et autour de la période d’activité des moustiques (mars à novembre), l’administration d’un préventif **1 fois par mois** est recommandée';
+      'Il est recommandé d\'administrer un traitement préventif **une fois par mois** pendant la saison des moustiques (environ de mars à novembre).';
 
   @override
   String get hgDogHeartworm2 =>
-      'L’infection est difficile à traiter et peut être mortelle — **la prévention est la meilleure solution**';
+      'En cas d\'infection, le traitement est difficile et peut être mortel — **la prévention est la meilleure méthode**.';
 
   @override
   String get hgDogHeartworm3 =>
-      'Avant l’administration, un test doit confirmer l’absence d’infection';
+      'Un test de dépistage (résultat négatif) est obligatoire avant de commencer le traitement.';
 
   @override
   String get hgDogHeartworm4 =>
-      'Une prévention toute l’année est encore plus sûre (recommandation vétérinaire)';
+      'Un traitement tout au long de l\'année est plus sûr (recommandé par les vétérinaires).';
 
   @override
   String get hgDogExternalParasites1 =>
-      'Administrer un traitement préventif spot-on ou oral **tous les mois**';
+      'Administrer un traitement préventif topique (pipette) ou oral **tous les mois**.';
 
   @override
   String get hgDogExternalParasites2 =>
-      'Après la promenade, vérifiez impérativement les oreilles, les espaces entre les doigts et les aisselles pour détecter les tiques';
+      'Après la promenade, vérifiez toujours l\'intérieur des oreilles, entre les coussinets et les aisselles pour détecter les tiques.';
 
   @override
   String get hgDogExternalParasites3 =>
-      'Pour retirer une tique, utilisez une pince et tirez lentement verticalement (ne pas tourner)';
+      'Pour retirer une tique, utilisez un tire-tique et tirez doucement à la verticale (ne pas tourner).';
 
   @override
   String get hgDogInternalParasites1 =>
-      'Ascaris, ankylostomes et trichures : vermifuge **tous les 3 à 6 mois**';
+      'Ascaris, ankylostomes, trichocéphales : Administrer un vermifuge **tous les 3 à 6 mois**.';
 
   @override
   String get hgDogInternalParasites2 =>
-      'Chez le chiot, dès 2 semaines : vermifuger 4 fois toutes les 2 semaines, puis assurer un suivi régulier';
+      'Chiots (dès 2 semaines) : Vermifuger toutes les 2 semaines (4 fois au total), puis entretien régulier.';
 
   @override
   String get hgDental1 =>
-      'Le brossage quotidien est idéal — au minimum **3 fois par semaine** recommandé';
+      'Un brossage quotidien est idéal — recommandé **au moins 3 fois par semaine**.';
 
   @override
   String get hgDental2 =>
-      'Utilisez impérativement un **dentifrice spécial animaux** (pas de dentifrice humain contenant du xylitol)';
+      'Utilisez toujours un **dentifrice spécial pour animaux** (le dentifrice humain contenant du xylitol est strictement interdit).';
 
   @override
   String get hgDental3 =>
-      'En cas de tartre important, un détartrage en clinique vétérinaire est nécessaire (sous anesthésie générale)';
+      'En cas de tartre important, un détartrage chez le vétérinaire est nécessaire (sous anesthésie générale).';
 
   @override
   String get hgDental4 =>
-      'Les friandises dentaires et jouets dentaires peuvent compléter les soins';
+      'Les friandises dentaires et les jouets à mâcher peuvent être utilisés comme soins complémentaires.';
 
   @override
   String get hgDogForbiddenFoodAlert =>
-      'Les aliments ci-dessous sont toxiques pour les chiens. Même de petites quantités peuvent être dangereuses : ne les donnez jamais.';
+      'Les aliments suivants sont toxiques pour les chiens. Même de petites quantités peuvent être mortelles, ne leur en donnez jamais.';
 
   @override
   String get hgDogForbiddenGrape =>
-      '**Raisins et raisins secs** — peuvent provoquer une insuffisance rénale, même une petite quantité peut être mortelle';
+      '**Raisins/Raisins secs** — Provoquent une insuffisance rénale, mortels même en petite quantité.';
 
   @override
   String get hgDogForbiddenChocolate =>
-      '**Chocolat et cacao** — intoxication à la théobromine, insuffisance cardiaque et convulsions';
+      '**Chocolat/Cacao** — Intoxication à la théobromine, insuffisance cardiaque, convulsions.';
 
   @override
   String get hgDogForbiddenOnion =>
-      '**Oignon, ail et ciboule** — destruction des globules rouges, anémie hémolytique';
+      '**Oignon/Poireau/Ail** — Détruisent les globules rouges, provoquant une anémie hémolytique.';
 
   @override
   String get hgDogForbiddenXylitol =>
-      '**Xylitol** — sécrétion excessive d’insuline, hypoglycémie et insuffisance hépatique';
+      '**Xylitol** — Sécrétion excessive d\'insuline, hypoglycémie, insuffisance hépatique.';
 
   @override
   String get hgDogForbiddenMacadamia =>
-      '**Noix de macadamia** — faiblesse musculaire, forte fièvre, vomissements';
+      '**Noix de macadamia** — Faiblesse musculaire, forte fièvre, vomissements.';
 
   @override
   String get hgDogForbiddenDoughAlcohol =>
-      '**Pâte crue et alcool** — intoxication à l’éthanol, hypoglycémie';
+      '**Pâte crue/Alcool** — Intoxication à l\'éthanol, hypoglycémie.';
 
   @override
   String get hgDogForbiddenAvocado =>
-      '**Avocat** — contient de la persine, pouvant provoquer vomissements et diarrhée';
+      '**Avocat** — Contient de la persine, provoque vomissements et diarrhées.';
 
   @override
   String get hgEmergencyAlert =>
-      'Si l’un des symptômes ci-dessous apparaît, consultez immédiatement une clinique vétérinaire.';
+      'Si les symptômes suivants apparaissent, consultez immédiatement un vétérinaire.';
 
   @override
   String get hgDogEmergency1 =>
-      'Perte totale d’appétit pendant plus de 24 heures';
+      'Perte totale d\'appétit pendant plus de 24 heures.';
 
   @override
   String get hgDogEmergency2 =>
-      'Vomissements ou diarrhée répétés 3 fois ou plus dans la journée';
+      'Vomissements ou diarrhées répétés 3 fois ou plus en une journée.';
 
   @override
   String get hgDogEmergency3 =>
-      'Abdomen gonflé et tentatives de vomir sans succès (suspicion de dilatation-torsion de l’estomac)';
+      'Ventre gonflé / tentatives de vomir sans résultat (suspicion de dilatation/torsion de l\'estomac).';
 
   @override
   String get hgDogEmergency4 =>
-      'Difficulté respiratoire, gencives pâles ou cyanose';
+      'Difficultés respiratoires, gencives pâles, cyanose.';
 
   @override
-  String get hgDogEmergency5 => 'Convulsions, crises ou perte de connaissance';
+  String get hgDogEmergency5 =>
+      'Convulsions, crises d\'épilepsie, perte de conscience.';
 
   @override
-  String get hgDogEmergency6 => 'Absence d’urine pendant plus de 12 heures';
+  String get hgDogEmergency6 => 'Absence d\'urine pendant plus de 12 heures.';
 
   @override
   String get hgDogEmergency7 =>
-      'Traumatisme visible, fracture ou saignement abondant';
+      'Traumatisme visible, fractures, saignements abondants.';
 
   @override
   String get hgDogExerciseAlert =>
-      'Chez le chien, le manque d’exercice n’est pas seulement un problème physique. Il peut être une cause majeure de stress, d’anxiété et de comportements destructeurs.';
+      'Le manque d\'exercice chez les chiens n\'est pas seulement un problème physique. C\'est la cause principale du stress, de l\'anxiété et des comportements destructeurs.';
 
   @override
   String get hgDogWalk1 =>
-      'Petits chiens : au moins **20 à 30 minutes** par jour ; chiens moyens et grands : **1 heure** ou plus recommandée';
+      'Petits chiens : recommandé au moins **20-30 minutes** par jour. Chiens moyens/grands : plus d\'**1 heure**.';
 
   @override
   String get hgDogWalk2 =>
-      'La promenade n’est pas seulement un moment pour faire ses besoins — c’est un temps de **stimulation olfactive, socialisation et détente**';
+      'La promenade n\'est pas seulement pour les besoins, mais pour la **stimulation olfactive, la socialisation et le soulagement du stress**.';
 
   @override
   String get hgDogWalk3 =>
-      'Laissez suffisamment de temps pour renifler — c’est très efficace pour réduire la fatigue mentale';
+      'Laissez-les renifler suffisamment — c\'est très efficace pour soulager la fatigue mentale.';
 
   @override
   String get hgDogWalk4 =>
-      'Attention aux brûlures sur l’asphalte en été — privilégiez les sorties avant 7 h ou le soir';
+      'Attention aux brûlures sur l\'asphalte en été — promenades recommandées avant 7h ou le soir.';
 
   @override
   String get hgDogPlay1 =>
-      '**Jeu de balle et tir à la corde** — dépense physique et renforcement du lien avec le maître';
+      '**Rapporter / Tirer à la corde** — Dépense l\'énergie et renforce le lien avec le maître.';
 
   @override
   String get hgDogPlay2 =>
-      '**Jeux de flair** — stimulation mentale, avec un effet proche de 30 minutes de promenade en seulement 15 minutes';
+      '**Jeux de flair (Nosework)** — Stimule le cerveau, 15 minutes équivalent à 30 minutes de promenade.';
 
   @override
   String get hgDogPlay3 =>
-      '**Jouets puzzle et Kong** — utiles pour réduire l’anxiété de séparation pendant les moments seul';
+      '**Jouets interactifs/Distributeurs** — Efficaces pour soulager l\'anxiété de séparation lorsqu\'ils sont seuls.';
 
   @override
   String get hgDogPlay4 =>
-      'Seulement **10 à 15 minutes** de jeu concentré par jour peuvent réduire nettement le stress';
+      'Seulement **10-15 minutes** de jeu concentré par jour peuvent réduire considérablement le niveau de stress.';
 
   @override
   String get hgDogStress1 =>
-      'Destruction de meubles ou d’objets, aboiements excessifs — signe possible de manque d’exercice ou de stimulation';
+      'Destruction de meubles ou d\'objets, aboiements excessifs — signes d\'un manque d\'exercice ou de stimulation.';
 
   @override
   String get hgDogStress2 =>
-      'Mordillage de la queue, léchage excessif des pattes ou du corps — comportement compulsif, tentative d’évacuer le stress';
+      'Se courir après la queue, léchage excessif (pattes ou corps) — comportement compulsif pour soulager le stress.';
 
   @override
   String get hgDogStress3 =>
-      'Anxiété excessive lors des départs du maître, accidents de propreté — suspicion d’anxiété de séparation';
+      'Anxiété excessive au départ du maître, malpropreté — suspicion d\'anxiété de séparation.';
 
   @override
   String get hgDogStress4 =>
-      'Si cela persiste, consultez un vétérinaire ou un spécialiste du comportement animal';
+      'Si les symptômes persistent, il est recommandé de consulter un vétérinaire ou un comportementaliste.';
 
   @override
   String get hgDogSocial1 =>
-      'Entre **3 et 14 semaines**, c’est la période clé de socialisation — l’exposition à diverses personnes, sons et environnements est importante';
+      'De **3 à 14 semaines** est la période d\'or de la socialisation — il est crucial de les exposer à diverses personnes, sons et environnements.';
 
   @override
   String get hgDogSocial2 =>
-      'Interactions avec d’autres chiens — parcs canins ou cours pour chiots peuvent aider';
+      'Interaction avec d\'autres chiens — profitez des parcs canins ou des cours pour chiots.';
 
   @override
   String get hgDogSocial3 =>
-      'Découvrir de nouveaux lieux, odeurs et sons contribue au bien-être mental';
+      'Découvrir de nouveaux lieux, odeurs et sons contribue à l\'enrichissement mental.';
 
   @override
   String get hgDogSocial4 =>
-      'Le renforcement positif (clicker, friandises) stimule le cerveau et renforce le lien en même temps';
+      'L\'éducation par renforcement positif (clicker, friandises) stimule le cerveau et renforce le lien simultanément.';
 
   @override
   String get hgCatCoreFvrcp =>
-      '**FVRCP (vaccin combiné)** — herpèsvirus félin, calicivirus et panleucopénie féline.\n1re dose à 6–8 semaines, 3 doses espacées de 3–4 semaines, puis rappel tous les 1 à 3 ans';
+      '**Typhus/Coryza (FVRCP)** — Herpèsvirus, Calicivirus, Parvovirus (Panleucopénie).\n1ère dose à 6-8 semaines, puis toutes les 3-4 semaines (3 doses au total), rappel tous les 1 à 3 ans.';
 
   @override
   String get hgCatCoreRabies =>
-      '**Rage** — indispensable pour les chats qui sortent, également recommandée pour les chats d’intérieur (obligatoire selon la loi)';
+      '**Rage** — Obligatoire pour les chats sortant, recommandé pour les chats d\'intérieur (obligatoire dans de nombreuses régions).';
 
   @override
   String get hgCatNonCoreFelv =>
-      '**Leucémie féline (FeLV)** — fortement recommandée pour les chats qui sortent et les foyers avec plusieurs chats';
+      '**Leucose féline (FeLV)** — Fortement recommandé pour les chats sortant ou vivant avec d\'autres chats.';
 
   @override
   String get hgCatNonCoreChlamydia =>
-      '**Chlamydia féline** — prévention de la conjonctivite en environnement multi-chats';
+      '**Chlamydiose féline** — Dans les environnements à plusieurs chats, prévient la conjonctivite.';
 
   @override
   String get hgCatNonCoreFiv =>
-      '**Virus de l’immunodéficience féline (FIV)** — surtout chez les mâles qui sortent, transmission par morsures lors de bagarres';
+      '**FIV (Sida du chat)** — Pour les chats mâles sortant (se transmet par morsure).';
 
   @override
   String get hgCatExternalParasites1 =>
-      'Chats qui sortent : prévention contre puces et tiques **1 fois par mois**';
+      'Chats sortant : Administrer un traitement préventif contre les puces/tiques **une fois par mois**.';
 
   @override
   String get hgCatExternalParasites2 =>
-      'Même les chats d’intérieur peuvent être exposés aux puces ramenées par les vêtements ou chaussures → prévention recommandée **tous les 3 mois**';
+      'Même les chats d\'intérieur peuvent attraper des puces via les vêtements ou chaussures → prévention recommandée **tous les 3 mois**.';
 
   @override
   String get hgCatExternalParasites3 =>
-      'Avec les produits spot-on, appliquez correctement sur la nuque';
+      'Lors de l\'utilisation de pipettes, appliquez précisément à la base du cou.';
 
   @override
-  String get hgCatInternalHeartworm => 'Parasites internes et dirofilariose';
+  String get hgCatInternalHeartworm => 'Parasites internes et Ver du cœur';
 
   @override
   String get hgCatInternalParasites1 =>
-      'Ascaris et ténias : vermifuge **tous les 3 à 6 mois**';
+      'Ascaris/Ténias : Administrer un vermifuge **tous les 3 à 6 mois**.';
 
   @override
   String get hgCatInternalParasites2 =>
-      'En cas d’alimentation crue (viande ou poisson cru), des contrôles plus fréquents sont recommandés';
+      'En cas d\'alimentation à base de viande ou de poisson cru, des contrôles plus fréquents sont recommandés.';
 
   @override
   String get hgCatHeartworm1 =>
-      'Dirofilariose — chez le chat, **il n’existe pas de traitement spécifique, la prévention est donc la seule solution**. Une prévention mensuelle est fortement recommandée pour les chats qui sortent';
+      'Ver du cœur — **Aucun traitement pour les chats, la prévention est la seule méthode**. Traitement mensuel fortement recommandé pour les chats sortant.';
 
   @override
-  String get hgCatMajorDiseases => 'Principales maladies du chat à surveiller';
+  String get hgCatMajorDiseases => 'Principales maladies félines à surveiller';
 
   @override
   String get hgCatDiseaseAlert =>
-      'Les chats ont tendance à cacher la douleur et la maladie ; lorsque des symptômes apparaissent, l’affection est souvent déjà avancée. Les bilans réguliers sont particulièrement importants.';
+      'Les chats cachent très bien leur douleur, les symptômes apparaissent souvent quand la maladie est déjà avancée. Les bilans de santé réguliers sont essentiels.';
 
   @override
   String get hgCatDiseaseFlutd =>
-      '**Maladie du bas appareil urinaire félin (FLUTD)** — fréquente chez les mâles. Si le chat n’urine pas, c’est une urgence immédiate';
+      '**Maladie du bas appareil urinaire (SUAF/FLUTD)** — Fréquente chez les mâles. L\'incapacité d\'uriner est une urgence absolue.';
 
   @override
   String get hgCatDiseaseCkd =>
-      '**Maladie rénale chronique (MRC)** — l’une des principales causes de décès chez les chats âgés. Dès 7 ans, un contrôle régulier des paramètres rénaux est indispensable';
+      '**Maladie rénale chronique (MRC)** — Première cause de mortalité chez les chats âgés. Des analyses de sang régulières sont essentielles après 7 ans.';
 
   @override
   String get hgCatDiseaseDiabetes =>
-      '**Diabète félin** — risque accru chez les chats obèses ou âgés. Surveillez l’augmentation de la soif et des urines';
+      '**Diabète félin** — Risque accru chez les chats obèses ou âgés. Surveillez toute augmentation de la soif et de l\'urine.';
 
   @override
   String get hgCatDiseaseHyperthyroidism =>
-      '**Hyperthyroïdie** — fréquente après 10 ans. Surveillez perte de poids, appétit augmenté et hyperactivité';
+      '**Hyperthyroïdie** — Fréquente chez les chats de plus de 10 ans. Les symptômes incluent perte de poids, appétit vorace et agitation.';
 
   @override
   String get hgCatDiseaseStomatitis =>
-      '**Stomatite** — très fréquente chez le chat. Mauvaise haleine, salivation ou perte d’appétit nécessitent un examen';
+      '**Stomatite** — Maladie très courante chez les chats. Surveillez la mauvaise haleine, la bave ou la perte d\'appétit.';
 
   @override
   String get hgCatDiseaseFhv =>
-      '**Herpèsvirus félin (FHV-1)** — après infection, il reste latent à vie. Le stress peut provoquer des rechutes : éternuements, sécrétions oculaires, conjonctivite';
+      '**Herpèsvirus félin (FHV-1)** — Le virus reste latent à vie après l\'infection. Réapparaît lors de stress, provoquant éternuements, écoulements oculaires et conjonctivite.';
 
   @override
-  String get hgHydrationDiet => 'Hydratation et gestion alimentaire';
+  String get hgHydrationDiet => 'Hydratation et gestion de l\'alimentation';
 
   @override
   String get hgCatHydrationAlert =>
-      'Les chats boivent naturellement peu et sont vulnérables aux maladies urinaires. Favoriser l’hydratation est très important.';
+      'Les chats boivent naturellement peu, ce qui les rend sujets aux maladies urinaires. Il est très important de les encourager à boire.';
 
   @override
   String get hgCatHydration1 =>
-      'L’association avec de la nourriture humide (boîtes ou sachets) est recommandée pour augmenter l’apport en eau';
+      'Il est recommandé de combiner avec de la nourriture humide (pâtée ou sachet) pour compléter l\'hydratation.';
 
   @override
   String get hgCatHydration2 =>
-      'Les chats préfèrent souvent l’eau qui coule — une **fontaine à eau** peut être efficace';
+      'Ils préfèrent l\'eau en mouvement — installer une **fontaine à eau** est très efficace.';
 
   @override
   String get hgCatHydration3 =>
-      'Placez la gamelle d’eau séparément de la nourriture ; les chats préfèrent souvent les récipients larges et peu profonds';
+      'Éloignez le bol d\'eau de la gamelle de nourriture ; ils préfèrent les bols larges et peu profonds.';
 
   @override
   String get hgCatHydration4 =>
-      'Objectif d’apport hydrique : environ **40 à 60 ml** par kg de poids corporel par jour';
+      'Objectif d\'hydratation : environ **40-60 ml** par kg de poids corporel par jour.';
 
   @override
   String get hgCatForbiddenFoodAlert =>
-      'Les aliments ci-dessous sont toxiques pour les chats. Même de petites quantités peuvent être dangereuses : ne les donnez jamais.';
+      'Les aliments suivants sont toxiques pour les chats. Même de petites quantités peuvent être mortelles, ne leur en donnez jamais.';
 
   @override
   String get hgCatForbiddenOnion =>
-      '**Oignon, ail et ciboule** — destruction des globules rouges, anémie hémolytique (les chats sont encore plus sensibles que les chiens)';
+      '**Oignon/Poireau/Ail** — Détruisent les globules rouges, provoquant une anémie hémolytique (plus sensibles que les chiens).';
 
   @override
   String get hgCatForbiddenGrape =>
-      '**Raisins et raisins secs** — peuvent provoquer une insuffisance rénale';
+      '**Raisins/Raisins secs** — Provoquent une insuffisance rénale.';
 
   @override
   String get hgCatForbiddenChocolate =>
-      '**Chocolat et caféine** — toxicité cardiaque et neurologique';
+      '**Chocolat/Caféine** — Toxiques pour le cœur et le système nerveux.';
 
   @override
   String get hgCatForbiddenRawFish =>
-      '**Poisson cru donné régulièrement** — peut entraîner une carence en thiamine (vitamine B1)';
+      '**Poisson cru (alimentation continue)** — Provoque une carence en thiamine (Vitamine B1).';
 
   @override
   String get hgCatForbiddenMilk =>
-      '**Lait et produits laitiers** — intolérance au lactose fréquente chez le chat adulte, diarrhée possible';
+      '**Lait/Produits laitiers** — Les chats adultes sont intolérants au lactose, ce qui provoque des diarrhées.';
 
   @override
   String get hgCatForbiddenXylitolAlcohol =>
-      '**Xylitol et alcool** — toxicité hépatique et neurologique';
+      '**Xylitol/Alcool** — Toxiques pour le foie et le système nerveux.';
 
   @override
   String get hgCatForbiddenAvocado =>
-      '**Avocat** — contient de la persine, pouvant provoquer vomissements et diarrhée';
+      '**Avocat** — Contient de la persine, provoque vomissements et diarrhées.';
 
   @override
   String get hgCatForbiddenRawEggWhite =>
-      '**Blanc d’œuf cru** — l’avidine bloque la biotine, pouvant entraîner des problèmes de peau et de pelage';
+      '**Blanc d\'œuf cru** — L\'avidine bloque l\'absorption de la biotine, causant des problèmes de peau et de pelage.';
 
   @override
   String get hgCatEmergency1 =>
-      '**Impossible d’uriner ou présence de sang dans les urines** — obstruction urétrale urgente, surtout chez les mâles';
+      '**Incapacité totale d\'uriner ou sang dans l\'urine** — Urgence pour obstruction urétrale (surtout chez les mâles).';
 
   @override
   String get hgCatEmergency2 =>
-      'Perte totale d’appétit pendant plus de 24 heures (risque de lipidose hépatique)';
+      'Perte totale d\'appétit pendant plus de 24 heures (risque de lipidose hépatique).';
 
   @override
   String get hgCatEmergency3 =>
-      '**Respiration bouche ouverte** — jamais normale chez le chat, urgence immédiate';
+      '**Respiration la bouche ouverte** — N\'est jamais normal chez le chat, nécessite des soins d\'urgence immédiats.';
 
   @override
   String get hgCatEmergency4 =>
-      'Paralysie soudaine ou froideur des pattes arrière (suspicion de thromboembolie)';
+      'Paralysie soudaine ou froideur des pattes arrière (suspicion de thrombose).';
 
   @override
-  String get hgCatEmergency5 => 'Convulsions, crises ou perte de connaissance';
+  String get hgCatEmergency5 =>
+      'Convulsions, crises d\'épilepsie, perte de conscience.';
 
   @override
   String get hgCatEmergency6 =>
-      'Gencives ou langue pâles, ou jaunissement/ictère';
+      'Gencives ou langue pâles, ou jaunâtres (ictère).';
 
   @override
   String get hgCatEmergency7 =>
-      'Vomissements ou diarrhée 3 fois ou plus dans la journée, ou sang dans les selles/vomissements';
+      'Vomissements ou diarrhées répétés 3 fois ou plus en une journée, ou sang dans les selles/vomissements.';
 
   @override
   String get hgCatEmergency8 =>
-      'Traumatisme visible, fracture ou saignement abondant';
+      'Traumatisme visible, fractures, saignements abondants.';
 
   @override
   String get hgEnvironmentMentalHealth => 'Environnement et santé mentale';
 
   @override
-  String get hgIndoorEnvironment => 'Gestion de l’environnement intérieur';
+  String get hgIndoorEnvironment => 'Gestion de l\'environnement intérieur';
 
   @override
   String get hgStressManagement => 'Gestion du stress';
 
   @override
   String get hgCatEnvironment1 =>
-      '**Litières** : nombre de chats + 1 minimum, nettoyage quotidien';
+      '**Bacs à litière** : Au moins le nombre de chats + 1, à garder propres tous les jours.';
 
   @override
   String get hgCatEnvironment2 =>
-      '**Griffoirs** : au moins 2, en combinant modèles verticaux et horizontaux';
+      '**Grattoirs** : Au moins 2 ou plus (combinaison de types verticaux et horizontaux).';
 
   @override
   String get hgCatEnvironment3 =>
-      '**Espaces en hauteur** : arbre à chat, étagères ou espaces verticaux pour satisfaire l’instinct territorial';
+      '**Espaces en hauteur** : Fournissez des espaces verticaux comme des arbres à chat ou des étagères (satisfait l\'instinct territorial).';
 
   @override
   String get hgCatEnvironment4 =>
-      '**Cachettes** : cartons, tunnels ou lieux sûrs où le chat peut se cacher';
+      '**Cachettes** : Fournissez des espaces sûrs pour se cacher, comme des boîtes ou des tunnels.';
 
   @override
   String get hgCatStress1 =>
-      'Le stress chez le chat est directement lié à une baisse d’immunité, au FLUTD et aux récidives d’herpèsvirus';
+      'Le stress chez le chat entraîne directement une baisse de l\'immunité, des maladies urinaires, la récurrence de l\'herpès, etc.';
 
   @override
   String get hgCatStress2 =>
-      'Lors de changements brusques d’environnement (déménagement, nouveau membre de la famille), l’usage d’un diffuseur de phéromones (Feliway) peut aider';
+      'Lors de changements soudains (déménagement, nouveaux membres, etc.), utilisez des diffuseurs de phéromones (Feliway).';
 
   @override
   String get hgCatStress3 =>
-      'Prévoir au moins **10 à 15 minutes par jour** de jeu avec des jouets';
+      'Assurez au moins **10-15 minutes** de jeu interactif avec une canne à pêche chaque jour.';
 
   @override
   String get hgCatStress4 =>
-      'Foyers multi-chats : séparez les ressources (gamelles, litières, couchages) selon le nombre de chats';
+      'Foyers multi-chats : Séparez les ressources (gamelles, litières, lits) en fonction du nombre de chats.';
 
   @override
   String get hgAge => 'Âge';
 
   @override
-  String get hgCheckupCycle => 'Fréquence du bilan';
+  String get hgCheckupCycle => 'Fréquence des bilans';
 
   @override
-  String get hgMainItems => 'Points principaux';
+  String get hgMainItems => 'Examens principaux';
 
   @override
   String get hgAge1to6 => '1 à 6 ans';
@@ -2706,11 +2720,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hgYearlyTwice => '2 fois par an';
 
   @override
-  String get hgEvery3to4Months => 'Tous les 3 à 4 mois';
+  String get hgEvery3to4Months => 'Tous les 3-4 mois';
 
   @override
   String get hgDogCheckupItems1 =>
-      'Analyse sanguine, auscultation cardiaque, poids, dents';
+      'Analyse de sang, auscultation cardiaque, poids, dents';
 
   @override
   String get hgDogCheckupItems2 =>
@@ -2718,42 +2732,42 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get hgDogCheckupItems3 =>
-      'Bilan sanguin complet, échographie, fonctions rénale et hépatique';
+      'Bilan sanguin complet, échographie, fonction rénale/hépatique';
 
   @override
   String get hgCatCheckupItems1 =>
-      'Analyse sanguine, analyse d’urine, poids, dents';
+      'Analyse de sang, analyse d\'urine, poids, dents';
 
   @override
   String get hgCatCheckupItems2 =>
-      'Paramètres rénaux et hépatiques, tension artérielle, thyroïde (T4)';
+      'Bilan rénal/hépatique, tension artérielle, thyroïde (T4)';
 
   @override
   String get hgCatCheckupItems3 =>
-      'Bilan sanguin complet, échographie abdominale, surveillance renforcée des reins';
+      'Bilan sanguin complet, échographie abdominale, suivi rénal intensif';
 
   @override
-  String get hgExerciseAmount => 'Niveau d’exercice';
+  String get hgExerciseAmount => 'Niveau d\'exercice';
 
   @override
-  String get hgBreedExamples => 'Exemples de races';
+  String get hgBreedExamples => 'Races représentatives';
 
   @override
   String get hgLow => 'Faible';
 
   @override
-  String get hgNormal => 'Modéré';
+  String get hgNormal => 'Normal';
 
   @override
   String get hgHigh => 'Élevé';
 
   @override
   String get hgBreedLowExamples =>
-      'Bouledogue, Basset Hound, Shih Tzu, Bichon maltais';
+      'Bouledogue, Basset Hound, Shih Tzu, Bichon Maltais';
 
   @override
   String get hgBreedNormalExamples =>
-      'Caniche, Bichon frisé, Cocker Spaniel, Beagle';
+      'Caniche, Bichon à poil frisé, Cocker, Beagle';
 
   @override
   String get hgBreedHighExamples =>
@@ -2761,16 +2775,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get hgDisclaimer =>
-      'Ce guide fournit des informations générales de santé, et les soins nécessaires peuvent varier selon l’état de chaque animal. En cas de symptômes anormaux ou de besoin de traitement, consultez impérativement un vétérinaire.';
+      'Ce guide fournit des informations générales sur la santé. Les soins nécessaires peuvent varier selon l\'état spécifique de votre animal. En cas de symptômes anormaux ou de besoin de traitement, consultez toujours un vétérinaire.';
 
   @override
-  String get categoryFilter => 'Filtre de Catégorie';
+  String get categoryFilter => 'Filtre de catégories';
 
   @override
-  String get selectAll => 'Tout Sélectionner';
+  String get selectAll => 'Tout sélectionner';
 
   @override
-  String get deselectAll => 'Tout Désélectionner';
+  String get deselectAll => 'Tout désélectionner';
 
   @override
   String get apply => 'Appliquer';
@@ -2782,7 +2796,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get treatmentContent => 'Traitement';
 
   @override
-  String get conditionScoreWord1 => 'Exécrable';
+  String get conditionScoreWord1 => 'Très mauvais';
 
   @override
   String get conditionScoreWord2 => 'Mauvais';
@@ -2794,10 +2808,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get conditionScoreWord4 => 'Bon';
 
   @override
-  String get conditionScoreWord5 => 'Excellent';
+  String get conditionScoreWord5 => 'Très bon';
 
   @override
   String conditionScoreFormat(Object score, Object word) {
-    return 'Condition $score pts - $word';
+    return 'Score $score - $word';
   }
 }

@@ -81,7 +81,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get toastBackToExit => 'Press again to exit the app';
+  String get toastBackToExit => 'Tap again to exit';
 
   @override
   String get toastNeedPet => 'No pet yet. Please add one from Profile first.';
@@ -221,7 +221,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorDbInit =>
-      'There was a problem preparing app data.\nPlease try again later.';
+      'We had a problem preparing the app data.\nPlease try again in a moment.';
 
   @override
   String get help => 'Help';
@@ -426,7 +426,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vaccineNameRequired => 'Vaccine name *';
 
   @override
-  String get vaccineNameExample => 'e.g. Rabies, combo vaccine';
+  String get vaccineNameExample => 'e.g. Rabies, Combo vaccine';
 
   @override
   String get scheduledDateRequired => 'Date *';
@@ -447,7 +447,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get visitPurposeRequired => 'Visit purpose *';
 
   @override
-  String get visitPurposeExample => 'e.g. Checkup, skin treatment';
+  String get visitPurposeExample => 'e.g. Checkup, Skin treatment';
 
   @override
   String get appointmentDateTimeRequired => 'Appointment date and time *';
@@ -462,7 +462,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get medicineNameRequired => 'Medicine name *';
 
   @override
-  String get medicineNameExample => 'e.g. Heartworm, dewormer';
+  String get medicineNameExample => 'e.g. Heartworm, Dewormer';
 
   @override
   String get doseExample => 'e.g. 0.5ml, 1 tablet';
@@ -504,7 +504,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get alarmNameRequired => 'Alert name *';
 
   @override
-  String get mealTimeExample => 'e.g. Breakfast, dinner';
+  String get mealTimeExample => 'e.g. Breakfast, Dinner';
 
   @override
   String get mealTimeRequired => 'Meal time *';
@@ -1339,7 +1339,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get name => 'Name';
 
   @override
-  String get petKind => 'Type';
+  String get petKind => 'Species';
 
   @override
   String get breed => 'Breed';
@@ -1542,7 +1542,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contactViaSendFeedbackLong =>
-      'If you contact us via the [Send feedback] button in Settings,\nwe will respond as quickly as possible.';
+      'Please contact us via the [Send feedback] button in Settings,\nand we\'ll get back to you as soon as possible.';
 
   @override
   String get privacyPolicyEffectiveDate =>

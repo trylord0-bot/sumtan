@@ -150,6 +150,11 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     String text(String key) => _ctrl(key).text.trim();
 
     switch (category) {
+      case 'poop':
+        if (data['type'] != '소변') {
+          data['type'] = '대변';
+        }
+        break;
       case 'medication':
         if (text('medicine').isEmpty || text('dose').isEmpty) {
           showTopToast(context, context.l10n.hintMedicineAndDose);
@@ -416,12 +421,14 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     final l10n = context.l10n;
     switch (widget.record.category) {
       case 'poop':
+        final selectedType =
+            _data['type'] == '소변' ? _data['type'] as String : '대변';
         return [
           FormSegmentRow(
             label: l10n.poopType,
-            options: const ['대변', '소변', '구토'],
-            optionLabels: [l10n.stool, l10n.urine, l10n.vomiting],
-            selected: _data['type'] as String? ?? '대변',
+            options: const ['대변', '소변'],
+            optionLabels: [l10n.stool, l10n.urine],
+            selected: selectedType,
             onChanged: (v) => _setData('type', v),
           ),
           const SizedBox(height: AppSpacing.space4),

@@ -14,7 +14,7 @@ String buildRecordSubtitle(BuildContext context, Record record) {
   switch (record.category) {
     case 'poop':
       return [
-        _localizedRecordValue(l10n, data['type']),
+        _localizedPoopType(l10n, data['type']),
         _localizedRecordValue(l10n, data['status']),
       ].where((s) => s.isNotEmpty).join(' · ');
     case 'condition':
@@ -138,6 +138,14 @@ String _localizedRecordList(AppLocalizations l10n, Object? raw) {
       .map((value) => _localizedRecordValue(l10n, value))
       .where((label) => label.isNotEmpty)
       .join(', ');
+}
+
+String _localizedPoopType(AppLocalizations l10n, Object? raw) {
+  return switch (raw?.toString()) {
+    '대변' => l10n.stool,
+    '소변' => l10n.urine,
+    _ => '',
+  };
 }
 
 String _localizedRecordValue(AppLocalizations l10n, Object? raw) {

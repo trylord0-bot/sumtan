@@ -74,8 +74,8 @@ class _PoopFormState extends ConsumerState<PoopForm> {
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
           label: l10n.poopType,
-          options: const ['대변', '소변', '구토'],
-          optionLabels: [l10n.feces, l10n.urine, l10n.vomiting],
+          options: const ['대변', '소변'],
+          optionLabels: [l10n.feces, l10n.urine],
           selected: _type,
           onChanged: (v) => setState(() => _type = v),
         ),

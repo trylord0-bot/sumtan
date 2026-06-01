@@ -685,10 +685,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get normal => '普通';
 
   @override
-  String get loose => '軟便';
+  String get loose => '形の異常';
 
   @override
-  String get hard => '硬い';
+  String get hard => '色の異常';
 
   @override
   String get bloodInStool => '血便';

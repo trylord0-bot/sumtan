@@ -60,6 +60,15 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
     '매우 많음': 'very_much',
   };
 
+  static String _normalizePoopStatus(Object? value) {
+    return switch (value?.toString()) {
+      '묽음' => '형태이상',
+      '딱딱함' => '색상이상',
+      '형태이상' || '색상이상' || '혈변' => value.toString(),
+      _ => '정상',
+    };
+  }
+
   @override
   void initState() {
     super.initState();
@@ -154,6 +163,7 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
         if (data['type'] != '소변') {
           data['type'] = '대변';
         }
+        data['status'] = _normalizePoopStatus(data['status']);
         break;
       case 'medication':
         if (text('medicine').isEmpty || text('dose').isEmpty) {
@@ -434,14 +444,14 @@ class _RecordEditSheetState extends ConsumerState<RecordEditSheet> {
           const SizedBox(height: AppSpacing.space4),
           FormSegmentRow(
             label: l10n.poopStatus,
-            options: const ['정상', '묽음', '딱딱함', '혈변'],
+            options: const ['정상', '형태이상', '색상이상', '혈변'],
             optionLabels: [
               l10n.normal,
               l10n.loose,
               l10n.hard,
               l10n.bloodInStool
             ],
-            selected: _data['status'] as String? ?? '정상',
+            selected: _normalizePoopStatus(_data['status']),
             onChanged: (v) => _setData('status', v),
           ),
         ];

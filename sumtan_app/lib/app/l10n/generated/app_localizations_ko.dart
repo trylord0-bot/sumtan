@@ -684,10 +684,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get normal => '정상';
 
   @override
-  String get loose => '묽음';
+  String get loose => '모양 이상';
 
   @override
-  String get hard => '딱딱함';
+  String get hard => '색 이상';
 
   @override
   String get bloodInStool => '혈변';

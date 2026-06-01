@@ -702,10 +702,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get normal => 'Normal';
 
   @override
-  String get loose => 'Mou';
+  String get loose => 'Forme anormale';
 
   @override
-  String get hard => 'Dur';
+  String get hard => 'Couleur anormale';
 
   @override
   String get bloodInStool => 'Sang dans les selles';

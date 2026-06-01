@@ -912,13 +912,13 @@
   "@normal": {
     "description": "Normal label"
   },
-  "loose": "Loose",
+  "loose": "Shape issue",
   "@loose": {
-    "description": "Loose label"
+    "description": "Abnormal stool shape label"
   },
-  "hard": "Hard",
+  "hard": "Color issue",
   "@hard": {
-    "description": "Hard label"
+    "description": "Abnormal stool color label"
   },
   "bloodInStool": "Blood in stool",
   "@bloodInStool": {

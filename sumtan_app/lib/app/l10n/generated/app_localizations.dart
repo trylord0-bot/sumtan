@@ -1422,16 +1422,16 @@ abstract class AppLocalizations {
   /// **'Normal'**
   String get normal;
 
-  /// Loose label
+  /// Abnormal stool shape label
   ///
   /// In en, this message translates to:
-  /// **'Loose'**
+  /// **'Shape issue'**
   String get loose;
 
-  /// Hard label
+  /// Abnormal stool color label
   ///
   /// In en, this message translates to:
-  /// **'Hard'**
+  /// **'Color issue'**
   String get hard;
 
   /// Blood in stool label

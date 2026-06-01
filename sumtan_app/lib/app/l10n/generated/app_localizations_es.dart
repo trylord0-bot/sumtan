@@ -701,10 +701,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get normal => 'Normal';
 
   @override
-  String get loose => 'Blando';
+  String get loose => 'Forma anormal';
 
   @override
-  String get hard => 'Duro';
+  String get hard => 'Color anormal';
 
   @override
   String get bloodInStool => 'Sangre en heces';

@@ -691,10 +691,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get normal => 'Normal';
 
   @override
-  String get loose => 'Loose';
+  String get loose => 'Shape issue';
 
   @override
-  String get hard => 'Hard';
+  String get hard => 'Color issue';
 
   @override
   String get bloodInStool => 'Blood in stool';

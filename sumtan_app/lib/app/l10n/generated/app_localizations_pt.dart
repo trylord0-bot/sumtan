@@ -700,10 +700,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get normal => 'Normal';
 
   @override
-  String get loose => 'Mole';
+  String get loose => 'Forma anormal';
 
   @override
-  String get hard => 'Duro';
+  String get hard => 'Cor anormal';
 
   @override
   String get bloodInStool => 'Sangue nas fezes';

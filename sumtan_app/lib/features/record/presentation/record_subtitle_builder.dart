@@ -157,6 +157,8 @@ String _localizedRecordValue(AppLocalizations l10n, Object? raw) {
     '소변' => l10n.urine,
     '구토' => l10n.vomiting,
     '정상' => l10n.normal,
+    '형태이상' => l10n.loose,
+    '색상이상' => l10n.hard,
     '묽음' => l10n.loose,
     '딱딱함' => l10n.hard,
     '혈변' => l10n.bloodInStool,

@@ -680,10 +680,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get normal => '正常';
 
   @override
-  String get loose => '软便';
+  String get loose => '形状异常';
 
   @override
-  String get hard => '干硬';
+  String get hard => '颜色异常';
 
   @override
   String get bloodInStool => '便血';
@@ -3283,10 +3283,10 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get normal => '正常';
 
   @override
-  String get loose => '软便';
+  String get loose => '形状异常';
 
   @override
-  String get hard => '干硬';
+  String get hard => '颜色异常';
 
   @override
   String get bloodInStool => '便血';
@@ -5811,10 +5811,10 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get normal => '正常';
 
   @override
-  String get loose => '軟便';
+  String get loose => '形狀異常';
 
   @override
-  String get hard => '硬便';
+  String get hard => '顏色異常';
 
   @override
   String get bloodInStool => '血便';

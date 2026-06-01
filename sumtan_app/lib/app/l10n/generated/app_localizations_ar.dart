@@ -693,10 +693,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get normal => 'طبيعي';
 
   @override
-  String get loose => 'رخو';
+  String get loose => 'مشكلة في الشكل';
 
   @override
-  String get hard => 'صلب';
+  String get hard => 'مشكلة في اللون';
 
   @override
   String get bloodInStool => 'دم في البراز';

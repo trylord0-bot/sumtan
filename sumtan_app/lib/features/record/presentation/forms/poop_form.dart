@@ -82,7 +82,7 @@ class _PoopFormState extends ConsumerState<PoopForm> {
         const SizedBox(height: AppSpacing.space4),
         FormSegmentRow(
           label: l10n.poopStatus,
-          options: const ['정상', '묽음', '딱딱함', '혈변'],
+          options: const ['정상', '형태이상', '색상이상', '혈변'],
           optionLabels: [l10n.normal, l10n.loose, l10n.hard, l10n.bloody],
           selected: _status,
           onChanged: (v) => setState(() => _status = v),

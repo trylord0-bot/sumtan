@@ -10,6 +10,7 @@ import '../../../app/widgets/app_toast.dart';
 import '../../../features/alarm/provider/alarm_provider.dart';
 import '../../../features/pet/provider/pet_provider.dart';
 import '../../../features/record/provider/record_provider.dart';
+import '../data/export_service.dart';
 import '../provider/export_provider.dart';
 import '../provider/import_provider.dart';
 import '../provider/purchase_provider.dart';
@@ -339,11 +340,13 @@ class _ExportSheet extends ConsumerStatefulWidget {
 
 class _ExportSheetState extends ConsumerState<_ExportSheet> {
   bool _exporting = false;
+  String? _sharingPath;
   final _exportButtonKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     final purchaseState = ref.watch(purchaseProvider);
+    final exportState = ref.watch(exportProvider);
     final l10n = context.l10n;
 
     ref.listen<PurchaseState>(purchaseProvider, (_, next) {
@@ -360,30 +363,36 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
         color: AppColors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.88,
+      ),
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 36),
       child: SafeArea(
         top: false,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Handle
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 18),
-                decoration: BoxDecoration(
-                  color: AppColors.gray300,
-                  borderRadius: BorderRadius.circular(9999),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Handle
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 18),
+                  decoration: BoxDecoration(
+                    color: AppColors.gray300,
+                    borderRadius: BorderRadius.circular(9999),
+                  ),
                 ),
               ),
-            ),
-            if (purchaseState.isUnlocked)
-              ..._buildUnlockedContent()
-            else
-              ..._buildLockedContent(purchaseState, l10n),
-          ],
+              if (purchaseState.isUnlocked)
+                ..._buildUnlockedContent(exportState.history)
+              else
+                ..._buildLockedContent(
+                    purchaseState, l10n, exportState.history),
+            ],
+          ),
         ),
       ),
     );
@@ -391,7 +400,11 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
 
   // ── 잠금 해제 전 UI ─────────────────────────────────────────────────────────
 
-  List<Widget> _buildLockedContent(PurchaseState ps, AppLocalizations l10n) {
+  List<Widget> _buildLockedContent(
+    PurchaseState ps,
+    AppLocalizations l10n,
+    List<ExportHistoryItem> history,
+  ) {
     final isBusy = ps.status == IapStatus.loading;
     final notAvailable = ps.status == IapStatus.notAvailable;
     final priceLabel = ps.product?.price ?? '3,000원';
@@ -406,6 +419,8 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
         ),
       ),
       const SizedBox(height: 14),
+      ..._buildHistorySection(history),
+      if (history.isNotEmpty) const SizedBox(height: 18),
 
       // 혜택 카드
       Container(
@@ -506,7 +521,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
                     ),
                   )
                 : Text(
-                    l10n.settingsPayAndExport(priceLabel),
+                    '새 데이터 ${l10n.settingsPayAndExport(priceLabel)}',
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
@@ -539,7 +554,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
 
   // ── 잠금 해제 후 UI ─────────────────────────────────────────────────────────
 
-  List<Widget> _buildUnlockedContent() {
+  List<Widget> _buildUnlockedContent(List<ExportHistoryItem> history) {
     final l10n = context.l10n;
     return [
       Row(
@@ -585,6 +600,8 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
             fontSize: 13, color: AppColors.gray500, height: 1.65),
       ),
       const SizedBox(height: 20),
+      ..._buildHistorySection(history),
+      if (history.isNotEmpty) const SizedBox(height: 18),
       SizedBox(
         key: _exportButtonKey,
         height: 50,
@@ -599,7 +616,7 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
           ),
           onPressed: _exporting ? null : _startExport,
           child: Text(
-            _exporting ? l10n.settingsExporting : l10n.settingsExportZip,
+            _exporting ? l10n.settingsExporting : '새 백업 ZIP 만들기',
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
           ),
         ),
@@ -623,6 +640,80 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
         ),
       ),
     ];
+  }
+
+  List<Widget> _buildHistorySection(List<ExportHistoryItem> history) {
+    if (history.isEmpty) return const [];
+
+    return [
+      const Text(
+        '이전 내보내기',
+        style: TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.w700,
+          color: AppColors.gray800,
+        ),
+      ),
+      const SizedBox(height: 8),
+      Container(
+        decoration: BoxDecoration(
+          color: AppColors.gray50,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: AppColors.gray200),
+        ),
+        child: Column(
+          children: [
+            for (var i = 0; i < history.length; i++) ...[
+              _ExportHistoryRow(
+                item: history[i],
+                isSharing: _sharingPath == history[i].path,
+                onTap: () => _shareHistory(history[i]),
+              ),
+              if (i < history.length - 1)
+                const Divider(
+                  height: 1,
+                  thickness: 1,
+                  color: AppColors.gray200,
+                ),
+            ],
+          ],
+        ),
+      ),
+      const SizedBox(height: 10),
+      const Text(
+        '저장된 백업은 추가 결제 없이 다시 공유할 수 있어요.',
+        style: TextStyle(fontSize: 12, color: AppColors.gray500, height: 1.45),
+      ),
+    ];
+  }
+
+  Future<void> _shareHistory(ExportHistoryItem item) async {
+    if (_sharingPath != null) return;
+
+    setState(() => _sharingPath = item.path);
+
+    final box = context.findRenderObject() as RenderBox?;
+    Rect? shareRect;
+    if (box != null) {
+      final pos = box.localToGlobal(Offset.zero);
+      shareRect = pos & box.size;
+    }
+
+    await ref.read(exportProvider.notifier).shareHistoryItem(
+          item,
+          sharePositionOrigin: shareRect,
+        );
+    if (!mounted) return;
+
+    final state = ref.read(exportProvider);
+    if (state.status == ExportStatus.error) {
+      showTopToast(
+        context,
+        _friendlyError(state.errorMessage, context.l10n.settingsExportFailed),
+      );
+      ref.read(exportProvider.notifier).reset();
+    }
+    setState(() => _sharingPath = null);
   }
 
   // ── 내보내기 실행 ───────────────────────────────────────────────────────────
@@ -656,13 +747,16 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
       mode: _ProgressMode.export,
     );
 
-    final box = _exportButtonKey.currentContext?.findRenderObject() as RenderBox?;
+    final box =
+        _exportButtonKey.currentContext?.findRenderObject() as RenderBox?;
     Rect? shareRect;
     if (box != null) {
       final pos = box.localToGlobal(Offset.zero);
       shareRect = pos & box.size;
     }
-    await ref.read(exportProvider.notifier).startExport(sharePositionOrigin: shareRect);
+    await ref
+        .read(exportProvider.notifier)
+        .startExport(sharePositionOrigin: shareRect);
     if (!mounted) return;
     Navigator.of(context, rootNavigator: true).pop();
 
@@ -679,6 +773,101 @@ class _ExportSheetState extends ConsumerState<_ExportSheet> {
     }
     ref.read(exportProvider.notifier).reset();
     if (mounted) setState(() => _exporting = false);
+  }
+}
+
+class _ExportHistoryRow extends StatelessWidget {
+  final ExportHistoryItem item;
+  final bool isSharing;
+  final VoidCallback onTap;
+
+  const _ExportHistoryRow({
+    required this.item,
+    required this.isSharing,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: isSharing ? null : onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
+        child: Row(
+          children: [
+            Container(
+              width: 34,
+              height: 34,
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: AppColors.gray200),
+              ),
+              child: const Icon(
+                Icons.folder_zip_outlined,
+                size: 18,
+                color: AppColors.primary600,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _formatExportedAt(item.exportedAt),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.gray800,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    '${item.fileName} · ${_formatBytes(item.sizeBytes)}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: AppColors.gray500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8),
+            if (isSharing)
+              const SizedBox(
+                width: 18,
+                height: 18,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            else
+              const Icon(
+                Icons.ios_share,
+                size: 18,
+                color: AppColors.gray500,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static String _formatExportedAt(DateTime value) {
+    final local = value.toLocal();
+    String two(int n) => n.toString().padLeft(2, '0');
+    return '${local.year}.${two(local.month)}.${two(local.day)} '
+        '${two(local.hour)}:${two(local.minute)}';
+  }
+
+  static String _formatBytes(int bytes) {
+    if (bytes <= 0) return '0 KB';
+    final kb = bytes / 1024;
+    if (kb < 1024) return '${kb.ceil()} KB';
+    return '${(kb / 1024).toStringAsFixed(1)} MB';
   }
 }
 
@@ -746,4 +935,3 @@ String _friendlyError(String? message, String fallback) {
       .replaceFirst('내보내기 실패: Exception: ', '')
       .replaceFirst('가져오기 실패: Exception: ', '');
 }
-

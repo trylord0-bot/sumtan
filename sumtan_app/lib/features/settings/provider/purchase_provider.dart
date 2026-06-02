@@ -75,7 +75,7 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
 
   Future<void> _init() async {
     if (kDebugMode) {
-      state = state.copyWith(isUnlocked: true, status: IapStatus.idle);
+      state = state.copyWith(status: IapStatus.idle);
       return;
     }
 
@@ -210,6 +210,11 @@ class PurchaseNotifier extends StateNotifier<PurchaseState> {
   }
 
   Future<void> buyExportUnlock() async {
+    if (kDebugMode) {
+      state = state.copyWith(isUnlocked: true, status: IapStatus.success);
+      return;
+    }
+
     final product = state.product;
     if (product == null) {
       state = state.copyWith(
@@ -317,7 +322,7 @@ AppLocalizations _purchaseLocalizations(Ref ref) {
 }
 
 Locale _supportedLocale(Locale locale) {
-  final supportedLocales = AppLocalizations.supportedLocales;
+  const supportedLocales = AppLocalizations.supportedLocales;
 
   for (final supported in supportedLocales) {
     if (supported.languageCode == locale.languageCode &&

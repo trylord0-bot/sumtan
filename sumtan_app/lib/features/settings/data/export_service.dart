@@ -14,8 +14,39 @@ import '../../../core/security/backup_crypto.dart';
 
 class ExportService {
   static const int schemaVersion = 1;
+  static const String _historyPrefsKey = 'export_history_v1';
+  static const int _maxHistoryItems = 10;
 
   final _db = DatabaseHelper.instance;
+
+  Future<List<ExportHistoryItem>> loadHistory() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_historyPrefsKey);
+    if (raw == null || raw.isEmpty) return const [];
+
+    final decoded = jsonDecode(raw);
+    if (decoded is! List) return const [];
+
+    final items = decoded
+        .whereType<Map>()
+        .map((item) => ExportHistoryItem.fromJson(
+              Map<String, dynamic>.from(item),
+            ))
+        .where((item) => item.path.isNotEmpty)
+        .toList();
+
+    final existing = <ExportHistoryItem>[];
+    for (final item in items) {
+      if (await File(item.path).exists()) {
+        existing.add(item);
+      }
+    }
+
+    if (existing.length != items.length) {
+      await _saveHistory(existing);
+    }
+    return existing;
+  }
 
   Future<File> exportZip({
     void Function(double progress, String message)? onProgress,
@@ -147,10 +178,15 @@ class ExportService {
         throw Exception('ZIP 파일을 생성하지 못했어요.');
       }
 
-      final tempDir = await getTemporaryDirectory();
+      final tempDir = await getApplicationDocumentsDirectory();
+      final exportDir = Directory(p.join(tempDir.path, 'exports'));
+      if (!await exportDir.exists()) {
+        await exportDir.create(recursive: true);
+      }
       final stamp = _backupStamp(DateTime.now());
-      zipFile = File(p.join(tempDir.path, '반려숨탄_백업_$stamp.zip'));
+      zipFile = File(p.join(exportDir.path, '반려숨탄_백업_$stamp.zip'));
       await zipFile.writeAsBytes(encoded, flush: true);
+      await _addHistory(zipFile, exportedAt);
 
       progress(1.0, '완료!');
       return zipFile;
@@ -173,6 +209,52 @@ class ExportService {
       text: '반려숨탄 앱 데이터 백업 파일입니다.',
       sharePositionOrigin: sharePositionOrigin,
     );
+  }
+
+  Future<void> shareHistoryItem(
+    ExportHistoryItem item, {
+    Rect? sharePositionOrigin,
+  }) async {
+    final file = File(item.path);
+    if (!await file.exists()) {
+      await removeHistoryItem(item.path);
+      throw Exception('백업 파일을 찾을 수 없어요.');
+    }
+
+    await Share.shareXFiles(
+      [XFile(file.path)],
+      subject: '반려숨탄 데이터 백업',
+      text: '반려숨탄 앱 데이터 백업 파일입니다.',
+      sharePositionOrigin: sharePositionOrigin,
+    );
+  }
+
+  Future<void> removeHistoryItem(String path) async {
+    final history = await loadHistory();
+    await _saveHistory(history.where((item) => item.path != path).toList());
+  }
+
+  Future<void> _addHistory(File file, String exportedAt) async {
+    final history = await loadHistory();
+    final stat = await file.stat();
+    final item = ExportHistoryItem(
+      path: file.path,
+      fileName: p.basename(file.path),
+      exportedAt: DateTime.parse(exportedAt),
+      sizeBytes: stat.size,
+    );
+
+    final next = [
+      item,
+      ...history.where((old) => old.path != item.path),
+    ].take(_maxHistoryItems).toList();
+    await _saveHistory(next);
+  }
+
+  Future<void> _saveHistory(List<ExportHistoryItem> items) async {
+    final prefs = await SharedPreferences.getInstance();
+    final encoded = jsonEncode(items.map((item) => item.toJson()).toList());
+    await prefs.setString(_historyPrefsKey, encoded);
   }
 
   Future<String?> _addFileToArchive({
@@ -227,4 +309,35 @@ class ExportService {
 
   String _safeName(String value) =>
       value.replaceAll(RegExp(r'[^A-Za-z0-9_-]+'), '_');
+}
+
+class ExportHistoryItem {
+  final String path;
+  final String fileName;
+  final DateTime exportedAt;
+  final int sizeBytes;
+
+  const ExportHistoryItem({
+    required this.path,
+    required this.fileName,
+    required this.exportedAt,
+    required this.sizeBytes,
+  });
+
+  factory ExportHistoryItem.fromJson(Map<String, dynamic> json) {
+    return ExportHistoryItem(
+      path: json['path'] as String? ?? '',
+      fileName: json['file_name'] as String? ?? '',
+      exportedAt: DateTime.tryParse(json['exported_at'] as String? ?? '') ??
+          DateTime.fromMillisecondsSinceEpoch(0),
+      sizeBytes: json['size_bytes'] as int? ?? 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'path': path,
+        'file_name': fileName,
+        'exported_at': exportedAt.toUtc().toIso8601String(),
+        'size_bytes': sizeBytes,
+      };
 }

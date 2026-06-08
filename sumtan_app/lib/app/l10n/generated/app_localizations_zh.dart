@@ -9,7 +9,7 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
-  String get appName => 'Pet Sumtan';
+  String get appName => 'Pet Note';
 
   @override
   String get appTagline => '宠物健康管理App';
@@ -134,7 +134,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsFeedback => '发送反馈';
 
   @override
-  String get settingsFeedbackSubject => 'Pet Sumtan 反馈';
+  String get settingsFeedbackSubject => 'Pet Note 反馈';
 
   @override
   String get settingsEmailAppMissing => '未找到邮件应用';
@@ -306,7 +306,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get alarmLabel => '提醒';
 
   @override
-  String get notificationChannelName => 'Pet Sumtan 提醒';
+  String get notificationChannelName => 'Pet Note 提醒';
 
   @override
   String get notificationChannelDescription => '宠物健康管理提醒';
@@ -902,7 +902,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get recordCategories => '记录分类';
 
   @override
-  String get whatIsPetSumtan => '什么是 Pet Sumtan？';
+  String get whatIsPetNote => '什么是 Pet Note？';
 
   @override
   String get todayRecordSummary => '今日记录汇总';
@@ -1544,7 +1544,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get privacyCollectedInfo => '收集的信息仅用于以下目的。';
 
   @override
-  String get privacyDataFeatures => 'Pet Sumtan 提供数据导出（备份）和导入（恢复）功能。';
+  String get privacyDataFeatures => 'Pet Note 提供数据导出（备份）和导入（恢复）功能。';
 
   @override
   String get privacyPolicyMayUpdate => '本隐私政策可能会因法律或服务变更而更新。';
@@ -1767,7 +1767,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get helpIntroContent =>
-      'Pet Sumtan 是一款可以集中记录和管理宠物健康与日常生活的App。\n您可以轻松记录喂食、饮水、排泄、体重、用药、就诊等情况，并设置提醒以免忘记重要事项。';
+      'Pet Note 是一款可以集中记录和管理宠物健康与日常生活的App。\n您可以轻松记录喂食、饮水、排泄、体重、用药、就诊等情况，并设置提醒以免忘记重要事项。';
 
   @override
   String get helpHomeTodayRecordSummaryDesc =>
@@ -1929,7 +1929,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get helpFaqNoNotificationA =>
-      '请在设备的设置中检查是否允许 Pet Sumtan 应用发送通知。另外，请确认应用内的“设置 > 通知设置”已开启。';
+      '请在设备的设置中检查是否允许 Pet Note 应用发送通知。另外，请确认应用内的“设置 > 通知设置”已开启。';
 
   @override
   String get helpFaqMoveDataQ => '我可以将数据转移到新设备吗？';
@@ -1946,14 +1946,14 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get privacyIntroBody =>
-      'Pet Sumtan 是一款无需注册即可使用的应用，所有数据仅保存在您的设备上。我们不会将您的个人信息发送到外部服务器，确保您宠物的珍贵信息安全。';
+      'Pet Note 是一款无需注册即可使用的应用，所有数据仅保存在您的设备上。我们不会将您的个人信息发送到外部服务器，确保您宠物的珍贵信息安全。';
 
   @override
   String get privacySection1Title => '收集的个人信息';
 
   @override
   String get privacySection1Body =>
-      'Pet Sumtan 无需注册即可使用，且不收集任何可识别个人身份的信息。但是，为了提供应用功能，以下信息可能会保存在您的设备上。';
+      'Pet Note 无需注册即可使用，且不收集任何可识别个人身份的信息。但是，为了提供应用功能，以下信息可能会保存在您的设备上。';
 
   @override
   String get privacyLocalStorageInfo => '保存在设备本地的信息';
@@ -2004,7 +2004,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get privacyRetentionBody =>
-      'Pet Sumtan 的所有数据仅保存在您设备内的本地数据库 (SQLite) 中，不会发送到外部服务器。';
+      'Pet Note 的所有数据仅保存在您设备内的本地数据库 (SQLite) 中，不会发送到外部服务器。';
 
   @override
   String get privacyDataDeletionMethod => '数据销毁方法';
@@ -2022,7 +2022,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get privacySection4Title => '向第三方提供信息';
 
   @override
-  String get privacyThirdPartyBody => 'Pet Sumtan 不会向外部第三方提供您的个人信息。但以下情况除外：';
+  String get privacyThirdPartyBody => 'Pet Note 不会向外部第三方提供您的个人信息。但以下情况除外：';
 
   @override
   String get privacyThirdPartyUserExport => '您自行使用数据导出（分享备份文件）功能时';
@@ -2078,7 +2078,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get privacyChildrenBody =>
-      'Pet Sumtan 不会单独收集14岁以下儿童的个人信息。所有应用数据仅保存在设备上，不会发送到外部服务器，因此儿童也可以安全使用。';
+      'Pet Note 不会单独收集14岁以下儿童的个人信息。所有应用数据仅保存在设备上，不会发送到外部服务器，因此儿童也可以安全使用。';
 
   @override
   String get privacySection8Title => '隐私政策的变更';
@@ -2612,7 +2612,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   AppLocalizationsZhCn() : super('zh_CN');
 
   @override
-  String get appName => 'Pet Sumtan';
+  String get appName => 'Pet Note';
 
   @override
   String get appTagline => '宠物健康管理App';
@@ -2737,7 +2737,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get settingsFeedback => '发送反馈';
 
   @override
-  String get settingsFeedbackSubject => 'Pet Sumtan 反馈';
+  String get settingsFeedbackSubject => 'Pet Note 反馈';
 
   @override
   String get settingsEmailAppMissing => '未找到邮件应用';
@@ -2909,7 +2909,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get alarmLabel => '提醒';
 
   @override
-  String get notificationChannelName => 'Pet Sumtan 提醒';
+  String get notificationChannelName => 'Pet Note 提醒';
 
   @override
   String get notificationChannelDescription => '宠物健康管理提醒';
@@ -3505,7 +3505,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get recordCategories => '记录分类';
 
   @override
-  String get whatIsPetSumtan => '什么是 Pet Sumtan？';
+  String get whatIsPetNote => '什么是 Pet Note？';
 
   @override
   String get todayRecordSummary => '今日记录汇总';
@@ -4147,7 +4147,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get privacyCollectedInfo => '收集的信息仅用于以下目的。';
 
   @override
-  String get privacyDataFeatures => 'Pet Sumtan 提供数据导出（备份）和导入（恢复）功能。';
+  String get privacyDataFeatures => 'Pet Note 提供数据导出（备份）和导入（恢复）功能。';
 
   @override
   String get privacyPolicyMayUpdate => '本隐私政策可能会因法律或服务变更而更新。';
@@ -4370,7 +4370,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get helpIntroContent =>
-      'Pet Sumtan 是一款可以集中记录和管理宠物健康与日常生活的App。\n您可以轻松记录喂食、饮水、排泄、体重、用药、就诊等情况，并设置提醒以免忘记重要事项。';
+      'Pet Note 是一款可以集中记录和管理宠物健康与日常生活的App。\n您可以轻松记录喂食、饮水、排泄、体重、用药、就诊等情况，并设置提醒以免忘记重要事项。';
 
   @override
   String get helpHomeTodayRecordSummaryDesc =>
@@ -4532,7 +4532,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get helpFaqNoNotificationA =>
-      '请在设备的设置中检查是否允许 Pet Sumtan 应用发送通知。另外，请确认应用内的“设置 > 通知设置”已开启。';
+      '请在设备的设置中检查是否允许 Pet Note 应用发送通知。另外，请确认应用内的“设置 > 通知设置”已开启。';
 
   @override
   String get helpFaqMoveDataQ => '我可以将数据转移到新设备吗？';
@@ -4549,14 +4549,14 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get privacyIntroBody =>
-      'Pet Sumtan 是一款无需注册即可使用的应用，所有数据仅保存在您的设备上。我们不会将您的个人信息发送到外部服务器，确保您宠物的珍贵信息安全。';
+      'Pet Note 是一款无需注册即可使用的应用，所有数据仅保存在您的设备上。我们不会将您的个人信息发送到外部服务器，确保您宠物的珍贵信息安全。';
 
   @override
   String get privacySection1Title => '收集的个人信息';
 
   @override
   String get privacySection1Body =>
-      'Pet Sumtan 无需注册即可使用，且不收集任何可识别个人身份的信息。但是，为了提供应用功能，以下信息可能会保存在您的设备上。';
+      'Pet Note 无需注册即可使用，且不收集任何可识别个人身份的信息。但是，为了提供应用功能，以下信息可能会保存在您的设备上。';
 
   @override
   String get privacyLocalStorageInfo => '保存在设备本地的信息';
@@ -4607,7 +4607,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get privacyRetentionBody =>
-      'Pet Sumtan 的所有数据仅保存在您设备内的本地数据库 (SQLite) 中，不会发送到外部服务器。';
+      'Pet Note 的所有数据仅保存在您设备内的本地数据库 (SQLite) 中，不会发送到外部服务器。';
 
   @override
   String get privacyDataDeletionMethod => '数据销毁方法';
@@ -4625,7 +4625,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
   String get privacySection4Title => '向第三方提供信息';
 
   @override
-  String get privacyThirdPartyBody => 'Pet Sumtan 不会向外部第三方提供您的个人信息。但以下情况除外：';
+  String get privacyThirdPartyBody => 'Pet Note 不会向外部第三方提供您的个人信息。但以下情况除外：';
 
   @override
   String get privacyThirdPartyUserExport => '您自行使用数据导出（分享备份文件）功能时';
@@ -4681,7 +4681,7 @@ class AppLocalizationsZhCn extends AppLocalizationsZh {
 
   @override
   String get privacyChildrenBody =>
-      'Pet Sumtan 不会单独收集14岁以下儿童的个人信息。所有应用数据仅保存在设备上，不会发送到外部服务器，因此儿童也可以安全使用。';
+      'Pet Note 不会单独收集14岁以下儿童的个人信息。所有应用数据仅保存在设备上，不会发送到外部服务器，因此儿童也可以安全使用。';
 
   @override
   String get privacySection8Title => '隐私政策的变更';
@@ -5139,7 +5139,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   AppLocalizationsZhTw() : super('zh_TW');
 
   @override
-  String get appName => 'Pet Sumtan';
+  String get appName => 'Pet Note';
 
   @override
   String get appTagline => '寵物健康管理 App';
@@ -5265,7 +5265,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get settingsFeedback => '意見回饋';
 
   @override
-  String get settingsFeedbackSubject => 'Pet Sumtan 意見回饋';
+  String get settingsFeedbackSubject => 'Pet Note 意見回饋';
 
   @override
   String get settingsEmailAppMissing => '找不到電子郵件應用程式';
@@ -5437,7 +5437,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get alarmLabel => '提醒';
 
   @override
-  String get notificationChannelName => 'Pet Sumtan 提醒';
+  String get notificationChannelName => 'Pet Note 提醒';
 
   @override
   String get notificationChannelDescription => '寵物照護提醒';
@@ -6033,7 +6033,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get recordCategories => '紀錄分類';
 
   @override
-  String get whatIsPetSumtan => 'Pet Sumtan 是什麼？';
+  String get whatIsPetNote => 'Pet Note 是什麼？';
 
   @override
   String get todayRecordSummary => '今日紀錄摘要';
@@ -6675,7 +6675,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get privacyCollectedInfo => '收集的資訊僅用於以下目的。';
 
   @override
-  String get privacyDataFeatures => 'Pet Sumtan 提供資料匯出 (備份) 與匯入 (還原) 功能。';
+  String get privacyDataFeatures => 'Pet Note 提供資料匯出 (備份) 與匯入 (還原) 功能。';
 
   @override
   String get privacyPolicyMayUpdate => '本隱私權政策可能會因法律或服務變更而更新。';
@@ -6898,7 +6898,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get helpIntroContent =>
-      'Pet Sumtan 是一個讓您在同一個地方記錄與管理寵物健康與日常生活的應用程式。\n您可以輕鬆記錄用餐、飲水、排泄、體重、餵藥、就診等資訊，並設定提醒以免忘記重要事項。';
+      'Pet Note 是一個讓您在同一個地方記錄與管理寵物健康與日常生活的應用程式。\n您可以輕鬆記錄用餐、飲水、排泄、體重、餵藥、就診等資訊，並設定提醒以免忘記重要事項。';
 
   @override
   String get helpHomeTodayRecordSummaryDesc => '一眼查看今天新增的所有紀錄。點擊紀錄即可查看詳情或進行編輯。';
@@ -7061,7 +7061,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get helpFaqNoNotificationA =>
-      '請檢查您的裝置設定是否允許 Pet Sumtan 的通知。另外，請確認應用程式內的「通知設定」已開啟 (設定 > 通知)。';
+      '請檢查您的裝置設定是否允許 Pet Note 的通知。另外，請確認應用程式內的「通知設定」已開啟 (設定 > 通知)。';
 
   @override
   String get helpFaqMoveDataQ => '我可以將資料轉移到新裝置嗎？';
@@ -7078,14 +7078,14 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get privacyIntroBody =>
-      'Pet Sumtan 是一個無需註冊即可使用的應用程式，所有資料僅儲存在您的裝置上。我們不會將您的個人資訊傳送到外部伺服器，確保您寶貴的寵物資訊安全。';
+      'Pet Note 是一個無需註冊即可使用的應用程式，所有資料僅儲存在您的裝置上。我們不會將您的個人資訊傳送到外部伺服器，確保您寶貴的寵物資訊安全。';
 
   @override
   String get privacySection1Title => '收集的個人資訊';
 
   @override
   String get privacySection1Body =>
-      'Pet Sumtan 無需註冊即可使用，且不會收集任何個人識別資訊。然而，為了提供應用程式功能，以下資訊可能會儲存在您的裝置上。';
+      'Pet Note 無需註冊即可使用，且不會收集任何個人識別資訊。然而，為了提供應用程式功能，以下資訊可能會儲存在您的裝置上。';
 
   @override
   String get privacyLocalStorageInfo => '儲存在裝置本機的資訊';
@@ -7136,7 +7136,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get privacyRetentionBody =>
-      'Pet Sumtan 的所有資料僅儲存在您裝置的本機資料庫 (SQLite) 中，不會傳送到外部伺服器。';
+      'Pet Note 的所有資料僅儲存在您裝置的本機資料庫 (SQLite) 中，不會傳送到外部伺服器。';
 
   @override
   String get privacyDataDeletionMethod => '資料銷毀方式';
@@ -7154,7 +7154,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get privacySection4Title => '提供資訊給第三方';
 
   @override
-  String get privacyThirdPartyBody => 'Pet Sumtan 不會將您的個人資訊提供給外部第三方。然而，以下情況例外：';
+  String get privacyThirdPartyBody => 'Pet Note 不會將您的個人資訊提供給外部第三方。然而，以下情況例外：';
 
   @override
   String get privacyThirdPartyUserExport => '當您自行使用資料匯出 (分享備份檔案) 功能時';
@@ -7210,7 +7210,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String get privacyChildrenBody =>
-      'Pet Sumtan 不會另外收集 14 歲以下兒童的個人資訊。所有應用程式資料僅儲存在裝置上，不會傳送到外部伺服器，因此兒童也能安全使用。';
+      'Pet Note 不會另外收集 14 歲以下兒童的個人資訊。所有應用程式資料僅儲存在裝置上，不會傳送到外部伺服器，因此兒童也能安全使用。';
 
   @override
   String get privacySection8Title => '隱私權政策的變更';

@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appName": "Pet Sumtan",
+  "appName": "Pet Note",
   "@appName": {
     "description": "Application name"
   },
@@ -169,7 +169,7 @@
   "@settingsFeedback": {
     "description": "Settings: Send feedback"
   },
-  "settingsFeedbackSubject": "Pet Sumtan feedback",
+  "settingsFeedbackSubject": "Pet Note feedback",
   "@settingsFeedbackSubject": {
     "description": "Settings: Feedback email subject"
   },
@@ -404,7 +404,7 @@
   "@alarmLabel": {
     "description": "Alert label"
   },
-  "notificationChannelName": "Pet Sumtan alerts",
+  "notificationChannelName": "Pet Note alerts",
   "@notificationChannelName": {
     "description": "Android notification channel name for alarm notifications"
   },
@@ -1208,9 +1208,9 @@
   "@recordCategories": {
     "description": "Record categories label"
   },
-  "whatIsPetSumtan": "What is Pet Sumtan?",
-  "@whatIsPetSumtan": {
-    "description": "What is Pet Sumtan label"
+  "whatIsPetNote": "What is Pet Note?",
+  "@whatIsPetNote": {
+    "description": "What is Pet Note label"
   },
   "todayRecordSummary": "Today’s record summary",
   "@todayRecordSummary": {
@@ -2138,7 +2138,7 @@
   "@privacyCollectedInfo": {
     "description": "Privacy collected info"
   },
-  "privacyDataFeatures": "Pet Sumtan provides data export (backup) and import (restore) features.",
+  "privacyDataFeatures": "Pet Note provides data export (backup) and import (restore) features.",
   "@privacyDataFeatures": {
     "description": "Privacy data features"
   },
@@ -2441,7 +2441,7 @@
       }
     }
   },
-  "helpIntroContent": "Pet Sumtan is an app where you can record and manage your pet's health and daily life in one place.\nYou can easily log meals, water, potty, weight, medication, vet visits, and set alerts so you never miss important schedules.",
+  "helpIntroContent": "Pet Note is an app where you can record and manage your pet's health and daily life in one place.\nYou can easily log meals, water, potty, weight, medication, vet visits, and set alerts so you never miss important schedules.",
   "@helpIntroContent": {
     "description": "Help: Intro content"
   },
@@ -2653,7 +2653,7 @@
   "@helpFaqNoNotificationQ": {
     "description": "Help: FAQ no notification Q"
   },
-  "helpFaqNoNotificationA": "Please check your device settings to ensure notifications are allowed for the Pet Sumtan app. Also, check if app notifications are enabled in Settings > Notification settings.",
+  "helpFaqNoNotificationA": "Please check your device settings to ensure notifications are allowed for the Pet Note app. Also, check if app notifications are enabled in Settings > Notification settings.",
   "@helpFaqNoNotificationA": {
     "description": "Help: FAQ no notification A"
   },
@@ -2673,7 +2673,7 @@
   "@helpFaqMultiplePetsA": {
     "description": "Help: FAQ multiple pets A"
   },
-  "privacyIntroBody": "Pet Sumtan is an app used without signing up, and all data is stored only on your device. We do not transmit personal information to external servers, keeping your precious pet information safe.",
+  "privacyIntroBody": "Pet Note is an app used without signing up, and all data is stored only on your device. We do not transmit personal information to external servers, keeping your precious pet information safe.",
   "@privacyIntroBody": {
     "description": "Privacy: Intro body"
   },
@@ -2681,7 +2681,7 @@
   "@privacySection1Title": {
     "description": "Privacy: Section 1 title"
   },
-  "privacySection1Body": "Pet Sumtan can be used without registration and does not collect personal identification information. However, the following information may be stored on your device to provide app features.",
+  "privacySection1Body": "Pet Note can be used without registration and does not collect personal identification information. However, the following information may be stored on your device to provide app features.",
   "@privacySection1Body": {
     "description": "Privacy: Section 1 body"
   },
@@ -2745,7 +2745,7 @@
   "@privacySection3Title": {
     "description": "Privacy: Section 3 title"
   },
-  "privacyRetentionBody": "All data in Pet Sumtan is stored only in the local database (SQLite) on the user's device and is not transmitted to external servers.",
+  "privacyRetentionBody": "All data in Pet Note is stored only in the local database (SQLite) on the user's device and is not transmitted to external servers.",
   "@privacyRetentionBody": {
     "description": "Privacy: Retention body"
   },
@@ -2769,7 +2769,7 @@
   "@privacySection4Title": {
     "description": "Privacy: Section 4 title"
   },
-  "privacyThirdPartyBody": "Pet Sumtan does not provide users' personal information to external parties. However, the following cases are exceptions.",
+  "privacyThirdPartyBody": "Pet Note does not provide users' personal information to external parties. However, the following cases are exceptions.",
   "@privacyThirdPartyBody": {
     "description": "Privacy: Third party body"
   },
@@ -2841,7 +2841,7 @@
   "@privacySection7Title": {
     "description": "Privacy: Section 7 title"
   },
-  "privacyChildrenBody": "Pet Sumtan does not collect separate personal information from children under 14. All app data is stored only on the device, and since there is no external server transmission, children can use it safely.",
+  "privacyChildrenBody": "Pet Note does not collect separate personal information from children under 14. All app data is stored only on the device, and since there is no external server transmission, children can use it safely.",
   "@privacyChildrenBody": {
     "description": "Privacy: Children body"
   },

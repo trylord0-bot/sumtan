@@ -9,7 +9,7 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
-  String get appName => '반려숨탄';
+  String get appName => '반려노트';
 
   @override
   String get appTagline => '반려동물 건강관리 앱';
@@ -135,7 +135,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsFeedback => '피드백 보내기';
 
   @override
-  String get settingsFeedbackSubject => '반려숨탄 피드백';
+  String get settingsFeedbackSubject => '반려노트 피드백';
 
   @override
   String get settingsEmailAppMissing => '이메일 앱을 찾을 수 없어요';
@@ -310,7 +310,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get alarmLabel => '알림';
 
   @override
-  String get notificationChannelName => '반려숨탄 알림';
+  String get notificationChannelName => '반려노트 알림';
 
   @override
   String get notificationChannelDescription => '반려동물 건강관리 알림';
@@ -906,7 +906,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get recordCategories => '기록 카테고리';
 
   @override
-  String get whatIsPetSumtan => '반려숨탄이란?';
+  String get whatIsPetNote => '반려노트란?';
 
   @override
   String get todayRecordSummary => '오늘의 기록 요약';
@@ -1551,7 +1551,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get privacyCollectedInfo => '수집된 정보는 아래 목적으로만 사용됩니다.';
 
   @override
-  String get privacyDataFeatures => '반려숨탄은 데이터 내보내기(백업) 및 가져오기(복원) 기능을 제공합니다.';
+  String get privacyDataFeatures => '반려노트는 데이터 내보내기(백업) 및 가져오기(복원) 기능을 제공합니다.';
 
   @override
   String get privacyPolicyMayUpdate =>
@@ -1775,7 +1775,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get helpIntroContent =>
-      '반려숨탄은 반려동물의 건강과 일상을 한 곳에서 기록하고 관리할 수 있는 앱이에요.\n식사, 음수, 배변, 체중, 투약, 병원 방문 등 다양한 건강 기록을 손쉽게 남기고, 알림 기능으로 중요한 일정을 놓치지 않을 수 있어요.';
+      '반려노트는 반려동물의 건강과 일상을 한 곳에서 기록하고 관리할 수 있는 앱이에요.\n식사, 음수, 배변, 체중, 투약, 병원 방문 등 다양한 건강 기록을 손쉽게 남기고, 알림 기능으로 중요한 일정을 놓치지 않을 수 있어요.';
 
   @override
   String get helpHomeTodayRecordSummaryDesc =>
@@ -1956,7 +1956,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get helpFaqNoNotificationA =>
-      '기기의 알림 설정에서 반려숨탄 앱의 알림이 허용되어 있는지 확인해 주세요. 설정 > 알림 설정에서 앱 알림이 켜져 있는지도 확인해 주세요.';
+      '기기의 알림 설정에서 반려노트 앱의 알림이 허용되어 있는지 확인해 주세요. 설정 > 알림 설정에서 앱 알림이 켜져 있는지도 확인해 주세요.';
 
   @override
   String get helpFaqMoveDataQ => '데이터를 새 기기로 옮길 수 있나요?';
@@ -1974,14 +1974,14 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get privacyIntroBody =>
-      '반려숨탄은 회원가입 없이 사용하는 앱으로, 모든 데이터는 사용자의 기기 내에만 저장됩니다. 외부 서버로 개인정보를 전송하지 않으며, 사용자의 소중한 반려동물 정보를 안전하게 보호합니다.';
+      '반려노트는 회원가입 없이 사용하는 앱으로, 모든 데이터는 사용자의 기기 내에만 저장됩니다. 외부 서버로 개인정보를 전송하지 않으며, 사용자의 소중한 반려동물 정보를 안전하게 보호합니다.';
 
   @override
   String get privacySection1Title => '수집하는 개인정보 항목';
 
   @override
   String get privacySection1Body =>
-      '반려숨탄은 회원가입 없이 사용할 수 있으며, 별도의 개인 식별 정보를 수집하지 않습니다. 다만, 앱 기능 제공을 위해 아래와 같은 정보가 기기 내에 저장될 수 있습니다.';
+      '반려노트는 회원가입 없이 사용할 수 있으며, 별도의 개인 식별 정보를 수집하지 않습니다. 다만, 앱 기능 제공을 위해 아래와 같은 정보가 기기 내에 저장될 수 있습니다.';
 
   @override
   String get privacyLocalStorageInfo => '기기 내 로컬 저장 정보';
@@ -2034,7 +2034,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get privacyRetentionBody =>
-      '반려숨탄의 모든 데이터는 사용자의 기기 내 로컬 데이터베이스(SQLite)에만 저장되며, 외부 서버로 전송되지 않습니다.';
+      '반려노트의 모든 데이터는 사용자의 기기 내 로컬 데이터베이스(SQLite)에만 저장되며, 외부 서버로 전송되지 않습니다.';
 
   @override
   String get privacyDataDeletionMethod => '데이터 파기 방법';
@@ -2055,7 +2055,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get privacyThirdPartyBody =>
-      '반려숨탄은 사용자의 개인정보를 외부에 제공하지 않습니다. 다만, 아래의 경우는 예외로 합니다.';
+      '반려노트는 사용자의 개인정보를 외부에 제공하지 않습니다. 다만, 아래의 경우는 예외로 합니다.';
 
   @override
   String get privacyThirdPartyUserExport =>
@@ -2117,7 +2117,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get privacyChildrenBody =>
-      '반려숨탄은 만 14세 미만 아동으로부터 별도의 개인정보를 수집하지 않습니다. 앱의 모든 데이터는 기기 내에만 저장되며, 외부 서버 전송이 없으므로 아동도 안전하게 이용할 수 있습니다.';
+      '반려노트는 만 14세 미만 아동으로부터 별도의 개인정보를 수집하지 않습니다. 앱의 모든 데이터는 기기 내에만 저장되며, 외부 서버 전송이 없으므로 아동도 안전하게 이용할 수 있습니다.';
 
   @override
   String get privacySection8Title => '개인정보 처리방침 변경';

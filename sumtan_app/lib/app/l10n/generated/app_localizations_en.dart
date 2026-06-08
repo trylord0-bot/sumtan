@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'Pet Sumtan';
+  String get appName => 'Pet Note';
 
   @override
   String get appTagline => 'Pet health care app';
@@ -135,7 +135,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsFeedback => 'Send feedback';
 
   @override
-  String get settingsFeedbackSubject => 'Pet Sumtan feedback';
+  String get settingsFeedbackSubject => 'Pet Note feedback';
 
   @override
   String get settingsEmailAppMissing => 'No email app found';
@@ -315,7 +315,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get alarmLabel => 'Alert';
 
   @override
-  String get notificationChannelName => 'Pet Sumtan alerts';
+  String get notificationChannelName => 'Pet Note alerts';
 
   @override
   String get notificationChannelDescription => 'Pet health care reminders';
@@ -913,7 +913,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get recordCategories => 'Record categories';
 
   @override
-  String get whatIsPetSumtan => 'What is Pet Sumtan?';
+  String get whatIsPetNote => 'What is Pet Note?';
 
   @override
   String get todayRecordSummary => 'Today’s record summary';
@@ -1598,7 +1598,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyDataFeatures =>
-      'Pet Sumtan provides data export (backup) and import (restore) features.';
+      'Pet Note provides data export (backup) and import (restore) features.';
 
   @override
   String get privacyPolicyMayUpdate =>
@@ -1824,7 +1824,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpIntroContent =>
-      'Pet Sumtan is an app where you can record and manage your pet\'s health and daily life in one place.\nYou can easily log meals, water, potty, weight, medication, vet visits, and set alerts so you never miss important schedules.';
+      'Pet Note is an app where you can record and manage your pet\'s health and daily life in one place.\nYou can easily log meals, water, potty, weight, medication, vet visits, and set alerts so you never miss important schedules.';
 
   @override
   String get helpHomeTodayRecordSummaryDesc =>
@@ -2018,7 +2018,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get helpFaqNoNotificationA =>
-      'Please check your device settings to ensure notifications are allowed for the Pet Sumtan app. Also, check if app notifications are enabled in Settings > Notification settings.';
+      'Please check your device settings to ensure notifications are allowed for the Pet Note app. Also, check if app notifications are enabled in Settings > Notification settings.';
 
   @override
   String get helpFaqMoveDataQ => 'Can I move my data to a new device?';
@@ -2036,14 +2036,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyIntroBody =>
-      'Pet Sumtan is an app used without signing up, and all data is stored only on your device. We do not transmit personal information to external servers, keeping your precious pet information safe.';
+      'Pet Note is an app used without signing up, and all data is stored only on your device. We do not transmit personal information to external servers, keeping your precious pet information safe.';
 
   @override
   String get privacySection1Title => 'Personal Information Collected';
 
   @override
   String get privacySection1Body =>
-      'Pet Sumtan can be used without registration and does not collect personal identification information. However, the following information may be stored on your device to provide app features.';
+      'Pet Note can be used without registration and does not collect personal identification information. However, the following information may be stored on your device to provide app features.';
 
   @override
   String get privacyLocalStorageInfo =>
@@ -2103,7 +2103,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyRetentionBody =>
-      'All data in Pet Sumtan is stored only in the local database (SQLite) on the user\'s device and is not transmitted to external servers.';
+      'All data in Pet Note is stored only in the local database (SQLite) on the user\'s device and is not transmitted to external servers.';
 
   @override
   String get privacyDataDeletionMethod => 'Data Destruction Method';
@@ -2126,7 +2126,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyThirdPartyBody =>
-      'Pet Sumtan does not provide users\' personal information to external parties. However, the following cases are exceptions.';
+      'Pet Note does not provide users\' personal information to external parties. However, the following cases are exceptions.';
 
   @override
   String get privacyThirdPartyUserExport =>
@@ -2191,7 +2191,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get privacyChildrenBody =>
-      'Pet Sumtan does not collect separate personal information from children under 14. All app data is stored only on the device, and since there is no external server transmission, children can use it safely.';
+      'Pet Note does not collect separate personal information from children under 14. All app data is stored only on the device, and since there is no external server transmission, children can use it safely.';
 
   @override
   String get privacySection8Title => 'Changes to Privacy Policy';

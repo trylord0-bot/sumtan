@@ -748,7 +748,7 @@ class _AppDrawer extends StatelessWidget {
                 border: Border(top: BorderSide(color: AppColors.gray100)),
               ),
               child: const Text(
-                'v1.0.0 · 반려숨탄',
+                'v1.0.0 · 반려노트',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 11, color: AppColors.gray400),
               ),

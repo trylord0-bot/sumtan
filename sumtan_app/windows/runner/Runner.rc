@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.sumtan" "\0"
-            VALUE "FileDescription", "sumtan_app" "\0"
+            VALUE "FileDescription", "Pet Note" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "sumtan_app" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.sumtan. All rights reserved." "\0"
             VALUE "OriginalFilename", "sumtan_app.exe" "\0"
-            VALUE "ProductName", "sumtan_app" "\0"
+            VALUE "ProductName", "Pet Note" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

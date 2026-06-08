@@ -1,11 +1,11 @@
 {
-    "name": "sumtan_app",
-    "short_name": "sumtan_app",
+    "name": "Pet Note",
+    "short_name": "Pet Note",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Pet health care app",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -18,7 +18,7 @@ class SumtanApp extends ConsumerWidget {
     //final locale = Locale('en');
 
     return MaterialApp.router(
-      title: 'Pet Sumtan',
+      title: 'Pet Note',
       theme: AppTheme.light,
       locale: locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,

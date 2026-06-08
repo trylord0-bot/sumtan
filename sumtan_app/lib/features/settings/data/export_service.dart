@@ -145,7 +145,7 @@ class ExportService {
       };
 
       final meta = <String, dynamic>{
-        'app_name': '반려숨탄',
+        'app_name': '반려노트',
         'app_version': '1.0.0+1',
         'schema_version': schemaVersion,
         'exported_at': exportedAt,
@@ -184,7 +184,7 @@ class ExportService {
         await exportDir.create(recursive: true);
       }
       final stamp = _backupStamp(DateTime.now());
-      zipFile = File(p.join(exportDir.path, '반려숨탄_백업_$stamp.zip'));
+      zipFile = File(p.join(exportDir.path, '반려노트_백업_$stamp.zip'));
       await zipFile.writeAsBytes(encoded, flush: true);
       await _addHistory(zipFile, exportedAt);
 
@@ -205,8 +205,8 @@ class ExportService {
     final file = await exportZip(onProgress: onProgress);
     await Share.shareXFiles(
       [XFile(file.path)],
-      subject: '반려숨탄 데이터 백업',
-      text: '반려숨탄 앱 데이터 백업 파일입니다.',
+      subject: '반려노트 데이터 백업',
+      text: '반려노트 앱 데이터 백업 파일입니다.',
       sharePositionOrigin: sharePositionOrigin,
     );
   }
@@ -223,8 +223,8 @@ class ExportService {
 
     await Share.shareXFiles(
       [XFile(file.path)],
-      subject: '반려숨탄 데이터 백업',
-      text: '반려숨탄 앱 데이터 백업 파일입니다.',
+      subject: '반려노트 데이터 백업',
+      text: '반려노트 앱 데이터 백업 파일입니다.',
       sharePositionOrigin: sharePositionOrigin,
     );
   }

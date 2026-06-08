@@ -21,7 +21,7 @@ class HelpScreen extends StatelessWidget {
         children: [
           _SectionHeader(
             emoji: '🐾',
-            title: context.l10n.whatIsPetSumtan,
+            title: context.l10n.whatIsPetNote,
           ),
           _HelpCard(
             content: context.l10n.helpIntroContent,

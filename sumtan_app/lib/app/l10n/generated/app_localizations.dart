@@ -117,7 +117,7 @@ abstract class AppLocalizations {
   /// Application name
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan'**
+  /// **'Pet Note'**
   String get appName;
 
   /// Application tagline
@@ -363,7 +363,7 @@ abstract class AppLocalizations {
   /// Settings: Feedback email subject
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan feedback'**
+  /// **'Pet Note feedback'**
   String get settingsFeedbackSubject;
 
   /// Settings: No email app
@@ -693,7 +693,7 @@ abstract class AppLocalizations {
   /// Android notification channel name for alarm notifications
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan alerts'**
+  /// **'Pet Note alerts'**
   String get notificationChannelName;
 
   /// Android notification channel description for alarm notifications
@@ -1866,11 +1866,11 @@ abstract class AppLocalizations {
   /// **'Record categories'**
   String get recordCategories;
 
-  /// What is Pet Sumtan label
+  /// What is Pet Note label
   ///
   /// In en, this message translates to:
-  /// **'What is Pet Sumtan?'**
-  String get whatIsPetSumtan;
+  /// **'What is Pet Note?'**
+  String get whatIsPetNote;
 
   /// Today record summary label
   ///
@@ -3051,7 +3051,7 @@ abstract class AppLocalizations {
   /// Privacy data features
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan provides data export (backup) and import (restore) features.'**
+  /// **'Pet Note provides data export (backup) and import (restore) features.'**
   String get privacyDataFeatures;
 
   /// Privacy policy may update
@@ -3483,7 +3483,7 @@ abstract class AppLocalizations {
   /// Help: Intro content
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan is an app where you can record and manage your pet\'s health and daily life in one place.\nYou can easily log meals, water, potty, weight, medication, vet visits, and set alerts so you never miss important schedules.'**
+  /// **'Pet Note is an app where you can record and manage your pet\'s health and daily life in one place.\nYou can easily log meals, water, potty, weight, medication, vet visits, and set alerts so you never miss important schedules.'**
   String get helpIntroContent;
 
   /// Help: Home today record summary
@@ -3801,7 +3801,7 @@ abstract class AppLocalizations {
   /// Help: FAQ no notification A
   ///
   /// In en, this message translates to:
-  /// **'Please check your device settings to ensure notifications are allowed for the Pet Sumtan app. Also, check if app notifications are enabled in Settings > Notification settings.'**
+  /// **'Please check your device settings to ensure notifications are allowed for the Pet Note app. Also, check if app notifications are enabled in Settings > Notification settings.'**
   String get helpFaqNoNotificationA;
 
   /// Help: FAQ move data Q
@@ -3831,7 +3831,7 @@ abstract class AppLocalizations {
   /// Privacy: Intro body
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan is an app used without signing up, and all data is stored only on your device. We do not transmit personal information to external servers, keeping your precious pet information safe.'**
+  /// **'Pet Note is an app used without signing up, and all data is stored only on your device. We do not transmit personal information to external servers, keeping your precious pet information safe.'**
   String get privacyIntroBody;
 
   /// Privacy: Section 1 title
@@ -3843,7 +3843,7 @@ abstract class AppLocalizations {
   /// Privacy: Section 1 body
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan can be used without registration and does not collect personal identification information. However, the following information may be stored on your device to provide app features.'**
+  /// **'Pet Note can be used without registration and does not collect personal identification information. However, the following information may be stored on your device to provide app features.'**
   String get privacySection1Body;
 
   /// Privacy: Local storage info
@@ -3939,7 +3939,7 @@ abstract class AppLocalizations {
   /// Privacy: Retention body
   ///
   /// In en, this message translates to:
-  /// **'All data in Pet Sumtan is stored only in the local database (SQLite) on the user\'s device and is not transmitted to external servers.'**
+  /// **'All data in Pet Note is stored only in the local database (SQLite) on the user\'s device and is not transmitted to external servers.'**
   String get privacyRetentionBody;
 
   /// Privacy: Data deletion method
@@ -3975,7 +3975,7 @@ abstract class AppLocalizations {
   /// Privacy: Third party body
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan does not provide users\' personal information to external parties. However, the following cases are exceptions.'**
+  /// **'Pet Note does not provide users\' personal information to external parties. However, the following cases are exceptions.'**
   String get privacyThirdPartyBody;
 
   /// Privacy: Third party user export
@@ -4083,7 +4083,7 @@ abstract class AppLocalizations {
   /// Privacy: Children body
   ///
   /// In en, this message translates to:
-  /// **'Pet Sumtan does not collect separate personal information from children under 14. All app data is stored only on the device, and since there is no external server transmission, children can use it safely.'**
+  /// **'Pet Note does not collect separate personal information from children under 14. All app data is stored only on the device, and since there is no external server transmission, children can use it safely.'**
   String get privacyChildrenBody;
 
   /// Privacy: Section 8 title

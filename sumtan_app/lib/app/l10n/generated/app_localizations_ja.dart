@@ -9,7 +9,7 @@ class AppLocalizationsJa extends AppLocalizations {
   AppLocalizationsJa([String locale = 'ja']) : super(locale);
 
   @override
-  String get appName => 'ペットスムタン';
+  String get appName => 'ペットノート';
 
   @override
   String get appTagline => 'ペットのヘルスケアアプリ';
@@ -135,7 +135,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsFeedback => 'フィードバックを送信';
 
   @override
-  String get settingsFeedbackSubject => 'ペットスムタン フィードバック';
+  String get settingsFeedbackSubject => 'ペットノート フィードバック';
 
   @override
   String get settingsEmailAppMissing => 'メールアプリが見つかりません';
@@ -311,7 +311,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get alarmLabel => 'お知らせ';
 
   @override
-  String get notificationChannelName => 'ペットスムタンのお知らせ';
+  String get notificationChannelName => 'ペットノートのお知らせ';
 
   @override
   String get notificationChannelDescription => 'ペットのヘルスケアリマインダー';
@@ -907,7 +907,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get recordCategories => '記録カテゴリー';
 
   @override
-  String get whatIsPetSumtan => 'ペットスムタンとは？';
+  String get whatIsPetNote => 'ペットノートとは？';
 
   @override
   String get todayRecordSummary => '今日の記録のまとめ';
@@ -1553,7 +1553,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get privacyDataFeatures =>
-      'ペットスムタンはデータのエクスポート（バックアップ）とインポート（復元）機能を提供しています。';
+      'ペットノートはデータのエクスポート（バックアップ）とインポート（復元）機能を提供しています。';
 
   @override
   String get privacyPolicyMayUpdate =>
@@ -1777,7 +1777,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get helpIntroContent =>
-      'ペットスムタンは、ペットの健康や日常を1か所で記録・管理できるアプリです。\nごはん、水、トイレ、体重、お薬、病院の訪問などを簡単に記録し、大切な予定を忘れないようにお知らせを設定できます。';
+      'ペットノートは、ペットの健康や日常を1か所で記録・管理できるアプリです。\nごはん、水、トイレ、体重、お薬、病院の訪問などを簡単に記録し、大切な予定を忘れないようにお知らせを設定できます。';
 
   @override
   String get helpHomeTodayRecordSummaryDesc =>
@@ -1957,7 +1957,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get helpFaqNoNotificationA =>
-      '端末の設定で、ペットスムタンアプリの通知が許可されているか確認してください。また、アプリ内の「設定 > 通知設定」がオンになっているかも確認してください。';
+      '端末の設定で、ペットノートアプリの通知が許可されているか確認してください。また、アプリ内の「設定 > 通知設定」がオンになっているかも確認してください。';
 
   @override
   String get helpFaqMoveDataQ => '新しい端末にデータを移行できますか？';
@@ -1974,14 +1974,14 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get privacyIntroBody =>
-      'ペットスムタンは会員登録なしで利用できるアプリであり、すべてのデータはお客様の端末にのみ保存されます。個人情報を外部サーバーに送信することはなく、大切なペットの情報を安全に守ります。';
+      'ペットノートは会員登録なしで利用できるアプリであり、すべてのデータはお客様の端末にのみ保存されます。個人情報を外部サーバーに送信することはなく、大切なペットの情報を安全に守ります。';
 
   @override
   String get privacySection1Title => '収集する個人情報';
 
   @override
   String get privacySection1Body =>
-      'ペットスムタンは登録なしで利用でき、個人を特定できる情報は収集しません。ただし、アプリの機能を提供するため、以下の情報がお客様の端末に保存される場合があります。';
+      'ペットノートは登録なしで利用でき、個人を特定できる情報は収集しません。ただし、アプリの機能を提供するため、以下の情報がお客様の端末に保存される場合があります。';
 
   @override
   String get privacyLocalStorageInfo => '端末のローカルに保存される情報';
@@ -2034,7 +2034,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get privacyRetentionBody =>
-      'ペットスムタンのすべてのデータはお客様の端末内のローカルデータベース (SQLite) にのみ保存され、外部サーバーには送信されません。';
+      'ペットノートのすべてのデータはお客様の端末内のローカルデータベース (SQLite) にのみ保存され、外部サーバーには送信されません。';
 
   @override
   String get privacyDataDeletionMethod => 'データの破棄方法';
@@ -2054,7 +2054,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get privacyThirdPartyBody =>
-      'ペットスムタンは、お客様の個人情報を外部の第三者に提供することはありません。ただし、以下の場合を除きます。';
+      'ペットノートは、お客様の個人情報を外部の第三者に提供することはありません。ただし、以下の場合を除きます。';
 
   @override
   String get privacyThirdPartyUserExport =>
@@ -2116,7 +2116,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get privacyChildrenBody =>
-      'ペットスムタンは、14歳未満の児童から個別に個人情報を収集することはありません。すべてのアプリデータは端末にのみ保存され、外部サーバーへの送信がないため、お子様でも安全にご利用いただけます。';
+      'ペットノートは、14歳未満の児童から個別に個人情報を収集することはありません。すべてのアプリデータは端末にのみ保存され、外部サーバーへの送信がないため、お子様でも安全にご利用いただけます。';
 
   @override
   String get privacySection8Title => 'プライバシーポリシーの変更';
